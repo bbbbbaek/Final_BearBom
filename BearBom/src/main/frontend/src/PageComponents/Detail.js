@@ -13,7 +13,7 @@ import Location from "./location";
 import Calendar from "./Calendar/Calendar2.js";
 import Calendar3 from "./Calendar/Calendar";
 import CarouselFadeExample from "../PageComponents/test";
-import ImageThumb from "./ImageThumb";
+import Thumb from "./Thumb";
 
 const Detail = ({ scrollTop }) => {
   // 아래에 왜 초기값을 객체 형태로 주지 않으면 오류가 나는지 모르겠음
@@ -46,7 +46,7 @@ const Detail = ({ scrollTop }) => {
   return (
     <>
       <div className="main-container">
-        <div className="img">
+        {/* <div className="img">
           <div className="main-img">
             <img className="img1" src="/img/img2.jpeg" />
           </div>
@@ -64,7 +64,8 @@ const Detail = ({ scrollTop }) => {
               <img className="img1" src="/img/img2.jpeg" />
             </div>
           </div>
-        </div>
+        </div> */}
+        <Thumb></Thumb>
 
         <div className="info">
           <div className="main-info">
@@ -101,7 +102,10 @@ const Detail = ({ scrollTop }) => {
               </h5>
               <div className="teacher-info">
                 <div>
-                  <img className="teacher-img" src="/img/psy.jpeg"></img>
+                  <img
+                    className="teacher-img"
+                    src={require("../img/img2.jpeg")}
+                  ></img>
                 </div>
                 <span>김광민 강사님</span>
                 <div>
@@ -149,7 +153,10 @@ const Detail = ({ scrollTop }) => {
                 </div>
 
                 <div className="cur-box-img">
-                  <img className="cur-img" src="/img/img2.jpeg"></img>
+                  <img
+                    className="cur-img"
+                    src={require("../img/img2.jpeg")}
+                  ></img>
                 </div>
               </div>
               <div className="cur-box1">
@@ -159,7 +166,10 @@ const Detail = ({ scrollTop }) => {
                 </div>
 
                 <div className="cur-box-img">
-                  <img className="cur-img" src="/img/img2.jpeg"></img>
+                  <img
+                    className="cur-img"
+                    src={require("../img/img2.jpeg")}
+                  ></img>
                 </div>
               </div>
               <div className="cur-box1">
@@ -169,7 +179,10 @@ const Detail = ({ scrollTop }) => {
                 </div>
 
                 <div className="cur-box-img">
-                  <img className="cur-img" src="/img/img2.jpeg"></img>
+                  <img
+                    className="cur-img"
+                    src={require("../img/img2.jpeg")}
+                  ></img>
                 </div>
               </div>
             </section>
@@ -225,7 +238,7 @@ const Detail = ({ scrollTop }) => {
                 <b>후기</b>
               </h5>
               <div className="review-box">
-                <img className="img2" src="/img/psy.jpeg"></img>
+                <img className="img2" src={require("../img/img2.jpeg")}></img>
                 <span className="review-nickname">nickname</span>
                 <div className="review-rating">
                   <HoverRating />
@@ -235,7 +248,7 @@ const Detail = ({ scrollTop }) => {
                 </div>
               </div>
               <div className="review-box">
-                <img className="img2" src="/img/psy.jpeg"></img>
+                <img className="img2" src={require("../img/img2.jpeg")}></img>
                 <span className="review-nickname">nickname</span>
                 <div className="review-rating">
                   <HoverRating />
@@ -245,7 +258,7 @@ const Detail = ({ scrollTop }) => {
                 </div>
               </div>
               <div className="review-box">
-                <img className="img2" src="/img/psy.jpeg"></img>
+                <img className="img2" src={require("../img/img2.jpeg")}></img>
                 <span className="review-nickname">nickname</span>
                 <div className="review-rating">
                   <HoverRating />
@@ -261,9 +274,7 @@ const Detail = ({ scrollTop }) => {
               <div className="calendar-title">
                 <h4>나만의 싸인 만들기 클래스</h4>
               </div>
-              <div className="main-cal-cal">
-                <Calendar3 id="Cal" />
-              </div>
+              <div className="main-cal-cal">{/* <Calendar3 id="Cal" /> */}</div>
 
               <div className="calendar-button-box">
                 <button className="calendar-button1">찜하기</button>
