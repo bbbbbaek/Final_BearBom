@@ -38,7 +38,7 @@ const StepTwo_2 = () => {
             </div>
             <div className="numCheck">
               <div className="datailLabel">
-                <p>추가 이미지 - 최대 4개까지 등록 가능</p>
+                <p>추가 이미지 - 최대 4개까지 등록 가능함</p>
               </div>
               <div className="inputWrap inputHfix">
                 <ThumbnailInput />
