@@ -11,6 +11,7 @@ const Inquiry = () => {
           <form action="/action_page.php" method="post">
             <label for="email">이메일</label>
             <input
+              className="inquiry-input"
               type="text"
               id="email"
               name="inquiry-email"
@@ -18,7 +19,7 @@ const Inquiry = () => {
             />
 
             <label for="sort">문의종류</label>
-            <select id="sort" name="inquiry-sort">
+            <select id="sort" name="inquiry-sort" className="inquiry-input">
               <option value="user">로그인/회원가입</option>
               <option value="payment">결제</option>
               <option value="course-registration">강좌 개설</option>
@@ -26,6 +27,7 @@ const Inquiry = () => {
 
             <label for="title">제목</label>
             <input
+              className="inquiry-input"
               id="title"
               type="text"
               name="inquiry-title"
