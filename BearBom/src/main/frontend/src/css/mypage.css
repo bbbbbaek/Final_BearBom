@@ -1,0 +1,15 @@
+.easy_login_name {
+    text-align: center;
+}
+
+.easy_login{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    grid-template-columns: repeat(3,1fr);
+    margin-bottom: 70px;
+}
+
+.login_etc input {
+    margin: 0px;
+}

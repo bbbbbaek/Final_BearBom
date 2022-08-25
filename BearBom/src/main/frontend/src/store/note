@@ -1,0 +1,2 @@
+redux store 폴더
+: 공유가 필요한 state가 많아지면 해당 state를 store 폴더에 정의하여 다른 컴포넌트에서도 쉽게 사용할 수 있게 함

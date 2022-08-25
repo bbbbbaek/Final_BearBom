@@ -1,0 +1,16 @@
+.course-main {
+  margin-left: 10%;
+  margin-right: 10%;
+  background-color: beige;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+}
+
+.testDiv {
+  text-align: center;
+  background-color: aqua;
+  margin: 20px;
+  width: 200px;
+  height: 300px;
+}
