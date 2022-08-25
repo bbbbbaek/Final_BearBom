@@ -5,5 +5,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 
 public interface UserRepository extends JpaRepository<User, String> {
+	Boolean existsByUserId(String userId);
 	
+	User findByUserId(String userId);
 }
+
+
+
+
+
+
+
