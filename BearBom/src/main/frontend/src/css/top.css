@@ -1,0 +1,24 @@
+.wrap {
+  display: block;
+  right: 8px;
+  bottom: 120px;
+  position: fixed;
+}
+
+.topbutton {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+  vertical-align: middle;
+  font-weight: 500;
+  text-transform: uppercase;
+  min-height: 36px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  z-index: 1050;
+  box-shadow: rgb(0 0 0 / 20%) 0px 3px 5px -1px,
+    rgb(0 0 0 / 14%) 0px 6px 10px 0px, rgb(0 0 0 / 12%) 0px 1px 18px 0px;
+  color: rgb(251, 234, 220);
+  background-color: darkgray;
+}
