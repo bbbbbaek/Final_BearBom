@@ -26,28 +26,26 @@ import axios from "axios";
 import { API_BASE_URL } from "../app-config";
 import { Link } from "react-router-dom";
 
-// const useStyles = makeStyles({
-//   root: {
-//     width: 300,
-//   },
-// });
+function valuetext(priceSlider) {
+  return `${priceSlider}원`;
+}
 
-function valuetext(value9) {
-  return `${value9}원`;
+function valueDate(dateMdf) {
+  return new Date(dateMdf);
 }
 
 // 강좌 조회 페이지
 const Course = (props) => {
-  const [value, setValue] = useState([0, 24]);
+  const [timeSlider, setTimeSlider] = useState([0, 24]);
 
   const handleChange1 = (event, newValue) => {
-    setValue(newValue);
+    setTimeSlider(newValue);
   };
 
-  const [value2, setValue2] = useState([0, 1000000]);
+  const [priceSlider, setPriceSlider] = useState([0, 1000000]);
 
-  const handleChange2 = (event2, newValue2) => {
-    setValue2(newValue2);
+  const handleChange2 = (event, newValue) => {
+    setPriceSlider(newValue);
   };
 
   const [course, setCourse] = useState([]);
@@ -252,6 +250,12 @@ const Course = (props) => {
     setCategorySel(event.target.value);
   };
 
+  // const [timeSlider, setTimeSlider] = React.useState(30);
+
+  // const handleChange5 = (event, newValue) => {
+  //   setTimeSlider(newValue);
+  // };
+
   return (
     <>
       <br />
@@ -412,34 +416,22 @@ const Course = (props) => {
               <input
                 type="text"
                 placeholder="00:00"
-                value="00:00"
+                value={valueDate(timeSlider[0])}
                 aria-invalid="false"
                 inputMode="numeric"
                 className="css-1x5jdmq"
               ></input>
             </div>
-            {/* <div className={classes.root}>
-              <Typography id="range-slider" gutterBottom>
-                Temperature range
-              </Typography>
-              <Slider
-                value={value}
-                onChange={handleChange9}
-                onChangeCommitted={handleChangeCommitted}
-                valueLabelDisplay="auto"
-                aria-labelledby="range-slider"
-                getAriaValueText={valuetext}
-              />
-            </div> */}
             <div className="time-slider-bar">
               <Box id="slider-top1">
                 <Slider
-                  getAriaLabel={() => "Temperature range"}
-                  value={value}
+                  getAriaLabel={() => "time range"}
+                  value={timeSlider}
                   onChange={handleChange1}
                   valueLabelDisplay="auto"
                   getAriaValueText={valuetext}
                   className="time-slider1"
+                  max={24}
                 />
               </Box>
             </div>
@@ -447,7 +439,7 @@ const Course = (props) => {
               <input
                 type="text"
                 placeholder="24:00"
-                value="24:00"
+                value={valueDate(timeSlider[1])}
                 aria-invalid="false"
                 inputMode="numeric"
                 className="css-1x5jdmq"
@@ -479,21 +471,22 @@ const Course = (props) => {
               <input
                 type="text"
                 placeholder="0원"
-                value="0"
+                value={valuetext(priceSlider[0])}
                 aria-invalid="false"
                 inputMode="numeric"
                 className="css-1x5jdmq"
               ></input>
             </div>
             <div className="price-slider-bar">
-              <Box id="slider-top1">
+              <Box id="slider-top2">
                 <Slider
-                  getAriaLabel={() => "Temperature range"}
-                  value={value}
+                  getAriaLabel={() => "price range"}
+                  value={priceSlider}
                   onChange={handleChange2}
                   valueLabelDisplay="auto"
                   getAriaValueText={valuetext}
                   className="price-slider1"
+                  max={1000000}
                 />
               </Box>
             </div>
@@ -501,7 +494,7 @@ const Course = (props) => {
               <input
                 type="text"
                 placeholder="1,000,000원"
-                value="1,000,000"
+                value={valuetext(priceSlider[1])}
                 aria-invalid="false"
                 inputMode="numeric"
                 className="css-1x5jdmq"
@@ -536,27 +529,6 @@ const Course = (props) => {
         />
       </Container>
       <br />
-      {/* <div className="course-main">
-        {course.map((a, i) => {
-          return (
-            <>
-              <div className="testDiv" key={i}>
-                <h4
-                  onClick={() => {
-                    navigate("/course/" + a.course_idx);
-                  }}
-                >
-                  {a.course_nm}
-                </h4>
-                <hr />
-                <p>강의번호: {a.course_idx}</p>
-                <p>카테고리: {a.course_type}</p>
-                <p>강의가격: {a.course_pri}</p>
-              </div>
-            </>
-          );
-        })}
-      </div> */}
       <main id="wrapper" className="main-contents">
         <div className="list-box h-2-box-panel main-wrapper-child-1">
           <div>
