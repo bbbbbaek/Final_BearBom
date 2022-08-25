@@ -12,7 +12,7 @@ import Rating from "@mui/material/Rating";
 import Location from "./location";
 import Calendar from "./Calendar/Calendar2.js";
 import Calendar3 from "./Calendar/Calendar";
-import CarouselFadeExample from "../PageComponents/test";
+import CarouselFadeExample from "../PageComponents/Test.js";
 import Thumb from "./Thumb";
 
 const Detail = ({ scrollTop }) => {
