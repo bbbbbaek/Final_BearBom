@@ -64,10 +64,10 @@ const Header = () => {
               </Nav.Link>
               <Nav.Link
                 onClick={() => {
-                  navigate("/mypage");
+                  navigate("/join");
                 }}
               >
-                마이페이지
+                회원가입
               </Nav.Link>
             </div>
           </Nav>

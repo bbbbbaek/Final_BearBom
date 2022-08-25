@@ -15,6 +15,7 @@ import Notice from "./PageComponents/Notice";
 import Helpdesk from "./PageComponents/Helpdesk";
 import Mypage from "./PageComponents/Mypage";
 import Login from "./PageComponents/Login";
+import Join from "./PageComponents/Join";
 import Detail from "./PageComponents/Detail";
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Route path="/helpdesk" element={<Helpdesk />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/join" element={<Join />} />
         <Route path="/mypage" element={<Mypage />} />
       </Routes>
       <Footer />
