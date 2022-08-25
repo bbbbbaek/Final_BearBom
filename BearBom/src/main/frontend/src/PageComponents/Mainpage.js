@@ -210,7 +210,7 @@ const Mainpage = (props) => {
               <br />
               당신의 취미를 찾아보세요
             </h1>
-            <div class="appstore-btn-list-area"></div>
+            <div className="appstore-btn-list-area"></div>
           </div>
           <div>
             <h1>
@@ -218,7 +218,7 @@ const Mainpage = (props) => {
               <br />
               여기 계시네요!
             </h1>
-            <div class="class-open-page-move-area">
+            <div className="class-open-page-move-area">
               {/* class="btn class-open-page-move-btn" */}
               <Button
                 className="class-open-page-move-btn"

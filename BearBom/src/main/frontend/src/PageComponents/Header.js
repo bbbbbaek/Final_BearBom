@@ -11,7 +11,7 @@ const Header = () => {
   return (
     <>
       {/* Navbar부분 */}
-      <Navbar bg="dark" variant="dark">
+      <Navbar bg="light" variant="light">
         <Container>
           <Navbar.Brand href="/">
             <img className="logoIcon" src={require("../images/logo1.png")} />
@@ -66,10 +66,10 @@ const Header = () => {
               </Nav.Link>
               <Nav.Link
                 onClick={() => {
-                  navigate("/mypage");
+                  navigate("/join");
                 }}
               >
-                마이페이지
+                회원가입
               </Nav.Link>
             </div>
           </Nav>

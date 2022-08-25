@@ -66,6 +66,7 @@ strong {
   position: absolute;
   width: 40%;
   min-width: 700px;
+  pointer-events: none;
   z-index: 2;
   left: 50%;
   top: 50%;
