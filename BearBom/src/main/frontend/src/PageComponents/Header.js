@@ -73,6 +73,13 @@ const Header = () => {
               >
                 회원가입
               </Nav.Link>
+              <Nav.Link
+                onClick={() => {
+                  navigate("/joinTest");
+                }}
+              >
+                회원가입2
+              </Nav.Link>
             </div>
           </Nav>
         </Container>
