@@ -11,9 +11,13 @@ const Header = () => {
   return (
     <>
       {/* Navbar부분 */}
-      <Navbar bg="dark" variant="dark">
+      <Navbar bg="light" variant="light">
         <Container>
-          <Navbar.Brand href="/">베어봄</Navbar.Brand>
+          <Navbar.Brand href="/">
+            <h4 style={{ color: "#f7b500", margin: 0, fontWeight: "bold" }}>
+              베어봄
+            </h4>
+          </Navbar.Brand>
           <Nav className="justify-content-start">
             <Nav.Link
               onClick={() => {
