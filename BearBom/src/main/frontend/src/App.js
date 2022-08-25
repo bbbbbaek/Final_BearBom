@@ -17,7 +17,8 @@ import Mypage from "./PageComponents/Mypage";
 import Login from "./PageComponents/Login";
 import Join from "./PageComponents/Join";
 import Detail from "./PageComponents/Detail";
-
+import Top from "./ModuleComponents/Top";
+import Chatbot from "./ModuleComponents/Chatbot";
 function App() {
   return (
     <>
@@ -34,6 +35,8 @@ function App() {
         <Route path="/join" element={<Join />} />
         <Route path="/mypage" element={<Mypage />} />
       </Routes>
+      <Top />
+      <Chatbot />
       <Footer />
     </>
   );

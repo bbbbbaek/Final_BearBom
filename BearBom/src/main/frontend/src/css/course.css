@@ -14,3 +14,113 @@
   width: 200px;
   height: 300px;
 }
+
+.class-category button{
+  margin: 3px;
+  width: 80px;
+}
+
+.class-week button {
+  margin: 3px;
+  width: 80px;
+}
+
+.class-level button {
+  margin:3px;
+  width: 80px;
+}
+
+.time-slider {
+  display: flex;
+}
+
+.price-slider {
+  display: flex;
+}
+
+.category-font {
+  font-weight: bold;
+}
+
+.css-1x5jdmq {
+  text-align: center;
+  width: 100px;
+  border-radius: 10px;
+}
+
+.searchForm {
+  display: flex;
+}
+
+.resetIcon {
+  width: 22px;
+  float:left;
+  margin-top: 4px;
+  padding-right: 1px;
+}
+
+.search-input {
+  border-radius: 11px;
+  width: 220px;
+  margin-left: 3px;
+}
+
+.searchIcon {
+  width: 30px;
+  margin-left: 5px;
+}
+
+.searchIcon2 {
+  width: 20px;
+}
+
+#btnGroupAddon {
+  background-color: #1c1c23;
+  border: 2px solid #1c1c23;
+}
+
+.form-control {
+  border: 2px solid #1c1c23;;
+}
+
+.search-btn {
+  background-color: #1c1c23;
+  margin-left: 1px;
+  border-radius: 10px;
+}
+
+.time-slider-bar {
+  width:220px;
+  margin: 0px 13px;
+}
+
+.price-slider-bar {
+  width:220px;
+  margin: 0px 13px;
+}
+
+.searchBtn {
+  background-color: #1c1c23;
+}
+
+.classCount {
+  font-size: 20px;
+  margin-left: 70px;
+}
+
+#pagePart {
+  justify-content: center;
+}
+
+.page-item {
+  border: 1px solid #a3a3c4;
+}
+
+.page-link {
+  color: rgb(49, 45, 48);
+}
+
+.searchContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}

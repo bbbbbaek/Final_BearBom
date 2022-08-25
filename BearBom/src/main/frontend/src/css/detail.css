@@ -1,3 +1,11 @@
+/* @fontface {
+  font-family: "Noto Sans", cursive;
+  src: url("https://fonts.googleapis.com/css?family=Noto Sans");
+} */
+body {
+  /* font-family: "Noto Sans", cursive; */
+}
+
 .detail-main {
   margin-left: 10%;
   margin-right: 10%;
@@ -10,22 +18,21 @@
   margin-right: 100px;
 }
 .img {
-  height: 20%;
+  height: 15%;
   margin-top: 20px;
 }
 .info {
-  height: 80%;
+  height: 84%;
   margin-left: 20px;
 }
 .main-info {
   float: left;
-  width: 70%;
+  width: 65%;
   height: 100%;
-  background-color: pink;
 }
 .main-cal {
   float: left;
-  width: 30%;
+  width: 34%;
   height: 100%;
 }
 .main-img {
@@ -81,19 +88,26 @@
   text-align: center;
 }
 
+.class-content {
+}
+
+.section-box {
+  height: 14%;
+}
+
+.d-block {
+  height: 300px;
+}
+
 .calendar-box {
+  position: fixed;
   box-sizing: border-box;
   border: 1px black solid;
   margin: auto;
-  margin-top: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
+  width: 20%;
   border-radius: 5px;
-  height: 500px;
-}
-
-.sssss {
-  margin: 10px;
+  right: 9%;
+  bottom: 0px;
 }
 
 .calendar-button-box {
@@ -102,14 +116,161 @@
 }
 
 .calendar-button1 {
-  width: 20%;
+  width: 30%;
   float: left;
+  margin-left: 10px;
   margin-right: 20px;
   border-radius: 3px;
   border-color: rgba(0, 0, 0, 0);
 }
+.calendar-button1:hover {
+  background-color: #1eb7e5;
+}
+.calendar-button1:active {
+  background-color: #00ffbb;
+}
+
 .calendar-button2 {
-  width: 25%;
+  width: 40%;
   float: left;
   border-color: rgba(0, 0, 0, 0);
+}
+
+.calendar-button2:hover {
+  background-color: #1eb7e5;
+}
+
+.calendar-button2:active {
+  background-color: #00ffbb;
+}
+
+.calendar-regist-box {
+  clear: both;
+}
+
+.calendar-regist {
+  width: 90%;
+  height: 10%;
+  border: 1px solid rgba(166, 25, 25, 0);
+  border-radius: 5px;
+  background-color: #1eb7e5;
+  margin: auto;
+  margin-top: 20px;
+  padding-top: 5px;
+}
+
+.calendar-regist:active {
+  background-color: #00ffbb;
+}
+
+.teacher-sales {
+  float: left;
+  text-align: center;
+}
+
+.teacher-rating {
+  float: left;
+  text-align: center;
+}
+
+.teacher-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.teacher-clear {
+  clear: both;
+}
+.class-content {
+  width: 80%;
+  height: 80%;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.cur-box-step {
+  float: left;
+}
+
+.cur-box1 {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.cur-box2 {
+  width: 100%;
+  height: 70px;
+}
+
+.cur-box3 {
+  width: 100%;
+  height: 70px;
+}
+
+.cur-box-img {
+}
+
+.cur-img {
+  width: 300px;
+  height: 100px;
+}
+
+.time-cal {
+  width: 100%;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+}
+
+.loc-map {
+  margin-left: 20px;
+  width: 80%;
+  height: 80%;
+}
+
+.notice-table {
+  margin-left: 50px;
+  border-spacing: 10px;
+  border-collapse: separate;
+}
+
+.notice-img {
+  width: 30px;
+  height: 30px;
+}
+.teacher-img {
+  border-radius: 70px;
+  width: 60px;
+  height: 60px;
+}
+.img2 {
+  border-radius: 70px;
+  width: 40px;
+  height: 40px;
+}
+
+.review-box {
+  width: 100%;
+  padding: 40px;
+  height: 10%;
+}
+
+.review-nickname {
+}
+
+.review-rating {
+  float: right;
+}
+
+.review-input {
+  clear: both;
+  float: left;
+  width: 100%;
+  height: 200px;
+  border-radius: 5px black;
+}
+
+.review-textarea {
+  width: 100%;
 }
