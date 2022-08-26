@@ -56,7 +56,7 @@ const CourseRegistration = () => {
             {/*<StepOne></StepOne>*/}
             {/*<StepTwo_1></StepTwo_1>*/}
             {/*<StepTwo_2></StepTwo_2>*/}
-            <StepTwo_2></StepTwo_2>
+            <StepOne></StepOne>
           </div>
           {/*<div className="midStepBtn">
             <button>이전</button>

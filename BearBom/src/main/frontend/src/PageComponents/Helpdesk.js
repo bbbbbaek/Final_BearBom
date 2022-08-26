@@ -7,8 +7,6 @@ import FAQ from "../ModuleComponents/FAQ";
 import Inquiry from "../ModuleComponents/Inquiry";
 import banner from "../images/helpdesk-banner.png";
 
-// import Sonnet from "../../components/Sonnet";
-
 const Helpdesk = () => {
   const [tabContent, setTabContent] = useState(0);
 

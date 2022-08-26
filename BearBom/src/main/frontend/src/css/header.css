@@ -1,7 +1,16 @@
+.header-main {
+  display: sticky;
+  top: 0;
+}
+
 .loginButton {
   display: flex;
 }
 
 Nav.Link {
   padding-left: 100px;
+}
+
+.logoIcon {
+  width: 100px;
 }
