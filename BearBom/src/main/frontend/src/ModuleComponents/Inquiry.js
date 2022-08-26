@@ -42,6 +42,7 @@ const Inquiry = () => {
             ></textarea>
 
             <input
+              className="inquiry-submit"
               type="submit"
               value="제출"
               onClick={() => {

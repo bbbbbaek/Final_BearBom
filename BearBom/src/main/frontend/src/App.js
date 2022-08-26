@@ -11,7 +11,7 @@ import Footer from "./PageComponents/Footer";
 import Mainpage from "./PageComponents/Mainpage";
 import Course from "./PageComponents/Course";
 import CourseRegistration from "./PageComponents/CourseRegistration";
-import Notice from "./PageComponents/Notice";
+import Guide from "./PageComponents/Guide";
 import Helpdesk from "./PageComponents/Helpdesk";
 import Mypage from "./PageComponents/Mypage";
 import Login from "./PageComponents/Login";
@@ -22,13 +22,15 @@ import Chatbot from "./ModuleComponents/Chatbot";
 function App() {
   return (
     <>
-      <Header />
+      <div className="header-main">
+        <Header />
+      </div>
       <Routes>
         <Route path="/" element={<Mainpage />} />
         <Route path="/course" element={<Course />} />
         <Route path="/course/:id" element={<Detail />} />
         <Route path="/course/registration" element={<CourseRegistration />} />
-        <Route path="/notice" element={<Notice />} />
+        <Route path="/guide" element={<Guide />} />
         <Route path="/helpdesk" element={<Helpdesk />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/login" element={<Login />} />
