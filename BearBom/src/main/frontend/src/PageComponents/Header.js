@@ -10,54 +10,16 @@ const Header = () => {
 
   return (
     <>
-      {/* Navbar부분 */}
-      <Navbar bg="light" variant="light">
-        <Container>
-          <Navbar.Brand href="/">
-            <img className="logoIcon" src={require("../images/logo1.png")} />
-          </Navbar.Brand>
-          <Nav className="justify-content-start">
-            <Nav.Link
-              onClick={() => {
-                navigate("/course");
-              }}
-            >
-              클래스 검색
-            </Nav.Link>
-            <Nav.Link
-              onClick={() => {
-                navigate("course/registration");
-              }}
-            >
-              클래스 등록
-            </Nav.Link>
-            <Nav.Link
-              onClick={() => {
-                navigate("/notice");
-              }}
-            >
-              이용안내
-            </Nav.Link>
-            <Nav.Link
-              onClick={() => {
-                navigate("/helpdesk");
-              }}
-            >
-              고객센터
-            </Nav.Link>
-            <Nav.Link
-              onClick={() => {
-                navigate("/mypage");
-              }}
-            >
-              마이페이지
-            </Nav.Link>
-            <div
-              className="loginButton"
-              style={{ display: "flex", justifyContent: "flex-end" }}
-            >
-              <div style={{ width: "50px" }}></div>
-
+      <div className="header-main">
+        {/* Navbar부분 */}
+        <Navbar bg="light" variant="light">
+          <Container>
+            <Navbar.Brand href="/">
+              <h4 style={{ color: "#f7b500", margin: 0, fontWeight: "bold" }}>
+                베어봄
+              </h4>
+            </Navbar.Brand>
+            <Nav className="justify-content-start">
               <Nav.Link
                 onClick={() => {
                   navigate("/course");
