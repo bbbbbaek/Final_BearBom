@@ -13,7 +13,8 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
-import DaumPostcode from "react-daum-postcode";
+import DaumPost from "./DaumPost";
+import Modal from "./ModalJoin";
 
 const JoinTest = () => {
   const handleSubmit = (e) => {
@@ -93,16 +94,7 @@ const JoinTest = () => {
                     name="userNm"
                   />
                 </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="userNickName"
-                    label="별명"
-                    name="userNickName"
-                  />
-                </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={9}>
                   <TextField
                     required
                     fullWidth
@@ -112,6 +104,19 @@ const JoinTest = () => {
                     autoComplete="email"
                   />
                 </Grid>
+                <Grid item xs={3}>
+                  <Button>이메일확인</Button>
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="userNickName"
+                    label="별명"
+                    name="userNickName"
+                  />
+                </Grid>
+
                 <Grid item xs={9}>
                   <TextField
                     required
