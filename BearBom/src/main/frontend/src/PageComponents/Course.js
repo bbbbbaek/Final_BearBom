@@ -33,7 +33,6 @@ function valuetext(priceSlider) {
 function valueDate(dateMdf) {
   return new Date(dateMdf);
 }
-
 // 강좌 조회 페이지
 const Course = (props) => {
   const [timeSlider, setTimeSlider] = useState([0, 24]);
@@ -400,7 +399,7 @@ const Course = (props) => {
                 평일
               </Button>
               <Button variant="outline-dark" size="sm" name="btn2">
-                토요일a
+                토요일
               </Button>
               <Button variant="outline-dark" size="sm" name="btn2">
                 일요일
