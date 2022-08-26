@@ -14,9 +14,7 @@ const Header = () => {
       <Navbar bg="light" variant="light">
         <Container>
           <Navbar.Brand href="/">
-            <h4 style={{ color: "#f7b500", margin: 0, fontWeight: "bold" }}>
-              베어봄
-            </h4>
+            <img className="logoIcon" src={require("../images/logo1.png")} />
           </Navbar.Brand>
           <Nav className="justify-content-start">
             <Nav.Link
