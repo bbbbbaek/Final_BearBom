@@ -88,6 +88,34 @@ body {
   text-align: center;
 }
 
+.teacher-Info-box {
+  margin-top: 10px;
+}
+
+.teacher-img {
+  width: 30%;
+}
+
+.teacher-sales {
+  float: left;
+  text-align: center;
+}
+
+.teacher-rating {
+  float: left;
+  text-align: center;
+}
+
+.teacher-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.teacher-clear {
+  clear: both;
+}
+
 .class-content {
 }
 
@@ -162,24 +190,6 @@ body {
   background-color: #00ffbb;
 }
 
-.teacher-sales {
-  float: left;
-  text-align: center;
-}
-
-.teacher-rating {
-  float: left;
-  text-align: center;
-}
-
-.teacher-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.teacher-clear {
-  clear: both;
-}
 .class-content {
   width: 80%;
   height: 80%;

@@ -10,10 +10,11 @@ import HoverRating from "./ReviewFeedback";
 import AutoHeightTextarea from "./AutoHeightTextarea";
 import Rating from "@mui/material/Rating";
 import Location from "./location";
-import Calendar from "./Calendar/Calendar2.js";
-import Calendar3 from "./Calendar/Calendar";
+// import Calendar from "./Calendar2/Calendar.js";
+import Calendar4 from "./Calendar/Calendar.js";
 import CarouselFadeExample from "../PageComponents/Test.js";
 import Thumb from "./Thumb";
+import MyComponent from "../PageComponents/Calendar";
 
 const Detail = ({ scrollTop }) => {
   // 아래에 왜 초기값을 객체 형태로 주지 않으면 오류가 나는지 모르겠음
@@ -101,14 +102,14 @@ const Detail = ({ scrollTop }) => {
                 <b>강사소개</b>
               </h5>
               <div className="teacher-info">
-                <div>
+                <div className="teacher-img">
                   <img
                     className="teacher-img"
                     src={require("../img/img2.jpeg")}
                   ></img>
                 </div>
                 <span>김광민 강사님</span>
-                <div>
+                <div className="teacher-Info-box">
                   <div>
                     <span className="teacher-sales">
                       누적 수강생
@@ -191,7 +192,10 @@ const Detail = ({ scrollTop }) => {
               <h5>
                 <b>시간표</b>
               </h5>
-              <div className="time-cal">{/* <Calendar3 id="Cal" /> */}</div>
+              <div className="time-cal">
+                <MyComponent />
+                <Calendar4 id="Cal" />
+              </div>
             </section>
 
             <hr />
@@ -274,7 +278,7 @@ const Detail = ({ scrollTop }) => {
               <div className="calendar-title">
                 <h4>나만의 싸인 만들기 클래스</h4>
               </div>
-              <div className="main-cal-cal">{/* <Calendar3 id="Cal" /> */}</div>
+              <div className="main-cal-cal">{/* <Calendar id="Cal" /> */}</div>
 
               <div className="calendar-button-box">
                 <button className="calendar-button1">찜하기</button>

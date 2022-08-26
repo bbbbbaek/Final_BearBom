@@ -26,19 +26,19 @@ function Thumb() {
 
   return (
     <div>
-      <div className="main">
+      <div className="main-thumb">
         <Box item={userSelect} />
       </div>
-      <div className="main">
+      <div className="main-thumb">
         <input
-          className="btn"
+          className="btn-thumb"
           onClick={() => play("img1")}
           type="image"
           src={require("../img/psy.jpeg")}
           alt="1번째 사진"
         ></input>
         <input
-          className="btn"
+          className="btn-thumb"
           onClick={() => play("img2")}
           type="image"
           src={require("../img/img2.jpeg")}
@@ -46,7 +46,7 @@ function Thumb() {
         ></input>
         {/** test 입니다. */}
         <input
-          className="btn"
+          className="btn-thumb"
           onClick={() => play("img3")}
           type="image"
           src={require("../img/img2.jpeg")}
