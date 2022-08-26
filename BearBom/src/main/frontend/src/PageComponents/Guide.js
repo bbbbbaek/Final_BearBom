@@ -1,6 +1,6 @@
 import { Subtitles } from "@mui/icons-material";
 import React from "react";
-import "../css/notice.css";
+import "../css/guide.css";
 import onepic from "../images/onepic.jpg";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -8,7 +8,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-const Notice = () => {
+const Guide = () => {
   return (
     <>
       <div>
@@ -223,4 +223,4 @@ const Notice = () => {
   );
 };
 
-export default Notice;
+export default Guide;

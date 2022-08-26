@@ -57,24 +57,66 @@ const Header = () => {
               style={{ display: "flex", justifyContent: "flex-end" }}
             >
               <div style={{ width: "50px" }}></div>
+
               <Nav.Link
                 onClick={() => {
-                  navigate("/login");
+                  navigate("/course");
                 }}
               >
-                로그인
+                클래스 검색
               </Nav.Link>
               <Nav.Link
                 onClick={() => {
-                  navigate("/join");
+                  navigate("course/registration");
                 }}
               >
-                회원가입
+                클래스 등록
               </Nav.Link>
-            </div>
-          </Nav>
-        </Container>
-      </Navbar>
+              <Nav.Link
+                onClick={() => {
+                  navigate("/guide");
+                }}
+              >
+                이용안내
+              </Nav.Link>
+              <Nav.Link
+                onClick={() => {
+                  navigate("/helpdesk");
+                }}
+              >
+                고객센터
+              </Nav.Link>
+              <Nav.Link
+                onClick={() => {
+                  navigate("/mypage");
+                }}
+              >
+                마이페이지
+              </Nav.Link>
+              <div
+                className="loginButton"
+                style={{ display: "flex", justifyContent: "flex-end" }}
+              >
+                <div style={{ width: "50px" }}></div>
+                <Nav.Link
+                  onClick={() => {
+                    navigate("/login");
+                  }}
+                >
+                  로그인
+                </Nav.Link>
+                <Nav.Link
+                  onClick={() => {
+                    navigate("/join");
+                  }}
+                >
+                  회원가입
+                </Nav.Link>
+              </div>
+            </Nav>
+          </Container>
+        </Navbar>
+      </div>
     </>
   );
 };

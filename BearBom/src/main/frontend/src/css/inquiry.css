@@ -9,7 +9,7 @@
   padding: 20px;
 }
 
-input[type="text"],
+.inquiry-input,
 select {
   width: 100%;
   padding: 12px 20px;
@@ -20,7 +20,7 @@ select {
   box-sizing: border-box;
 }
 
-input[type="submit"] {
+.inquiry-submit {
   width: 100%;
   background-color: #778cb2;
   color: white;
