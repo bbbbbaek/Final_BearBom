@@ -14,9 +14,7 @@ const Header = () => {
       <Navbar bg="light" variant="light">
         <Container>
           <Navbar.Brand href="/">
-            <h4 style={{ color: "#f7b500", margin: 0, fontWeight: "bold" }}>
-              베어봄
-            </h4>
+            <img className="logoIcon" src={require("../images/logo1.png")} />
           </Navbar.Brand>
           <Nav className="justify-content-start">
             <Nav.Link
@@ -59,22 +57,24 @@ const Header = () => {
               style={{ display: "flex", justifyContent: "flex-end" }}
             >
               <div style={{ width: "50px" }}></div>
+
               <Nav.Link
                 onClick={() => {
-                  navigate("/login");
+                  navigate("/course");
                 }}
               >
-                로그인
+                클래스 검색
               </Nav.Link>
               <Nav.Link
                 onClick={() => {
-                  navigate("/join");
+                  navigate("course/registration");
                 }}
               >
-                회원가입
+                클래스 등록
               </Nav.Link>
               <Nav.Link
                 onClick={() => {
+<<<<<<< HEAD
                   navigate("/joinTest");
                 }}
               >
@@ -84,6 +84,51 @@ const Header = () => {
           </Nav>
         </Container>
       </Navbar>
+=======
+                  navigate("/guide");
+                }}
+              >
+                이용안내
+              </Nav.Link>
+              <Nav.Link
+                onClick={() => {
+                  navigate("/helpdesk");
+                }}
+              >
+                고객센터
+              </Nav.Link>
+              <Nav.Link
+                onClick={() => {
+                  navigate("/mypage");
+                }}
+              >
+                마이페이지
+              </Nav.Link>
+              <div
+                className="loginButton"
+                style={{ display: "flex", justifyContent: "flex-end" }}
+              >
+                <div style={{ width: "50px" }}></div>
+                <Nav.Link
+                  onClick={() => {
+                    navigate("/login");
+                  }}
+                >
+                  로그인
+                </Nav.Link>
+                <Nav.Link
+                  onClick={() => {
+                    navigate("/join");
+                  }}
+                >
+                  회원가입
+                </Nav.Link>
+              </div>
+            </Nav>
+          </Container>
+        </Navbar>
+      </div>
+>>>>>>> 054f63970444e9a0dc05dc1af94dcd6d9bf517e0
     </>
   );
 };
