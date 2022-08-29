@@ -8,6 +8,7 @@ import {
 import React, { useState } from "react";
 import "../../css/courseRegistration.css";
 import ThumbnailInput from "./RegistrationComponents/ThumbnailInput";
+import FileInput from "./RegistrationComponents/FileInput"
 
 const StepTwo_2 = () => {
   return (
@@ -38,12 +39,12 @@ const StepTwo_2 = () => {
             </div>
             <div className="numCheck">
               <div className="datailLabel">
-                <p>추가 이미지 - 최대 4개까지 등록 가능함</p>
+                <p>추가 이미지 - 클래스에 대한 추가 이미지</p>
               </div>
               <div className="inputWrap inputHfix">
-                <ThumbnailInput />
+                <FileInput />
               </div>
-              <p className="inputWar">*이미지 등록시 유의사항.</p>
+              <p className="inputWar">*최대 4장 까지 등록 가능합니다.</p>
             </div>
           </div>
         </div>
