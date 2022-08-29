@@ -4,8 +4,13 @@ import CenteredTabs from "../PageComponents/CourseRegistration/AddCourseNav";
 import StepOne from "./CourseRegistration/StepOne";
 import StepTwo_1 from "./CourseRegistration/StepTwo_1"
 import StepTwo_2 from "./CourseRegistration/StepTwo_2"
+import StepTwo_3 from "./CourseRegistration/StepTwo_3";
 import CoPresentIcon from "@mui/icons-material/CoPresent";
 import "../css/courseRegistration.css";
+import StepTwo_4 from "./CourseRegistration/StepTwo_4";
+import StepTwo_5 from "./CourseRegistration/StepTwo_5";
+import { createTheme, ThemeProvider } from "@mui/material";
+import StepTwo_6 from "./CourseRegistration/StepTwo_6";
 
 //const [formData1, setFormData1] = useState({});
 
@@ -27,11 +32,29 @@ import "../css/courseRegistration.css";
 //     setFormData(newFormData);
 // }////////////////////////////////////////////////////////////////////////////////
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      //light: '#111',
+      main: '#958a78 ',
+      //dark: '#555',
+      //contrastText: '#fff',
+    },
+    secondary: {
+      //light: '#ff7961',
+      main: '#675d58 ',
+      //dark: '#ba000d',
+      //contrastText: '#000',
+    },
+  },
+});
+
 const CourseRegistration = () => {
   
 
 
   return (
+    <ThemeProvider theme={theme}>
     <div className="addclass">
       <div className="top">
         <div className="subTitle">
@@ -56,7 +79,10 @@ const CourseRegistration = () => {
             {/*<StepOne></StepOne>*/}
             {/*<StepTwo_1></StepTwo_1>*/}
             {/*<StepTwo_2></StepTwo_2>*/}
-            <StepTwo_2></StepTwo_2>
+            {/*<StepTwo_3></StepTwo_3>*/}
+            {/*<StepTwo_4></StepTwo_4>*/}
+            {/*<StepTwo_5></StepTwo_5>*/}
+            <StepTwo_6></StepTwo_6>
           </div>
           {/*<div className="midStepBtn">
             <button>이전</button>
@@ -65,6 +91,7 @@ const CourseRegistration = () => {
         </div>
       </div>
     </div>
+    </ThemeProvider>
   );
 };
 export default CourseRegistration;

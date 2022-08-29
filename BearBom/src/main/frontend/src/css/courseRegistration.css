@@ -297,3 +297,64 @@ h4{
   min-height: 400px;
   height: 100%;
 }
+
+.difSelect{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 450px;
+}
+
+.runtimeInput{
+  min-height: 48px;
+  width: 100%;
+  max-width: 360px;
+  border: 1px solid #bdb7ae;
+  border-radius: 5px;
+  padding-left: 10px;
+}
+
+.runtimeInput:focus{
+  border-color: #675d58;
+  outline: none;
+}
+
+.culi{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 600px;
+}
+
+.culiInput{
+  min-height: 200px;
+  width: 100%;
+  max-width: 490px;
+  border: 1px solid #bdb7ae;
+  border-radius: 5px;
+  padding-left: 10px;
+}
+
+.culiInput:focus{
+  border-color: #675d58;
+  outline: none;
+}
+
+.lec{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 600px;
+}
+
+.lecInput{
+  min-height: 200px;
+  width: 100%;
+  max-width: 600px;
+  border: 1px solid #bdb7ae;
+  border-radius: 5px;
+  padding-left: 10px;
+}
