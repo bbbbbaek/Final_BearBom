@@ -76,12 +76,20 @@ const StepTwo_6 = () => {
               <div className="datailLabel">
                 <p>상세위치</p>
               </div>
-              <div className="inputWrap">
-                <input
-                  className="classTitle inputBox"
-                  type="text"
-                  placeholder="클래스 제목 (최대100자)"
-                ></input>
+              <div className="kakaoPostCode">
+                <>{/* 카카오 주소, 지도 API 시작 */}
+                <input type="text" id="sample3_postcode" placeholder="우편번호"/>
+                <input type="button" onclick="sample3_execDaumPostcode()" value="우편번호 찾기"/><br/>
+                <input type="text" id="sample3_address" placeholder="주소"/><br/>
+                <input type="text" id="sample3_detailAddress" placeholder="상세주소"/>
+                <input type="text" id="sample3_extraAddress" placeholder="참고항목"/>
+
+                <div id="wrap">
+                <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" onclick="foldDaumPostcode()" alt="접기 버튼"/>
+                </div>
+                
+                
+                </>{/* 카카오 주소, 지도 API 종료 */}
               </div>
             </div>
           </div>
