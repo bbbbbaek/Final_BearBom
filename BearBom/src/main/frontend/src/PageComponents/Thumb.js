@@ -15,6 +15,10 @@ const choice = {
     name: "img3",
     img: process.env.PUBLIC_URL + require("../img/img2.jpeg"),
   },
+  img4: {
+    name: "img4",
+    img: process.env.PUBLIC_URL + require("../img/img2.jpeg"),
+  },
 };
 
 function Thumb() {
@@ -25,7 +29,7 @@ function Thumb() {
   };
 
   return (
-    <div>
+    <div className="main-thumb-box">
       <div className="main-thumb">
         <Box item={userSelect} />
       </div>
@@ -51,6 +55,13 @@ function Thumb() {
           type="image"
           src={require("../img/img2.jpeg")}
           alt="3번째 사진"
+        ></input>
+        <input
+          className="btn-thumb"
+          onClick={() => play("img4")}
+          type="image"
+          src={require("../img/img2.jpeg")}
+          alt="4번째 사진"
         ></input>
       </div>
     </div>
