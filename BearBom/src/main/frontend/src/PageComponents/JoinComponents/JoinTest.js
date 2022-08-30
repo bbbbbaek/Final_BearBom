@@ -13,20 +13,100 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
-import DaumPostcode from "react-daum-postcode";
+import PopupDom from "./PopupDom";
+import PopupPostCode from "./PopupPostCode";
 
 const JoinTest = () => {
-  const handleSubmit = (e) => {
+  // const handleSubmit = (e) => {
+
+  //   e.preventDefault();
+  //   try {
+  //     const data = new FormData(e.target);
+  //     const userId = data.get("userId");
+  //   } catch (e) {
+  //     window.alert(e.message);
+  //   }
+  //   // const data = new FormData(e.target);
+  //   // const userId = data.get("userId");
+  //   // const userPw = data.get("userPw");
+
+  //   // Join({ userId: userId, userPw: userPw }).then((response) => {
+  //   //   //회원가입 성공 시 로그인페이지로 이동
+  //   //   window.location.href = "/login";
+  //   // });
+  // };
+
+  const [userId, setUserId] = useState("");
+  const [userPw, setUserPw] = useState("");
+  const [userNm, setUserNm] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userNickName, setUserNickName] = useState("");
+  // const [userZipCode, setUserZipCode] = useState(0);
+  // const [userAddress, setUserAddress] = useState("");
+  const [userAddressDef, setUserAddressDef] = useState("");
+  const [userTel, setUserTel] = useState();
+  const [zonecodee, setZonecodee] = useState("");
+  const [fullAddresss, setFullAddresss] = useState("");
+  const [userRePw, setUserRePw] = useState("");
+
+  const onUserIdHandler = (e) => {
+    setUserId(e.currentTarget.value);
+  };
+
+  const onUserPwHandler = (e) => {
+    setUserPw(e.currentTarget.value);
+  };
+
+  const onUserNmHandler = (e) => {
+    setUserNm(e.currentTarget.value);
+  };
+
+  const onUserEmailHandler = (e) => {
+    setUserEmail(e.currentTarget.value);
+  };
+
+  const onUserNickNameHandler = (e) => {
+    setUserNickName(e.currentTarget.value);
+  };
+
+  const onUserAddressDefHandler = (e) => {
+    setUserAddressDef(e.currentTarget.value);
+  };
+
+  const onZonecodeeHandler = (e) => {
+    setZonecodee(e.currentTarget.value);
+  };
+
+  const onFullAddresssHandler = (e) => {
+    setFullAddresss(e.currentTarget.value);
+  };
+
+  const onUserRePwHandler = (e) => {
+    setUserRePw(e.currentTarget.value);
+  };
+
+  const onUserTelHandler = (e) => {
+    setUserTel(e.currentTarget.value);
+  };
+
+  const onSubmitJoin = (e) => {
     e.preventDefault();
+    if (userPw !== userRePw) {
+      return alert("비밀번호와 비밀번호확인은 같아야 합니다.");
+    }
+  };
 
-    const data = new FormData(e.target);
-    const userId = data.get("userId");
-    const userPw = data.get("userPw");
+  // 팝업창 상태 관리
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-    // Join({ userId: userId, userPw: userPw }).then((response) => {
-    //   //회원가입 성공 시 로그인페이지로 이동
-    //   window.location.href = "/login";
-    // });
+  // 팝업창 열기
+  const openPostCode = () => {
+    setIsPopupOpen(true);
+  };
+
+  // 팝업창 닫기
+  const closePostCode = () => {
+    setIsPopupOpen(false);
   };
 
   return (
@@ -34,7 +114,7 @@ const JoinTest = () => {
       {/* <ThemeProvider theme={theme}> */}
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-        <form noValidate onSubmit={handleSubmit}>
+        <form>
           <Box
             sx={{
               marginTop: 8,
@@ -62,6 +142,8 @@ const JoinTest = () => {
                     label="아이디"
                     name="userId"
                     autoFocus
+                    value={userId}
+                    onChange={onUserIdHandler}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -72,6 +154,7 @@ const JoinTest = () => {
                     label="비밀번호"
                     type="password"
                     id="userPw"
+                    value={userPw}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -82,6 +165,7 @@ const JoinTest = () => {
                     label="비밀번호 확인"
                     type="Password"
                     id="userRePw"
+                    value={userRePw}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -91,7 +175,22 @@ const JoinTest = () => {
                     id="userNm"
                     label="이름"
                     name="userNm"
+                    value={userNm}
                   />
+                </Grid>
+                <Grid item xs={9}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="userEmail"
+                    label="이메일"
+                    name="userEmail"
+                    autoComplete="email"
+                    value={userEmail}
+                  />
+                </Grid>
+                <Grid item xs={3}>
+                  <Button>이메일확인</Button>
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
@@ -100,29 +199,31 @@ const JoinTest = () => {
                     id="userNickName"
                     label="별명"
                     name="userNickName"
+                    value={userNickName}
                   />
                 </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="userEmail"
-                    label="이메일"
-                    name="userEmail"
-                    autoComplete="email"
-                  />
-                </Grid>
+
                 <Grid item xs={9}>
                   <TextField
                     required
                     fullWidth
                     id="userZipcode"
                     label="우편번호"
-                    name="userZipcode"
+                    name="userZipCode"
+                    value={zonecodee}
                   />
                 </Grid>
                 <Grid item xs={3}>
-                  <Button>주소검색</Button>
+                  <Button onClick={openPostCode}>검색</Button>
+                  <div id="popupDom">
+                    {isPopupOpen && (
+                      <PopupPostCode
+                        setZonecodee={setZonecodee}
+                        setFullAddresss={setFullAddresss}
+                        onClose={closePostCode}
+                      />
+                    )}
+                  </div>
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
@@ -131,7 +232,7 @@ const JoinTest = () => {
                     id="userAddress"
                     label="주소"
                     name="userAddress"
-                    // value={userAddress}
+                    value={fullAddresss}
                     // onChange={({ target: { value } }) => setUserAddress(value)}
                   />
                 </Grid>
@@ -145,15 +246,17 @@ const JoinTest = () => {
                     // onChange={({ target: { value } }) =>
                     //   setUserAddressDef(value)
                     // }
+                    value={userAddressDef}
                   ></TextField>
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
                     required
                     fullWidth
-                    id="userNm"
+                    id="userTel"
                     label="전화번호"
-                    name="userNm"
+                    name="userTel"
+                    value={userTel}
                   />
                 </Grid>
                 <Grid item xs={12}>
