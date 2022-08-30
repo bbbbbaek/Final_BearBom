@@ -21,7 +21,22 @@ const Saw = (props) => {
 
     get_local = new Set(get_local);
     get_local = [...get_local];
-    localStorage.setItem("data", JSON.stringify(get_local));
+
+    // if (localStorage.get_local === undefined) {
+    //   localStorage.setItem("data", JSON.stringify([]));
+    // }
+
+    if (get_local.length >= 7) {
+      localStorage.clear();
+    } else {
+      console.log(get_local.length);
+      localStorage.setItem("data", JSON.stringify(get_local));
+    }
+
+    // let tested = JSON.parse(localStorage.getItem("data"));
+    // tested.unshift(id);
+    // tested = [...new Set(tested)].slice(0, 3);
+    // localStorage.setItem("data", JSON.stringify(tested));
   }, [dataa]);
   return <>{dataa.title}</>;
 };
