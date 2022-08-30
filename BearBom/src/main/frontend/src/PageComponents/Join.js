@@ -34,6 +34,7 @@ const Join = () => {
   const [userNmError, setUserNmError] = useState(false);
   const [userNickNameError, setUserNickNameError] = useState(false);
   const [userTelError, setUserTelError] = useState(false);
+  //const
 
   // 아이디 유효성 검사
   const onChangeUserId = (e) => {
