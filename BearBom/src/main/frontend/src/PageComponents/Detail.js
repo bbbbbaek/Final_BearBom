@@ -10,10 +10,12 @@ import HoverRating from "./ReviewFeedback";
 import AutoHeightTextarea from "./AutoHeightTextarea";
 import Rating from "@mui/material/Rating";
 import Location from "./location";
-import Calendar from "./Calendar/Calendar2.js";
-import Calendar3 from "./Calendar/Calendar";
+// import Calendar from "./Calendar2/Calendar.js";
+import Calendar4 from "./Calendar/Calendar.js";
+import Calendar5 from "../PageComponents/Calendar";
 import CarouselFadeExample from "../PageComponents/Test.js";
 import Thumb from "./Thumb";
+// import MyComponent from "../PageComponents/Calendar";
 
 const Detail = ({ scrollTop }) => {
   // 아래에 왜 초기값을 객체 형태로 주지 않으면 오류가 나는지 모르겠음
@@ -46,29 +48,11 @@ const Detail = ({ scrollTop }) => {
   return (
     <>
       <div className="main-container">
-        {/* <div className="img">
-          <div className="main-img">
-            <img className="img1" src="/img/img2.jpeg" />
-          </div>
-          <div className="sub-total-img">
-            <div className="sub-img1">
-              <img className="img1" src="/img/img2.jpeg" />
-            </div>
-            <div className="sub-img2">
-              <img className="img1" src="/img/img2.jpeg" />
-            </div>
-            <div className="sub-img3">
-              <img className="img1" src="/img/img2.jpeg" />
-            </div>
-            <div className="sub-img4">
-              <img className="img1" src="/img/img2.jpeg" />
-            </div>
-          </div>
-        </div> */}
-        <Thumb></Thumb>
-
         <div className="info">
           <div className="main-info">
+            <div className="main-img-box">
+              <Thumb></Thumb>
+            </div>
             <h4>Title</h4>
             <Navbar>
               <Nav className="justify-content-start">
@@ -100,37 +84,34 @@ const Detail = ({ scrollTop }) => {
               <h5>
                 <b>강사소개</b>
               </h5>
-              <div className="teacher-info">
-                <div>
-                  <img
-                    className="teacher-img"
-                    src={require("../img/img2.jpeg")}
-                  ></img>
-                </div>
-                <span>김광민 강사님</span>
-                <div>
+
+              <div className="grid-box">
+                <div className="grid">
+                  <div className="item1">
+                    <img
+                      className="teacher-img"
+                      src={require("../img/img2.jpeg")}
+                    ></img>
+                  </div>
+                  <div className="teacher-student">
+                    누적 수강생
+                    <br />
+                    124명
+                  </div>
                   <div>
-                    <span className="teacher-sales">
-                      누적 수강생
-                      <br />
-                      124명
-                    </span>
-                  </div>
-                  <div className="teacher-rating">
-                    <p>4.5</p>
-                    <Rating
-                      name="half-rating-read"
-                      defaultValue={2.5}
-                      precision={0.5}
-                      readOnly
-                    />
+                    <div className="teacher-rating">
+                      <p>4.5</p>
+                      <Rating
+                        name="half-rating-read"
+                        defaultValue={2.5}
+                        precision={0.5}
+                        readOnly
+                      />
+                    </div>
                   </div>
                 </div>
+                <div className="item2">안녕하세여 김광민입니다~~~~~~~~ </div>
               </div>
-              <div className="teacher-content">
-                <p>안녕하세여 김광민입니다~~~~~~~~ 감사합니다~~~~~~</p>
-              </div>
-              <div className="teacher-clear"></div>
             </section>
             <hr />
             <section id="class" className="section-box">
@@ -191,7 +172,9 @@ const Detail = ({ scrollTop }) => {
               <h5>
                 <b>시간표</b>
               </h5>
-              <div className="time-cal">{/* <Calendar3 id="Cal" /> */}</div>
+              <div className="time-cal">
+                <Calendar5 id="Cal" />
+              </div>
             </section>
 
             <hr />
@@ -274,7 +257,9 @@ const Detail = ({ scrollTop }) => {
               <div className="calendar-title">
                 <h4>나만의 싸인 만들기 클래스</h4>
               </div>
-              <div className="main-cal-cal">{/* <Calendar3 id="Cal" /> */}</div>
+              <div className="main-cal-cal">
+                <Calendar4 id="Cal" />
+              </div>
 
               <div className="calendar-button-box">
                 <button className="calendar-button1">찜하기</button>

@@ -9,8 +9,17 @@ import React, { useState } from "react";
 import "../../css/courseRegistration.css";
 import ThumbnailInput from "./RegistrationComponents/ThumbnailInput";
 import FileInput from "./RegistrationComponents/FileInput"
+import Editor from "./RegistrationComponents/Editor";
 
-const StepTwo_2 = () => {
+
+const StepTwo_3 = () => {
+
+  const [desc, setDesc] = useState('');
+  function onEditorChange(value) {
+      setDesc(value)
+  }
+
+
   return (
     <>
       <div className="content content1">
@@ -19,32 +28,26 @@ const StepTwo_2 = () => {
           <div className="contentDetail">
             <div className="nameWrap">
               <h5 className="detailName">
-                이미지
+                상세내용
                 <div className="nameUnderbar"></div>
               </h5>
             </div>
             <div className="detailEx">
               <p className="datilNameInfo">
-                클래스를 대표하는 썸네일 이미지를 등록해주세요
+                상세내용을 작성해주세요
               </p>
             </div>
             <div className="numCheck">
               <div className="datailLabel">
-                <p>대표 이미지 - 썸네일</p>
+                <p>클래스 상세내용</p>
               </div>
               <div className="inputWrap inputHfix">
-                <ThumbnailInput />
+                <div>
+                  {/*<Editor value={desc} onChange={onEditorChange} />*/}
+                  에디터 추가중
+                </div>
               </div>
-              <p className="inputWar">*이미지 등록시 유의사항.</p>
-            </div>
-            <div className="numCheck">
-              <div className="datailLabel">
-                <p>추가 이미지 - 클래스에 대한 추가 이미지</p>
-              </div>
-              <div className="inputWrap inputHfix">
-                <FileInput />
-              </div>
-              <p className="inputWar">*최대 4장 까지 등록 가능합니다.</p>
+              <p className="inputWar">*5줄 이상 작성해 주세요.</p>
             </div>
           </div>
         </div>
@@ -52,4 +55,4 @@ const StepTwo_2 = () => {
     </>
   );
 };
-export default StepTwo_2;
+export default StepTwo_3;
