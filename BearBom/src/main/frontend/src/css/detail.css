@@ -17,6 +17,7 @@ body {
   margin-left: 100px;
   margin-right: 100px;
 }
+
 .img {
   height: 15%;
   margin-top: 20px;
@@ -24,6 +25,7 @@ body {
 .info {
   height: 84%;
   margin-left: 20px;
+  clear: both;
 }
 .main-info {
   float: left;
@@ -51,29 +53,6 @@ body {
   overflow: hidden;
 }
 
-.sub-img1 {
-  height: 100%;
-  width: 100%;
-  margin-right: 10px;
-}
-
-.sub-img2 {
-  height: 100%;
-  width: 100%;
-}
-
-.sub-img3 {
-  height: 100%;
-  width: 100%;
-  margin-top: 10px;
-}
-
-.sub-img4 {
-  height: 100%;
-  width: 100%;
-  margin-top: 10px;
-}
-
 .img1 {
   height: 100%;
 }
@@ -88,11 +67,83 @@ body {
   text-align: center;
 }
 
+.teacher-info2 {
+  width: 30%;
+
+  display: grid;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.teacher-content2 {
+  width: 70%;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.teacher-clear {
+  clear: both;
+}
+
+.teacher-Info-box {
+  margin-top: 10px;
+}
+
+.teacher-img {
+  width: 30%;
+}
+
+.teacher-sales {
+  float: left;
+  text-align: center;
+}
+
+.teacher-rating {
+  float: left;
+  text-align: center;
+}
+
+.teacher-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid-box {
+  display: inline-block;
+  width: 100%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  text-align: center;
+  width: 35%;
+  float: left;
+}
+
+.item1 {
+  grid-column-end: span 2;
+  text-align: center;
+}
+.item2 {
+  float: left;
+  width: 65%;
+  text-align: center;
+}
+
+.teacher-student {
+  width: 100%;
+}
+
+.teacher-clear {
+  clear: both;
+}
+.main-img-box {
+}
 .class-content {
 }
 
 .section-box {
-  height: 14%;
 }
 
 .d-block {
@@ -100,14 +151,14 @@ body {
 }
 
 .calendar-box {
-  position: fixed;
+  position: sticky;
+  top: 1px;
   box-sizing: border-box;
   border: 1px black solid;
+  background-color: edeae7;
   margin: auto;
-  width: 20%;
+  margin-left: 10px;
   border-radius: 5px;
-  right: 9%;
-  bottom: 0px;
 }
 
 .calendar-button-box {
@@ -157,30 +208,13 @@ body {
   margin: auto;
   margin-top: 20px;
   padding-top: 5px;
+  margin-bottom: 20px;
 }
 
 .calendar-regist:active {
   background-color: #00ffbb;
 }
 
-.teacher-sales {
-  float: left;
-  text-align: center;
-}
-
-.teacher-rating {
-  float: left;
-  text-align: center;
-}
-
-.teacher-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.teacher-clear {
-  clear: both;
-}
 .class-content {
   width: 80%;
   height: 80%;

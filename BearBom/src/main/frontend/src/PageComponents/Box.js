@@ -2,15 +2,6 @@ import React from "react";
 
 const Box = (props) => {
   let result;
-  if (
-    props.result !== "tie" &&
-    props.title === "computer" &&
-    props.result !== ""
-  ) {
-    result = props.result === "win" ? "lose" : "win";
-  } else {
-    result = props.result;
-  }
 
   return (
     <div className={`box ${result}`}>
