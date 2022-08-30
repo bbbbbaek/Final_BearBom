@@ -215,15 +215,21 @@ const Mainpage = () => {
             ? get_local.map((a, i) => {
                 return (
                   <div>
-                    <p
-                      className="get-local"
-                      style={{ marginTop: "10px" }}
-                      onClick={() => {
-                        navigate(`/saw/${a.id}`);
-                      }}
+                    <Link
+                      to={`/saw/${a.id}`}
+                      state={{ dataa: a }}
+                      style={{ textDecoration: "none", color: "#ff5862" }}
                     >
-                      {a.title}
-                    </p>
+                      <p
+                        className="get-local"
+                        style={{ marginTop: "10px" }}
+                        // onClick={() => {
+                        //   navigate(`/saw/${a.id}`);
+                        // }}
+                      >
+                        {a.title}
+                      </p>
+                    </Link>
                   </div>
                 );
               })
