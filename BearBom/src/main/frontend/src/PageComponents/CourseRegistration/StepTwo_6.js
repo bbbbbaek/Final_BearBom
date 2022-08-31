@@ -10,6 +10,7 @@ import CheckCircle from "@mui/icons-material/CheckCircle";
 import "../../css/courseRegistration.css";
 import SelectButton from "./RegistrationComponents/SelectButton";
 import KakaoAPI from "./RegistrationComponents/KakaoAPI";
+import KakaoAPI2 from "./RegistrationComponents/KakaoAPI2";
 
 const StepTwo_6 = () => {
   const [location, setLocation] = useState("");
@@ -81,7 +82,7 @@ const StepTwo_6 = () => {
                 <>{/* 카카오 주소, 지도 API 시작 */}
 
                   <KakaoAPI/>
-
+                  <KakaoAPI2/>{/*지도 표출 안됨 수정중*/}
                 </>{/* 카카오 주소, 지도 API 종료 */}
               </div>
             </div>
