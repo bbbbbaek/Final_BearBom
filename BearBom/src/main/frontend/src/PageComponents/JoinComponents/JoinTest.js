@@ -420,7 +420,7 @@ const Join = () => {
                 </Grid>
                 <Grid item xs={12} sm={4}>
                   <Button id="userZipSearch" onClick={handleClick}>
-                    우편번호 검색
+                    주소 검색
                   </Button>
                 </Grid>
                 <Grid item xs={12}>
