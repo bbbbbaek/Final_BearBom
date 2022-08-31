@@ -375,3 +375,21 @@ h4{
   top:-1px;
   z-index:1
 }
+
+.addressWrap{
+  display:none;
+  border:1px solid;
+  width:500px;
+  height:300px;
+  margin:5px 0;
+  position:relative
+}
+
+
+#btnFoldWrap{
+  cursor:pointer;
+  position:absolute;
+  right:0px;
+  top:-1px;
+  z-index:1
+}
