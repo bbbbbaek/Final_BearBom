@@ -140,6 +140,12 @@ const Mainpage = () => {
 
     //데이터불러오는 axios
     //setCourse(response.data);
+    // axios({
+    //   method: "get",
+    //   url: API_BASE_URL + "/api/course/getCourseList",
+    // }).then((response) => {
+    //   setCourse(response.data);
+    // });
   }, []);
 
   const [index, setIndex] = useState(0);

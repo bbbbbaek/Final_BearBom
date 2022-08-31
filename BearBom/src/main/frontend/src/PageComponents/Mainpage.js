@@ -183,7 +183,7 @@ const Mainpage = () => {
     (arr, index, callback) =>
       index === callback.findIndex((t) => t.id === arr.id)
   );
-  console.log(test2);
+  // console.log(test2);
   return (
     <>
       <div className="top-vod-banner-container">
