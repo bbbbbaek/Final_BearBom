@@ -25,25 +25,26 @@ import Saw from "./PageComponents/Saw";
 function App() {
   return (
     <>
-      <div className="header-main">
-        <Header />
+      <Header />
+      <div style={{ paddingTop: "60px" }}>
+        <Routes>
+          <Route path="/" element={<Mainpage />} />
+          <Route path="/course" element={<Course />} />
+          <Route path="/course/:id" element={<Detail />} />
+          <Route path="/course/registration" element={<CourseRegistration />} />
+          <Route path="/guide" element={<Guide />} />
+          <Route path="/helpdesk" element={<Helpdesk />} />
+          <Route path="/mypage" element={<Mypage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/join" element={<Join />} />
+          <Route path="/joinTest" element={<JoinTest />} />
+          <Route path="/mypage" element={<Mypage />} />
+          <Route path="/saw/:id" element={<Saw />} />
+        </Routes>
+        <Top />
+        <Chatbot />
       </div>
-      <Routes>
-        <Route path="/" element={<Mainpage />} />
-        <Route path="/course" element={<Course />} />
-        <Route path="/course/:id" element={<Detail />} />
-        <Route path="/course/registration" element={<CourseRegistration />} />
-        <Route path="/guide" element={<Guide />} />
-        <Route path="/helpdesk" element={<Helpdesk />} />
-        <Route path="/mypage" element={<Mypage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/join" element={<Join />} />
-        <Route path="/joinTest" element={<JoinTest />} />
-        <Route path="/mypage" element={<Mypage />} />
-        <Route path="/saw/:id" element={<Saw />} />
-      </Routes>
-      <Top />
-      <Chatbot />
+
       <Footer />
     </>
   );
