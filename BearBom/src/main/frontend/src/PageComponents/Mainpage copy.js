@@ -99,7 +99,7 @@ const Mainpage = () => {
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 3,
+      items: 4,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
@@ -215,22 +215,9 @@ const Mainpage = () => {
             ? get_local.map((a, i) => {
                 return (
                   <div>
-                    <Link
-                      to={`/saw/${a.id}`}
-                      state={{ dataa: a }}
-                      style={{ textDecoration: "none", color: "#ff5862" }}
-                    >
-                      <p
-                        className="get-local"
-                        style={{ marginTop: "10px" }}
-                        // onClick={() => {
-                        //   navigate(`/saw/${a.id}`);
-                        // }}
-                      >
-                        {/* {a.title} */}
-                        {a.id}
-                      </p>
-                    </Link>
+                    <p className="get-local" style={{ marginTop: "10px" }}>
+                      {a.id}
+                    </p>
                   </div>
                 );
               })

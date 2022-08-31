@@ -32,7 +32,7 @@ const PopupPostCode = ({ setZonecodee, setFullAddresss, onClose }) => {
   const postCodeStyle = {
     display: "block",
     position: "absolute",
-    top: "50%",
+    top: "38%",
     width: "600px",
     height: "458px",
     padding: "7px",
