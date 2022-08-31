@@ -79,7 +79,7 @@ const TextContainer = styled.div`
 `;
 // const CardWrapper = styled.a`
 const CardWrapper = styled.div`
-  width: 300px;
+  width: 100%;
   height: 100%;
   margin: 0 auto;
 
