@@ -100,7 +100,7 @@ $base: 0.6rem;
   position: absolute;
   right: 0;
   bottom: 600px;
-  width: 200px;
+  width: 150px;
   
   margin-right: 50px;
   text-align: center;
@@ -124,3 +124,12 @@ $base: 0.6rem;
 //   height: 40px;
 //   line-height: 40px;
 // }
+
+.react-multiple-carousel__arrow--left {
+  left: 0px;
+}
+
+.react-multiple-carousel__arrow--right {
+  right: 0px;
+  
+}

@@ -12,9 +12,10 @@ import axios from "axios";
 import { API_BASE_URL } from "../app-config";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 
+import Saw from "./Saw";
 import dataTest from "./dataTest.js";
 
-const Mainpage = (props) => {
+const Mainpage = () => {
   const [course, setCourse] = useState([]);
 
   const stateText = [
@@ -98,7 +99,7 @@ const Mainpage = (props) => {
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 3,
+      items: 4,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
@@ -124,6 +125,9 @@ const Mainpage = (props) => {
   const [text, setText] = useState([]);
 
   useEffect(() => {
+    console.log(dataa);
+    console.log(dataTest);
+
     let i = 0;
     setText(initialArray.filter((item, index) => index === i));
     setInterval(() => {
@@ -133,14 +137,9 @@ const Mainpage = (props) => {
         i = -1;
       }
     }, 3000);
+
     //데이터불러오는 axios
     //setCourse(response.data);
-    axios({
-      method: "get",
-      url: API_BASE_URL + "/api/course/getCourseList",
-    }).then((response) => {
-      setCourse(response.data);
-    });
   }, []);
 
   const [index, setIndex] = useState(0);
@@ -158,7 +157,7 @@ const Mainpage = (props) => {
     navigate("/course/registration");
   };
 
-  // const get_local = JSON.parse(localStorage.getItem("data"));
+  const get_local = JSON.parse(localStorage.getItem("data"));
 
   return (
     <>
@@ -208,6 +207,23 @@ const Mainpage = (props) => {
           </div>
         </div>
       </div>
+      <div className="lasted">
+        <div className="inner">
+          <p style={{ marginTop: "10px" }}>최근 본 상품</p>
+          {/* /**{id: ,title: ,} */}
+          {get_local !== null
+            ? get_local.map((a, i) => {
+                return (
+                  <div>
+                    <p className="get-local" style={{ marginTop: "10px" }}>
+                      {a.id}
+                    </p>
+                  </div>
+                );
+              })
+            : null}
+        </div>
+      </div>
       <main id="wrapper" className="main-contents">
         <div className="list-box h-2-box-panel main-wrapper-child-1">
           <div>
@@ -248,6 +264,7 @@ const Mainpage = (props) => {
           <div className="list-header">
             <h2>베어봄이 검증한 이달의 인기클래스!</h2>
           </div>
+
           <div>
             <CarouselContainer>
               <div className="favorite-list">
@@ -260,6 +277,7 @@ const Mainpage = (props) => {
                       //   이게 props 넣는거
 
                       <MiniCard
+                        key={data.id}
                         id={data.id}
                         thumbnail={data.thumbnail}
                         title={data.title}
@@ -285,17 +303,22 @@ const Mainpage = (props) => {
                   <Carousel responsive={responsive}>
                     {/* <div className="test001"> */}
 
-                    {stateText.map((data) => (
+                    {dataa.map((data) => (
                       // 여기서 {}말고 ()로 하면 return 안해도 됨
                       //   이게 props 넣는거
-
-                      <MiniCard
-                        id={data.id}
-                        thumbnail={data.thumbnail}
-                        title={data.title}
-                        condition={true}
-                        // 예시로 보여주기 위함
-                      />
+                      <Link to={`/saw/${data.id}`} state={{ dataa: data }}>
+                        <MiniCard
+                          key={data.id}
+                          id={data.id}
+                          thumbnail={data.thumbnail}
+                          title={data.title}
+                          condition={true}
+                          // onClick={() => {
+                          //   localStorage.setItem("iddd", "1");
+                          // }}
+                          // 예시로 보여주기 위함
+                        />
+                      </Link>
                     ))}
                     {/* </div> */}
                   </Carousel>
