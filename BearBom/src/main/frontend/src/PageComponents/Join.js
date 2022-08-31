@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "../css/join.css";
 
 import Avatar from "@mui/material/Avatar";
@@ -13,20 +13,162 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
-import DaumPostcode from "react-daum-postcode";
+import PopupPostCode from "./PopupPostCode";
 
 const Join = () => {
+  const [userId, setUserId] = useState("");
+  const [userPw, setUserPw] = useState("");
+  const [userRePw, setUserRePw] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userNm, setUserNm] = useState("");
+  const [userNickName, setUserNickName] = useState("");
+  const [userTel, setUserTel] = useState("");
+  const [userAddressDef, setUserAddressDef] = useState("");
+  const [zonecodee, setZonecodee] = useState("");
+  const [fullAddresss, setFullAddresss] = useState("");
+
+  const [userIdError, setUserIdError] = useState(false);
+  const [userPwError, setUserPwError] = useState(false);
+  const [userRePwError, setUserRePwError] = useState(false);
+  const [userEmailError, setUserEmailError] = useState(false);
+  const [userNmError, setUserNmError] = useState(false);
+  const [userNickNameError, setUserNickNameError] = useState(false);
+  const [userTelError, setUserTelError] = useState(false);
+  //const
+
+  // 아이디 유효성 검사
+  const onChangeUserId = (e) => {
+    const userIdRegex = /^[a-zA-z0-9]{5,10}$/;
+
+    if (!e.target.value || userIdRegex.test(e.target.value))
+      setUserIdError(false);
+    else setUserIdError(true);
+    setUserId(e.target.value);
+  };
+
+  // 비밀번호 유효성 검사
+  const onChangeUserPw = (e) => {
+    const userPwRegex =
+      // /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
+      /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
+    if (!e.target.value || userPwRegex.test(e.target.value))
+      setUserPwError(false);
+    else setUserPwError(true);
+
+    if (!userRePw || e.target.value === userRePw) setUserRePwError(false);
+    else setUserRePwError(true);
+    setUserPw(e.target.value);
+  };
+  const onChangeUserRePw = (e) => {
+    if (userPw === e.target.value) setUserRePwError(false);
+    else setUserRePwError(true);
+    setUserRePw(e.target.value);
+  };
+
+  // 이메일 유효성 검사
+  const onChangeUserEmail = (e) => {
+    const userEmailRegex = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+    if (!e.target.value || userEmailRegex.test(e.target.value))
+      setUserEmailError(false);
+    else setUserEmailError(true);
+    setUserEmail(e.target.value);
+  };
+
+  // 이름 유효성 검사
+  const onChangeUserNm = (e) => {
+    const userNmRegex = /^[a-z|A-Zㅣ가-힣]+$/;
+    if (!e.target.value || userNmRegex.test(e.target.value))
+      setUserNmError(false);
+    else setUserNmError(true);
+    setUserNm(e.target.value);
+  };
+
+  // 닉네임 유효성 검사
+  const onChangeUserNickName = (e) => {
+    const userNickNameRegex = /^[a-z|A-Zㅣ가-힣]{2,10}$/;
+    if (!e.target.value || userNickNameRegex.test(e.target.value))
+      setUserNickNameError(false);
+    else setUserNickNameError(true);
+    setUserNickName(e.target.value);
+  };
+
+  // 전화번호 유효성 검사
+  const onChangeUserTel = (e) => {
+    const userTelRegex = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}/;
+    if (!e.target.value || userTelRegex.test(e.target.value))
+      setUserTelError(false);
+    else setUserTelError(true);
+    setUserTel(e.target.value);
+  };
+
+  const validation = () => {
+    if (!userId) setUserIdError(true);
+    if (!userPw) setUserPwError(true);
+    if (!userRePw) setUserRePwError(true);
+    if (!userEmail) setUserEmailError(true);
+    if (!userNm) setUserNmError(true);
+    if (!userNickName) setUserNickNameError(true);
+    if (!userTel) setUserTelError(true);
+
+    if (
+      userId &&
+      userPw &&
+      userRePw &&
+      userEmail &&
+      userNm &&
+      userNickName &&
+      userTel
+    )
+      return true;
+    else return false;
+  };
+
+  const onUserAddressDefHandler = (e) => {
+    setUserAddressDef(e.currentTarget.value);
+  };
+
+  const onZonecodeeHandler = (e) => {
+    setZonecodee(e.currentTarget.value);
+  };
+
+  const onFullAddresssHandler = (e) => {
+    setFullAddresss(e.currentTarget.value);
+  };
+
+  // 팝업창 상태 관리
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  // 팝업창 열기
+  const openPostCode = () => {
+    setIsPopupOpen(true);
+  };
+
+  // 팝업창 닫기
+  const closePostCode = () => {
+    setIsPopupOpen(false);
+  };
+
+  // const onSubmit = (e) => {
+  //   if (validation()) return;
+
+  //   // API Call
+  // };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   const data = new FormData(e.target);
+  //   const userId = data.get("userId");
+  //   const userPw = data.get("userPw");
+
+  //   // Join({ userId: userId, userPw: userPw }).then((response) => {
+  //   //   //회원가입 성공 시 로그인페이지로 이동
+  //   //   window.location.href = "/login";
+  //   // });
+  // };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const data = new FormData(e.target);
-    const userId = data.get("userId");
-    const userPw = data.get("userPw");
-
-    // Join({ userId: userId, userPw: userPw }).then((response) => {
-    //   //회원가입 성공 시 로그인페이지로 이동
-    //   window.location.href = "/login";
-    // });
   };
 
   return (
@@ -34,7 +176,8 @@ const Join = () => {
       {/* <ThemeProvider theme={theme}> */}
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-        <form noValidate onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
+          {/* <form noValidate onSubmit={handleSubmit}> */}
           <Box
             sx={{
               marginTop: 8,
@@ -75,7 +218,7 @@ const Join = () => {
                   autoComplete="family-name"
                 />
               </Grid> */}
-                <Grid item xs={12}>
+                <Grid item xs={8}>
                   <TextField
                     required
                     fullWidth
@@ -83,9 +226,21 @@ const Join = () => {
                     label="아이디"
                     name="userId"
                     autoFocus
+                    value={userId}
+                    onChange={onChangeUserId}
                   />
+                  {userIdError && (
+                    <div class="invalid-input">
+                      5자 이상 10자 이하로 입력해 주세요.
+                    </div>
+                  )}
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={4}>
+                  <Button type="submit" fullWidth sx={{ mt: 1 }}>
+                    중복 확인
+                  </Button>
+                </Grid>
+                <Grid item xs={8}>
                   <TextField
                     required
                     fullWidth
@@ -93,7 +248,19 @@ const Join = () => {
                     label="이메일"
                     name="userEmail"
                     autoComplete="email"
+                    value={userEmail}
+                    onChange={onChangeUserEmail}
                   />
+                  {userEmailError && (
+                    <div class="invalid-input">
+                      유효한 이메일 형식을 입력하세요.
+                    </div>
+                  )}
+                </Grid>
+                <Grid item xs={4}>
+                  <Button type="submit" fullWidth sx={{ mt: 1 }}>
+                    이메일 확인
+                  </Button>
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
@@ -103,7 +270,14 @@ const Join = () => {
                     label="비밀번호"
                     type="password"
                     id="userPw"
+                    value={userPw}
+                    onChange={onChangeUserPw}
                   />
+                  {userPwError && (
+                    <div class="invalid-input">
+                      숫자 + 영문자 + 특수문자 조합으로 8자리 이상 입력해주세요.
+                    </div>
+                  )}
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
@@ -113,7 +287,14 @@ const Join = () => {
                     label="비밀번호 확인"
                     type="Password"
                     id="userRePw"
+                    value={userRePw}
+                    onChange={onChangeUserRePw}
                   />
+                  {userRePwError && (
+                    <div class="invalid-input">
+                      비밀번호가 일치하지 않습니다.
+                    </div>
+                  )}
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
@@ -122,7 +303,15 @@ const Join = () => {
                     id="userNm"
                     label="이름"
                     name="userNm"
+                    value={userNm}
+                    onChange={onChangeUserNm}
                   />
+                  {userNmError && (
+                    <div class="invalid-input">
+                      한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용
+                      불가)
+                    </div>
+                  )}
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
@@ -131,7 +320,36 @@ const Join = () => {
                     id="userNickName"
                     label="별명"
                     name="userNickName"
+                    value={userNickName}
+                    onChange={onChangeUserNickName}
                   />
+                  {userNickNameError && (
+                    <div class="invalid-input">
+                      2자 이상 10자 이내로 작성 가능합니다.
+                    </div>
+                  )}
+                </Grid>
+                <Grid item xs={8}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="userZipcode"
+                    label="우편번호"
+                    name="userZipCode"
+                    value={zonecodee}
+                  />
+                </Grid>
+                <Grid item xs={4}>
+                  <Button onClick={openPostCode}>검색</Button>
+                  <div id="popupDom">
+                    {isPopupOpen && (
+                      <PopupPostCode
+                        setZonecodee={setZonecodee}
+                        setFullAddresss={setFullAddresss}
+                        onClose={closePostCode}
+                      />
+                    )}
+                  </div>
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
@@ -140,6 +358,7 @@ const Join = () => {
                     id="userAddress"
                     label="주소"
                     name="userAddress"
+                    value={fullAddresss}
                     // value={userAddress}
                     // onChange={({ target: { value } }) => setUserAddress(value)}
                   />
@@ -160,10 +379,15 @@ const Join = () => {
                   <TextField
                     required
                     fullWidth
-                    id="userNm"
+                    id="userTel"
                     label="전화번호"
-                    name="userNm"
+                    name="userTel"
+                    value={userTel}
+                    onChange={onChangeUserTel}
                   />
+                  {userTelError && (
+                    <div class="invalid-input">"-"을 입력해 주세요.</div>
+                  )}
                 </Grid>
                 <Grid item xs={12}>
                   <FormControlLabel
@@ -183,7 +407,10 @@ const Join = () => {
                 </Grid>
               </Grid>
               <Button
+                // submit은 입력값 그대로 보내기 할 때,
+                // button은 입력값이 경우에 따라 다르게 사용 될 때??
                 type="submit"
+                // type="button"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}

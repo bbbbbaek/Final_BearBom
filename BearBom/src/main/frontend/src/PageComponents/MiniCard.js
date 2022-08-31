@@ -1,47 +1,51 @@
 import React from "react";
+import { Link, Route } from "react-router-dom";
 import styled from "styled-components";
+import Saw from "./Saw";
 function MiniCard({ id, title, thumbnail, condition }) {
   return (
-    <CardWrapper href={`/course/${id}`}>
-      {/* 개별 Card */}
-      {/* img */}
-      <p>{id}</p>
-      <VideoContainer>
-        {/* 95%만족 태그 */}
-        <div className="test">
-          <div className="tag">95% 만족</div>
+    <>
+      <CardWrapper>
+        {/* 개별 Card */}
+        {/* img */}
+        <p>{id}</p>
+        <VideoContainer>
+          {/* 95%만족 태그 */}
+          <div className="test">
+            <div className="tag">95% 만족</div>
 
-          {/* 비디오 */}
+            {/* 비디오 */}
 
-          <video
-            autoPlay
-            loop
-            playsInline
-            className="prototype__artwork prototype__eidit"
-            src={thumbnail}
-            style={{
-              objectFit: "contain",
-            }}
-          ></video>
+            <video
+              autoPlay
+              loop
+              playsInline
+              className="prototype__artwork prototype__eidit"
+              src={thumbnail}
+              style={{
+                objectFit: "contain",
+              }}
+            ></video>
 
-          {/* 위치 */}
-          <div className="place">마포구 망원동</div>
-        </div>
-      </VideoContainer>
-      {/* title */}
-      <TextContainer>
-        <div className="first_row">
-          {/* props로 데이터 넘겨서 넣어주기 일단 dummy */}
-          원데이
-        </div>
-        <div className="second_row">{title}</div>
-        <div className={condition ? "third_row" : "hollow"}>
-          {/* 이쪽은 있을수도있고 없을수도있고 조건 처리 */}
-          {condition ? "true면 보임" : "false면 안보임"}
-        </div>
-        <div className="last_row">30,000원 ~</div>
-      </TextContainer>
-    </CardWrapper>
+            {/* 위치 */}
+            <div className="place">마포구 망원동</div>
+          </div>
+        </VideoContainer>
+        {/* title */}
+        <TextContainer>
+          <div className="first_row">
+            {/* props로 데이터 넘겨서 넣어주기 일단 dummy */}
+            원데이
+          </div>
+          <div className="second_row">{title}</div>
+          <div className={condition ? "third_row" : "hollow"}>
+            {/* 이쪽은 있을수도있고 없을수도있고 조건 처리 */}
+            {condition ? "true면 보임" : "false면 안보임"}
+          </div>
+          <div className="last_row">30,000원 ~</div>
+        </TextContainer>
+      </CardWrapper>
+    </>
   );
 }
 
@@ -73,8 +77,8 @@ const TextContainer = styled.div`
     font-size: 14px;
   }
 `;
-
-const CardWrapper = styled.a`
+// const CardWrapper = styled.a`
+const CardWrapper = styled.div`
   width: 300px;
   height: 100%;
   margin: 0 auto;
