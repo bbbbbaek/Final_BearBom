@@ -4,6 +4,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/header.css";
+import logoImg from "../images/logo.png";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -15,9 +16,10 @@ const Header = () => {
         <Navbar bg="light" variant="light">
           <Container>
             <Navbar.Brand href="/">
-              <h4 style={{ color: "#f7b500", margin: 0, fontWeight: "bold" }}>
+              {/* <h4 style={{ color: "#958a78", margin: 0, fontWeight: "bold" }}>
                 베어봄
-              </h4>
+              </h4> */}
+              <img className="logoImg" src={logoImg} alt="" />
             </Navbar.Brand>
             <Nav className="justify-content-start">
               <Nav.Link

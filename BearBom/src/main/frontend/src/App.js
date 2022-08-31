@@ -23,9 +23,7 @@ import JoinTest from "./PageComponents/JoinComponents/JoinTest";
 function App() {
   return (
     <>
-      <div className="header-main">
-        <Header />
-      </div>
+      <Header />
       <Routes>
         <Route path="/" element={<Mainpage />} />
         <Route path="/course" element={<Course />} />
