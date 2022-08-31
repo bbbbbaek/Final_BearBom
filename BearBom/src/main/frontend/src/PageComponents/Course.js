@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import "../css/course.css";
 import {
+  Button,
   ButtonGroup,
   FormControl,
   InputLabel,
   MenuItem,
+  Pagination,
+  PaginationItem,
   Select,
+  Stack,
 } from "@mui/material";
 import InputGroup from "react-bootstrap/InputGroup";
 import MiniCard from "./MiniCard";
@@ -25,17 +28,65 @@ import "react-multi-carousel/lib/styles.css";
 import axios from "axios";
 import { API_BASE_URL } from "../app-config";
 import { Link } from "react-router-dom";
+import "../css/btnDeco.scss";
+// import TextContainer from "../PageComponents/MiniCard";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 function valuetext(priceSlider) {
   return `${priceSlider}원`;
 }
 
-function valueDate(dateMdf) {
-  return new Date(dateMdf);
+// function valueDate(dateMdf) {
+//   return new Date(dateMdf);
+// }
+
+let hour;
+let minu;
+
+function valueDate(time) {
+  hour = Math.floor(time / 60);
+  minu = Math.floor(time % 60);
+
+  if (hour < 10) {
+    hour = "0" + hour;
+  }
+  if (minu < 10) {
+    minu = "0" + minu;
+  }
+
+  return `${hour}:${minu}`;
 }
+
+// function valueDate(dateMdf) {
+//   const min = parseInt(dateMdf, 10);
+//   let hours = Math.floor(min / 1440);
+//   let minutes = Math.floor(min - hours * 1440);
+
+//   if (hours < 10) {
+//     hours = "0" + hours;
+//   }
+//   if (minutes < 10) {
+//     minutes = "0" + minutes;
+//   }
+//   return hours + ":" + minutes;
+// }
+
+// function valueDate(dateMdf) {
+//   dateMdf = Number(dateMdf);
+//   var hou = Math.floor(dateMdf / 3600);
+//   var minu = Math.floor((dateMdf % 3600) / 60);
+
+//   var houDisplay = hou > 0 ? hou + (hou == 1 ? " hour, " : " hours, ") : "";
+//   var minuDisplay =
+//     minu > 0 ? minu + (minu == 1 ? " minute, " : " minutes, ") : "";
+
+//   return houDisplay + minuDisplay;
+// }
+
 // 강좌 조회 페이지
 const Course = (props) => {
-  const [timeSlider, setTimeSlider] = useState([0, 24]);
+  const [timeSlider, setTimeSlider] = useState([0, 1440]);
 
   const handleChange1 = (event, newValue) => {
     setTimeSlider(newValue);
@@ -255,6 +306,40 @@ const Course = (props) => {
   //   setTimeSlider(newValue);
   // };
 
+  let dataCategory = ["원데이", "정기"];
+
+  let [btnActiveCategory, setBtnActiveCategory] = useState("");
+
+  const toggleActiveCategory = (e) => {
+    setBtnActiveCategory((prev) => {
+      return e.target.value;
+    });
+  };
+
+  let dataWeek = ["평일", "토요일", "일요일"];
+
+  let [btnActiveWeek, setBtnActiveWeek] = useState("");
+
+  const toggleActiveWeek = (e) => {
+    setBtnActiveWeek((prev) => {
+      return e.target.value;
+    });
+  };
+
+  let dataLevel = ["입문", "중급", "고급"];
+
+  let [btnActiveLevel, setBtnActiveLevel] = useState("");
+
+  const toggleActiveLevel = (e) => {
+    setBtnActiveLevel((prev) => {
+      return e.target.value;
+    });
+  };
+
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const page = parseInt(query.get("page") || "1", 10);
+
   return (
     <>
       <br />
@@ -369,22 +454,24 @@ const Course = (props) => {
           </Col>
           <Col className="class-category">
             <ButtonGroup name="btnGroup1">
-              <Button
-                variant="outline-dark"
-                size="sm"
-                className="btn-category1"
-                name="btn1"
-              >
-                원데이
-              </Button>
-              <Button
-                variant="outline-dark"
-                size="sm"
-                className="btn-category2"
-                name="btn1"
-              >
-                정기
-              </Button>
+              <div className="container">
+                {dataCategory.map((item, idx) => {
+                  return (
+                    <>
+                      <button
+                        value={idx}
+                        className={
+                          "btn" + (idx == btnActiveCategory ? " active" : "")
+                        }
+                        onClick={toggleActiveCategory}
+                        id="btnDeco"
+                      >
+                        {item}
+                      </button>
+                    </>
+                  );
+                })}
+              </div>
             </ButtonGroup>
           </Col>
         </Row>
@@ -395,15 +482,24 @@ const Course = (props) => {
           </Col>
           <Col md={4} className="class-week">
             <ButtonGroup name="btnGroup2">
-              <Button variant="outline-dark" size="sm" name="btn2">
-                평일
-              </Button>
-              <Button variant="outline-dark" size="sm" name="btn2">
-                토요일
-              </Button>
-              <Button variant="outline-dark" size="sm" name="btn2">
-                일요일
-              </Button>
+              <div className="container">
+                {dataWeek.map((item, idx) => {
+                  return (
+                    <>
+                      <button
+                        value={idx}
+                        className={
+                          "btn" + (idx == btnActiveWeek ? " active" : "")
+                        }
+                        onClick={toggleActiveWeek}
+                        id="btnDeco"
+                      >
+                        {item}
+                      </button>
+                    </>
+                  );
+                })}
+              </div>
             </ButtonGroup>
           </Col>
           <Col md={1} className="category-font">
@@ -430,7 +526,9 @@ const Course = (props) => {
                   valueLabelDisplay="auto"
                   getAriaValueText={valuetext}
                   className="time-slider1"
-                  max={24}
+                  min={0}
+                  max={1440}
+                  step="10"
                 />
               </Box>
             </div>
@@ -452,15 +550,24 @@ const Course = (props) => {
             난이도
           </Col>
           <Col md={4} className="class-level">
-            <Button variant="outline-dark" size="sm">
-              입문
-            </Button>
-            <Button variant="outline-dark" size="sm">
-              중급
-            </Button>
-            <Button variant="outline-dark" size="sm">
-              고급
-            </Button>
+            <div className="container">
+              {dataLevel.map((item, idx) => {
+                return (
+                  <>
+                    <button
+                      value={idx}
+                      className={
+                        "btn" + (idx == btnActiveLevel ? " active" : "")
+                      }
+                      onClick={toggleActiveLevel}
+                      id="btnDeco"
+                    >
+                      {item}
+                    </button>
+                  </>
+                );
+              })}
+            </div>
           </Col>
           <Col md={1} className="category-font">
             금액
@@ -486,6 +593,7 @@ const Course = (props) => {
                   getAriaValueText={valuetext}
                   className="price-slider1"
                   max={1000000}
+                  step="1000"
                 />
               </Box>
             </div>
@@ -504,16 +612,13 @@ const Course = (props) => {
         <br />
         <Row className="justify-content-md-center">
           <Col xs lg="2">
-            <Button variant="outline-dark" size="lg" className="refreshBtn">
-              <img
-                className="resetIcon"
-                src={require("../images/reset-icon.png")}
-              />
+            <Button variant="outline-dark" size="lg" id="refreshBtn">
+              <img id="resetIcon" src={require("../images/reset-icon.png")} />
               초기화
             </Button>
           </Col>
           <Col xs lg="2">
-            <Button variant="secondary" size="lg" className="searchBtn">
+            <Button variant="secondary" size="lg" id="searchBtn">
               검색하기
             </Button>
           </Col>
@@ -593,26 +698,33 @@ const Course = (props) => {
               height: "1px",
             }}
           />
-
-          {/* <div className="searchPaging"> */}
-          {/* <Pagination id="pagePart">
-              <Pagination.First />
-              <Pagination.Prev />
-              <Pagination.Item>{1}</Pagination.Item>
-              <Pagination.Ellipsis />
-
-              <Pagination.Item>{10}</Pagination.Item>
-              <Pagination.Item>{11}</Pagination.Item>
-              <Pagination.Item active>{12}</Pagination.Item>
-              <Pagination.Item>{13}</Pagination.Item>
-              <Pagination.Item disabled>{14}</Pagination.Item>
-
-              <Pagination.Ellipsis />
-              <Pagination.Item>{20}</Pagination.Item>
-              <Pagination.Next />
-              <Pagination.Last />
-            </Pagination> */}
-          {/* </div> */}
+          <div className="pagingPart">
+            <Pagination
+              page={page}
+              count={10}
+              renderItem={(item) => (
+                <PaginationItem
+                  component={Link}
+                  to={`/inbox${item.page === 1 ? "" : `?page=${item.page}`}`}
+                  {...item}
+                />
+              )}
+            />
+            {/* <Stack spacing={2}>
+              <Pagination
+                count={10}
+                renderItem={(item) => (
+                  <PaginationItem
+                    components={{
+                      previous: ArrowBackIcon,
+                      next: ArrowForwardIcon,
+                    }}
+                    {...item}
+                  />
+                )}
+              />
+            </Stack> */}
+          </div>
         </div>
       </main>
     </>
