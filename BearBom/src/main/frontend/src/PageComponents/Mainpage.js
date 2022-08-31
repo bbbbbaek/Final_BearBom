@@ -12,6 +12,8 @@ import axios from "axios";
 import { API_BASE_URL } from "../app-config";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 
+import dataTest from "./dataTest.js";
+
 const Mainpage = (props) => {
   const [course, setCourse] = useState([]);
 
@@ -153,10 +155,10 @@ const Mainpage = (props) => {
   const onClickClassRegist = () => {
     navigate("/course/registration");
   };
-
+  const [dataa, setDataa] = useState(dataTest);
 
   const get_local = JSON.parse(localStorage.getItem("data"));
-  
+
   return (
     <>
       <div className="top-vod-banner-container">
@@ -315,17 +317,22 @@ const Mainpage = (props) => {
                   <Carousel responsive={responsive}>
                     {/* <div className="test001"> */}
 
-                    {stateText.map((data) => (
+                    {dataa.map((data) => (
                       // 여기서 {}말고 ()로 하면 return 안해도 됨
                       //   이게 props 넣는거
-
-                      <MiniCard
-                        id={data.id}
-                        thumbnail={data.thumbnail}
-                        title={data.title}
-                        condition={true}
-                        // 예시로 보여주기 위함
-                      />
+                      <Link to={`/saw/${data.id}`} state={{ dataa: data }}>
+                        <MiniCard
+                          key={data.id}
+                          id={data.id}
+                          thumbnail={data.thumbnail}
+                          title={data.title}
+                          condition={true}
+                          // onClick={() => {
+                          //   localStorage.setItem("iddd", "1");
+                          // }}
+                          // 예시로 보여주기 위함
+                        />
+                      </Link>
                     ))}
                     {/* </div> */}
                   </Carousel>
