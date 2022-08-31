@@ -15,9 +15,20 @@
   height: 300px;
 }
 
-.class-category button{
+
+.class-category button {
   margin: 3px;
   width: 80px;
+}
+
+#btn-category1 {
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+#btn-category2 {
+  border: 1px solid black;
+  border-radius: 10px;
 }
 
 .class-week button {
@@ -25,9 +36,46 @@
   width: 80px;
 }
 
+#btn-week1 {
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+#btn-week2 {
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+#btn-week3 {
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
 .class-level button {
   margin:3px;
   width: 80px;
+}
+
+#btn-level1 {
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+#btn-level2 {
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+#btn-level3 {
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+#refreshBtn {
+  border: 2px solid #958a78;
+  border-radius: 10px;
+  height: 45px;
+  color: rgb(59, 73, 78);
 }
 
 .time-slider {
@@ -45,17 +93,17 @@
 .css-1x5jdmq {
   text-align: center;
   width: 100px;
+  height: 45px;
   border-radius: 10px;
+  border: 2px solid #958a78;
 }
 
 .searchForm {
   display: flex;
 }
 
-.resetIcon {
+#resetIcon {
   width: 22px;
-  float:left;
-  margin-top: 4px;
   padding-right: 1px;
 }
 
@@ -75,12 +123,12 @@
 }
 
 #btnGroupAddon {
-  background-color: #1c1c23;
-  border: 2px solid #1c1c23;
+  background-color: #958a78;
+  border: 2px solid #958a78;
 }
 
 .form-control {
-  border: 2px solid #1c1c23;;
+  border: 2px solid #958a78;;
 }
 
 .search-btn {
@@ -94,13 +142,21 @@
   margin: 0px 13px;
 }
 
+/* #time-slider1 {
+  color: #958a78;
+} */
+
 .price-slider-bar {
   width:220px;
   margin: 0px 13px;
 }
 
-.searchBtn {
-  background-color: #1c1c23;
+#searchBtn {
+  background-color: #958a78;
+  color: rgb(59, 73, 78);
+  border-radius: 10px;
+  width: 100px;
+  height: 45px;
 }
 
 .classCount {
@@ -123,4 +179,9 @@
 .searchContent {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+/* Pagination css */
+.css-wjh20t-MuiPagination-ul {
+  justify-content: center;
 }
