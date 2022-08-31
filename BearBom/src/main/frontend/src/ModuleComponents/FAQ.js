@@ -31,6 +31,17 @@ const FAQ = ({ data }) => {
           );
         })}
       </div>
+      <button
+        onClick={() => {
+          console.log(faqData);
+          faqData.push({
+            title: "test",
+            content: "test",
+          });
+        }}
+      >
+        click!
+      </button>
     </>
   );
 };
