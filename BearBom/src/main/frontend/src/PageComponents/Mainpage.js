@@ -159,7 +159,9 @@ const Mainpage = () => {
 
   const get_local = JSON.parse(localStorage.getItem("data"));
   // console.log(JSON.parse(localStorage.getItem("data")).map((el) => el.id));
-  const test = JSON.parse(localStorage.getItem("data")).map((el) => el.id);
+  // const test = JSON.parse(localStorage.getItem("data")).map((el) => el.id);
+  // const test = JSON.parse(localStorage.getItem("data"));
+  // console.log(test);
   // console.log(test);
 
   // console.log(test);
@@ -179,10 +181,10 @@ const Mainpage = () => {
   // );
   // console.log(test2);
 
-  const test2 = get_local.filter(
-    (arr, index, callback) =>
-      index === callback.findIndex((t) => t.id === arr.id)
-  );
+  // const test2 = get_local.filter(
+  //   (arr, index, callback) =>
+  //     index === callback.findIndex((t) => t.id === arr.id)
+  // );
   // console.log(test2);
   return (
     <>
@@ -238,7 +240,7 @@ const Mainpage = () => {
           {/* /**{id: ,title: ,} */}
 
           {get_local !== null
-            ? test2.map((a, i) => {
+            ? get_local.map((a, i) => {
                 return (
                   <div>
                     <Link
