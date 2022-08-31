@@ -12,10 +12,7 @@ import axios from "axios";
 import { API_BASE_URL } from "../app-config";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 
-import Saw from "./Saw";
-import dataTest from "./dataTest.js";
-
-const Mainpage = () => {
+const Mainpage = (props) => {
   const [course, setCourse] = useState([]);
 
   const stateText = [
@@ -120,14 +117,9 @@ const Mainpage = () => {
     채워나갈 수 있어요!`,
   ]; // 원본 배열
 
-  const [dataa, setDataa] = useState(dataTest);
-
   const [text, setText] = useState([]);
 
   useEffect(() => {
-    console.log(dataa);
-    console.log(dataTest);
-
     let i = 0;
     setText(initialArray.filter((item, index) => index === i));
     setInterval(() => {
@@ -137,9 +129,14 @@ const Mainpage = () => {
         i = -1;
       }
     }, 3000);
-
     //데이터불러오는 axios
     //setCourse(response.data);
+    axios({
+      method: "get",
+      url: API_BASE_URL + "/api/course/getCourseList",
+    }).then((response) => {
+      setCourse(response.data);
+    });
   }, []);
 
   const [index, setIndex] = useState(0);
@@ -157,33 +154,6 @@ const Mainpage = () => {
     navigate("/course/registration");
   };
 
-  const get_local = JSON.parse(localStorage.getItem("data"));
-  // console.log(JSON.parse(localStorage.getItem("data")).map((el) => el.id));
-  const test = JSON.parse(localStorage.getItem("data")).map((el) => el.id);
-  // console.log(test);
-
-  // console.log(test);
-
-  // const test1 = test.filter((item, i) => {
-  //   return (
-  //     test.findIndex((item2, j) => {
-  //       return item.id === item2.id;
-  //     }) === i
-  //   );
-  // });
-
-  // console.log(test1);
-
-  // const test2 = test.filter(
-  //   (element, index) => test.indexOf(element) === index
-  // );
-  // console.log(test2);
-
-  const test2 = get_local.filter(
-    (arr, index, callback) =>
-      index === callback.findIndex((t) => t.id === arr.id)
-  );
-  // console.log(test2);
   return (
     <>
       <div className="top-vod-banner-container">
@@ -232,37 +202,6 @@ const Mainpage = () => {
           </div>
         </div>
       </div>
-      <div className="lasted">
-        <div className="inner">
-          <p style={{ marginTop: "10px" }}>최근 본 상품</p>
-          {/* /**{id: ,title: ,} */}
-
-          {get_local !== null
-            ? test2.map((a, i) => {
-                return (
-                  <div>
-                    <Link
-                      to={`/saw/${a.id}`}
-                      state={{ dataa: a }}
-                      style={{ textDecoration: "none", color: "#ff5862" }}
-                    >
-                      <p
-                        className="get-local"
-                        style={{ marginTop: "10px" }}
-                        // onClick={() => {
-                        //   navigate(`/saw/${a.id}`);
-                        // }}
-                      >
-                        {/* {a.title} */}
-                        {a.id}
-                      </p>
-                    </Link>
-                  </div>
-                );
-              })
-            : null}
-        </div>
-      </div>
       <main id="wrapper" className="main-contents">
         <div className="list-box h-2-box-panel main-wrapper-child-1">
           <div>
@@ -303,7 +242,6 @@ const Mainpage = () => {
           <div className="list-header">
             <h2>베어봄이 검증한 이달의 인기클래스!</h2>
           </div>
-
           <div>
             <CarouselContainer>
               <div className="favorite-list">
@@ -316,7 +254,6 @@ const Mainpage = () => {
                       //   이게 props 넣는거
 
                       <MiniCard
-                        key={data.id}
                         id={data.id}
                         thumbnail={data.thumbnail}
                         title={data.title}
@@ -342,22 +279,17 @@ const Mainpage = () => {
                   <Carousel responsive={responsive}>
                     {/* <div className="test001"> */}
 
-                    {dataa.map((data) => (
+                    {stateText.map((data) => (
                       // 여기서 {}말고 ()로 하면 return 안해도 됨
                       //   이게 props 넣는거
-                      <Link to={`/saw/${data.id}`} state={{ dataa: data }}>
-                        <MiniCard
-                          key={data.id}
-                          id={data.id}
-                          thumbnail={data.thumbnail}
-                          title={data.title}
-                          condition={true}
-                          // onClick={() => {
-                          //   localStorage.setItem("iddd", "111");
-                          // }}
-                          // 예시로 보여주기 위함
-                        />
-                      </Link>
+
+                      <MiniCard
+                        id={data.id}
+                        thumbnail={data.thumbnail}
+                        title={data.title}
+                        condition={true}
+                        // 예시로 보여주기 위함
+                      />
                     ))}
                     {/* </div> */}
                   </Carousel>
