@@ -154,6 +154,9 @@ const Mainpage = (props) => {
     navigate("/course/registration");
   };
 
+
+  const get_local = JSON.parse(localStorage.getItem("data"));
+  
   return (
     <>
       <div className="top-vod-banner-container">
@@ -202,6 +205,39 @@ const Mainpage = (props) => {
           </div>
         </div>
       </div>
+
+      <div className="lasted">
+        <div className="inner">
+          <p style={{ marginTop: "10px" }}>최근 본 상품</p>
+          {/* /**{id: ,title: ,} */}
+
+          {get_local !== null
+            ? get_local.map((a, i) => {
+                return (
+                  <div>
+                    <Link
+                      to={`/saw/${a.id}`}
+                      state={{ dataa: a }}
+                      style={{ textDecoration: "none", color: "#ff5862" }}
+                    >
+                      <p
+                        className="get-local"
+                        style={{ marginTop: "10px" }}
+                        // onClick={() => {
+                        //   navigate(`/saw/${a.id}`);
+                        // }}
+                      >
+                        {/* {a.title} */}
+                        {a.id}
+                      </p>
+                    </Link>
+                  </div>
+                );
+              })
+            : null}
+        </div>
+      </div>
+
       <main id="wrapper" className="main-contents">
         <div className="list-box h-2-box-panel main-wrapper-child-1">
           <div>
