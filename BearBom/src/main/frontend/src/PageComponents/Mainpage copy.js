@@ -99,7 +99,7 @@ const Mainpage = () => {
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 3,
+      items: 4,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
@@ -158,32 +158,7 @@ const Mainpage = () => {
   };
 
   const get_local = JSON.parse(localStorage.getItem("data"));
-  // console.log(JSON.parse(localStorage.getItem("data")).map((el) => el.id));
-  const test = JSON.parse(localStorage.getItem("data")).map((el) => el.id);
-  // console.log(test);
 
-  // console.log(test);
-
-  // const test1 = test.filter((item, i) => {
-  //   return (
-  //     test.findIndex((item2, j) => {
-  //       return item.id === item2.id;
-  //     }) === i
-  //   );
-  // });
-
-  // console.log(test1);
-
-  // const test2 = test.filter(
-  //   (element, index) => test.indexOf(element) === index
-  // );
-  // console.log(test2);
-
-  const test2 = get_local.filter(
-    (arr, index, callback) =>
-      index === callback.findIndex((t) => t.id === arr.id)
-  );
-  console.log(test2);
   return (
     <>
       <div className="top-vod-banner-container">
@@ -236,27 +211,13 @@ const Mainpage = () => {
         <div className="inner">
           <p style={{ marginTop: "10px" }}>최근 본 상품</p>
           {/* /**{id: ,title: ,} */}
-
           {get_local !== null
-            ? test2.map((a, i) => {
+            ? get_local.map((a, i) => {
                 return (
                   <div>
-                    <Link
-                      to={`/saw/${a.id}`}
-                      state={{ dataa: a }}
-                      style={{ textDecoration: "none", color: "#ff5862" }}
-                    >
-                      <p
-                        className="get-local"
-                        style={{ marginTop: "10px" }}
-                        // onClick={() => {
-                        //   navigate(`/saw/${a.id}`);
-                        // }}
-                      >
-                        {/* {a.title} */}
-                        {a.id}
-                      </p>
-                    </Link>
+                    <p className="get-local" style={{ marginTop: "10px" }}>
+                      {a.id}
+                    </p>
                   </div>
                 );
               })
@@ -353,7 +314,7 @@ const Mainpage = () => {
                           title={data.title}
                           condition={true}
                           // onClick={() => {
-                          //   localStorage.setItem("iddd", "111");
+                          //   localStorage.setItem("iddd", "1");
                           // }}
                           // 예시로 보여주기 위함
                         />
