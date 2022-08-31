@@ -72,7 +72,7 @@ const Login = () => {
                 <Link href="#">비밀번호 찾기</Link>
               </Grid>
               <Grid item>
-                <Link href="#">회원가입</Link>
+                <Link href="join">회원가입</Link>
               </Grid>
             </Grid>
           </Box>

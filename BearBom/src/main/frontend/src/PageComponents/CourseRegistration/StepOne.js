@@ -40,7 +40,7 @@ import SelectButton from "./RegistrationComponents/SelectButton";
                           placeholder="' - '를 제외하고 입력해주세요"
                         ></input>
                       </div>
-                      <Button variant="contained" size="small" style={{minWidth:80}}>
+                      <Button variant="contained" size="small" color="primary" style={{minWidth:80}}>
                         문자전송
                       </Button>
                     </div>
