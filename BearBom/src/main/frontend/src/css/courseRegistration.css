@@ -180,7 +180,8 @@ p{
   display: flex;
   font-size: 14px;
   font-weight: 400px;
-  margin-left: 12px;
+  margin-left: 15px;
+  margin-top: 10px;
 }
 
 .inputButtonWrap{
@@ -225,6 +226,15 @@ h4{
   flex-direction: row;
   justify-content: space-between;
   
+}
+
+.minMaxBox{
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 400px;
 }
 
 .rightBtn{
