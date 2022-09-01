@@ -308,3 +308,19 @@ body {
 .review-textarea {
   width: 100%;
 }
+
+.reviewmodal-box {
+  float: right;
+  margin-right: 40px;
+  background-color: #1eb7e5;
+  border-radius: 5px;
+  border: 1px solid rgb(0, 0, 0, 0);
+}
+
+.rating-position {
+  right: 0px;
+}
+
+.modal-position {
+  margin-left: 220px;
+}

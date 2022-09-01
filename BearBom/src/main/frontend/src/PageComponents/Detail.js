@@ -9,12 +9,13 @@ import AnchorLink from "react-anchor-link-smooth-scroll";
 import HoverRating from "./ReviewFeedback";
 import AutoHeightTextarea from "./AutoHeightTextarea";
 import Rating from "@mui/material/Rating";
-import Location from "./location";
+import Location from "./Location";
 // import Calendar from "./Calendar2/Calendar.js";
 import Calendar4 from "./Calendar/Calendar.js";
 import Calendar5 from "../PageComponents/Calendar";
 import CarouselFadeExample from "../PageComponents/Test.js";
 import Thumb from "./Thumb";
+import Modal from "./ReviewModal";
 // import MyComponent from "../PageComponents/Calendar";
 
 const Detail = ({ scrollTop }) => {
@@ -44,6 +45,15 @@ const Detail = ({ scrollTop }) => {
       calRef.current.style.opacity = 1;
     }
   }, [scrollTop]);
+
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   return (
     <>
@@ -220,6 +230,18 @@ const Detail = ({ scrollTop }) => {
               <h5>
                 <b>후기</b>
               </h5>
+
+              <button className="reviewmodal-box" onClick={openModal}>
+                등록하기
+              </button>
+
+              <Modal open={modalOpen} close={closeModal} header="후기">
+                <div className="modal-position">
+                  <HoverRating />
+                </div>
+                <AutoHeightTextarea />
+              </Modal>
+
               <div className="review-box">
                 <img className="img2" src={require("../img/img2.jpeg")}></img>
                 <span className="review-nickname">nickname</span>
