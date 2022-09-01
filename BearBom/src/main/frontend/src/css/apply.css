@@ -1,0 +1,91 @@
+.calendar-box1 {
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 80px;
+  animation: fadein 3s;
+  min-width: 460px;
+  width: calc(100% - 40px);
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  background-color: #fafafa;
+  margin-left: 20px;
+  margin-top: 40px;
+  word-break: keep-all;
+}
+
+.cal-box {
+  margin-left: 30px;
+}
+
+.cal-sel-box {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.apply-cost {
+  float: right;
+  padding-right: 30px;
+  padding-bottom: 10px;
+  margin-top: 20px;
+}
+
+.apply-cost-won {
+  margin-left: 20px;
+}
+
+.cal-btn-box {
+  min-width: 400px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.cal-wishList {
+  width: 43%;
+  height: 30px;
+  text-align: center;
+  margin-left: 28px;
+  background-color: #dbd7d3;
+  border-radius: 5px;
+  border: 1px solid #edeae7;
+}
+
+.cal-wishList:active {
+  background-color: #edeae7;
+}
+
+.cal-apply {
+  width: 43%;
+  height: 30px;
+  text-align: center;
+  margin-right: 5px;
+  background-color: #dbd7d3;
+  border-radius: 5px;
+  border: 1px solid #edeae7;
+}
+
+.cal-apply:active {
+  background-color: #edeae7;
+}
+
+.start-date {
+  width: 48%;
+  height: 30px;
+  text-align: center;
+  margin-left: 16px;
+}
+
+.end-date {
+  width: 48%;
+  height: 30px;
+  text-align: center;
+}

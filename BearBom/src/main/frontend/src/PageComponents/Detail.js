@@ -15,6 +15,7 @@ import Calendar2 from "../PageComponents/Calendar";
 import CarouselFadeExample from "../PageComponents/Test.js";
 import Thumb from "./Thumb";
 import Modal from "./ReviewModal";
+import Apply from "./Apply";
 // import MyComponent from "../PageComponents/Calendar";
 
 const Detail = ({ scrollTop }) => {
@@ -43,7 +44,7 @@ const Detail = ({ scrollTop }) => {
   const calRef = useRef(null);
 
   useEffect(() => {
-    if (height > 2000) {
+    if (height > 1000) {
       calRef.current.style.opacity = 0;
       calRef.current.style.transition = "opacity 0.7s";
     } else {
@@ -62,6 +63,7 @@ const Detail = ({ scrollTop }) => {
     };
   });
 
+  //모달 창 띄우기
   const [modalOpen, setModalOpen] = useState(false);
 
   const openModal = () => {
@@ -291,7 +293,7 @@ const Detail = ({ scrollTop }) => {
             </section>
           </div>
           <div className="main-cal">
-            <div className="calendar-box" ref={calRef}>
+            {/* <div className="calendar-box" ref={calRef}>
               <div className="calendar-title">
                 <h4>나만의 싸인 만들기 클래스</h4>
               </div>
@@ -306,6 +308,9 @@ const Detail = ({ scrollTop }) => {
             <div className="calendar-regist-box">예약금액 1인 40,000원</div>
             <div className="calendar-regist">
               <span className="calendar-text">신청하기</span>
+            </div> */}
+            <div ref={calRef}>
+              <Apply />
             </div>
           </div>
         </div>
