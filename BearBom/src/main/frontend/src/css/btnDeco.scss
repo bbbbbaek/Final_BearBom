@@ -1,0 +1,13 @@
+#btnDeco {
+    width: 100px;
+    color: rgb(59, 73, 78);
+    background-color: #dbd7d3;
+    height: 45px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+
+    &.active {
+        background-color: #958a78;
+    }
+}
