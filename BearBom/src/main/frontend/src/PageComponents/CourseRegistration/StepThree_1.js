@@ -19,17 +19,17 @@ import KakaoAPI from "./RegistrationComponents/KakaoAPI";
     return (
       <>
         <div className="content content1">
-          <div className="contentName">Step.2 클래스 소개</div>
+          <div className="contentName">Step.3 금액 및 일정</div>
           <div className="contentWrap">
             <div className="contentDetail">
               <div className="nameWrap">
                 <h5 className="detailName">
-                  위치정보
+                  클래스 일정 및 인원
                   <div className="nameUnderbar"></div>
                 </h5>
               </div>
               <div className="detailEx">
-                <p className="datilNameInfo">클래스의 위치를 알려주세요</p>
+                <p className="datilNameInfo">클래스의 일정과 수강인원을 설정해 주세요</p>
               </div>
               <div className="detail">
                 <div className="selectBox">
@@ -67,20 +67,6 @@ import KakaoAPI from "./RegistrationComponents/KakaoAPI";
                       <MenuItem value={217}>충청남도</MenuItem>
                     </Select>
                   </FormControl>
-                </div>
-              </div>
-            </div>
-            <div className="contentDetail">
-            <div className="numCheck">
-                <div className="datailLabel">
-                  <p>상세위치</p>
-                </div>
-                <div className="kakaoPostCode">
-                  <>{/* 카카오 주소, 지도 API 시작 */}
-  
-                    <KakaoAPI/>
-  
-                  </>{/* 카카오 주소, 지도 API 종료 */}
                 </div>
               </div>
             </div>
