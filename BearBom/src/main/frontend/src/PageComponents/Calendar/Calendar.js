@@ -1,105 +1,105 @@
-import React from "react";
-import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import { LocalizationProvider } from "@mui/x-date-pickers-pro";
-import { AdapterDateFns } from "@mui/x-date-pickers-pro/AdapterDateFns";
-import { StaticDateRangePicker } from "@mui/x-date-pickers-pro/StaticDateRangePicker";
-import { DateRangePickerDay as MuiDateRangePickerDay } from "@mui/x-date-pickers-pro/DateRangePickerDay";
+// import React from "react";
+// import { styled } from "@mui/material/styles";
+// import Box from "@mui/material/Box";
+// import TextField from "@mui/material/TextField";
+// import { LocalizationProvider } from "@mui/x-date-pickers-pro";
+// import { AdapterDateFns } from "@mui/x-date-pickers-pro/AdapterDateFns";
+// import { StaticDateRangePicker } from "@mui/x-date-pickers-pro/StaticDateRangePicker";
+// import { DateRangePickerDay as MuiDateRangePickerDay } from "@mui/x-date-pickers-pro/DateRangePickerDay";
 
-const DateRangePickerDay = styled(MuiDateRangePickerDay)(
-  ({ theme, isHighlighting, isStartOfHighlighting, isEndOfHighlighting }) => ({
-    ...(isHighlighting && {
-      borderRadius: 0,
-      backgroundColor: theme.palette.primary.main,
-      color: theme.palette.common.white,
-      "&:hover, &:focus": {
-        backgroundColor: theme.palette.primary.dark,
-      },
-    }),
-    ...(isStartOfHighlighting && {
-      borderTopLeftRadius: "50%",
-      borderBottomLeftRadius: "50%",
-    }),
-    ...(isEndOfHighlighting && {
-      borderTopRightRadius: "50%",
-      borderBottomRightRadius: "50%",
-    }),
-  })
-);
+// const DateRangePickerDay = styled(MuiDateRangePickerDay)(
+//   ({ theme, isHighlighting, isStartOfHighlighting, isEndOfHighlighting }) => ({
+//     ...(isHighlighting && {
+//       borderRadius: 0,
+//       backgroundColor: theme.palette.primary.main,
+//       color: theme.palette.common.white,
+//       "&:hover, &:focus": {
+//         backgroundColor: theme.palette.primary.dark,
+//       },
+//     }),
+//     ...(isStartOfHighlighting && {
+//       borderTopLeftRadius: "50%",
+//       borderBottomLeftRadius: "50%",
+//     }),
+//     ...(isEndOfHighlighting && {
+//       borderTopRightRadius: "50%",
+//       borderBottomRightRadius: "50%",
+//     }),
+//   })
+// );
 
-function Calendar4() {
-  const [value, setValue] = React.useState([null, null]);
+// function Calendar4() {
+//   const [value, setValue] = React.useState([null, null]);
 
-  const renderWeekPickerDay = (date, dateRangePickerDayProps) => {
-    return <DateRangePickerDay {...dateRangePickerDayProps} />;
-  };
+//   const renderWeekPickerDay = (date, dateRangePickerDayProps) => {
+//     return <DateRangePickerDay {...dateRangePickerDayProps} />;
+//   };
 
-  return (
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <StaticDateRangePicker
-        displayStaticWrapperAs=""
-        label="date range"
-        value={value}
-        onChange={(newValue) => setValue(newValue)}
-        renderDay={renderWeekPickerDay}
-        renderInput={(startProps, endProps) => (
-          <React.Fragment>
-            <TextField {...startProps} />
-            <Box sx={{ mx: 2 }}> to </Box>
-            <TextField {...endProps} />
-          </React.Fragment>
-        )}
-      />
-    </LocalizationProvider>
-  );
-}
-export default Calendar4;
+//   return (
+//     <LocalizationProvider dateAdapter={AdapterDateFns}>
+//       <StaticDateRangePicker
+//         displayStaticWrapperAs=""
+//         label="date range"
+//         value={value}
+//         onChange={(newValue) => setValue(newValue)}
+//         renderDay={renderWeekPickerDay}
+//         renderInput={(startProps, endProps) => (
+//           <React.Fragment>
+//             <TextField {...startProps} />
+//             <Box sx={{ mx: 2 }}> to </Box>
+//             <TextField {...endProps} />
+//           </React.Fragment>
+//         )}
+//       />
+//     </LocalizationProvider>
+//   );
+// }
+// export default Calendar4;
 
-// // import React, { useState } from "react";
-// // import "../../css/calendar.css";
-// // import { Calendar } from "react-date-range";
-// // import { ko } from "date-fns/esm/locale";
+// import React, { useState } from "react";
+// import "../../css/calendar.css";
+// import { Calendar } from "react-date-range";
+// import { ko } from "date-fns/esm/locale";
 
-// // function Calendar3() {
-// //   const [startDate, setStartDate] = useState(new Date());
-// //   const [endDate, setEndDate] = useState(new Date());
+// function Calendar3() {
+//   const [startDate, setStartDate] = useState(new Date());
+//   const [endDate, setEndDate] = useState(new Date());
 
-// //   return (
-// //     <section>
-// //       <p>(필수) 프로젝트 기간</p>
-// //       <p>프로젝트의 진행 기간을 선택해주세요.</p>
-// //       <div>
-// //         <p>프로젝트 시작일: </p>
-// //         <Calendar
-// //           selected={startDate}
-// //           onChange={(date) => setStartDate(date)}
-// //           locale={ko}
-// //           dateFormat="yyyy년 MM월 dd일"
-// //           placeholderText="Weeks start on Monday"
-// //           minDate={new Date()}
-// //           selectsStart
-// //           startDate={startDate}
-// //           endDate={endDate}
-// //         />
-// //       </div>
-// //       <div>
-// //         <p>프로젝트 종료일:</p>
-// //         <Calendar
-// //           selected={endDate}
-// //           onChange={(date) => setEndDate(date)}
-// //           locale={ko}
-// //           dateFormat="yyyy년 MM월 dd일"
-// //           placeholderText="Weeks start on Monday"
-// //           selectsEnd
-// //           endDate={endDate}
-// //           minDate={startDate}
-// //         />
-// //       </div>
-// //     </section>
-// //   );
-// // }
-// // export default Calendar3;
+//   return (
+//     <section>
+//       <p>(필수) 프로젝트 기간</p>
+//       <p>프로젝트의 진행 기간을 선택해주세요.</p>
+//       <div>
+//         <p>프로젝트 시작일: </p>
+//         <Calendar
+//           selected={startDate}
+//           onChange={(date) => setStartDate(date)}
+//           locale={ko}
+//           dateFormat="yyyy년 MM월 dd일"
+//           placeholderText="Weeks start on Monday"
+//           minDate={new Date()}
+//           selectsStart
+//           startDate={startDate}
+//           endDate={endDate}
+//         />
+//       </div>
+//       <div>
+//         <p>프로젝트 종료일:</p>
+//         <Calendar
+//           selected={endDate}
+//           onChange={(date) => setEndDate(date)}
+//           locale={ko}
+//           dateFormat="yyyy년 MM월 dd일"
+//           placeholderText="Weeks start on Monday"
+//           selectsEnd
+//           endDate={endDate}
+//           minDate={startDate}
+//         />
+//       </div>
+//     </section>
+//   );
+// }
+// export default Calendar3;
 // // import React, { useState, useQuery } from "react";
 // // import Calendar from "react-calendar";
 // // import "../../css/calendar.css"; // css import
@@ -166,41 +166,41 @@ export default Calendar4;
 // //   }
 // // }
 // // export default CalendarComponent;
-// // import { Calendar } from "react-date-range"; // 얘가 캘린더 라이브러리
-// // import ko from "date-fns/locale/ko"; // 날짜 포맷 라이브러리 (한국어 기능을 임포트)
-// // import moment from "moment"; // 날짜 포맷 라이브러리
-// // import React, { useState, useCallback } from "react";
+// import { Calendar } from "react-date-range"; // 얘가 캘린더 라이브러리
+// import ko from "date-fns/locale/ko"; // 날짜 포맷 라이브러리 (한국어 기능을 임포트)
+// import moment from "moment"; // 날짜 포맷 라이브러리
+// import React, { useState, useCallback } from "react";
 
-// // function Calendar3() {
-// //   const [showCalendar, setShowCalendar] = useState(); // 캘린더 여는 토글
-// //   const tomorrow = moment().add(1, "d").toDate(); // 내일 날짜 기본값지정을 위해
-// //   const [date, setDate] = useState(tomorrow); // date 를 선언하고 기본값을 내일날짜로 지정
+// function Calendar3() {
+//   const [showCalendar, setShowCalendar] = useState(); // 캘린더 여는 토글
+//   const tomorrow = moment().add(1, "d").toDate(); // 내일 날짜 기본값지정을 위해
+//   const [date, setDate] = useState(tomorrow); // date 를 선언하고 기본값을 내일날짜로 지정
 
-// //   const onChangeDate = useCallback(
-// //     (date) => {
-// //       // date 변경값을 받아오는 함수
-// //       if (!date) {
-// //         return;
-// //       } // 날짜값이 없을 때 예외처리
-// //       setDate(date); // 날짜값이 들어오면 date 를 set해준다
-// //     },
-// //     [date]
-// //   );
-// //   return (
-// //     <>
-// //       <Calendar
-// //         locale={ko} // 한국어 달력
-// //         months={1} // 1달치 달력만 디스플레이
-// //         minDate={tomorrow} // 최소날짜값 내일이면 내일부터 선택가능하다.
-// //         date={date} // 날짜값
-// //         onChange={onChangeDate} // onChange 함수
-// //         dateDisplayFormat={"yyyy.mm.dd"} // 날짜 포맷값
-// //       />
-// //     </>
-// //   );
-// // }
+//   const onChangeDate = useCallback(
+//     (date) => {
+//       // date 변경값을 받아오는 함수
+//       if (!date) {
+//         return;
+//       } // 날짜값이 없을 때 예외처리
+//       setDate(date); // 날짜값이 들어오면 date 를 set해준다
+//     },
+//     [date]
+//   );
+//   return (
+//     <>
+//       <Calendar
+//         locale={ko} // 한국어 달력
+//         months={1} // 1달치 달력만 디스플레이
+//         minDate={tomorrow} // 최소날짜값 내일이면 내일부터 선택가능하다.
+//         date={date} // 날짜값
+//         onChange={onChangeDate} // onChange 함수
+//         dateDisplayFormat={"yyyy.mm.dd"} // 날짜 포맷값
+//       />
+//     </>
+//   );
+// }
 
-// // export default Calendar3;
+// export default Calendar3;
 
 // import { DateRangePicker } from "react-date-range";
 // function Calendar3() {
@@ -408,3 +408,153 @@ export default Calendar4;
 // };
 
 // export default DateRange;
+
+// import React, { useState } from "react";
+
+// import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
+
+// import "../../css/react-datepicker.css";
+
+// import ko from "date-fns/locale/ko";
+
+// registerLocale("ko", ko);
+
+// function Calendar3() {
+//   // 달력 날짜 변경 시 기준점이 되는 날짜
+
+//   const [startDate, setStartDate] = useState(new Date());
+//   const [endDate, setEndDate] = useState(null);
+//   const onChange = (dates) => {
+//     const [start, end] = dates;
+//     setStartDate(start);
+//     setEndDate(end);
+//   };
+
+//   // https://reactdatepicker.com/ 참고
+
+//   const ExampleCustomInput = ({ value, onClick }) => (
+//     <button class="example-custom-input" onClick={onClick}>
+//       {value}
+//     </button>
+//   );
+
+//   // 월/일
+
+//   const getFormattedDate = (date) => {
+//     const month = date.toLocaleDateString("ko-KR", {
+//       month: "long",
+//     });
+
+//     const day = date.toLocaleDateString("ko-KR", {
+//       day: "numeric",
+//     });
+
+//     return `${month.substr(0, month.length - 1)}/${day.substr(
+//       0,
+//       day.length - 1
+//     )}`;
+//   };
+
+//   // 요일 반환
+
+//   const getDayName = (date) => {
+//     return date
+//       .toLocaleDateString("ko-KR", {
+//         weekday: "long",
+//       })
+//       .substr(0, 1);
+//   };
+
+//   // 날짜 비교시 년 월 일까지만 비교하게끔
+
+//   const createDate = (date) => {
+//     return new Date(
+//       new Date(
+//         date.getFullYear(),
+
+//         date.getMonth(),
+
+//         date.getDate(),
+
+//         0,
+
+//         0,
+
+//         0
+//       )
+//     );
+//   };
+
+//   return (
+//     <>
+//       <DatePicker
+//         locale="ko" // 달력 한글화
+//         selected={startDate} // 날짜 state
+//         onChange={onChange} // 날짜 설정 콜백 함수
+//         customInput={<ExampleCustomInput />}
+//         minDate={new Date()} // 과거 날짜 disable
+//         startDate={startDate}
+//         endDate={endDate}
+//         inline
+//         popperModifiers={{
+//           // 모바일 web 환경에서 화면을 벗어나지 않도록 하는 설정
+
+//           preventOverflow: {
+//             enabled: true,
+//           },
+//         }}
+//         popperPlacement="auto" // 화면 중앙에 팝업이 뜨도록
+//         // 토요일, 일요일 색깔 바꾸기 위함
+
+//         dayClassName={(date) =>
+//           getDayName(createDate(date)) === "토"
+//             ? "saturday"
+//             : getDayName(createDate(date)) === "일"
+//             ? "sunday"
+//             : undefined
+//         }
+//       />
+//     </>
+//   );
+// }
+
+// export default Calendar3;
+import React, { useState } from "react";
+import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import ko from "date-fns/locale/ko";
+
+registerLocale("ko", ko);
+
+const Calendar3 = () => {
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(null);
+
+  const onChange = (dates) => {
+    const [start, end] = dates;
+    setStartDate(start);
+    setEndDate(end);
+  };
+  if (endDate) {
+    console.log("시작일 :" + startDate + "종료일 :" + endDate);
+  }
+  registerLocale("ko", ko);
+  return (
+    <>
+      <DatePicker
+        locale="ko"
+        selected={startDate}
+        onChange={onChange}
+        startDate={startDate}
+        endDate={endDate}
+        minDate={new Date()}
+        // excludeDates={[addDays(new Date(), 1), addDays(new Date(), 5)]}
+        selectsRange
+        selectsDisabledDaysInRange
+        inline
+      />
+    </>
+  );
+};
+
+export default Calendar3;

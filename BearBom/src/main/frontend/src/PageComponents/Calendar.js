@@ -1,68 +1,130 @@
-import React, { useEffect } from "react";
-import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import { LocalizationProvider } from "@mui/x-date-pickers-pro";
-import { AdapterDateFns } from "@mui/x-date-pickers-pro/AdapterDateFns";
-import { StaticDateRangePicker } from "@mui/x-date-pickers-pro/StaticDateRangePicker";
-import { DateRangePickerDay as MuiDateRangePickerDay } from "@mui/x-date-pickers-pro/DateRangePickerDay";
-import { ko } from "date-fns/locale";
+import React, { useState } from "react";
+import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import ko from "date-fns/locale/ko";
 
-const DateRangePickerDay = styled(MuiDateRangePickerDay)(
-  ({ theme, isHighlighting, isStartOfHighlighting, isEndOfHighlighting }) => ({
-    ...(isHighlighting && {
-      borderRadius: 0,
-      backgroundColor: theme.palette.primary.main,
-      color: theme.palette.common.white,
-      "&:hover, &:focus": {
-        backgroundColor: theme.palette.primary.dark,
-      },
-    }),
-    ...(isStartOfHighlighting && {
-      borderTopLeftRadius: "50%",
-      borderBottomLeftRadius: "50%",
-    }),
-    ...(isEndOfHighlighting && {
-      borderTopRightRadius: "50%",
-      borderBottomRightRadius: "50%",
-    }),
-  })
-);
+registerLocale("ko", ko);
 
-function Calendar5() {
-  const [value, setValue] = React.useState([null, null]);
-  useEffect(() => {
-    const $span = document.querySelectorAll(
-      ".MuiTypography-root MuiTypography-caption css-1w13o7u-MuiTypography-root"
-    );
-    console.log($span[0]);
-    // $span[0].textContent = "일";
-  }, []);
+const Calendar2 = (props) => {
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
 
-  const renderWeekPickerDay = (date, dateRangePickerDayProps) => {
-    return <DateRangePickerDay {...dateRangePickerDayProps} />;
+  const onChange = (dates) => {
+    const [start, end] = dates;
+    setStartDate(start);
+    setEndDate(end);
   };
+  if (endDate) {
+    console.log("시작일 :" + startDate + "종료일 :" + endDate);
+  }
+  registerLocale("ko", ko);
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <StaticDateRangePicker
-        displayStaticWrapperAs="desktop"
-        label="date range"
-        value={value}
-        onChange={(newValue) => setValue(newValue)}
-        renderDay={renderWeekPickerDay}
-        renderInput={(startProps, endProps) => (
-          <React.Fragment>
-            <TextField {...startProps} />
-            <Box sx={{ mx: 2 }}> to </Box>
-            <TextField {...endProps} />
-          </React.Fragment>
-        )}
-      />
-    </LocalizationProvider>
+    <>
+      <div className={`react-datepicker__month-container ${props.width}`}>
+        <DatePicker
+          locale="ko"
+          selected={startDate}
+          onChange={onChange}
+          startDate={startDate}
+          endDate={endDate}
+          minDate={new Date()}
+          // excludeDates={[addDays(new Date(), 1), addDays(new Date(), 5)]}
+          selectsRange
+          selectsDisabledDaysInRange
+          inline
+        />
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <DatePicker
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+            selectsStart
+            startDate={startDate}
+            endDate={endDate}
+          />
+
+          <DatePicker
+            selected={endDate}
+            onChange={(date) => setEndDate(date)}
+            selectsEnd
+            startDate={startDate}
+            endDate={endDate}
+            minDate={startDate}
+          />
+        </div>
+      </div>
+    </>
   );
-}
-export default Calendar5;
+};
+
+export default Calendar2;
+
+// import React, { useEffect } from "react";
+// import { styled } from "@mui/material/styles";
+// import Box from "@mui/material/Box";
+// import TextField from "@mui/material/TextField";
+// import { LocalizationProvider } from "@mui/x-date-pickers-pro";
+// import { AdapterDateFns } from "@mui/x-date-pickers-pro/AdapterDateFns";
+// import { StaticDateRangePicker } from "@mui/x-date-pickers-pro/StaticDateRangePicker";
+// import { DateRangePickerDay as MuiDateRangePickerDay } from "@mui/x-date-pickers-pro/DateRangePickerDay";
+// import { ko } from "date-fns/locale";
+
+// const DateRangePickerDay = styled(MuiDateRangePickerDay)(
+//   ({ theme, isHighlighting, isStartOfHighlighting, isEndOfHighlighting }) => ({
+//     ...(isHighlighting && {
+//       borderRadius: 0,
+//       backgroundColor: theme.palette.primary.main,
+//       color: theme.palette.common.white,
+//       "&:hover, &:focus": {
+//         backgroundColor: theme.palette.primary.dark,
+//       },
+//     }),
+//     ...(isStartOfHighlighting && {
+//       borderTopLeftRadius: "50%",
+//       borderBottomLeftRadius: "50%",
+//     }),
+//     ...(isEndOfHighlighting && {
+//       borderTopRightRadius: "50%",
+//       borderBottomRightRadius: "50%",
+//     }),
+//   })
+// );
+
+// function Calendar5() {
+//   const [value, setValue] = React.useState([null, null]);
+//   useEffect(() => {
+//     const $span = document.querySelectorAll(
+//       ".MuiTypography-root MuiTypography-caption css-1w13o7u-MuiTypography-root"
+//     );
+//     console.log($span[0]);
+//     // $span[0].textContent = "일";
+//   }, []);
+
+//   const renderWeekPickerDay = (date, dateRangePickerDayProps) => {
+//     return <DateRangePickerDay {...dateRangePickerDayProps} />;
+//   };
+
+//   return (
+//     <LocalizationProvider dateAdapter={AdapterDateFns}>
+//       <StaticDateRangePicker
+//         displayStaticWrapperAs="desktop"
+//         label="date range"
+//         value={value}
+//         locale={ko}
+//         onChange={(newValue) => setValue(newValue)}
+//         renderDay={renderWeekPickerDay}
+//         renderInput={(startProps, endProps) => (
+//           <React.Fragment>
+//             <TextField {...startProps} />
+//             <Box sx={{ mx: 2 }}> to </Box>
+//             <TextField {...endProps} />
+//           </React.Fragment>
+//         )}
+//       />
+//     </LocalizationProvider>
+//   );
+// }
+// export default Calendar5;
 // import React, { useState } from "react";
 // import "../css/calendar.css";
 // // import DatePicker from "react-datepicker";
