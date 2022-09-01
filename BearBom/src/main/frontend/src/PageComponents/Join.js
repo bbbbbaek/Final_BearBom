@@ -252,6 +252,7 @@ const Join = () => {
       } else {
         alert("사용 가능한 아이디 입니다.");
         setCheckIdError(false);
+        //test
       }
     });
   };
