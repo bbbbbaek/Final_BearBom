@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import "../../css/join.css";
+
 import "../../css/join.scss";
 
 import Avatar from "@mui/material/Avatar";
@@ -16,9 +16,12 @@ import Container from "@mui/material/Container";
 
 import { useDaumPostcodePopup } from "react-daum-postcode";
 import axios from "axios";
-import { tr } from "date-fns/locale";
+import { API_BASE_URL } from "../../app-config";
+import { useNavigate } from "react-router-dom";
 
 const Join = () => {
+  const naviate = useNavigate();
+
   // 값 저장
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
@@ -28,7 +31,8 @@ const Join = () => {
   const [userNickName, setUserNickName] = useState("");
   const [userTel, setUserTel] = useState("");
   const [userAddressDef, setUserAddressDef] = useState("");
-
+  const [usingTerm, setUsingTerm] = useState(false);
+  const [infoTerm, setInfoTerm] = useState(false);
   //오류메시지 상태 저장
   const [userIdMessage, setUserIdMessage] = useState("");
   const [userPwMessage, setUserPwMessage] = useState("");
@@ -37,7 +41,8 @@ const Join = () => {
   const [userNmMessage, setUserNmMessage] = useState("");
   const [userNickNameMessage, setUserNickNameMessage] = useState("");
   const [userTelMessage, setUserTelMessage] = useState("");
-
+  const [usingTermMessage, setUsingTermMessage] = useState("");
+  const [infoTermMessage, setInfoTermMessage] = useState("");
   //유효성 검사
   const [isUserId, setIsUserId] = useState(false);
   const [isUserPw, setIsUserPw] = useState(false);
@@ -46,6 +51,8 @@ const Join = () => {
   const [isUserNm, setIsUserNm] = useState(false);
   const [isUserNickName, setIsUserNickName] = useState(false);
   const [isUserTel, setIsUserTel] = useState(false);
+  const [isUsingTerm, setIsUsingTerm] = useState(false);
+  const [isInfoTerm, setIsInfoTerm] = useState(false);
 
   //우편번호 및 주소 조회(다음 우편번호 검색 서비스 사용)
   const open = useDaumPostcodePopup(
@@ -198,28 +205,69 @@ const Join = () => {
     setUserAddressDef(userAddressDefCurrent);
   });
 
-  //유효성 검사 전체 테스트 버튼
-  // const handleButtomValid = () => {
-  //   if (
-  //     !isValidInput ||
-  //     !isValidEmail ||
-  //     !isValidPassword
-  //     !isUserId &&
-  //     !isUserPw &&
-  //     !isUserRePw &&
-  //     !userEmail &&
-  //     !userNm &&
-  //     !userTel
-  //     // !isCheckBoxClicked()
-  //     ) {
-  //     alert('please fill in the blanks');
-  //   };
+  //이용약관
+  const onChangeUsingTerm = (e) => {
+    setUsingTerm(e.target.checked);
+    setIsUsingTerm(e.target.checked);
+  };
+
+  //개인정보 수집 이용
+  const onChangeInfoTerm = (e) => {
+    setInfoTerm(e.target.checked);
+    setIsInfoTerm(e.target.checked);
+  };
+
+  //회원가입 버튼 클릭
+  const onSubmitJoinHandler = (e) => {
+    e.preventDefault();
+
+    const data = new FormData(e.target);
+    const userId = data.get("userId");
+    const userPw = data.get("userPw");
+    const userEmail = data.get("userEmail");
+    const userNm = data.get("userNm");
+    const userNickName = data.get("userNickName");
+    const userTel = data.get("userTel");
+    const userZipcode = data.get("userZipcode");
+    const userAddress = data.get("userAddress");
+    const userAddressDef = data.get("userAddressDef");
+    // multipart/form-data 이미지 헤더
+    try {
+      axios({
+        method: "post",
+        url: API_BASE_URL + "/api/user/joinTest",
+        data: {
+          userId: userId,
+          userPw: userPw,
+          userEmail: userEmail,
+          userNm: userNm,
+          userNickName: userNickName,
+          userTel: userTel,
+          userZipcode: userZipcode,
+          userAddress: userAddress,
+          userAddressDef: userAddressDef,
+        },
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          naviate("/login");
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    } catch (err) {
+      console.error(err);
+    }
+  };
   return (
     <>
       {/* <ThemeProvider theme={theme}> */}
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-        <form>
+        <form onSubmit={onSubmitJoinHandler}>
           {/* <form noValidate onSubmit={handleSubmit}> */}
           <Box
             sx={{
@@ -234,7 +282,6 @@ const Join = () => {
               회원가입
             </Typography>
             <Box
-              component="form"
               noValidate
               // onSubmit={handleSubmit}
               sx={{ mt: 3 }}
@@ -249,7 +296,6 @@ const Join = () => {
                       label="아이디"
                       name="userId"
                       autoFocus
-                      typeName="userId"
                       value={userId}
                       onChange={onChangeName}
                     />
@@ -263,7 +309,7 @@ const Join = () => {
                   </div>
                 </Grid>
                 <Grid item xs={4}>
-                  <Button type="submit" fullWidth sx={{ mt: 1 }}>
+                  <Button fullWidth sx={{ mt: 1 }}>
                     중복 확인
                   </Button>
                 </Grid>
@@ -278,7 +324,6 @@ const Join = () => {
                       autoComplete="email"
                       value={userEmail}
                       onChange={onChangeEmail}
-                      typeName="email"
                     />
                     {userEmail.length > 0 && (
                       <span
@@ -292,7 +337,7 @@ const Join = () => {
                   </div>
                 </Grid>
                 <Grid item xs={4}>
-                  <Button type="submit" fullWidth sx={{ mt: 1 }}>
+                  <Button fullWidth sx={{ mt: 1 }}>
                     이메일 인증
                   </Button>
                 </Grid>
@@ -317,7 +362,6 @@ const Join = () => {
                       id="userPw"
                       value={userPw}
                       onChange={onChangePassword}
-                      typeName="userPw"
                     />
                     {userPw.length > 0 && (
                       <span
@@ -339,7 +383,6 @@ const Join = () => {
                       id="userRePw"
                       value={userRePw}
                       onChange={onChangePasswordConfirm}
-                      typeName="userRePw"
                     />
                     {userRePw.length > 0 && (
                       <span
@@ -412,7 +455,7 @@ const Join = () => {
                       fullWidth
                       id="userZipcode"
                       label="우편번호"
-                      name="userZipCode"
+                      name="userZipcode"
                       value={zipCode}
                       onChange={onChangeZipCode}
                     />
@@ -448,22 +491,31 @@ const Join = () => {
                     />
                   </div>
                 </Grid>
-
+                {/*  const [usingTerm, setUsingTerm] = useState("");
+               const [infoTerm, setInfoTerm] = useState(""); */}
                 <Grid item xs={12}>
                   <FormControlLabel
                     control={
-                      <Checkbox value="allowExtraEmails" color="primary" />
+                      <Checkbox
+                        checked={usingTerm}
+                        color="primary"
+                        onChange={onChangeUsingTerm}
+                      />
                     }
                   />
-                  <Link href="#">이용약관에</Link> 동의합니다.
+                  <Link href="#">(필수) 이용약관에</Link> 동의합니다.
                 </Grid>
                 <Grid item xs={12}>
                   <FormControlLabel
                     control={
-                      <Checkbox value="allowExtraEmails" color="primary" />
+                      <Checkbox
+                        checked={infoTerm}
+                        color="primary"
+                        onChange={onChangeInfoTerm}
+                      />
                     }
                   />
-                  <Link href="#">개인정보 수집·이용에</Link> 동의합니다.
+                  <Link href="#">(필수) 개인정보 수집·이용에</Link> 동의합니다.
                 </Grid>
               </Grid>
               <Button
@@ -481,7 +533,9 @@ const Join = () => {
                     isUserRePw &&
                     isUserEmail &&
                     isUserNm &&
-                    isUserTel
+                    isUserTel &&
+                    isUsingTerm &&
+                    isInfoTerm
                   )
                 }
               >
@@ -492,7 +546,7 @@ const Join = () => {
 
               <div className="easy_login_name">간편 로그인</div>
               <br />
-              <div class="easy_login">
+              <div className="easy_login">
                 <div className="google_login">
                   <a href="https://accounts.google.com/ServiceLogin/identifier?service=accountsettings&continue=https%3A%2F%2Fmyaccount.google.com%3Futm_source%3Daccount-marketing-page%26utm_medium%3Dgo-to-account-button&flowName=GlifWebSignIn&flowEntry=ServiceLogin">
                     <img

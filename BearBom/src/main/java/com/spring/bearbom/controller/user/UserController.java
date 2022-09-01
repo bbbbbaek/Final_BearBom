@@ -26,7 +26,7 @@ public class UserController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	@PostMapping("/join")
+	@PostMapping("/joinTest")
 	public ResponseEntity<?> join(@RequestBody User user) {
 		try {
 			System.out.println(passwordEncoder.getClass());
@@ -42,6 +42,14 @@ public class UserController {
 			userDTO.setUserId(joinUser.getUserId());
 			userDTO.setUserPw(joinUser.getUserPw());
 			userDTO.setRole(joinUser.getRole());
+			userDTO.setUserEmail(joinUser.getUserEmail());
+			userDTO.setUserNm(joinUser.getUserNm());
+			userDTO.setUserNickname(joinUser.getUserNickName());
+			userDTO.setUserAddress(joinUser.getUserAddress());
+			userDTO.setUserAddressDef(joinUser.getUserAddressDef());
+			userDTO.setUserTel(joinUser.getUserTel());
+			userDTO.setUserYn(joinUser.getUserYn());
+				
 			return ResponseEntity.ok().body(userDTO);
 		} catch(Exception e) {
 			ResponseDTO<UserDTO> response = new ResponseDTO<>();
@@ -77,4 +85,15 @@ public class UserController {
 			return ResponseEntity.badRequest().body(response);
 		}
 	}
+	
+	 @PostMapping("/idCheck")
+     public String checkId(@RequestBody User user) {
+        User idCheck = userService.idCheck(user.getUserId());
+        
+        if(idCheck == null) {
+           return "2";
+        } else {
+           return "1";
+        }
+     }
 }
