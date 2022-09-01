@@ -9,7 +9,7 @@ public class UserDTO {
 	private int userPwFailCnt;
 	private String userNm;
 	private String userNickname;
-	private int userTel;
+	private String userTel;
 	private String userAddress;
 	private String userAddressDef;
 	private int userZipCode;

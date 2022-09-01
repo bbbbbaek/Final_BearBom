@@ -73,6 +73,8 @@ public class UserController {
 			userDTO.setUserId(loginUser.getUserId());
 			userDTO.setUserPw(loginUser.getUserPw());
 			userDTO.setRole(loginUser.getRole());
+			
+			
 			//발행된 토큰 DTO에 담아서 리턴
 			userDTO.setToken(token);
 			
@@ -86,14 +88,14 @@ public class UserController {
 		}
 	}
 	
-	 @PostMapping("/idCheck")
+	 @PostMapping("/checkId")
      public String checkId(@RequestBody User user) {
         User idCheck = userService.idCheck(user.getUserId());
         
         if(idCheck == null) {
-           return "2";
+           return "idOk";
         } else {
-           return "1";
+           return "idFail";
         }
      }
 }
