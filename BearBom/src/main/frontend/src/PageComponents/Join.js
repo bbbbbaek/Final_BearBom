@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
+import axios from "axios";
 import "../css/join.css";
 
 import Avatar from "@mui/material/Avatar";
@@ -14,6 +15,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
 import PopupPostCode from "./PopupPostCode";
+import { responsesAreSame } from "workbox-broadcast-update";
+import { API_BASE_URL } from "../app-config";
 
 const Join = () => {
   const [userId, setUserId] = useState("");
@@ -27,14 +30,14 @@ const Join = () => {
   const [zonecodee, setZonecodee] = useState("");
   const [fullAddresss, setFullAddresss] = useState("");
 
-  const [userIdError, setUserIdError] = useState(false);
-  const [userPwError, setUserPwError] = useState(false);
-  const [userRePwError, setUserRePwError] = useState(false);
-  const [userEmailError, setUserEmailError] = useState(false);
-  const [userNmError, setUserNmError] = useState(false);
-  const [userNickNameError, setUserNickNameError] = useState(false);
-  const [userTelError, setUserTelError] = useState(false);
-  //const
+  const [userIdError, setUserIdError] = useState(true);
+  const [userPwError, setUserPwError] = useState(true);
+  const [userRePwError, setUserRePwError] = useState(true);
+  const [userEmailError, setUserEmailError] = useState(true);
+  const [userNmError, setUserNmError] = useState(true);
+  const [userNickNameError, setUserNickNameError] = useState(true);
+  const [userTelError, setUserTelError] = useState(true);
+  const [checkIdError, setCheckIdError] = useState(true);
 
   // 아이디 유효성 검사
   const onChangeUserId = (e) => {
@@ -109,6 +112,7 @@ const Join = () => {
     if (!userNm) setUserNmError(true);
     if (!userNickName) setUserNickNameError(true);
     if (!userTel) setUserTelError(true);
+    if (!checkIdError) setCheckIdError(true);
 
     if (
       userId &&
@@ -117,7 +121,8 @@ const Join = () => {
       userEmail &&
       userNm &&
       userNickName &&
-      userTel
+      userTel &&
+      checkIdError
     )
       return true;
     else return false;
@@ -167,16 +172,134 @@ const Join = () => {
   //   // });
   // };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  // };
+
+  const onSubmitHandler = (e) => {
+    // e.preventDefault();
+    // if (
+    //   userIdError &&
+    //   userPwError &&
+    //   userRePwError &&
+    //   userEmailError &&
+    //   userNmError &&
+    //   userNickNameError &&
+    //   userTelError &&
+    //   checkIdError
+    // ) {
+    //   alert("양식에 맞게 작성해주세요.");
+    //   return;
+    // } else {
+    axios({
+      method: "post",
+      url: API_BASE_URL + "/api/user/join",
+      data: {
+        userId: userId,
+        userPw: userPw,
+        // userRePw: userRePw,
+        userEmail: userEmail,
+        userNm: userNm,
+        userNickName: userNickName,
+        userTel: userTel,
+        userAddressDef: userAddressDef,
+        zonecodee: zonecodee,
+        fullAddresss: fullAddresss,
+      },
+    }).then((response) => {
+      console.log(response);
+      window.location.href = "/login";
+    });
+
+    // }
+
+    // const joinObj = {};
+    // const formData = new FormData(e.target);
+
+    // formData.forEach(function (value, key) {
+    //   joinObj[key] = value;
+    // });
   };
+
+  const idCheck = () => {
+    axios({
+      method: "post",
+      url: API_BASE_URL + "/api/user/checkId",
+      data: { userId: userId },
+    }).then((response) => {
+      console.log(response);
+      if (response.data === "1") {
+        alert("이미 사용중인 아이디 입니다.");
+        setCheckIdError(true);
+      } else {
+        setCheckIdError(false);
+      }
+    });
+  };
+
+  // // ??
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   axios({
+  //     method: "post",
+  //     url: API_BASE_URL + "/api/user/checkId",
+  //     data: {userId: userId},
+  //   }).then((response) => {
+  //     console.log(response);
+  // if (response.data === 1) {
+  //   alert("already exist");
+  //   setCheckIdError(true);
+  // };
+  //   });
+
+  //   //회원가입 버튼
+  //   const onSubmitHandler = (e) => {
+  //     e.preventDefault();
+
+  //     const data = new FormData(e.target);
+  //     const userId = data.get("userId");
+  //     const userPw = data.get("userPw");
+  //     const userNm = data.get("userNm");
+  //     const userNickName = data.get("userNickName");
+  //     const userTel = data.get("userTel");
+  //     const userEmail = data.get("userEmail");
+  //     const zonecodee = data.get("zonecodee");
+  //     const fullAddresss = data.get("FullAddresss");
+  //     const userAddressDef = data.get("userAddressDef");
+  //     // const userMarketing = data.get("userMarketing");
+
+  //     if (!(userPw && userRePw)) {
+  //       console.log(userPw);
+  //       console.log(userRePw);
+  //       alert("제대로 입력하세요.");
+  //       return;
+  //     } else {
+  //       Join({
+  //         userId: userId,
+  //         userPw: userPw,
+  //         userNm: userNm,
+  //         userNickName: userNickName,
+  //         userTel: userTel,
+  //         userEmail: userEmail,
+  //         // userZip: userZip,
+  //         fullAddresss: fullAddresss,
+  //         userAddressDef: userAddressDef,
+  //         // userMarketing: userMarketing,
+  //       }).then((response) => {
+  //         //회원가입 성공시 로그인 페이지로 이동
+  //         window.location.href = "/login";
+  //       });
+  //     }
+  //  };
 
   return (
     <>
       {/* <ThemeProvider theme={theme}> */}
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-        <form onSubmit={handleSubmit}>
+        {/* <form onSubmit={handleSubmit}> */}
+        <form onSubmit={onSubmitHandler}>
           {/* <form noValidate onSubmit={handleSubmit}> */}
           <Box
             sx={{
@@ -414,6 +537,7 @@ const Join = () => {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                onSubmit={onSubmitHandler}
               >
                 회원가입
               </Button>
@@ -467,5 +591,4 @@ const Join = () => {
     </>
   );
 };
-
 export default Join;

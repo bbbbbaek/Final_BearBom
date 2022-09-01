@@ -66,5 +66,8 @@ public class User {
 	
 	@Column(nullable = true)
 	private String lecturerInfo;
+
+	
+	
 	
 }
