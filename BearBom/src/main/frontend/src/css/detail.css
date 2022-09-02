@@ -36,6 +36,7 @@ body {
   float: left;
   width: 34%;
   height: 100%;
+  position: sticky;
 }
 .main-img {
   float: left;
@@ -69,7 +70,6 @@ body {
 
 .teacher-info2 {
   width: 30%;
-
   display: grid;
   grid-column-start: 1;
   grid-column-end: 3;
@@ -139,8 +139,19 @@ body {
   clear: both;
 }
 .main-img-box {
+  margin-top: 32px;
 }
 .class-content {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  height: 80%;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.carousel-item-start {
+  display: none;
 }
 
 .section-box {
@@ -151,14 +162,24 @@ body {
 }
 
 .calendar-box {
-  position: sticky;
+  /* position: sticky;
   top: 1px;
   box-sizing: border-box;
   border: 1px black solid;
   background-color: edeae7;
   margin: auto;
-  margin-left: 10px;
   border-radius: 5px;
+  margin-left: 10px;
+   */
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 80px;
+  width: 100%;
+  word-break: keep-all;
+  padding-left: 50px;
+  margin: auto;
+  animation: fadein 3s;
 }
 
 .calendar-button-box {
@@ -167,12 +188,13 @@ body {
 }
 
 .calendar-button1 {
-  width: 30%;
+  width: 45%;
   float: left;
   margin-left: 10px;
   margin-right: 20px;
   border-radius: 3px;
   border-color: rgba(0, 0, 0, 0);
+  height: 40px;
 }
 .calendar-button1:hover {
   background-color: #1eb7e5;
@@ -182,9 +204,10 @@ body {
 }
 
 .calendar-button2 {
-  width: 40%;
+  width: 45%;
   float: left;
   border-color: rgba(0, 0, 0, 0);
+  height: 40px;
 }
 
 .calendar-button2:hover {
@@ -200,8 +223,8 @@ body {
 }
 
 .calendar-regist {
-  width: 90%;
-  height: 10%;
+  width: 100%;
+  height: 2%;
   border: 1px solid rgba(166, 25, 25, 0);
   border-radius: 5px;
   background-color: #1eb7e5;
@@ -213,13 +236,6 @@ body {
 
 .calendar-regist:active {
   background-color: #00ffbb;
-}
-
-.class-content {
-  width: 80%;
-  height: 80%;
-  margin-top: 20px;
-  margin-left: 20px;
 }
 
 .cur-box-step {
@@ -246,12 +262,12 @@ body {
 }
 
 .cur-img {
-  width: 300px;
+  width: 200px;
   height: 100px;
 }
 
 .time-cal {
-  width: 100%;
+  width: 750px;
   height: 500px;
   display: flex;
   justify-content: center;
@@ -307,4 +323,53 @@ body {
 
 .review-textarea {
   width: 100%;
+}
+
+.reviewmodal-box {
+  float: right;
+  margin-right: 40px;
+  background-color: #1eb7e5;
+  border-radius: 5px;
+  border: 1px solid rgb(0, 0, 0, 0);
+}
+
+.rating-position {
+  right: 0px;
+}
+
+.modal-position {
+  margin-left: 220px;
+}
+
+.react-datepicker__month-container {
+  width: 395px;
+}
+
+.react-datepicker__day-names {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: bold;
+  width: 100%;
+}
+
+.react-datepicker__week {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.react-datepicker__day {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+#nav-bar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.calendar-text {
+  height: 30px;
 }

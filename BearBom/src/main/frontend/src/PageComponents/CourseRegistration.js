@@ -1,9 +1,10 @@
 
 import React, { useMemo, useState } from "react";
+
 import CenteredTabs from "../PageComponents/CourseRegistration/AddCourseNav";
 import StepOne from "./CourseRegistration/StepOne";
-import StepTwo_1 from "./CourseRegistration/StepTwo_1"
-import StepTwo_2 from "./CourseRegistration/StepTwo_2"
+import StepTwo_1 from "./CourseRegistration/StepTwo_1";
+import StepTwo_2 from "./CourseRegistration/StepTwo_2";
 import StepTwo_3 from "./CourseRegistration/StepTwo_3";
 import CoPresentIcon from "@mui/icons-material/CoPresent";
 import "../css/courseRegistration.css";
@@ -37,13 +38,13 @@ const theme = createTheme({
   palette: {
     primary: {
       //light: '#111',
-      main: '#958a78 ',
+      main: "#958a78 ",
       //dark: '#555',
       //contrastText: '#fff',
     },
     secondary: {
       //light: '#ff7961',
-      main: '#675d58 ',
+      main: "#675d58 ",
       //dark: '#ba000d',
       //contrastText: '#000',
     },
@@ -54,6 +55,7 @@ const theme = createTheme({
 });
 
 const CourseRegistration = () => {
+
   
   //const [currentStep, setCurrentStep] = useState[1];
   const currentStep = 1;
@@ -65,25 +67,18 @@ const CourseRegistration = () => {
     return '다음';
   }, [currentStep]);
 
+
   return (
     <ThemeProvider theme={theme}>
-    <div className="addclass">
-      <div className="top">
-        <div className="subTitle">
-          <CoPresentIcon fontSize="large" color="action"></CoPresentIcon>
-          <h4>&nbsp;등록페이지</h4>
-        </div>
-        <div className="progressbar">
-          <CenteredTabs></CenteredTabs>
-        </div>
-      </div>
-      <div className="fullline"></div>
-      <div className="middle">
-        <div className="leftbar">
-          <div className="step0 step">Step 1. 인증 및 클래스 유형</div>
-          <div className="step">Step 2. 클래스 소개</div>
-          <div className="step">Step 3. 금액 및 일정</div>
-          <div className="step">Step 4. 클래스 위치</div>
+      <div className="addclass">
+        <div className="top">
+          <div className="subTitle">
+            <CoPresentIcon fontSize="large" color="action"></CoPresentIcon>
+            <h4>&nbsp;등록페이지</h4>
+          </div>
+          <div className="progressbar">
+            <CenteredTabs></CenteredTabs>
+          </div>
         </div>
         <div className="midline" />
         <div className="midRight">
@@ -117,9 +112,9 @@ const CourseRegistration = () => {
                   </Button>
                   </div>
            </div>
+
         </div>
       </div>
-    </div>
     </ThemeProvider>
   );
 };
