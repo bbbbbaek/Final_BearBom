@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/reviewModal.css";
+import "../../css/reviewModal.css";
 
 const Modal = (props) => {
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
@@ -18,7 +18,7 @@ const Modal = (props) => {
           </header>
           <main>{props.children}</main>
           <footer>
-            <button className="close" onClick={close}>
+            <button type="submit" className="close" onClick={close}>
               등록하기
             </button>
           </footer>
