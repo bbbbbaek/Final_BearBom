@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
+import axios from "axios";
 import "../css/join.css";
 
 import Avatar from "@mui/material/Avatar";
@@ -14,6 +15,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
 import PopupPostCode from "./PopupPostCode";
+import { responsesAreSame } from "workbox-broadcast-update";
+import { API_BASE_URL } from "../app-config";
 
 const Join = () => {
   const [userId, setUserId] = useState("");
@@ -27,15 +30,25 @@ const Join = () => {
   const [zonecodee, setZonecodee] = useState("");
   const [fullAddresss, setFullAddresss] = useState("");
 
-  const [userIdError, setUserIdError] = useState(false);
-  const [userPwError, setUserPwError] = useState(false);
-  const [userRePwError, setUserRePwError] = useState(false);
-  const [userEmailError, setUserEmailError] = useState(false);
-  const [userNmError, setUserNmError] = useState(false);
-  const [userNickNameError, setUserNickNameError] = useState(false);
-  const [userTelError, setUserTelError] = useState(false);
-  //const
+  const [userIdError, setUserIdError] = useState(true);
+  const [userPwError, setUserPwError] = useState(true);
+  const [userRePwError, setUserRePwError] = useState(true);
+  const [userEmailError, setUserEmailError] = useState(true);
+  const [userNmError, setUserNmError] = useState(true);
+  const [userNickNameError, setUserNickNameError] = useState(true);
+  const [userTelError, setUserTelError] = useState(true);
+  const [checkIdError, setCheckIdError] = useState(true);
 
+  const [userInfo, setUserInfo] = useState({});
+
+  const addUserInfo = (e) => {
+    const newUserInfo = {
+      ...userInfo,
+      [e.target.name]: e.target.value,
+    };
+
+    setUserInfo(newUserInfo);
+  };
   // 아이디 유효성 검사
   const onChangeUserId = (e) => {
     const userIdRegex = /^[a-zA-z0-9]{5,10}$/;
@@ -44,6 +57,7 @@ const Join = () => {
       setUserIdError(false);
     else setUserIdError(true);
     setUserId(e.target.value);
+    addUserInfo(e);
   };
 
   // 비밀번호 유효성 검사
@@ -58,6 +72,7 @@ const Join = () => {
     if (!userRePw || e.target.value === userRePw) setUserRePwError(false);
     else setUserRePwError(true);
     setUserPw(e.target.value);
+    addUserInfo(e);
   };
   const onChangeUserRePw = (e) => {
     if (userPw === e.target.value) setUserRePwError(false);
@@ -72,6 +87,7 @@ const Join = () => {
       setUserEmailError(false);
     else setUserEmailError(true);
     setUserEmail(e.target.value);
+    addUserInfo(e);
   };
 
   // 이름 유효성 검사
@@ -81,6 +97,7 @@ const Join = () => {
       setUserNmError(false);
     else setUserNmError(true);
     setUserNm(e.target.value);
+    addUserInfo(e);
   };
 
   // 닉네임 유효성 검사
@@ -90,6 +107,7 @@ const Join = () => {
       setUserNickNameError(false);
     else setUserNickNameError(true);
     setUserNickName(e.target.value);
+    addUserInfo(e);
   };
 
   // 전화번호 유효성 검사
@@ -99,6 +117,7 @@ const Join = () => {
       setUserTelError(false);
     else setUserTelError(true);
     setUserTel(e.target.value);
+    addUserInfo(e);
   };
 
   const validation = () => {
@@ -109,6 +128,7 @@ const Join = () => {
     if (!userNm) setUserNmError(true);
     if (!userNickName) setUserNickNameError(true);
     if (!userTel) setUserTelError(true);
+    if (!checkIdError) setCheckIdError(true);
 
     if (
       userId &&
@@ -117,7 +137,8 @@ const Join = () => {
       userEmail &&
       userNm &&
       userNickName &&
-      userTel
+      userTel &&
+      checkIdError
     )
       return true;
     else return false;
@@ -125,14 +146,17 @@ const Join = () => {
 
   const onUserAddressDefHandler = (e) => {
     setUserAddressDef(e.currentTarget.value);
+    addUserInfo(e);
   };
 
   const onZonecodeeHandler = (e) => {
     setZonecodee(e.currentTarget.value);
+    addUserInfo(e);
   };
 
   const onFullAddresssHandler = (e) => {
     setFullAddresss(e.currentTarget.value);
+    addUserInfo(e);
   };
 
   // 팝업창 상태 관리
@@ -167,16 +191,135 @@ const Join = () => {
   //   // });
   // };
 
-  const handleSubmit = (e) => {
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  // };
+
+  const onSubmitHandler = (e) => {
+    console.log({
+      ...userInfo,
+      userZipcode: zonecodee,
+      userAddress: fullAddresss,
+    });
     e.preventDefault();
+    // e.preventDefault();
+    // if (
+    //   userIdError &&
+    //   userPwError &&
+    //   userRePwError &&
+    //   userEmailError &&
+    //   userNmError &&
+    //   userNickNameError &&
+    //   userTelError &&
+    //   checkIdError
+    // ) {
+    //   alert("양식에 맞게 작성해주세요.");
+    //   return;
+    // } else {
+    axios({
+      method: "post",
+      url: API_BASE_URL + "/api/user/join",
+      // headers: {
+      //   Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+      // },
+
+      data: { ...userInfo, userZipCode: zonecodee, userAddress: fullAddresss },
+    }).then((response) => {
+      console.log(response);
+      window.location.href = "/login";
+    });
+
+    // }
+
+    // const joinObj = {};
+    // const formData = new FormData(e.target);
+
+    // formData.forEach(function (value, key) {
+    //   joinObj[key] = value;
+    // });
   };
+
+  const idCheck = () => {
+    axios({
+      method: "post",
+      url: API_BASE_URL + "/api/user/checkId",
+      data: { userId: userId },
+    }).then((response) => {
+      console.log(response);
+      if (response.data === "idFail") {
+        alert("이미 사용중인 아이디 입니다.");
+        setCheckIdError(true);
+      } else {
+        alert("사용 가능한 아이디 입니다.");
+        setCheckIdError(false);
+        //test
+      }
+    });
+  };
+
+  // // ??
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   axios({
+  //     method: "post",
+  //     url: API_BASE_URL + "/api/user/checkId",
+  //     data: {userId: userId},
+  //   }).then((response) => {
+  //     console.log(response);
+  // if (response.data === 1) {
+  //   alert("already exist");
+  //   setCheckIdError(true);
+  // };
+  //   });
+
+  //   //회원가입 버튼
+  //   const onSubmitHandler = (e) => {
+  //     e.preventDefault();
+
+  //     const data = new FormData(e.target);
+  //     const userId = data.get("userId");
+  //     const userPw = data.get("userPw");
+  //     const userNm = data.get("userNm");
+  //     const userNickName = data.get("userNickName");
+  //     const userTel = data.get("userTel");
+  //     const userEmail = data.get("userEmail");
+  //     const zonecodee = data.get("zonecodee");
+  //     const fullAddresss = data.get("FullAddresss");
+  //     const userAddressDef = data.get("userAddressDef");
+  //     // const userMarketing = data.get("userMarketing");
+
+  //     if (!(userPw && userRePw)) {
+  //       console.log(userPw);
+  //       console.log(userRePw);
+  //       alert("제대로 입력하세요.");
+  //       return;
+  //     } else {
+  //       Join({
+  //         userId: userId,
+  //         userPw: userPw,
+  //         userNm: userNm,
+  //         userNickName: userNickName,
+  //         userTel: userTel,
+  //         userEmail: userEmail,
+  //         // userZip: userZip,
+  //         fullAddresss: fullAddresss,
+  //         userAddressDef: userAddressDef,
+  //         // userMarketing: userMarketing,
+  //       }).then((response) => {
+  //         //회원가입 성공시 로그인 페이지로 이동
+  //         window.location.href = "/login";
+  //       });
+  //     }
+  //  };
 
   return (
     <>
       {/* <ThemeProvider theme={theme}> */}
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-        <form onSubmit={handleSubmit}>
+        {/* <form onSubmit={handleSubmit}> */}
+        <form onSubmit={onSubmitHandler}>
           {/* <form noValidate onSubmit={handleSubmit}> */}
           <Box
             sx={{
@@ -191,7 +334,7 @@ const Join = () => {
               회원가입
             </Typography>
             <Box
-              component="form"
+              component="div"
               noValidate
               // onSubmit={handleSubmit}
               sx={{ mt: 3 }}
@@ -228,15 +371,21 @@ const Join = () => {
                     autoFocus
                     value={userId}
                     onChange={onChangeUserId}
+                    // helperText={userIdError ? "아이디에러" : ""}
                   />
                   {userIdError && (
-                    <div class="invalid-input">
+                    <div className="invalid-input">
                       5자 이상 10자 이하로 입력해 주세요.
                     </div>
                   )}
                 </Grid>
                 <Grid item xs={4}>
-                  <Button type="submit" fullWidth sx={{ mt: 1 }}>
+                  <Button
+                    type="button"
+                    onClick={idCheck}
+                    fullWidth
+                    sx={{ mt: 1 }}
+                  >
                     중복 확인
                   </Button>
                 </Grid>
@@ -252,13 +401,13 @@ const Join = () => {
                     onChange={onChangeUserEmail}
                   />
                   {userEmailError && (
-                    <div class="invalid-input">
+                    <div className="invalid-input">
                       유효한 이메일 형식을 입력하세요.
                     </div>
                   )}
                 </Grid>
                 <Grid item xs={4}>
-                  <Button type="submit" fullWidth sx={{ mt: 1 }}>
+                  <Button type="button" fullWidth sx={{ mt: 1 }}>
                     이메일 확인
                   </Button>
                 </Grid>
@@ -274,7 +423,7 @@ const Join = () => {
                     onChange={onChangeUserPw}
                   />
                   {userPwError && (
-                    <div class="invalid-input">
+                    <div className="invalid-input">
                       숫자 + 영문자 + 특수문자 조합으로 8자리 이상 입력해주세요.
                     </div>
                   )}
@@ -291,7 +440,7 @@ const Join = () => {
                     onChange={onChangeUserRePw}
                   />
                   {userRePwError && (
-                    <div class="invalid-input">
+                    <div className="invalid-input">
                       비밀번호가 일치하지 않습니다.
                     </div>
                   )}
@@ -307,7 +456,7 @@ const Join = () => {
                     onChange={onChangeUserNm}
                   />
                   {userNmError && (
-                    <div class="invalid-input">
+                    <div className="invalid-input">
                       한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용
                       불가)
                     </div>
@@ -324,7 +473,7 @@ const Join = () => {
                     onChange={onChangeUserNickName}
                   />
                   {userNickNameError && (
-                    <div class="invalid-input">
+                    <div className="invalid-input">
                       2자 이상 10자 이내로 작성 가능합니다.
                     </div>
                   )}
@@ -337,6 +486,7 @@ const Join = () => {
                     label="우편번호"
                     name="userZipCode"
                     value={zonecodee}
+                    onChange={onZonecodeeHandler}
                   />
                 </Grid>
                 <Grid item xs={4}>
@@ -359,6 +509,7 @@ const Join = () => {
                     label="주소"
                     name="userAddress"
                     value={fullAddresss}
+                    onChange={onFullAddresssHandler}
                     // value={userAddress}
                     // onChange={({ target: { value } }) => setUserAddress(value)}
                   />
@@ -369,6 +520,8 @@ const Join = () => {
                     id="userAddressDef"
                     label="상세주소"
                     name="userAddressDef"
+                    onChange={onUserAddressDefHandler}
+                    value={userAddressDef}
                     // value={userAddressDef}
                     // onChange={({ target: { value } }) =>
                     //   setUserAddressDef(value)
@@ -386,7 +539,7 @@ const Join = () => {
                     onChange={onChangeUserTel}
                   />
                   {userTelError && (
-                    <div class="invalid-input">"-"을 입력해 주세요.</div>
+                    <div className="invalid-input">"-"을 입력해 주세요.</div>
                   )}
                 </Grid>
                 <Grid item xs={12}>
@@ -422,7 +575,7 @@ const Join = () => {
 
               <div className="easy_login_name">간편 로그인</div>
               <br />
-              <div class="easy_login">
+              <div className="easy_login">
                 <div className="google_login">
                   <a href="https://accounts.google.com/ServiceLogin/identifier?service=accountsettings&continue=https%3A%2F%2Fmyaccount.google.com%3Futm_source%3Daccount-marketing-page%26utm_medium%3Dgo-to-account-button&flowName=GlifWebSignIn&flowEntry=ServiceLogin">
                     <img
@@ -467,5 +620,4 @@ const Join = () => {
     </>
   );
 };
-
 export default Join;

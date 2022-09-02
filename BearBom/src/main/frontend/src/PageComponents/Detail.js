@@ -9,12 +9,13 @@ import AnchorLink from "react-anchor-link-smooth-scroll";
 import HoverRating from "./ReviewFeedback";
 import AutoHeightTextarea from "./AutoHeightTextarea";
 import Rating from "@mui/material/Rating";
-import Location from "./location";
-// import Calendar from "./Calendar2/Calendar.js";
-import Calendar4 from "./Calendar/Calendar.js";
-import Calendar5 from "../PageComponents/Calendar";
+import Location from "./Location";
+import Calendar3 from "./Calendar/Calendar.js";
+import Calendar2 from "../PageComponents/Calendar";
 import CarouselFadeExample from "../PageComponents/Test.js";
 import Thumb from "./Thumb";
+import Modal from "./ReviewModal";
+import Apply from "./Apply";
 // import MyComponent from "../PageComponents/Calendar";
 
 const Detail = ({ scrollTop }) => {
@@ -28,8 +29,6 @@ const Detail = ({ scrollTop }) => {
   );
   const { id } = useParams(data);
 
-  const calRef = useRef(null);
-
   useEffect(() => {}, []);
 
   // a.id: data의 id속성
@@ -37,13 +36,42 @@ const Detail = ({ scrollTop }) => {
   let item = course.find((a) => (a.course_idx = id));
   console.log(item);
 
+  const [height, setHeight] = useState();
+  const handleHeight = () => {
+    setHeight(window.pageYOffset);
+  };
+
+  const calRef = useRef(null);
+
   useEffect(() => {
-    if (scrollTop > 1000) {
+    if (height > 1000) {
       calRef.current.style.opacity = 0;
+      calRef.current.style.transition = "opacity 0.7s";
     } else {
       calRef.current.style.opacity = 1;
     }
-  }, [scrollTop]);
+    console.log("test");
+  }, [height]);
+
+  useEffect(() => {
+    const watch = () => {
+      window.addEventListener("scroll", handleHeight);
+    };
+    watch(); // addEventListener 함수를 실행
+    return () => {
+      window.removeEventListener("scroll", handleHeight); // addEventListener 함수를 삭제
+    };
+  });
+
+  //모달 창 띄우기
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   return (
     <>
@@ -55,7 +83,7 @@ const Detail = ({ scrollTop }) => {
             </div>
             <h4>Title</h4>
             <Navbar>
-              <Nav className="justify-content-start">
+              <Nav id="nav-bar">
                 <AnchorLink className="nav-list" href="#teacher">
                   강사소개
                 </AnchorLink>
@@ -173,7 +201,7 @@ const Detail = ({ scrollTop }) => {
                 <b>시간표</b>
               </h5>
               <div className="time-cal">
-                <Calendar5 id="Cal" />
+                <Calendar2 width="width" />
               </div>
             </section>
 
@@ -220,6 +248,18 @@ const Detail = ({ scrollTop }) => {
               <h5>
                 <b>후기</b>
               </h5>
+
+              <button className="reviewmodal-box" onClick={openModal}>
+                등록하기
+              </button>
+
+              <Modal open={modalOpen} close={closeModal} header="후기">
+                <div className="modal-position">
+                  <HoverRating />
+                </div>
+                <AutoHeightTextarea />
+              </Modal>
+
               <div className="review-box">
                 <img className="img2" src={require("../img/img2.jpeg")}></img>
                 <span className="review-nickname">nickname</span>
@@ -253,22 +293,24 @@ const Detail = ({ scrollTop }) => {
             </section>
           </div>
           <div className="main-cal">
-            <div className="calendar-box" ref={calRef}>
+            {/* <div className="calendar-box" ref={calRef}>
               <div className="calendar-title">
                 <h4>나만의 싸인 만들기 클래스</h4>
               </div>
-              <div className="main-cal-cal">
-                <Calendar4 id="Cal" />
+              <div>
+                <Calendar2 />
               </div>
-
-              <div className="calendar-button-box">
-                <button className="calendar-button1">찜하기</button>
-                <button className="calendar-button2">공유하기</button>
-              </div>
-              <div className="calendar-regist-box"></div>
-              <div className="calendar-regist">
-                <span className="calendar-text">신청하기</span>
-              </div>
+            </div>
+            <div className="calendar-button-box">
+              <button className="calendar-button1">찜하기</button>
+              <button className="calendar-button2">공유하기</button>
+            </div>
+            <div className="calendar-regist-box">예약금액 1인 40,000원</div>
+            <div className="calendar-regist">
+              <span className="calendar-text">신청하기</span>
+            </div> */}
+            <div ref={calRef}>
+              <Apply />
             </div>
           </div>
         </div>

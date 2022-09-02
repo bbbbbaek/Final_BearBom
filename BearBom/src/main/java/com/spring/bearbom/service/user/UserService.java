@@ -7,6 +7,8 @@ public interface UserService {
 	
 	User login(String userid, String userpw);
 
+	User idCheck(String userId);
+
 	
 }
 
