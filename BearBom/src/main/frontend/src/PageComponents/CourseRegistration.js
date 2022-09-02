@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+
+import React, { useMemo, useState } from "react";
+
 import CenteredTabs from "../PageComponents/CourseRegistration/AddCourseNav";
 import StepOne from "./CourseRegistration/StepOne";
 import StepTwo_1 from "./CourseRegistration/StepTwo_1";
@@ -8,8 +10,9 @@ import CoPresentIcon from "@mui/icons-material/CoPresent";
 import "../css/courseRegistration.css";
 import StepTwo_4 from "./CourseRegistration/StepTwo_4";
 import StepTwo_5 from "./CourseRegistration/StepTwo_5";
-import { createTheme, ThemeProvider } from "@mui/material";
+import { Button, createTheme, ThemeProvider } from "@mui/material";
 import StepTwo_6 from "./CourseRegistration/StepTwo_6";
+import StepThree_1 from "./CourseRegistration/StepThree_1";
 
 //const [formData1, setFormData1] = useState({});
 
@@ -45,10 +48,26 @@ const theme = createTheme({
       //dark: '#ba000d',
       //contrastText: '#000',
     },
+    success:{
+      main: '#453b36 ',
+    }
   },
 });
 
 const CourseRegistration = () => {
+
+  
+  //const [currentStep, setCurrentStep] = useState[1];
+  const currentStep = 1;
+
+  const returnButtonValue = useMemo(() => {
+    if (currentStep === 10) {
+      return '등록';
+    }
+    return '다음';
+  }, [currentStep]);
+
+
   return (
     <ThemeProvider theme={theme}>
       <div className="addclass">
@@ -61,30 +80,39 @@ const CourseRegistration = () => {
             <CenteredTabs></CenteredTabs>
           </div>
         </div>
-        <div className="fullline"></div>
-        <div className="middle">
-          <div className="leftbar">
-            <div className="step0 step">Step 1. 인증 및 클래스 유형</div>
-            <div className="step">Step 2. 클래스 소개</div>
-            <div className="step">Step 3. 금액 및 일정</div>
-            <div className="step">Step 4. 클래스 위치</div>
+        <div className="midline" />
+        <div className="midRight">
+          <div className="midContent">
+            {/*<StepOne></StepOne>*/}
+            {/*<StepTwo_1></StepTwo_1>*/}
+            {/*<StepTwo_2></StepTwo_2>*/}
+            {/*<StepTwo_3></StepTwo_3>*/}
+            {/*<StepTwo_4></StepTwo_4>*/}
+            {/*<StepTwo_5></StepTwo_5>*/}
+            {/*<StepTwo_6></StepTwo_6>*/}
+            <StepThree_1></StepThree_1>
           </div>
-          <div className="midline" />
-          <div className="midRight">
-            <div className="midContent">
-              {/*<StepOne></StepOne>*/}
-              {/*<StepTwo_1></StepTwo_1>*/}
-              {/*<StepTwo_2></StepTwo_2>*/}
-              {/*<StepTwo_3></StepTwo_3>*/}
-              {/*<StepTwo_4></StepTwo_4>*/}
-              {/*<StepTwo_5></StepTwo_5>*/}
-              <StepTwo_6></StepTwo_6>
-            </div>
-            {/*<div className="midStepBtn">
-            <button>이전</button>
-            <button>다음</button>
-           </div>*/}
-          </div>
+          <div className="midStepBtn">
+            <div className="stepBtnBox">
+                  {currentStep > 0 && <Button
+                    variant="outlined"
+                    size="large"
+                    disabled={currentStep <= 0}
+                    color="secondary"
+                  >
+                    이전
+                  </Button>}
+                  <Button
+                    variant="outlined"
+                    color="success"
+                    size="large"
+                    style={{ marginLeft: 20, background: '#dbd7d3'}}
+                  >
+                    {returnButtonValue}
+                  </Button>
+                  </div>
+           </div>
+
         </div>
       </div>
     </ThemeProvider>
