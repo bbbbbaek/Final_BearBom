@@ -16,7 +16,7 @@ import Helpdesk from "./PageComponents/Helpdesk";
 import Mypage from "./PageComponents/Mypage";
 import Login from "./PageComponents/Login";
 import Join from "./PageComponents/Join";
-import Detail from "./PageComponents/Detail";
+import Detail from "./PageComponents/Detail/Detail";
 import Top from "./ModuleComponents/Top";
 import Chatbot from "./ModuleComponents/Chatbot";
 import JoinTest from "./PageComponents/JoinComponents/JoinTest";

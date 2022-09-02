@@ -63,16 +63,6 @@ const Detail = ({ scrollTop }) => {
     };
   });
 
-  //모달 창 띄우기
-  const [modalOpen, setModalOpen] = useState(false);
-
-  const openModal = () => {
-    setModalOpen(true);
-  };
-  const closeModal = () => {
-    setModalOpen(false);
-  };
-
   return (
     <>
       <div className="main-container">
