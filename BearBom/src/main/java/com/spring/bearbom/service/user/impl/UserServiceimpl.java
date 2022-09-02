@@ -1,5 +1,6 @@
 package com.spring.bearbom.service.user.impl;
 
+import com.spring.bearbom.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,9 @@ public class UserServiceimpl implements UserService {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+
+	@Autowired
+	private UserMapper userMapper;
 	
 	@Override
 	public User join(User user) {
@@ -43,21 +47,33 @@ public class UserServiceimpl implements UserService {
 	
 	return null;
 	}
-	
-	public String test() {
-		return "aaa";
-	}
+
 
 	@Override
 	public User idCheck(String userId) {
 		User checkIdUser = userRepository.findByUserId(userId);
+		System.out.println(checkIdUser);
 		if(checkIdUser != null) {
 			return checkIdUser;
 		} else {
 			return null;
 		}
-	
+
 	}
+
+
+	@Override
+	public int idDuplicate(String userId) {
+		return userMapper.idDuplicate(userId);
+	}
+
+	public String test() {
+		return "aaa";
+	}
+
+
+
+
 }
 
 
