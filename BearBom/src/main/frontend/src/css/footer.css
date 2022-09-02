@@ -1,11 +1,13 @@
 .footer {
+  display: flex;
   background-color: #f8f9fa;
+  justify-content: center;
 }
 
 .footer-main {
   display: flex;
-  margin-left: 10%;
-  margin-right: 10%;
+  /* margin-left: 10%;
+  margin-right: 10%; */
   align-items: center;
 }
 
@@ -13,10 +15,10 @@
   margin: 10px;
   width: 200px;
   height: 200px;
-  background-color: white;
-}
-
-.footer-content {
+  background-size: 90%;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-right: 50px;
 }
 
 hr {
