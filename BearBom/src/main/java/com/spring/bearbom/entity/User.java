@@ -23,7 +23,7 @@ public class User {
 	
 	@Column(nullable = false)
 	private String userPw;
-	
+
 	private int userPwFailCnt = 0;
 	
 	@Column(nullable = false)
@@ -49,6 +49,7 @@ public class User {
 	
 	@Column(nullable = false ,columnDefinition = "char(1)")
 	private char userYn = 'Y';
+
 	
 	@Column
 	private String userPhotoOrgNm;
@@ -56,6 +57,7 @@ public class User {
 	@Column
 	private String userPhotoNewNm;
 	
+
 	@Column
 	private String userPhotoPath;
 	

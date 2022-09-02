@@ -48,7 +48,9 @@ public class UserController {
 			userDTO.setUserAddress(joinUser.getUserAddress());
 			userDTO.setUserAddressDef(joinUser.getUserAddressDef());
 			userDTO.setUserTel(joinUser.getUserTel());
-			userDTO.setUseryn(joinUser.getUserYn());
+
+			userDTO.setUserYn(joinUser.getUserYn());
+
 				
 			return ResponseEntity.ok().body(userDTO);
 		} catch(Exception e) {
@@ -88,14 +90,18 @@ public class UserController {
 		}
 	}
 	
+
 	 @PostMapping("/checkId")
+
      public String checkId(@RequestBody User user) {
         User idCheck = userService.idCheck(user.getUserId());
         
         if(idCheck == null) {
+
            return "idOk";
         } else {
            return "idFail";
+
         }
      }
 }

@@ -27,7 +27,7 @@ public class UserServiceimpl implements UserService {
 //		if(userRepository.existsByUserId(user.getUserId())) {
 //			throw new RuntimeException("userid already exists");
 //		}
-		System.out.println(user.toString());
+
 		return userRepository.save(user);
 	}
 	
