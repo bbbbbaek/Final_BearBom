@@ -20,7 +20,7 @@ import { API_BASE_URL } from "../../app-config";
 import { useNavigate } from "react-router-dom";
 
 const Join = () => {
-  const naviate = useNavigate();
+  const navigate = useNavigate();
 
   // 값 저장
   const [userId, setUserId] = useState("");
@@ -253,7 +253,7 @@ const Join = () => {
         },
       })
         .then((response) => {
-          naviate("/login");
+          navigate("/login");
         })
         .catch((e) => {
           console.log(e);

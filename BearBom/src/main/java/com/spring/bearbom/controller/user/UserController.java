@@ -26,7 +26,7 @@ public class UserController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	@PostMapping("/joinTest")
+	@PostMapping("/join")
 	public ResponseEntity<?> join(@RequestBody User user) {
 		try {
 			System.out.println(passwordEncoder.getClass());
