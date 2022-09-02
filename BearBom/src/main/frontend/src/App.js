@@ -21,6 +21,8 @@ import Top from "./ModuleComponents/Top";
 import Chatbot from "./ModuleComponents/Chatbot";
 import JoinTest from "./PageComponents/JoinComponents/JoinTest";
 import Saw from "./PageComponents/Saw";
+import Admin from "./PageComponents/AdminPage/Admin";
+import Page404 from "./PageComponents/Page404";
 
 function App() {
   return (
@@ -40,6 +42,8 @@ function App() {
           <Route path="/joinTest" element={<JoinTest />} />
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/saw/:id" element={<Saw />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/*" element={<Page404 />} />
         </Routes>
         <Top />
         <Chatbot />
