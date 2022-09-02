@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import "../css/course.css";
 import {
+  Button,
   ButtonGroup,
   FormControl,
   InputLabel,
   MenuItem,
+  Pagination,
+  PaginationItem,
   Select,
+  Stack,
 } from "@mui/material";
 import InputGroup from "react-bootstrap/InputGroup";
 import MiniCard from "./MiniCard";
@@ -25,17 +28,36 @@ import "react-multi-carousel/lib/styles.css";
 import axios from "axios";
 import { API_BASE_URL } from "../app-config";
 import { Link } from "react-router-dom";
+import "../css/btnDeco.scss";
 
 function valuetext(priceSlider) {
   return `${priceSlider}원`;
 }
 
-function valueDate(dateMdf) {
-  return new Date(dateMdf);
+// function valueDate(dateMdf) {
+//   return new Date(dateMdf);
+// }
+
+let hour;
+let minu;
+
+function valueDate(time) {
+  hour = Math.floor(time / 60);
+  minu = Math.floor(time % 60);
+
+  if (hour < 10) {
+    hour = "0" + hour;
+  }
+  if (minu < 10) {
+    minu = "0" + minu;
+  }
+
+  return `${hour}:${minu}`;
 }
+
 // 강좌 조회 페이지
 const Course = (props) => {
-  const [timeSlider, setTimeSlider] = useState([0, 24]);
+  const [timeSlider, setTimeSlider] = useState([0, 1440]);
 
   const handleChange1 = (event, newValue) => {
     setTimeSlider(newValue);
@@ -249,283 +271,349 @@ const Course = (props) => {
     setCategorySel(event.target.value);
   };
 
-  // const [timeSlider, setTimeSlider] = React.useState(30);
+  let dataCategory = ["원데이", "정기"];
 
-  // const handleChange5 = (event, newValue) => {
-  //   setTimeSlider(newValue);
-  // };
+  let [btnActiveCategory, setBtnActiveCategory] = useState("");
+
+  const toggleActiveCategory = (e) => {
+    setBtnActiveCategory((prev) => {
+      return e.target.value;
+    });
+  };
+
+  let dataWeek = ["평일", "토요일", "일요일"];
+
+  let [btnActiveWeek, setBtnActiveWeek] = useState("");
+
+  const toggleActiveWeek = (e) => {
+    setBtnActiveWeek((prev) => {
+      return e.target.value;
+    });
+  };
+
+  let dataLevel = ["입문", "중급", "고급"];
+
+  let [btnActiveLevel, setBtnActiveLevel] = useState("");
+
+  const toggleActiveLevel = (e) => {
+    setBtnActiveLevel((prev) => {
+      return e.target.value;
+    });
+  };
+
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const page = parseInt(query.get("page") || "1", 10);
+
+  const onSubmitSearchHandler = (event) => {
+    event.preventDefault();
+  };
 
   return (
     <>
       <br />
       <Container>
-        <Row>
-          <Col>
-            <div className="searchForm">
-              <div>
-                <InputGroup>
-                  <InputGroup.Text id="btnGroupAddon">
-                    <img
-                      className="searchIcon2"
-                      src={require("../images/search-icon3.png")}
+        <form noValidate id="searchSubmitForm" onSubmit={onSubmitSearchHandler}>
+          <Row>
+            <Col>
+              <div className="searchForm">
+                <div>
+                  <InputGroup>
+                    <InputGroup.Text id="btnGroupAddon">
+                      <img
+                        className="searchIcon2"
+                        src={require("../images/search-icon3.png")}
+                      />
+                    </InputGroup.Text>
+                    <Form.Control
+                      type="text"
+                      placeholder="클래스 검색"
+                      aria-label="classSearch"
+                      aria-describedby="btnGroupAddon"
+                      name="courseNm"
                     />
-                  </InputGroup.Text>
-                  <Form.Control
-                    type="text"
-                    placeholder="클래스 검색"
-                    aria-label="classSearch"
-                    aria-describedby="btnGroupAddon"
-                  />
-                </InputGroup>
+                  </InputGroup>
+                </div>
               </div>
-            </div>
-          </Col>
-        </Row>
-        <br />
-        <Row>
-          <Col md={1} className="category-font">
-            지역
-          </Col>
-          <Col>
-            <Dropdown>
-              <div>
-                <FormControl sx={{ m: 1, minWidth: 170 }} size="small">
-                  <InputLabel id="demo-select-small">지역</InputLabel>
-                  <Select
-                    labelId="demo-select-small"
-                    id="demo-select-small"
-                    value={city}
-                    label="city"
-                    onChange={handleChange3}
-                  >
-                    <MenuItem value="">
-                      <em>지역검색</em>
-                    </MenuItem>
-                    <MenuItem value={1}>전체</MenuItem>
-                    <MenuItem value={2}>서울</MenuItem>
-                    <MenuItem value={3}>경기</MenuItem>
-                    <MenuItem value={4}>인천</MenuItem>
-                    <MenuItem value={5}>강원</MenuItem>
-                    <MenuItem value={6}>대구</MenuItem>
-                    <MenuItem value={7}>부산</MenuItem>
-                    <MenuItem value={8}>경상북도</MenuItem>
-                    <MenuItem value={9}>경상남도</MenuItem>
-                    <MenuItem value={10}>울산</MenuItem>
-                    <MenuItem value={11}>광주</MenuItem>
-                    <MenuItem value={12}>전라북도</MenuItem>
-                    <MenuItem value={13}>전라남도</MenuItem>
-                    <MenuItem value={14}>세종</MenuItem>
-                    <MenuItem value={15}>제주</MenuItem>
-                    <MenuItem value={16}>충청북도</MenuItem>
-                    <MenuItem value={17}>충청남도</MenuItem>
-                  </Select>
-                </FormControl>
-              </div>
-            </Dropdown>
-          </Col>
-        </Row>
-        <br />
-        <Row>
-          <Col md={1} className="category-font">
-            카테고리
-          </Col>
-          <Col>
-            <Dropdown>
-              <div>
-                <FormControl sx={{ m: 1, minWidth: 170 }} size="small">
-                  <InputLabel id="demo-select-small">카테고리</InputLabel>
-                  <Select
-                    labelId="demo-select-small"
-                    id="demo-select-small"
-                    value={categorySel}
-                    label="categorySel"
-                    onChange={handleChange4}
-                  >
-                    <MenuItem value="">
-                      <em>카테고리검색</em>
-                    </MenuItem>
-                    <MenuItem value={1}>전체</MenuItem>
-                    <MenuItem value={2}>핸드메이드</MenuItem>
-                    <MenuItem value={3}>쿠킹</MenuItem>
-                    <MenuItem value={4}>플라워·가드닝</MenuItem>
-                    <MenuItem value={5}>드로잉</MenuItem>
-                    <MenuItem value={6}>음악</MenuItem>
-                    <MenuItem value={7}>요가·필라테스</MenuItem>
-                    <MenuItem value={8}>레져·스포츠</MenuItem>
-                    <MenuItem value={9}>뷰티</MenuItem>
-                    <MenuItem value={10}>반려동물</MenuItem>
-                    <MenuItem value={11}>체험</MenuItem>
-                    <MenuItem value={12}>자기계발</MenuItem>
-                  </Select>
-                </FormControl>
-              </div>
-            </Dropdown>
-          </Col>
-        </Row>
-        <br />
-        <Row>
-          <Col md={1} className="category-font">
-            유형
-          </Col>
-          <Col className="class-category">
-            <ButtonGroup name="btnGroup1">
-              <Button
-                variant="outline-dark"
-                size="sm"
-                className="btn-category1"
-                name="btn1"
-              >
-                원데이
-              </Button>
-              <Button
-                variant="outline-dark"
-                size="sm"
-                className="btn-category2"
-                name="btn1"
-              >
-                정기
-              </Button>
-            </ButtonGroup>
-          </Col>
-        </Row>
-        <br />
-        <Row>
-          <Col md={1} className="category-font">
-            요일
-          </Col>
-          <Col md={4} className="class-week">
-            <ButtonGroup name="btnGroup2">
-              <Button variant="outline-dark" size="sm" name="btn2">
-                평일
-              </Button>
-              <Button variant="outline-dark" size="sm" name="btn2">
-                토요일
-              </Button>
-              <Button variant="outline-dark" size="sm" name="btn2">
-                일요일
-              </Button>
-            </ButtonGroup>
-          </Col>
-          <Col md={1} className="category-font">
-            시간
-          </Col>
+            </Col>
+          </Row>
+          <br />
+          <Row>
+            <Col md={1} className="category-font">
+              지역
+            </Col>
+            <Col>
+              <Dropdown>
+                <div>
+                  <FormControl sx={{ m: 1, minWidth: 170 }} size="small">
+                    <InputLabel id="demo-select-small">지역</InputLabel>
+                    <Select
+                      labelId="demo-select-small"
+                      id="demo-select-small"
+                      value={city}
+                      label="city"
+                      onChange={handleChange3}
+                    >
+                      <MenuItem value="">
+                        <em>지역검색</em>
+                      </MenuItem>
+                      <MenuItem value={1}>전체</MenuItem>
+                      <MenuItem value={2}>서울</MenuItem>
+                      <MenuItem value={3}>경기</MenuItem>
+                      <MenuItem value={4}>인천</MenuItem>
+                      <MenuItem value={5}>강원</MenuItem>
+                      <MenuItem value={6}>대구</MenuItem>
+                      <MenuItem value={7}>부산</MenuItem>
+                      <MenuItem value={8}>경상북도</MenuItem>
+                      <MenuItem value={9}>경상남도</MenuItem>
+                      <MenuItem value={10}>울산</MenuItem>
+                      <MenuItem value={11}>광주</MenuItem>
+                      <MenuItem value={12}>전라북도</MenuItem>
+                      <MenuItem value={13}>전라남도</MenuItem>
+                      <MenuItem value={14}>세종</MenuItem>
+                      <MenuItem value={15}>제주</MenuItem>
+                      <MenuItem value={16}>충청북도</MenuItem>
+                      <MenuItem value={17}>충청남도</MenuItem>
+                    </Select>
+                  </FormControl>
+                </div>
+              </Dropdown>
+            </Col>
+          </Row>
+          <br />
+          <Row>
+            <Col md={1} className="category-font">
+              카테고리
+            </Col>
+            <Col>
+              <Dropdown>
+                <div>
+                  <FormControl sx={{ m: 1, minWidth: 170 }} size="small">
+                    <InputLabel id="demo-select-small">카테고리</InputLabel>
+                    <Select
+                      labelId="demo-select-small"
+                      id="demo-select-small"
+                      value={categorySel}
+                      label="categorySel"
+                      onChange={handleChange4}
+                    >
+                      <MenuItem value="">
+                        <em>카테고리검색</em>
+                      </MenuItem>
+                      <MenuItem value={1}>전체</MenuItem>
+                      <MenuItem value={2}>핸드메이드</MenuItem>
+                      <MenuItem value={3}>쿠킹</MenuItem>
+                      <MenuItem value={4}>플라워·가드닝</MenuItem>
+                      <MenuItem value={5}>드로잉</MenuItem>
+                      <MenuItem value={6}>음악</MenuItem>
+                      <MenuItem value={7}>요가·필라테스</MenuItem>
+                      <MenuItem value={8}>레져·스포츠</MenuItem>
+                      <MenuItem value={9}>뷰티</MenuItem>
+                      <MenuItem value={10}>반려동물</MenuItem>
+                      <MenuItem value={11}>체험</MenuItem>
+                      <MenuItem value={12}>자기계발</MenuItem>
+                    </Select>
+                  </FormControl>
+                </div>
+              </Dropdown>
+            </Col>
+          </Row>
+          <br />
+          <Row>
+            <Col md={1} className="category-font">
+              유형
+            </Col>
+            <Col className="class-category">
+              <ButtonGroup name="btnGroup1">
+                <div className="container">
+                  {dataCategory.map((item, idx) => {
+                    return (
+                      <>
+                        <button
+                          value={idx}
+                          className={
+                            "btn" + (idx == btnActiveCategory ? " active" : "")
+                          }
+                          onClick={toggleActiveCategory}
+                          id="btnDeco"
+                        >
+                          {item}
+                        </button>
+                      </>
+                    );
+                  })}
+                </div>
+              </ButtonGroup>
+            </Col>
+          </Row>
+          <br />
+          <Row>
+            <Col md={1} className="category-font">
+              요일
+            </Col>
+            <Col md={4} className="class-week">
+              <ButtonGroup name="btnGroup2">
+                <div className="container">
+                  {dataWeek.map((item, idx) => {
+                    return (
+                      <>
+                        <button
+                          value={idx}
+                          className={
+                            "btn" + (idx == btnActiveWeek ? " active" : "")
+                          }
+                          onClick={toggleActiveWeek}
+                          id="btnDeco"
+                        >
+                          {item}
+                        </button>
+                      </>
+                    );
+                  })}
+                </div>
+              </ButtonGroup>
+            </Col>
+            <Col md={1} className="category-font">
+              시간
+            </Col>
 
-          <Col md={5} className="time-slider">
-            <div className="time-slider-input1">
-              <input
-                type="text"
-                placeholder="00:00"
-                value={valueDate(timeSlider[0])}
-                aria-invalid="false"
-                inputMode="numeric"
-                className="css-1x5jdmq"
-              ></input>
-            </div>
-            <div className="time-slider-bar">
-              <Box id="slider-top1">
-                <Slider
-                  getAriaLabel={() => "time range"}
-                  value={timeSlider}
-                  onChange={handleChange1}
-                  valueLabelDisplay="auto"
-                  getAriaValueText={valuetext}
-                  className="time-slider1"
-                  max={24}
-                />
-              </Box>
-            </div>
-            <div className="time-slider-input2">
-              <input
-                type="text"
-                placeholder="24:00"
-                value={valueDate(timeSlider[1])}
-                aria-invalid="false"
-                inputMode="numeric"
-                className="css-1x5jdmq"
-              ></input>
-            </div>
-          </Col>
-        </Row>
-        <br />
-        <Row>
-          <Col md={1} className="category-font">
-            난이도
-          </Col>
-          <Col md={4} className="class-level">
-            <Button variant="outline-dark" size="sm">
-              입문
-            </Button>
-            <Button variant="outline-dark" size="sm">
-              중급
-            </Button>
-            <Button variant="outline-dark" size="sm">
-              고급
-            </Button>
-          </Col>
-          <Col md={1} className="category-font">
-            금액
-          </Col>
-          <Col md={5} className="price-slider">
-            <div className="price-slider-input1">
-              <input
-                type="text"
-                placeholder="0원"
-                value={valuetext(priceSlider[0])}
-                aria-invalid="false"
-                inputMode="numeric"
-                className="css-1x5jdmq"
-              ></input>
-            </div>
-            <div className="price-slider-bar">
-              <Box id="slider-top2">
-                <Slider
-                  getAriaLabel={() => "price range"}
-                  value={priceSlider}
-                  onChange={handleChange2}
-                  valueLabelDisplay="auto"
-                  getAriaValueText={valuetext}
-                  className="price-slider1"
-                  max={1000000}
-                />
-              </Box>
-            </div>
-            <div className="price-slider-input2">
-              <input
-                type="text"
-                placeholder="1,000,000원"
-                value={valuetext(priceSlider[1])}
-                aria-invalid="false"
-                inputMode="numeric"
-                className="css-1x5jdmq"
-              ></input>
-            </div>
-          </Col>
-        </Row>
-        <br />
-        <Row className="justify-content-md-center">
-          <Col xs lg="2">
-            <Button variant="outline-dark" size="lg" className="refreshBtn">
-              <img
-                className="resetIcon"
-                src={require("../images/reset-icon.png")}
-              />
-              초기화
-            </Button>
-          </Col>
-          <Col xs lg="2">
-            <Button variant="secondary" size="lg" className="searchBtn">
-              검색하기
-            </Button>
-          </Col>
-        </Row>
-        <br />
-        <hr
-          style={{
-            width: "100%",
-            alignSelf: "center",
-            height: "1px",
-          }}
-        />
+            <Col md={5} className="time-slider">
+              <div className="time-slider-input1">
+                <input
+                  type="text"
+                  placeholder="00:00"
+                  value={valueDate(timeSlider[0])}
+                  aria-invalid="false"
+                  inputMode="numeric"
+                  className="css-1x5jdmq"
+                ></input>
+              </div>
+              <div className="time-slider-bar">
+                <Box id="slider-top1">
+                  <Slider
+                    getAriaLabel={() => "time range"}
+                    value={timeSlider}
+                    onChange={handleChange1}
+                    valueLabelDisplay="auto"
+                    getAriaValueText={valuetext}
+                    className="time-slider1"
+                    min={0}
+                    max={1440}
+                    step="10"
+                  />
+                </Box>
+              </div>
+              <div className="time-slider-input2">
+                <input
+                  type="text"
+                  placeholder="24:00"
+                  value={valueDate(timeSlider[1])}
+                  aria-invalid="false"
+                  inputMode="numeric"
+                  className="css-1x5jdmq"
+                ></input>
+              </div>
+            </Col>
+          </Row>
+          <br />
+          <Row>
+            <Col md={1} className="category-font">
+              난이도
+            </Col>
+            <Col md={4} className="class-level">
+              <div className="container">
+                {dataLevel.map((item, idx) => {
+                  return (
+                    <>
+                      <button
+                        value={idx}
+                        className={
+                          "btn" + (idx == btnActiveLevel ? " active" : "")
+                        }
+                        onClick={toggleActiveLevel}
+                        id="btnDeco"
+                      >
+                        {item}
+                      </button>
+                    </>
+                  );
+                })}
+              </div>
+            </Col>
+            <Col md={1} className="category-font">
+              금액
+            </Col>
+            <Col md={5} className="price-slider">
+              <div className="price-slider-input1">
+                <input
+                  type="text"
+                  placeholder="0원"
+                  value={valuetext(priceSlider[0])}
+                  aria-invalid="false"
+                  inputMode="numeric"
+                  className="css-1x5jdmq"
+                ></input>
+              </div>
+              <div className="price-slider-bar">
+                <Box id="slider-top2">
+                  <Slider
+                    getAriaLabel={() => "price range"}
+                    value={priceSlider}
+                    onChange={handleChange2}
+                    valueLabelDisplay="auto"
+                    getAriaValueText={valuetext}
+                    className="price-slider1"
+                    max={1000000}
+                    step="1000"
+                  />
+                </Box>
+              </div>
+              <div className="price-slider-input2">
+                <input
+                  type="text"
+                  placeholder="1,000,000원"
+                  value={valuetext(priceSlider[1])}
+                  aria-invalid="false"
+                  inputMode="numeric"
+                  className="css-1x5jdmq"
+                ></input>
+              </div>
+            </Col>
+          </Row>
+          <br />
+          <Row className="justify-content-md-center">
+            <Col xs lg="2">
+              <Button
+                type="submit"
+                variant="outline-dark"
+                size="lg"
+                id="refreshBtn"
+              >
+                <img id="resetIcon" src={require("../images/reset-icon.png")} />
+                초기화
+              </Button>
+            </Col>
+            <Col xs lg="2">
+              <Button
+                type="submit"
+                variant="secondary"
+                size="lg"
+                id="searchBtn"
+                onSubmit={onSubmitSearchHandler}
+              >
+                검색하기
+              </Button>
+            </Col>
+          </Row>
+          <br />
+          <hr
+            style={{
+              width: "100%",
+              alignSelf: "center",
+              height: "1px",
+            }}
+          />
+        </form>
       </Container>
       <br />
       <main id="wrapper" className="main-contents">
@@ -593,26 +681,19 @@ const Course = (props) => {
               height: "1px",
             }}
           />
-
-          {/* <div className="searchPaging"> */}
-          {/* <Pagination id="pagePart">
-              <Pagination.First />
-              <Pagination.Prev />
-              <Pagination.Item>{1}</Pagination.Item>
-              <Pagination.Ellipsis />
-
-              <Pagination.Item>{10}</Pagination.Item>
-              <Pagination.Item>{11}</Pagination.Item>
-              <Pagination.Item active>{12}</Pagination.Item>
-              <Pagination.Item>{13}</Pagination.Item>
-              <Pagination.Item disabled>{14}</Pagination.Item>
-
-              <Pagination.Ellipsis />
-              <Pagination.Item>{20}</Pagination.Item>
-              <Pagination.Next />
-              <Pagination.Last />
-            </Pagination> */}
-          {/* </div> */}
+          <div className="pagingPart">
+            <Pagination
+              page={page}
+              count={10}
+              renderItem={(item) => (
+                <PaginationItem
+                  component={Link}
+                  to={`/inbox${item.page === 1 ? "" : `?page=${item.page}`}`}
+                  {...item}
+                />
+              )}
+            />
+          </div>
         </div>
       </main>
     </>

@@ -1,0 +1,17 @@
+.chart-container {
+  display: flex;
+  width: 800px;
+  height: 320px;
+  background-color: #fff;
+  align-items: flex-end;
+  /* border-bottom: 2px solid black; */
+  padding: 10px;
+  border-radius: 5px;
+}
+.chart-item {
+  display: flex;
+  width: 20px;
+  height: 100px;
+  background-color: #2caad2;
+  margin: 1px;
+}

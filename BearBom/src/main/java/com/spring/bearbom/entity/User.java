@@ -7,6 +7,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import lombok.Data;
 
@@ -22,8 +23,8 @@ public class User {
 	
 	@Column(nullable = false)
 	private String userPw;
-	
-	private int userPwFailCnt;
+
+	private int userPwFailCnt = 0;
 	
 	@Column(nullable = false)
 	private String userNm;
@@ -32,7 +33,7 @@ public class User {
 	private String userNickName;
 	
 	@Column(nullable = false)
-	private int userTel;
+	private String userTel;
 	
 	@Column(nullable = false, columnDefinition = "varchar(1000)")
 	private String userAddress;
@@ -41,30 +42,35 @@ public class User {
 	private String userAddressDef;
 	
 	@Column(nullable = false)
-	private int userZipCode;
+	private int userZipcode;
 	
 	@Column(nullable = false)
 	private String userEmail;
 	
 	@Column(nullable = false ,columnDefinition = "char(1)")
-	private char userYn;
+	private char userYn = 'Y';
+
 	
-	@Column(nullable = false)
+	@Column
 	private String userPhotoOrgNm;
 	
-	@Column(nullable = false)
+	@Column
 	private String userPhotoNewNm;
 	
-	@Column(nullable = false)
+
+	@Column
 	private String userPhotoPath;
 	
 	@Column(nullable = false)
-	private int userPoint;
+	private int userPoint = 0;
 	
 	@Column(columnDefinition = "varchar(45) default 'ROLE_USER'")
 	private String role;
 	
 	@Column(nullable = true)
 	private String lecturerInfo;
+
+	
+	
 	
 }

@@ -42,6 +42,16 @@ public class UserController {
 			userDTO.setUserId(joinUser.getUserId());
 			userDTO.setUserPw(joinUser.getUserPw());
 			userDTO.setRole(joinUser.getRole());
+			userDTO.setUserEmail(joinUser.getUserEmail());
+			userDTO.setUserNm(joinUser.getUserNm());
+			userDTO.setUserNickname(joinUser.getUserNickName());
+			userDTO.setUserAddress(joinUser.getUserAddress());
+			userDTO.setUserAddressDef(joinUser.getUserAddressDef());
+			userDTO.setUserTel(joinUser.getUserTel());
+
+			userDTO.setUserYn(joinUser.getUserYn());
+
+				
 			return ResponseEntity.ok().body(userDTO);
 		} catch(Exception e) {
 			ResponseDTO<UserDTO> response = new ResponseDTO<>();
@@ -65,6 +75,8 @@ public class UserController {
 			userDTO.setUserId(loginUser.getUserId());
 			userDTO.setUserPw(loginUser.getUserPw());
 			userDTO.setRole(loginUser.getRole());
+			
+			
 			//발행된 토큰 DTO에 담아서 리턴
 			userDTO.setToken(token);
 			
@@ -77,4 +89,19 @@ public class UserController {
 			return ResponseEntity.badRequest().body(response);
 		}
 	}
+	
+
+	 @PostMapping("/checkId")
+
+     public String checkId(@RequestBody User user) {
+        User idCheck = userService.idCheck(user.getUserId());
+        
+        if(idCheck == null) {
+
+           return "idOk";
+        } else {
+           return "idFail";
+
+        }
+     }
 }

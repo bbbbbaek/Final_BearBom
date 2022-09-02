@@ -9,6 +9,8 @@ import React, { useState } from "react";
 import CheckCircle from "@mui/icons-material/CheckCircle";
 import "../../css/courseRegistration.css";
 import SelectButton from "./RegistrationComponents/SelectButton";
+import KakaoAPI from "./RegistrationComponents/KakaoAPI";
+import KakaoAPI2 from "./RegistrationComponents/KakaoAPI2";
 
 const StepTwo_6 = () => {
   const [location, setLocation] = useState("");
@@ -78,17 +80,9 @@ const StepTwo_6 = () => {
               </div>
               <div className="kakaoPostCode">
                 <>{/* 카카오 주소, 지도 API 시작 */}
-                <input type="text" id="sample3_postcode" placeholder="우편번호"/>
-                <input type="button" onclick="sample3_execDaumPostcode()" value="우편번호 찾기"/><br/>
-                <input type="text" id="sample3_address" placeholder="주소"/><br/>
-                <input type="text" id="sample3_detailAddress" placeholder="상세주소"/>
-                <input type="text" id="sample3_extraAddress" placeholder="참고항목"/>
 
-                <div id="wrap">
-                <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" onclick="foldDaumPostcode()" alt="접기 버튼"/>
-                </div>
-                
-                
+                  <KakaoAPI/>
+                  <KakaoAPI2/>{/*지도 표출 안됨 수정중*/}
                 </>{/* 카카오 주소, 지도 API 종료 */}
               </div>
             </div>
