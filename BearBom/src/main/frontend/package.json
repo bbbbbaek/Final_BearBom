@@ -26,6 +26,7 @@
     "react-anchor-link-smooth-scroll": "^1.0.12",
     "react-bootstrap": "^2.5.0",
     "react-calendar": "^3.7.0",
+    "react-csv": "^2.2.2",
     "react-date-range": "^1.4.0",
     "react-datepicker": "^4.8.0",
     "react-daum-postcode": "^3.1.1",
@@ -51,7 +52,8 @@
     "workbox-range-requests": "^6.5.4",
     "workbox-routing": "^6.5.4",
     "workbox-strategies": "^6.5.4",
-    "workbox-streams": "^6.5.4"
+    "workbox-streams": "^6.5.4",
+    "zustand": "^4.1.1"
   },
   "proxy": "http://localhost:8080",
   "scripts": {
