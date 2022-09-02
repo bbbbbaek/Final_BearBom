@@ -23,10 +23,10 @@ public class UserServiceimpl implements UserService {
 			throw new RuntimeException("Invalid Argument");
 		}
 		
-		//userid 중복 체크
-		if(userRepository.existsByUserId(user.getUserId())) {
-			throw new RuntimeException("userid already exists");
-		}
+//		//userid 중복 체크
+//		if(userRepository.existsByUserId(user.getUserId())) {
+//			throw new RuntimeException("userid already exists");
+//		}
 		
 		return userRepository.save(user);
 	}
@@ -46,6 +46,17 @@ public class UserServiceimpl implements UserService {
 	
 	public String test() {
 		return "aaa";
+	}
+
+	@Override
+	public User idCheck(String userId) {
+		User checkIdUser = userRepository.findByUserId(userId);
+		if(checkIdUser != null) {
+			return checkIdUser;
+		} else {
+			return null;
+		}
+	
 	}
 }
 
