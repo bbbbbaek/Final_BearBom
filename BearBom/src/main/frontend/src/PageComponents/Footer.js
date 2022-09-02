@@ -1,13 +1,24 @@
 import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import "../css/footer.css";
+import logo from "../images/logo.png";
 
 const Footer = () => {
   return (
     <>
       <div className="footer">
         <div className="footer-main">
-          <div className="footer-logo"></div>
+          <div
+            className="footer-logo"
+            style={{
+              backgroundImage: `url(${logo})`,
+              // backgroundSize: "90%",
+              // backgroundRepeat: "no-repeat",
+              // backgroundPosition: "center",
+            }}
+          >
+            {/* <img src={logo} alt="logo" style={{ backgroundSize: "cover" }} /> */}
+          </div>
           <div className="footer-content">
             <h5>베어봄컴퍼니(주)</h5>
             <hr />

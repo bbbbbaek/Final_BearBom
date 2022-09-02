@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Accordion from "react-bootstrap/Accordion";
-import ClassSearch from "./ClassSearch";
+import ClassView from "./ClassView";
 import Main from "./Main";
+import SalesView from "./SalesView";
 import "../../css/admin.css";
-import SalesSearch from "../SalesSearch";
+import SideBarQuickView from "./SideBarQuickView";
 
 const Admin = () => {
   // 아래로 너무 길어지니깐 menu state에 데이터 담고 map함수 써서 간결하게 만들자
@@ -26,7 +27,8 @@ const Admin = () => {
       <hr /> */}
       <div className="page-wrapper">
         <div className="sidebar-wrapper">
-          <div className="sidebar-quickview"></div>
+          <h3>관리자 페이지</h3>
+          <SideBarQuickView />
           <Accordion>
             <Accordion.Item eventKey="0">
               <Accordion.Header>매출 관리</Accordion.Header>
@@ -137,7 +139,7 @@ const Admin = () => {
           </Accordion>
         </div>
         <div className="content-wrapper">
-          {[<Main />, <SalesSearch />][tab]}
+          {[<Main />, <SalesView />, <ClassView />][tab]}
         </div>
       </div>
     </>
