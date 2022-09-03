@@ -33,7 +33,14 @@ const Join = () => {
   const [userAddressDef, setUserAddressDef] = useState("");
   const [usingTerm, setUsingTerm] = useState(false);
   const [infoTerm, setInfoTerm] = useState(false);
+<<<<<<< HEAD
   const [fullAddresss, setFullAddresss] = useState("");
+=======
+
+  // 이메일 체크
+  const [userEmailCheck, setUserEmailCheck] = useState("");
+  const [test, setTest] = useState("");
+>>>>>>> 69f03bac91128a36122b24ee0ec084861890fdf3
 
   //오류메시지 상태 저장
   const [userIdMessage, setUserIdMessage] = useState("");
@@ -45,6 +52,8 @@ const Join = () => {
   const [userTelMessage, setUserTelMessage] = useState("");
   const [usingTermMessage, setUsingTermMessage] = useState("");
   const [infoTermMessage, setInfoTermMessage] = useState("");
+  const [userEmailCheckMessage, setUserEmailCheckMessage] = useState("");
+
   //유효성 검사
   const [isUserId, setIsUserId] = useState(false);
   const [isUserPw, setIsUserPw] = useState(false);
@@ -55,6 +64,19 @@ const Join = () => {
   const [isUserTel, setIsUserTel] = useState(false);
   const [isUsingTerm, setIsUsingTerm] = useState(false);
   const [isInfoTerm, setIsInfoTerm] = useState(false);
+  const [isIdCheckError, setIsIdCheckError] = useState(false);
+  const [isUserEmailCheckError, setIsUserEmailCheckError] = useState(false);
+
+  const [userInfo, setUserInfo] = useState({});
+
+  const addUserInfo = (e) => {
+    const newUserInfo = {
+      ...userInfo,
+      [e.target.name]: e.target.value,
+    };
+
+    setUserInfo(newUserInfo);
+  };
 
   const [userInfo, setUserInfo] = useState({});
 
@@ -191,6 +213,21 @@ const Join = () => {
     addUserInfo(e);
   });
 
+  //이메일 인증
+  const onChangeEmailCheck = (e) => {
+    const emailCheckCurrent = e.target.value;
+    setUserEmailCheck(emailCheckCurrent);
+
+    if (test === e.target.value) {
+      setUserEmailCheckMessage("성공");
+      setIsUserEmailCheckError(true);
+    } else {
+      setUserEmailCheckMessage("실패");
+      setIsUserEmailCheckError(false);
+    }
+    console.log(userEmailCheck);
+  };
+
   //전화번호
   const onChangeUserTel = useCallback((e) => {
     const userTelRegex = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}/;
@@ -208,25 +245,37 @@ const Join = () => {
   });
 
   //우편번호
-  const onChangeZipCode = useCallback((e) => {
+  const onChangeZipCode = (e) => {
     const zipCodeCurrent = e.target.value;
     setZipCode(zipCodeCurrent);
     addUserInfo(e);
+<<<<<<< HEAD
   });
+=======
+  };
+>>>>>>> 69f03bac91128a36122b24ee0ec084861890fdf3
 
   //주소
-  const onChangeFullAddress = useCallback((e) => {
+  const onChangeFullAddress = (e) => {
     const fullAddressCurrent = e.target.value;
     setFullAddress(fullAddressCurrent);
     addUserInfo(e);
+<<<<<<< HEAD
   });
+=======
+  };
+>>>>>>> 69f03bac91128a36122b24ee0ec084861890fdf3
 
   //상세주소
-  const onChangeUserAddressDef = useCallback((e) => {
+  const onChangeUserAddressDef = (e) => {
     const userAddressDefCurrent = e.target.value;
     setUserAddressDef(userAddressDefCurrent);
     addUserInfo(e);
+<<<<<<< HEAD
   });
+=======
+  };
+>>>>>>> 69f03bac91128a36122b24ee0ec084861890fdf3
 
   //이용약관
   const onChangeUsingTerm = (e) => {
@@ -289,8 +338,14 @@ const Join = () => {
   const onSubmitJoinHandler = (e) => {
     console.log({
       ...userInfo,
+<<<<<<< HEAD
       // userZipcode: zonecodee,
       // userAddress: fullAddresss,
+=======
+      userZipcode: zipCode,
+      userAddress: fullAddress,
+      userAddressDef: userAddressDef,
+>>>>>>> 69f03bac91128a36122b24ee0ec084861890fdf3
     });
     e.preventDefault();
     // e.preventDefault();
@@ -338,16 +393,57 @@ const Join = () => {
       data: { userId: userId },
     }).then((response) => {
       console.log(response);
+<<<<<<< HEAD
       if (response.data === "idFail") {
         alert("이미 사용중인 아이디 입니다.");
         // setCheckIdError(true);
       } else {
         alert("사용 가능한 아이디 입니다.");
         // setCheckIdError(false);
+=======
+      if (response.data === 1) {
+        alert("사용 불가능한 아이디입니다.");
+        // setCheckIdError(true);
+        setIsIdCheckError(false);
+      } else {
+        alert("사용 가능한 아이디 입니다.");
+        // setCheckIdError(false);
+        setIsIdCheckError(true);
+>>>>>>> 69f03bac91128a36122b24ee0ec084861890fdf3
       }
     });
   };
 
+<<<<<<< HEAD
+=======
+  const emailConfirm = () => {
+    axios({
+      method: "post",
+      url: API_BASE_URL + "/api/user/emailConfirm",
+      data: { userEmail: userEmail },
+    }).then((response) => {
+      console.log(response);
+      // setUserEmailCheck(response.data);
+      console.log(response.data);
+      setTest(response.data);
+      // setUserEmailCheck(response.data);
+      // console.log(test);
+      // console.log(userEmailCheck);
+      // return response;
+    });
+    // .then((response) => {
+    //   console.log(test);
+    //   if (test === userEmailCheck) {
+    //     setUserEmailCheckMessage("성공");
+    //     setIsUserEmailCheckError(true);
+    //   } else {
+    //     setUserEmailCheckMessage("실패");
+    //     setIsUserEmailCheckError(false);
+    //   }
+    // });
+  };
+
+>>>>>>> 69f03bac91128a36122b24ee0ec084861890fdf3
   return (
     <>
       {/* <ThemeProvider theme={theme}> */}
@@ -400,6 +496,10 @@ const Join = () => {
                     onClick={idCheck}
                     fullWidth
                     sx={{ mt: 1 }}
+<<<<<<< HEAD
+=======
+                    disabled={!isUserId}
+>>>>>>> 69f03bac91128a36122b24ee0ec084861890fdf3
                   >
                     중복 확인
                   </Button>
@@ -428,20 +528,37 @@ const Join = () => {
                   </div>
                 </Grid>
                 <Grid item xs={4}>
-                  <Button fullWidth sx={{ mt: 1 }}>
+                  <Button
+                    type="button"
+                    onClick={emailConfirm}
+                    fullWidth
+                    sx={{ mt: 1 }}
+                    disabled={!isUserEmail}
+                  >
                     이메일 인증
                   </Button>
                 </Grid>
-                {/* <Grid item xs={12}>
+                <Grid item xs={12}>
                   <div className="formbox">
                     <TextField
                       fullWidth
                       id="userEmailCheck"
                       label="이메일 코드 인증"
                       name="userEmailCheck"
+                      value={userEmailCheck}
+                      onChange={onChangeEmailCheck}
                     />
+                    {userEmailCheck.length > 0 && (
+                      <span
+                        className={`message ${
+                          isUserEmailCheckError ? "success" : "error"
+                        }`}
+                      >
+                        {userEmailCheckMessage}
+                      </span>
+                    )}
                   </div>
-                </Grid> */}
+                </Grid>
                 <Grid item xs={12}>
                   <div className="formbox">
                     <TextField
@@ -626,7 +743,9 @@ const Join = () => {
                     isUserNm &&
                     isUserTel &&
                     isUsingTerm &&
-                    isInfoTerm
+                    isInfoTerm &&
+                    isIdCheckError &&
+                    isUserEmailCheckError
                   )
                 }
               >

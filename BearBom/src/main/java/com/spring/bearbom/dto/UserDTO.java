@@ -13,7 +13,7 @@ public class UserDTO {
 	private String userAddress;
 	private String userAddressDef;
 
-	private int userZipcode;
+	private String userZipcode;
 	private String userEmail;
 	private char userYn;
 
