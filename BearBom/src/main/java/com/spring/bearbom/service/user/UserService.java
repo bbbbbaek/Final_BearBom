@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface UserService {
 	User join(User user);
 	
-	User login(String userid, String userpw);
+	User login(String userId, String userPw);
 
 	User idCheck(String userId);
 

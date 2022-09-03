@@ -5,9 +5,52 @@ import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/header.css";
 import logoImg from "../images/logo.png";
+import { useState, useEffect, useCallback } from "react";
 
 const Header = () => {
   const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   if (localStorage.getItem("ACCESS_TOKEN") === null) {
+  //     navigate("/");
+  //   }
+  // }, []);
+
+  //isLogin은 localStorage에 ACCESS_TOKEN이라는 값을 저장하고 있는지를 검사하는 함수
+  const isLogin = !!localStorage.getItem("ACCESS_TOKEN");
+  const [loginText, setLoginText] = useState("");
+  const [logoutText, setLogoutText] = useState("");
+  const test = localStorage.getItem("USER_ID");
+  console.log(!!localStorage.getItem("ACCESS_TOKEN"));
+  console.log(isLogin);
+
+  // const test2 = localStorage.removeItem("USER_ID");
+
+  const onClickIsLogin = (e) => {
+    e.preventDefault();
+    if (!isLogin) {
+      // setLoginText("로그인");
+      console.log(loginText);
+      // window.location.href("/loginTest");
+      navigate("/loginTest");
+    } else {
+      // setLoginText(localStorage.getItem("USER_ID"));
+      console.log(loginText);
+      // window.location.href("/mypage");
+      navigate("/mypage");
+    }
+    console.log(loginText);
+  };
+
+  const onClicklogOut = (e) => {
+    if (!isLogin) {
+      navigate("/joinTest");
+    } else {
+      localStorage.removeItem("USER_ID");
+      localStorage.removeItem("ACCESS_TOKEN");
+      navigate("/");
+    }
+  };
 
   return (
     <>
@@ -62,26 +105,47 @@ const Header = () => {
                 style={{ display: "flex", justifyContent: "flex-end" }}
               >
                 <div style={{ width: "50px" }}></div>
-                <Nav.Link
+                {/* <Nav.Link
                   onClick={() => {
                     navigate("/login");
                   }}
                 >
                   로그인
-                </Nav.Link>
+                </Nav.Link> */}
                 <Nav.Link
+                  // onClick={() => {
+
+                  //   navigate("/loginTest");
+                  // }}
+                  onClick={onClickIsLogin}
+                  // onChange={onChangeIsLogin}
+                >
+                  {isLogin ? <sapn>{test}</sapn> : <span>로그인</span>}
+                </Nav.Link>
+                {/* <Nav.Link
+                  onClick={() => {
+                    navigate("/loginTest");
+                  }}
+                >
+                  로그인2
+                </Nav.Link> */}
+                {/* <Nav.Link
                   onClick={() => {
                     navigate("/join");
                   }}
                 >
                   회원가입
-                </Nav.Link>
-                <Nav.Link
+                </Nav.Link> */}
+                {/** */}
+                {/* <Nav.Link
                   onClick={() => {
                     navigate("/joinTest");
                   }}
                 >
                   회원가입2
+                </Nav.Link> */}
+                <Nav.Link onClick={onClicklogOut}>
+                  {isLogin ? <span>로그아웃</span> : <span>회원가입</span>}
                 </Nav.Link>
               </div>
             </Nav>

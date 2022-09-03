@@ -20,6 +20,7 @@ import Detail from "./PageComponents/Detail/Detail";
 import Top from "./ModuleComponents/Top";
 import Chatbot from "./ModuleComponents/Chatbot";
 import JoinTest from "./PageComponents/JoinComponents/JoinTest";
+import LoginTest from "./PageComponents/JoinComponents/LoginTest";
 import Saw from "./PageComponents/Saw";
 import Admin from "./PageComponents/AdminPage/Admin";
 import Page404 from "./PageComponents/Page404";
@@ -38,6 +39,7 @@ function App() {
           <Route path="/helpdesk" element={<Helpdesk />} />
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/loginTest" element={<LoginTest />} />
           <Route path="/join" element={<Join />} />
           <Route path="/joinTest" element={<JoinTest />} />
           <Route path="/mypage" element={<Mypage />} />
