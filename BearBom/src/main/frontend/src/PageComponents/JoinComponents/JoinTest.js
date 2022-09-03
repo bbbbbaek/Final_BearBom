@@ -33,6 +33,8 @@ const Join = () => {
   const [userAddressDef, setUserAddressDef] = useState("");
   const [usingTerm, setUsingTerm] = useState(false);
   const [infoTerm, setInfoTerm] = useState(false);
+  const [fullAddresss, setFullAddresss] = useState("");
+
   //오류메시지 상태 저장
   const [userIdMessage, setUserIdMessage] = useState("");
   const [userPwMessage, setUserPwMessage] = useState("");
@@ -53,6 +55,17 @@ const Join = () => {
   const [isUserTel, setIsUserTel] = useState(false);
   const [isUsingTerm, setIsUsingTerm] = useState(false);
   const [isInfoTerm, setIsInfoTerm] = useState(false);
+
+  const [userInfo, setUserInfo] = useState({});
+
+  const addUserInfo = (e) => {
+    const newUserInfo = {
+      ...userInfo,
+      [e.target.name]: e.target.value,
+    };
+
+    setUserInfo(newUserInfo);
+  };
 
   //우편번호 및 주소 조회(다음 우편번호 검색 서비스 사용)
   const open = useDaumPostcodePopup(
@@ -95,6 +108,7 @@ const Join = () => {
     } else {
       setUserIdMessage("올바른 이름 형식입니다.");
       setIsUserId(true);
+      addUserInfo(e);
     }
   }, []);
 
@@ -111,6 +125,7 @@ const Join = () => {
     } else {
       setUserEmailMessage("올바른 이메일 형식이에요 : )");
       setIsUserEmail(true);
+      addUserInfo(e);
     }
   }, []);
 
@@ -129,6 +144,7 @@ const Join = () => {
     } else {
       setUserPwMessage("올바른 비밀번호 입니다.");
       setIsUserPw(true);
+      addUserInfo(e);
     }
   }, []);
 
@@ -144,6 +160,7 @@ const Join = () => {
       } else {
         setUserRePwMessage("비밀번호가 일치하지 않습니다.");
         setIsUserRePw(false);
+        addUserInfo(e);
       }
     },
     [userPw]
@@ -163,6 +180,7 @@ const Join = () => {
     } else {
       setUserNmMessage("올바른 이름입니다.");
       setIsUserNm(true);
+      addUserInfo(e);
     }
   });
 
@@ -170,6 +188,7 @@ const Join = () => {
   const onChangeUserNickName = useCallback((e) => {
     const userNickNameCurrent = e.target.value;
     setUserNickName(userNickNameCurrent);
+    addUserInfo(e);
   });
 
   //전화번호
@@ -184,6 +203,7 @@ const Join = () => {
     } else {
       setUserTelMessage("올바른 전화번호입니다.");
       setIsUserTel(true);
+      addUserInfo(e);
     }
   });
 
@@ -191,18 +211,21 @@ const Join = () => {
   const onChangeZipCode = useCallback((e) => {
     const zipCodeCurrent = e.target.value;
     setZipCode(zipCodeCurrent);
+    addUserInfo(e);
   });
 
   //주소
   const onChangeFullAddress = useCallback((e) => {
     const fullAddressCurrent = e.target.value;
     setFullAddress(fullAddressCurrent);
+    addUserInfo(e);
   });
 
   //상세주소
   const onChangeUserAddressDef = useCallback((e) => {
     const userAddressDefCurrent = e.target.value;
     setUserAddressDef(userAddressDefCurrent);
+    addUserInfo(e);
   });
 
   //이용약관
@@ -218,50 +241,113 @@ const Join = () => {
   };
 
   //회원가입 버튼 클릭
-  const onSubmitJoinHandler = (e) => {
-    e.preventDefault();
+  // const onSubmitJoinHandler = (e) => {
+  //   e.preventDefault();
 
-    const data = new FormData(e.target);
-    const userId = data.get("userId");
-    const userPw = data.get("userPw");
-    const userEmail = data.get("userEmail");
-    const userNm = data.get("userNm");
-    const userNickName = data.get("userNickName");
-    const userTel = data.get("userTel");
-    const userZipcode = data.get("userZipcode");
-    const userAddress = data.get("userAddress");
-    const userAddressDef = data.get("userAddressDef");
-    // multipart/form-data 이미지 헤더
-    try {
-      axios({
-        method: "post",
-        url: API_BASE_URL + "/api/user/joinTest",
-        data: {
-          userId: userId,
-          userPw: userPw,
-          userEmail: userEmail,
-          userNm: userNm,
-          userNickName: userNickName,
-          userTel: userTel,
-          userZipcode: userZipcode,
-          userAddress: userAddress,
-          userAddressDef: userAddressDef,
-        },
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => {
-          navigate("/login");
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    } catch (err) {
-      console.error(err);
-    }
+  //   const data = new FormData(e.target);
+  //   const userId = data.get("userId");
+  //   const userPw = data.get("userPw");
+  //   const userEmail = data.get("userEmail");
+  //   const userNm = data.get("userNm");
+  //   const userNickName = data.get("userNickName");
+  //   const userTel = data.get("userTel");
+  //   const userZipcode = data.get("userZipcode");
+  //   const userAddress = data.get("userAddress");
+  //   const userAddressDef = data.get("userAddressDef");
+  //   // multipart/form-data 이미지 헤더
+  //   try {
+  //     axios({
+  //       method: "post",
+  //       url: API_BASE_URL + "/api/user/joinTest",
+  //       data: {
+  //         userId: userId,
+  //         userPw: userPw,
+  //         userEmail: userEmail,
+  //         userNm: userNm,
+  //         userNickName: userNickName,
+  //         userTel: userTel,
+  //         userZipcode: userZipcode,
+  //         userAddress: userAddress,
+  //         userAddressDef: userAddressDef,
+  //       },
+  //       headers: {
+  //         Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+  //         "Content-Type": "application/json",
+  //       },
+  //     })
+  //       .then((response) => {
+  //         navigate("/login");
+  //       })
+  //       .catch((e) => {
+  //         console.log(e);
+  //       });
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
+
+  const onSubmitJoinHandler = (e) => {
+    console.log({
+      ...userInfo,
+      // userZipcode: zonecodee,
+      // userAddress: fullAddresss,
+    });
+    e.preventDefault();
+    // e.preventDefault();
+    // if (
+    //   userIdError &&
+    //   userPwError &&
+    //   userRePwError &&
+    //   userEmailError &&
+    //   userNmError &&
+    //   userNickNameError &&
+    //   userTelError &&
+    //   checkIdError
+    // ) {
+    //   alert("양식에 맞게 작성해주세요.");
+    //   return;
+    // } else {
+    axios({
+      method: "post",
+      url: API_BASE_URL + "/api/user/join",
+
+      // headers: {
+      //   Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+      // },
+
+      data: {
+        ...userInfo,
+        userId: userId,
+        userEmail: userEmail,
+        userZipcode: zipCode,
+        userAddress: fullAddress,
+        userAddressDef: userAddressDef,
+      },
+      // data: { ...userInfo, userZipCode: zonecodee, userAddress: fullAddresss },
+    }).then((response) => {
+      console.log(response);
+      // window.location.href = "/login";
+      navigate("/login");
+    });
   };
+
+  const idCheck = () => {
+    axios({
+      method: "post",
+      url: API_BASE_URL + "/api/user/checkId",
+      data: { userId: userId },
+    }).then((response) => {
+      console.log(response);
+      if (response.data === "idFail") {
+        alert("이미 사용중인 아이디 입니다.");
+        // setCheckIdError(true);
+      } else {
+        alert("사용 가능한 아이디 입니다.");
+        // setCheckIdError(false);
+      }
+    });
+  };
+
   return (
     <>
       {/* <ThemeProvider theme={theme}> */}
@@ -309,7 +395,12 @@ const Join = () => {
                   </div>
                 </Grid>
                 <Grid item xs={4}>
-                  <Button fullWidth sx={{ mt: 1 }}>
+                  <Button
+                    type="button"
+                    onClick={idCheck}
+                    fullWidth
+                    sx={{ mt: 1 }}
+                  >
                     중복 확인
                   </Button>
                 </Grid>
