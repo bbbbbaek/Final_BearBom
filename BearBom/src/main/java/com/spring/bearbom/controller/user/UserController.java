@@ -87,12 +87,12 @@ public class UserController {
 			//발행된 토큰 DTO에 담아서 리턴
 			userDTO.setToken(token);
 
+			log.info("userDTO: {}", userDTO);
+
 			return ResponseEntity.ok().body(userDTO);
 		} else {
 			ResponseDTO<UserDTO> response = new ResponseDTO<>();
-
 			response.setError("login failed");
-
 			return ResponseEntity.badRequest().body(response);
 		}
 	}

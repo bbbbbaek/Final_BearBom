@@ -485,6 +485,7 @@ const Join = () => {
                     onClick={emailConfirm}
                     fullWidth
                     sx={{ mt: 1 }}
+                    disabled={!isUserEmail}
                   >
                     이메일 인증
                   </Button>
