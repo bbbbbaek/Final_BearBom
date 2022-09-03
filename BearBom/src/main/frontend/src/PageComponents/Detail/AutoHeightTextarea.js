@@ -1,7 +1,7 @@
 import "../../css/AutoHeightTextarea.css";
 import { useState } from "react";
 
-const AutoHeightTextarea = () => {
+const AutoHeightTextarea = ({ courserContent }) => {
   // 사용자 입력 저장
   const [checkItemContent, setCheckItemContent] = useState("");
   // 줄바꿈 위치를 저장하는 Dictionary
@@ -49,7 +49,7 @@ const AutoHeightTextarea = () => {
         <textarea
           className="review-textarea"
           type="text"
-          value={checkItemContent}
+          value={courserContent}
           placeholder={""}
           onChange={checkItemChangeHandler}
           onKeyDown={checkItemEnterHandler}

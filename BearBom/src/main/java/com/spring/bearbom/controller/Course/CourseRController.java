@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.bearbom.dto.ResponseDTO;
+import com.spring.bearbom.entity.Course;
 import com.spring.bearbom.entity.Courser;
 import com.spring.bearbom.jwt.JwtTokenProvider;
 import com.spring.bearbom.service.courseR.CourseRService;
@@ -24,8 +25,10 @@ public class CourseRController {
     private JwtTokenProvider jwtTokenProvider;
 
     @PostMapping("/getReviewList")
-    public ResponseDTO<Courser> getReviewList(@RequestBody Courser courser) {
-    	System.out.println(courser.getCourse().getCourseIdx());
+    public ResponseDTO<Courser> getReviewList(@RequestBody Course course) {
+    	System.out.println(course.getCourseIdx());
+    	Courser courser = new Courser();
+    	courser.setCourse(course);
     	List<Courser> reviewList = courseRService.Review(courser);
     	ResponseDTO<Courser> response = new ResponseDTO<Courser>();
     	response.setData(reviewList);
