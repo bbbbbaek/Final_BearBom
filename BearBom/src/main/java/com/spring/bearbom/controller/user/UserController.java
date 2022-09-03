@@ -4,8 +4,13 @@ import com.spring.bearbom.dto.ResponseDTO;
 import com.spring.bearbom.dto.UserDTO;
 import com.spring.bearbom.entity.User;
 import com.spring.bearbom.jwt.JwtTokenProvider;
+import com.spring.bearbom.service.email.EmailService;
 import com.spring.bearbom.service.user.UserService;
+import lombok.extern.slf4j.Slf4j;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/user")
+@Slf4j
 public class UserController {
 	@Autowired
 	private UserService userService;
@@ -25,6 +31,8 @@ public class UserController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
+	@Autowired
+	private EmailService emailService;
 	@PostMapping("/join")
 	public ResponseEntity<?> join(@RequestBody User user) {
 		try {
@@ -105,7 +113,38 @@ public class UserController {
 	public int checkId(@RequestBody User user) {
 		int result = userService.idDuplicate(user.getUserId());
 		System.out.println(result);
+		log.info("result: {}", result);
+
 		return result;
 	}
+
+	@PostMapping("/emailConfirm")
+//	@ApiOperation(value = "회원 가입시 이메인 인증", notes = "기존사용하고 있는 이메일을 통해 인증")
+//	@ApiResponses({
+//			@ApiResponse(code = 200, message = "성공"),
+//			@ApiResponse(code = 401, message = "인증 실패"),
+//			@ApiResponse(code = 404, message = "사용자 없음"),
+//			@ApiResponse(code = 500, message = "서버 오류")
+//	})
+	public ResponseEntity<?> emailConfirm(@RequestBody  String data) throws Exception {
+
+		System.out.println("/////////" +data);
+		JSONParser parser = new JSONParser();
+		Object obj = parser.parse(data);
+		JSONObject jsonObj = (JSONObject) obj;
+
+		String email = (String) jsonObj.get("userEmail");
+
+		log.info("이메일 파싱 : {} ",email);
+
+//		JSONObject parser = new JSONObject(data);
+//		String      email = parser.getString("email");
+
+		String confirm = emailService.sendSimpleMessage(email);
+//		log.info("confirm: {}", confirm);
+		return ResponseEntity.ok().body(confirm);
+	}
+
+
 
 }

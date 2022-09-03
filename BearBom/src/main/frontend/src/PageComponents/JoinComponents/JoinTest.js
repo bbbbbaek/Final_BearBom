@@ -34,6 +34,10 @@ const Join = () => {
   const [usingTerm, setUsingTerm] = useState(false);
   const [infoTerm, setInfoTerm] = useState(false);
 
+  // 이메일 체크
+  const [userEmailCheck, setUserEmailCheck] = useState("");
+  const [test, setTest] = useState("");
+
   //오류메시지 상태 저장
   const [userIdMessage, setUserIdMessage] = useState("");
   const [userPwMessage, setUserPwMessage] = useState("");
@@ -44,6 +48,8 @@ const Join = () => {
   const [userTelMessage, setUserTelMessage] = useState("");
   const [usingTermMessage, setUsingTermMessage] = useState("");
   const [infoTermMessage, setInfoTermMessage] = useState("");
+  const [userEmailCheckMessage, setUserEmailCheckMessage] = useState("");
+
   //유효성 검사
   const [isUserId, setIsUserId] = useState(false);
   const [isUserPw, setIsUserPw] = useState(false);
@@ -55,6 +61,7 @@ const Join = () => {
   const [isUsingTerm, setIsUsingTerm] = useState(false);
   const [isInfoTerm, setIsInfoTerm] = useState(false);
   const [isIdCheckError, setIsIdCheckError] = useState(false);
+  const [isUserEmailCheckError, setIsUserEmailCheckError] = useState(false);
 
   const [userInfo, setUserInfo] = useState({});
 
@@ -189,6 +196,21 @@ const Join = () => {
     setUserNickName(userNickNameCurrent);
     addUserInfo(e);
   });
+
+  //이메일 인증
+  const onChangeEmailCheck = (e) => {
+    const emailCheckCurrent = e.target.value;
+    setUserEmailCheck(emailCheckCurrent);
+
+    if (test === e.target.value) {
+      setUserEmailCheckMessage("성공");
+      setIsUserEmailCheckError(true);
+    } else {
+      setUserEmailCheckMessage("실패");
+      setIsUserEmailCheckError(false);
+    }
+    console.log(userEmailCheck);
+  };
 
   //전화번호
   const onChangeUserTel = useCallback((e) => {
@@ -350,6 +372,33 @@ const Join = () => {
     });
   };
 
+  const emailConfirm = () => {
+    axios({
+      method: "post",
+      url: API_BASE_URL + "/api/user/emailConfirm",
+      data: { userEmail: userEmail },
+    }).then((response) => {
+      console.log(response);
+      // setUserEmailCheck(response.data);
+      console.log(response.data);
+      setTest(response.data);
+      // setUserEmailCheck(response.data);
+      // console.log(test);
+      // console.log(userEmailCheck);
+      // return response;
+    });
+    // .then((response) => {
+    //   console.log(test);
+    //   if (test === userEmailCheck) {
+    //     setUserEmailCheckMessage("성공");
+    //     setIsUserEmailCheckError(true);
+    //   } else {
+    //     setUserEmailCheckMessage("실패");
+    //     setIsUserEmailCheckError(false);
+    //   }
+    // });
+  };
+
   return (
     <>
       {/* <ThemeProvider theme={theme}> */}
@@ -431,20 +480,36 @@ const Join = () => {
                   </div>
                 </Grid>
                 <Grid item xs={4}>
-                  <Button fullWidth sx={{ mt: 1 }}>
+                  <Button
+                    type="button"
+                    onClick={emailConfirm}
+                    fullWidth
+                    sx={{ mt: 1 }}
+                  >
                     이메일 인증
                   </Button>
                 </Grid>
-                {/* <Grid item xs={12}>
+                <Grid item xs={12}>
                   <div className="formbox">
                     <TextField
                       fullWidth
                       id="userEmailCheck"
                       label="이메일 코드 인증"
                       name="userEmailCheck"
+                      value={userEmailCheck}
+                      onChange={onChangeEmailCheck}
                     />
+                    {userEmailCheck.length > 0 && (
+                      <span
+                        className={`message ${
+                          isUserEmailCheckError ? "success" : "error"
+                        }`}
+                      >
+                        {userEmailCheckMessage}
+                      </span>
+                    )}
                   </div>
-                </Grid> */}
+                </Grid>
                 <Grid item xs={12}>
                   <div className="formbox">
                     <TextField
@@ -630,7 +695,8 @@ const Join = () => {
                     isUserTel &&
                     isUsingTerm &&
                     isInfoTerm &&
-                    isIdCheckError
+                    isIdCheckError &&
+                    isUserEmailCheckError
                   )
                 }
               >
