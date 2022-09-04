@@ -42,7 +42,7 @@ public class User {
 	private String userAddressDef;
 	
 	@Column(nullable = false)
-	private int userZipcode;
+	private String userZipcode;
 	
 	@Column(nullable = false)
 	private String userEmail;
