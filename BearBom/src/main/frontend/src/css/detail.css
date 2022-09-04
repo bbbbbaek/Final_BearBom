@@ -33,7 +33,7 @@ body {
   height: 100%;
 }
 .main-cal {
-  float: left;
+  float: right;
   width: 34%;
   height: 100%;
   position: sticky;

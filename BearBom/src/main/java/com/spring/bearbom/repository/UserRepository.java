@@ -5,7 +5,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 
 public interface UserRepository extends JpaRepository<User, String> {
-	Boolean existsByUserId(String userId);
+
+	/* 유효성 검사 - 중복 체크
+	 * 중복 : true
+	 * 중복이 아닌 경우 : false
+	 */
+	boolean existsByUserId(String userId);
 	
 	User findByUserId(String userId);
 }
