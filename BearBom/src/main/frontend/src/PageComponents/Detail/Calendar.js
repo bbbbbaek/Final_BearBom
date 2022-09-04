@@ -41,6 +41,7 @@ const Calendar2 = (props) => {
               selectsStart
               startDate={startDate}
               endDate={endDate}
+              readOnly
             />
           </div>
           <div className="end-date">
@@ -51,6 +52,7 @@ const Calendar2 = (props) => {
               startDate={startDate}
               endDate={endDate}
               minDate={startDate}
+              readOnly
             />
           </div>
         </div>

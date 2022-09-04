@@ -3,7 +3,7 @@ import HoverRating from "./ReviewFeedback";
 import AutoHeightTextarea from "./AutoHeightTextarea";
 import React, { useState, useEffect } from "react";
 //import * as React from 'react';
-import axios from "axios";
+
 
 function Review({ review }) {
   //모달 창 띄우기
