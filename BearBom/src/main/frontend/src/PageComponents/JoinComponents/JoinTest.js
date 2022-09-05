@@ -33,14 +33,10 @@ const Join = () => {
   const [userAddressDef, setUserAddressDef] = useState("");
   const [usingTerm, setUsingTerm] = useState(false);
   const [infoTerm, setInfoTerm] = useState(false);
-<<<<<<< HEAD
-  const [fullAddresss, setFullAddresss] = useState("");
-=======
 
   // 이메일 체크
   const [userEmailCheck, setUserEmailCheck] = useState("");
   const [test, setTest] = useState("");
->>>>>>> 69f03bac91128a36122b24ee0ec084861890fdf3
 
   //오류메시지 상태 저장
   const [userIdMessage, setUserIdMessage] = useState("");
@@ -66,17 +62,6 @@ const Join = () => {
   const [isInfoTerm, setIsInfoTerm] = useState(false);
   const [isIdCheckError, setIsIdCheckError] = useState(false);
   const [isUserEmailCheckError, setIsUserEmailCheckError] = useState(false);
-
-  const [userInfo, setUserInfo] = useState({});
-
-  const addUserInfo = (e) => {
-    const newUserInfo = {
-      ...userInfo,
-      [e.target.name]: e.target.value,
-    };
-
-    setUserInfo(newUserInfo);
-  };
 
   const [userInfo, setUserInfo] = useState({});
 
@@ -249,33 +234,21 @@ const Join = () => {
     const zipCodeCurrent = e.target.value;
     setZipCode(zipCodeCurrent);
     addUserInfo(e);
-<<<<<<< HEAD
-  });
-=======
   };
->>>>>>> 69f03bac91128a36122b24ee0ec084861890fdf3
 
   //주소
   const onChangeFullAddress = (e) => {
     const fullAddressCurrent = e.target.value;
     setFullAddress(fullAddressCurrent);
     addUserInfo(e);
-<<<<<<< HEAD
-  });
-=======
   };
->>>>>>> 69f03bac91128a36122b24ee0ec084861890fdf3
 
   //상세주소
   const onChangeUserAddressDef = (e) => {
     const userAddressDefCurrent = e.target.value;
     setUserAddressDef(userAddressDefCurrent);
     addUserInfo(e);
-<<<<<<< HEAD
-  });
-=======
   };
->>>>>>> 69f03bac91128a36122b24ee0ec084861890fdf3
 
   //이용약관
   const onChangeUsingTerm = (e) => {
@@ -338,14 +311,10 @@ const Join = () => {
   const onSubmitJoinHandler = (e) => {
     console.log({
       ...userInfo,
-<<<<<<< HEAD
-      // userZipcode: zonecodee,
-      // userAddress: fullAddresss,
-=======
+
       userZipcode: zipCode,
       userAddress: fullAddress,
       userAddressDef: userAddressDef,
->>>>>>> 69f03bac91128a36122b24ee0ec084861890fdf3
     });
     e.preventDefault();
     // e.preventDefault();
@@ -393,14 +362,7 @@ const Join = () => {
       data: { userId: userId },
     }).then((response) => {
       console.log(response);
-<<<<<<< HEAD
-      if (response.data === "idFail") {
-        alert("이미 사용중인 아이디 입니다.");
-        // setCheckIdError(true);
-      } else {
-        alert("사용 가능한 아이디 입니다.");
-        // setCheckIdError(false);
-=======
+
       if (response.data === 1) {
         alert("사용 불가능한 아이디입니다.");
         // setCheckIdError(true);
@@ -409,13 +371,10 @@ const Join = () => {
         alert("사용 가능한 아이디 입니다.");
         // setCheckIdError(false);
         setIsIdCheckError(true);
->>>>>>> 69f03bac91128a36122b24ee0ec084861890fdf3
       }
     });
   };
 
-<<<<<<< HEAD
-=======
   const emailConfirm = () => {
     axios({
       method: "post",
@@ -443,7 +402,6 @@ const Join = () => {
     // });
   };
 
->>>>>>> 69f03bac91128a36122b24ee0ec084861890fdf3
   return (
     <>
       {/* <ThemeProvider theme={theme}> */}
@@ -496,10 +454,7 @@ const Join = () => {
                     onClick={idCheck}
                     fullWidth
                     sx={{ mt: 1 }}
-<<<<<<< HEAD
-=======
                     disabled={!isUserId}
->>>>>>> 69f03bac91128a36122b24ee0ec084861890fdf3
                   >
                     중복 확인
                   </Button>

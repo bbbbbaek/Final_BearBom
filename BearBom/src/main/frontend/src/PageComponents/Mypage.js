@@ -6,9 +6,8 @@ import SideBar from "./MyPage/SideBar";
 const Mypage = () => {
   return (
     <>
-<<<<<<< HEAD
       <p>mypage</p>
-=======
+
       <div className="mypage-banner">mypage</div>
       <div style={{ marginLeft: "15%", marginRight: "15%" }}>
         <div className="mypage-quickview-wrapper">
@@ -22,7 +21,6 @@ const Mypage = () => {
           <div className="mypage-content-wrapper">mypage-content-wrapper</div>
         </div>
       </div>
->>>>>>> 867145d (김광민 마이페이지 요소 추가 220904)
     </>
   );
 };
