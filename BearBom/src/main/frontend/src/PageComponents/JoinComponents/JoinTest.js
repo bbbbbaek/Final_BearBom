@@ -167,6 +167,7 @@ const Join = () => {
       } else {
         setUserRePwMessage("비밀번호가 일치하지 않습니다.");
         setIsUserRePw(false);
+        addUserInfo(e);
       }
     },
     [userPw]
@@ -310,6 +311,7 @@ const Join = () => {
   const onSubmitJoinHandler = (e) => {
     console.log({
       ...userInfo,
+
       userZipcode: zipCode,
       userAddress: fullAddress,
       userAddressDef: userAddressDef,
@@ -360,6 +362,7 @@ const Join = () => {
       data: { userId: userId },
     }).then((response) => {
       console.log(response);
+
       if (response.data === 1) {
         alert("사용 불가능한 아이디입니다.");
         // setCheckIdError(true);

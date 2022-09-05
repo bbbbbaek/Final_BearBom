@@ -32,7 +32,7 @@ public class UserController {
 	private PasswordEncoder passwordEncoder;
 
 	@Autowired
-	private EmailService emailService;
+	 EmailService emailService;
 	@PostMapping("/join")
 	public ResponseEntity<?> join(@RequestBody User user) {
 		try {

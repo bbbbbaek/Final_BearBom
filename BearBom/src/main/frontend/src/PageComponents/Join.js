@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
-import "../css/join.css";
+import "../css/join.scss";
 
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -17,8 +17,11 @@ import Container from "@mui/material/Container";
 import PopupPostCode from "./PopupPostCode";
 import { responsesAreSame } from "workbox-broadcast-update";
 import { API_BASE_URL } from "../app-config";
+import { useNavigate } from "react-router-dom";
 
 const Join = () => {
+  const navigate = useNavigate();
+
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
   const [userRePw, setUserRePw] = useState("");
@@ -172,29 +175,6 @@ const Join = () => {
     setIsPopupOpen(false);
   };
 
-  // const onSubmit = (e) => {
-  //   if (validation()) return;
-
-  //   // API Call
-  // };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   const data = new FormData(e.target);
-  //   const userId = data.get("userId");
-  //   const userPw = data.get("userPw");
-
-  //   // Join({ userId: userId, userPw: userPw }).then((response) => {
-  //   //   //회원가입 성공 시 로그인페이지로 이동
-  //   //   window.location.href = "/login";
-  //   // });
-  // };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  // };
-
   const onSubmitHandler = (e) => {
     console.log({
       ...userInfo,
@@ -257,70 +237,12 @@ const Join = () => {
     });
   };
 
-  // // ??
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   axios({
-  //     method: "post",
-  //     url: API_BASE_URL + "/api/user/checkId",
-  //     data: {userId: userId},
-  //   }).then((response) => {
-  //     console.log(response);
-  // if (response.data === 1) {
-  //   alert("already exist");
-  //   setCheckIdError(true);
-  // };
-  //   });
-
-  //   //회원가입 버튼
-  //   const onSubmitHandler = (e) => {
-  //     e.preventDefault();
-
-  //     const data = new FormData(e.target);
-  //     const userId = data.get("userId");
-  //     const userPw = data.get("userPw");
-  //     const userNm = data.get("userNm");
-  //     const userNickName = data.get("userNickName");
-  //     const userTel = data.get("userTel");
-  //     const userEmail = data.get("userEmail");
-  //     const zonecodee = data.get("zonecodee");
-  //     const fullAddresss = data.get("FullAddresss");
-  //     const userAddressDef = data.get("userAddressDef");
-  //     // const userMarketing = data.get("userMarketing");
-
-  //     if (!(userPw && userRePw)) {
-  //       console.log(userPw);
-  //       console.log(userRePw);
-  //       alert("제대로 입력하세요.");
-  //       return;
-  //     } else {
-  //       Join({
-  //         userId: userId,
-  //         userPw: userPw,
-  //         userNm: userNm,
-  //         userNickName: userNickName,
-  //         userTel: userTel,
-  //         userEmail: userEmail,
-  //         // userZip: userZip,
-  //         fullAddresss: fullAddresss,
-  //         userAddressDef: userAddressDef,
-  //         // userMarketing: userMarketing,
-  //       }).then((response) => {
-  //         //회원가입 성공시 로그인 페이지로 이동
-  //         window.location.href = "/login";
-  //       });
-  //     }
-  //  };
-
   return (
     <>
-      {/* <ThemeProvider theme={theme}> */}
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-        {/* <form onSubmit={handleSubmit}> */}
+
         <form onSubmit={onSubmitHandler}>
-          {/* <form noValidate onSubmit={handleSubmit}> */}
           <Box
             sx={{
               marginTop: 8,
@@ -333,34 +255,8 @@ const Join = () => {
             <Typography component="h1" variant="h5">
               회원가입
             </Typography>
-            <Box
-              component="div"
-              noValidate
-              // onSubmit={handleSubmit}
-              sx={{ mt: 3 }}
-            >
+            <Box component="div" noValidate sx={{ mt: 3 }}>
               <Grid container spacing={2}>
-                {/* <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
-              </Grid> */}
                 <Grid item xs={8}>
                   <TextField
                     required
@@ -510,8 +406,6 @@ const Join = () => {
                     name="userAddress"
                     value={fullAddresss}
                     onChange={onFullAddresssHandler}
-                    // value={userAddress}
-                    // onChange={({ target: { value } }) => setUserAddress(value)}
                   />
                 </Grid>{" "}
                 <Grid item xs={12}>
@@ -522,10 +416,6 @@ const Join = () => {
                     name="userAddressDef"
                     onChange={onUserAddressDefHandler}
                     value={userAddressDef}
-                    // value={userAddressDef}
-                    // onChange={({ target: { value } }) =>
-                    //   setUserAddressDef(value)
-                    // }
                   />
                 </Grid>{" "}
                 <Grid item xs={12}>
@@ -560,10 +450,7 @@ const Join = () => {
                 </Grid>
               </Grid>
               <Button
-                // submit은 입력값 그대로 보내기 할 때,
-                // button은 입력값이 경우에 따라 다르게 사용 될 때??
                 type="submit"
-                // type="button"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
@@ -604,19 +491,10 @@ const Join = () => {
                   </a>
                 </div>
               </div>
-              {/* <Grid container justifyContent="flex-end" mb={9}>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid> */}
             </Box>
           </Box>
-          {/* <Copyright sx={{ mt: 5 }} /> */}
         </form>
       </Container>
-      {/* </ThemeProvider> */}
     </>
   );
 };
