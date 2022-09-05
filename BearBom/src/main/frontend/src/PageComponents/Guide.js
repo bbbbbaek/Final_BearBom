@@ -1,14 +1,66 @@
 import { Subtitles } from "@mui/icons-material";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../css/guide.css";
-import onepic from "../images/onepic.jpg";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import guideData from "../ModuleComponents/guideData";
+import { API_BASE_URL } from "../app-config";
+import axios from "axios";
 
-const Guide = () => {
+const Guide = ({ data }) => {
+  // const [state, setState] = useState(guideData);
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const guideDate = new FormData(e.target);
+  //   const guideIdx = guideDate.get("guideIdx");
+  //   const guideContent = guideDate.get("guideContent");
+  //   const guideRegdate = guideDate.get("guideRegdate");
+  //   const guideMdfdate = guideDate.get("guideMdfdate");
+  // };
+
+  // const [guide, setGuide] = useState([]);
+  // useEffect(() => {
+  //   //데이터불러오는 axios
+  //   //setGuide(response.data);
+  //   axios({
+  //     method: "post",
+  //     url: API_BASE_URL + "/api/PageComponents/Guide",
+  //   }).then((response) => {
+  //     console.log(response.data);
+  //     setGuide(response.data);
+  //   });
+  // }, []);
+
+  const [operation, setOperation] = useState([]);
+
+  const [guideTitle, setGuidTitle] = useState("");
+  const [guideContent, setGuideContent] = useState("");
+
+  // let listUrl = "http://localhost:8080/api/guide/getOperationList";
+
+  const list = () => {
+    axios({
+      url: API_BASE_URL + "/api/guide/getOperationList",
+      method: "post",
+      data: { guideContent: guideContent, guideTitle: guideTitle },
+    })
+      .then((response) => {
+        console.log(response.data.data);
+        setOperation(response.data.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  React.useEffect(() => {
+    list();
+  }, []);
+
   return (
     <>
       <div>
@@ -18,13 +70,13 @@ const Guide = () => {
               <div className="jss134">
                 <div className="jss136">
                   <h5 className="jss139">베어봄 GUIDE</h5>
-                  <h5 className="jss139-2" style={{ color: "orange" }}>
+                  <h5 className="jss139-2" style={{ color: "#958a78" }}>
                     일상의 따뜻한 휴식, 그리고 새로운 경험 😎😆🧐
                   </h5>
                   <div className="jss140">"안녕하세요"</div>
                   <div className="jss140">
                     "로컬 크리에이터 중심의 소셜 취미 클래스 플랫폼 &nbsp;
-                    <b style={{ color: "orange" }}>베어봄</b>에 오신것을
+                    <b style={{ color: "#958a78" }}>베어봄</b>에 오신것을
                     환영합니다."
                   </div>
                   <div className="jss138">
@@ -88,26 +140,76 @@ const Guide = () => {
               <div className="jss155">
                 <div className="jss157">
                   <h4 className="jss159">자주 묻는 질문</h4>
-                  <div>
-                    <Accordion>
-                      <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel1a-content"
-                        id="panel1a-header"
-                      >
-                        <Typography sx={{ fontWeight: "bold" }}>
-                          베어봄은 어떤 서비스 인가요?
-                        </Typography>
-                      </AccordionSummary>
-                      <AccordionDetails>
-                        <Typography>
-                          다양한 취미/여가/체험/원데이 클래스들을 찾아 오프라인
-                          클래스에 참석 할 수 있는 서비스 입니다.
-                        </Typography>
-                      </AccordionDetails>
-                    </Accordion>
-                  </div>
-                  <div>
+                  <form>
+                    <div>
+                      {operation.map((a, i) => {
+                        return (
+                          <Accordion>
+                            <AccordionSummary
+                              expandIcon={<ExpandMoreIcon />}
+                              aria-controls="panel1a-content"
+                              id="panel1a-header"
+                            >
+                              <Typography
+                                sx={{ fontWeight: "bold" }}
+                                name="guideTitle"
+                                value={guideTitle}
+                              >
+                                {operation[i].guideTitle}
+                              </Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                              <Typography
+                                name="guideContent"
+                                value={guideContent}
+                              >
+                                {operation[i].guideContent}
+                              </Typography>
+                              {operation[i].guideTitle.includes("환불") ? (
+                                <>
+                                  <p>2. 날짜 별 취소 및 환불 정책</p>
+                                  <table className="table1">
+                                    <tr className="tr1">
+                                      <td className="td1">
+                                        클래스 4일 이전 취소
+                                      </td>
+                                      <td className="td2">100% 환불</td>
+                                    </tr>
+                                    <tr className="tr1">
+                                      <td className="td1">
+                                        클래스 3일 전 취소
+                                      </td>
+                                      <td className="td2">70% 환불</td>
+                                    </tr>
+                                    <tr className="tr1">
+                                      <td className="td1">
+                                        클래스 2일 전 취소
+                                      </td>
+                                      <td className="td2">50% 환불</td>
+                                    </tr>
+                                    <tr className="tr1">
+                                      <td className="td1">
+                                        클래스 하루 전 또는 당일 취소
+                                      </td>
+                                      <td
+                                        className="td2"
+                                        style={{ color: "orange" }}
+                                      >
+                                        환불 불가
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </>
+                              ) : (
+                                ""
+                              )}
+                            </AccordionDetails>
+                          </Accordion>
+                        );
+                      })}
+                    </div>
+                  </form>
+                  {/* <div>
                     <Accordion>
                       <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
@@ -211,14 +313,14 @@ const Guide = () => {
                           문의 주실 수 있습니다.
                         </Typography>
                       </AccordionDetails>
-                    </Accordion>
-                  </div>
+                    </Accordion> */}
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      {/* </div> */}
     </>
   );
 };
