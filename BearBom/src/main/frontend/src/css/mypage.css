@@ -1,15 +1,36 @@
-.easy_login_name {
-    text-align: center;
+.mypage-banner {
+  width: 100%;
+  height: 250px;
+  background-color: aliceblue;
 }
 
-.easy_login{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    grid-template-columns: repeat(3,1fr);
-    margin-bottom: 70px;
+.mypage-quickview-wrapper {
+  /* border: 1px solid #ddddda; */
+  width: 100%;
+  height: 150px;
+  border-radius: 10px;
+  /* background-color: beige; */
 }
 
-.login_etc input {
-    margin: 0px;
+.mypage-quickview-container {
+}
+
+.mypage-container {
+  margin-top: 50px;
+  display: flex;
+  width: 100%;
+  min-height: 800px;
+  background-color: bisque;
+}
+
+.mypage-sidebar-wrapper {
+  width: 20%;
+  height: 500px;
+  background-color: azure;
+}
+
+.mypage-content-wrapper {
+  width: 80%;
+  height: 500px;
+  background-color: antiquewhite;
 }
