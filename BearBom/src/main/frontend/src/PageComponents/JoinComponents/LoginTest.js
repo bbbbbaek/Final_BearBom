@@ -16,6 +16,7 @@ import Container from "@mui/material/Container";
 import axios from "axios";
 import { API_BASE_URL } from "../../app-config";
 import { useNavigate } from "react-router-dom";
+import LoginNaver from "./LoginNaver";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -143,16 +144,7 @@ const Login = () => {
                 ></img>
               </a>
             </div>
-            <div className="naver_login">
-              <a href="https://nid.naver.com/nidlogin.login">
-                <img
-                  src={require("../../img/naver_login.png")}
-                  width="50"
-                  height="50"
-                  alt="naver"
-                ></img>
-              </a>
-            </div>
+            <LoginNaver></LoginNaver>
           </div>
         </form>
       </Container>

@@ -351,7 +351,7 @@ const Join = () => {
     }).then((response) => {
       console.log(response);
       // window.location.href = "/login";
-      navigate("/login");
+      navigate("/loginTest");
     });
   };
 
