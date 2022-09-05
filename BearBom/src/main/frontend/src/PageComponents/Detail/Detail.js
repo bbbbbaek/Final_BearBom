@@ -18,6 +18,7 @@ import Time from "./Detail-Time";
 import Cur from "./Detail-Cur";
 import { API_BASE_URL } from "../../app-config";
 import axios from "axios";
+import OpenModal from "./OpenModal";
 // import MyComponent from "../PageComponents/Calendar";
 
 const Detail = ({ scrollTop }) => {
@@ -67,6 +68,29 @@ const Detail = ({ scrollTop }) => {
   //     console.log(response);
   //     window.location.href = "/login";
   //   });
+
+  const [reviewList, setReviewList] = useState([]);
+
+  let listUrl = "http://localhost:8080/api/course/getReviewList";
+
+  const list = () => {
+    axios({
+      url: listUrl,
+      method: "post",
+      data: { courseIdx: 1 },
+    })
+      .then((response) => {
+        console.log(response.data.data);
+        setReviewList(response.data.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  React.useEffect(() => {
+    list();
+  }, []);
 
   return (
     <>
@@ -163,7 +187,10 @@ const Detail = ({ scrollTop }) => {
             </section>
             <hr />
             <section id="review" className="section-box">
-              <Review />
+              <OpenModal />
+              {reviewList.map((review) => (
+                <Review review={review} />
+              ))}
             </section>
           </div>
           <div className="main-cal">
