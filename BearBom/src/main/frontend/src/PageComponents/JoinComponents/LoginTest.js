@@ -16,7 +16,7 @@ import Container from "@mui/material/Container";
 import axios from "axios";
 import { API_BASE_URL } from "../../app-config";
 import { useNavigate } from "react-router-dom";
-import LoginNaver from "./LoginNaver";
+import LoginKaKao from "./LoginKaKao";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -144,7 +144,7 @@ const Login = () => {
                 ></img>
               </a>
             </div>
-            <LoginNaver></LoginNaver>
+            <LoginKaKao></LoginKaKao>
           </div>
         </form>
       </Container>
