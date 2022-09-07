@@ -1,19 +1,25 @@
 .formbox {
-    position: relative;
-    margin-bottom: 20px;
-    .message {
-      font-weight: 500;
-      font-size: 1rem;
-      line-height: 24px;
-      letter-spacing: -1px;
-      position: absolute;
-      bottom: -30px;
-      left: 10px;
-      &.success {
-        color: green;
-      }
+
+  position: relative;
+  margin-bottom: 20px;
+  .message {
+    font-weight: 500;
+    font-size: 0.88rem;
+    line-height: 24px;
+    letter-spacing: -1px;
+    position: absolute;
+    bottom: -30px;
+    left: 10px;
+    &.success {
+      color: green;
+    }
     &.error {
-        color: #ff2727;
-      }
+      color: #ff2727;
     }
   }
+}
+
+.idSave {
+  margin-left: 16px;
+}
+
