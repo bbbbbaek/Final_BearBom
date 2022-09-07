@@ -1,32 +1,49 @@
 import Modal from "./ReviewModal";
-import HoverRating from "./ReviewFeedback";
+import SubmitRating from "./SubmitRating";
 import AutoHeightTextarea from "./AutoHeightTextarea";
 import { useState } from "react";
 
-function OpenModal() {
+function OpenModal({ addReviewInfo, onWriteReview }) {
   const [modalOpen, setModalOpen] = useState(false);
 
-  const openModal = () => {
-    setModalOpen(true);
-  };
-  const closeModal = () => {
-    setModalOpen(false);
-  };
+  // const openModal = () => {
+  //   setModalOpen(true);
+  // };
+  // const closeModal = () => {
+  //   setModalOpen(false);
+  // };
   return (
     <>
       <h5>
         <b>후기</b>
       </h5>
 
-      <button className="reviewmodal-box" onClick={openModal}>
+      <button
+        className="reviewmodal-box"
+        onClick={() => {
+          setModalOpen(!modalOpen);
+        }}
+      >
         등록하기
       </button>
-      <Modal open={modalOpen} close={closeModal} header="후기">
-        <div className="modal-position">
-          <HoverRating />
-        </div>
-        <AutoHeightTextarea />
-      </Modal>
+      {modalOpen ? (
+        <Modal
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+          onWriteReview={onWriteReview}
+          open={modalOpen}
+          // close={closeModal}
+          header="후기"
+        >
+          <div className="modal-span">
+            <span>강의는 어떠셨나요?</span>
+          </div>
+          <div className="modal-position">
+            <SubmitRating addReviewInfo={addReviewInfo} />
+          </div>
+          <AutoHeightTextarea addReviewInfo={addReviewInfo} />
+        </Modal>
+      ) : null}
     </>
   );
 }

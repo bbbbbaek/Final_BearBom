@@ -29,3 +29,30 @@
   width: 400px;
   height: 350px;
 }
+
+.btn-thumb-box {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.btn-thumb1 {
+  width: 100px;
+  height: 100px;
+  float: left;
+}
+.btn-thumb2 {
+  width: 100px;
+  height: 100px;
+  float: left;
+}
+.btn-thumb3 {
+  width: 100px;
+  height: 100px;
+  float: left;
+}
+.btn-thumb4 {
+  width: 100px;
+  height: 100px;
+  float: left;
+}
