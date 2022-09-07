@@ -253,7 +253,8 @@ h4{
   display: flex;
   z-index: 5;
   position: sticky;
-  bottom: 15px;
+  bottom: 0px;
+  padding-bottom: 15px;
   max-width: 920px;
   background: #fff;
   border-top: 1px solid #dbd7d3;
