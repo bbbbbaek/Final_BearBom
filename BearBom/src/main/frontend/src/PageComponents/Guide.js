@@ -9,8 +9,12 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import guideData from "../ModuleComponents/guideData";
 import { API_BASE_URL } from "../app-config";
 import axios from "axios";
+import useStore from "../store/store.js";
 
 const Guide = ({ data }) => {
+  const { guideTitle } = useStore();
+  const { guideContent } = useStore();
+
   // const [state, setState] = useState(guideData);
 
   // const handleSubmit = (e) => {
@@ -37,8 +41,8 @@ const Guide = ({ data }) => {
 
   const [operation, setOperation] = useState([]);
 
-  const [guideTitle, setGuidTitle] = useState("");
-  const [guideContent, setGuideContent] = useState("");
+  // const [guideTitle, setGuidTitle] = useState("");
+  // const [guideContent, setGuideContent] = useState("");
 
   // let listUrl = "http://localhost:8080/api/guide/getOperationList";
 

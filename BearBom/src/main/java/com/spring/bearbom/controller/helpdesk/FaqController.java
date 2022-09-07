@@ -1,10 +1,9 @@
-package com.spring.bearbom.controller.guide;
+package com.spring.bearbom.controller.helpdesk;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,28 +11,27 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.bearbom.dto.ResponseDTO;
 import com.spring.bearbom.dto.UserDTO;
-import com.spring.bearbom.entity.Courser;
 import com.spring.bearbom.entity.Guide;
-import com.spring.bearbom.entity.User;
+import com.spring.bearbom.entity.Helpdesk;
 import com.spring.bearbom.jwt.JwtTokenProvider;
-import com.spring.bearbom.service.guide.GuideService;
+import com.spring.bearbom.service.helpdesk.FaqService;
 
 @RestController
-@RequestMapping("/api/guide")
-public class GuideController {
+@RequestMapping("/api/helpdesk")
+public class FaqController {
 	@Autowired
-	private GuideService guideService;
+	private FaqService faqService;
 	
 	@Autowired
 	private JwtTokenProvider jwtTokenProvider;
 	
-	@PostMapping("/getOperationList")
-	public ResponseEntity<?> getOperationList(@RequestBody Guide guide) {
+	@PostMapping("/getFaqList")
+	public ResponseEntity<?> getFaqList(@RequestBody Guide guide) {
 		try {
 			
-			List<Guide> operation = guideService.operation(guide);
+			List<Guide> faq = faqService.faq(guide);
 	    	ResponseDTO<Guide> response = new ResponseDTO<Guide>();
-	    	response.setData(operation);
+	    	response.setData(faq);
 			
 			return ResponseEntity.ok().body(response);
 		} catch(Exception e) {
@@ -43,9 +41,4 @@ public class GuideController {
 			return ResponseEntity.badRequest().body(response);
 		}
 	}
-	
-	
-	}
-	
-	
-	
+}

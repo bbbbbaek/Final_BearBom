@@ -1,4 +1,4 @@
-package com.spring.bearbom.service.guide.impl;
+package com.spring.bearbom.service.helpdesk.impl;
 
 import java.util.List;
 
@@ -7,21 +7,24 @@ import org.springframework.stereotype.Service;
 
 import com.spring.bearbom.entity.Guide;
 import com.spring.bearbom.repository.GuideRepository;
-import com.spring.bearbom.service.guide.GuideService;
-
+import com.spring.bearbom.repository.HelpdeskRepository;
+import com.spring.bearbom.service.helpdesk.FaqService;
 @Service
-public class GuideServiceImpl implements GuideService{
+public class FaqServiceImpl implements FaqService{
 
 	@Autowired
 	private GuideRepository guideRepository;
 
 	@Override
-	public List<Guide> operation(Guide guide) {
+	public List<Guide> faq(Guide guide) {
 		// TODO Auto-generated method stub
-		
-		List<Guide> oprationList = guideRepository.findAll();
-		return oprationList;
+
+		List<Guide> faqList = guideRepository.findAll();
+		return faqList;
 	}
+
+	
+
 
 	
 }
