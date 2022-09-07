@@ -1,6 +1,5 @@
-
 import React, { useMemo, useState } from "react";
-
+import useStore from "zustand";
 import CenteredTabs from "../PageComponents/CourseRegistration/AddCourseNav";
 import StepOne from "./CourseRegistration/StepOne";
 import StepTwo_1 from "./CourseRegistration/StepTwo_1";
@@ -48,25 +47,31 @@ const theme = createTheme({
       //dark: '#ba000d',
       //contrastText: '#000',
     },
-    success:{
-      main: '#453b36 ',
-    }
+    success: {
+      main: "#453b36 ",
+    },
   },
 });
 
-const CourseRegistration = () => {
 
-  
-  //const [currentStep, setCurrentStep] = useState[1];
-  const currentStep = 1;
+const CourseRegistration = () => {
+  const [currentStep, setCurrentStep] = useState(0);
+  //const currentStep = 0;
 
   const returnButtonValue = useMemo(() => {
-    if (currentStep === 10) {
-      return '등록';
+    if (currentStep === 7) {
+      return "등록";
     }
-    return '다음';
+    return "다음";
   }, [currentStep]);
 
+  const handleStepPlus = () => {
+    setCurrentStep(currentStep+1)
+  };
+
+  const handleStepMinus = () => {
+    setCurrentStep(currentStep-1)
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -80,39 +85,52 @@ const CourseRegistration = () => {
             <CenteredTabs></CenteredTabs>
           </div>
         </div>
-        <div className="midline" />
-        <div className="midRight">
-          <div className="midContent">
-            {/*<StepOne></StepOne>*/}
-            {/*<StepTwo_1></StepTwo_1>*/}
-            {/*<StepTwo_2></StepTwo_2>*/}
-            {/*<StepTwo_3></StepTwo_3>*/}
-            {/*<StepTwo_4></StepTwo_4>*/}
-            {/*<StepTwo_5></StepTwo_5>*/}
-            {/*<StepTwo_6></StepTwo_6>*/}
-            <StepThree_1></StepThree_1>
+        <div className="fullline"></div>
+        <div className="middle">
+          <div className="leftbar">
+            <div className="step0 step">Step 1. 인증 및 클래스 유형</div>
+            <div className="step">Step 2. 클래스 소개</div>
+            <div className="step">Step 3. 금액 및 일정</div>
+            <div className="step">Step 4. 클래스 위치</div>
           </div>
-          <div className="midStepBtn">
-            <div className="stepBtnBox">
-                  {currentStep > 0 && <Button
+          <div className="midline" />
+          <div className="midRight">
+            <div className="midContent">
+              {[<StepOne/>,
+              <StepTwo_1/>,
+              <StepTwo_2/>,
+              <StepTwo_3/>,
+              <StepTwo_4/>,
+              <StepTwo_5/>,
+              <StepTwo_6/>,
+              <StepThree_1/>][currentStep]}
+            </div>
+            <div className="midStepBtn">
+              <div className="stepBtnBox">
+                {currentStep > 0 && (
+                  <Button
                     variant="outlined"
                     size="large"
                     disabled={currentStep <= 0}
                     color="secondary"
+                    onClick={handleStepMinus}
                   >
                     이전
-                  </Button>}
-                  <Button
-                    variant="outlined"
-                    color="success"
-                    size="large"
-                    style={{ marginLeft: 20, background: '#dbd7d3'}}
-                  >
-                    {returnButtonValue}
                   </Button>
-                  </div>
-           </div>
-
+                )}
+                <Button
+                  variant="outlined"
+                  color="success"
+                  size="large"
+                  style={{ marginLeft: 20, background: "#dbd7d3" }}
+                  onClick={handleStepPlus}
+                >
+                  {returnButtonValue}
+                </Button>
+                <div>{currentStep}</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </ThemeProvider>

@@ -5,11 +5,19 @@ import React, { useState } from "react";
 import CheckCircle from "@mui/icons-material/CheckCircle";
 import "../../css/courseRegistration.css";
 import SelectButton from "./RegistrationComponents/SelectButton";
+import useStore from "./stepStore";
 
 
   const StepOne = () => {
+   const { min } = useStore();
 
     const [buttonValue, setButtonValue] = useState(true);
+    const [Number, setNumber] = useState();
+
+    const handlePhoneNum = (event) => {
+      setNumber(event.target.value);
+      useStore.setState({phoneNum:event.target.value})
+    };
 
     return (
         <>
@@ -38,6 +46,7 @@ import SelectButton from "./RegistrationComponents/SelectButton";
                           className="phoneNum"
                           type="text"
                           placeholder="' - '를 제외하고 입력해주세요"
+                          onChange={handlePhoneNum}
                         ></input>
                       </div>
                       <Button variant="contained" size="small" color="primary" style={{minWidth:80}}>
@@ -45,7 +54,7 @@ import SelectButton from "./RegistrationComponents/SelectButton";
                       </Button>
                     </div>
                     <p className="numCheck1 inputWar">
-                      *번호 인증은 최초 1회만 하시면 됩니다.
+                      * 번호 인증은 최초 1회만 하면 되게끔 만들고 싶다
                     </p>
                   </div>
                 </div>
