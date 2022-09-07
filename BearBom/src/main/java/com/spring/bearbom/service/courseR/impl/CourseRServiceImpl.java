@@ -21,4 +21,11 @@ public class CourseRServiceImpl implements CourseRService {
 
      return reviewList;
     }
+    
+    @Override
+    public Courser WriteReview(Courser courser) {
+    	int courserIdx = courserRepository.selectNextCourserIdx(courser.getCourse().getCourseIdx());
+    	courser.setCourserIdx(courserIdx);
+    	return courserRepository.save(courser);
+    }
 }

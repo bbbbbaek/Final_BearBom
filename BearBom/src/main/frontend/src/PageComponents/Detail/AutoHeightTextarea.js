@@ -1,7 +1,7 @@
 import "../../css/AutoHeightTextarea.css";
 import { useState } from "react";
 
-const AutoHeightTextarea = ({ courserContent }) => {
+const AutoHeightTextarea = ({ courserContent, addReviewInfo }) => {
   // 사용자 입력 저장
   const [checkItemContent, setCheckItemContent] = useState("");
   // 줄바꿈 위치를 저장하는 Dictionary
@@ -12,7 +12,7 @@ const AutoHeightTextarea = ({ courserContent }) => {
   // 사용자 입력 업데이트 및 줄바꿈 감지
   const checkItemChangeHandler = (event) => {
     setCheckItemContent(event.target.value);
-
+    addReviewInfo(event);
     // Scroll이 생기면 line break
     if (event.target.scrollHeight !== event.target.clientHeight) {
       setLineHeight((prev) => prev + 1); // textarea 높이 늘리고
@@ -54,6 +54,7 @@ const AutoHeightTextarea = ({ courserContent }) => {
           onChange={checkItemChangeHandler}
           onKeyDown={checkItemEnterHandler}
           style={{ height: lineHeight * 27 + 27 + "px" }}
+          name="courserContent"
         />
       </div>
     </>

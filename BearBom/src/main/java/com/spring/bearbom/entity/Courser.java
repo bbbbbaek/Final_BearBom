@@ -30,7 +30,7 @@ public class Courser {
     private LocalDateTime courserMdfdate = LocalDateTime.now();
 
     @Column(nullable = false,columnDefinition = "char(1)")
-    private char courserUseYn ='N';
+    private char courserUseYn ='Y';
 
     @ManyToOne
     @JoinColumn(name="USER_ID")

@@ -24,6 +24,7 @@ import LoginTest from "./PageComponents/JoinComponents/LoginTest";
 import Saw from "./PageComponents/Saw";
 import Admin from "./PageComponents/AdminPage/Admin";
 import Page404 from "./PageComponents/Page404";
+import Test123 from "./PageComponents/Detail/Test123";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
           <Route path="/saw/:id" element={<Saw />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/*" element={<Page404 />} />
+          <Route path="/course/test" element={<Test123 />} />
         </Routes>
         <Top />
         <Chatbot />
