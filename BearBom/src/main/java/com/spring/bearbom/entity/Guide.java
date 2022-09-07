@@ -16,6 +16,9 @@ public class Guide {
 
     @Id
     private int guideIdx;
+    
+    @Column(nullable = false, columnDefinition = "varchar(2000)")
+    private String guideTitle;
 
     @Column(nullable = false, columnDefinition = "varchar(2000)")
     private String guideContent;

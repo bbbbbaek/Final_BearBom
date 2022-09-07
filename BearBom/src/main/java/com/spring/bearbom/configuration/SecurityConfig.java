@@ -36,14 +36,16 @@ public class SecurityConfig{
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.cors() //cors는 WebMvcConfig로 설정했으므로 따로 지정안함
-				.and()
-				.csrf().disable() //csrf방식 disable
-				.httpBasic().disable() //jwt를 사용하므로 basic 인증방식 disable
-				//토큰 방식을 사용하므로 세션방식을 사용하지 않도록 설정
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-				.and()
-				.authorizeRequests().antMatchers("/", "/api/member/**", "/api/user/*", "/api/course/*").permitAll()
-				.anyRequest().authenticated();
+
+			.and()
+			.csrf().disable() //csrf방식 disable
+			.httpBasic().disable() //jwt를 사용하므로 basic 인증방식 disable
+			//토큰 방식을 사용하므로 세션방식을 사용하지 않도록 설정
+			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+			.and()
+			.authorizeRequests().antMatchers("/", "/api/member/**", "/api/user/*", "/api/course/*","/api/guide/*" , "/api/helpdesk/*").permitAll()
+								.anyRequest().authenticated();
+		
 
 		//filter 등록
 		//매 요청마다 corsfilter 실행 후 jwtAuthenticationFilter 실행
