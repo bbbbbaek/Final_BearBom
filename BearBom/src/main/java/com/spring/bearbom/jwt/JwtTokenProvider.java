@@ -6,6 +6,7 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
+import com.spring.bearbom.dto.UserDTO;
 import org.springframework.stereotype.Component;
 
 import com.spring.bearbom.entity.User;
@@ -45,7 +46,27 @@ public class JwtTokenProvider {
 				.setExpiration(expiryDate) //exp
 				.compact();
 	}
-	
+
+
+	public String createT(UserDTO user) {
+		//토큰 만료일 설정. 현재로부터 1일뒤로 설정
+		Date expiryDate = Date.from(Instant.now().plus(1, ChronoUnit.DAYS));
+
+		//JWT 생성
+		return Jwts.builder()
+				//header에 들어갈 내용 및 서명을 위한 SCERET_KEY
+				.signWith(key, SignatureAlgorithm.HS256)
+				//payload에 들어갈 내용
+				//토큰의 주체
+				.setSubject(user.getUserId()) //sub
+				//토큰 발행 주체
+				.setIssuer("todo app") //iss
+				//토큰 발행 일자
+				.setIssuedAt(new Date()) //isa
+				//토큰 만료 일자
+				.setExpiration(expiryDate) //exp
+				.compact();
+	}
 	//토큰을 받아와서 토크의 유효성 확인
 	public String validateAndGetUsername(String token) {
 		//SECRET_KEY를 이용하여 서명을 만들고 받아온

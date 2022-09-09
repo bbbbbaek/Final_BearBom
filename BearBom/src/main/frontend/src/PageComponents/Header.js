@@ -6,6 +6,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/header.css";
 import logoImg from "../images/logo.png";
 import { useState, useEffect, useCallback } from "react";
+import axios from "axios";
+import { API_BASE_URL } from "../app-config";
+import { KAKAO_LOGOUT_URL } from "./JoinComponents/OAuth";
+import LogoutKaKao from "./JoinComponents/LogoutKaKao";
+import { id } from "date-fns/locale";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -20,7 +25,7 @@ const Header = () => {
   const isLogin = !!localStorage.getItem("ACCESS_TOKEN");
   const [loginText, setLoginText] = useState("");
   const [logoutText, setLogoutText] = useState("");
-  const test = localStorage.getItem("USER_ID");
+  const userId = localStorage.getItem("USER_ID");
   console.log(!!localStorage.getItem("ACCESS_TOKEN"));
   console.log(isLogin);
 
@@ -42,12 +47,19 @@ const Header = () => {
     console.log(loginText);
   };
 
+  const test = localStorage.getItem("test");
+  // else if (test === "kakao") {
+  //   localStorage.removeItem("USER_ID");
+  //   localStorage.removeItem("ACCESS_TOKEN");
+  //   localStorage.clear();
+  // }
   const onClicklogOut = (e) => {
     if (!isLogin) {
       navigate("/joinTest");
     } else {
       localStorage.removeItem("USER_ID");
       localStorage.removeItem("ACCESS_TOKEN");
+      localStorage.clear();
       navigate("/");
     }
   };
@@ -120,7 +132,7 @@ const Header = () => {
                   onClick={onClickIsLogin}
                   // onChange={onChangeIsLogin}
                 >
-                  {isLogin ? <sapn>{test}</sapn> : <span>로그인</span>}
+                  {isLogin ? <sapn>{userId}</sapn> : <span>로그인</span>}
                 </Nav.Link>
                 {/* <Nav.Link
                   onClick={() => {
@@ -147,6 +159,7 @@ const Header = () => {
                 <Nav.Link onClick={onClicklogOut}>
                   {isLogin ? <span>로그아웃</span> : <span>회원가입</span>}
                 </Nav.Link>
+                <LogoutKaKao></LogoutKaKao>
               </div>
             </Nav>
           </Container>
