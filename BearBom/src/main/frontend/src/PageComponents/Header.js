@@ -157,7 +157,15 @@ const Header = () => {
                   회원가입2
                 </Nav.Link> */}
                 <Nav.Link onClick={onClicklogOut}>
-                  {isLogin ? <span>로그아웃</span> : <span>회원가입</span>}
+                  {isLogin ? (
+                    test === "kakao" ? (
+                      <LogoutKaKao></LogoutKaKao>
+                    ) : (
+                      <span>로그아웃</span>
+                    )
+                  ) : (
+                    <span>회원가입</span>
+                  )}
                 </Nav.Link>
                 <LogoutKaKao></LogoutKaKao>
               </div>
