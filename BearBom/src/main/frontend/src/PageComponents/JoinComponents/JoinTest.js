@@ -346,6 +346,10 @@ const Join = () => {
         userZipcode: zipCode,
         userAddress: fullAddress,
         userAddressDef: userAddressDef,
+        userPw: userPw,
+        userNm: userNm,
+        userNickName: userNickName,
+        userTel: userTel,
       },
       // data: { ...userInfo, userZipCode: zonecodee, userAddress: fullAddresss },
     }).then((response) => {

@@ -43,9 +43,9 @@ public class SecurityConfig{
 			//토큰 방식을 사용하므로 세션방식을 사용하지 않도록 설정
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
-			.authorizeRequests().antMatchers("/", "/api/member/**", "/api/user/*", "/api/course/*","/api/guide/*" , "/api/helpdesk/*").permitAll()
+			.authorizeRequests().antMatchers("/", "/api/member/**", "/api/user/*", "/api/course/*","/api/guide/*" , "/api/helpdesk/*", "/oauth/kakao", "/oauth/**").permitAll()
 								.anyRequest().authenticated();
-		
+
 
 		//filter 등록
 		//매 요청마다 corsfilter 실행 후 jwtAuthenticationFilter 실행

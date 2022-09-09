@@ -3,7 +3,7 @@ package com.spring.bearbom.dto;
 import lombok.Data;
 
 @Data
-public class UserDTO {
+public class SocialDto {
 	private String userId;
 	private String userPw;
 	private int userPwFailCnt;

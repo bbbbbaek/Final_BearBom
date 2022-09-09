@@ -48,7 +48,7 @@ public class UserController {
 			userDTO.setRole(joinUser.getRole());
 			userDTO.setUserEmail(joinUser.getUserEmail()); //
 			userDTO.setUserNm(joinUser.getUserNm());
-			userDTO.setUserNickname(joinUser.getUserNickName());
+			userDTO.setUserNickName(joinUser.getUserNickName());
 			userDTO.setUserAddress(joinUser.getUserAddress());
 			userDTO.setUserAddressDef(joinUser.getUserAddressDef());
 			userDTO.setUserTel(joinUser.getUserTel());
