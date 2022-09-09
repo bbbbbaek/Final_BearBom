@@ -156,7 +156,7 @@ const Header = () => {
                 >
                   회원가입2
                 </Nav.Link> */}
-                <Nav.Link onClick={onClicklogOut}>
+                {/* <Nav.Link onClick={onClicklogOut}>
                   {isLogin ? (
                     test === "kakao" ? (
                       <LogoutKaKao></LogoutKaKao>
@@ -166,8 +166,33 @@ const Header = () => {
                   ) : (
                     <span>회원가입</span>
                   )}
-                </Nav.Link>
-                <LogoutKaKao></LogoutKaKao>
+                </Nav.Link> */}
+                <Nav onClick={onClicklogOut}>
+                  <div className="navt" style={{ padding: "8px" }}>
+                    {isLogin ? (
+                      test === "kakao" ? (
+                        <LogoutKaKao></LogoutKaKao>
+                      ) : (
+                        <span
+                          style={{
+                            color: "#0000008c",
+                          }}
+                        >
+                          로그아웃
+                        </span>
+                      )
+                    ) : (
+                      <span
+                        style={{
+                          color: "#0000008c",
+                        }}
+                      >
+                        회원가입
+                      </span>
+                    )}
+                  </div>
+                </Nav>
+                {/* <LogoutKaKao></LogoutKaKao> */}
               </div>
             </Nav>
           </Container>
