@@ -47,13 +47,15 @@ const AutoHeightTextarea = ({ courserContent, addReviewInfo }) => {
     <>
       <div className="autoHeightTextarea">
         <textarea
+          cols={10}
+          rows={3}
           className="review-textarea"
           type="text"
           value={courserContent}
           placeholder={""}
           onChange={checkItemChangeHandler}
           onKeyDown={checkItemEnterHandler}
-          style={{ height: lineHeight * 27 + 27 + "px" }}
+          style={{ height: lineHeight * 30 + 30 + "px" }}
           name="courserContent"
         />
       </div>
