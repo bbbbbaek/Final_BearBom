@@ -35,3 +35,7 @@ out/
 
 ### VS Code ###
 .vscode/
+
+/src/main/resources/application.properties
+/src/main/com/spring/bearbom/configuration/MailConfig.java
+/src/main/com/spring/bearbom/service/oauth/OAuthService.java
