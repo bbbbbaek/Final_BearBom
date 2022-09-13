@@ -6,8 +6,6 @@ import SideBar from "./MyPage/SideBar";
 const Mypage = () => {
   return (
     <>
-      <p>mypage</p>
-
       <div className="mypage-banner">mypage</div>
       <div style={{ marginLeft: "15%", marginRight: "15%" }}>
         <div className="mypage-quickview-wrapper">
