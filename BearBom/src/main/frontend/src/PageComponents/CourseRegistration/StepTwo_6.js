@@ -11,7 +11,7 @@ import "../../css/courseRegistration.css";
 import SelectButton from "./RegistrationComponents/SelectButton";
 import KakaoAPI from "./RegistrationComponents/KakaoAPI";
 import KakaoAPI2 from "./RegistrationComponents/KakaoAPI2";
-import useStore from "./stepStore";
+import CourseStore from "./CourseStore";
 
 const StepTwo_6 = () => {
 

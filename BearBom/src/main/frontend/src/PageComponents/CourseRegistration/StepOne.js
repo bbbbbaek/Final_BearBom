@@ -5,18 +5,18 @@ import React, { useState } from "react";
 import CheckCircle from "@mui/icons-material/CheckCircle";
 import "../../css/courseRegistration.css";
 import SelectButton from "./RegistrationComponents/SelectButton";
-import useStore from "./stepStore";
+import CourseStore from "./CourseStore";
 
 
   const StepOne = () => {
-   const { min } = useStore();
+   const { min } = CourseStore();
 
     const [buttonValue, setButtonValue] = useState(true);
     const [Number, setNumber] = useState();
 
     const handlePhoneNum = (event) => {
       setNumber(event.target.value);
-      useStore.setState({phoneNum:event.target.value})
+      CourseStore.setState({phoneNum:event.target.value})
     };
 
     return (

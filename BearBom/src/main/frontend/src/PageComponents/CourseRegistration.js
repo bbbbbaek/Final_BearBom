@@ -67,6 +67,10 @@ const CourseRegistration = () => {
 
   const handleStepPlus = () => {
     setCurrentStep(currentStep+1)
+    if(returnButtonValue==="등록"){
+      console.log("등록하기 전송시작")
+      
+    }
   };
 
   const handleStepMinus = () => {

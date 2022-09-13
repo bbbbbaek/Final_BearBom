@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import "../../css/courseRegistration.css";
-import useStore from "./stepStore";
+import CourseStore from "./CourseStore";
 
 const range = (start, stop, step) => {
   let a = [start],
@@ -19,13 +19,13 @@ const range = (start, stop, step) => {
 };
 
 const StepThree_1 = () => {
-  const { min } = useStore();
+  const { min } = CourseStore();
   const [minPeople, setMinPeople] = useState();
   const [maxPeople, setMaxPeople] = useState();
 
   const handleMinPeople = (event) => {
     setMinPeople(event.target.value);
-    useStore.setState({ min: event.target.value });
+    CourseStore.setState({ min: event.target.value });
   };
 
   const handleMaxPeople = (event) => {
