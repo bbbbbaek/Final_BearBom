@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import useStore from "zustand";
 import CenteredTabs from "../PageComponents/CourseRegistration/AddCourseNav";
 import StepOne from "./CourseRegistration/StepOne";
@@ -12,6 +12,7 @@ import StepTwo_5 from "./CourseRegistration/StepTwo_5";
 import { Button, createTheme, ThemeProvider } from "@mui/material";
 import StepTwo_6 from "./CourseRegistration/StepTwo_6";
 import StepThree_1 from "./CourseRegistration/StepThree_1";
+import { useNavigate } from "react-router-dom";
 
 //const [formData1, setFormData1] = useState({});
 
@@ -53,8 +54,21 @@ const theme = createTheme({
   },
 });
 
-
 const CourseRegistration = () => {
+  const navigete = useNavigate();
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("ACCESS_TOKEN");
+
+    if (
+      accessToken === null ||
+      accessToken === "" ||
+      typeof accessToken === "undefined"
+    ) {
+      navigete("/login");
+    }
+  }, []);
+
   const [currentStep, setCurrentStep] = useState(0);
   //const currentStep = 0;
 
@@ -66,11 +80,11 @@ const CourseRegistration = () => {
   }, [currentStep]);
 
   const handleStepPlus = () => {
-    setCurrentStep(currentStep+1)
+    setCurrentStep(currentStep + 1);
   };
 
   const handleStepMinus = () => {
-    setCurrentStep(currentStep-1)
+    setCurrentStep(currentStep - 1);
   };
 
   return (
@@ -96,14 +110,18 @@ const CourseRegistration = () => {
           <div className="midline" />
           <div className="midRight">
             <div className="midContent">
-              {[<StepOne/>,
-              <StepTwo_1/>,
-              <StepTwo_2/>,
-              <StepTwo_3/>,
-              <StepTwo_4/>,
-              <StepTwo_5/>,
-              <StepTwo_6/>,
-              <StepThree_1/>][currentStep]}
+              {
+                [
+                  <StepOne />,
+                  <StepTwo_1 />,
+                  <StepTwo_2 />,
+                  <StepTwo_3 />,
+                  <StepTwo_4 />,
+                  <StepTwo_5 />,
+                  <StepTwo_6 />,
+                  <StepThree_1 />,
+                ][currentStep]
+              }
             </div>
             <div className="midStepBtn">
               <div className="stepBtnBox">
