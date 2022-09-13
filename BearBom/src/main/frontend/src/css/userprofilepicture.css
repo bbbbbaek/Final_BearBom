@@ -1,0 +1,23 @@
+.upp-main {
+  font-size: 0.8rem;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.upp-pp-wrapper {
+  margin: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.upp-pp {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  background-color: #e1e2e3;
+  outline: none;
+  appearance: none;
+  overflow: hidden;
+}

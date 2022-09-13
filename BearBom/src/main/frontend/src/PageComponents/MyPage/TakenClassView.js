@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../../css/salesview.css";
-import salesData from "./salesData";
+import salesData from "../AdminPage/salesData";
 import { CSVLink } from "react-csv";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import excelDownload from "../../images/excelDownload.png";
 
-const SalesView = ({ setTab }) => {
+const TakenClassView = () => {
   const sortedData = [...salesData].sort((a, b) => b.idx - a.idx);
   const [rawData] = useState(sortedData);
   // data의 초깃값을 salesData로 설정하게 되면, rawData와 참조값이 같게 되면서 splice메소드 사용하여 data 변경 시, rawData의 값도 변경되는 문제 있음
@@ -69,15 +69,7 @@ const SalesView = ({ setTab }) => {
 
   return (
     <>
-      <h1
-        onClick={() => {
-          // 탭 새로고침이 안됨 ㅠ
-          setTab("");
-          setTab(1);
-        }}
-      >
-        Sales View
-      </h1>
+      <h4>수강 내역 조회</h4>
       <hr />
       <div className="sales-table-wrapper">
         <div className="sales-filter-wrapper">
@@ -173,4 +165,4 @@ const SalesView = ({ setTab }) => {
   );
 };
 
-export default SalesView;
+export default TakenClassView;

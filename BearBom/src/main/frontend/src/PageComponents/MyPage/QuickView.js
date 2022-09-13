@@ -4,12 +4,12 @@ import "../../css/mypage-quickview.css";
 const QuickView = () => {
   return (
     <>
-      <div className="wrapper-title">
-        <div className="wrapper-title-content">
-          <h5>나의 강좌 현황</h5>
-        </div>
-      </div>
       <div className="wrapper-content">
+        <div className="wrapper-content-title">
+          <p>
+            <strong>나의 강좌 현황</strong>
+          </p>
+        </div>
         <div className="wrapper-content-content">
           <div className="myclass-status-item">
             <p>
@@ -29,19 +29,19 @@ const QuickView = () => {
             </p>
             <h4>0</h4>
           </div>
-          <div className="myclass-status-item">
+          <div id="myclass-status-item">
             <p>
               <strong>장바구니</strong>
             </p>
             <h4>0</h4>
           </div>
-          <div id="myclass-status-item">
+          {/* <div id="myclass-status-item">
             <ul>
-              <li>- 환불: 0</li>
-              <li>- 취소: 0</li>
-              <li>- 미결제: 0</li>
+              <li>- 환불 &nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp; 0</li>
+              <li>- 취소 &nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp; 0</li>
+              <li>- 미결제 &nbsp;:&nbsp;&nbsp; 0</li>
             </ul>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

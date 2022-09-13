@@ -2,39 +2,45 @@ import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/inquiry.css";
 import axios from "axios";
+import { API_BASE_URL } from "../app-config";
 
 const Inquiry = () => {
   const navigate = useNavigate();
-  const [inquiryInfo, setInquiryInfo] = useState([]);
-  const email = useRef();
-  const sort = useRef();
-  const title = useRef();
-  const content = useRef();
+  const [inquiryInfo, setInquiryInfo] = useState({ inquirySort: "user" });
 
-  const onSubmit = () => {
-    inquiryInfo.push(
-      email.current.value,
-      sort.current.value,
-      title.current.value,
-      content.current.value
-    );
-    console.log(inquiryInfo);
-  };
+  // const onSubmit = () => {
+  //   inquiryInfo.push(
+  //     email.current.value,
+  //     sort.current.value,
+  //     title.current.value,
+  //     content.current.value
+  //   );
+  //   console.log(inquiryInfo);
+  // };
 
   const onSubmit2 = () => {
+    console.log(inquiryInfo);
     axios({
-      // url: "/helpdesk.do",
+      url: API_BASE_URL + "/api/helpdesk/insertInquiry",
       method: "post",
-      data: {
-        email: email.current.value,
-        sort: sort.current.value,
-        title: title.current.value,
-        content: content.current.value,
-      },
-      baseURL: "http://localhost:8080/",
-      //withCredentials: true,
-    }).then(console.log("success"));
+      data: inquiryInfo,
+    })
+      .then(console.log("success"))
+      .catch((e) => {
+        console.log(e);
+      });
   };
+
+  const handleChange = (e) => {
+    console.log(e.target.name);
+    const updatedInquiryInfo = {
+      ...inquiryInfo,
+      [e.target.name]: e.target.value,
+    };
+
+    setInquiryInfo(updatedInquiryInfo);
+  };
+
   return (
     <>
       <div className="inquiry-main">
@@ -45,17 +51,19 @@ const Inquiry = () => {
               className="inquiry-input"
               type="text"
               id="email"
-              name="inquiry-email"
+              name="inquiryEmail"
               placeholder="답변 받으실 이메일 주소를 입력해주세요"
-              ref={email}
+              value={inquiryInfo.inquiryEmail}
+              onChange={handleChange}
             />
 
             <label for="sort">문의종류</label>
             <select
               id="sort"
-              name="inquiry-sort"
+              name="inquirySort"
               className="inquiry-input"
-              ref={sort}
+              value={inquiryInfo.inquirySort}
+              onChange={handleChange}
             >
               <option value="user">로그인/회원가입</option>
               <option value="payment">결제</option>
@@ -67,22 +75,24 @@ const Inquiry = () => {
               className="inquiry-input"
               id="title"
               type="text"
-              name="inquiry-title"
+              name="inquiryTitle"
               placeholder="제목을 입력해주세요."
-              ref={title}
+              value={inquiryInfo.inquiryTitle}
+              onChange={handleChange}
             />
             <label for="content">내용</label>
             <textarea
               id="content"
-              name="inquiry-content"
+              name="inquiryContent"
               cols="50"
               rows="10"
-              ref={content}
+              value={inquiryInfo.inquiryContent}
+              onChange={handleChange}
             ></textarea>
 
             <input
               className="inquiry-submit"
-              // type="submit"
+              type="button"
               value="제출"
               onClick={() => {
                 // setInquiryInfo([]);
