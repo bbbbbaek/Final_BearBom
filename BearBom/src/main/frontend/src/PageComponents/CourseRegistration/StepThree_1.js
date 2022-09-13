@@ -5,7 +5,7 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import "../../css/courseRegistration.css";
 import CourseStore from "./CourseStore";
 
@@ -18,23 +18,35 @@ const range = (start, stop, step) => {
   return a;
 };
 
-const StepThree_1 = () => {
-  const { min } = CourseStore();
-  const [minPeople, setMinPeople] = useState();
-  const [maxPeople, setMaxPeople] = useState();
+const StepThree_1 = ({saveFormData}) => {
+  //const { min } = CourseStore();
+  const [min, setMin] = useState();
+  const [max, setMax] = useState();
+  const [formObj, setFormObj] = useState({});
+
+  useEffect(() => {
+    saveFormData(formObj);
+ }, [formObj]);
+
+ useEffect(() => {
+  setFormObj({...formObj, "min": min})
+ }, [min]);
+
+ useEffect(() => {
+  setFormObj({...formObj, "max": max})
+ }, [max]);
 
   const handleMinPeople = (event) => {
-    setMinPeople(event.target.value);
+    setMin(event.target.value);
     CourseStore.setState({ min: event.target.value });
   };
 
   const handleMaxPeople = (event) => {
-    setMaxPeople(event.target.value);
+    setMax(event.target.value);
   };
 
   return (
-    <>
-      {min}
+    <form id="step_three_1_form">
       <div className="content content1">
         <div className="contentName">Step.3 금액 및 일정</div>
         <div className="contentWrap">
@@ -74,7 +86,7 @@ const StepThree_1 = () => {
                     <Select
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
-                      value={minPeople}
+                      value={min}
                       label="Cate"
                       onChange={handleMinPeople}
                     >
@@ -101,7 +113,7 @@ const StepThree_1 = () => {
                     <Select
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
-                      value={maxPeople}
+                      value={max}
                       label="Cate"
                       onChange={handleMaxPeople}
                     >
@@ -123,7 +135,7 @@ const StepThree_1 = () => {
           </div>
         </div>
       </div>
-    </>
+    </form>
   );
 };
-export default StepThree_1;
+export default React.memo(StepThree_1);

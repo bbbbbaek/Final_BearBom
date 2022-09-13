@@ -5,7 +5,7 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CheckCircle from "@mui/icons-material/CheckCircle";
 import "../../css/courseRegistration.css";
 import SelectButton from "./RegistrationComponents/SelectButton";
@@ -13,16 +13,25 @@ import KakaoAPI from "./RegistrationComponents/KakaoAPI";
 import KakaoAPI2 from "./RegistrationComponents/KakaoAPI2";
 import CourseStore from "./CourseStore";
 
-const StepTwo_6 = () => {
+const StepTwo_6 = ({saveFormData}) => {
 
   const [location, setLocation] = useState("");
+  const [formObj, setFormObj] = useState({});
+
+  useEffect(() => {
+    saveFormData(formObj);
+ }, [formObj]);
+
+ useEffect(() => {
+  setFormObj({...formObj, "location": location})
+ }, [location]);
 
   const handleChangeLoca = (event) => {
     setLocation(event.target.value);
   };
 
   return (
-    <>
+    <form id="step_two_6_form">
       <div className="content content1">
         <div className="contentName">Step.2 클래스 소개</div>
         <div className="contentWrap">
@@ -83,7 +92,7 @@ const StepTwo_6 = () => {
               <div className="kakaoPostCode">
                 <>{/* 카카오 주소, 지도 API 시작 */}
 
-                  <KakaoAPI/>
+                  <KakaoAPI saveFormData={saveFormData}/>
                   <KakaoAPI2/>{/*지도 표출 안됨 수정중*/}
                 </>{/* 카카오 주소, 지도 API 종료 */}
               </div>
@@ -91,7 +100,7 @@ const StepTwo_6 = () => {
           </div>
         </div>
       </div>
-    </>
+    </form>
   );
 };
 export default StepTwo_6;

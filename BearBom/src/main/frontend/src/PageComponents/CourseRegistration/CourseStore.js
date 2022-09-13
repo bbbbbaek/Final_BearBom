@@ -15,18 +15,4 @@ const CourseStore = create(() => ({
   max: 0,
 }));
 
-// const category = create(() => ({
-//   cateNo : 0,
-//   locaNo : 0,
-
-// }));
-
-// const courseFileStore = create(() => ({
-//   COURSE_FILE_IDX : 0,
-//   COURSE_FILE_ORG_NM : "",
-//   COURSE_FILE_NEW_NM : "",
-//   COURSE_FILE_PATH : "",
-
-// }));
-
 export default CourseStore;

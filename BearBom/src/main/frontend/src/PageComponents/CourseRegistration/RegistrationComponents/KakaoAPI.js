@@ -1,8 +1,45 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import DaumPostcode from "react-daum-postcode";
 
-const KakaoAPI = (props) => {
+const KakaoAPI = ({saveFormData}) => {
+  /////////////////////////////////////////////////////////
+  //폼데이터 생성부분
+  // const [address, setAddress] = useState();
+  // const [addressDef, setAddressDef] = useState();
+  // const [addressEx, setAddressEx] = useState();
+  // const [zipcode, setZipcode] = useState();
+
+  const [formObj, setFormObj] = useState({});
+  const [addressDef, setAddressDef] = useState();
+  const zipcodeRef = useRef()
+  //const addressDefRef = useRef()
+  const addressExRef = useRef()
+  const addressRef = useRef()
+  useEffect(() => {
+    saveFormData(formObj);
+ }, [formObj]);
+
+//  useEffect(() => {
+  
+//  }, [address]);
+
+ useEffect(() => {
+  setFormObj({...formObj, "addressDef": addressDef, "address": addressRef.current.value, "addressEx": addressExRef.current.value, "zipcode": zipcodeRef.current.value})
+  // setFormObj({...formObj, "address": addressRef.current.value})
+  // setFormObj({...formObj, "addressEx": addressExRef.current.value})
+  // setFormObj({...formObj, "zipcode": zipcodeRef.current.value})
+ }, [addressDef]);
+
+//  useEffect(() => {
+  
+//  }, [addressEx]);
+
+//  useEffect(() => {
+  
+//  }, [zipcode]);
   ////////////////////////////////////////////////////////////////////////////
+
+
   // 우편번호 찾기 찾기 화면을 넣을 element
   var element_wrap = document.getElementById("wrap");
 
@@ -82,17 +119,21 @@ const KakaoAPI = (props) => {
   return (
     <div>
       <div>
-        <input type="text" id="sample3_postcode" placeholder="우편번호" />
+        <input type="text" id="sample3_postcode" placeholder="우편번호" ref={zipcodeRef} />
         <input
           type="button"
           onclick="sample6_execDaumPostcode()"
           value="우편번호 찾기"
+
         />
         <br />
-        <input type="text" id="sample3_address" placeholder="주소" />
+        <input type="text" id="sample3_address" placeholder="주소" ref={addressRef} />
         <br />
-        <input type="text" id="sample3_detailAddress" placeholder="상세주소" />
-        <input type="text" id="sample3_extraAddress" placeholder="참고항목" />
+        <input type="text" id="sample3_detailAddress" placeholder="상세주소"
+        onChange={(e) => setAddressDef(e.target.value)}
+        //ref={addressDefRef} 
+        />
+        <input type="text" id="sample3_extraAddress" placeholder="참고항목" ref={addressExRef} />
         <div
           id="wrap addressWrap"
         >
