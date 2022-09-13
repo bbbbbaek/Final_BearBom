@@ -13,7 +13,7 @@ body {
   justify-content: center;
 }
 .main-container {
-  height: 3600px;
+  height: auto;
   margin-left: 100px;
   margin-right: 100px;
 }
@@ -337,10 +337,6 @@ body {
   right: 0px;
 }
 
-.modal-position {
-  margin-left: 220px;
-}
-
 .react-datepicker__month-container {
   width: 395px;
 }
@@ -376,4 +372,23 @@ body {
 
 .calendar-text {
   height: 30px;
+}
+
+.modal-position {
+  display: flex;
+  justify-content: center;
+}
+
+.modal-span {
+  text-align: center;
+}
+
+.reviewList {
+  height: 300px;
+  overflow: hidden;
+}
+
+.more-btn {
+  position: absolute;
+  left: 500px;
 }

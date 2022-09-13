@@ -24,6 +24,9 @@ import LoginTest from "./PageComponents/JoinComponents/LoginTest";
 import Saw from "./PageComponents/Saw";
 import Admin from "./PageComponents/AdminPage/Admin";
 import Page404 from "./PageComponents/Page404";
+import Test123 from "./PageComponents/Detail/Test123";
+import RedirectForKakao from "./PageComponents/JoinComponents/RedirectForKakao";
+import RedirectForKakaoLogout from "./PageComponents/JoinComponents/RedirectForKakaoLogout";
 
 function App() {
   return (
@@ -32,6 +35,11 @@ function App() {
       <div style={{ paddingTop: "60px" }}>
         <Routes>
           <Route path="/" element={<Mainpage />} />
+          <Route path="/oauth/kakao" element={<RedirectForKakao />} />
+          <Route
+            path="/oauth/kakao/logout"
+            element={<RedirectForKakaoLogout />}
+          />
           <Route path="/course" element={<Course />} />
           <Route path="/course/:id" element={<Detail />} />
           <Route path="/course/registration" element={<CourseRegistration />} />
@@ -46,6 +54,7 @@ function App() {
           <Route path="/saw/:id" element={<Saw />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/*" element={<Page404 />} />
+          <Route path="/course/test" element={<Test123 />} />
         </Routes>
         <Top />
         <Chatbot />

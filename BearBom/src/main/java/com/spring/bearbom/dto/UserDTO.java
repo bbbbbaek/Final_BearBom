@@ -8,7 +8,7 @@ public class UserDTO {
 	private String userPw;
 	private int userPwFailCnt;
 	private String userNm;
-	private String userNickname;
+	private String userNickName;
 	private String userTel;
 	private String userAddress;
 	private String userAddressDef;

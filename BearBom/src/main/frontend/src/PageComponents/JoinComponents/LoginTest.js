@@ -16,6 +16,7 @@ import Container from "@mui/material/Container";
 import axios from "axios";
 import { API_BASE_URL } from "../../app-config";
 import { useNavigate } from "react-router-dom";
+import LoginKaKao from "./LoginKaKao";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -133,18 +134,8 @@ const Login = () => {
                 ></img>
               </a>
             </div>
-            <div className="kakao_login">
-              <a href="https://accounts.kakao.com/login?continue=https%3A%2F%2Fcs.kakao.com%2Fhelps%3Fcategory%3D166%26locale%3Dko%26service%3D52">
-                <img
-                  src={require("../../img/kakao_login.png")}
-                  height="50"
-                  width="50"
-                  alt="kakao"
-                ></img>
-              </a>
-            </div>
             <div className="naver_login">
-              <a href="https://nid.naver.com/nidlogin.login">
+              <a href="https://accounts.google.com/ServiceLogin/identifier?service=accountsettings&continue=https%3A%2F%2Fmyaccount.google.com%3Futm_source%3Daccount-marketing-page%26utm_medium%3Dgo-to-account-button&flowName=GlifWebSignIn&flowEntry=ServiceLogin">
                 <img
                   src={require("../../img/naver_login.png")}
                   width="50"
@@ -153,6 +144,17 @@ const Login = () => {
                 ></img>
               </a>
             </div>
+            {/* <div className="kakao_login">
+              <a href="https://accounts.kakao.com/login?continue=https%3A%2F%2Fcs.kakao.com%2Fhelps%3Fcategory%3D166%26locale%3Dko%26service%3D52">
+                <img
+                  src={require("../../img/kakao_login.png")}
+                  height="50"
+                  width="50"
+                  alt="kakao"
+                ></img>
+              </a>
+            </div> */}
+            <LoginKaKao></LoginKaKao>
           </div>
         </form>
       </Container>

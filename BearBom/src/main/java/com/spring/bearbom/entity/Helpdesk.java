@@ -9,27 +9,27 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name="T_HELPDESK")
+@Table(name="T_helpDesk")
 @DynamicInsert
 @DynamicUpdate
 public class Helpdesk {
     @Id
-    private int helpdeskIdx;
+    private int helpDeskIdx;
 
     @Column(nullable = false)
-    private String helpdeskNm;
+    private String helpDeskNm;
 
     @Column(nullable = false)
-    private String helpdeskContent;
+    private String helpDeskContent;
 
     @Column(nullable = false)
-    private LocalDateTime helpdeskInqDate = LocalDateTime.now();
+    private LocalDateTime helpDeskInqDate = LocalDateTime.now();
 
     @Column(nullable = false,columnDefinition = "char(1)")
-    private char helpdeskUseYn = 'N';
+    private char helpDeskUseYn = 'N';
 
     @Column(nullable = false,columnDefinition = "char(1)")
-    private char helpdeskYn = 'N';
+    private char helpDeskYn = 'N';
 
     @ManyToOne
     @JoinColumn(name="USER_ID")

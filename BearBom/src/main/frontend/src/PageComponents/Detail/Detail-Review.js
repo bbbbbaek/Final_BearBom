@@ -4,7 +4,6 @@ import AutoHeightTextarea from "./AutoHeightTextarea";
 import React, { useState, useEffect } from "react";
 //import * as React from 'react';
 
-
 function Review({ review }) {
   //모달 창 띄우기
   const [modalOpen, setModalOpen] = useState(false);
@@ -22,7 +21,9 @@ function Review({ review }) {
       <div className="review-box">
         {/* key={u.courserIdx} */}
         <img className="img2" src={require("../../img/img2.jpeg")}></img>
-        <span className="review-nickname">{review.user.userNickName}</span>
+        <span className="review-nickname">
+          {/* {review.user.userNickName} */}
+        </span>
         <div className="review-rating">
           <HoverRating courserRate={review.courserRate} />
         </div>

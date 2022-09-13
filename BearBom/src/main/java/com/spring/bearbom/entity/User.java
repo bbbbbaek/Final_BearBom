@@ -1,9 +1,6 @@
 package com.spring.bearbom.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -70,7 +67,5 @@ public class User {
 	@Column(nullable = true)
 	private String lecturerInfo;
 
-	
-	
-	
+
 }
