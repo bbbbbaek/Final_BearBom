@@ -1,8 +1,14 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { API_BASE_URL } from "../app-config";
+
+import LikeButton from "../ModuleComponents/LikeButton";
 
 const Saw = (props) => {
   const { id } = useParams();
+  console.log(id);
+
   const [dataa, setDataa] = useState({});
   const location = useLocation();
   useEffect(() => {
@@ -48,7 +54,74 @@ const Saw = (props) => {
     // tested = [...new Set(tested)].slice(0, 3);
     // localStorage.setItem("data", JSON.stringify(tested));
   }, [dataa]);
-  return <>{dataa.title}</>;
+
+  //
+  // console.log(dataa);
+  // console.log(dataa.id); // id 값
+  // const id = dataa.id;
+  // console.log(id);
+  // like 구현 ///////////////////////
+  const navigate = useNavigate();
+  const [like, setLike] = useState(false);
+
+  useEffect((e) => {
+    const fetchData = async () => {
+      // const res = await axios.get(`${API_BASE_URL}/api/like/getLikeList`);
+      // console.log(res);
+      // if (res.data.type === "liked") setLike(true);
+      const userId = localStorage.getItem("USER_ID");
+      const token = localStorage.getItem("ACCESS_TOKEN");
+      if (!token) {
+        return;
+      }
+
+      axios({
+        method: "GET",
+        url: API_BASE_URL + "/api/like/getLikeList",
+        params: { userId: userId, courseIdx: id },
+        //403 에러는 보안관련 에러
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+        },
+      })
+        .then((response) => {
+          console.log(response);
+          if (response.data.likeState === "liked") {
+            setLike(true);
+          } else {
+            setLike(false);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    fetchData();
+  }, []);
+
+  const toggleLike = async (e) => {
+    // const res = await axios.post(`${API_BASE_URL}/api/like/{id}/insertLike`);
+    await axios({
+      method: "POST",
+      url: `${API_BASE_URL}/api/like/${id}/insertLike`,
+      //403 에러는 보안관련 에러
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+      },
+    }).then((response) => {
+      console.log(response);
+    });
+    // [POST] 사용자가 좋아요를 누름 -> DB 갱신
+    setLike(!like);
+  };
+  ///////////////////////////////////
+
+  return (
+    <>
+      {dataa.title}
+      <LikeButton like={like} onClick={toggleLike}></LikeButton>
+    </>
+  );
 };
 
 export default Saw;

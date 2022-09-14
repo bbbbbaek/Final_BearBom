@@ -8,6 +8,8 @@ import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Data
 @Table(name="T_USER")
@@ -67,5 +69,10 @@ public class User {
 	@Column(nullable = true)
 	private String lecturerInfo;
 
+	@OneToMany(
+			cascade = CascadeType.ALL,
+			orphanRemoval = true,
+			fetch = FetchType.LAZY)
+	private List<Like> like;
 
 }

@@ -22,4 +22,5 @@ public class Like {
     @ManyToOne
     @JoinColumn(name="USER_ID")
     private User user;
+
 }
