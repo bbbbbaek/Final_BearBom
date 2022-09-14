@@ -27,6 +27,9 @@ import Page404 from "./PageComponents/Page404";
 import Test123 from "./PageComponents/Detail/Test123";
 import RedirectForKakao from "./PageComponents/JoinComponents/RedirectForKakao";
 import RedirectForKakaoLogout from "./PageComponents/JoinComponents/RedirectForKakaoLogout";
+import PayReady from "./PageComponents/Detail/KakaoPayReady";
+import PayResult from "./PageComponents/Detail/KakaoPayResult";
+import KakaoPayReady from "./PageComponents/Detail/KakaoPayReady1";
 
 function App() {
   return (
@@ -55,6 +58,10 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/*" element={<Page404 />} />
           <Route path="/course/test" element={<Test123 />} />
+          <Route path="/payready" exact={true} component={PayReady} />
+          // 결제 승인이 진행될 PayResult를 설정한다.
+          <Route path="/payresult" component={PayResult} />
+          <Route path="/payready1" component={KakaoPayReady} />
         </Routes>
         <Top />
         <Chatbot />

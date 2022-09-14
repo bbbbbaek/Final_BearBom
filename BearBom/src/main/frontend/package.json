@@ -58,6 +58,7 @@
     "zustand": "^4.1.1"
   },
   "proxy": "http://localhost:8080",
+  "proxy": "https://kapi.kakao.com",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
