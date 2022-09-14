@@ -1,4 +1,4 @@
-package com.spring.bearbom.controller.Course;
+package com.spring.bearbom.controller.course;
 
 import com.spring.bearbom.dto.LikeDto;
 import com.spring.bearbom.entity.Like;

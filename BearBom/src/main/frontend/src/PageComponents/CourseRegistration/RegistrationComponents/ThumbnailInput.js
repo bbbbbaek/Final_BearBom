@@ -1,11 +1,20 @@
 import { Button } from "@mui/material";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { width } from "@mui/system";
 
-const ThumbnailInput = () => {
+const ThumbnailInput = ({saveFormData}) => {
   const [selectedImage, setSelectedImage] = useState();
+  const [formObj, setFormObj] = useState({});
+
+  useEffect(() => {
+     saveFormData(formObj);
+  }, [formObj]);
+
+  useEffect(() => {
+   setFormObj({...formObj, "selectedImage": selectedImage})
+  }, [selectedImage]);
 //   const test = false;
   
 

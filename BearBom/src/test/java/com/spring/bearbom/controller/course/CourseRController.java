@@ -1,4 +1,4 @@
-package com.spring.bearbom.controller.course;
+package com.spring.bearbom.controller.Course;
 
 import java.util.List;
 import java.util.Map;

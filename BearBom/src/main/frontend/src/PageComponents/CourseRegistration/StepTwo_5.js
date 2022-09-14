@@ -3,16 +3,24 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../css/courseRegistration.css";
 
-const StepTwo_5 = () => {
-  const [LecturerInfo, setLecturerInfo] = useState("");
+const StepTwo_5 = ({saveFormData}) => {
+  const [lecturerInfo, setLecturerInfo] = useState("");
+  const [formObj, setFormObj] = useState({});
 
+  useEffect(() => {
+    saveFormData(formObj);
+ }, [formObj]);
+
+ useEffect(() => {
+  setFormObj({...formObj, "lecturerInfo": lecturerInfo})
+ }, [lecturerInfo]);
 
 
   return (
-    <>
+    <form id="step_two_5_form">
       <div className="content content1">
         <div className="contentName">Step.2 클래스 소개</div>
         <div className="contentWrap">
@@ -30,13 +38,13 @@ const StepTwo_5 = () => {
               <textarea className="lecInput"
                         multiline
                         placeholder={'소개글을 작성해 주세요\n최소 40자 이상'}
-                        onChange={setLecturerInfo}
+                        onChange={(e) => setLecturerInfo(e.target.value)}
                     ></textarea> 
             </div>
           </div>
         </div>
       </div>
-    </>
+    </form>
   );
 };
 export default StepTwo_5;

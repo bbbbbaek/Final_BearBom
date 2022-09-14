@@ -5,29 +5,44 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CheckCircle from "@mui/icons-material/CheckCircle";
 import "../../css/courseRegistration.css";
 import SelectButton from "./RegistrationComponents/SelectButton";
 
-const StepTwo_1 = (/*{onClickNexButton}*/) => {
+const StepTwo_1 = ({saveFormData}) => {
   const [category, setCategory] = useState("");
+  const [className, setClassName] = useState();
+  const [formObj, setFormObj] = useState({});
+
+  useEffect(() => {
+     saveFormData(formObj);
+  }, [formObj]);
+
+  useEffect(() => {
+   setFormObj({...formObj, "category": category})
+  }, [category]);
+
+  useEffect(() => {
+   setFormObj({...formObj, "className": className})
+  }, [className]);
+
+  ///////////////////////////////////////////
 
   const handleChangeCate = (event) => {
     setCategory(event.target.value);
   };
 
-  const [location, setLocation] = useState("");
+  const handleClassName = (e) => {
+    setClassName(e.target.value);
+  }
 
-  const handleChangeLoca = (event) => {
-    setLocation(event.target.value);
-  };
 
-  const [menuItem, setMenuItem] = useState([]);
+  //const [menuItem, setMenuItem] = useState([]);
   //axios => setMenuItem
 
   return (
-    <>
+    <form id="step_two_1_form">
       <div className="content content1">
         <div className="contentName">Step.2 클래스 소개</div>
         <div className="contentWrap">
@@ -50,6 +65,8 @@ const StepTwo_1 = (/*{onClickNexButton}*/) => {
                   className="classTitle inputBox"
                   type="text"
                   placeholder="클래스 제목 (최대100자)"
+                  value={className}
+                  onChange={handleClassName}
                 ></input>
               </div>
             </div>
@@ -112,7 +129,7 @@ const StepTwo_1 = (/*{onClickNexButton}*/) => {
           </div>
         </div>
       </div>
-    </>
+    </form>
   );
 };
 export default StepTwo_1;

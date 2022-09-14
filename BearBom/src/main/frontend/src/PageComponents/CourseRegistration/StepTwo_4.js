@@ -3,13 +3,30 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../css/courseRegistration.css";
 
-const StepTwo_4 = () => {
+const StepTwo_4 = ({saveFormData}) => {
   const [difficulty, setDifficulty] = useState("");
   const [durationTime, setDurationTime] = useState(0);
   const [curriculum, setCurriculum] = useState("");
+  const [formObj, setFormObj] = useState({});
+
+  useEffect(() => {
+    saveFormData(formObj);
+ }, [formObj]);
+
+ useEffect(() => {
+  setFormObj({...formObj, "level": difficulty})
+ }, [difficulty]);
+
+ useEffect(() => {
+  setFormObj({...formObj, "runtime": durationTime})
+ }, [durationTime]);
+ 
+ useEffect(() => {
+  setFormObj({...formObj, "levelContent": curriculum})
+ }, [curriculum]);
 
   const MyButton = ({ children, onClick, selected, value }) => {
     return (
@@ -31,7 +48,7 @@ const StepTwo_4 = () => {
 
 
   return (
-    <>
+    <form id="step_two_4_form">
       <div className="content content1">
         <div className="contentName">Step.2 클래스 소개</div>
         <div className="contentWrap">
@@ -87,13 +104,13 @@ const StepTwo_4 = () => {
               <textarea className="culiInput"
                         multiline
                         placeholder={'커리큘럼을 자유롭게 작성해 주세요\n최대 600자'}
-                        onChange={setCurriculum}
+                        onChange={(e) => setCurriculum(e.target.value)}
                     ></textarea> 
             </div>
           </div>
         </div>
       </div>
-    </>
+    </form>
   );
 };
 export default StepTwo_4;
