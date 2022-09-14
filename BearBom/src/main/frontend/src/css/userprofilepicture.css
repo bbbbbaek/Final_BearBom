@@ -1,5 +1,6 @@
 .upp-main {
   font-size: 0.8rem;
+  height: 14rem;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -13,8 +14,8 @@
 }
 
 .upp-pp {
-  width: 5rem;
-  height: 5rem;
+  width: 7rem;
+  height: 7rem;
   border-radius: 50%;
   background-color: #e1e2e3;
   outline: none;

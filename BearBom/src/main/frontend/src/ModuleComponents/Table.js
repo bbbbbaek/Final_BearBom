@@ -1,12 +1,24 @@
 import React, { useEffect, useRef, useState } from "react";
-import "../../css/salesview.css";
-import salesData from "../AdminPage/salesData";
+import "../css/salesview.css";
+import salesData from "../PageComponents/AdminPage/salesData";
 import { CSVLink } from "react-csv";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-import excelDownload from "../../images/excelDownload.png";
+import excelDownload from "../images/excelDownload.png";
+import { TableMenuItems } from "../ModuleComponents/TableMenuItems";
 
-const TakenClassView = () => {
+const SalesView = ({ setTab, tableItems }) => {
+  // const tableItems = new TableMenuItems(
+  //   "Sales View",
+  //   "클래스명",
+  //   "매출",
+  //   "매출이익",
+  //   "수량",
+  //   "구매자",
+  //   "판매자",
+  //   "구매일자"
+  // );
+
   const sortedData = [...salesData].sort((a, b) => b.idx - a.idx);
   const [rawData] = useState(sortedData);
   // data의 초깃값을 salesData로 설정하게 되면, rawData와 참조값이 같게 되면서 splice메소드 사용하여 data 변경 시, rawData의 값도 변경되는 문제 있음
@@ -69,9 +81,15 @@ const TakenClassView = () => {
 
   return (
     <>
-      <h5>
-        <strong>수강 내역 조회</strong>
-      </h5>
+      <h1
+        onClick={() => {
+          // 탭 새로고침이 안됨 ㅠ
+          setTab("");
+          setTab(1);
+        }}
+      >
+        {tableItems.title}
+      </h1>
       <hr />
       <div className="sales-table-wrapper">
         <div className="sales-filter-wrapper">
@@ -120,13 +138,27 @@ const TakenClassView = () => {
         <table className="salesTable">
           <tr>
             <td className="salesTd salesTable-title veryShort">번호</td>
-            <td className="salesTd salesTable-title long">클래스명</td>
-            <td className="salesTd salesTable-title medium">매출</td>
-            <td className="salesTd salesTable-title medium">매출이익</td>
-            <td className="salesTd salesTable-title short">수량</td>
-            <td className="salesTd salesTable-title short">구매자</td>
-            <td className="salesTd salesTable-title short">판매자</td>
-            <td className="salesTd salesTable-title medium">구매일자</td>
+            <td className="salesTd salesTable-title long">
+              {tableItems.item1}
+            </td>
+            <td className="salesTd salesTable-title medium">
+              {tableItems.item2}
+            </td>
+            <td className="salesTd salesTable-title medium">
+              {tableItems.item3}
+            </td>
+            <td className="salesTd salesTable-title short">
+              {tableItems.item4}
+            </td>
+            <td className="salesTd salesTable-title short">
+              {tableItems.item5}
+            </td>
+            <td className="salesTd salesTable-title short">
+              {tableItems.item6}
+            </td>
+            <td className="salesTd salesTable-title medium">
+              {tableItems.item7}
+            </td>
           </tr>
 
           {currentPageData.map((a, i) => {
@@ -167,4 +199,4 @@ const TakenClassView = () => {
   );
 };
 
-export default TakenClassView;
+export default SalesView;

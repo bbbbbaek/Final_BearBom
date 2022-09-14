@@ -6,9 +6,10 @@ const QuickView = () => {
     <>
       <div className="wrapper-content">
         <div className="wrapper-content-title">
-          <p>
+          <h5>
             <strong>나의 강좌 현황</strong>
-          </p>
+          </h5>
+          <hr />
         </div>
         <div className="wrapper-content-content">
           <div className="myclass-status-item">

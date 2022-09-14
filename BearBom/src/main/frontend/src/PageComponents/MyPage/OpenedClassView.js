@@ -69,7 +69,9 @@ const OpenedClassView = () => {
 
   return (
     <>
-      <h4>개설 내역 조회</h4>
+      <h5>
+        <strong>개설 내역 조회</strong>
+      </h5>
       <hr />
       <div className="sales-table-wrapper">
         <div className="sales-filter-wrapper">
