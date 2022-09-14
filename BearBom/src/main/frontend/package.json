@@ -27,6 +27,7 @@
     "react-anchor-link-smooth-scroll": "^1.0.12",
     "react-bootstrap": "^2.5.0",
     "react-calendar": "^3.7.0",
+    "react-cookie": "^4.1.1",
     "react-csv": "^2.2.2",
     "react-date-range": "^1.4.0",
     "react-datepicker": "^4.8.0",
@@ -57,6 +58,7 @@
     "zustand": "^4.1.1"
   },
   "proxy": "http://localhost:8080",
+  "proxy": "https://kapi.kakao.com",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

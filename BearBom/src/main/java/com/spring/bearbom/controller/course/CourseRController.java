@@ -1,5 +1,6 @@
 package com.spring.bearbom.controller.course;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.bearbom.dto.CourserDTO;
-import com.spring.bearbom.dto.ResponseDTO;
 import com.spring.bearbom.entity.Course;
 import com.spring.bearbom.entity.Courser;
 import com.spring.bearbom.jwt.JwtTokenProvider;
@@ -27,15 +27,29 @@ public class CourseRController {
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
+//    @GetMapping("aaa")
+//    public ResponseEntity<> ttt (@RequestParam String userId)
+    
     @PostMapping("/getReviewList")
-    public ResponseDTO<Courser> getReviewList(@RequestBody Course course) {
+    public Map<String, Object> getReviewList(@RequestBody Course course) {
     	System.out.println(course.getCourseIdx());
+    	
     	Courser courser = new Courser();
     	courser.setCourse(course);
+    	
     	List<Courser> reviewList = courseRService.Review(courser);
-    	ResponseDTO<Courser> response = new ResponseDTO<Courser>();
-    	response.setData(reviewList);
-    	return response;
+    	
+//    	List<Double> updateRating = courseRService.updateRating(courser);
+    	
+    	double averageRating = courseRService.updateRating(courser);
+    	
+    	System.out.println(averageRating);
+    	Map<String, Object> resultMap = new HashMap<String, Object>();
+    	
+    	resultMap.put("reviewList", reviewList);
+    	resultMap.put("averageRating", averageRating);
+    	
+    	return resultMap;
     }
     
     @PostMapping("/writeReview")
