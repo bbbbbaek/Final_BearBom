@@ -1,10 +1,9 @@
 package com.spring.bearbom.mapper;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
-
-import com.spring.bearbom.dto.UpdateRateDTO;
-
+@Mapper
 public interface CourserMapper {
 	
 	@Select("SELECT COUNT(*) FROM T_COURSER WHERE COURSER_ID = #{courserIdx}")
