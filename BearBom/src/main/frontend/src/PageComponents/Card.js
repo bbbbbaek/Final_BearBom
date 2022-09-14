@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import HeartImg from "../../src/assets/heart.png";
 import EmptyHeartImg from "../../src/assets/empty-heart.png";
@@ -8,7 +8,9 @@ import "../css/card.scss";
 import { API_BASE_URL } from "../app-config";
 import axios from "axios";
 const Card = ({ title, condition, price, thumbnail, id }) => {
+  const navigate = useNavigate();
   const [like, setLike] = useState(false);
+
   useEffect((e) => {
     const fetchData = async () => {
       // const res = await axios.get(`${API_BASE_URL}/api/like/getLikeList`);
@@ -49,6 +51,8 @@ const Card = ({ title, condition, price, thumbnail, id }) => {
     const userId = localStorage.getItem("USER_ID");
     const token = localStorage.getItem("ACCESS_TOKEN");
     if (!token) {
+      alert("찜하기를 위해 로그인해주세요 :)");
+      navigate("/login");
       return;
     }
     await axios({

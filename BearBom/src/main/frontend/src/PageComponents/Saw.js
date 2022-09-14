@@ -104,6 +104,8 @@ const Saw = (props) => {
     const userId = localStorage.getItem("USER_ID");
     const token = localStorage.getItem("ACCESS_TOKEN");
     if (!token) {
+      alert("찜하기를 위해 로그인해주세요 :)");
+      navigate("/login");
       return;
     }
     await axios({
