@@ -29,11 +29,11 @@ const StepThree_1 = ({saveFormData}) => {
  }, [formObj]);
 
  useEffect(() => {
-  setFormObj({...formObj, "min": min})
+  setFormObj({...formObj, "courseMin": min})
  }, [min]);
 
  useEffect(() => {
-  setFormObj({...formObj, "max": max})
+  setFormObj({...formObj, "courseMax": max})
  }, [max]);
 
   const handleMinPeople = (event) => {

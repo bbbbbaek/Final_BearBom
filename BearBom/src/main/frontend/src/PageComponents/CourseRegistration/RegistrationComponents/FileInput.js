@@ -1,18 +1,25 @@
 import { Button } from "@mui/material";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { width } from "@mui/system";
 
-const ThumbnailInput = () => {
-  const [selectedImage, setSelectedImage] = useState();
+const FilelInput = ({changeImages}) => {
+  const [ImageFile, setImageFile] = useState();
+  const [imageFileList, setImageFileList] = useState([]);
 //   const test = false;
-  
+  useEffect(() => {
+    imageFileList.forEach(image => {
+      changeImages(image);
+    })
+  }, [imageFileList]);
 
   // 파일 업로드시 미리보기
   const imageChange = (e) => {
     if (e.target.files && e.target.files.length > 0) {
-      setSelectedImage(e.target.files[0]);
+      const fileList = Array.prototype.slice.call(e.target.files);
+      setImageFile(e.target.files[0]);
+      setImageFileList(fileList);
       const $button = document.querySelector(".imgAddBtn");
       $button.style.display = "none"
     }
@@ -20,7 +27,7 @@ const ThumbnailInput = () => {
 
   // 이미지 삭제버튼 클릭시
   const removeSelectedImage = () => {
-    setSelectedImage();
+    setImageFile();
     const $button = document.querySelector(".imgAddBtn");
     $button.style.display = "flex"
   };
@@ -54,11 +61,11 @@ const ThumbnailInput = () => {
         </Button>
         </div>
 
-        {selectedImage && (
+        {ImageFile && (
           <div className="imgPrev">
             <div className="imgBox">
                 <img
-                    src={URL.createObjectURL(selectedImage)}
+                    src={URL.createObjectURL(ImageFile)}
                     style={styles.image}
                     alt="Thumbnail"
                     />
@@ -75,7 +82,7 @@ const ThumbnailInput = () => {
   );
 };
 
-export default ThumbnailInput;
+export default FilelInput;
 
 // 이미지 스타일
 const styles = {

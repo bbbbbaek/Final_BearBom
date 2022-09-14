@@ -18,11 +18,14 @@ import CourseStore from "./CourseStore";
      }, [formObj]);
 
      useEffect(() => {
-      setFormObj({...formObj, "phoneNum": number})
+      setFormObj({...formObj, "userTel": number})
      }, [number]);
 
      useEffect(() => {
-      setFormObj({...formObj, "buttonValue": buttonValue})
+      if(buttonValue)
+        setFormObj({...formObj, "courseOnOff": "on"});
+      else 
+        setFormObj({...formObj, "courseOnOff": "off"});
      }, [buttonValue]);
 
     const handlePhoneNum = (event) => {

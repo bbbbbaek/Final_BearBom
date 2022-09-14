@@ -88,5 +88,18 @@ public class Course {
 	@JoinColumn(name="CMMN_CODE_IDX")
 	private CmmnCode cmmnCode;
 
-
+	@Column(nullable = false)
+	private String courseLevelContent;
+	
+	@Column(nullable = false)
+	private String courseZipcode;
+	
+	@Column(nullable = false)
+	private String courseAddress;
+	
+	@Column(nullable = false)
+	private String courseAddressDef;
+	
+	@Column(nullable = false)
+	private String courseAddressEx;
 }
