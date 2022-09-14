@@ -15,14 +15,14 @@ import com.spring.bearbom.dto.CourserDTO;
 import com.spring.bearbom.entity.Course;
 import com.spring.bearbom.entity.Courser;
 import com.spring.bearbom.jwt.JwtTokenProvider;
-import com.spring.bearbom.service.courseR.CourseRService;
+import com.spring.bearbom.service.course.CourserService;
 
 @RestController
 @RequestMapping("/api/course")
 public class CourseRController {
 
     @Autowired
-    private CourseRService courseRService;
+    private CourserService courserService;
 
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
@@ -38,11 +38,11 @@ public class CourseRController {
     	Courser courser = new Courser();
     	courser.setCourse(course);
     	
-    	List<Courser> reviewList = courseRService.Review(courser);
+    	List<Courser> reviewList = courserService.Review(courser);
     	
 //    	List<Double> updateRating = courseRService.updateRating(courser);
     	
-    	double averageRating = courseRService.updateRating(courser);
+    	double averageRating = courserService.updateRating(courser);
     	
     	System.out.println(averageRating);
     	Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -51,28 +51,6 @@ public class CourseRController {
     	resultMap.put("averageRating", averageRating);
     	
     	return resultMap;
-
-
-//    @PostMapping("/getReviewList")
-//    public Map<String, Object> getReviewList(@RequestBody Course course) {
-//        System.out.println(course.getCourseIdx());
-//
-//        Courser courser = new Courser();
-//        courser.setCourse(course);
-//
-//        List<Courser> reviewList = courseRService.Review(courser);
-//
-////    	List<Double> updateRating = courseRService.updateRating(courser);
-//
-//        double averageRating = courseRService.updateRating(courser);
-//
-//        System.out.println(averageRating);
-//        Map<String, Object> resultMap = new HashMap<String, Object>();
-//
-//        resultMap.put("reviewList", reviewList);
-//        resultMap.put("averageRating", averageRating);
-//
-//        return resultMap;
 
     }
 
@@ -92,7 +70,7 @@ public class CourseRController {
         courser.setCourserRate(paramMap.get("courserRate"));
 
         //System.out.println(courser.getCourse().getCourseIdx());
-        Courser review = courseRService.WriteReview(courser);
+        Courser review = courserService.WriteReview(courser);
         CourserDTO courserDTO = new CourserDTO();
 
         courserDTO.setCourserIdx(review.getCourserIdx());
