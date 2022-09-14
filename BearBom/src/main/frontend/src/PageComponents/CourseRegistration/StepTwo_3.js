@@ -21,7 +21,7 @@ const StepTwo_3 = ({saveFormData}) => {
  }, [formObj]);
 
  useEffect(() => {
-  setFormObj({...formObj, "contents": contents})
+  setFormObj({...formObj, "courseContents": contents})
  }, [contents]);
 
   // const [desc, setDesc] = useState('');

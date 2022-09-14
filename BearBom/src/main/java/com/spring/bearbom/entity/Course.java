@@ -20,8 +20,8 @@ public class Course {
 	@Column(nullable = false)
 	private String courseNm;
 	
-	@Column(nullable = false)
-	private String courseType;
+//	@Column(nullable = false)
+//	private String courseType;
 	
 	@Column(nullable = false)
 	private String courseOnOff;
@@ -84,9 +84,28 @@ public class Course {
 	@JoinColumn(name="USER_ID")
 	private User user;
 
-	@ManyToOne
-	@JoinColumn(name="CMMN_CODE_IDX")
-	private CmmnCode cmmnCode;
+//	@ManyToOne
+//	@JoinColumn(name="CMMN_CODE_IDX")
+//	private CmmnCode cmmnCode;
+	
+	@Column(nullable= false)
+	private String courseLocation;
+	
+	@Column(nullable= false)
+	private String courseCategory;
 
-
+	@Column(nullable = false)
+	private String courseLevelContent;
+	
+	@Column(nullable = false)
+	private String courseZipcode;
+	
+	@Column(nullable = false)
+	private String courseAddress;
+	
+	@Column(nullable = false)
+	private String courseAddressDef;
+	
+	@Column(nullable = false)
+	private String courseAddressEx;
 }

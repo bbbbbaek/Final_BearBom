@@ -23,7 +23,7 @@ const StepTwo_6 = ({saveFormData}) => {
  }, [formObj]);
 
  useEffect(() => {
-  setFormObj({...formObj, "location": location})
+  setFormObj({...formObj, "courseLocation": location})
  }, [location]);
 
   const handleChangeLoca = (event) => {

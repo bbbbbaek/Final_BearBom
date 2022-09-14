@@ -20,11 +20,11 @@ const StepTwo_1 = ({saveFormData}) => {
   }, [formObj]);
 
   useEffect(() => {
-   setFormObj({...formObj, "category": category})
+   setFormObj({...formObj, "courseCategory": category})
   }, [category]);
 
   useEffect(() => {
-   setFormObj({...formObj, "className": className})
+   setFormObj({...formObj, "courseNm": className})
   }, [className]);
 
   ///////////////////////////////////////////
