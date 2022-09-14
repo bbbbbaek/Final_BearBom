@@ -5,7 +5,7 @@ import "../css/mainpage.scss";
 import styled from "styled-components";
 import Carousel from "react-multi-carousel";
 // import Carousel from "react-bootstrap/Carousel";
-
+import LikeButton from "../ModuleComponents/LikeButton";
 import "react-multi-carousel/lib/styles.css";
 import { Button } from "react-bootstrap";
 import axios from "axios";
@@ -13,6 +13,7 @@ import { API_BASE_URL } from "../app-config";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 
 import dataTest from "./dataTest.js";
+import Card from "./Card";
 
 const Mainpage = (props) => {
   const [course, setCourse] = useState([]);
@@ -90,6 +91,65 @@ const Mainpage = (props) => {
     },
   ];
 
+  const stateText1 = [
+    {
+      id: "01",
+      title: "겉바속쫀 휘낭시에 만들기 클래스",
+      category: "카테고리01",
+      image: process.env.PUBLIC_URL + "/twopic.png",
+      price: "￦11,900",
+    },
+    {
+      id: "02",
+      title: "타이틀02",
+      category: "카테고리02",
+      image: process.env.PUBLIC_URL + "/twopic.png",
+      price: "￦02,900",
+    },
+    {
+      id: "03",
+      title: "타이틀03",
+      category: "카테고리03",
+      image: process.env.PUBLIC_URL + "/twopic.png",
+      price: "￦99,900",
+    },
+    {
+      id: "04",
+      title: "타이틀04",
+      category: "카테고리04",
+      image: process.env.PUBLIC_URL + "/twopic.png",
+      price: "￦99,900",
+    },
+    {
+      id: "05",
+      title: "테이블05",
+      category: "카테로기05",
+      image: process.env.PUBLIC_URL + "/twopic.png",
+      price: "￦99,900",
+    },
+    {
+      id: "06",
+      title: "타이틀06",
+      category: "카테고리06",
+      image: process.env.PUBLIC_URL + "/twopic.png",
+      price: "￦99,900",
+    },
+    {
+      id: "07",
+      title: "타이틀07",
+      category: "카테고리07",
+      image: process.env.PUBLIC_URL + "/twopic.png",
+      price: "￦99,900",
+    },
+
+    {
+      id: "08",
+      title: "타이틀08",
+      category: "카테고리08",
+      image: process.env.PUBLIC_URL + "/twopic.png",
+      price: "￦99,900",
+    },
+  ];
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -98,7 +158,7 @@ const Mainpage = (props) => {
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 3,
+      items: 4,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
@@ -287,18 +347,21 @@ const Mainpage = (props) => {
                   <Carousel responsive={responsive}>
                     {/* <div className="test001"> */}
 
-                    {stateText.map((data) => (
+                    {stateText1.map((data) => (
                       // 여기서 {}말고 ()로 하면 return 안해도 됨
                       //   이게 props 넣는거
-
-                      <MiniCard
-                        id={data.id}
-                        thumbnail={data.thumbnail}
-                        title={data.title}
-                        condition={true}
-                        // 예시로 보여주기 위함
-                      />
+                      <Link to={`/saw/${data.id}`} state={{ dataa: data }}>
+                        <Card
+                          id={data.id}
+                          thumbnail={data.image}
+                          title={data.title}
+                          price={data.price}
+                          condition={true}
+                          // 예시로 보여주기 위함
+                        />
+                      </Link>
                     ))}
+
                     {/* </div> */}
                   </Carousel>
                 </div>
