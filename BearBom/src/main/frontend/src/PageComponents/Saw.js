@@ -103,6 +103,9 @@ const Saw = (props) => {
     // const res = await axios.post(`${API_BASE_URL}/api/like/{id}/insertLike`);
     const userId = localStorage.getItem("USER_ID");
     const token = localStorage.getItem("ACCESS_TOKEN");
+    if (!token) {
+      return;
+    }
     await axios({
       method: "POST",
       url: `${API_BASE_URL}/api/like/${id}/insertLike`,
@@ -122,6 +125,7 @@ const Saw = (props) => {
       })
       .catch((error) => {
         console.log(error);
+        alert("로그인 해주세요 :)");
       });
     // [POST] 사용자가 좋아요를 누름 -> DB 갱신
     // setLike(!like);
