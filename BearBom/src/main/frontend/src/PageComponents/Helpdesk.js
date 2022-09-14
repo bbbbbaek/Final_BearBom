@@ -14,9 +14,7 @@ const Helpdesk = () => {
   return (
     <>
       <div className="helpdesk-background">
-        <div className="banner-container">
-          {/* <img src={banner} alt="" /> */}
-        </div>
+        <div className="banner-container" />
         <br />
         <div className="helpdesk-main">
           <div className="menu-container">
@@ -48,13 +46,15 @@ const Helpdesk = () => {
               1:1문의
             </div>
           </div>
+
+          <br />
+          {/* Modal부분 */}
+          <div className="content-container">
+            {[<Notice />, <FAQ />, <Inquiry />][tabContent]}
+          </div>
         </div>
-        <br />
       </div>
-      {/* Modal부분 */}
-      <div className="content-container">
-        {[<Notice />, <FAQ />, <Inquiry />][tabContent]}
-      </div>
+      <br />
     </>
   );
 };
