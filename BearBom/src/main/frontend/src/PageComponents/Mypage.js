@@ -1,24 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import "../css/mypage.css";
-import QuickView from "./MyPage/QuickView";
-import SideBar from "./MyPage/SideBar";
+import OpenedClassView from "../PageComponents/MyPage/OpenedClassView";
+import QuickView from "../PageComponents/MyPage/QuickView";
+import SideBar from "../PageComponents/MyPage/SideBar";
+import TakenClassView from "../PageComponents/MyPage/TakenClassView";
+import InquiryView from "./MyPage/InquiryView";
+import WishlistView from "./MyPage/WishlistView";
+import UserInfoModification from "./MyPage/UserInfoModification";
+import LecturerInfoModification from "./MyPage/LecturerInfoModification";
+import UserProfilePicture from "./MyPage/UserProfilePicture";
 
 const Mypage = () => {
+  const [tab, setTab] = useState(0);
+
   return (
     <>
-      <p>mypage</p>
-
-      <div className="mypage-banner">mypage</div>
-      <div style={{ marginLeft: "15%", marginRight: "15%" }}>
-        <div className="mypage-quickview-wrapper">
-          <QuickView />
-          {/* <div className="mypage-quickview-container"></div> */}
-        </div>
-        <div className="mypage-container">
-          <div className="mypage-sidebar-wrapper">
-            <SideBar />
+      <div className="mypage">
+        <div className="mypage-banner">mypage</div>
+        <div style={{ paddingLeft: "15%", paddingRight: "15%" }}>
+          <div className="mypage-container">
+            <div className="mypage-sidebar-wrapper">
+              <UserProfilePicture />
+              <hr />
+              <SideBar setTab={setTab} />
+            </div>
+            <div className="mypage-content-wrapper">
+              <div className="mypage-quickview-wrapper">
+                <QuickView />
+              </div>
+              <div className="mypage-content">
+                {
+                  [
+                    <TakenClassView />,
+                    <OpenedClassView />,
+                    <UserInfoModification />,
+                    <LecturerInfoModification />,
+                    <InquiryView />,
+                    <div>dd</div>,
+                    <WishlistView />,
+                  ][tab]
+                }
+              </div>
+            </div>
           </div>
-          <div className="mypage-content-wrapper">mypage-content-wrapper</div>
         </div>
       </div>
     </>
