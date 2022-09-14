@@ -5,14 +5,21 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../css/courseRegistration.css";
 import ThumbnailInput from "./RegistrationComponents/ThumbnailInput";
 import FileInput from "./RegistrationComponents/FileInput"
 
-const StepTwo_2 = () => {
+const StepTwo_2 = ({saveFormData}) => {
+
+  const [formObj, setFormObj] = useState({});
+
+  useEffect(() => {
+     saveFormData(formObj);
+  }, [formObj]);
+
   return (
-    <>
+    <form id="step_two_2_form">
       <div className="content content1">
         <div className="contentName">Step.2 클래스 소개</div>
         <div className="contentWrap">
@@ -33,7 +40,7 @@ const StepTwo_2 = () => {
                 <p>대표 이미지 - 썸네일</p>
               </div>
               <div className="inputWrap inputHfix">
-                <ThumbnailInput />
+                <ThumbnailInput saveFormData={saveFormData} />
               </div>
               <p className="inputWar">*이미지 등록시 유의사항.</p>
             </div>
@@ -49,7 +56,7 @@ const StepTwo_2 = () => {
           </div>
         </div>
       </div>
-    </>
+    </form>
   );
 };
 export default StepTwo_2;

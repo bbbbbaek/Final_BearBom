@@ -40,5 +40,3 @@ out/
 /src/main/java/com/spring/bearbom/configuration/MailConfig.java
 /src/main/java/com/spring/bearbom/service/oauth/OAuthService.java
 /src/main/java/com/spring/bearbom/service/oauth/OAuthService1.java
-
-

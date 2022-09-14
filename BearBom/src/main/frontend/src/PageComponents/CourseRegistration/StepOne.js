@@ -1,26 +1,37 @@
 import {
     Button, ToggleButtonGroup,
   } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CheckCircle from "@mui/icons-material/CheckCircle";
 import "../../css/courseRegistration.css";
 import SelectButton from "./RegistrationComponents/SelectButton";
-import useStore from "./stepStore";
+import CourseStore from "./CourseStore";
 
 
-  const StepOne = () => {
-   const { min } = useStore();
-
+  const StepOne = ({saveFormData}) => {
     const [buttonValue, setButtonValue] = useState(true);
-    const [Number, setNumber] = useState();
+    const [number, setNumber] = useState();
+    const [formObj, setFormObj] = useState({});
+
+     useEffect(() => {
+        saveFormData(formObj);
+     }, [formObj]);
+
+     useEffect(() => {
+      setFormObj({...formObj, "phoneNum": number})
+     }, [number]);
+
+     useEffect(() => {
+      setFormObj({...formObj, "buttonValue": buttonValue})
+     }, [buttonValue]);
 
     const handlePhoneNum = (event) => {
       setNumber(event.target.value);
-      useStore.setState({phoneNum:event.target.value})
+      //CourseStore.setState({phoneNum:event.target.value})
     };
 
     return (
-        <>
+        <form id="step_one_form">
             <div className="content content1">
               <div className="contentName">Step.1 인증 및 클래스 유형</div>
               <div className="contentWrap">
@@ -44,8 +55,10 @@ import useStore from "./stepStore";
                       <div className="inputWrap">
                         <input
                           className="phoneNum"
+                          name="phoneNum"
                           type="text"
                           placeholder="' - '를 제외하고 입력해주세요"
+                          value={number}
                           onChange={handlePhoneNum}
                         ></input>
                       </div>
@@ -89,7 +102,7 @@ import useStore from "./stepStore";
                 </div>
               </div>
               </div>
-          </>
+          </form>
       );
     };
     export default StepOne;
