@@ -125,7 +125,8 @@ const Saw = (props) => {
       })
       .catch((error) => {
         console.log(error);
-        alert("로그인 해주세요 :)");
+        //불필요한 alert
+        // alert("로그인 해주세요 :)");
       });
     // [POST] 사용자가 좋아요를 누름 -> DB 갱신
     // setLike(!like);

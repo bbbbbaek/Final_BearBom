@@ -134,7 +134,7 @@ h2 {
   position: relative;
   width: 100%;
   /* max-width: 1280px; */
-  max-width: 1310px;
+  max-width: 1500px;
   margin: 0 auto;
 }
 
@@ -151,7 +151,7 @@ h2 {
 /**/
 
 .favorite-list {
-  margin-left: 3%;
+  /* margin-left: 3%; */
 }
 
 .class-open-page-move-area .class-open-page-move-btn {
@@ -240,3 +240,11 @@ h2 {
 /* .shoeinfo-container {
   display: flex;
 } */
+
+.react-multiple-carousel__arrow--left {
+  left: 0px;
+}
+
+.react-multiple-carousel__arrow--right {
+  right: 0px;
+}
