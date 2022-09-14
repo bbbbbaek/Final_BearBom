@@ -79,6 +79,7 @@ const Saw = (props) => {
         method: "GET",
         url: API_BASE_URL + "/api/like/getLikeList",
         params: { userId: userId, courseIdx: id },
+        //403 에러는 보안관련 에러
         headers: {
           Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
         },
@@ -87,6 +88,8 @@ const Saw = (props) => {
           console.log(response);
           if (response.data.likeState === "liked") {
             setLike(true);
+          } else {
+            setLike(false);
           }
         })
         .catch((error) => {
@@ -97,7 +100,17 @@ const Saw = (props) => {
   }, []);
 
   const toggleLike = async (e) => {
-    const res = await axios.post(`${API_BASE_URL}/api/like/{id}/test`);
+    // const res = await axios.post(`${API_BASE_URL}/api/like/{id}/insertLike`);
+    await axios({
+      method: "POST",
+      url: `${API_BASE_URL}/api/like/${id}/insertLike`,
+      //403 에러는 보안관련 에러
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+      },
+    }).then((response) => {
+      console.log(response);
+    });
     // [POST] 사용자가 좋아요를 누름 -> DB 갱신
     setLike(!like);
   };

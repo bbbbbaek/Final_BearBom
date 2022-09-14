@@ -36,13 +36,31 @@ public class LikeController {
         return ResponseEntity.ok().body(likeDto);
     }
 
-    //빈하트 클릭 시 하트 저장
-    @PostMapping("a")
-    public ResponseEntity<LikeDto> like(@RequestBody LikeDto likeDto) {
-        likeService.like(likeDto);
+    //빈하트 클릭 시 하트
+    @PostMapping("{id}/insertLike")
+    public ResponseEntity<LikeDto> like(@PathVariable(name = "id") int courseIdx, @RequestBody LikeDto likeDto) {
+        System.out.println("///////////////////"+courseIdx);
+        int like = likeService.readLike(likeDto);
+
+        if(like == 1) {
+            likeService.unLike(likeDto);
+            likeDto.setLikeState("unLike");
+        } else {
+            likeService.like(likeDto);
+            likeDto.setLikeState("like");
+        }
 //        return new ResponseEntity<>(likeDto, HttpStatus.CREATED);
         return ResponseEntity.ok().body(likeDto);
     }
+
+
+//    //빈하트 클릭 시 하트 저장
+//    @PostMapping("a")
+//    public ResponseEntity<LikeDto> like(@RequestBody LikeDto likeDto) {
+//        likeService.like(likeDto);
+////        return new ResponseEntity<>(likeDto, HttpStatus.CREATED);
+//        return ResponseEntity.ok().body(likeDto);
+//    }
 
     //꽉찬 하트 클릭시 하트 해제
     @PostMapping("b")

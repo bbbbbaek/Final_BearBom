@@ -19,7 +19,7 @@ public class LikeServiceImpl implements LikeService {
 
     @Override
     public void unLike(LikeDto likeDto) {
-
+        likeMapper.unLike(likeDto);
     }
 
     @Override
