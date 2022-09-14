@@ -7,18 +7,8 @@ import Stack from "@mui/material/Stack";
 import excelDownload from "../images/excelDownload.png";
 import { TableMenuItems } from "../ModuleComponents/TableMenuItems";
 
+// TableMenuItems 객체로 생성한 tableItems state를 사용하여 각 컴포넌트에 알맞은 데이터를 출력할 수 있도록 설계
 const SalesView = ({ setTab, tableItems }) => {
-  // const tableItems = new TableMenuItems(
-  //   "Sales View",
-  //   "클래스명",
-  //   "매출",
-  //   "매출이익",
-  //   "수량",
-  //   "구매자",
-  //   "판매자",
-  //   "구매일자"
-  // );
-
   const sortedData = [...salesData].sort((a, b) => b.idx - a.idx);
   const [rawData] = useState(sortedData);
   // data의 초깃값을 salesData로 설정하게 되면, rawData와 참조값이 같게 되면서 splice메소드 사용하여 data 변경 시, rawData의 값도 변경되는 문제 있음
@@ -81,15 +71,15 @@ const SalesView = ({ setTab, tableItems }) => {
 
   return (
     <>
-      <h1
+      <h5
         onClick={() => {
           // 탭 새로고침이 안됨 ㅠ
           setTab("");
           setTab(1);
         }}
       >
-        {tableItems.title}
-      </h1>
+        <strong>{tableItems.title}</strong>
+      </h5>
       <hr />
       <div className="sales-table-wrapper">
         <div className="sales-filter-wrapper">

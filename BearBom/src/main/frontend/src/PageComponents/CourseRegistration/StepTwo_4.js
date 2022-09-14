@@ -17,15 +17,15 @@ const StepTwo_4 = ({saveFormData}) => {
  }, [formObj]);
 
  useEffect(() => {
-  setFormObj({...formObj, "level": difficulty})
+  setFormObj({...formObj, "courseLevel": difficulty})
  }, [difficulty]);
 
  useEffect(() => {
-  setFormObj({...formObj, "runtime": durationTime})
+  setFormObj({...formObj, "courseRuntime": durationTime})
  }, [durationTime]);
  
  useEffect(() => {
-  setFormObj({...formObj, "levelContent": curriculum})
+  setFormObj({...formObj, "courseLevelContent": curriculum})
  }, [curriculum]);
 
   const MyButton = ({ children, onClick, selected, value }) => {

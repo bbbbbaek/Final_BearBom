@@ -1,5 +1,5 @@
 .helpdesk-background {
-  background-color: #ffffff;
+  background-color: #f8f8f8;
 }
 
 .banner-container {
@@ -39,12 +39,11 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-items: center;
-  background-color: #ffffff;
 }
 
 .menu-list {
   margin: 10px;
-  background-color: #f8fafc;
+  background-color: #e1e2e3;
   width: 95%;
   min-height: 65px;
   display: flex;
@@ -70,7 +69,12 @@ p {
 }
 
 .content-container {
+  min-width: 98%;
+  background-color: #fff;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+
+  border: 1px solid #e1e2e3;
   border-radius: 3px;
-  min-width: 95%;
-  background-color: #ffffff;
+  padding: 1rem;
 }

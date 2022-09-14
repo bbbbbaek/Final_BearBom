@@ -113,6 +113,11 @@ const CourseRegistration = () => {
         url: "http://localhost:8080/api/course/courseRegistration",
         method: "POST",
         data: formData,
+        //403 에러는 보안관련 에러
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+          "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
+        },
       })
         .then((response) => {})
         .catch((e) => {

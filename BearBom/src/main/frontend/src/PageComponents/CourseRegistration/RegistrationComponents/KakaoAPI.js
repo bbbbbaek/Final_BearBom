@@ -24,7 +24,7 @@ const KakaoAPI = ({saveFormData}) => {
 //  }, [address]);
 
  useEffect(() => {
-  setFormObj({...formObj, "addressDef": addressDef, "address": addressRef.current.value, "addressEx": addressExRef.current.value, "zipcode": zipcodeRef.current.value})
+  setFormObj({...formObj, "courseAddressDef": addressDef, "courseAddress": addressRef.current.value, "courseAddressEx": addressExRef.current.value, "courseZipcode": zipcodeRef.current.value})
   // setFormObj({...formObj, "address": addressRef.current.value})
   // setFormObj({...formObj, "addressEx": addressExRef.current.value})
   // setFormObj({...formObj, "zipcode": zipcodeRef.current.value})

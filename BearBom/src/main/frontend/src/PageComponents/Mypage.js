@@ -9,6 +9,7 @@ import WishlistView from "./MyPage/WishlistView";
 import UserInfoModification from "./MyPage/UserInfoModification";
 import LecturerInfoModification from "./MyPage/LecturerInfoModification";
 import UserProfilePicture from "./MyPage/UserProfilePicture";
+import InquiryWrite from "./MyPage/InquiryWrite";
 
 const Mypage = () => {
   const [tab, setTab] = useState(0);
@@ -28,7 +29,7 @@ const Mypage = () => {
               <div className="mypage-quickview-wrapper">
                 <QuickView />
               </div>
-              <div className="mypage-content">
+              <div className={tab === 5 ? null : "mypage-content"}>
                 {
                   [
                     <TakenClassView />,
@@ -36,7 +37,7 @@ const Mypage = () => {
                     <UserInfoModification />,
                     <LecturerInfoModification />,
                     <InquiryView />,
-                    <div>dd</div>,
+                    <InquiryWrite />,
                     <WishlistView />,
                   ][tab]
                 }
