@@ -55,10 +55,9 @@ const Detail = ({ scrollTop }) => {
     axios({
       method: "post",
       url: API_BASE_URL + "/api/course/writeReview",
-      // headers: {
-      //   Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
-      // },
-
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+      },
       data: reviewInfo,
     }).then((response) => {
       console.log(response);
@@ -78,6 +77,9 @@ const Detail = ({ scrollTop }) => {
     axios({
       url: listUrl,
       method: "post",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+      },
       // params: {userId: userId}
       data: { courseIdx: 1 },
     })

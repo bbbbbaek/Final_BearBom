@@ -18,7 +18,7 @@ function Apply() {
     } else {
       calRef.current.style.opacity = 1;
     }
-    console.log("test");
+    // console.log("test");
   }, [height]);
 
   useEffect(() => {
