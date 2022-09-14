@@ -30,26 +30,50 @@ public class CourseRController {
 //    @GetMapping("aaa")
 //    public ResponseEntity<> ttt (@RequestParam String userId)
 
+    
     @PostMapping("/getReviewList")
     public Map<String, Object> getReviewList(@RequestBody Course course) {
-        System.out.println(course.getCourseIdx());
-
-        Courser courser = new Courser();
-        courser.setCourse(course);
-
-        List<Courser> reviewList = courseRService.Review(courser);
-
+    	System.out.println(course.getCourseIdx());
+    	
+    	Courser courser = new Courser();
+    	courser.setCourse(course);
+    	
+    	List<Courser> reviewList = courseRService.Review(courser);
+    	
 //    	List<Double> updateRating = courseRService.updateRating(courser);
+    	
+    	double averageRating = courseRService.updateRating(courser);
+    	
+    	System.out.println(averageRating);
+    	Map<String, Object> resultMap = new HashMap<String, Object>();
+    	
+    	resultMap.put("reviewList", reviewList);
+    	resultMap.put("averageRating", averageRating);
+    	
+    	return resultMap;
 
-        double averageRating = courseRService.updateRating(courser);
 
-        System.out.println(averageRating);
-        Map<String, Object> resultMap = new HashMap<String, Object>();
+//    @PostMapping("/getReviewList")
+//    public Map<String, Object> getReviewList(@RequestBody Course course) {
+//        System.out.println(course.getCourseIdx());
+//
+//        Courser courser = new Courser();
+//        courser.setCourse(course);
+//
+//        List<Courser> reviewList = courseRService.Review(courser);
+//
+////    	List<Double> updateRating = courseRService.updateRating(courser);
+//
+//        double averageRating = courseRService.updateRating(courser);
+//
+//        System.out.println(averageRating);
+//        Map<String, Object> resultMap = new HashMap<String, Object>();
+//
+//        resultMap.put("reviewList", reviewList);
+//        resultMap.put("averageRating", averageRating);
+//
+//        return resultMap;
 
-        resultMap.put("reviewList", reviewList);
-        resultMap.put("averageRating", averageRating);
-
-        return resultMap;
     }
 
     @PostMapping("/writeReview")

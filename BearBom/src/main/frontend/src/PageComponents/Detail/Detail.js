@@ -34,6 +34,8 @@ const Detail = ({ scrollTop }) => {
   let item = course.find((a) => (a.course_idx = id));
   console.log(item);
 
+  const ida = useParams();
+  console.log(ida);
   const [reviewInfo, setReviewInfo] = useState({ courseIdx: 1 });
 
   const addReviewInfo = (e) => {
@@ -66,19 +68,24 @@ const Detail = ({ scrollTop }) => {
   const [reviewList, setReviewList] = useState([]);
   const [reviewData, setReviewData] = useState([]);
   const [cnt, setCnt] = useState(0);
+  const [averageRating, setaverageRating] = useState([]);
 
   let listUrl = "http://localhost:8080/api/course/getReviewList";
 
+  const userId = localStorage.getItem("USER_ID");
+  console.log(userId);
   const list = () => {
     axios({
       url: listUrl,
       method: "post",
+      // params: {userId: userId}
       data: { courseIdx: 1 },
     })
       .then((response) => {
-        console.log(response.data.data);
-        setReviewList(response.data.data);
-        setReviewData(response.data.data.slice(0, 4));
+        console.log(response.data);
+        setReviewList(response.data.reviewList);
+        setaverageRating(response.data.averageRating);
+        setReviewData(response.data.reviewList.slice(0, 4));
       })
       .catch((e) => {
         console.log(e);
@@ -105,6 +112,13 @@ const Detail = ({ scrollTop }) => {
 
   return (
     <>
+      <button
+        onClick={() => {
+          console.log(averageRating);
+        }}
+      >
+        test
+      </button>
       <div className="main-container">
         <div className="info">
           <div className="main-info">
@@ -114,15 +128,16 @@ const Detail = ({ scrollTop }) => {
             </div>
             <h4>Title</h4>
             <CourseNavbar />
-            <hr />
-            <section id="teacher" className="section-box">
+            <hr id="teacher" />
+            <section /* id="teacher" */ className="section-box">
+              <Teacher averageRating={averageRating} />
+
               <h5>
                 <b>강사소개</b>
               </h5>
-              <Teacher />
             </section>
-            <hr />
-            <section id="class" className="section-box">
+            <hr id="class" />
+            <section className="section-box">
               <h5>
                 <b>클래스소개</b>
               </h5>
@@ -163,12 +178,12 @@ const Detail = ({ scrollTop }) => {
                   <button
                     className="more-btn"
                     onClick={() => {
-                      console.log(woobin);
-                      console.log(reviewList);
+                      // console.log(woobin);
+                      // console.log(reviewList);
                       // setWoobin(!woobin);
                       setCnt(cnt + 1);
-                      console.log(reviewData);
-                      console.log(cnt);
+                      // console.log(reviewData);
+                      // console.log(cnt);
                       // axios
                       //   .get("http://localhost:8080/api/course/getReviewList.json")
                       //   .then((response) => {
