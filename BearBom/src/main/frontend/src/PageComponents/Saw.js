@@ -101,6 +101,8 @@ const Saw = (props) => {
 
   const toggleLike = async (e) => {
     // const res = await axios.post(`${API_BASE_URL}/api/like/{id}/insertLike`);
+    const userId = localStorage.getItem("USER_ID");
+    const token = localStorage.getItem("ACCESS_TOKEN");
     await axios({
       method: "POST",
       url: `${API_BASE_URL}/api/like/${id}/insertLike`,
@@ -108,11 +110,21 @@ const Saw = (props) => {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
       },
-    }).then((response) => {
-      console.log(response);
-    });
+      data: { courseIdx: id, userId: userId },
+    })
+      .then((response) => {
+        console.log(response);
+        if (response.data.likeState === "like") {
+          setLike(!like);
+        } else {
+          setLike(!like);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     // [POST] 사용자가 좋아요를 누름 -> DB 갱신
-    setLike(!like);
+    // setLike(!like);
   };
   ///////////////////////////////////
 
