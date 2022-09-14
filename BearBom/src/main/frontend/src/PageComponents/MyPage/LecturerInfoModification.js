@@ -3,7 +3,10 @@ import React from "react";
 const LecturerInfoModification = () => {
   return (
     <>
-      <div></div>
+      <h5>
+        <strong>강사 프로필 수정</strong>
+      </h5>
+      <hr />
     </>
   );
 };

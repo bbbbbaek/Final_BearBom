@@ -17,6 +17,7 @@ import com.spring.bearbom.entity.User;
 import com.spring.bearbom.jwt.JwtTokenProvider;
 import com.spring.bearbom.mapper.UserMapper;
 import com.spring.bearbom.repository.UserRepository;
+//import com.spring.bearbom.service.oauth.OAuthService;
 import com.spring.bearbom.service.oauth.OAuthService;
 
 import lombok.AllArgsConstructor;

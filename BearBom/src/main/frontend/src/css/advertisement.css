@@ -1,0 +1,24 @@
+.ads-wrapper {
+  margin: 5%;
+  width: 90%;
+  min-height: 5rem;
+  max-height: 20rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
+  overflow: hidden;
+}
+
+.ads-pic {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.ads-pic:hover {
+  cursor: pointer;
+}

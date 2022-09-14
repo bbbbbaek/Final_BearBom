@@ -44,6 +44,10 @@ const Inquiry = () => {
   return (
     <>
       <div className="inquiry-main">
+        <h5>
+          <strong>1:1문의</strong>
+        </h5>
+        <hr />
         <div className="inquiry-container">
           <form action="/action_page.php" method="post">
             <label for="email">이메일</label>
