@@ -28,7 +28,7 @@ function Review({ review }) {
           <HoverRating courserRate={review.courserRate} />
         </div>
         <div className="review-textarea">
-          {/* <AutoHeightTextarea courserContent={review.courserContent} /> */}
+          {/* <AutoHeightTextarea readOnly courserContent={review.courserContent} /> */}
           <span>{review.courserContent}</span>
         </div>
       </div>

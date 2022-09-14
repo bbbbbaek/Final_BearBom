@@ -1,4 +1,4 @@
-package com.spring.bearbom.controller.Course;
+package com.spring.bearbom.controller.course;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

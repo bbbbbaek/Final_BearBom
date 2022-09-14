@@ -14,8 +14,8 @@ body {
 }
 .main-container {
   height: auto;
-  margin-left: 100px;
-  margin-right: 100px;
+  width: 80%;
+  margin: auto;
 }
 
 .img {
@@ -37,6 +37,9 @@ body {
   width: 34%;
   height: 100%;
   position: sticky;
+}
+.main-img-box {
+  margin: 54px 120px 50px 120px;
 }
 .main-img {
   float: left;
@@ -138,9 +141,7 @@ body {
 .teacher-clear {
   clear: both;
 }
-.main-img-box {
-  margin-top: 32px;
-}
+
 .class-content {
   display: flex;
   justify-content: center;
@@ -302,8 +303,9 @@ body {
 
 .review-box {
   width: 100%;
-  padding: 40px;
-  height: 10%;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 20px;
 }
 
 .review-nickname {
@@ -325,12 +327,16 @@ body {
   width: 100%;
 }
 
-.reviewmodal-box {
+.reviewmodal-btn {
   float: right;
   margin-right: 40px;
   background-color: #1eb7e5;
   border-radius: 5px;
   border: 1px solid rgb(0, 0, 0, 0);
+}
+
+.review-modal-box {
+  width: 100%;
 }
 
 .rating-position {
@@ -384,11 +390,21 @@ body {
 }
 
 .reviewList {
-  height: 300px;
-  overflow: hidden;
+  min-height: 600px;
+  margin-bottom: 300px;
+  /* overflow: scroll; */
 }
 
 .more-btn {
+  /* position: absolute;
+  left: 500px; */
   position: absolute;
   left: 500px;
+  border: 1px none;
+  border-radius: 5px;
+  background-color: #dbd7b3;
+}
+
+#review-box-list {
+  height: 100%;
 }
