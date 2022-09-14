@@ -17,6 +17,8 @@ import CourseStore from "./CourseStore";
         saveFormData(formObj);
      }, [formObj]);
 
+//const test = localStorage.getItem("USER_ID") 로컬스토리지 가져오는것
+
      useEffect(() => {
       setFormObj({...formObj, "userTel": number})
      }, [number]);

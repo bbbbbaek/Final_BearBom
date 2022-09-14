@@ -20,7 +20,7 @@ const StepTwo_1 = ({saveFormData}) => {
   }, [formObj]);
 
   useEffect(() => {
-   setFormObj({...formObj, "cmmnCodeIdx": category})
+   setFormObj({...formObj, "courseCategory": category})
   }, [category]);
 
   useEffect(() => {
