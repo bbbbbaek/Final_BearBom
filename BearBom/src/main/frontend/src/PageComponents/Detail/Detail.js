@@ -64,6 +64,8 @@ const Detail = ({ scrollTop }) => {
     });
   };
   const [reviewList, setReviewList] = useState([]);
+  const [reviewData, setReviewData] = useState([]);
+  const [cnt, setCnt] = useState(0);
 
   let listUrl = "http://localhost:8080/api/course/getReviewList";
 
@@ -76,6 +78,7 @@ const Detail = ({ scrollTop }) => {
       .then((response) => {
         console.log(response.data.data);
         setReviewList(response.data.data);
+        setReviewData(response.data.data.slice(0, 4));
       })
       .catch((e) => {
         console.log(e);
@@ -85,6 +88,15 @@ const Detail = ({ scrollTop }) => {
   React.useEffect(() => {
     list();
   }, []);
+
+  useEffect(() => {
+    console.log(reviewList);
+    console.log(reviewList.slice(4 * cnt, 4 * (cnt + 1)));
+    let copy = reviewData.concat(reviewList.slice(4 * cnt, 4 * (cnt + 1)));
+    // let copy = [...reviewData];
+    console.log(copy);
+    setReviewData(copy);
+  }, [cnt]);
 
   // const style = { onclick=
   //   overflow: user.active ? "none" : "hidden",
@@ -138,26 +150,40 @@ const Detail = ({ scrollTop }) => {
             <section id="review" className="section-box">
               <div
                 className="reviewList"
-                style={{ height: woobin ? "auto" : "300px" }}
+                // style={{ height: woobin ? "auto" : "300px" }}
               >
                 <OpenModal
                   addReviewInfo={addReviewInfo}
                   onWriteReview={onWriteReview}
                 />
-
-                {reviewList.map((review) => (
-                  <Review review={review} />
-                ))}
+                <div id="review-box-list">
+                  {reviewData.map((review) => (
+                    <Review review={review} />
+                  ))}
+                  <button
+                    className="more-btn"
+                    onClick={() => {
+                      console.log(woobin);
+                      console.log(reviewList);
+                      // setWoobin(!woobin);
+                      setCnt(cnt + 1);
+                      console.log(reviewData);
+                      console.log(cnt);
+                      // axios
+                      //   .get("http://localhost:8080/api/course/getReviewList.json")
+                      //   .then((response) => {
+                      //     let copy = [...reviewList, ...response.data.data];
+                      //     setReviewList(copy);
+                      //   })
+                      //   .catch(() => {
+                      //     console.log("실패함");
+                      //   });
+                    }}
+                  >
+                    더보기
+                  </button>
+                </div>
               </div>
-              <button
-                className="more-btn"
-                onClick={() => {
-                  console.log(woobin);
-                  setWoobin(!woobin);
-                }}
-              >
-                더보기
-              </button>
             </section>
           </div>
           <div className="main-cal">

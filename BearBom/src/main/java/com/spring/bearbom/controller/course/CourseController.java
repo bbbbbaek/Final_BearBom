@@ -1,4 +1,4 @@
-package com.spring.bearbom.controller.Course;
+package com.spring.bearbom.controller.course;
 
 import java.io.IOException;
 import java.util.Map;

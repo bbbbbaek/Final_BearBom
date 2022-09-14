@@ -14,18 +14,19 @@ function OpenModal({ addReviewInfo, onWriteReview }) {
   // };
   return (
     <>
-      <h5>
-        <b>후기</b>
-      </h5>
-
-      <button
-        className="reviewmodal-box"
-        onClick={() => {
-          setModalOpen(!modalOpen);
-        }}
-      >
-        등록하기
-      </button>
+      <div className="review-modal-header">
+        <h5>
+          <b>후기</b>
+        </h5>
+        <button
+          className="reviewmodal-btn"
+          onClick={() => {
+            setModalOpen(!modalOpen);
+          }}
+        >
+          등록하기
+        </button>
+      </div>
       {modalOpen ? (
         <Modal
           modalOpen={modalOpen}

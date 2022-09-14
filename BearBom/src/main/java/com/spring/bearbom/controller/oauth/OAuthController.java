@@ -116,7 +116,24 @@ public class OAuthController {
             return ResponseEntity.ok().body(userDTO);
         } else {
             User test1 = users.get(0);
-            return ResponseEntity.ok().body(test1);
+            userDTO.setUserId(test1.getUserId());
+            userDTO.setUserNm(test1.getUserNm());
+            userDTO.setUserPw(test1.getUserPw());
+            userDTO.setRole(test1.getRole());
+            userDTO.setUserAddress(test1.getUserAddress());
+            userDTO.setUserNickName(test1.getUserNm());
+            userDTO.setUserPoint(test1.getUserPoint());
+            userDTO.setUserPwFailCnt(test1.getUserPwFailCnt());
+            userDTO.setUserTel(test1.getUserTel());
+            userDTO.setUserYn(test1.getUserYn());
+            userDTO.setUserZipcode(test1.getUserZipcode());
+            userDTO.setUserEmail(test1.getUserEmail());
+
+            System.out.println(userDTO);
+            final String tokenT = jwtTokenProvider.createT(userDTO);
+            System.out.println("tokenT://////////"+tokenT);
+            userDTO.setToken(tokenT);
+            return ResponseEntity.ok().body(userDTO);
         }
 
 
