@@ -13,7 +13,7 @@ public interface LikeMapper {
     int readLike(LikeDto likeDto);
 
     //좋아요 등록
-    @Insert("INSERT INTO T_LIKE(COURSE_IDX, USER_ID) VALUES  #{courseIdx}, #{userId}")
+    @Insert("INSERT INTO T_LIKE(COURSE_IDX, USER_ID) VALUES  (#{courseIdx}, #{userId})")
     void like(LikeDto likeDto);
 
 
