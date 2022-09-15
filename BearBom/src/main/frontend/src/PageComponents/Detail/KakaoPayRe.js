@@ -1,6 +1,8 @@
 import React, { useState, useCallback, useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 const KakaoPayRe = () => {
   const { search } = useLocation(); //location 안에 있는 토큰 정보를 빼내서 사용해야 한다.
@@ -9,6 +11,10 @@ const KakaoPayRe = () => {
     JSON.parse(sessionStorage.getItem("params"))
   );
   const [tid, setTid] = useState(sessionStorage.getItem("tid"));
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     const pgToken = search.split("=")[1];
@@ -47,6 +53,28 @@ const KakaoPayRe = () => {
   }, [rcParams, tid, params]);
   //url에 붙어서 온 pg_token을 결제api에 줄 params에 할당
   //params.pg_token = search.split("=")[1];
+  return (
+    <>
+      <Button variant="primary" onClick={handleShow}>
+        Launch demo modal
+      </Button>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
 };
 
 export default KakaoPayRe;
