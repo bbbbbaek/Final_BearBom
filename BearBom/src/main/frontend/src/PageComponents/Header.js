@@ -37,7 +37,7 @@ const Header = () => {
       // setLoginText("로그인");
       console.log(loginText);
       // window.location.href("/loginTest");
-      navigate("/loginTest");
+      navigate("/login");
     } else {
       // setLoginText(localStorage.getItem("USER_ID"));
       console.log(loginText);

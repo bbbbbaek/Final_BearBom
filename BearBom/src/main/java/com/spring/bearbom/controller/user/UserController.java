@@ -14,6 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/user")
@@ -70,7 +74,7 @@ public class UserController {
 		//로그인 한 Member 객체 생성
 		User loginUser = userService.login(user.getUserId(), user.getUserPw());
 
-		if(loginUser != null) {
+		if(loginUser != null && loginUser.getLoginFailMessage() == null) {
 			//로그인된 유저에 대한 토큰 발행
 			final String token = jwtTokenProvider.create(loginUser);
 
@@ -89,7 +93,7 @@ public class UserController {
 			return ResponseEntity.ok().body(userDTO);
 		} else {
 			ResponseDTO<UserDTO> response = new ResponseDTO<>();
-			response.setError("login failed");
+			response.setError(loginUser.getLoginFailMessage());
 			return ResponseEntity.badRequest().body(response);
 		}
 	}
@@ -141,8 +145,6 @@ public class UserController {
 //		log.info("confirm: {}", confirm);
 		return ResponseEntity.ok().body(confirm);
 	}
-
-
 
 
 }
