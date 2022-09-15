@@ -17,6 +17,7 @@ import Card from "./Card";
 
 const Mainpage = () => {
   const [course, setCourse] = useState([]);
+  const [averageRating, setaverageRating] = useState([]);
 
   const stateText = [
     {
@@ -198,8 +199,10 @@ const Mainpage = () => {
       url: API_BASE_URL + "/api/main/getCourseList",
     }).then((response) => {
       // console.log(response);
-      // console.log(response.data);
-      setCourse(response.data);
+      console.log(response.data);
+      // setCourse(response.data);
+      // setCourse(response.data.getCourseList);
+      // setaverageRating(response.data.averageRating);
     });
   }, []);
 
@@ -358,7 +361,7 @@ const Mainpage = () => {
                     {course.map((data) => (
                       // 여기서 {}말고 ()로 하면 return 안해도 됨
                       //   이게 props 넣는거
-                      <Card course={data} />
+                      <Card course={data} averageRating={averageRating} />
                     ))}
                   </Carousel>
                 </div>
@@ -366,39 +369,7 @@ const Mainpage = () => {
             </CarouselContainer>
           </div>
         </div>
-        <div className="list-box favorite-class-area">
-          <div className="list-header">
-            <h2>베어봄이 검증한 이달의 인기클래스!</h2>
-          </div>
-          <div>
-            <CarouselContainer>
-              <div className="favorite-list">
-                <div style={{ width: "100%", margin: "0 auto" }}>
-                  <Carousel responsive={responsive}>
-                    <div className="test001">
-                      {stateText1.map((data) => (
-                        // 여기서 {}말고 ()로 하면 return 안해도 됨
-                        //   이게 props 넣는거
-                        <Link to={`/saw/${data.id}`} state={{ dataa: data }}>
-                          <MiniCard
-                            id={data.id}
-                            thumbnail={data.image}
-                            title={data.title}
-                            price={data.price}
-                            condition={true}
-                            // 예시로 보여주기 위함
-                          />
-                        </Link>
-                      ))}
-                    </div>
 
-                    {/* </div>
-                  </Carousel>
-                </div>
-              </div>
-            </CarouselContainer>
-          </div>
-        </div>
         <div className="list-box new-class-area">
           <div className="list-header">
             <h2>오늘 오픈 했어요!</h2>
@@ -408,8 +379,6 @@ const Mainpage = () => {
               <div className="favorite-list">
                 <div style={{ width: "100%", margin: "0 auto" }}>
                   <Carousel responsive={responsive}>
-                    {/* <div className="test001"> */}
-
                     {dataa.map((data) => (
                       // 여기서 {}말고 ()로 하면 return 안해도 됨
                       //   이게 props 넣는거
@@ -427,7 +396,6 @@ const Mainpage = () => {
                         />
                       </Link>
                     ))}
-                    {/* </div> */}
                   </Carousel>
                 </div>
               </div>
