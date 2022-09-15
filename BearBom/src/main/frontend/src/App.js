@@ -59,7 +59,7 @@ function App() {
           <Route path="/*" element={<Page404 />} />
           <Route path="/course/test" element={<Test123 />} />
           <Route path="/payready" exact={true} component={PayReady} />
-          // 결제 승인이 진행될 PayResult를 설정한다.
+
           <Route path="/payresult" component={PayResult} />
           <Route path="/payready1" component={KakaoPayReady} />
         </Routes>
