@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.spring.bearbom.entity.Course;
 import com.spring.bearbom.entity.CourseFile;
-import com.spring.bearbom.entity.CourseFileId;
+import com.spring.bearbom.entity.User;
 import com.spring.bearbom.service.course.CourseService;
 
 @RestController
@@ -34,6 +34,13 @@ public class CourseController {
 	public void courseRegistration(MultipartHttpServletRequest multiPartHttpServletRequest, HttpServletRequest request,
 			@RequestParam Map<String, Object> paramMap) throws IOException {
 //		userService.updatePhoneNum(paramMap.get("phoneNum"));
+		
+		//유저정보
+		User user = new User();
+		user.setUserId(String.valueOf(paramMap.get("userId")));
+		//user.setUserTel(String.valueOf(paramMap.get("userTel")));
+		//user.setRole("ROLE_LECTURER");
+		//userService.updateUserInfoForCoureseRegistraion(user);
 //		
 		System.out.println(paramMap);
 		
@@ -41,6 +48,7 @@ public class CourseController {
 		Course course = new Course();
 		int courseIdx = courseService.findCourseIdx(0);
 		course.setCourseIdx(courseIdx);
+		course.setUser(user);
 		course.setCourseOnOff(String.valueOf(paramMap.get("courseOnOff")));
 		course.setCourseNm(String.valueOf(paramMap.get("courseNm")));
 		course.setCourseCategory(String.valueOf(paramMap.get("courseCategory")));
@@ -95,7 +103,7 @@ public class CourseController {
 					
 					//업로딩
 					File file = new File(rootPath + savePath + uuid + m.getOriginalFilename());
-					m.transferTo(file);
+					m.transferTo(file);//테스트시죽일것
 					
 					
 				}
@@ -108,9 +116,16 @@ public class CourseController {
 		fileList.remove(0);
 		//파일 업로드 끝
 		
-		courseService.courseRegistration(course);
+		courseService.courseRegistration(course);//테스트시죽일것
+		System.out.println(course);
+		System.out.println("-----------------------------");
 		
-		courseService.courseFileSave(fileList);
+		courseService.courseFileSave(fileList);//테스트시죽일것
+		System.out.println(fileList);
+		
+		
+		
+		
 		/*코스 등록 끝*/
 
 		//CourseDTO courseDTO = new CourseDTO();
