@@ -155,7 +155,11 @@ const Login = () => {
         if (err.response.data.error === "not exist id") {
           alert("존재하지 않는 아이디입니다.");
         } else if (err.response.data.error === "wrong password") {
-          alert("잘못된 비밀번호입니다.");
+          alert("비밀번호를 확인해 주세요.");
+        } else if (err.response.data.error === "loging denied") {
+          alert(
+            "비밀번호 5회 오류로 사용이 제한됩니다. \n비밀번호 변경 후 이용해 주세요"
+          );
         }
       });
   };
