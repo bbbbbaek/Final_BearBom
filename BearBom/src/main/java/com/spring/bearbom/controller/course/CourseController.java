@@ -126,7 +126,7 @@ public class CourseController {
 		
 		
 		
-		/*코스 등록 끝*/
+		/*코스 등록 끝*///
 
 		//CourseDTO courseDTO = new CourseDTO();
 		
