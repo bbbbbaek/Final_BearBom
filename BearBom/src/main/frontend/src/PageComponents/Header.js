@@ -74,10 +74,10 @@ const Header = () => {
               {/* <h4 style={{ color: "#958a78", margin: 0, fontWeight: "bold" }}>
                 베어봄
               </h4> */}
-              {/* <img
+              <img
                 className="header-logoImg"
-                src={require("../img/bearlogo.png")}
-              ></img> */}
+                src={require("../img/blogo1.png")}
+              ></img>
               <img className="logoImg" src={logoImg} alt="" />
             </Navbar.Brand>
             <Nav className="justify-content-start">
@@ -88,6 +88,13 @@ const Header = () => {
               >
                 클래스 검색
               </Nav.Link>
+              {/* <Nav.Link
+                onClick={() => {
+                  navigate("/courseTest");
+                }}
+              >
+                클래스 검색2
+              </Nav.Link> */}
               <Nav.Link
                 onClick={() => {
                   navigate("course/registration");

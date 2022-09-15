@@ -32,28 +32,28 @@ public class Course {
 	@Column(nullable = false)
 	private char courseUseYn;
 
-	@Column(nullable = false)
+	@Column//(nullable = false)
 	private int courseCnt;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, columnDefinition = "default Y")
 	private String courseLevel;
 	
-	@Column(nullable = false)
+	@Column//(nullable = false)
 	private Time courseStTime;
 	
-	@Column(nullable = false)
+	@Column//(nullable = false)
 	private Time courseEndTime;
 
 	@Column(nullable = false)
 	private String courseRuntime;
 
-	@Column(nullable = false)
+	@Column//(nullable = false)
 	private Date courseStDate;
 	
-	@Column(nullable = false)
+	@Column//(nullable = false)
 	private Date courseEndDate;
 	
-	@Column(nullable = false)
+	@Column//(nullable = false)
 	private int courseCost;
 	
 	@Column(nullable = false, columnDefinition = "int default 0")
@@ -71,13 +71,13 @@ public class Course {
 	@Column(nullable = false)
 	private String courseContents;
 
-	@Column(nullable = false)
+	@Column//(nullable = false)
 	private String courseThumbnailOrgNm;
 	
-	@Column(nullable = false)
+	@Column//(nullable = false)
 	private String courseThumbnailNm;
 	
-	@Column(nullable = false)
+	@Column//(nullable = false)
 	private String courseThumbnailPath;
 
 	@ManyToOne

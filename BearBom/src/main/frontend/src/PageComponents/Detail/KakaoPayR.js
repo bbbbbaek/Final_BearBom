@@ -27,18 +27,18 @@ const KakaoPayR = () => {
     setPayInfo(location.state.obj);
   }, []);
 
-  useEffect(() => {
-    if (Object.keys(payInfo).length !== 0) {
-      const newParams = {
-        ...params,
-        partner_order_id: payInfo.orderNo,
-        artner_user_id: payInfo.userId,
-        item_name: payInfo.itemName,
-        total_amount: payInfo.paymentAmount,
-      };
-      setParams(newParams);
-    }
-  }, [payInfo]);
+  // useEffect(() => {
+  //   if (Object.keys(payInfo).length !== 0) {
+  //     const newParams = {
+  //       ...params,
+  //       partner_order_id: payInfo.orderNo,
+  //       artner_user_id: payInfo.userId,
+  //       item_name: payInfo.itemName,
+  //       total_amount: payInfo.paymentAmount,
+  //     };
+  //     setParams(newParams);
+  //   }
+  // }, [payInfo]);
 
   const [responseData, setResponseData] = useState({
     // 응답에서 가져올 값들
