@@ -5,15 +5,15 @@ import { API_BASE_URL } from "../app-config";
 
 import LikeButton from "../ModuleComponents/LikeButton";
 
-const Saw = () => {
+const Saw = (props) => {
   const { id } = useParams();
   console.log(id);
 
-  const [courseInfo, setCourseInfo] = useState({});
+  const [dataa, setDataa] = useState({});
   const location = useLocation();
   useEffect(() => {
     let get_local = localStorage.getItem("data");
-    setCourseInfo(location.state.courseInfo);
+    setDataa(location.state.dataa);
     // console.log(dataa);
     if (get_local == null) {
       get_local = [];
@@ -23,9 +23,9 @@ const Saw = () => {
 
     // console.log(id);
     let duplicateFlag = false;
-    if (JSON.stringify(courseInfo) !== "{}") {
+    if (JSON.stringify(dataa) !== "{}") {
       for (let i = 0; i < get_local.length; i++) {
-        if (courseInfo.courseIdx === get_local[i].courseIdx) {
+        if (dataa.id === get_local[i].id) {
           duplicateFlag = true;
           break;
         }
@@ -34,7 +34,7 @@ const Saw = () => {
       // if() 안에 변수명만 들어가면 무조건 true 거나 값이 있을때,
       //!변수명 하면은 false 거나 값이 null(undefined)
       if (!duplicateFlag) {
-        get_local.push(courseInfo);
+        get_local.push(dataa);
       }
       //get_local =[{}, {}, {} ,{}];
 
@@ -53,7 +53,7 @@ const Saw = () => {
     // tested.unshift(id);
     // tested = [...new Set(tested)].slice(0, 3);
     // localStorage.setItem("data", JSON.stringify(tested));
-  }, [courseInfo]);
+  }, [dataa]);
 
   //
   // console.log(dataa);
@@ -137,7 +137,7 @@ const Saw = () => {
 
   return (
     <>
-      {courseInfo.courseNm}
+      {dataa.title}
       <LikeButton like={like} onClick={toggleLike}></LikeButton>
     </>
   );

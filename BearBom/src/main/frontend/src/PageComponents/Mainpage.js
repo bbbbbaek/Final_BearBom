@@ -15,7 +15,7 @@ import { Link, useNavigate, Navigate } from "react-router-dom";
 import dataTest from "./dataTest.js";
 import Card from "./Card";
 
-const Mainpage = (props) => {
+const Mainpage = () => {
   const [course, setCourse] = useState([]);
 
   const stateText = [
@@ -195,11 +195,20 @@ const Mainpage = (props) => {
     //setCourse(response.data);
     axios({
       method: "get",
-      url: API_BASE_URL + "/api/course/getCourseList",
+      url: API_BASE_URL + "/api/main/getCourseList",
     }).then((response) => {
+      // console.log(response);
+      // console.log(response.data);
       setCourse(response.data);
     });
   }, []);
+
+  useEffect(() => {
+    if (course.length !== 0) {
+      console.log("1111");
+      console.log(course);
+    }
+  }, [course]);
 
   const [index, setIndex] = useState(0);
 
@@ -216,6 +225,8 @@ const Mainpage = (props) => {
     navigate("/course/registration");
   };
   const [dataa, setDataa] = useState(dataTest);
+
+  const [courseInfo, setCourseInfo] = useState(course);
 
   const get_local = JSON.parse(localStorage.getItem("data"));
 
@@ -278,8 +289,8 @@ const Mainpage = (props) => {
                 return (
                   <div>
                     <Link
-                      to={`/saw/${a.id}`}
-                      state={{ dataa: a }}
+                      to={`/saw/${a.courseIdx}`}
+                      state={{ courseInfo: a }}
                       style={{ textDecoration: "none", color: "#ff5862" }}
                     >
                       <p
@@ -290,7 +301,7 @@ const Mainpage = (props) => {
                         // }}
                       >
                         {/* {a.title} */}
-                        {a.id}
+                        {a.courseIdx}
                       </p>
                     </Link>
                   </div>
@@ -335,7 +346,6 @@ const Mainpage = (props) => {
             </div>
           </div>
         </div>
-
         <div className="list-box favorite-class-area">
           <div className="list-header">
             <h2>베어봄이 검증한 이달의 인기클래스!</h2>
@@ -345,24 +355,44 @@ const Mainpage = (props) => {
               <div className="favorite-list">
                 <div style={{ width: "100%", margin: "0 auto" }}>
                   <Carousel responsive={responsive}>
-                    {/* <div className="test001"> */}
-
-                    {stateText1.map((data) => (
+                    {course.map((data) => (
                       // 여기서 {}말고 ()로 하면 return 안해도 됨
                       //   이게 props 넣는거
-                      <Link to={`/saw/${data.id}`} state={{ dataa: data }}>
-                        <Card
-                          id={data.id}
-                          thumbnail={data.image}
-                          title={data.title}
-                          price={data.price}
-                          condition={true}
-                          // 예시로 보여주기 위함
-                        />
-                      </Link>
+                      <Card course={data} />
                     ))}
+                  </Carousel>
+                </div>
+              </div>
+            </CarouselContainer>
+          </div>
+        </div>
+        <div className="list-box favorite-class-area">
+          <div className="list-header">
+            <h2>베어봄이 검증한 이달의 인기클래스!</h2>
+          </div>
+          <div>
+            <CarouselContainer>
+              <div className="favorite-list">
+                <div style={{ width: "100%", margin: "0 auto" }}>
+                  <Carousel responsive={responsive}>
+                    <div className="test001">
+                      {stateText1.map((data) => (
+                        // 여기서 {}말고 ()로 하면 return 안해도 됨
+                        //   이게 props 넣는거
+                        <Link to={`/saw/${data.id}`} state={{ dataa: data }}>
+                          <MiniCard
+                            id={data.id}
+                            thumbnail={data.image}
+                            title={data.title}
+                            price={data.price}
+                            condition={true}
+                            // 예시로 보여주기 위함
+                          />
+                        </Link>
+                      ))}
+                    </div>
 
-                    {/* </div> */}
+                    {/* </div>
                   </Carousel>
                 </div>
               </div>
