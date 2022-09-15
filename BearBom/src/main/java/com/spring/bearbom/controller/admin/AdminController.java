@@ -25,7 +25,7 @@ public class AdminController {
 	private JwtTokenProvider jwtTokenProvider;
 	
 	@PostMapping("/getInquiryInfoReferenceList")
-	public ResponseEntity<?> getInquiryInfoReferenceList(@RequestBody Inquiry inquiry) {
+	public ResponseEntity<?> getInquiryInfoReferenceList( Inquiry inquiry) {
 		try {
 			
 			List<Inquiry> inquiryInfoReference = adminService.inquiryInfoReference(inquiry);
