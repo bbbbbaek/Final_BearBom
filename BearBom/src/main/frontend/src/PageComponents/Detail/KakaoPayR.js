@@ -13,18 +13,18 @@ const KakaoPayR = () => {
     partner_user_id: "partner_user_id",
     item_name: "item_name",
     quantity: 1,
-    total_amount: 0,
+    total_amount: 1000,
     vat_amount: 0,
     tax_free_amount: 0,
-    approval_url: "http://localhost:3000/kakaopayResult/",
-    fail_url: "http://localhost:3000/kakaopayResult",
-    cancel_url: "http://localhost:3000/kakaopayResult",
+    approval_url: "http://localhost:3000/payresult/",
+    fail_url: "http://localhost:3000/payresult",
+    cancel_url: "http://localhost:3000/payresult",
   });
 
   //Order.js에서 Link를 통해 보낸 state에서 결제정보를 꺼냄
   const location = useLocation();
   React.useEffect(() => {
-    setPayInfo(location.state.obj);
+    //setPayInfo(location.state.obj);
   }, []);
 
   // useEffect(() => {
