@@ -108,4 +108,10 @@ public class Course {
 	
 	@Column(nullable = false)
 	private String courseAddressEx;
+	
+	@Transient
+	private int courseStCost;
+	
+	@Transient
+	private int courseEndCost;
 }
