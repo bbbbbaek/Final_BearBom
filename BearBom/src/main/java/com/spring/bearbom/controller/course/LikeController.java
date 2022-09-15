@@ -1,6 +1,7 @@
 package com.spring.bearbom.controller.course;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +25,9 @@ public class LikeController {
     private final LikeService likeService;
 
     @GetMapping("/getLikeList")
-    public ResponseEntity<LikeDto> readLike(@RequestParam String userId, @RequestParam int courseIdx) {
+    public ResponseEntity<LikeDto> readLike(@RequestParam String userId, @RequestParam int courseIdx, @AuthenticationPrincipal String userIdd) {
+        //@AutenticationPrincipal로 userId 가져올 수 있음
+        System.out.println(userIdd);
         System.out.println(userId);
         System.out.println(courseIdx);
         LikeDto likeDto = new LikeDto();

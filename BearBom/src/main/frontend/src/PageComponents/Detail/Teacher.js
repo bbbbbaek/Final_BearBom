@@ -73,6 +73,11 @@ function Teacher({ averageRating }) {
         <div className="teacher-num">124명</div>
         <div>평균 평점</div>
         <div className="teacher-num">{averageRating}</div>
+        <button
+          onClick={() => {
+            console.log(averageRating);
+          }}
+        ></button>
       </div>
       {/* <div id="nana">
         <div id="box1">1</div>

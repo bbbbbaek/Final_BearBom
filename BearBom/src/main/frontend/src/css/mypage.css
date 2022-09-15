@@ -28,7 +28,7 @@
 .mypage-sidebar-wrapper {
   width: 20%;
   /* padding: 2%; */
-  height: 45rem;
+  min-height: 20rem;
   background-color: #fff;
   border: 1px solid #e1e2e3;
   border-radius: 3px;

@@ -17,12 +17,17 @@ import CourseStore from "./CourseStore";
         saveFormData(formObj);
      }, [formObj]);
 
+//const test = localStorage.getItem("USER_ID") 로컬스토리지 가져오는것
+
      useEffect(() => {
-      setFormObj({...formObj, "phoneNum": number})
+      setFormObj({...formObj, "userTel": number})
      }, [number]);
 
      useEffect(() => {
-      setFormObj({...formObj, "buttonValue": buttonValue})
+      if(buttonValue)
+        setFormObj({...formObj, "courseOnOff": "on"});
+      else 
+        setFormObj({...formObj, "courseOnOff": "off"});
      }, [buttonValue]);
 
     const handlePhoneNum = (event) => {

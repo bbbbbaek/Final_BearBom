@@ -7,7 +7,13 @@ const UserProfilePicture = () => {
     <>
       <div className="upp-main">
         <div className="upp-pp-wrapper">
-          <input className="upp-pp" type="file" />
+          <input
+            className="upp-pp"
+            type="file"
+            style={{
+              background: `url(${adminProfileImage})`,
+            }}
+          />
         </div>
         <p>
           <strong>김광민</strong>

@@ -15,8 +15,6 @@ const LikeButton = ({ like, onClick }) => {
 export default LikeButton;
 
 const Heart = styled.img`
-    // css
-    margin-top:50px;
-    width:40px;
-}
+  // css
+  width: 20px;
 `;

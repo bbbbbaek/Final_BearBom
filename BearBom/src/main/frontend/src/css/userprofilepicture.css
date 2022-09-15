@@ -21,4 +21,6 @@
   outline: none;
   appearance: none;
   overflow: hidden;
+  background-position-x: center;
+  background-position-y: center;
 }

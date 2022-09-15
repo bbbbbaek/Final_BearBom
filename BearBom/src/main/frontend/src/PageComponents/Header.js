@@ -136,7 +136,7 @@ const Header = () => {
                   onClick={onClickIsLogin}
                   // onChange={onChangeIsLogin}
                 >
-                  {isLogin ? <sapn>{userId}</sapn> : <span>로그인</span>}
+                  {isLogin ? <span>{userId}</span> : <span>로그인</span>}
                 </Nav.Link>
                 {/* <Nav.Link
                   onClick={() => {
