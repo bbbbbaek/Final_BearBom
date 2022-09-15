@@ -9,14 +9,16 @@ const UserProfilePicture = () => {
         <div className="upp-pp-wrapper">
           <input
             className="upp-pp"
+            id="upp-up"
             type="file"
             style={{
               background: `url(${adminProfileImage})`,
             }}
           />
+          <label htmlFor="upp-up">hello</label>
         </div>
         <p>
-          <strong>김광민</strong>
+          <strong>김광민 님 환영합니다.</strong>
         </p>
         <br />
         <span>kmkim4238@naver.com</span>
