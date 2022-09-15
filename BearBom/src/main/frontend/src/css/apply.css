@@ -4,16 +4,18 @@
   position: fixed;
   top: 80px;
   animation: fadein 3s;
-  min-width: 460px;
+  min-width: 350px;
   border: 1px solid #ced4da;
   border-radius: 5px;
   background-color: #fafafa;
   margin-top: 40px;
+  margin-left: 40px;
   word-break: keep-all;
+  box-shadow: 2px 1px 10px 1px rgba(0, 0, 0, 0.1);
 }
 
 .cal-box {
-  margin-left: 30px;
+  margin: auto;
 }
 
 .cal-sel-box {
@@ -38,7 +40,7 @@
 }
 
 .cal-btn-box {
-  min-width: 400px;
+  min-width: 350px;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -96,4 +98,8 @@
 
 .react-datepicker__input-container {
   margin-right: 10px;
+}
+
+.react-datepicker__month-container {
+  width: 300px;
 }

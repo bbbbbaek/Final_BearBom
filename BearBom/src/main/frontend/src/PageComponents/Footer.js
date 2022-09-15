@@ -10,7 +10,7 @@ const Footer = () => {
         <div className="footer-main">
           <img
             className="footer-logoImg"
-            src={require("../img/bearlogo.png")}
+            src={require("../img/blogo1.png")}
           ></img>
           <div
             className="footer-logo"

@@ -33,7 +33,7 @@ const Calendar2 = (props) => {
           selectsDisabledDaysInRange
           inline
         />
-        <div className="cal-sel-box">
+        {/* <div className="cal-sel-box">
           <div className="start-date">
             <DatePicker
               selected={startDate}
@@ -55,7 +55,7 @@ const Calendar2 = (props) => {
               readOnly
             />
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );
