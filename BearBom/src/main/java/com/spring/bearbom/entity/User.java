@@ -1,6 +1,11 @@
 package com.spring.bearbom.entity;
 
 import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -68,6 +73,9 @@ public class User {
 	
 	@Column(nullable = true)
 	private String lecturerInfo;
+	
+	@Transient
+	private String loginFailMessage;
 
 	@OneToMany(
 			cascade = CascadeType.ALL,
