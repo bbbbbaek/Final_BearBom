@@ -18,6 +18,7 @@ public interface CourserService {
 	double updateRating(Courser courser);
 	
 	List<Course> getCourseList(Course course);
-    
 
+
+    double updateRating1(Courser courser);
 }

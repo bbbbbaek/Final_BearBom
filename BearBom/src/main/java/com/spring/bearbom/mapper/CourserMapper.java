@@ -17,7 +17,7 @@ public interface CourserMapper {
 	@Select("SELECT COUNT(*) FROM T_COURSER WHERE COURSER_ID = #{courserIdx}")
 	public double getRatingAvg(int courserIdx);
 	
-	@Select("SELECT AVG(courser_rate) FROM t_courser where course_idx = #{courseIdx}")
+	@Select("SELECT AVG(a.courser_rate) FROM t_courser a, t_course b  where a.course_idx = b.courser_idx and course_idx = 14")
 	public double updateRating1(Courser courser);
 	
 	

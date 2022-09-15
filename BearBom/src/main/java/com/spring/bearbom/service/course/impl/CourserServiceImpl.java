@@ -40,7 +40,12 @@ public class CourserServiceImpl implements CourserService {
 		// TODO Auto-generated method stub
 		return courserMapper.updateRating(courser);
 	}
-	
+
+    @Override
+    public double updateRating1(Courser courser) {
+        // TODO Auto-generated method stub
+        return courserMapper.updateRating(courser);
+    }
 	@Override
     public List<Course> getCourseList(Course course) {
 //        List<Course> courseList = courseRepository.findAll();

@@ -17,7 +17,7 @@ import Card from "./Card";
 
 const Mainpage = () => {
   const [course, setCourse] = useState([]);
-  const [averageRating, setaverageRating] = useState([]);
+  const [averageRating, setAverageRating] = useState("");
 
   const stateText = [
     {
@@ -200,9 +200,9 @@ const Mainpage = () => {
     }).then((response) => {
       // console.log(response);
       console.log(response.data);
-      setCourse(response.data);
-      // setCourse(response.data.getCourseList);
-      // setaverageRating(response.data.averageRating);
+      // setCourse(response.data);
+      setCourse(response.data.getCourseList);
+      setAverageRating(response.data.averageRating);
     });
   }, []);
 
@@ -361,7 +361,7 @@ const Mainpage = () => {
                     {course.map((data) => (
                       // 여기서 {}말고 ()로 하면 return 안해도 됨
                       //   이게 props 넣는거
-                      <Card course={data} />
+                      <Card course={data} averageRating={averageRating} />
                     ))}
                   </Carousel>
                 </div>

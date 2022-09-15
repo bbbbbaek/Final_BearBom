@@ -23,31 +23,31 @@ public class MainController {
 
     @Autowired
     private CourserService courserService;
-    @GetMapping("/getCourseList")
-    public ResponseEntity<?> getCourseList( Course course) {
-        List<Course> getCourseList = mainService.getCourseList(course);
-        return ResponseEntity.ok().body(getCourseList);
-
-    }
 
 //    @GetMapping("/getCourseList")
-//    public Map<String, Object> getCourseList(Course course) {
-//        System.out.println("/////////"+course);
-//        try {
-//            Courser courser = new Courser();
-//            courser.setCourse(course);
-//            Map<String, Object> resultMap = new HashMap<String, Object>();
-//            List<Course> getCourseList = mainService.getCourseList(course);
-//
-//            double averageRating = courserService.updateRating(courser);
-//
-//            resultMap.put("getCourseList", getCourseList);
-//            resultMap.put("averageRating", averageRating);
-//            return resultMap;
-//        } catch (Exception e) {
-//            Map<String, Object> errorMap = new HashMap<String, Object>();
-//            errorMap.put("error",e.getMessage());
-//            return errorMap;
-//        }
+//    public ResponseEntity<?> getCourseList( Course course) {
+//        List<Course> getCourseList = mainService.getCourseList(course);
+//        return ResponseEntity.ok().body(getCourseList);
 //    }
+
+    @GetMapping("/getCourseList")
+    public Map<String, Object> getCourseList(Course course) {
+        System.out.println("/////////"+course);
+        try {
+            Courser courser = new Courser();
+            courser.setCourse(course);
+            Map<String, Object> resultMap = new HashMap<String, Object>();
+            List<Course> getCourseList = mainService.getCourseList(course);
+
+            double averageRating = courserService.updateRating1(courser);
+            System.out.println(averageRating);
+            resultMap.put("getCourseList", getCourseList);
+            resultMap.put("averageRating", averageRating);
+            return resultMap;
+        } catch (Exception e) {
+            Map<String, Object> errorMap = new HashMap<String, Object>();
+            errorMap.put("error",e.getMessage());
+            return errorMap;
+        }
+    }
 }
