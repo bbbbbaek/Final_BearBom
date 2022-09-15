@@ -55,17 +55,131 @@ function valueDate(time) {
 
 // 강좌 조회 페이지
 const Course = (props) => {
+  const [courseSearch, setCourseSearch] = useState("");
+  const [locationSearch, setLocationSearch] = React.useState("");
+  const [courseType, setCourseType] = React.useState("");
+  const [courseLevel, setCourseLevel] = useState("");
+  const [courseStTime, setCourseStTime] = useState("");
+  const [courseEndTime, setCourseEndTime] = useState("");
+  const [courseStCost, setCourseStCost] = useState("");
+  const [courseEndCost, setCourseEndCost] = useState("");
+  const [courseLevelName, setCourseLevelName] = useState("");
+
+  const [searchInfo, setSearchInfo] = useState({});
+
+  const addSearchInfo = (e) => {
+    const newSearchInfo = {
+      ...searchInfo,
+      [e.target.name]: e.target.value,
+    };
+
+    setSearchInfo(newSearchInfo);
+  };
+
+  const onChangeSearchNm = (e) => {
+    const courseSearchNm = e.target.value;
+    setCourseSearch(courseSearchNm);
+    addSearchInfo(e);
+  };
+
+  const onChangeLocation = (e) => {
+    const locationChange = e.target.value;
+    setLocationSearch(locationChange);
+    addSearchInfo(e);
+  };
+
+  const onChangeType = (e) => {
+    const typeChange = e.target.value;
+    setCourseType(typeChange);
+    addSearchInfo(e);
+  };
+
+  const onChangeLevel = (e) => {
+    const levelChange = e.target.value;
+    setCourseLevel(levelChange);
+    addSearchInfo(e);
+  };
+
+  const onChangeStTime = (e) => {
+    console.log(e.target.value);
+    const stTimeChange = e.target.value;
+    setCourseStTime(stTimeChange);
+    addSearchInfo(e);
+  };
+
+  const onChangeEndTime = (e) => {
+    const endTimeChange = e.target.value;
+    setCourseEndTime(endTimeChange);
+    addSearchInfo(e);
+  };
+
+  const onChangeStCost = (e) => {
+    const costChange = e.target.value;
+    setCourseStCost(costChange);
+    addSearchInfo(e);
+  };
+
+  const onChangeEndCost = (e) => {
+    const costChange = e.target.value;
+    setCourseEndCost(costChange);
+    addSearchInfo(e);
+  };
+
+  const onSubmitSearchHandler = (e) => {
+    console.log({
+      ...searchInfo,
+      courseSearch: courseSearch,
+      locationSearch: locationSearch,
+      courseType: courseType,
+      courseLevel: courseLevelName,
+      courseStTime: courseStTime,
+      courseEndTime: courseEndTime,
+      courseStCost: courseStCost,
+      courseEndCost: courseEndCost,
+    });
+    e.preventDefault();
+
+    axios({
+      method: "post",
+      url: API_BASE_URL + "/api/course/searchCourse",
+      data: {
+        ...searchInfo,
+        courseSearch: courseSearch,
+        locationSearch: locationSearch,
+        courseType: courseType,
+        courseLevel: courseLevelName,
+        courseStTime: courseStTime,
+        courseEndTime: courseEndTime,
+        courseStCost: courseStCost,
+        courseEndCost: courseEndCost,
+      },
+    }).then((responseSearchData) => {
+      console.log(responseSearchData);
+      window.location.href = "/course";
+    });
+  };
+
   const [timeSlider, setTimeSlider] = useState([0, 1440]);
 
   const handleChange1 = (event, newValue) => {
     setTimeSlider(newValue);
   };
 
+  useEffect(() => {
+    setCourseStTime(valueDate(timeSlider[0]));
+    setCourseEndTime(valueDate(timeSlider[1]));
+  }, [timeSlider]);
+
   const [priceSlider, setPriceSlider] = useState([0, 1000000]);
 
   const handleChange2 = (event, newValue) => {
     setPriceSlider(newValue);
   };
+
+  useEffect(() => {
+    setCourseStCost(valuetext(priceSlider[0]).slice(0, -1));
+    setCourseEndCost(valuetext(priceSlider[1]).slice(0, -1));
+  }, [priceSlider]);
 
   const [course, setCourse] = useState([]);
 
@@ -335,37 +449,6 @@ const Course = (props) => {
     },
   };
 
-  const initialArray = [
-    `지금 베어봄과 함께
-    일상을 취미로 채워보세요!`,
-    `모든 일상이 즐겁기만 할 수는 없죠.
-    그렇지만 우리는,`,
-    `일상 틈틈이, 즐거운 일들을
-    채워나갈 수 있어요!`,
-  ]; // 원본 배열
-
-  const [text, setText] = useState([]);
-
-  useEffect(() => {
-    let i = 0;
-    setText(initialArray.filter((item, index) => index === i));
-    setInterval(() => {
-      i++;
-      setText(initialArray.filter((item, index) => index === i));
-      if (initialArray.length - 1 === i) {
-        i = -1;
-      }
-    }, 3000);
-    //데이터불러오는 axios
-    //setCourse(response.data);
-    axios({
-      method: "get",
-      url: API_BASE_URL + "/api/course",
-    }).then((response) => {
-      setCourse(response.data);
-    });
-  }, []);
-
   const [index, setIndex] = useState(0);
 
   const handleSelect = (selectedIndex, e) => {
@@ -374,9 +457,9 @@ const Course = (props) => {
 
   let navigate = useNavigate();
 
-  const [locationSearch, setLocationSearch] = React.useState("");
+  // const [locationSearch, setLocationSearch] = React.useState("");
 
-  const [courseType, setCourseType] = React.useState([]);
+  // const [courseType, setCourseType] = React.useState([]);
 
   const courseTypeChange = (e) => {
     setCourseType(() => {
@@ -384,117 +467,37 @@ const Course = (props) => {
     });
   };
 
-  let dataCategory = ["오프라인", "온라인"];
+  // let dataCategory = ["오프라인", "온라인"];
 
-  let [courseOnOff, setCourseOnOff] = useState("");
+  // let [courseOnOff, setCourseOnOff] = useState("");
 
-  const toggleActiveCategory = (e) => {
-    setCourseOnOff((prev) => {
-      return e.target.value;
-    });
-  };
+  // const toggleActiveCategory = (e) => {
+  //   setCourseOnOff((prev) => {
+  //     return e.target.value;
+  //   });
+  // };
 
-  let dataWeek = ["평일", "토요일", "일요일"];
+  // let dataWeek = ["평일", "토요일", "일요일"];
 
-  let [courseStDate, setCourseStDate] = useState("");
+  // let [courseStDate, setCourseStDate] = useState("");
 
-  const toggleActiveWeek = (e) => {
-    setCourseStDate((prev) => {
-      return e.target.value;
-    });
-  };
+  // const toggleActiveWeek = (e) => {
+  //   setCourseStDate((prev) => {
+  //     return e.target.value;
+  //   });
+  // };
 
-  let dataLevel = ["입문", "중급", "고급"];
+  const dataLevel = ["입문", "중급", "고급"];
 
-  let [courseLevel, setCourseLevel] = useState("");
+  // const [courseLevel, setCourseLevel] = useState("");
 
   const toggleActiveLevel = (e) => {
     setCourseLevel((prev) => {
       return e.target.value;
     });
+    setCourseLevelName(dataLevel[e.target.value]);
+    addSearchInfo(e);
   };
-
-  const [courseSearch, setCourseSearch] = useState("");
-  const [courseStTime, setCourseStTime] = useState("");
-  const [courseEndTime, setCourseEndTime] = useState("");
-  const [courseCostMin, setCourseCostMin] = useState("");
-  const [courseCostMax, setCourseCostMax] = useState("");
-
-  // searchData(props) {
-  //   super(props);
-  //   this.state = {
-  //     courseSearch = '',
-  //     locationSearch = '',
-  //     courseType = '',
-  //     courseOnOff = '',
-  //     courseDate = '',
-  //     courseStTime = '',
-  //     courseEndTime = '',
-  //     courseLevel = '',
-  //     courseCostMin = '',
-  //     courseCostMax = ''
-  //   };
-  // };
-
-  // addFormData = () => {
-  //   const url = '/api/course';
-  //   const formData = new FormData();
-  //   formData.append('courseSearch', this.state.courseSearch);
-  //   formData.append('locationSearch', this.state.locationSearch);
-  //   formData.append('courseType', this.state.courseType);
-  //   formData.append('courseOnOff', this.state.courseOnOff);
-  //   formData.append('courseDate', this.state.courseDate);
-  //   formData.append('courseStTime', this.state.courseStTime);
-  //   formData.append('courseEndTime', this.state.courseEndTime);
-  //   formData.append('courseLevel', this.state.courseLevel);
-  //   formData.append('courseCostMin', this.state.courseCostMin);
-  //   formData.append('courseCostMax', this.state.courseCostMax);
-
-  //   return post(url, formData);
-  // }
-
-  const onSubmitSearchHandler = (e) => {
-    e.preventDefault();
-
-    axios({
-      method: "post",
-      url: API_BASE_URL + "/api/course",
-      data: { ...searchInfo },
-    }).then((responseSearchData) => {
-      console.log(responseSearchData);
-      window.location.href = "/course";
-    });
-  };
-
-  const [searchInfo, setSearchInfo] = useState({});
-
-  const addSearchInfo = (e) => {
-    const newSearchInfo = {
-      ...searchInfo,
-      [e.target.name]: e.target.value,
-    };
-
-    setSearchInfo(newSearchInfo);
-  };
-
-  // useEffect(() => {
-  //   // const fetchData = async () => {
-  //   //   setLoading(true);
-  //   //   const responsePage = await axios.get(
-  //   //     "https://jsonplaceholder.typicode.com/posts"
-  //   //     // API_BASE_URL + "/api/course/getCourseList"
-  //   //   );
-  //   //   setPosts(responsePage.data);
-  //   //   setLoading(false);
-  //   // };
-  //   // fetchData();
-  //   axios({
-  //     method: "get",
-  //     url: API_BASE_URL + "/api/course/getCourseList",
-  //   }).then((response) => {
-  //     setPosts(response.data);
-  //   });
-  // }, []);
 
   const [data, setData] = useState(stateText);
   const [pageData, setPageData] = useState([]);
@@ -503,8 +506,14 @@ const Course = (props) => {
   const offset = (page - 1) * limit;
 
   useEffect(() => {
-    setPageData(data.slice(0, 10));
+    setPageData(data.slice(0, 12));
   }, []);
+
+  useEffect(() => {
+    if (pageData.length !== 0) {
+      console.log(pageData.length);
+    }
+  }, [pageData]);
   const pagingFunc = (pageNum) => {
     setPageData(data.slice(10 * pageNum - 10, 10 * pageNum));
   };
@@ -537,7 +546,7 @@ const Course = (props) => {
                       aria-describedby="btnGroupAddon"
                       name="courseSearch"
                       value={courseSearch}
-                      // onChange={handleValueChange}
+                      onChange={onChangeSearchNm}
                     />
                   </InputGroup>
                 </div>
@@ -560,28 +569,28 @@ const Course = (props) => {
                       label="city"
                       name="locationSearch"
                       value={locationSearch}
-                      // onChange={handleValueChange}
+                      onChange={onChangeLocation}
                     >
                       <MenuItem value="">
                         <em>지역검색</em>
                       </MenuItem>
-                      <MenuItem value={1}>전체</MenuItem>
-                      <MenuItem value={2}>서울</MenuItem>
-                      <MenuItem value={3}>경기</MenuItem>
-                      <MenuItem value={4}>인천</MenuItem>
-                      <MenuItem value={5}>강원</MenuItem>
-                      <MenuItem value={6}>대구</MenuItem>
-                      <MenuItem value={7}>부산</MenuItem>
-                      <MenuItem value={8}>경상북도</MenuItem>
-                      <MenuItem value={9}>경상남도</MenuItem>
-                      <MenuItem value={10}>울산</MenuItem>
-                      <MenuItem value={11}>광주</MenuItem>
-                      <MenuItem value={12}>전라북도</MenuItem>
-                      <MenuItem value={13}>전라남도</MenuItem>
-                      <MenuItem value={14}>세종</MenuItem>
-                      <MenuItem value={15}>제주</MenuItem>
-                      <MenuItem value={16}>충청북도</MenuItem>
-                      <MenuItem value={17}>충청남도</MenuItem>
+                      <MenuItem value={"전체"}>전체</MenuItem>
+                      <MenuItem value={"서울"}>서울</MenuItem>
+                      <MenuItem value={"경기"}>경기</MenuItem>
+                      <MenuItem value={"인천"}>인천</MenuItem>
+                      <MenuItem value={"강원"}>강원</MenuItem>
+                      <MenuItem value={"대구"}>대구</MenuItem>
+                      <MenuItem value={"부산"}>부산</MenuItem>
+                      <MenuItem value={"경상북도"}>경상북도</MenuItem>
+                      <MenuItem value={"경상남도"}>경상남도</MenuItem>
+                      <MenuItem value={"울산"}>울산</MenuItem>
+                      <MenuItem value={"광주"}>광주</MenuItem>
+                      <MenuItem value={"전라북도"}>전라북도</MenuItem>
+                      <MenuItem value={"전라남도"}>전라남도</MenuItem>
+                      <MenuItem value={"세종"}>세종</MenuItem>
+                      <MenuItem value={"제주"}>제주</MenuItem>
+                      <MenuItem value={"충청북도"}>충청북도</MenuItem>
+                      <MenuItem value={"충청남도"}>충청남도</MenuItem>
                     </Select>
                   </FormControl>
                 </div>
@@ -604,23 +613,23 @@ const Course = (props) => {
                       label="categorySel"
                       name="courseType"
                       value={courseType}
-                      // onChange={handleValueChange}
+                      onChange={onChangeType}
                     >
                       <MenuItem value="">
                         <em>카테고리검색</em>
                       </MenuItem>
-                      <MenuItem value={1}>전체</MenuItem>
-                      <MenuItem value={2}>핸드메이드</MenuItem>
-                      <MenuItem value={3}>쿠킹</MenuItem>
-                      <MenuItem value={4}>플라워·가드닝</MenuItem>
-                      <MenuItem value={5}>드로잉</MenuItem>
-                      <MenuItem value={6}>음악</MenuItem>
-                      <MenuItem value={7}>요가·필라테스</MenuItem>
-                      <MenuItem value={8}>레져·스포츠</MenuItem>
-                      <MenuItem value={9}>뷰티</MenuItem>
-                      <MenuItem value={10}>반려동물</MenuItem>
-                      <MenuItem value={11}>체험</MenuItem>
-                      <MenuItem value={12}>자기계발</MenuItem>
+                      <MenuItem value={"전체"}>전체</MenuItem>
+                      <MenuItem value={"핸드메이드"}>핸드메이드</MenuItem>
+                      <MenuItem value={"쿠킹"}>쿠킹</MenuItem>
+                      <MenuItem value={"플라워·가드닝"}>플라워·가드닝</MenuItem>
+                      <MenuItem value={"드로잉"}>드로잉</MenuItem>
+                      <MenuItem value={"음악"}>음악</MenuItem>
+                      <MenuItem value={"요가·필라테스"}>요가·필라테스</MenuItem>
+                      <MenuItem value={"레져·스포츠"}>레져·스포츠</MenuItem>
+                      <MenuItem value={"뷰티"}>뷰티</MenuItem>
+                      <MenuItem value={"반려동물"}>반려동물</MenuItem>
+                      <MenuItem value={"체험"}>체험</MenuItem>
+                      <MenuItem value={"자기계발"}>자기계발</MenuItem>
                     </Select>
                   </FormControl>
                 </div>
@@ -686,6 +695,37 @@ const Course = (props) => {
                 </div>
               </ButtonGroup>
             </Col> */}
+
+            <Col md={1} className="category-font">
+              난이도
+            </Col>
+            <Col md={4} className="class-level">
+              <div className="container">
+                {dataLevel.map((item, idx) => {
+                  return (
+                    <>
+                      <button
+                        type="button"
+                        value={idx}
+                        className={
+                          "btn" + (idx == courseLevel ? " active" : "")
+                        }
+                        onClick={toggleActiveLevel}
+                        id="btnDeco"
+                        name="courseLevel"
+                        // onChange={onChangeLevel}
+                      >
+                        {item}
+                      </button>
+                    </>
+                  );
+                })}
+              </div>
+            </Col>
+          </Row>
+          <br />
+          <br />
+          <Row>
             <Col md={1} className="category-font">
               시간
             </Col>
@@ -700,6 +740,7 @@ const Course = (props) => {
                   inputMode="numeric"
                   className="css-1x5jdmq"
                   name="courseStTime"
+                  onChange={onChangeStTime}
                 ></input>
               </div>
               <div className="time-slider-bar">
@@ -726,37 +767,14 @@ const Course = (props) => {
                   inputMode="numeric"
                   className="css-1x5jdmq"
                   name="courseEndTime"
+                  onChange={onChangeEndTime}
                 ></input>
               </div>
             </Col>
           </Row>
           <br />
+          <br />
           <Row>
-            <Col md={1} className="category-font">
-              난이도
-            </Col>
-            <Col md={4} className="class-level">
-              <div className="container">
-                {dataLevel.map((item, idx) => {
-                  return (
-                    <>
-                      <button
-                        value={idx}
-                        className={
-                          "btn" + (idx == courseLevel ? " active" : "")
-                        }
-                        onClick={toggleActiveLevel}
-                        id="btnDeco"
-                        name="courseLevel"
-                        // onChange={handleValueChange}
-                      >
-                        {item}
-                      </button>
-                    </>
-                  );
-                })}
-              </div>
-            </Col>
             <Col md={1} className="category-font">
               금액
             </Col>
@@ -769,8 +787,8 @@ const Course = (props) => {
                   aria-invalid="false"
                   inputMode="numeric"
                   className="css-1x5jdmq"
-                  name="courseCost"
-                  // onChange={handleValueChange}
+                  name="courseStost"
+                  onChange={onChangeStCost}
                 ></input>
               </div>
               <div className="price-slider-bar">
@@ -795,17 +813,18 @@ const Course = (props) => {
                   aria-invalid="false"
                   inputMode="numeric"
                   className="css-1x5jdmq"
-                  name="courseCost"
-                  // onChange={handleValueChange}
+                  name="courseEndCost"
+                  onChange={onChangeEndCost}
                 ></input>
               </div>
             </Col>
           </Row>
           <br />
+          <br />
           <Row className="justify-content-md-center">
             <Col xs lg="2">
               <Button
-                type="submit"
+                type="button"
                 variant="outline-dark"
                 size="lg"
                 id="refreshBtn"
@@ -889,20 +908,16 @@ const Course = (props) => {
               height: "1px",
             }}
           />
-          {pageData.map(() => {
-            return (
-              <div className="searchContent">
-                {data.slice(offset, offset + limit).map((minidata) => (
-                  <MiniCard
-                    id={minidata.id}
-                    thumbnail={minidata.thumbnail}
-                    title={minidata.title}
-                    condition={true}
-                  />
-                ))}
-              </div>
-            );
-          })}
+          <div className="searchContent">
+            {pageData.map((minidata) => (
+              <MiniCard
+                id={minidata.id}
+                thumbnail={minidata.thumbnail}
+                title={minidata.title}
+                condition={true}
+              />
+            ))}
+          </div>
           <Stack spacing={2}>
             <Pagination
               boundaryCount={10}
