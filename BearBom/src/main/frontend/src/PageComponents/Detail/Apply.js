@@ -1,7 +1,8 @@
 import Calendar2 from "./Calendar";
 import Calendar3 from "./Calendar3";
 import "../../css/apply.css";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useNavigate } from "react";
+import LikeButton from "../../ModuleComponents/LikeButton";
 
 function Apply() {
   const [height, setHeight] = useState();
@@ -31,6 +32,12 @@ function Apply() {
     };
   });
 
+  // const navigate = useNavigate();
+
+  // const onClickBtn = () => {
+  //   navigate(`https://kapi.kakao.com/v1/payment/ready`);
+  // };
+
   return (
     <>
       <div className="calendar-box1" ref={calRef}>
@@ -46,9 +53,15 @@ function Apply() {
         </div>
 
         <div className="cal-btn-box">
-          <button className="cal-wishList">찜하기</button>
-          <button type="submit" className="cal-apply">
-            신청하기
+          <button className="cal-wishList">
+            <LikeButton></LikeButton>찜하기
+          </button>
+
+          <button
+            type="button"
+            className="cal-apply" /* onClick={onClickBtn} */
+          >
+            <a href="https://kapi.kakao.com/v1/payment/ready">신청하기 </a>
           </button>
         </div>
       </div>
