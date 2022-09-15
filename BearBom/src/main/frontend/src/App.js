@@ -58,7 +58,6 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/*" element={<Page404 />} />
           <Route path="/course/test" element={<Test123 />} />
-
           <Route path="/payready" element={<KakaoPayR />} />
           <Route path="/payresult" element={<KakaoPayRe />} />
         </Routes>

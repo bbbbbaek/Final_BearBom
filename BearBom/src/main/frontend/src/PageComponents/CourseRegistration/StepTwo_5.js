@@ -10,12 +10,14 @@ const StepTwo_5 = ({saveFormData}) => {
   const [lecturerInfo, setLecturerInfo] = useState("");
   const [formObj, setFormObj] = useState({});
 
+  const userId = localStorage.getItem("USER_ID") //로컬스토리지 가져오는것
+
   useEffect(() => {
     saveFormData(formObj);
  }, [formObj]);
 
  useEffect(() => {
-  setFormObj({...formObj, "lecturerInfo": lecturerInfo})
+  setFormObj({...formObj, "lecturerInfo": lecturerInfo, "userId" : userId})
  }, [lecturerInfo]);
 
 
