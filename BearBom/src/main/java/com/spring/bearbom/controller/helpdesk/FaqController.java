@@ -4,10 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.spring.bearbom.dto.ResponseDTO;
 import com.spring.bearbom.dto.UserDTO;
@@ -25,14 +22,14 @@ public class FaqController {
 	@Autowired
 	private JwtTokenProvider jwtTokenProvider;
 	
-	@PostMapping("/getFaqList")
-	public ResponseEntity<?> getFaqList(@RequestBody Guide guide) {
+	@GetMapping("/getFaqList")
+	public ResponseEntity<?> getFaqList(Guide guide) {
 		try {
-			
+
 			List<Guide> faq = faqService.faq(guide);
 	    	ResponseDTO<Guide> response = new ResponseDTO<Guide>();
 	    	response.setData(faq);
-			
+
 			return ResponseEntity.ok().body(response);
 		} catch(Exception e) {
 			ResponseDTO<UserDTO> response = new ResponseDTO<>();
@@ -41,4 +38,10 @@ public class FaqController {
 			return ResponseEntity.badRequest().body(response);
 		}
 	}
+//	@GetMapping("/getFaqList")
+//	public ResponseEntity<?> getFaqList(String test) {
+//		test = "test";
+//		return ResponseEntity.ok().body(test);
+//	}
+
 }

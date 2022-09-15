@@ -8,7 +8,7 @@ import excelDownload from "../images/excelDownload.png";
 import { TableMenuItems } from "../ModuleComponents/TableMenuItems";
 
 // TableMenuItems 객체로 생성한 tableItems state를 사용하여 각 컴포넌트에 알맞은 데이터를 출력할 수 있도록 설계
-const SalesView = ({ setTab, tableItems }) => {
+const SalesView = ({ setTab, tableItems, fetchedData }) => {
   const sortedData = [...salesData].sort((a, b) => b.idx - a.idx);
   const [rawData] = useState(sortedData);
   // data의 초깃값을 salesData로 설정하게 되면, rawData와 참조값이 같게 되면서 splice메소드 사용하여 data 변경 시, rawData의 값도 변경되는 문제 있음
@@ -71,6 +71,7 @@ const SalesView = ({ setTab, tableItems }) => {
 
   return (
     <>
+      <div>{fetchedData}</div>
       <h5
         onClick={() => {
           // 탭 새로고침이 안됨 ㅠ
