@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import data from "../../ModuleComponents/data";
 import "../../css/detail.css";
 import { API_BASE_URL } from "../../app-config";
@@ -19,23 +19,14 @@ import Test123 from "./Test123";
 
 const Detail = ({ scrollTop }) => {
   // 아래에 왜 초기값을 객체 형태로 주지 않으면 오류가 나는지 모르겠음
-  const [course, setCourse] = useState(
-    data
-    // {
-    //   course_idx: "0",
-    //   course_nm: "happy lecture",
-    // },
-  );
-  const { id } = useParams(data);
 
-  // a.id: data의 id속성
-  // id: useParam으로 불러온 url의 숫자값
-  let item = course.find((a) => (a.course_idx = id));
-  console.log(item);
-
-  const ida = useParams();
-  console.log(ida);
+  const { id } = useParams();
+  const [course, setCourse] = useState([]);
+  const [woobin, setWoobin] = useState(false);
+  const navigate = useNavigate();
   const [reviewInfo, setReviewInfo] = useState({ courseIdx: 1 });
+  const [courseInfo, setCourseInfo] = useState({});
+  const location = useLocation();
 
   const addReviewInfo = (e) => {
     const newReviewInfo = {
@@ -80,7 +71,7 @@ const Detail = ({ scrollTop }) => {
         Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
       },
       // params: {userId: userId}
-      data: { courseIdx: 1 },
+      data: { courseIdx: id },
     })
       .then((response) => {
         console.log(response.data);
@@ -95,7 +86,33 @@ const Detail = ({ scrollTop }) => {
 
   React.useEffect(() => {
     list();
-  }, []);
+    let get_local = localStorage.getItem("data");
+    setCourseInfo(location.state.courseInfo);
+    if (get_local == null) {
+      get_local = [];
+    } else {
+      get_local = JSON.parse(get_local);
+    }
+
+    let duplicateFlag = false;
+    if (JSON.stringify(courseInfo) !== "{}") {
+      for (let i = 0; i < get_local.length; i++) {
+        if (courseInfo.courseIdx === get_local[i].courseIdx) {
+          duplicateFlag = true;
+          break;
+        }
+      }
+      if (!duplicateFlag) {
+        get_local.push(courseInfo);
+      }
+
+      if (get_local.length > 5) {
+        get_local.splice(0, 1);
+      }
+
+      localStorage.setItem("data", JSON.stringify(get_local));
+    }
+  }, [courseInfo]);
 
   useEffect(() => {
     console.log(reviewList);
@@ -109,11 +126,22 @@ const Detail = ({ scrollTop }) => {
   // const style = { onclick=
   //   overflow: user.active ? "none" : "hidden",
   // };
-  const [woobin, setWoobin] = useState(false);
-
-  const navigate = useNavigate();
 
   ///////////////////////////////////
+
+  useEffect(() => {
+    //데이터불러오는 axios
+    //setCourse(response.data);
+    axios({
+      method: "get",
+      url: API_BASE_URL + "/api/course/getCourseList",
+    }).then((response) => {
+      // console.log(response);
+      // console.log(response.data);
+      setCourse(response.data);
+    });
+  }, []);
+
   return (
     <>
       <div className="main-container">
@@ -121,6 +149,11 @@ const Detail = ({ scrollTop }) => {
           <div className="main-info">
             <div className="main-img-box">
               {/* <Thumb></Thumb> */}
+              {/* {course.map((data) => (
+                // 여기서 {}말고 ()로 하면 return 안해도 됨
+                //   이게 props 넣는거
+                <Test123 course={data} />
+              ))} */}
               <Test123></Test123>
             </div>
             <h4>Title</h4>

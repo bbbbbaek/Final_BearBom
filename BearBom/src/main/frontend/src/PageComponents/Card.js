@@ -90,7 +90,7 @@ const Card = ({ course, averageRating }) => {
     <>
       <CardWrapper>
         {course.courseIdx}
-        <Link to={`/saw/${course.courseIdx}`} state={{ courseInfo: course }}>
+        <Link to={`/course/${course.courseIdx}`} state={{ courseInfo: course }}>
           <ImgContainer>
             <div className="tag">{averageRating} 평점</div>
 
