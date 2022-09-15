@@ -84,10 +84,10 @@ const Login = () => {
   const onChangeName = useCallback((e) => {
     setUserId(e.target.value);
     if (e.target.value.length < 2 || e.target.value.length > 10) {
-      setUserIdMessage("2글자 이상 10글자 미만으로 입력해주세요.");
+      // setUserIdMessage("2글자 이상 10글자 미만으로 입력해주세요.");
       setIsUserId(false);
     } else {
-      setUserIdMessage("올바른 이름 형식입니다.");
+      // setUserIdMessage("올바른 이름 형식입니다.");
       setIsUserId(true);
       addUserInfo(e);
     }
@@ -101,12 +101,12 @@ const Login = () => {
     setUserPw(passwordCurrent);
 
     if (!passwordRegex.test(passwordCurrent)) {
-      setUserPwMessage(
-        "숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!"
-      );
+      // setUserPwMessage(
+      //   "숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!"
+      // );
       setIsUserPw(false);
     } else {
-      setUserPwMessage("올바른 비밀번호 형식입니다.");
+      // setUserPwMessage("올바른 비밀번호 형식입니다.");
       setIsUserPw(true);
       addUserInfo(e);
     }
@@ -155,7 +155,7 @@ const Login = () => {
         if (err.response.data.error === "not exist id") {
           alert("존재하지 않는 아이디입니다.");
         } else if (err.response.data.error === "wrong password") {
-          alert("잘못된 비밀번호 입니다.");
+          alert("잘못된 비밀번호입니다.");
         }
       });
   };
