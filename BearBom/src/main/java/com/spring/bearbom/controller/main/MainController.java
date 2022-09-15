@@ -35,6 +35,7 @@ public class MainController {
         try {
             Courser courser = new Courser();
             courser.setCourse(course);
+            System.out.println("////////////" + courser);
             Map<String, Object> resultMap = new HashMap<String, Object>();
             List<Course> getCourseList = mainService.getCourseList(course);
 
