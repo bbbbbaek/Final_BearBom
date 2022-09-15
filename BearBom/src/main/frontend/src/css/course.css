@@ -181,6 +181,11 @@
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
+.pagingPart {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
 /* Pagination css */
 .css-wjh20t-MuiPagination-ul {
   justify-content: center;
