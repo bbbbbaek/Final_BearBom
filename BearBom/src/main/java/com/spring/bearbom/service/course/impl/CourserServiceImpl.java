@@ -37,6 +37,6 @@ public class CourserServiceImpl implements CourserService {
 	@Override
 	public double updateRating(Courser courser) {
 		// TODO Auto-generated method stub
-		return courserMapper.updateRating(courser.getCourserRate());
+		return courserMapper.updateRating(courser);
 	}
 }
