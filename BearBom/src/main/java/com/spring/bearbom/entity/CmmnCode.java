@@ -4,6 +4,7 @@ import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -17,5 +18,9 @@ public class CmmnCode {
     @Id
     private String cmmnCodeIdx;
 
+    @Column
     private String cmmnCodeNm;
+
+    @Column
+    private String cmmnCodeType;
 }

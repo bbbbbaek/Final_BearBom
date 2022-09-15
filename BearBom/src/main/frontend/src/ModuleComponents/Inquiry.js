@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../css/inquiry.css";
 import axios from "axios";
 import { API_BASE_URL } from "../app-config";
+import useFetch from "../customHooks/useFetch";
 
 const Inquiry = () => {
   const navigate = useNavigate();
@@ -99,9 +100,9 @@ const Inquiry = () => {
               type="button"
               value="제출"
               onClick={() => {
-                // setInquiryInfo([]);
+                alert("문의 등록이 완료되었습니다.");
                 onSubmit2();
-                // navigate("/helpdesk");
+                navigate("/helpdesk");
               }}
             />
           </form>

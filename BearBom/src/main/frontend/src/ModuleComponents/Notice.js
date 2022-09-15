@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
+import useFetch from "../customHooks/useFetch";
 import Table from "../ModuleComponents/Table";
 import { TableMenuItems } from "../ModuleComponents/TableMenuItems";
 
@@ -15,10 +17,12 @@ const Notice = () => {
       "구매일자"
     )
   );
+  let ba = useFetch("/api/helpdesk/getNoticeList");
+  let fetchedData = ba.data;
 
   return (
     <>
-      <Table tableItems={tableItems} />
+      <Table tableItems={tableItems} fetchedData={fetchedData} />
     </>
   );
 };

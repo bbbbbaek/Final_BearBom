@@ -29,7 +29,7 @@ const Mypage = () => {
               <div className="mypage-quickview-wrapper">
                 <QuickView />
               </div>
-              <div className={tab === 5 ? null : "mypage-content"}>
+              <div className={"mypage-content"}>
                 {
                   [
                     <TakenClassView />,

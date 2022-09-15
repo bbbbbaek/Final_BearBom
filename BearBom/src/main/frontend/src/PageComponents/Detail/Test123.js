@@ -67,7 +67,7 @@ import "../../css/thumb.css";
 const choice = {
   img1: {
     name: "img1",
-    img: process.env.PUBLIC_URL + require("../../img/psy.jpeg"),
+    img: process.env.PUBLIC_URL + require("../../img/class001.webp"),
   },
   img2: {
     name: "img2",
@@ -75,11 +75,11 @@ const choice = {
   },
   img3: {
     name: "img3",
-    img: process.env.PUBLIC_URL + require("../../img/img2.jpeg"),
+    img: process.env.PUBLIC_URL + require("../../img/class002.webp"),
   },
   img4: {
     name: "img4",
-    img: process.env.PUBLIC_URL + require("../../img/img2.jpeg"),
+    img: process.env.PUBLIC_URL + require("../../img/class003.webp"),
   },
 };
 
@@ -120,7 +120,7 @@ function Test123() {
             className="btn-thumb1"
             onClick={() => play("img1")}
             type="image"
-            src={require("../../img/psy.jpeg")}
+            src={require("../../img/class001.webp")}
             alt="1번째 사진"
           ></input>
         </div>
@@ -138,7 +138,7 @@ function Test123() {
             className="btn-thumb3"
             onClick={() => play("img3")}
             type="image"
-            src={require("../../img/img2.jpeg")}
+            src={require("../../img/class002.webp")}
             alt="3번째 사진"
           ></input>
         </div>
@@ -147,7 +147,7 @@ function Test123() {
             className="btn-thumb4"
             onClick={() => play("img4")}
             type="image"
-            src={require("../../img/img2.jpeg")}
+            src={require("../../img/class003.webp")}
             alt="4번째 사진"
           ></input>
         </div>

@@ -14,8 +14,6 @@ import {
   FormControl,
   InputLabel,
   MenuItem,
-  Pagination,
-  PaginationItem,
   Select,
   Stack,
 } from "@mui/material";
@@ -26,17 +24,17 @@ import "../css/mainpage.scss";
 import styled from "styled-components";
 import "react-multi-carousel/lib/styles.css";
 import axios from "axios";
+import { post } from "axios";
 import { API_BASE_URL } from "../app-config";
 import { Link } from "react-router-dom";
 import "../css/btnDeco.scss";
+import "../css/classview.css";
+import classData from "../PageComponents/AdminPage/classData";
+import Pagination from "@mui/material/Pagination";
 
 function valuetext(priceSlider) {
   return `${priceSlider}원`;
 }
-
-// function valueDate(dateMdf) {
-//   return new Date(dateMdf);
-// }
 
 let hour;
 let minu;
@@ -57,17 +55,131 @@ function valueDate(time) {
 
 // 강좌 조회 페이지
 const Course = (props) => {
+  const [courseSearch, setCourseSearch] = useState("");
+  const [locationSearch, setLocationSearch] = React.useState("");
+  const [courseType, setCourseType] = React.useState("");
+  const [courseLevel, setCourseLevel] = useState("");
+  const [courseStTime, setCourseStTime] = useState("");
+  const [courseEndTime, setCourseEndTime] = useState("");
+  const [courseStCost, setCourseStCost] = useState("");
+  const [courseEndCost, setCourseEndCost] = useState("");
+  const [courseLevelName, setCourseLevelName] = useState("");
+
+  const [searchInfo, setSearchInfo] = useState({});
+
+  const addSearchInfo = (e) => {
+    const newSearchInfo = {
+      ...searchInfo,
+      [e.target.name]: e.target.value,
+    };
+
+    setSearchInfo(newSearchInfo);
+  };
+
+  const onChangeSearchNm = (e) => {
+    const courseSearchNm = e.target.value;
+    setCourseSearch(courseSearchNm);
+    addSearchInfo(e);
+  };
+
+  const onChangeLocation = (e) => {
+    const locationChange = e.target.value;
+    setLocationSearch(locationChange);
+    addSearchInfo(e);
+  };
+
+  const onChangeType = (e) => {
+    const typeChange = e.target.value;
+    setCourseType(typeChange);
+    addSearchInfo(e);
+  };
+
+  const onChangeLevel = (e) => {
+    const levelChange = e.target.value;
+    setCourseLevel(levelChange);
+    addSearchInfo(e);
+  };
+
+  const onChangeStTime = (e) => {
+    console.log(e.target.value);
+    const stTimeChange = e.target.value;
+    setCourseStTime(stTimeChange);
+    addSearchInfo(e);
+  };
+
+  const onChangeEndTime = (e) => {
+    const endTimeChange = e.target.value;
+    setCourseEndTime(endTimeChange);
+    addSearchInfo(e);
+  };
+
+  const onChangeStCost = (e) => {
+    const costChange = e.target.value;
+    setCourseStCost(costChange);
+    addSearchInfo(e);
+  };
+
+  const onChangeEndCost = (e) => {
+    const costChange = e.target.value;
+    setCourseEndCost(costChange);
+    addSearchInfo(e);
+  };
+
+  const onSubmitSearchHandler = (e) => {
+    console.log({
+      ...searchInfo,
+      courseSearch: courseSearch,
+      locationSearch: locationSearch,
+      courseType: courseType,
+      courseLevel: courseLevelName,
+      courseStTime: courseStTime,
+      courseEndTime: courseEndTime,
+      courseStCost: courseStCost,
+      courseEndCost: courseEndCost,
+    });
+    e.preventDefault();
+
+    axios({
+      method: "post",
+      url: API_BASE_URL + "/api/course/searchCourse",
+      data: {
+        ...searchInfo,
+        courseSearch: courseSearch,
+        locationSearch: locationSearch,
+        courseType: courseType,
+        courseLevel: courseLevelName,
+        courseStTime: courseStTime,
+        courseEndTime: courseEndTime,
+        courseStCost: courseStCost,
+        courseEndCost: courseEndCost,
+      },
+    }).then((responseSearchData) => {
+      console.log(responseSearchData);
+      window.location.href = "/course";
+    });
+  };
+
   const [timeSlider, setTimeSlider] = useState([0, 1440]);
 
   const handleChange1 = (event, newValue) => {
     setTimeSlider(newValue);
   };
 
+  useEffect(() => {
+    setCourseStTime(valueDate(timeSlider[0]));
+    setCourseEndTime(valueDate(timeSlider[1]));
+  }, [timeSlider]);
+
   const [priceSlider, setPriceSlider] = useState([0, 1000000]);
 
   const handleChange2 = (event, newValue) => {
     setPriceSlider(newValue);
   };
+
+  useEffect(() => {
+    setCourseStCost(valuetext(priceSlider[0]).slice(0, -1));
+    setCourseEndCost(valuetext(priceSlider[1]).slice(0, -1));
+  }, [priceSlider]);
 
   const [course, setCourse] = useState([]);
 
@@ -194,6 +306,129 @@ const Course = (props) => {
     },
   ];
 
+  // const stateTextPage = [
+  //   {
+  //     id: "pp-01",
+  //     title: "Kids-story",
+  //     artist: "Thomas Buisson",
+  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
+  //     thumbnail:
+  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
+  //     price: 10,
+  //     pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
+  //   },
+  //   {
+  //     id: "pp-02",
+  //     title: "mockyapp",
+  //     artist: "Ahmed Amr",
+  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
+  //     thumbnail:
+  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/mockyapp.mp4",
+  //     price: 20,
+  //     pieUrl: "https://cloud.protopie.io/p/27631ac9d5",
+  //   },
+  //   {
+  //     id: "pp-03",
+  //     title: "mockyapp",
+  //     artist: "Ahmed Amr",
+  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
+  //     thumbnail:
+  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/mockyapp.mp4",
+  //     price: 20,
+  //     pieUrl: "https://cloud.protopie.io/p/27631ac9d5",
+  //   },
+  //   {
+  //     id: "pp-04",
+  //     title: "mockyapp",
+  //     artist: "Ahmed Amr",
+  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
+  //     thumbnail:
+  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/mockyapp.mp4",
+  //     price: 20,
+  //     pieUrl: "https://cloud.protopie.io/p/27631ac9d5",
+  //   },
+  //   {
+  //     id: "pp-05",
+  //     title: "Kids-story",
+  //     artist: "Thomas Buisson",
+  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
+  //     thumbnail:
+  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
+  //     price: 10,
+  //     pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
+  //   },
+  //   {
+  //     id: "pp-06",
+  //     title: "Kids-story",
+  //     artist: "Thomas Buisson",
+  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
+  //     thumbnail:
+  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
+  //     price: 10,
+  //     pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
+  //   },
+  //   {
+  //     id: "pp-07",
+  //     title: "Kids-story",
+  //     artist: "Thomas Buisson",
+  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
+  //     thumbnail:
+  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
+  //     price: 10,
+  //     pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
+  //   },
+  //   {
+  //     id: "pp-08",
+  //     title: "Kids-story",
+  //     artist: "Thomas Buisson",
+  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
+  //     thumbnail:
+  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
+  //     price: 10,
+  //     pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
+  //   },
+  //   {
+  //     id: "pp-09",
+  //     title: "Kids-story",
+  //     artist: "Thomas Buisson",
+  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
+  //     thumbnail:
+  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
+  //     price: 10,
+  //     pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
+  //   },
+  //   {
+  //     id: "pp-10",
+  //     title: "Kids-story",
+  //     artist: "Thomas Buisson",
+  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
+  //     thumbnail:
+  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
+  //     price: 10,
+  //     pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
+  //   },
+  //   {
+  //     id: "pp-11",
+  //     title: "Kids-story",
+  //     artist: "Thomas Buisson",
+  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
+  //     thumbnail:
+  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
+  //     price: 10,
+  //     pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
+  //   },
+  //   {
+  //     id: "pp-12",
+  //     title: "Kids-story",
+  //     artist: "Thomas Buisson",
+  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
+  //     thumbnail:
+  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
+  //     price: 10,
+  //     pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
+  //   },
+  // ];
+
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -214,106 +449,85 @@ const Course = (props) => {
     },
   };
 
-  const initialArray = [
-    `지금 베어봄과 함께
-    일상을 취미로 채워보세요!`,
-    `모든 일상이 즐겁기만 할 수는 없죠.
-    그렇지만 우리는,`,
-    `일상 틈틈이, 즐거운 일들을
-    채워나갈 수 있어요!`,
-  ]; // 원본 배열
-
-  const [text, setText] = useState([]);
-
-  useEffect(() => {
-    let i = 0;
-    setText(initialArray.filter((item, index) => index === i));
-    setInterval(() => {
-      i++;
-      setText(initialArray.filter((item, index) => index === i));
-      if (initialArray.length - 1 === i) {
-        i = -1;
-      }
-    }, 3000);
-    //데이터불러오는 axios
-    //setCourse(response.data);
-    axios({
-      method: "get",
-      url: API_BASE_URL + "/api/course/getCourseList",
-    }).then((response) => {
-      setCourse(response.data);
-    });
-  }, []);
-
   const [index, setIndex] = useState(0);
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
 
-  // const [loading, setLoading] = useState(true);
-  // const onClickClassRegist = useEffect(() => {}, []);
-  // const onClickClassRegist = () => {
-  //   history.push("/course/registration");
-  // };
-
   let navigate = useNavigate();
 
-  const [city, setCity] = React.useState("");
+  // const [locationSearch, setLocationSearch] = React.useState("");
 
-  const handleChange3 = (event) => {
-    setCity(event.target.value);
-  };
+  // const [courseType, setCourseType] = React.useState([]);
 
-  const [categorySel, setCategorySel] = React.useState("");
-
-  const handleChange4 = (event) => {
-    setCategorySel(event.target.value);
-  };
-
-  let dataCategory = ["원데이", "정기"];
-
-  let [btnActiveCategory, setBtnActiveCategory] = useState("");
-
-  const toggleActiveCategory = (e) => {
-    setBtnActiveCategory((prev) => {
+  const courseTypeChange = (e) => {
+    setCourseType(() => {
       return e.target.value;
     });
   };
 
-  let dataWeek = ["평일", "토요일", "일요일"];
+  // let dataCategory = ["오프라인", "온라인"];
 
-  let [btnActiveWeek, setBtnActiveWeek] = useState("");
+  // let [courseOnOff, setCourseOnOff] = useState("");
 
-  const toggleActiveWeek = (e) => {
-    setBtnActiveWeek((prev) => {
-      return e.target.value;
-    });
-  };
+  // const toggleActiveCategory = (e) => {
+  //   setCourseOnOff((prev) => {
+  //     return e.target.value;
+  //   });
+  // };
 
-  let dataLevel = ["입문", "중급", "고급"];
+  // let dataWeek = ["평일", "토요일", "일요일"];
 
-  let [btnActiveLevel, setBtnActiveLevel] = useState("");
+  // let [courseStDate, setCourseStDate] = useState("");
+
+  // const toggleActiveWeek = (e) => {
+  //   setCourseStDate((prev) => {
+  //     return e.target.value;
+  //   });
+  // };
+
+  const dataLevel = ["입문", "중급", "고급"];
+
+  // const [courseLevel, setCourseLevel] = useState("");
 
   const toggleActiveLevel = (e) => {
-    setBtnActiveLevel((prev) => {
+    setCourseLevel((prev) => {
       return e.target.value;
     });
+    setCourseLevelName(dataLevel[e.target.value]);
+    addSearchInfo(e);
   };
 
-  const location = useLocation();
-  const query = new URLSearchParams(location.search);
-  const page = parseInt(query.get("page") || "1", 10);
+  const [data, setData] = useState(stateText);
+  const [pageData, setPageData] = useState([]);
+  const [limit, setLimit] = useState(10);
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * limit;
 
-  const onSubmitSearchHandler = (event) => {
-    event.preventDefault();
+  useEffect(() => {
+    setPageData(data.slice(0, 12));
+  }, []);
+
+  useEffect(() => {
+    if (pageData.length !== 0) {
+      console.log(pageData.length);
+    }
+  }, [pageData]);
+  const pagingFunc = (pageNum) => {
+    setPageData(data.slice(10 * pageNum - 10, 10 * pageNum));
   };
 
   return (
     <>
       <br />
       <Container>
-        <form noValidate id="searchSubmitForm" onSubmit={onSubmitSearchHandler}>
+        <form
+          noValidate
+          id="searchSubmitForm"
+          name="searchSubmitForm"
+          onSubmit={onSubmitSearchHandler}
+        >
           <Row>
             <Col>
               <div className="searchForm">
@@ -327,10 +541,12 @@ const Course = (props) => {
                     </InputGroup.Text>
                     <Form.Control
                       type="text"
-                      placeholder="클래스 검색"
+                      placeholder="클래스 검색."
                       aria-label="classSearch"
                       aria-describedby="btnGroupAddon"
-                      name="courseNm"
+                      name="courseSearch"
+                      value={courseSearch}
+                      onChange={onChangeSearchNm}
                     />
                   </InputGroup>
                 </div>
@@ -350,30 +566,31 @@ const Course = (props) => {
                     <Select
                       labelId="demo-select-small"
                       id="demo-select-small"
-                      value={city}
                       label="city"
-                      onChange={handleChange3}
+                      name="locationSearch"
+                      value={locationSearch}
+                      onChange={onChangeLocation}
                     >
                       <MenuItem value="">
                         <em>지역검색</em>
                       </MenuItem>
-                      <MenuItem value={1}>전체</MenuItem>
-                      <MenuItem value={2}>서울</MenuItem>
-                      <MenuItem value={3}>경기</MenuItem>
-                      <MenuItem value={4}>인천</MenuItem>
-                      <MenuItem value={5}>강원</MenuItem>
-                      <MenuItem value={6}>대구</MenuItem>
-                      <MenuItem value={7}>부산</MenuItem>
-                      <MenuItem value={8}>경상북도</MenuItem>
-                      <MenuItem value={9}>경상남도</MenuItem>
-                      <MenuItem value={10}>울산</MenuItem>
-                      <MenuItem value={11}>광주</MenuItem>
-                      <MenuItem value={12}>전라북도</MenuItem>
-                      <MenuItem value={13}>전라남도</MenuItem>
-                      <MenuItem value={14}>세종</MenuItem>
-                      <MenuItem value={15}>제주</MenuItem>
-                      <MenuItem value={16}>충청북도</MenuItem>
-                      <MenuItem value={17}>충청남도</MenuItem>
+                      <MenuItem value={"전체"}>전체</MenuItem>
+                      <MenuItem value={"서울"}>서울</MenuItem>
+                      <MenuItem value={"경기"}>경기</MenuItem>
+                      <MenuItem value={"인천"}>인천</MenuItem>
+                      <MenuItem value={"강원"}>강원</MenuItem>
+                      <MenuItem value={"대구"}>대구</MenuItem>
+                      <MenuItem value={"부산"}>부산</MenuItem>
+                      <MenuItem value={"경상북도"}>경상북도</MenuItem>
+                      <MenuItem value={"경상남도"}>경상남도</MenuItem>
+                      <MenuItem value={"울산"}>울산</MenuItem>
+                      <MenuItem value={"광주"}>광주</MenuItem>
+                      <MenuItem value={"전라북도"}>전라북도</MenuItem>
+                      <MenuItem value={"전라남도"}>전라남도</MenuItem>
+                      <MenuItem value={"세종"}>세종</MenuItem>
+                      <MenuItem value={"제주"}>제주</MenuItem>
+                      <MenuItem value={"충청북도"}>충청북도</MenuItem>
+                      <MenuItem value={"충청남도"}>충청남도</MenuItem>
                     </Select>
                   </FormControl>
                 </div>
@@ -393,25 +610,26 @@ const Course = (props) => {
                     <Select
                       labelId="demo-select-small"
                       id="demo-select-small"
-                      value={categorySel}
                       label="categorySel"
-                      onChange={handleChange4}
+                      name="courseType"
+                      value={courseType}
+                      onChange={onChangeType}
                     >
                       <MenuItem value="">
                         <em>카테고리검색</em>
                       </MenuItem>
-                      <MenuItem value={1}>전체</MenuItem>
-                      <MenuItem value={2}>핸드메이드</MenuItem>
-                      <MenuItem value={3}>쿠킹</MenuItem>
-                      <MenuItem value={4}>플라워·가드닝</MenuItem>
-                      <MenuItem value={5}>드로잉</MenuItem>
-                      <MenuItem value={6}>음악</MenuItem>
-                      <MenuItem value={7}>요가·필라테스</MenuItem>
-                      <MenuItem value={8}>레져·스포츠</MenuItem>
-                      <MenuItem value={9}>뷰티</MenuItem>
-                      <MenuItem value={10}>반려동물</MenuItem>
-                      <MenuItem value={11}>체험</MenuItem>
-                      <MenuItem value={12}>자기계발</MenuItem>
+                      <MenuItem value={"전체"}>전체</MenuItem>
+                      <MenuItem value={"핸드메이드"}>핸드메이드</MenuItem>
+                      <MenuItem value={"쿠킹"}>쿠킹</MenuItem>
+                      <MenuItem value={"플라워·가드닝"}>플라워·가드닝</MenuItem>
+                      <MenuItem value={"드로잉"}>드로잉</MenuItem>
+                      <MenuItem value={"음악"}>음악</MenuItem>
+                      <MenuItem value={"요가·필라테스"}>요가·필라테스</MenuItem>
+                      <MenuItem value={"레져·스포츠"}>레져·스포츠</MenuItem>
+                      <MenuItem value={"뷰티"}>뷰티</MenuItem>
+                      <MenuItem value={"반려동물"}>반려동물</MenuItem>
+                      <MenuItem value={"체험"}>체험</MenuItem>
+                      <MenuItem value={"자기계발"}>자기계발</MenuItem>
                     </Select>
                   </FormControl>
                 </div>
@@ -419,7 +637,7 @@ const Course = (props) => {
             </Col>
           </Row>
           <br />
-          <Row>
+          {/* <Row>
             <Col md={1} className="category-font">
               유형
             </Col>
@@ -432,10 +650,12 @@ const Course = (props) => {
                         <button
                           value={idx}
                           className={
-                            "btn" + (idx == btnActiveCategory ? " active" : "")
+                            "btn" + (idx == courseOnOff ? " active" : "")
                           }
                           onClick={toggleActiveCategory}
                           id="btnDeco"
+                          name="courseOnOff"
+                          // onChange={handleValueChange}
                         >
                           {item}
                         </button>
@@ -445,10 +665,10 @@ const Course = (props) => {
                 </div>
               </ButtonGroup>
             </Col>
-          </Row>
+          </Row> */}
           <br />
           <Row>
-            <Col md={1} className="category-font">
+            {/* <Col md={1} className="category-font">
               요일
             </Col>
             <Col md={4} className="class-week">
@@ -460,10 +680,12 @@ const Course = (props) => {
                         <button
                           value={idx}
                           className={
-                            "btn" + (idx == btnActiveWeek ? " active" : "")
+                            "btn" + (idx == courseStDate ? " active" : "")
                           }
                           onClick={toggleActiveWeek}
                           id="btnDeco"
+                          name="courseStDate"
+                          // onChange={handleValueChange}
                         >
                           {item}
                         </button>
@@ -472,7 +694,38 @@ const Course = (props) => {
                   })}
                 </div>
               </ButtonGroup>
+            </Col> */}
+
+            <Col md={1} className="category-font">
+              난이도
             </Col>
+            <Col md={4} className="class-level">
+              <div className="container">
+                {dataLevel.map((item, idx) => {
+                  return (
+                    <>
+                      <button
+                        type="button"
+                        value={idx}
+                        className={
+                          "btn" + (idx == courseLevel ? " active" : "")
+                        }
+                        onClick={toggleActiveLevel}
+                        id="btnDeco"
+                        name="courseLevel"
+                        // onChange={onChangeLevel}
+                      >
+                        {item}
+                      </button>
+                    </>
+                  );
+                })}
+              </div>
+            </Col>
+          </Row>
+          <br />
+          <br />
+          <Row>
             <Col md={1} className="category-font">
               시간
             </Col>
@@ -486,6 +739,8 @@ const Course = (props) => {
                   aria-invalid="false"
                   inputMode="numeric"
                   className="css-1x5jdmq"
+                  name="courseStTime"
+                  onChange={onChangeStTime}
                 ></input>
               </div>
               <div className="time-slider-bar">
@@ -511,35 +766,15 @@ const Course = (props) => {
                   aria-invalid="false"
                   inputMode="numeric"
                   className="css-1x5jdmq"
+                  name="courseEndTime"
+                  onChange={onChangeEndTime}
                 ></input>
               </div>
             </Col>
           </Row>
           <br />
+          <br />
           <Row>
-            <Col md={1} className="category-font">
-              난이도
-            </Col>
-            <Col md={4} className="class-level">
-              <div className="container">
-                {dataLevel.map((item, idx) => {
-                  return (
-                    <>
-                      <button
-                        value={idx}
-                        className={
-                          "btn" + (idx == btnActiveLevel ? " active" : "")
-                        }
-                        onClick={toggleActiveLevel}
-                        id="btnDeco"
-                      >
-                        {item}
-                      </button>
-                    </>
-                  );
-                })}
-              </div>
-            </Col>
             <Col md={1} className="category-font">
               금액
             </Col>
@@ -552,6 +787,8 @@ const Course = (props) => {
                   aria-invalid="false"
                   inputMode="numeric"
                   className="css-1x5jdmq"
+                  name="courseStost"
+                  onChange={onChangeStCost}
                 ></input>
               </div>
               <div className="price-slider-bar">
@@ -576,15 +813,18 @@ const Course = (props) => {
                   aria-invalid="false"
                   inputMode="numeric"
                   className="css-1x5jdmq"
+                  name="courseEndCost"
+                  onChange={onChangeEndCost}
                 ></input>
               </div>
             </Col>
           </Row>
           <br />
+          <br />
           <Row className="justify-content-md-center">
             <Col xs lg="2">
               <Button
-                type="submit"
+                type="button"
                 variant="outline-dark"
                 size="lg"
                 id="refreshBtn"
@@ -599,7 +839,8 @@ const Course = (props) => {
                 variant="secondary"
                 size="lg"
                 id="searchBtn"
-                onSubmit={onSubmitSearchHandler}
+                // onSubmit={onSubmitSearchHandler}
+                // onClick={}
               >
                 검색하기
               </Button>
@@ -660,20 +901,6 @@ const Course = (props) => {
           <div className="list-header">
             <h2>클래스 검색해서 베어봄!</h2>
           </div>
-          <div className="searchContent">
-            {stateText.map((data) => (
-              // 여기서 {}말고 ()로 하면 return 안해도 됨
-              //   이게 props 넣는거
-
-              <MiniCard
-                id={data.id}
-                thumbnail={data.thumbnail}
-                title={data.title}
-                condition={true}
-                // 예시로 보여주기 위함
-              />
-            ))}
-          </div>
           <hr
             style={{
               width: "100%",
@@ -681,19 +908,28 @@ const Course = (props) => {
               height: "1px",
             }}
           />
-          <div className="pagingPart">
-            <Pagination
-              page={page}
-              count={10}
-              renderItem={(item) => (
-                <PaginationItem
-                  component={Link}
-                  to={`/inbox${item.page === 1 ? "" : `?page=${item.page}`}`}
-                  {...item}
-                />
-              )}
-            />
+          <div className="searchContent">
+            {pageData.map((minidata) => (
+              <MiniCard
+                id={minidata.id}
+                thumbnail={minidata.thumbnail}
+                title={minidata.title}
+                condition={true}
+              />
+            ))}
           </div>
+          <Stack spacing={2}>
+            <Pagination
+              boundaryCount={10}
+              count={10}
+              color="primary"
+              showFirstButton={true}
+              showLastButton={true}
+              onChange={(e) => {
+                pagingFunc(e.target.textContent);
+              }}
+            />
+          </Stack>
         </div>
       </main>
     </>

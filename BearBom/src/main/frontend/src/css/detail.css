@@ -7,14 +7,14 @@ body {
 }
 
 .detail-main {
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 15%;
+  margin-right: 15%;
   background-color: beige;
   justify-content: center;
 }
 .main-container {
   height: auto;
-  width: 80%;
+  width: 70%;
   margin: auto;
 }
 
@@ -34,12 +34,12 @@ body {
 }
 .main-cal {
   float: right;
-  width: 34%;
+  width: 30%;
   height: 100%;
   position: sticky;
 }
 .main-img-box {
-  margin: 54px 120px 50px 120px;
+  margin: 24px 0px 50px 0px;
 }
 .main-img {
   float: left;
@@ -64,13 +64,16 @@ body {
   padding-left: 20px;
   color: black;
   font-weight: bold;
+  text-decoration-line: blink;
 }
 
 .main-cal {
   padding-right: 10px;
   text-align: center;
 }
-
+.teacher {
+  margin-top: 20px;
+}
 .teacher-info2 {
   width: 30%;
   display: grid;
@@ -388,9 +391,10 @@ body {
 
 .navbar-expand {
   position: sticky;
-  top: 60px;
-  background-color: #dbd7d3;
+  top: 77px;
+  border-bottom: 1px solid #dbd7d3;
   z-index: 99;
+  background-color: white;
 }
 
 .navbar-nav {

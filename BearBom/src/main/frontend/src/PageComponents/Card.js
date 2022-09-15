@@ -7,9 +7,10 @@ import LikeButton from "../ModuleComponents/LikeButton";
 import "../css/card.scss";
 import { API_BASE_URL } from "../app-config";
 import axios from "axios";
-const Card = ({ title, condition, price, thumbnail, id }) => {
+const Card = ({ course }) => {
   const navigate = useNavigate();
   const [like, setLike] = useState(false);
+  const [dataa, setDataa] = useState();
 
   useEffect((e) => {
     const fetchData = async () => {
@@ -25,7 +26,7 @@ const Card = ({ title, condition, price, thumbnail, id }) => {
       axios({
         method: "GET",
         url: API_BASE_URL + "/api/like/getLikeList",
-        params: { userId: userId, courseIdx: id },
+        params: { userId: userId, courseIdx: course.courseIdx },
         //403 에러는 보안관련 에러
         headers: {
           Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
@@ -57,12 +58,12 @@ const Card = ({ title, condition, price, thumbnail, id }) => {
     }
     await axios({
       method: "POST",
-      url: `${API_BASE_URL}/api/like/${id}/insertLike`,
+      url: `${API_BASE_URL}/api/like/${course.courseIdx}/insertLike`,
       //403 에러는 보안관련 에러
       headers: {
         Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
       },
-      data: { courseIdx: id, userId: userId },
+      data: { courseIdx: course.courseIdx, userId: userId },
     })
       .then((response) => {
         console.log(response);
@@ -84,17 +85,19 @@ const Card = ({ title, condition, price, thumbnail, id }) => {
   return (
     <>
       <CardWrapper>
-        {id}
-        <ImgContainer>
-          <div className="tag">95% 만족</div>
+        {course.courseIdx}
+        <Link to={`/saw/${course.courseIdx}`} state={{ courseInfo: course }}>
+          <ImgContainer>
+            <div className="tag">95% 만족</div>
 
-          <img
-            className="img_test"
-            src={thumbnail}
-            // style={{ width: "250px", height: "250px" }}
-            alt="test"
-          ></img>
-        </ImgContainer>
+            <img
+              className="img_test"
+              src={`http://localhost:8080/upload/${course.courseThumbnailNm}`}
+              // style={{ width: "250px", height: "250px" }}
+              alt="test"
+            ></img>
+          </ImgContainer>
+        </Link>
         <div className="like">
           <LikeButton like={like} onClick={toggleLike}></LikeButton>
         </div>
@@ -102,14 +105,14 @@ const Card = ({ title, condition, price, thumbnail, id }) => {
           <div className="first_row">
             {/* props로 데이터 넘겨서 넣어주기 일단 dummy */}
             {/* 원데이 */}
-            {title}
+            {course.courseNm}
           </div>
           {/* <div className="second_row">{title}</div> */}
           {/* <div className={condition ? "third_row" : "hollow"}> */}
           {/* 이쪽은 있을수도있고 없을수도있고 조건 처리 */}
           {/* {condition ? "true면 보임" : "false면 안보임"} */}
           {/* </div> */}
-          <div className="last_row">{price}</div>
+          <div className="last_row">{course.courseCost}</div>
         </TextContainer>
       </CardWrapper>
     </>

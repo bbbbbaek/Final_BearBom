@@ -1,6 +1,5 @@
-import React, { useEffect, useRef } from "react";
-import { useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import data from "../../ModuleComponents/data";
 import "../../css/detail.css";
 import { API_BASE_URL } from "../../app-config";
@@ -112,15 +111,11 @@ const Detail = ({ scrollTop }) => {
   // };
   const [woobin, setWoobin] = useState(false);
 
+  const navigate = useNavigate();
+
+  ///////////////////////////////////
   return (
     <>
-      <button
-        onClick={() => {
-          console.log(averageRating);
-        }}
-      >
-        test
-      </button>
       <div className="main-container">
         <div className="info">
           <div className="main-info">
@@ -130,13 +125,12 @@ const Detail = ({ scrollTop }) => {
             </div>
             <h4>Title</h4>
             <CourseNavbar />
-            <hr id="teacher" />
+            {/* <hr id="teacher" /> */}
             <section /* id="teacher" */ className="section-box">
-              <Teacher averageRating={averageRating} />
-
-              <h5>
+              <h5 className="teacher">
                 <b>강사소개</b>
               </h5>
+              <Teacher averageRating={averageRating} />
             </section>
             <hr id="class" />
             <section className="section-box">
@@ -205,7 +199,7 @@ const Detail = ({ scrollTop }) => {
           </div>
           <div className="main-cal">
             <div>
-              <Apply />
+              <Apply courseIdx={id} />
             </div>
           </div>
         </div>
