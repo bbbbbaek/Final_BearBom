@@ -27,7 +27,6 @@ import Page404 from "./PageComponents/Page404";
 import Test123 from "./PageComponents/Detail/Test123";
 import RedirectForKakao from "./PageComponents/JoinComponents/RedirectForKakao";
 import RedirectForKakaoLogout from "./PageComponents/JoinComponents/RedirectForKakaoLogout";
-import PayReady from "./PageComponents/Detail/KakaoPayReady";
 import KakaoPayRe from "./PageComponents/Detail/KakaoPayRe";
 import KakaoPayR from "./PageComponents/Detail/KakaoPayR";
 

@@ -15,6 +15,12 @@ function Apply({ courseIdx }) {
   const [like, setLike] = useState(false);
   const calRef = useRef(null);
 
+  //카카오페이 경로이동
+  const navigate = useNavigate();
+  const onClickBtn = () => {
+    navigate(`/payready`);
+  };
+
   useEffect((e) => {
     const fetchData = async () => {
       // const res = await axios.get(`${API_BASE_URL}/api/like/getLikeList`);
@@ -70,12 +76,6 @@ function Apply({ courseIdx }) {
     };
   });
 
-  const navigate = useNavigate();
-
-  const onClickBtn = () => {
-    navigate(`/payready`);
-  };
-
   const toggleLike = async (e) => {
     // const res = await axios.post(`${API_BASE_URL}/api/like/{courseIdx}/insertLike`);
     const userId = localStorage.getItem("USER_ID");
@@ -127,9 +127,10 @@ function Apply({ courseIdx }) {
         </div>
 
         <div className="cal-btn-box">
-          <button className="cal-wishList">
-            <LikeButton onClick={toggleLike}></LikeButton>찜하기
-          </button>
+          <div className="cal-wishList">
+            <LikeButton like={like} onClick={toggleLike}></LikeButton>
+            찜하기
+          </div>
 
           <button type="button" className="cal-apply" onClick={onClickBtn}>
             신청하기

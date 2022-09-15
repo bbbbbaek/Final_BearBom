@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.bearbom.entity.Course;
 import com.spring.bearbom.entity.Courser;
 import com.spring.bearbom.mapper.CourserMapper;
 import com.spring.bearbom.repository.CourserRepository;
@@ -39,4 +40,11 @@ public class CourserServiceImpl implements CourserService {
 		// TODO Auto-generated method stub
 		return courserMapper.updateRating(courser.getCourserRate());
 	}
+	
+	@Override
+    public List<Course> getCourseList(Course course) {
+//        List<Course> courseList = courseRepository.findAll();
+        List<Course> courseList = courserMapper.getCourseList(course);
+        return courseList;
+    }
 }

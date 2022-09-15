@@ -86,7 +86,7 @@ const Card = ({ course }) => {
     <>
       <CardWrapper>
         {course.courseIdx}
-        <Link to={`/saw/${course.courseIdx}`} state={{ courseInfo: course }}>
+        <Link to={`/course/${course.courseIdx}`} state={{ courseInfo: course }}>
           <ImgContainer>
             <div className="tag">95% 만족</div>
 

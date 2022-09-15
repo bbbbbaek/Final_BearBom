@@ -2,6 +2,7 @@ package com.spring.bearbom.service.course;
 
 import java.util.List;
 
+import com.spring.bearbom.entity.Course;
 import com.spring.bearbom.entity.Courser;
 
 public interface CourserService {
@@ -15,6 +16,8 @@ public interface CourserService {
 	
 
 	double updateRating(Courser courser);
+	
+	List<Course> getCourseList(Course course);
     
 
 }
