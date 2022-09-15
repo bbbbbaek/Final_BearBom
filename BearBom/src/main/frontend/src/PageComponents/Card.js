@@ -7,10 +7,14 @@ import LikeButton from "../ModuleComponents/LikeButton";
 import "../css/card.scss";
 import { API_BASE_URL } from "../app-config";
 import axios from "axios";
-const Card = ({ course }) => {
+const Card = ({ course, averageRating }) => {
   const navigate = useNavigate();
   const [like, setLike] = useState(false);
   const [dataa, setDataa] = useState();
+  const courseCost = course.courseCost;
+  const courseCostChange = courseCost
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
   useEffect((e) => {
     const fetchData = async () => {
@@ -88,7 +92,7 @@ const Card = ({ course }) => {
         {course.courseIdx}
         <Link to={`/saw/${course.courseIdx}`} state={{ courseInfo: course }}>
           <ImgContainer>
-            <div className="tag">95% 만족</div>
+            <div className="tag">{averageRating} 평점</div>
 
             <img
               className="img_test"
@@ -112,7 +116,7 @@ const Card = ({ course }) => {
           {/* 이쪽은 있을수도있고 없을수도있고 조건 처리 */}
           {/* {condition ? "true면 보임" : "false면 안보임"} */}
           {/* </div> */}
-          <div className="last_row">{course.courseCost}</div>
+          <div className="last_row">{courseCostChange}원</div>
         </TextContainer>
       </CardWrapper>
     </>
