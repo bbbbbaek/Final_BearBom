@@ -25,7 +25,8 @@ public class UserDTO {
 	private String lecturerInfo;
 	private String token;
 	
-
+	// 로그인 카운트 테스트
+	private String test;
 	
 	
 }
