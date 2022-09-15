@@ -25,4 +25,10 @@ public class MainServiceImpl implements MainService {
         List<Course> courseList = mainMapper.getCourseList(course);
         return courseList;
     }
+
+    @Override
+    public List<Course> getCourseEndDateList(Course course) {
+        List<Course> courseList = mainMapper.getCourseEndDateList(course);
+        return courseList;
+    }
 }

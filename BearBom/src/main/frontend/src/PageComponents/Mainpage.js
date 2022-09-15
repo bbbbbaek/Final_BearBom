@@ -14,9 +14,11 @@ import { Link, useNavigate, Navigate } from "react-router-dom";
 
 import dataTest from "./dataTest.js";
 import Card from "./Card";
+import Card2 from "./Card2";
 
 const Mainpage = () => {
   const [course, setCourse] = useState([]);
+  const [endday, setEndday] = useState([]);
   const [averageRating, setAverageRating] = useState("");
 
   const stateText = [
@@ -181,7 +183,6 @@ const Mainpage = () => {
   ]; // 원본 배열
 
   const [text, setText] = useState([]);
-
   useEffect(() => {
     let i = 0;
     setText(initialArray.filter((item, index) => index === i));
@@ -200,18 +201,25 @@ const Mainpage = () => {
     }).then((response) => {
       // console.log(response);
       console.log(response.data);
-      // setCourse(response.data);
-      setCourse(response.data.getCourseList);
-      setAverageRating(response.data.averageRating);
+      setCourse(response.data);
+
+      // let result = response.data.map((el) => {
+      //   return { courseIdx: el["courseIdx"] };
+      // });
+
+      // console.log(result);
+      // setCourse(response.data.getCourseList);
+      // setAverageRating(response.data.averageRating);
+    });
+
+    axios({
+      method: "get",
+      url: API_BASE_URL + "/api/main/getCourseEndDateList",
+    }).then((response) => {
+      console.log(response.data);
+      setEndday(response.data);
     });
   }, []);
-
-  useEffect(() => {
-    if (course.length !== 0) {
-      console.log("1111");
-      console.log(course);
-    }
-  }, [course]);
 
   const [index, setIndex] = useState(0);
 
@@ -232,6 +240,14 @@ const Mainpage = () => {
   const [courseInfo, setCourseInfo] = useState(course);
 
   const get_local = JSON.parse(localStorage.getItem("data"));
+
+  // let result = course.map((el) => {
+  //   if (el["course_idx"]) {
+  //     return { courseIdx: el["course_idx"] };
+  //   }
+  // });
+
+  // console.log(result);
 
   return (
     <>
@@ -361,7 +377,8 @@ const Mainpage = () => {
                     {course.map((data) => (
                       // 여기서 {}말고 ()로 하면 return 안해도 됨
                       //   이게 props 넣는거
-                      <Card course={data} averageRating={averageRating} />
+                      // <Card course={data} averageRating={averageRating} />
+                      <Card course={data} />
                     ))}
                   </Carousel>
                 </div>
@@ -372,29 +389,19 @@ const Mainpage = () => {
 
         <div className="list-box new-class-area">
           <div className="list-header">
-            <h2>오늘 오픈 했어요!</h2>
+            {/* <h2>오늘 오픈 했어요!</h2> */}
+            <h2>마감임박! 단 하루 남은 클래스</h2>
           </div>
           <div>
             <CarouselContainer>
               <div className="favorite-list">
                 <div style={{ width: "100%", margin: "0 auto" }}>
                   <Carousel responsive={responsive}>
-                    {dataa.map((data) => (
+                    {endday.map((data) => (
                       // 여기서 {}말고 ()로 하면 return 안해도 됨
                       //   이게 props 넣는거
-                      <Link to={`/saw/${data.id}`} state={{ dataa: data }}>
-                        <MiniCard
-                          key={data.id}
-                          id={data.id}
-                          thumbnail={data.thumbnail}
-                          title={data.title}
-                          condition={true}
-                          // onClick={() => {
-                          //   localStorage.setItem("iddd", "1");
-                          // }}
-                          // 예시로 보여주기 위함
-                        />
-                      </Link>
+                      // <Card course={data} averageRating={averageRating} />
+                      <Card2 endday={data} />
                     ))}
                   </Carousel>
                 </div>

@@ -7,11 +7,11 @@ import LikeButton from "../ModuleComponents/LikeButton";
 import "../css/card.scss";
 import { API_BASE_URL } from "../app-config";
 import axios from "axios";
-const Card = ({ course }) => {
+const Card2 = ({ endday }) => {
   const navigate = useNavigate();
   const [like, setLike] = useState(false);
   const [dataa, setDataa] = useState();
-  const courseCost = course.courseCost;
+  const courseCost = endday.courseCost;
   const courseCostChange = courseCost
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -30,7 +30,7 @@ const Card = ({ course }) => {
       axios({
         method: "GET",
         url: API_BASE_URL + "/api/like/getLikeList",
-        params: { userId: userId, courseIdx: course.courseIdx },
+        params: { userId: userId, courseIdx: endday.courseIdx },
         //403 에러는 보안관련 에러
         headers: {
           Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
@@ -62,12 +62,12 @@ const Card = ({ course }) => {
     }
     await axios({
       method: "POST",
-      url: `${API_BASE_URL}/api/like/${course.courseIdx}/insertLike`,
+      url: `${API_BASE_URL}/api/like/${endday.courseIdx}/insertLike`,
       //403 에러는 보안관련 에러
       headers: {
         Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
       },
-      data: { courseIdx: course.courseIdx, userId: userId },
+      data: { courseIdx: endday.courseIdx, userId: userId },
     })
       .then((response) => {
         console.log(response);
@@ -89,15 +89,15 @@ const Card = ({ course }) => {
   return (
     <>
       <CardWrapper>
-        {course.courseIdx}
-        <Link to={`/course/${course.courseIdx}`} state={{ courseInfo: course }}>
+        {endday.courseIdx}
+        <Link to={`/course/${endday.courseIdx}`} state={{ courseInfo: endday }}>
           <ImgContainer>
             <div className="tag"> 평점</div>
             {/* <div className="tag">{averageRating} 평점</div> */}
 
             <img
               className="img_test"
-              src={`http://localhost:8080/upload/${course.courseThumbnailNm}`}
+              src={`http://localhost:8080/upload/${endday.courseThumbnailNm}`}
               // style={{ width: "250px", height: "250px" }}
               alt="test"
             ></img>
@@ -110,7 +110,7 @@ const Card = ({ course }) => {
           <div className="first_row">
             {/* props로 데이터 넘겨서 넣어주기 일단 dummy */}
             {/* 원데이 */}
-            {course.courseNm}
+            {endday.courseNm}
           </div>
           {/* <div className="second_row">{title}</div> */}
           {/* <div className={condition ? "third_row" : "hollow"}> */}
@@ -124,7 +124,7 @@ const Card = ({ course }) => {
   );
 };
 
-export default Card;
+export default Card2;
 
 const TextContainer = styled.div`
   margin-top: 0.5rem;
