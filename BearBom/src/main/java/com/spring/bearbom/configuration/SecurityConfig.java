@@ -43,7 +43,9 @@ public class SecurityConfig{
 			//토큰 방식을 사용하므로 세션방식을 사용하지 않도록 설정
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
-			.authorizeRequests().antMatchers("/", "/api/member/**", "/api/user/*","/api/guide/*" , "/api/helpdesk/*", "/oauth/kakao", "/oauth/**", "/api/course/searchCourse").permitAll()
+
+			.authorizeRequests().antMatchers("/", "/api/member/**", "/api/user/*","/api/guide/*","/api/**" , "/api/helpdesk/*", "/oauth/kakao", "/oauth/**","/upload/*").permitAll()
+
 								.anyRequest().authenticated();
 
 
