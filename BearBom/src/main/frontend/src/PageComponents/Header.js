@@ -88,13 +88,13 @@ const Header = () => {
               >
                 클래스 검색
               </Nav.Link>
-              <Nav.Link
+              {/* <Nav.Link
                 onClick={() => {
                   navigate("/courseTest");
                 }}
               >
                 클래스 검색2
-              </Nav.Link>
+              </Nav.Link> */}
               <Nav.Link
                 onClick={() => {
                   navigate("course/registration");
