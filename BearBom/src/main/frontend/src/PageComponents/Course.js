@@ -541,7 +541,7 @@ const Course = (props) => {
                     </InputGroup.Text>
                     <Form.Control
                       type="text"
-                      placeholder="클래스 검색"
+                      placeholder="클래스 검색."
                       aria-label="classSearch"
                       aria-describedby="btnGroupAddon"
                       name="courseSearch"
