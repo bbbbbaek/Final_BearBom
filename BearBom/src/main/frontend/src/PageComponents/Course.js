@@ -14,8 +14,6 @@ import {
   FormControl,
   InputLabel,
   MenuItem,
-  Pagination,
-  PaginationItem,
   Select,
   Stack,
 } from "@mui/material";
@@ -26,17 +24,17 @@ import "../css/mainpage.scss";
 import styled from "styled-components";
 import "react-multi-carousel/lib/styles.css";
 import axios from "axios";
+import { post } from "axios";
 import { API_BASE_URL } from "../app-config";
 import { Link } from "react-router-dom";
 import "../css/btnDeco.scss";
+import "../css/classview.css";
+import classData from "../PageComponents/AdminPage/classData";
+import Pagination from "@mui/material/Pagination";
 
 function valuetext(priceSlider) {
   return `${priceSlider}원`;
 }
-
-// function valueDate(dateMdf) {
-//   return new Date(dateMdf);
-// }
 
 let hour;
 let minu;
@@ -194,6 +192,129 @@ const Course = (props) => {
     },
   ];
 
+  // const stateTextPage = [
+  //   {
+  //     id: "pp-01",
+  //     title: "Kids-story",
+  //     artist: "Thomas Buisson",
+  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
+  //     thumbnail:
+  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
+  //     price: 10,
+  //     pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
+  //   },
+  //   {
+  //     id: "pp-02",
+  //     title: "mockyapp",
+  //     artist: "Ahmed Amr",
+  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
+  //     thumbnail:
+  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/mockyapp.mp4",
+  //     price: 20,
+  //     pieUrl: "https://cloud.protopie.io/p/27631ac9d5",
+  //   },
+  //   {
+  //     id: "pp-03",
+  //     title: "mockyapp",
+  //     artist: "Ahmed Amr",
+  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
+  //     thumbnail:
+  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/mockyapp.mp4",
+  //     price: 20,
+  //     pieUrl: "https://cloud.protopie.io/p/27631ac9d5",
+  //   },
+  //   {
+  //     id: "pp-04",
+  //     title: "mockyapp",
+  //     artist: "Ahmed Amr",
+  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
+  //     thumbnail:
+  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/mockyapp.mp4",
+  //     price: 20,
+  //     pieUrl: "https://cloud.protopie.io/p/27631ac9d5",
+  //   },
+  //   {
+  //     id: "pp-05",
+  //     title: "Kids-story",
+  //     artist: "Thomas Buisson",
+  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
+  //     thumbnail:
+  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
+  //     price: 10,
+  //     pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
+  //   },
+  //   {
+  //     id: "pp-06",
+  //     title: "Kids-story",
+  //     artist: "Thomas Buisson",
+  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
+  //     thumbnail:
+  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
+  //     price: 10,
+  //     pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
+  //   },
+  //   {
+  //     id: "pp-07",
+  //     title: "Kids-story",
+  //     artist: "Thomas Buisson",
+  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
+  //     thumbnail:
+  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
+  //     price: 10,
+  //     pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
+  //   },
+  //   {
+  //     id: "pp-08",
+  //     title: "Kids-story",
+  //     artist: "Thomas Buisson",
+  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
+  //     thumbnail:
+  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
+  //     price: 10,
+  //     pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
+  //   },
+  //   {
+  //     id: "pp-09",
+  //     title: "Kids-story",
+  //     artist: "Thomas Buisson",
+  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
+  //     thumbnail:
+  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
+  //     price: 10,
+  //     pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
+  //   },
+  //   {
+  //     id: "pp-10",
+  //     title: "Kids-story",
+  //     artist: "Thomas Buisson",
+  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
+  //     thumbnail:
+  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
+  //     price: 10,
+  //     pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
+  //   },
+  //   {
+  //     id: "pp-11",
+  //     title: "Kids-story",
+  //     artist: "Thomas Buisson",
+  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
+  //     thumbnail:
+  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
+  //     price: 10,
+  //     pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
+  //   },
+  //   {
+  //     id: "pp-12",
+  //     title: "Kids-story",
+  //     artist: "Thomas Buisson",
+  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
+  //     thumbnail:
+  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
+  //     price: 10,
+  //     pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
+  //   },
+  // ];
+
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -239,7 +360,7 @@ const Course = (props) => {
     //setCourse(response.data);
     axios({
       method: "get",
-      url: API_BASE_URL + "/api/course/getCourseList",
+      url: API_BASE_URL + "/api/course",
     }).then((response) => {
       setCourse(response.data);
     });
@@ -251,69 +372,153 @@ const Course = (props) => {
     setIndex(selectedIndex);
   };
 
-  // const [loading, setLoading] = useState(true);
-  // const onClickClassRegist = useEffect(() => {}, []);
-  // const onClickClassRegist = () => {
-  //   history.push("/course/registration");
-  // };
-
   let navigate = useNavigate();
 
-  const [city, setCity] = React.useState("");
+  const [locationSearch, setLocationSearch] = React.useState("");
 
-  const handleChange3 = (event) => {
-    setCity(event.target.value);
+  const [courseType, setCourseType] = React.useState([]);
+
+  const courseTypeChange = (e) => {
+    setCourseType(() => {
+      return e.target.value;
+    });
   };
 
-  const [categorySel, setCategorySel] = React.useState("");
+  let dataCategory = ["오프라인", "온라인"];
 
-  const handleChange4 = (event) => {
-    setCategorySel(event.target.value);
-  };
-
-  let dataCategory = ["원데이", "정기"];
-
-  let [btnActiveCategory, setBtnActiveCategory] = useState("");
+  let [courseOnOff, setCourseOnOff] = useState("");
 
   const toggleActiveCategory = (e) => {
-    setBtnActiveCategory((prev) => {
+    setCourseOnOff((prev) => {
       return e.target.value;
     });
   };
 
   let dataWeek = ["평일", "토요일", "일요일"];
 
-  let [btnActiveWeek, setBtnActiveWeek] = useState("");
+  let [courseStDate, setCourseStDate] = useState("");
 
   const toggleActiveWeek = (e) => {
-    setBtnActiveWeek((prev) => {
+    setCourseStDate((prev) => {
       return e.target.value;
     });
   };
 
   let dataLevel = ["입문", "중급", "고급"];
 
-  let [btnActiveLevel, setBtnActiveLevel] = useState("");
+  let [courseLevel, setCourseLevel] = useState("");
 
   const toggleActiveLevel = (e) => {
-    setBtnActiveLevel((prev) => {
+    setCourseLevel((prev) => {
       return e.target.value;
     });
   };
 
-  const location = useLocation();
-  const query = new URLSearchParams(location.search);
-  const page = parseInt(query.get("page") || "1", 10);
+  const [courseSearch, setCourseSearch] = useState("");
+  const [courseStTime, setCourseStTime] = useState("");
+  const [courseEndTime, setCourseEndTime] = useState("");
+  const [courseCostMin, setCourseCostMin] = useState("");
+  const [courseCostMax, setCourseCostMax] = useState("");
 
-  const onSubmitSearchHandler = (event) => {
-    event.preventDefault();
+  // searchData(props) {
+  //   super(props);
+  //   this.state = {
+  //     courseSearch = '',
+  //     locationSearch = '',
+  //     courseType = '',
+  //     courseOnOff = '',
+  //     courseDate = '',
+  //     courseStTime = '',
+  //     courseEndTime = '',
+  //     courseLevel = '',
+  //     courseCostMin = '',
+  //     courseCostMax = ''
+  //   };
+  // };
+
+  // addFormData = () => {
+  //   const url = '/api/course';
+  //   const formData = new FormData();
+  //   formData.append('courseSearch', this.state.courseSearch);
+  //   formData.append('locationSearch', this.state.locationSearch);
+  //   formData.append('courseType', this.state.courseType);
+  //   formData.append('courseOnOff', this.state.courseOnOff);
+  //   formData.append('courseDate', this.state.courseDate);
+  //   formData.append('courseStTime', this.state.courseStTime);
+  //   formData.append('courseEndTime', this.state.courseEndTime);
+  //   formData.append('courseLevel', this.state.courseLevel);
+  //   formData.append('courseCostMin', this.state.courseCostMin);
+  //   formData.append('courseCostMax', this.state.courseCostMax);
+
+  //   return post(url, formData);
+  // }
+
+  const onSubmitSearchHandler = (e) => {
+    e.preventDefault();
+
+    axios({
+      method: "post",
+      url: API_BASE_URL + "/api/course",
+      data: { ...searchInfo },
+    }).then((responseSearchData) => {
+      console.log(responseSearchData);
+      window.location.href = "/course";
+    });
+  };
+
+  const [searchInfo, setSearchInfo] = useState({});
+
+  const addSearchInfo = (e) => {
+    const newSearchInfo = {
+      ...searchInfo,
+      [e.target.name]: e.target.value,
+    };
+
+    setSearchInfo(newSearchInfo);
+  };
+
+  // useEffect(() => {
+  //   // const fetchData = async () => {
+  //   //   setLoading(true);
+  //   //   const responsePage = await axios.get(
+  //   //     "https://jsonplaceholder.typicode.com/posts"
+  //   //     // API_BASE_URL + "/api/course/getCourseList"
+  //   //   );
+  //   //   setPosts(responsePage.data);
+  //   //   setLoading(false);
+  //   // };
+  //   // fetchData();
+  //   axios({
+  //     method: "get",
+  //     url: API_BASE_URL + "/api/course/getCourseList",
+  //   }).then((response) => {
+  //     setPosts(response.data);
+  //   });
+  // }, []);
+
+  const [data, setData] = useState(stateText);
+  const [pageData, setPageData] = useState([]);
+  const [limit, setLimit] = useState(10);
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * limit;
+
+  useEffect(() => {
+    setPageData(data.slice(0, 10));
+  }, []);
+  const pagingFunc = (pageNum) => {
+    setPageData(data.slice(10 * pageNum - 10, 10 * pageNum));
   };
 
   return (
     <>
       <br />
       <Container>
-        <form noValidate id="searchSubmitForm" onSubmit={onSubmitSearchHandler}>
+        <form
+          noValidate
+          id="searchSubmitForm"
+          name="searchSubmitForm"
+          onSubmit={onSubmitSearchHandler}
+        >
           <Row>
             <Col>
               <div className="searchForm">
@@ -330,7 +535,9 @@ const Course = (props) => {
                       placeholder="클래스 검색"
                       aria-label="classSearch"
                       aria-describedby="btnGroupAddon"
-                      name="courseNm"
+                      name="courseSearch"
+                      value={courseSearch}
+                      // onChange={handleValueChange}
                     />
                   </InputGroup>
                 </div>
@@ -350,9 +557,10 @@ const Course = (props) => {
                     <Select
                       labelId="demo-select-small"
                       id="demo-select-small"
-                      value={city}
                       label="city"
-                      onChange={handleChange3}
+                      name="locationSearch"
+                      value={locationSearch}
+                      // onChange={handleValueChange}
                     >
                       <MenuItem value="">
                         <em>지역검색</em>
@@ -393,9 +601,10 @@ const Course = (props) => {
                     <Select
                       labelId="demo-select-small"
                       id="demo-select-small"
-                      value={categorySel}
                       label="categorySel"
-                      onChange={handleChange4}
+                      name="courseType"
+                      value={courseType}
+                      // onChange={handleValueChange}
                     >
                       <MenuItem value="">
                         <em>카테고리검색</em>
@@ -419,7 +628,7 @@ const Course = (props) => {
             </Col>
           </Row>
           <br />
-          <Row>
+          {/* <Row>
             <Col md={1} className="category-font">
               유형
             </Col>
@@ -432,10 +641,12 @@ const Course = (props) => {
                         <button
                           value={idx}
                           className={
-                            "btn" + (idx == btnActiveCategory ? " active" : "")
+                            "btn" + (idx == courseOnOff ? " active" : "")
                           }
                           onClick={toggleActiveCategory}
                           id="btnDeco"
+                          name="courseOnOff"
+                          // onChange={handleValueChange}
                         >
                           {item}
                         </button>
@@ -445,10 +656,10 @@ const Course = (props) => {
                 </div>
               </ButtonGroup>
             </Col>
-          </Row>
+          </Row> */}
           <br />
           <Row>
-            <Col md={1} className="category-font">
+            {/* <Col md={1} className="category-font">
               요일
             </Col>
             <Col md={4} className="class-week">
@@ -460,10 +671,12 @@ const Course = (props) => {
                         <button
                           value={idx}
                           className={
-                            "btn" + (idx == btnActiveWeek ? " active" : "")
+                            "btn" + (idx == courseStDate ? " active" : "")
                           }
                           onClick={toggleActiveWeek}
                           id="btnDeco"
+                          name="courseStDate"
+                          // onChange={handleValueChange}
                         >
                           {item}
                         </button>
@@ -472,7 +685,7 @@ const Course = (props) => {
                   })}
                 </div>
               </ButtonGroup>
-            </Col>
+            </Col> */}
             <Col md={1} className="category-font">
               시간
             </Col>
@@ -486,6 +699,7 @@ const Course = (props) => {
                   aria-invalid="false"
                   inputMode="numeric"
                   className="css-1x5jdmq"
+                  name="courseStTime"
                 ></input>
               </div>
               <div className="time-slider-bar">
@@ -511,6 +725,7 @@ const Course = (props) => {
                   aria-invalid="false"
                   inputMode="numeric"
                   className="css-1x5jdmq"
+                  name="courseEndTime"
                 ></input>
               </div>
             </Col>
@@ -528,10 +743,12 @@ const Course = (props) => {
                       <button
                         value={idx}
                         className={
-                          "btn" + (idx == btnActiveLevel ? " active" : "")
+                          "btn" + (idx == courseLevel ? " active" : "")
                         }
                         onClick={toggleActiveLevel}
                         id="btnDeco"
+                        name="courseLevel"
+                        // onChange={handleValueChange}
                       >
                         {item}
                       </button>
@@ -552,6 +769,8 @@ const Course = (props) => {
                   aria-invalid="false"
                   inputMode="numeric"
                   className="css-1x5jdmq"
+                  name="courseCost"
+                  // onChange={handleValueChange}
                 ></input>
               </div>
               <div className="price-slider-bar">
@@ -576,6 +795,8 @@ const Course = (props) => {
                   aria-invalid="false"
                   inputMode="numeric"
                   className="css-1x5jdmq"
+                  name="courseCost"
+                  // onChange={handleValueChange}
                 ></input>
               </div>
             </Col>
@@ -599,7 +820,8 @@ const Course = (props) => {
                 variant="secondary"
                 size="lg"
                 id="searchBtn"
-                onSubmit={onSubmitSearchHandler}
+                // onSubmit={onSubmitSearchHandler}
+                // onClick={}
               >
                 검색하기
               </Button>
@@ -660,20 +882,6 @@ const Course = (props) => {
           <div className="list-header">
             <h2>클래스 검색해서 베어봄!</h2>
           </div>
-          <div className="searchContent">
-            {stateText.map((data) => (
-              // 여기서 {}말고 ()로 하면 return 안해도 됨
-              //   이게 props 넣는거
-
-              <MiniCard
-                id={data.id}
-                thumbnail={data.thumbnail}
-                title={data.title}
-                condition={true}
-                // 예시로 보여주기 위함
-              />
-            ))}
-          </div>
           <hr
             style={{
               width: "100%",
@@ -681,19 +889,32 @@ const Course = (props) => {
               height: "1px",
             }}
           />
-          <div className="pagingPart">
+          {pageData.map(() => {
+            return (
+              <div className="searchContent">
+                {data.slice(offset, offset + limit).map((minidata) => (
+                  <MiniCard
+                    id={minidata.id}
+                    thumbnail={minidata.thumbnail}
+                    title={minidata.title}
+                    condition={true}
+                  />
+                ))}
+              </div>
+            );
+          })}
+          <Stack spacing={2}>
             <Pagination
-              page={page}
+              boundaryCount={10}
               count={10}
-              renderItem={(item) => (
-                <PaginationItem
-                  component={Link}
-                  to={`/inbox${item.page === 1 ? "" : `?page=${item.page}`}`}
-                  {...item}
-                />
-              )}
+              color="primary"
+              showFirstButton={true}
+              showLastButton={true}
+              onChange={(e) => {
+                pagingFunc(e.target.textContent);
+              }}
             />
-          </div>
+          </Stack>
         </div>
       </main>
     </>

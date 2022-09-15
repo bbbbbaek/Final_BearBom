@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.spring.bearbom.entity.Course;
 import com.spring.bearbom.service.course.CourseService;
 
 @RestController
