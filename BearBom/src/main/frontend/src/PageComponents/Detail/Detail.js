@@ -71,7 +71,7 @@ const Detail = ({ scrollTop }) => {
         Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
       },
       // params: {userId: userId}
-      data: { courseIdx: id },
+      data: { courseIdx: 1 },
     })
       .then((response) => {
         console.log(response.data);
