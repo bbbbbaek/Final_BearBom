@@ -200,7 +200,7 @@ const Mainpage = () => {
     }).then((response) => {
       // console.log(response);
       console.log(response.data);
-      // setCourse(response.data);
+      setCourse(response.data);
       // setCourse(response.data.getCourseList);
       // setaverageRating(response.data.averageRating);
     });
@@ -292,7 +292,7 @@ const Mainpage = () => {
                 return (
                   <div>
                     <Link
-                      to={`/saw/${a.courseIdx}`}
+                      to={`/course/${a.courseIdx}`}
                       state={{ courseInfo: a }}
                       style={{ textDecoration: "none", color: "#ff5862" }}
                     >
@@ -361,7 +361,7 @@ const Mainpage = () => {
                     {course.map((data) => (
                       // 여기서 {}말고 ()로 하면 return 안해도 됨
                       //   이게 props 넣는거
-                      <Card course={data} averageRating={averageRating} />
+                      <Card course={data} />
                     ))}
                   </Carousel>
                 </div>

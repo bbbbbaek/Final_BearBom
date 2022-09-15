@@ -7,7 +7,7 @@ import LikeButton from "../ModuleComponents/LikeButton";
 import "../css/card.scss";
 import { API_BASE_URL } from "../app-config";
 import axios from "axios";
-const Card = ({ course, averageRating }) => {
+const Card = ({ course }) => {
   const navigate = useNavigate();
   const [like, setLike] = useState(false);
   const [dataa, setDataa] = useState();
@@ -92,7 +92,7 @@ const Card = ({ course, averageRating }) => {
         {course.courseIdx}
         <Link to={`/course/${course.courseIdx}`} state={{ courseInfo: course }}>
           <ImgContainer>
-            <div className="tag">{averageRating} 평점</div>
+            <div className="tag">평점</div>
 
             <img
               className="img_test"

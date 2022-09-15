@@ -18,6 +18,10 @@ public interface CourserMapper {
 	public double getRatingAvg(int courserIdx);
 	
 	@Select("SELECT AVG(courser_rate) FROM t_courser where course_idx = #{courseIdx}")
+	public double updateRating1(Courser courser);
+	
+	
+	@Select("SELECT AVG(courser_rate) FROM t_courser")
 	public double updateRating(Courser courser);
 	
 	@Select("select * from t_course where course_use_yn = 'Y' order by course_cnt desc")
