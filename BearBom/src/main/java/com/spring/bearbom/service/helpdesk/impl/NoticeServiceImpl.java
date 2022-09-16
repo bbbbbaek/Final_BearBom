@@ -16,10 +16,23 @@ public class NoticeServiceImpl implements NoticeService{
 	@Autowired
 	private NoticeRepository noticeRepository;
 
+	// 그냥 보여주는것
 	@Override
 	public List<Notice> notice(Notice notice) {
 		// TODO Auto-generated method stub
 		List<Notice> noticeList = noticeRepository.findAll();
 		return noticeList;
 	}
+
+	@Override
+	public Notice insertNotice(Notice notice) {
+		// TODO Auto-generated method stub
+		int noticeIdx = noticeRepository.selectNextnoticeIdx();
+		notice.setNoticeIdx(noticeIdx);
+		return noticeRepository.save(notice);
+	}
+	
+	
+	//백단에 저장
+	
 }

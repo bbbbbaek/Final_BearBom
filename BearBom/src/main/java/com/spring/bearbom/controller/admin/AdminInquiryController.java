@@ -17,7 +17,7 @@ import com.spring.bearbom.service.admin.AdminService;
 
 @RestController
 @RequestMapping("/api/admin")
-public class AdminController {
+public class AdminInquiryController {
 	@Autowired
 	private AdminService adminService;
 	
