@@ -10,8 +10,8 @@ import java.util.List;
 public interface MainMapper {
 
     //@Select("select * from t_course where course_use_yn = 'Y' order by course_cnt desc")
-
-    @Select("select * from t_course where course_use_yn = 'Y' order by course_cnt desc limit 10")
-
     List<Course> getCourseList(Course course);
+
+    @Select("SELECT * FROM t_course WHERE course_use_yn = 'Y' and DATEDIFF(DATE(NOW()), course_end_date) = 1")
+    List<Course> getCourseEndDateList(Course course);
 }

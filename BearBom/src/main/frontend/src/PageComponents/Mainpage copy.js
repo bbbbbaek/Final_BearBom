@@ -5,7 +5,7 @@ import "../css/mainpage.scss";
 import styled from "styled-components";
 import Carousel from "react-multi-carousel";
 // import Carousel from "react-bootstrap/Carousel";
-
+import LikeButton from "../ModuleComponents/LikeButton";
 import "react-multi-carousel/lib/styles.css";
 import { Button } from "react-bootstrap";
 import axios from "axios";
@@ -13,9 +13,11 @@ import { API_BASE_URL } from "../app-config";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 
 import dataTest from "./dataTest.js";
+import Card from "./Card";
 
-const Mainpage = (props) => {
+const Mainpage = () => {
   const [course, setCourse] = useState([]);
+  const [averageRating, setAverageRating] = useState("");
 
   const stateText = [
     {
@@ -90,6 +92,65 @@ const Mainpage = (props) => {
     },
   ];
 
+  const stateText1 = [
+    {
+      id: "01",
+      title: "겉바속쫀 휘낭시에 만들기 클래스",
+      category: "카테고리01",
+      image: process.env.PUBLIC_URL + "/twopic.png",
+      price: "￦11,900",
+    },
+    {
+      id: "02",
+      title: "타이틀02",
+      category: "카테고리02",
+      image: process.env.PUBLIC_URL + "/twopic.png",
+      price: "￦02,900",
+    },
+    {
+      id: "03",
+      title: "타이틀03",
+      category: "카테고리03",
+      image: process.env.PUBLIC_URL + "/twopic.png",
+      price: "￦99,900",
+    },
+    {
+      id: "04",
+      title: "타이틀04",
+      category: "카테고리04",
+      image: process.env.PUBLIC_URL + "/twopic.png",
+      price: "￦99,900",
+    },
+    {
+      id: "05",
+      title: "테이블05",
+      category: "카테로기05",
+      image: process.env.PUBLIC_URL + "/twopic.png",
+      price: "￦99,900",
+    },
+    {
+      id: "06",
+      title: "타이틀06",
+      category: "카테고리06",
+      image: process.env.PUBLIC_URL + "/twopic.png",
+      price: "￦99,900",
+    },
+    {
+      id: "07",
+      title: "타이틀07",
+      category: "카테고리07",
+      image: process.env.PUBLIC_URL + "/twopic.png",
+      price: "￦99,900",
+    },
+
+    {
+      id: "08",
+      title: "타이틀08",
+      category: "카테고리08",
+      image: process.env.PUBLIC_URL + "/twopic.png",
+      price: "￦99,900",
+    },
+  ];
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -98,7 +159,7 @@ const Mainpage = (props) => {
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 3,
+      items: 4,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
@@ -135,9 +196,13 @@ const Mainpage = (props) => {
     //setCourse(response.data);
     axios({
       method: "get",
-      url: API_BASE_URL + "/api/course/getCourseList",
+      url: API_BASE_URL + "/api/main/getCourseList",
     }).then((response) => {
-      setCourse(response.data);
+      // console.log(response);
+      console.log(response.data);
+      // setCourse(response.data);
+      setCourse(response.data.getCourseList);
+      setAverageRating(response.data.averageRating);
     });
   }, []);
 
@@ -156,6 +221,8 @@ const Mainpage = (props) => {
     navigate("/course/registration");
   };
   const [dataa, setDataa] = useState(dataTest);
+
+  const [courseInfo, setCourseInfo] = useState(course);
 
   const get_local = JSON.parse(localStorage.getItem("data"));
 
@@ -218,8 +285,8 @@ const Mainpage = (props) => {
                 return (
                   <div>
                     <Link
-                      to={`/saw/${a.id}`}
-                      state={{ dataa: a }}
+                      to={`/course/${a.courseIdx}`}
+                      state={{ courseInfo: a }}
                       style={{ textDecoration: "none", color: "#ff5862" }}
                     >
                       <p
@@ -230,7 +297,7 @@ const Mainpage = (props) => {
                         // }}
                       >
                         {/* {a.title} */}
-                        {a.id}
+                        {a.courseIdx}
                       </p>
                     </Link>
                   </div>
@@ -275,7 +342,6 @@ const Mainpage = (props) => {
             </div>
           </div>
         </div>
-
         <div className="list-box favorite-class-area">
           <div className="list-header">
             <h2>베어봄이 검증한 이달의 인기클래스!</h2>
@@ -285,27 +351,18 @@ const Mainpage = (props) => {
               <div className="favorite-list">
                 <div style={{ width: "100%", margin: "0 auto" }}>
                   <Carousel responsive={responsive}>
-                    {/* <div className="test001"> */}
-
-                    {stateText.map((data) => (
+                    {course.map((data) => (
                       // 여기서 {}말고 ()로 하면 return 안해도 됨
                       //   이게 props 넣는거
-
-                      <MiniCard
-                        id={data.id}
-                        thumbnail={data.thumbnail}
-                        title={data.title}
-                        condition={true}
-                        // 예시로 보여주기 위함
-                      />
+                      <Card course={data} averageRating={averageRating} />
                     ))}
-                    {/* </div> */}
                   </Carousel>
                 </div>
               </div>
             </CarouselContainer>
           </div>
         </div>
+
         <div className="list-box new-class-area">
           <div className="list-header">
             <h2>오늘 오픈 했어요!</h2>
@@ -315,8 +372,6 @@ const Mainpage = (props) => {
               <div className="favorite-list">
                 <div style={{ width: "100%", margin: "0 auto" }}>
                   <Carousel responsive={responsive}>
-                    {/* <div className="test001"> */}
-
                     {dataa.map((data) => (
                       // 여기서 {}말고 ()로 하면 return 안해도 됨
                       //   이게 props 넣는거
@@ -334,7 +389,6 @@ const Mainpage = (props) => {
                         />
                       </Link>
                     ))}
-                    {/* </div> */}
                   </Carousel>
                 </div>
               </div>

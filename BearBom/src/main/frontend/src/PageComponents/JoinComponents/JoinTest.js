@@ -629,7 +629,12 @@ const Join = () => {
                   </div>
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                  <Button id="userZipSearch" onClick={handleClick}>
+                  <Button
+                    fullWidth
+                    sx={{ mt: 1 }}
+                    id="userZipSearch"
+                    onClick={handleClick}
+                  >
                     주소 검색
                   </Button>
                 </Grid>

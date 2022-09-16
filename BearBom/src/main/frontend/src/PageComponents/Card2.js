@@ -7,20 +7,15 @@ import LikeButton from "../ModuleComponents/LikeButton";
 import "../css/card.scss";
 import { API_BASE_URL } from "../app-config";
 import axios from "axios";
-const Card = ({ course }) => {
+const Card2 = ({ endday }) => {
   const navigate = useNavigate();
   const [like, setLike] = useState(false);
   const [dataa, setDataa] = useState();
-  const courseCost = course.courseCost;
+  const courseCost = endday.courseCost;
   const courseCostChange = courseCost
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-  const [testt, setTestt] = useState("");
-  const [flag, setFlag] = useState(false);
-  // console.log(typeof course.rate);
-
-  // console.log("ttttt", course);
   useEffect((e) => {
     const fetchData = async () => {
       // const res = await axios.get(`${API_BASE_URL}/api/like/getLikeList`);
@@ -35,7 +30,7 @@ const Card = ({ course }) => {
       axios({
         method: "GET",
         url: API_BASE_URL + "/api/like/getLikeList",
-        params: { userId: userId, courseIdx: course.courseIdx },
+        params: { userId: userId, courseIdx: endday.courseIdx },
         //403 에러는 보안관련 에러
         headers: {
           Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
@@ -53,17 +48,7 @@ const Card = ({ course }) => {
           console.log(error);
         });
     };
-    const test = (e) => {
-      if (course.rate == 0) {
-        setTestt("신규");
-        setFlag(false);
-      } else {
-        setTestt(course.rate);
-        setFlag(true);
-      }
-    };
     fetchData();
-    test();
   }, []);
 
   const toggleLike = async (e) => {
@@ -77,12 +62,12 @@ const Card = ({ course }) => {
     }
     await axios({
       method: "POST",
-      url: `${API_BASE_URL}/api/like/${course.courseIdx}/insertLike`,
+      url: `${API_BASE_URL}/api/like/${endday.courseIdx}/insertLike`,
       //403 에러는 보안관련 에러
       headers: {
         Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
       },
-      data: { courseIdx: course.courseIdx, userId: userId },
+      data: { courseIdx: endday.courseIdx, userId: userId },
     })
       .then((response) => {
         console.log(response);
@@ -104,21 +89,15 @@ const Card = ({ course }) => {
   return (
     <>
       <CardWrapper>
-        {course.courseIdx}
-        <Link to={`/course/${course.courseIdx}`} state={{ courseInfo: course }}>
+        {endday.courseIdx}
+        <Link to={`/course/${endday.courseIdx}`} state={{ courseInfo: endday }}>
           <ImgContainer>
-            {/* <div className="tag">{course.rate}</div> */}
-            <div className="tag">
-              <span className={`message ${flag ? "success" : "error"}`}>
-                {testt}
-              </span>
-            </div>
-
+            <div className="tag"> 평점</div>
             {/* <div className="tag">{averageRating} 평점</div> */}
 
             <img
               className="img_test"
-              src={`http://localhost:8080/upload/${course.courseThumbnailNm}`}
+              src={`http://localhost:8080/upload/${endday.courseThumbnailNm}`}
               // style={{ width: "250px", height: "250px" }}
               alt="test"
             ></img>
@@ -131,7 +110,7 @@ const Card = ({ course }) => {
           <div className="first_row">
             {/* props로 데이터 넘겨서 넣어주기 일단 dummy */}
             {/* 원데이 */}
-            {course.courseNm}
+            {endday.courseNm}
           </div>
           {/* <div className="second_row">{title}</div> */}
           {/* <div className={condition ? "third_row" : "hollow"}> */}
@@ -145,7 +124,7 @@ const Card = ({ course }) => {
   );
 };
 
-export default Card;
+export default Card2;
 
 const TextContainer = styled.div`
   margin-top: 0.5rem;
@@ -178,18 +157,7 @@ const CardWrapper = styled.div`
   height: 100%;
   margin: 0 auto;
 `;
-// .tag {
-//   position: absolute;
-//   top: 5%;
-//   left: 5%;
-//   background-color: #6a82ec;
-//   border: 0.3px solid #6a82ec;
-//   padding: 3px 6px;
-//   color: white;
-//   border-radius: 7px;
-//   font-size: 10px;
-//   font-weight: 600;
-// }
+
 const ImgContainer = styled.div`
   position: relative;
   width: 85%;
@@ -205,9 +173,15 @@ const ImgContainer = styled.div`
     position: absolute;
     top: 5%;
     left: 5%;
+    background-color: #6a82ec;
+    border: 0.3px solid #6a82ec;
     padding: 3px 6px;
     color: white;
+    border-radius: 7px;
+    font-size: 10px;
+    font-weight: 600;
   }
+
   .place {
     position: absolute;
     bottom: 5%;

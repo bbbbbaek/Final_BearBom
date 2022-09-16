@@ -24,8 +24,7 @@ const FAQ = ({ data }) => {
   const list = () => {
     axios({
       url: API_BASE_URL + "/api/helpdesk/getFaqList",
-      method: "post",
-      data: { guideContent: guideContent, guideTitle: guideTitle },
+      method: "get",
     })
       .then((response) => {
         console.log(response.data.data);
@@ -42,6 +41,10 @@ const FAQ = ({ data }) => {
 
   return (
     <>
+      <h5>
+        <strong>자주 묻는 질문</strong>
+      </h5>
+      <hr />
       <div className="faq-main">
         {faq.map((a, i) => {
           return (
@@ -95,17 +98,6 @@ const FAQ = ({ data }) => {
           );
         })}
       </div>
-      <button
-        onClick={() => {
-          console.log(faqData);
-          faqData.push({
-            title: "test",
-            content: "test",
-          });
-        }}
-      >
-        click!
-      </button>
     </>
   );
 };

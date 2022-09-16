@@ -12,3 +12,15 @@ export class TableMenuItems {
     this.item7 = item7;
   }
 }
+
+export class TableDataItems {
+  constructor(data1, data2, data3, data4, data5, data6, data7) {
+    this.data1 = data1;
+    this.data2 = data2;
+    this.data3 = data3;
+    this.data4 = data4;
+    this.data5 = data5;
+    this.data6 = data6;
+    this.data7 = data7;
+  }
+}

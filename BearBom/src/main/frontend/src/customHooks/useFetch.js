@@ -14,7 +14,7 @@ const useFetch = (url, postData) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("hello?");
+      console.log("start data fetching");
       setLoading(true);
       try {
         const res = await axios({
@@ -22,7 +22,7 @@ const useFetch = (url, postData) => {
           method: "post",
           data: postData,
         });
-        console.log(res.data);
+        // console.log(res.data);
         setData(res.data);
       } catch (err) {
         setError(err);
