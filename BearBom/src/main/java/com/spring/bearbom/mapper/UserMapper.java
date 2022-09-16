@@ -28,7 +28,7 @@ public interface UserMapper {
 //	@Insert("INSERT INTO t_order VALUES (( SELECT IFNULL(MAX(order_no),0) + 1 FROM t_order A),#{userId},${orderPrice},#{itemNo})")
 
     @Update("UPDATE T_USER SET USER_PW_FAIL_CNT = 0 WHERE USER_ID = #{userId}")
-    void updatetest(String userId);
+    void updateResetFailCnt(String userId);
     
     @Update("UPDATE T_USER SET USER_PW_FAIL_CNT = USER_PW_FAIL_CNT + 1 WHERE USER_ID = #{userId}")
     void updateFailCnt(String userId);

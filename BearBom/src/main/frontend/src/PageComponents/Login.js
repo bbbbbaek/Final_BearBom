@@ -182,7 +182,7 @@ const Login = () => {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              로그인2
+              로그인
             </Typography>
 
             <Box noValidate sx={{ mt: 3 }}>
@@ -255,10 +255,10 @@ const Login = () => {
 
               <Grid container mb={1}>
                 <Grid item xs>
-                  <Link href="#">비밀번호 찾기</Link>
+                  <Link href="PwFind">비밀번호 찾기</Link>
                 </Grid>
                 <Grid item>
-                  <Link href="join">회원가입</Link>
+                  <Link href="joinTest">회원가입</Link>
                 </Grid>
               </Grid>
 

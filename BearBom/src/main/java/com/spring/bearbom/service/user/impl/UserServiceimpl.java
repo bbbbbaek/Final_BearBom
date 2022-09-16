@@ -44,7 +44,7 @@ public class UserServiceimpl implements UserService {
 			
 	
 			if(loginUser != null && passwordEncoder.matches(userPw, loginUser.getUserPw())) {
-				userMapper.updatetest(userId);
+				userMapper.updateResetFailCnt(userId);
 				return loginUser;
 			} else if(loginUser != null && !passwordEncoder.matches(userPw, loginUser.getUserPw())) {
 				User pwFaiiledUser = new User();

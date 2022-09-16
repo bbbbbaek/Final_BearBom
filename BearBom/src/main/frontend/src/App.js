@@ -30,6 +30,7 @@ import RedirectForKakaoLogout from "./PageComponents/JoinComponents/RedirectForK
 import PayReady from "./PageComponents/Detail/KakaoPayReady";
 import KakaoPayRe from "./PageComponents/Detail/KakaoPayRe";
 import KakaoPayR from "./PageComponents/Detail/KakaoPayR";
+import PwFind from "./PageComponents/PwFind";
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
           <Route path="/course/test" element={<Test123 />} />
           <Route path="/payready" element={<KakaoPayR />} />
           <Route path="/payresult" element={<KakaoPayRe />} />
+          <Route path="/pwfind" element={<PwFind />} />
         </Routes>
         <Top />
         <Chatbot />
