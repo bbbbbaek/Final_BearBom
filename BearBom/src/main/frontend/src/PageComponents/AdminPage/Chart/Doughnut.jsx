@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import "../../../css/doughnut.css";
 
 const Doughnut = () => {
-  const [data, setData] = useState([9, 1]);
+  const [data, setData] = useState([8, 2]);
   const [array, setArray] = useState([]);
   useEffect(() => {
     let sum = data.reduce((a, b) => {

@@ -5,6 +5,9 @@ import Main from "./Main";
 import SalesView from "./SalesView";
 import "../../css/admin.css";
 import SideBarQuickView from "./SideBarQuickView";
+import ProfilePicture from "../../ModuleComponents/ProfilePicture";
+import InquiryView from "../MyPage/InquiryView";
+import Notice from "../../ModuleComponents/Notice";
 
 const Admin = () => {
   // 아래로 너무 길어지니깐 menu state에 데이터 담고 map함수 써서 간결하게 만들자
@@ -139,7 +142,7 @@ const Admin = () => {
           </Accordion>
         </div>
         <div className="content-wrapper">
-          {[<Main />, <SalesView />, <ClassView />][tab]}
+          {[<Main />, <SalesView />, <ClassView />, <InquiryView />][tab]}
         </div>
       </div>
     </>

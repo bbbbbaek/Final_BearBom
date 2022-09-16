@@ -1,0 +1,58 @@
+.admin_widget {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  padding: 1rem;
+  -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+  box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+  border-radius: 10px;
+  height: 9rem;
+
+  .left,
+  .right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    hr {
+      margin: 3px;
+    }
+    .title {
+      font-weight: bold;
+      color: rgb(160, 160, 160);
+    }
+
+    .counter {
+      font-size: 2rem;
+      font-weight: 300;
+    }
+
+    .link {
+      width: max-content;
+      border-bottom: 1px solid #e1e2e3;
+      cursor: pointer;
+    }
+
+    .percentage {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+
+      &.positive {
+        color: rgb(255, 80, 80);
+      }
+
+      &.negative {
+        color: rgb(80, 80, 255);
+      }
+    }
+
+    .icon {
+      font-size: 3rem;
+      padding: 5px;
+      // background-color: #e1e2e3;
+      border-radius: 5px;
+      align-self: flex-end;
+    }
+  }
+}

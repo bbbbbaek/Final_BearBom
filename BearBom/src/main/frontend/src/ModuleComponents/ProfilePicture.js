@@ -1,30 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import "../css/profilepicture.css";
 import adminProfileImage from "../images/adminProfileImage.png";
-import changePP from "../images/changePP.png";
+import cameraButton from "../images/cameraButton.png";
 
 const ProfilePicture = () => {
+  const [fileImage, setFileImage] = useState(adminProfileImage);
+  const saveFileImage = (e) => {
+    setFileImage(URL.createObjectURL(e.target.files[0]));
+    console.log(fileImage);
+  };
   return (
     <>
-      <div className="pp-wrapper">
-        <div
-          className="pp-div"
-          style={{ background: `url(${adminProfileImage})` }}
-        ></div>
-        <input
-          className="pp-input"
-          id="pp-input"
-          type="file"
-          style={{
-            background: `url(${adminProfileImage})`,
-          }}
-        />
-        <label htmlFor="pp-input" id="pp-label">
+      <div className="pp-main">
+        <div className="pp-wrapper">
           <div
-            className="pp-label-div"
-            style={{ background: `url(${changePP})` }}
+            className="pp-div"
+            style={{ backgroundImage: `url(${fileImage})` }}
           ></div>
-        </label>
+          <input
+            accept="image/*"
+            className="pp-input"
+            id="pp-input"
+            type="file"
+            onChange={saveFileImage}
+          />
+          <label htmlFor="pp-input" id="pp-label" />
+        </div>
       </div>
     </>
   );

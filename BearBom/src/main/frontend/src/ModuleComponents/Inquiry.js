@@ -102,7 +102,6 @@ const Inquiry = () => {
               onClick={() => {
                 alert("문의 등록이 완료되었습니다.");
                 onSubmit2();
-                navigate("/helpdesk");
               }}
             />
           </form>

@@ -3,12 +3,14 @@
   height: 14rem;
   justify-content: center;
   align-items: center;
-  text-align: center;
   justify-content: center;
+}
+.upp-pp-text {
+  text-align: center;
 }
 
 .upp-pp-wrapper {
-  margin: 2rem;
   display: flex;
   justify-content: center;
+  margin: 2rem 2rem 1rem 2rem;
 }

@@ -16,15 +16,6 @@ const Main = () => {
             <BarSales />
           </div>
           <QuickView />
-          {/* <div className="admin-main-content-wrapper-left-item" id="second-tab">
-            <div className="sleepy">월매출 10,000,000원</div>
-            <div className="slicer"></div>
-            <div className="sleepy">가입자 수 50,000명</div>
-            <div className="slicer"></div>
-            <div className="sleepy">등록된 클래스 수 500개</div>
-            <div className="slicer"></div>
-            <div className="sleepy">어제 방문자 수 2,000명</div>
-          </div> */}
         </div>
         <div className="admin-main-content-wrapper-right">
           <div className="admin-main-content-wrapper-right-item">

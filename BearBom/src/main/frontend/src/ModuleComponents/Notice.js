@@ -27,7 +27,7 @@ const Notice = () => {
       "noticeContent",
       "noticeRegdate",
       "noticeMdfdate",
-      "user",
+      // "user",
     ]
     // )
   );

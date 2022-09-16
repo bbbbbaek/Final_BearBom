@@ -1,5 +1,6 @@
 import React from "react";
 import "../../css/sidebarquickview.css";
+import ProfilePicture from "../../ModuleComponents/ProfilePicture";
 import adminProfileImage from "../../images/adminProfileImage.png";
 
 const SideBarQuickView = () => {
@@ -7,7 +8,7 @@ const SideBarQuickView = () => {
     <>
       <div className="sidebar-quickview-wrapper">
         <div className="sidebar-quickview-left">
-          <div className="sidebar-quickview-left-image">
+          {/* <div className="sidebar-quickview-left-image">
             <p>Admin님 환영합니다.</p>
             <div className="profile-image-div">
               <img
@@ -17,7 +18,8 @@ const SideBarQuickView = () => {
               />
             </div>
             <div className="profile-image-description"></div>
-          </div>
+          </div> */}
+          <ProfilePicture />
           <div className="sidebar-quickview-left-content">
             <div></div>
           </div>
