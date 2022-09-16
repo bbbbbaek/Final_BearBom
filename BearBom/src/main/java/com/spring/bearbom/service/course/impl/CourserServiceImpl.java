@@ -23,7 +23,9 @@ public class CourserServiceImpl implements CourserService {
     @Override
     public List<Courser> Review(Courser courser) {
         List<Courser> reviewList  = courserRepository.findByCourse(courser.getCourse());
-
+        for(Courser courser1 : reviewList) {
+    		System.out.println(courser1.toString());
+    	}
         return reviewList;
     }
 
@@ -42,9 +44,9 @@ public class CourserServiceImpl implements CourserService {
 	}
 	
 	@Override
-    public List<Course> getCourseList(Course course) {
+    public Course getCourse(int courseIdx) {
 //        List<Course> courseList = courseRepository.findAll();
-        List<Course> courseList = courserMapper.getCourseList(course);
-        return courseList;
+        Course course = courserMapper.getCourse(courseIdx);
+        return course;
     }
 }

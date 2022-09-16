@@ -17,7 +17,7 @@ public interface CourserService {
 
 	double updateRating(Courser courser);
 	
-	List<Course> getCourseList(Course course);
+	Course getCourse(int courseIdx);
     
 
 }
