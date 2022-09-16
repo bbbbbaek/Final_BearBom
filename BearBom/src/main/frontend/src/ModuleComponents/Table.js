@@ -8,7 +8,8 @@ import excelDownload from "../images/excelDownload.png";
 import { TableMenuItems } from "../ModuleComponents/TableMenuItems";
 
 // TableMenuItems 객체로 생성한 tableItems state를 사용하여 각 컴포넌트에 알맞은 데이터를 출력할 수 있도록 설계
-const SalesView = ({ setTab, tableItems, fetchedData }) => {
+const Table = ({ setTab, tableItems, tableData, fetchedData }) => {
+  // const [please, setPlease] = useState(fetchedData);
   const sortedData = [...salesData].sort((a, b) => b.idx - a.idx);
   const [rawData] = useState(sortedData);
   // data의 초깃값을 salesData로 설정하게 되면, rawData와 참조값이 같게 되면서 splice메소드 사용하여 data 변경 시, rawData의 값도 변경되는 문제 있음
@@ -71,21 +72,26 @@ const SalesView = ({ setTab, tableItems, fetchedData }) => {
 
   return (
     <>
-      <div>{fetchedData}</div>
-      <h5
-        onClick={() => {
-          // 탭 새로고침이 안됨 ㅠ
-          setTab("");
-          setTab(1);
-        }}
-      >
-        <strong>{tableItems.title}</strong>
-      </h5>
-      <hr />
-      <div className="sales-table-wrapper">
-        <div className="sales-filter-wrapper">
-          {/* <button onClick={() => {}}>조회</button> */}
-          {/* <select name="duration">
+      {/* fetchData를 받아왔을 때만 아래의 화면을 보여줄 수 있도록 삼항연산자 사용.
+          해당 조건을 주지 않으면, 데이터를 받아오기 전에 fetchData는 배열이 아니기 때문에 아래 식들에서 오류가 남 */}
+      {fetchedData ? (
+        <>
+          {/* <div>{fetchedData[0].tableData[0]}</div> */}
+          {/* <div>{fetchedData[0][tableData[0]]}</div> */}
+          <h5
+            onClick={() => {
+              // 탭 새로고침이 안됨 ㅠ
+              setTab("");
+              setTab(1);
+            }}
+          >
+            <strong>{tableItems.title}</strong>
+          </h5>
+          <hr />
+          <div className="sales-table-wrapper">
+            <div className="sales-filter-wrapper">
+              {/* <button onClick={() => {}}>조회</button> */}
+              {/* <select name="duration">
             <option value="3년">3년</option>
             <option value="1년">1년</option>
             <option value="6개월">6개월</option>
@@ -94,100 +100,102 @@ const SalesView = ({ setTab, tableItems, fetchedData }) => {
             <option value="1주일">1주일</option>
             <option value="1일">1일</option>
           </select> */}
-          <select name="duration" ref={filterSelectRef}>
-            {/* 전체 필터로 검색 시, 구매자, 판매자, 강의명 모든 조건에서 검색할 수 있도록 처리해야 하나 아직 못함 */}
-            <option value="all">전체</option>
-            <option value="userId">구매자</option>
-            <option value="lecturerId">판매자</option>
-            <option value="className">강의명</option>
-          </select>
-          <input
-            type="text"
-            ref={filterInputRef}
-            onChange={(e) => {
-              setInputValue(e.target.value);
-            }}
-          />
-          <button
-            onClick={() => {
-              filteringData(
-                filterInputRef.current.value,
-                filterSelectRef.current.value
-              );
-            }}
-          >
-            검색
-          </button>
-          <CSVLink data={data}>
-            <div style={{ textDecoration: "none" }}>
-              <img src={excelDownload} style={{ marginLeft: "1rem" }} />
+              <select name="duration" ref={filterSelectRef}>
+                {/* 전체 필터로 검색 시, 구매자, 판매자, 강의명 모든 조건에서 검색할 수 있도록 처리해야 하나 아직 못함 */}
+                <option value="all">전체</option>
+                <option value="userId">구매자</option>
+                <option value="lecturerId">판매자</option>
+                <option value="className">강의명</option>
+              </select>
+              <input
+                type="text"
+                ref={filterInputRef}
+                onChange={(e) => {
+                  setInputValue(e.target.value);
+                }}
+              />
+              <button
+                onClick={() => {
+                  filteringData(
+                    filterInputRef.current.value,
+                    filterSelectRef.current.value
+                  );
+                }}
+              >
+                검색
+              </button>
+              <CSVLink data={data}>
+                <div style={{ textDecoration: "none" }}>
+                  <img src={excelDownload} style={{ marginLeft: "1rem" }} />
+                </div>
+              </CSVLink>
             </div>
-          </CSVLink>
-        </div>
-        <br />
+            <br />
 
-        <table className="salesTable">
-          <tr>
-            <td className="salesTd salesTable-title veryShort">번호</td>
-            <td className="salesTd salesTable-title long">
-              {tableItems.item1}
-            </td>
-            <td className="salesTd salesTable-title medium">
-              {tableItems.item2}
-            </td>
-            <td className="salesTd salesTable-title medium">
-              {tableItems.item3}
-            </td>
-            <td className="salesTd salesTable-title short">
-              {tableItems.item4}
-            </td>
-            <td className="salesTd salesTable-title short">
-              {tableItems.item5}
-            </td>
-            <td className="salesTd salesTable-title short">
-              {tableItems.item6}
-            </td>
-            <td className="salesTd salesTable-title medium">
-              {tableItems.item7}
-            </td>
-          </tr>
-
-          {currentPageData.map((a, i) => {
-            return (
-              <tr key={a.idx}>
-                <td className="salesTd">{a.idx}</td>
-                <td className="salesTd">{a.className}</td>
-                <td className="salesTd">{parseInt(a.price)}</td>
-                <td className="salesTd">{parseInt(a.price / 11)}</td>
-                <td className="salesTd">{a.count}</td>
-                <td className="salesTd">{a.userId}</td>
-                <td className="salesTd">{a.lecturerId}</td>
-                <td className="salesTd">
-                  {new Date(a.dateOfPurchase).toLocaleDateString()}
+            <table className="salesTable">
+              <tr>
+                <td className="salesTd salesTable-title veryShort">번호</td>
+                <td className="salesTd salesTable-title long">
+                  {tableItems.item1}
+                </td>
+                <td className="salesTd salesTable-title medium">
+                  {tableItems.item2}
+                </td>
+                <td className="salesTd salesTable-title medium">
+                  {tableItems.item3}
+                </td>
+                <td className="salesTd salesTable-title short">
+                  {tableItems.item4}
+                </td>
+                <td className="salesTd salesTable-title short">
+                  {tableItems.item5}
+                </td>
+                <td className="salesTd salesTable-title short">
+                  {tableItems.item6}
+                </td>
+                <td className="salesTd salesTable-title medium">
+                  {tableItems.item7}
                 </td>
               </tr>
-            );
-          })}
-        </table>
-      </div>
-      <div className="pagination-wrapper">
-        <Stack spacing={1}>
-          <Pagination
-            boundaryCount={5}
-            count={pageCount}
-            color="primary"
-            defaultPage={1}
-            showFirstButton={true}
-            showLastButton={true}
-            // 2번째 인자가 current page를 받는 인자임
-            onChange={(e, page) => {
-              changeCurrentPageData(page);
-            }}
-          />
-        </Stack>
-      </div>
+
+              {currentPageData.map((a, i) => {
+                return (
+                  <tr key={i}>
+                    <td className="salesTd">{a[tableData[0]]}</td>
+                    <td className="salesTd">{a[tableData[1]]}</td>
+                    <td className="salesTd">{a[tableData[2]]}</td>
+                    <td className="salesTd">{a[tableData[3]]}</td>
+                    <td className="salesTd">{a[tableData[4]]}</td>
+                    {/* <td className="salesTd">{a[tableData[5]]}</td> */}
+                    {/* <td className="salesTd">{a[tableData[6]]}</td>
+                    <td className="salesTd">
+                      {new Date(a.dateOfPurchase).toLocaleDateString()}
+                    </td> */}
+                  </tr>
+                );
+              })}
+            </table>
+          </div>
+          <div className="pagination-wrapper">
+            <Stack spacing={1}>
+              <Pagination
+                boundaryCount={5}
+                count={pageCount}
+                color="primary"
+                defaultPage={1}
+                showFirstButton={true}
+                showLastButton={true}
+                // 2번째 인자가 current page를 받는 인자임
+                onChange={(e, page) => {
+                  changeCurrentPageData(page);
+                }}
+              />
+            </Stack>
+          </div>
+        </>
+      ) : null}
     </>
   );
 };
 
-export default SalesView;
+export default Table;

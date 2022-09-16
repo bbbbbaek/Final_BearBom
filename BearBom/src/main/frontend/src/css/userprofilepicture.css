@@ -12,19 +12,3 @@
   display: flex;
   justify-content: center;
 }
-
-.upp-pp {
-  width: 7rem;
-  height: 7rem;
-  border-radius: 50%;
-  background-color: #e1e2e3;
-  outline: none;
-  appearance: none;
-  overflow: hidden;
-  background-position-x: center;
-  background-position-y: center;
-}
-
-.upp-pp::file-selector-button {
-  display: none;
-}

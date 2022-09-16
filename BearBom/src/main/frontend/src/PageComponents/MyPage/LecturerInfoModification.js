@@ -4,6 +4,7 @@ import "../../css/lecturerinfomodification.css";
 import axios from "axios";
 import { useState } from "react";
 import adminProfileImage from "../../images/adminProfileImage.png";
+import ProfilePicture from "../../ModuleComponents/ProfilePicture";
 
 const LecturerInfoModification = () => {
   const [boardData, setBoardData] = useState("");
@@ -15,13 +16,7 @@ const LecturerInfoModification = () => {
       <hr />
       <div className="lecturerinfomdf-wrapper">
         <div className="lecturerinfomdf-left">
-          <input
-            className="upp-pp"
-            type="file"
-            style={{
-              background: `url(${adminProfileImage})`,
-            }}
-          />
+          <ProfilePicture />
           <input type="text" placeholder="닉네임을 입력하세요" />
         </div>
         <div className="lecturerinfomdf-right">
