@@ -16,6 +16,11 @@ const Card = ({ course }) => {
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
+  const [testt, setTestt] = useState("");
+  const [flag, setFlag] = useState(false);
+  // console.log(typeof course.rate);
+
+  // console.log("ttttt", course);
   useEffect((e) => {
     const fetchData = async () => {
       // const res = await axios.get(`${API_BASE_URL}/api/like/getLikeList`);
@@ -48,7 +53,17 @@ const Card = ({ course }) => {
           console.log(error);
         });
     };
+    const test = (e) => {
+      if (course.rate == 0) {
+        setTestt("신규");
+        setFlag(false);
+      } else {
+        setTestt(course.rate);
+        setFlag(true);
+      }
+    };
     fetchData();
+    test();
   }, []);
 
   const toggleLike = async (e) => {
@@ -92,7 +107,13 @@ const Card = ({ course }) => {
         {course.courseIdx}
         <Link to={`/course/${course.courseIdx}`} state={{ courseInfo: course }}>
           <ImgContainer>
-            <div className="tag"> 평점</div>
+            {/* <div className="tag">{course.rate}</div> */}
+            <div className="tag">
+              <span className={`message ${flag ? "success" : "error"}`}>
+                {testt}
+              </span>
+            </div>
+
             {/* <div className="tag">{averageRating} 평점</div> */}
 
             <img
@@ -157,7 +178,18 @@ const CardWrapper = styled.div`
   height: 100%;
   margin: 0 auto;
 `;
-
+// .tag {
+//   position: absolute;
+//   top: 5%;
+//   left: 5%;
+//   background-color: #6a82ec;
+//   border: 0.3px solid #6a82ec;
+//   padding: 3px 6px;
+//   color: white;
+//   border-radius: 7px;
+//   font-size: 10px;
+//   font-weight: 600;
+// }
 const ImgContainer = styled.div`
   position: relative;
   width: 85%;
@@ -173,15 +205,9 @@ const ImgContainer = styled.div`
     position: absolute;
     top: 5%;
     left: 5%;
-    background-color: #6a82ec;
-    border: 0.3px solid #6a82ec;
     padding: 3px 6px;
     color: white;
-    border-radius: 7px;
-    font-size: 10px;
-    font-weight: 600;
   }
-
   .place {
     position: absolute;
     bottom: 5%;

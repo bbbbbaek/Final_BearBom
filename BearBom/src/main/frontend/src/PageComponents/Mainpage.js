@@ -21,138 +21,6 @@ const Mainpage = () => {
   const [endday, setEndday] = useState([]);
   const [averageRating, setAverageRating] = useState("");
 
-  const stateText = [
-    {
-      id: "pp-01",
-      title: "Kids-story",
-      artist: "Thomas Buisson",
-      desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
-      thumbnail:
-        "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
-      price: 10,
-      pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
-    },
-    {
-      id: "pp-02",
-      title: "mockyapp",
-      artist: "Ahmed Amr",
-      desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
-      thumbnail:
-        "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/mockyapp.mp4",
-      price: 20,
-      pieUrl: "https://cloud.protopie.io/p/27631ac9d5",
-    },
-    {
-      id: "pp-03",
-      title: "mockyapp",
-      artist: "Ahmed Amr",
-      desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
-      thumbnail:
-        "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/mockyapp.mp4",
-      price: 20,
-      pieUrl: "https://cloud.protopie.io/p/27631ac9d5",
-    },
-    {
-      id: "pp-04",
-      title: "mockyapp",
-      artist: "Ahmed Amr",
-      desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
-      thumbnail:
-        "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/mockyapp.mp4",
-      price: 20,
-      pieUrl: "https://cloud.protopie.io/p/27631ac9d5",
-    },
-    {
-      id: "pp-05",
-      title: "Kids-story",
-      artist: "Thomas Buisson",
-      desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
-      thumbnail:
-        "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
-      price: 10,
-      pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
-    },
-    {
-      id: "pp-06",
-      title: "Kids-story",
-      artist: "Thomas Buisson",
-      desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
-      thumbnail:
-        "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
-      price: 10,
-      pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
-    },
-    {
-      id: "pp-07",
-      title: "Kids-story",
-      artist: "Thomas Buisson",
-      desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
-      thumbnail:
-        "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
-      price: 10,
-      pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
-    },
-  ];
-
-  const stateText1 = [
-    {
-      id: "01",
-      title: "겉바속쫀 휘낭시에 만들기 클래스",
-      category: "카테고리01",
-      image: process.env.PUBLIC_URL + "/twopic.png",
-      price: "￦11,900",
-    },
-    {
-      id: "02",
-      title: "타이틀02",
-      category: "카테고리02",
-      image: process.env.PUBLIC_URL + "/twopic.png",
-      price: "￦02,900",
-    },
-    {
-      id: "03",
-      title: "타이틀03",
-      category: "카테고리03",
-      image: process.env.PUBLIC_URL + "/twopic.png",
-      price: "￦99,900",
-    },
-    {
-      id: "04",
-      title: "타이틀04",
-      category: "카테고리04",
-      image: process.env.PUBLIC_URL + "/twopic.png",
-      price: "￦99,900",
-    },
-    {
-      id: "05",
-      title: "테이블05",
-      category: "카테로기05",
-      image: process.env.PUBLIC_URL + "/twopic.png",
-      price: "￦99,900",
-    },
-    {
-      id: "06",
-      title: "타이틀06",
-      category: "카테고리06",
-      image: process.env.PUBLIC_URL + "/twopic.png",
-      price: "￦99,900",
-    },
-    {
-      id: "07",
-      title: "타이틀07",
-      category: "카테고리07",
-      image: process.env.PUBLIC_URL + "/twopic.png",
-      price: "￦99,900",
-    },
-
-    {
-      id: "08",
-      title: "타이틀08",
-      category: "카테고리08",
-      image: process.env.PUBLIC_URL + "/twopic.png",
-      price: "￦99,900",
-    },
-  ];
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -201,14 +69,14 @@ const Mainpage = () => {
     }).then((response) => {
       // console.log(response);
       console.log(response.data);
-      setCourse(response.data);
+      // setCourse(response.data);
 
       // let result = response.data.map((el) => {
       //   return { courseIdx: el["courseIdx"] };
       // });
 
       // console.log(result);
-      // setCourse(response.data.getCourseList);
+      setCourse(response.data.getCourseList);
       // setAverageRating(response.data.averageRating);
     });
 
@@ -308,11 +176,13 @@ const Mainpage = () => {
                 return (
                   <div>
                     <Link
+                      key={i}
                       to={`/course/${a.courseIdx}`}
                       state={{ courseInfo: a }}
                       style={{ textDecoration: "none", color: "#ff5862" }}
                     >
                       <p
+                        key={i}
                         className="get-local"
                         style={{ marginTop: "10px" }}
                         // onClick={() => {
@@ -377,8 +247,8 @@ const Mainpage = () => {
                     {course.map((data) => (
                       // 여기서 {}말고 ()로 하면 return 안해도 됨
                       //   이게 props 넣는거
-                      // <Card course={data} averageRating={averageRating} />
                       <Card course={data} />
+                      // <Card key={data} course={data} />
                     ))}
                   </Carousel>
                 </div>
@@ -401,7 +271,7 @@ const Mainpage = () => {
                       // 여기서 {}말고 ()로 하면 return 안해도 됨
                       //   이게 props 넣는거
                       // <Card course={data} averageRating={averageRating} />
-                      <Card2 endday={data} />
+                      <Card2 key={data} endday={data} />
                     ))}
                   </Carousel>
                 </div>

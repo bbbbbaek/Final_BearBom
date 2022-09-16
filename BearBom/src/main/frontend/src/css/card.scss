@@ -6,3 +6,25 @@
     z-index: 1;
     // bottom: 0%;
 }
+
+
+.tag{
+    .message {
+      font-weight: 500;
+      font-size: 0.88rem;
+      &.success {
+        // background-color: #ff5862;
+        // border: 0.3px solid #ff5862;
+        background-image: linear-gradient(253deg, #8094ff, #ff5862 75%);
+        padding: 5px 6px !important;
+        border-radius: 7px;
+      }
+      &.error {
+        background-color: #ff5862;
+        border: 1px solid #ff5862;
+        border-radius: 7px;
+        padding: 5px 6px !important;
+      }
+    }
+}
+  
