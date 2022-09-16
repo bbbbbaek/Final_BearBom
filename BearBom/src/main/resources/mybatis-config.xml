@@ -16,6 +16,6 @@
 	<typeAliases>
 		<typeAlias type="com.spring.bearbom.entity.Course" alias="course"></typeAlias>
 		<typeAlias type="com.spring.bearbom.entity.User" alias="user"></typeAlias>
-		
+		<typeAlias type="com.spring.bearbom.common.CamelHashMap" alias="camelHashMap"></typeAlias>
 	</typeAliases>
 </configuration>

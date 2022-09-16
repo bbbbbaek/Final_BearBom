@@ -17,4 +17,6 @@ public interface CourserRepository extends JpaRepository<Courser, CourserId> {
 	
 	@Query(value="select ifnull(max(a.courser_idx), 0) + 1 from t_courser a where a.course_idx = :courseIdx", nativeQuery = true)
 	int selectNextCourserIdx(@Param("courseIdx") int courseIdx);
+
+
 }
