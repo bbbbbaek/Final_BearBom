@@ -2,27 +2,49 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import useFetch from "../customHooks/useFetch";
 import Table from "../ModuleComponents/Table";
-import { TableMenuItems } from "../ModuleComponents/TableMenuItems";
+import {
+  TableDataItems,
+  TableMenuItems,
+} from "../ModuleComponents/TableMenuItems";
 
 const Notice = () => {
   const [tableItems, setTableItems] = useState(
     new TableMenuItems(
       "공지사항",
-      "클래스명",
-      "매출",
-      "매출이익",
-      "수량",
-      "구매자",
+      "제목",
+      "내용",
+      "등록일",
+      "수정일",
       "판매자",
       "구매일자"
     )
   );
-  let ba = useFetch("/api/helpdesk/getNoticeList");
-  let fetchedData = ba.data;
+  const [tableData, setTableData] = useState(
+    // new TableDataItems(
+    [
+      "noticeIdx",
+      "noticeNm",
+      "noticeContent",
+      "noticeRegdate",
+      "noticeMdfdate",
+      "user",
+    ]
+    // )
+  );
+  let fetch = useFetch("/api/helpdesk/getNoticeList");
+  let fetchedData = null;
+  fetchedData = fetch.data.data;
+  console.log(fetchedData);
 
   return (
     <>
-      <Table tableItems={tableItems} fetchedData={fetchedData} />
+      {fetchedData !== undefined ? (
+        <Table
+          tableItems={tableItems}
+          tableData={tableData}
+          fetchedData={fetchedData}
+        />
+      ) : null}
     </>
   );
 };
