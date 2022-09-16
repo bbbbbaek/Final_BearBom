@@ -38,28 +38,33 @@ public class UserServiceimpl implements UserService {
 	public User login(String userId, String userPw) {
 		
 		//return memberRepository.findByUseridAndPassword(userid, password);
-//		if(failcnt < 5) {
-		User loginUser = userRepository.findByUserId(userId);
-
-		if(loginUser != null && passwordEncoder.matches(userPw, loginUser.getUserPw())) {
-			return loginUser;
-		} else if(loginUser != null && !passwordEncoder.matches(userPw, loginUser.getUserPw())) {
-			User pwFaiiledUser = new User();
-			userMapper.updateFailCnt(userId);
-			pwFaiiledUser.setUserId(userId);
-			pwFaiiledUser.setLoginFailMessage("wrong password");
-			return pwFaiiledUser;
-		} else if(loginUser == null) {
-			User idFailedUser = new User();
-			idFailedUser.setLoginFailMessage("not exist id");
-			return idFailedUser;
+		int failCnt = userMapper.checkFailCnt(userId);
+		if(failCnt < 5) {
+			User loginUser = userRepository.findByUserId(userId);
+			
+	
+			if(loginUser != null && passwordEncoder.matches(userPw, loginUser.getUserPw())) {
+				userMapper.updateResetFailCnt(userId);
+				return loginUser;
+			} else if(loginUser != null && !passwordEncoder.matches(userPw, loginUser.getUserPw())) {
+				User pwFaiiledUser = new User();
+				userMapper.updateFailCnt(userId);
+				pwFaiiledUser.setUserId(userId);
+				pwFaiiledUser.setLoginFailMessage("wrong password");
+				return pwFaiiledUser;
+			} else if(loginUser == null) {
+				User idFailedUser = new User();
+				idFailedUser.setLoginFailMessage("not exist id");
+				return idFailedUser;
+			}
 		}
-		// 로그인 되면 실패 카운트 초기화
 		
-//		} else {
-//			userDto.setTest("notlogin");
-//		}
-		return null;
+		User logingDenied = new User();
+		logingDenied.setLoginFailMessage("loging denied");
+			return logingDenied;
+			
+		
+	
 	}
 
 
@@ -89,7 +94,3 @@ public class UserServiceimpl implements UserService {
 
 
 }
-
-
-
-
