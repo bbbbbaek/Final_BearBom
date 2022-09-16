@@ -61,25 +61,8 @@ const Course = (props) => {
   const [courseStCost, setCourseStCost] = useState("");
   const [courseEndCost, setCourseEndCost] = useState("");
   const [courseLevelName, setCourseLevelName] = useState("");
-  const [locationCode, setLocationCode] = useState([]);
-  const [categoryCode, setCategoryCode] = useState([]);
 
   const [searchInfo, setSearchInfo] = useState({});
-
-  useEffect(() => {
-    axios({
-      url: "http://localhost:8080/api/course/getCommonCodeList",
-      method: "get",
-    })
-      .then((response) => {
-        console.log(response.data);
-        setLocationCode(response.data.locationCodeList);
-        setCategoryCode(response.data.categoryCodeList);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   const addSearchInfo = (e) => {
     const newSearchInfo = {
@@ -589,13 +572,8 @@ const Course = (props) => {
                       <MenuItem value="">
                         <em>지역검색</em>
                       </MenuItem>
-                      <MenuItem value={"all"}>전체</MenuItem>
-                      {locationCode.map((code) => (
-                        <MenuItem value={code.cmmnCodeIdx}>
-                          {code.cmmnCodeNm}
-                        </MenuItem>
-                      ))}
-                      {/* <MenuItem value={"서울"}>서울</MenuItem>
+                      <MenuItem value={"전체"}>전체</MenuItem>
+                      <MenuItem value={"서울"}>서울</MenuItem>
                       <MenuItem value={"경기"}>경기</MenuItem>
                       <MenuItem value={"인천"}>인천</MenuItem>
                       <MenuItem value={"강원"}>강원</MenuItem>
@@ -610,7 +588,7 @@ const Course = (props) => {
                       <MenuItem value={"세종"}>세종</MenuItem>
                       <MenuItem value={"제주"}>제주</MenuItem>
                       <MenuItem value={"충청북도"}>충청북도</MenuItem>
-                      <MenuItem value={"충청남도"}>충청남도</MenuItem> */}
+                      <MenuItem value={"충청남도"}>충청남도</MenuItem>
                     </Select>
                   </FormControl>
                 </div>
@@ -639,12 +617,7 @@ const Course = (props) => {
                         <em>카테고리검색</em>
                       </MenuItem>
                       <MenuItem value={"전체"}>전체</MenuItem>
-                      {categoryCode.map((code) => (
-                        <MenuItem value={code.cmmnCodeIdx}>
-                          {code.cmmnCodeNm}
-                        </MenuItem>
-                      ))}
-                      {/* <MenuItem value={"핸드메이드"}>핸드메이드</MenuItem>
+                      <MenuItem value={"핸드메이드"}>핸드메이드</MenuItem>
                       <MenuItem value={"쿠킹"}>쿠킹</MenuItem>
                       <MenuItem value={"플라워·가드닝"}>플라워·가드닝</MenuItem>
                       <MenuItem value={"드로잉"}>드로잉</MenuItem>
@@ -654,7 +627,7 @@ const Course = (props) => {
                       <MenuItem value={"뷰티"}>뷰티</MenuItem>
                       <MenuItem value={"반려동물"}>반려동물</MenuItem>
                       <MenuItem value={"체험"}>체험</MenuItem>
-                      <MenuItem value={"자기계발"}>자기계발</MenuItem> */}
+                      <MenuItem value={"자기계발"}>자기계발</MenuItem>
                     </Select>
                   </FormControl>
                 </div>
