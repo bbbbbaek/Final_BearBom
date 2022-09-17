@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import "../css/helpdesk.css";
+import "./helpdesk.scss";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
-import Notice from "../ModuleComponents/Notice";
-import FAQ from "../ModuleComponents/FAQ";
-import Inquiry from "../ModuleComponents/Inquiry";
-import banner from "../images/helpdesk-banner.png";
+import Notice from "../Notice/Notice";
+import FAQ from "../FAQ/FAQ";
+import Inquiry from "../Inquiry/Inquiry";
+import banner from "../../../images/helpdesk-banner.png";
 
 const Helpdesk = () => {
   const [tabContent, setTabContent] = useState(0);
@@ -13,13 +13,13 @@ const Helpdesk = () => {
   const onClickNotice = () => {};
   return (
     <>
-      <div className="helpdesk-background">
-        <div className="banner-container" />
+      <div className="helpdesk_home">
+        <div className="banner" />
         <br />
-        <div className="helpdesk-main">
-          <div className="menu-container">
+        <div className="body">
+          <div className="menuBar">
             <div
-              className="menu-list"
+              className="menu"
               id=""
               onClick={() => {
                 setTabContent(0);
@@ -28,7 +28,7 @@ const Helpdesk = () => {
               공지사항
             </div>
             <div
-              className="menu-list"
+              className="menu"
               id=""
               onClick={() => {
                 setTabContent(1);
@@ -37,7 +37,7 @@ const Helpdesk = () => {
               FAQ
             </div>
             <div
-              className="menu-list"
+              className="menu"
               id=""
               onClick={() => {
                 setTabContent(2);
@@ -49,7 +49,7 @@ const Helpdesk = () => {
 
           <br />
           {/* Modal부분 */}
-          <div className="content-container">
+          <div className="content">
             {[<Notice />, <FAQ />, <Inquiry />][tabContent]}
           </div>
         </div>

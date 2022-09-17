@@ -1,0 +1,71 @@
+.admin_navbar {
+  height: 3.1rem;
+  border-bottom: 1px solid #e1e2e3;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: #555;
+
+  .wrapper {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .search {
+      display: flex;
+      align-items: center;
+      border: 1px solid #e1e2e3;
+      padding: 0.2rem;
+
+      input {
+        border: none;
+        outline: none;
+        background-color: transparent;
+
+        &::placeholder {
+          font-size: 1rem;
+        }
+      }
+    }
+
+    .items {
+      display: flex;
+      align-items: center;
+
+      .item {
+        display: flex;
+        align-items: center;
+        margin-left: 1.2rem;
+        position: relative;
+
+        .icon {
+          font-size: 1.5rem;
+        }
+
+        .avatar {
+          width: 2rem;
+          height: 2rem;
+          border-radius: 50%;
+        }
+
+        .notif {
+          width: 1rem;
+          height: 1rem;
+          background-color: red;
+          border-radius: 50%;
+          color: white;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 0.7rem;
+          font-weight: bold;
+          position: absolute;
+          top: -5px;
+          right: -5px;
+        }
+      }
+    }
+  }
+}

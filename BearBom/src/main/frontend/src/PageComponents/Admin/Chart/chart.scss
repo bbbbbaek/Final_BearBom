@@ -1,0 +1,24 @@
+.chart {
+  flex: 5;
+  -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+  box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+  border-radius: 5px;
+  padding: 1rem;
+  color: gray;
+
+  .top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .title {
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .top_right {
+      display: flex;
+    }
+  }
+}

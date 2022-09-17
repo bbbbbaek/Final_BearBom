@@ -27,6 +27,9 @@ import { API_BASE_URL } from "../app-config";
 import { Link } from "react-router-dom";
 import "../css/btnDeco.scss";
 import "../css/classview.css";
+
+import classData from "../PageComponents/Admin/classData";
+
 import Pagination from "@mui/material/Pagination";
 
 function valuetext(priceSlider) {
