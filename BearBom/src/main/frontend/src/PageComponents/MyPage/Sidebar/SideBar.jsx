@@ -11,7 +11,7 @@ import SendIcon from "@mui/icons-material/Send";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import StarBorder from "@mui/icons-material/StarBorder";
-import Advertisement from "../../ModuleComponents/Advertisement";
+import Advertisement from "../../../ModuleComponents/Advertisement";
 
 const SideBar = ({ setTab }) => {
   const [open1, setOpen1] = useState(false);

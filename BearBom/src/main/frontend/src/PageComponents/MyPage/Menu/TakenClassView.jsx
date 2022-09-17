@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Table from "../../ModuleComponents/Table/Table";
-import { TableMenuItems } from "../../ModuleComponents/TableMenuItems";
+import Table from "../../../ModuleComponents/Table/Table";
+import { TableMenuItems } from "../../../ModuleComponents/TableMenuItems";
 
 const TakenClassView = () => {
   const [tableItems, setTableItems] = useState(

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Table from "../../ModuleComponents/Table/Table";
-import { TableMenuItems } from "../../ModuleComponents/TableMenuItems";
-import useFetch from "../../customHooks/useFetch";
+import Table from "../../../ModuleComponents/Table/Table";
+import { TableMenuItems } from "../../../ModuleComponents/TableMenuItems";
+import useFetch from "../../../customHooks/useFetch";
 import axios from "axios";
-import { API_BASE_URL } from "../../app-config";
+import { API_BASE_URL } from "../../../app-config";
 
 const InquiryView = () => {
   // const data = useFetch("/api/admin/getInquiryInfoReferenceList");

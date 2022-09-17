@@ -1,5 +1,5 @@
 import React from "react";
-import "../../css/mypage-quickview.css";
+import "./quickview.scss";
 
 const QuickView = () => {
   return (

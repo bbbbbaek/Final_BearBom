@@ -1,10 +1,9 @@
 import React from "react";
-import TextEditor from "../../ModuleComponents/TextEditor";
-import "../../css/lecturerinfomodification.css";
+import TextEditor from "../../../ModuleComponents/TextEditor";
+import "./lecturerinfomodification.scss";
 import axios from "axios";
 import { useState } from "react";
-import adminProfileImage from "../../images/adminProfileImage.png";
-import ProfilePicture from "../../ModuleComponents/ProfilePicture";
+import ProfilePicture from "../../../ModuleComponents/ProfilePicture";
 
 const LecturerInfoModification = () => {
   const [boardData, setBoardData] = useState("");

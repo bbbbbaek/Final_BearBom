@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import "../css/mypage.css";
-import OpenedClassView from "../PageComponents/MyPage/OpenedClassView";
-import QuickView from "../PageComponents/MyPage/QuickView";
-import SideBar from "../PageComponents/MyPage/SideBar";
-import TakenClassView from "../PageComponents/MyPage/TakenClassView";
-import InquiryView from "./MyPage/InquiryView";
-import WishlistView from "./MyPage/WishlistView";
-import UserInfoModification from "./MyPage/UserInfoModification";
-import LecturerInfoModification from "./MyPage/LecturerInfoModification";
-import UserProfilePicture from "./MyPage/UserProfilePicture";
-import InquiryWrite from "./MyPage/InquiryWrite";
+import "./mypage.scss";
+import OpenedClassView from "../Menu/OpenedClassView";
+import QuickView from "../Quickview/QuickView";
+import SideBar from "../Sidebar/SideBar";
+import TakenClassView from "../Menu/TakenClassView";
+import InquiryView from "../Menu/InquiryView";
+import WishlistView from "../Menu/WishlistView";
+import UserInfoModification from "../Menu/UserInfoModification";
+import LecturerInfoModification from "../Menu/LecturerInfoModification";
+import UserProfilePicture from "../UserProfilePicture";
+import InquiryWrite from "../Menu/InquiryWrite";
 
 const Mypage = () => {
   const [tab, setTab] = useState(0);

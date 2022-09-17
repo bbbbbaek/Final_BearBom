@@ -1,5 +1,5 @@
 import React from "react";
-import Inquiry from "../../PageComponents/Helpdesk/Inquiry/Inquiry";
+import Inquiry from "../../Helpdesk/Inquiry/Inquiry";
 
 const InquiryWrite = () => {
   return (
