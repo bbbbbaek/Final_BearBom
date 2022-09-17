@@ -17,4 +17,6 @@ public interface CourseService {
 	List<Map<String, Object>> getLocationCodeList();
 	
 	List<Map<String, Object>> getCategoryCodeList();
+
+    List<Map<String, Object>> getCourseList();
 }

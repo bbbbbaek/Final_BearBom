@@ -8,11 +8,11 @@ import "../css/card.scss";
 import { API_BASE_URL } from "../app-config";
 import axios from "axios";
 
-const CardSearch = ({ course }) => {
+const CardSearch = ({ data }) => {
   const navigate = useNavigate();
   const [like, setLike] = useState(false);
   const [dataa, setDataa] = useState();
-  const courseCost = course.courseCost;
+  const courseCost = data.courseCost;
   const courseCostChange = courseCost
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -36,7 +36,7 @@ const CardSearch = ({ course }) => {
       axios({
         method: "GET",
         url: API_BASE_URL + "/api/like/getLikeList",
-        params: { userId: userId, courseIdx: course.courseIdx },
+        params: { userId: userId, courseIdx: data.courseIdx },
         //403 에러는 보안관련 에러
         headers: {
           Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
@@ -55,11 +55,11 @@ const CardSearch = ({ course }) => {
         });
     };
     const test = (e) => {
-      if (course.rate === 0) {
+      if (data.rate === 0) {
         setTestt("신규");
         setFlag(false);
       } else {
-        setTestt("평점 " + course.rate);
+        setTestt("평점 " + data.rate);
 
         setFlag(true);
       }
@@ -79,12 +79,12 @@ const CardSearch = ({ course }) => {
     }
     await axios({
       method: "POST",
-      url: `${API_BASE_URL}/api/like/${course.courseIdx}/insertLike`,
+      url: `${API_BASE_URL}/api/like/${data.courseIdx}/insertLike`,
       //403 에러는 보안관련 에러
       headers: {
         Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
       },
-      data: { courseIdx: course.courseIdx, userId: userId },
+      data: { courseIdx: data.courseIdx, userId: userId },
     })
       .then((response) => {
         console.log(response);
@@ -106,8 +106,8 @@ const CardSearch = ({ course }) => {
   return (
     <>
       <CardWrapper>
-        {course.courseIdx}
-        <Link to={`/course/${course.courseIdx}`} state={{ courseInfo: course }}>
+        {data.courseIdx}
+        <Link to={`/course/${data.courseIdx}`} state={{ courseInfo: data }}>
           <ImgContainer>
             {/* <div className="tag">{course.rate}</div> */}
             <div className="tag">
@@ -120,7 +120,7 @@ const CardSearch = ({ course }) => {
 
             <img
               className="img_test"
-              src={`http://localhost:8080/upload/${course.courseThumbnailNm}`}
+              src={`http://localhost:8080/upload/${data.courseThumbnailNm}`}
               style={{ width: "250px", height: "250px" }}
               alt="test"
             ></img>
@@ -133,7 +133,7 @@ const CardSearch = ({ course }) => {
           <div className="first_row">
             {/* props로 데이터 넘겨서 넣어주기 일단 dummy */}
             {/* 원데이 */}
-            {course.courseNm}
+            {data.courseNm}
           </div>
           {/* <div className="second_row">{title}</div> */}
           {/* <div className={condition ? "third_row" : "hollow"}> */}

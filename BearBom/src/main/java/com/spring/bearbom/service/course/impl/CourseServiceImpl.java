@@ -51,4 +51,9 @@ public class CourseServiceImpl implements CourseService {
 	public List<Map<String, Object>> getCategoryCodeList() {
 		return courseMapper.getCategoryCodeList();
 	}
+
+	@Override
+	public List<Map<String, Object>> getCourseList() {
+		return courseMapper.getCourseList();
+	}
 }

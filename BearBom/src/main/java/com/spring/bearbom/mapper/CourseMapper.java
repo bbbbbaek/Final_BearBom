@@ -10,4 +10,6 @@ public interface CourseMapper {
 	List<Map<String, Object>> getLocationCodeList();
 	
 	List<Map<String, Object>> getCategoryCodeList();
+
+	List<Map<String, Object>> getCourseList();
 }
