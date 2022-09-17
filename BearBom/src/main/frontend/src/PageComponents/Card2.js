@@ -7,6 +7,7 @@ import LikeButton from "../ModuleComponents/LikeButton";
 import "../css/card.scss";
 import { API_BASE_URL } from "../app-config";
 import axios from "axios";
+
 const Card2 = ({ endday }) => {
   const navigate = useNavigate();
   const [like, setLike] = useState(false);
@@ -48,7 +49,17 @@ const Card2 = ({ endday }) => {
           console.log(error);
         });
     };
+    const test = (e) => {
+      if (endday.rate === 0) {
+        setTestt("신규");
+        setFlag(false);
+      } else {
+        setTestt("평점 " + endday.rate);
+        setFlag(true);
+      }
+    };
     fetchData();
+    test();
   }, []);
 
   const toggleLike = async (e) => {
@@ -82,17 +93,25 @@ const Card2 = ({ endday }) => {
         //불필요한 alert
         // alert("로그인 해주세요 :)");
       });
+
     // [POST] 사용자가 좋아요를 누름 -> DB 갱신
     // setLike(!like);
   };
   ///////////////////////////////////
+  const [testt, setTestt] = useState("");
+  const [flag, setFlag] = useState(false);
   return (
     <>
       <CardWrapper>
         {endday.courseIdx}
         <Link to={`/course/${endday.courseIdx}`} state={{ courseInfo: endday }}>
           <ImgContainer>
-            <div className="tag"> 평점</div>
+            <div className="tag">
+              <div className={`message ${flag ? "success" : "error"}`}>
+                {testt}
+              </div>
+            </div>
+
             {/* <div className="tag">{averageRating} 평점</div> */}
 
             <img
@@ -125,7 +144,6 @@ const Card2 = ({ endday }) => {
 };
 
 export default Card2;
-
 const TextContainer = styled.div`
   margin-top: 0.5rem;
   margin-left: 5rem;
@@ -157,7 +175,18 @@ const CardWrapper = styled.div`
   height: 100%;
   margin: 0 auto;
 `;
-
+// .tag {
+//   position: absolute;
+//   top: 5%;
+//   left: 5%;
+//   background-color: #6a82ec;
+//   border: 0.3px solid #6a82ec;
+//   padding: 3px 6px;
+//   color: white;
+//   border-radius: 7px;
+//   font-size: 10px;
+//   font-weight: 600;
+// }
 const ImgContainer = styled.div`
   position: relative;
   width: 85%;
@@ -173,15 +202,9 @@ const ImgContainer = styled.div`
     position: absolute;
     top: 5%;
     left: 5%;
-    background-color: #6a82ec;
-    border: 0.3px solid #6a82ec;
-    padding: 3px 6px;
+    padding: 3px 3px;
     color: white;
-    border-radius: 7px;
-    font-size: 10px;
-    font-weight: 600;
   }
-
   .place {
     position: absolute;
     bottom: 5%;

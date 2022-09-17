@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -10,7 +10,6 @@ import Slider from "@mui/material/Slider";
 import "../css/course.css";
 import {
   Button,
-  ButtonGroup,
   FormControl,
   InputLabel,
   MenuItem,
@@ -24,12 +23,13 @@ import "../css/mainpage.scss";
 import styled from "styled-components";
 import "react-multi-carousel/lib/styles.css";
 import axios from "axios";
-import { post } from "axios";
 import { API_BASE_URL } from "../app-config";
 import { Link } from "react-router-dom";
 import "../css/btnDeco.scss";
 import "../css/classview.css";
+
 import classData from "../PageComponents/Admin/classData";
+
 import Pagination from "@mui/material/Pagination";
 
 function valuetext(priceSlider) {
@@ -64,8 +64,25 @@ const Course = (props) => {
   const [courseStCost, setCourseStCost] = useState("");
   const [courseEndCost, setCourseEndCost] = useState("");
   const [courseLevelName, setCourseLevelName] = useState("");
+  const [locationCode, setLocationCode] = useState([]);
+  const [categoryCode, setCategoryCode] = useState([]);
 
   const [searchInfo, setSearchInfo] = useState({});
+
+  useEffect(() => {
+    axios({
+      url: "http://localhost:8080/api/course/getCommonCodeList",
+      method: "get",
+    })
+      .then((response) => {
+        console.log(response.data);
+        setLocationCode(response.data.locationCodeList);
+        setCategoryCode(response.data.categoryCodeList);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const addSearchInfo = (e) => {
     const newSearchInfo = {
@@ -521,6 +538,7 @@ const Course = (props) => {
   return (
     <>
       <br />
+      <br />
       <Container>
         <form
           noValidate
@@ -574,8 +592,13 @@ const Course = (props) => {
                       <MenuItem value="">
                         <em>지역검색</em>
                       </MenuItem>
-                      <MenuItem value={"전체"}>전체</MenuItem>
-                      <MenuItem value={"서울"}>서울</MenuItem>
+                      <MenuItem value={"all"}>전체</MenuItem>
+                      {locationCode.map((code) => (
+                        <MenuItem value={code.cmmnCodeIdx}>
+                          {code.cmmnCodeNm}
+                        </MenuItem>
+                      ))}
+                      {/* <MenuItem value={"서울"}>서울</MenuItem>
                       <MenuItem value={"경기"}>경기</MenuItem>
                       <MenuItem value={"인천"}>인천</MenuItem>
                       <MenuItem value={"강원"}>강원</MenuItem>
@@ -590,7 +613,7 @@ const Course = (props) => {
                       <MenuItem value={"세종"}>세종</MenuItem>
                       <MenuItem value={"제주"}>제주</MenuItem>
                       <MenuItem value={"충청북도"}>충청북도</MenuItem>
-                      <MenuItem value={"충청남도"}>충청남도</MenuItem>
+                      <MenuItem value={"충청남도"}>충청남도</MenuItem> */}
                     </Select>
                   </FormControl>
                 </div>
@@ -619,7 +642,12 @@ const Course = (props) => {
                         <em>카테고리검색</em>
                       </MenuItem>
                       <MenuItem value={"전체"}>전체</MenuItem>
-                      <MenuItem value={"핸드메이드"}>핸드메이드</MenuItem>
+                      {categoryCode.map((code) => (
+                        <MenuItem value={code.cmmnCodeIdx}>
+                          {code.cmmnCodeNm}
+                        </MenuItem>
+                      ))}
+                      {/* <MenuItem value={"핸드메이드"}>핸드메이드</MenuItem>
                       <MenuItem value={"쿠킹"}>쿠킹</MenuItem>
                       <MenuItem value={"플라워·가드닝"}>플라워·가드닝</MenuItem>
                       <MenuItem value={"드로잉"}>드로잉</MenuItem>
@@ -629,7 +657,7 @@ const Course = (props) => {
                       <MenuItem value={"뷰티"}>뷰티</MenuItem>
                       <MenuItem value={"반려동물"}>반려동물</MenuItem>
                       <MenuItem value={"체험"}>체험</MenuItem>
-                      <MenuItem value={"자기계발"}>자기계발</MenuItem>
+                      <MenuItem value={"자기계발"}>자기계발</MenuItem> */}
                     </Select>
                   </FormControl>
                 </div>
@@ -839,7 +867,6 @@ const Course = (props) => {
                 variant="secondary"
                 size="lg"
                 id="searchBtn"
-                // onSubmit={onSubmitSearchHandler}
                 // onClick={}
               >
                 검색하기

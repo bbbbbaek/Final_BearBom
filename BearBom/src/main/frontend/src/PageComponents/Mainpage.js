@@ -4,14 +4,13 @@ import "../css/mainpage.css";
 import "../css/mainpage.scss";
 import styled from "styled-components";
 import Carousel from "react-multi-carousel";
-// import Carousel from "react-bootstrap/Carousel";
 import LikeButton from "../ModuleComponents/LikeButton";
 import "react-multi-carousel/lib/styles.css";
 import { Button } from "react-bootstrap";
 import axios from "axios";
 import { API_BASE_URL } from "../app-config";
 import { Link, useNavigate, Navigate } from "react-router-dom";
-
+import videoTest from "../assets/Potters.mp4";
 import dataTest from "./dataTest.js";
 import Card from "./Card";
 import Card2 from "./Card2";
@@ -62,22 +61,13 @@ const Mainpage = () => {
       }
     }, 3000);
     //데이터불러오는 axios
-    //setCourse(response.data);
     axios({
       method: "get",
       url: API_BASE_URL + "/api/main/getCourseList",
     }).then((response) => {
-      // console.log(response);
       console.log(response.data);
-      // setCourse(response.data);
 
-      // let result = response.data.map((el) => {
-      //   return { courseIdx: el["courseIdx"] };
-      // });
-
-      // console.log(result);
       setCourse(response.data.getCourseList);
-      // setAverageRating(response.data.averageRating);
     });
 
     axios({
@@ -85,7 +75,7 @@ const Mainpage = () => {
       url: API_BASE_URL + "/api/main/getCourseEndDateList",
     }).then((response) => {
       console.log(response.data);
-      setEndday(response.data);
+      setEndday(response.data.getCourseEndDateList);
     });
   }, []);
 
@@ -94,9 +84,6 @@ const Mainpage = () => {
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
-
-  // const [loading, setLoading] = useState(true);
-  // const onClickClassRegist = useEffect(() => {}, []);
 
   const navigate = useNavigate();
 
@@ -109,14 +96,6 @@ const Mainpage = () => {
 
   const get_local = JSON.parse(localStorage.getItem("data"));
 
-  // let result = course.map((el) => {
-  //   if (el["course_idx"]) {
-  //     return { courseIdx: el["course_idx"] };
-  //   }
-  // });
-
-  // console.log(result);
-
   return (
     <>
       <div className="top-vod-banner-container">
@@ -124,37 +103,19 @@ const Mainpage = () => {
           className="vod"
           id="mainBannerVideo"
           preload="metadata"
-          poster="https://d1x9f5mf11b8gz.cloudfront.net/vod/20210831/main-poster.gif"
           controlsList="nodownload"
           autoPlay
           muted
           playsInline
           loop
         >
-          <source
-            src="https://d2g3bq8rd0lmrw.cloudfront.net/vod/20210907/pcmain.mp4"
-            type="video/mp4"
-          />
+          <source src={videoTest} type="video/mp4" />
         </video>
         <div className="main-title-area">
           <div className="msg-wrapper">
-            {/* <div className="anim-msg msg-1 visible">
-              <img
-                className="sub-msg"
-                src="pc-main-title.png"
-                width="100%"
-                alt="대체이미지"
-              />
-            </div> */}
-
             <div className="anim-msg msg-3 visible">
               <p className="sub-msg visible">
-                <strong>
-                  {/* 지금 베어봄과 함께 */}
-                  {/* <br /> */}
-                  {/* 일상을 취미로 채워보세요! */}
-                  {text}
-                </strong>
+                <strong>{text}</strong>
               </p>
             </div>
           </div>
@@ -169,28 +130,27 @@ const Mainpage = () => {
       <div className="lasted">
         <div className="inner">
           <p style={{ marginTop: "10px" }}>최근 본 상품</p>
-          {/* /**{id: ,title: ,} */}
 
           {get_local !== null
             ? get_local.map((a, i) => {
                 return (
-                  <div>
+                  <div key={i}>
                     <Link
-                      key={i}
                       to={`/course/${a.courseIdx}`}
                       state={{ courseInfo: a }}
                       style={{ textDecoration: "none", color: "#ff5862" }}
                     >
                       <p
-                        key={i}
                         className="get-local"
-                        style={{ marginTop: "10px" }}
-                        // onClick={() => {
-                        //   navigate(`/saw/${a.id}`);
-                        // }}
+                        style={{ marginTop: "20px", display: "block" }}
                       >
-                        {/* {a.title} */}
-                        {a.courseIdx}
+                        {a.courseNm + "        "}
+                        <img
+                          className="img_test"
+                          src={`http://localhost:8080/upload/${a.courseThumbnailNm}`}
+                          style={{ width: "50px", height: "50px" }}
+                          alt="test"
+                        ></img>
                       </p>
                     </Link>
                   </div>
@@ -217,19 +177,11 @@ const Mainpage = () => {
               여기 계시네요!
             </h1>
             <div className="class-open-page-move-area">
-              {/* class="btn class-open-page-move-btn" */}
               <Button
                 className="class-open-page-move-btn"
                 variant="light"
-                // onClickClassRegist={onClickClassRegist}
                 onClick={onClickClassRegist}
               >
-                {/* <Link
-                  style={{ textDecoration: "none", color: "#ff5862" }}
-                  to="/course/registration"
-                >
-                  클래스 오픈하기
-                </Link> */}
                 클래스 오픈하기
               </Button>
             </div>
@@ -244,11 +196,12 @@ const Mainpage = () => {
               <div className="favorite-list">
                 <div style={{ width: "100%", margin: "0 auto" }}>
                   <Carousel responsive={responsive}>
-                    {course.map((data) => (
+                    {course.map((data, i) => (
                       // 여기서 {}말고 ()로 하면 return 안해도 됨
                       //   이게 props 넣는거
-                      <Card course={data} />
-                      // <Card key={data} course={data} />
+                      <div key={i}>
+                        <Card course={data} />
+                      </div>
                     ))}
                   </Carousel>
                 </div>
@@ -267,11 +220,10 @@ const Mainpage = () => {
               <div className="favorite-list">
                 <div style={{ width: "100%", margin: "0 auto" }}>
                   <Carousel responsive={responsive}>
-                    {endday.map((data) => (
-                      // 여기서 {}말고 ()로 하면 return 안해도 됨
-                      //   이게 props 넣는거
-                      // <Card course={data} averageRating={averageRating} />
-                      <Card2 key={data} endday={data} />
+                    {endday.map((data, i) => (
+                      <div key={i}>
+                        <Card2 endday={data} />
+                      </div>
                     ))}
                   </Carousel>
                 </div>
