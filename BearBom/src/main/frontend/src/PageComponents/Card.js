@@ -7,6 +7,7 @@ import LikeButton from "../ModuleComponents/LikeButton";
 import "../css/card.scss";
 import { API_BASE_URL } from "../app-config";
 import axios from "axios";
+
 const Card = ({ course }) => {
   const navigate = useNavigate();
   const [like, setLike] = useState(false);
@@ -54,11 +55,12 @@ const Card = ({ course }) => {
         });
     };
     const test = (e) => {
-      if (course.rate == 0) {
+      if (course.rate === 0) {
         setTestt("신규");
         setFlag(false);
       } else {
-        setTestt(course.rate);
+        setTestt("평점 " + course.rate);
+
         setFlag(true);
       }
     };
@@ -109,9 +111,9 @@ const Card = ({ course }) => {
           <ImgContainer>
             {/* <div className="tag">{course.rate}</div> */}
             <div className="tag">
-              <span className={`message ${flag ? "success" : "error"}`}>
+              <div className={`message ${flag ? "success" : "error"}`}>
                 {testt}
-              </span>
+              </div>
             </div>
 
             {/* <div className="tag">{averageRating} 평점</div> */}
@@ -119,7 +121,7 @@ const Card = ({ course }) => {
             <img
               className="img_test"
               src={`http://localhost:8080/upload/${course.courseThumbnailNm}`}
-              // style={{ width: "250px", height: "250px" }}
+              style={{ width: "250px", height: "250px" }}
               alt="test"
             ></img>
           </ImgContainer>
@@ -155,6 +157,7 @@ const TextContainer = styled.div`
   .first_row {
     font-weight: 600;
     font-size: 15px;
+    width: 250px;
   }
   .second_row {
     font-size: 13px;
@@ -205,7 +208,7 @@ const ImgContainer = styled.div`
     position: absolute;
     top: 5%;
     left: 5%;
-    padding: 3px 6px;
+    padding: 3px 3px;
     color: white;
   }
   .place {

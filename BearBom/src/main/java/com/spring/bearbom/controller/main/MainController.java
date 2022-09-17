@@ -54,9 +54,32 @@ public class MainController {
         }
     }
 
+//    @GetMapping("/getCourseEndDateList")
+//    public ResponseEntity<?> getCourseEndDateList(Course course) {
+//        List<Course> getCourseEndDateList = mainService.getCourseEndDateList(course);
+//        return ResponseEntity.ok().body(getCourseEndDateList);
+//    }
+
+
     @GetMapping("/getCourseEndDateList")
-    public ResponseEntity<?> getCourseEndDateList(Course course) {
-        List<Course> getCourseEndDateList = mainService.getCourseEndDateList(course);
-        return ResponseEntity.ok().body(getCourseEndDateList);
+    public Map<String, Object> getCourseEndDateList(Course course) {
+        System.out.println("/////////"+course);
+        try {
+//            Courser courser = new Courser();
+//            courser.setCourse(course);
+            Map<String, Object> resultMap = new HashMap<String, Object>();
+            List<Course> getCourseEndDateList = mainService.getCourseEndDateList(course);
+
+//            List<Courser> averageRating = courserService.updateRating1(courser);
+
+//            System.out.println(averageRating);
+            resultMap.put("getCourseEndDateList", getCourseEndDateList);
+//            resultMap.put("averageRating", averageRating);
+            return resultMap;
+        } catch (Exception e) {
+            Map<String, Object> errorMap = new HashMap<String, Object>();
+            errorMap.put("error",e.getMessage());
+            return errorMap;
+        }
     }
 }
