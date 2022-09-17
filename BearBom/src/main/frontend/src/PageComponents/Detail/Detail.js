@@ -21,12 +21,16 @@ const Detail = ({ scrollTop }) => {
   // 아래에 왜 초기값을 객체 형태로 주지 않으면 오류가 나는지 모르겠음
 
   const { id } = useParams();
-  const [course, setCourse] = useState([]);
-  const [woobin, setWoobin] = useState(false);
+  const [course, setCourse] = useState({});
+  // const [woobin, setWoobin] = useState(false);
   const navigate = useNavigate();
   const [reviewInfo, setReviewInfo] = useState({ courseIdx: 1 });
   const [courseInfo, setCourseInfo] = useState({});
   const location = useLocation();
+  const [reviewList, setReviewList] = useState([]);
+  const [reviewData, setReviewData] = useState([]);
+  const [cnt, setCnt] = useState(0);
+  const [averageRating, setaverageRating] = useState([]);
 
   const addReviewInfo = (e) => {
     const newReviewInfo = {
@@ -40,6 +44,7 @@ const Detail = ({ scrollTop }) => {
   const onWriteReview = () => {
     console.log({
       ...reviewInfo,
+      courseIdx: id,
     });
 
     axios({
@@ -51,19 +56,20 @@ const Detail = ({ scrollTop }) => {
       data: reviewInfo,
     }).then((response) => {
       console.log(response);
+      setReviewList(response.data.reviewList);
+      setaverageRating(response.data.averageRating);
+      setReviewData(response.data.reviewList.slice(0, 4));
+      setCnt(0);
       // window.location.href = "/course/:id";
     });
   };
-  const [reviewList, setReviewList] = useState([]);
-  const [reviewData, setReviewData] = useState([]);
-  const [cnt, setCnt] = useState(0);
-  const [averageRating, setaverageRating] = useState([]);
 
   let listUrl = "http://localhost:8080/api/course/getReviewList";
 
   const userId = localStorage.getItem("USER_ID");
   console.log(userId);
   const list = () => {
+    setReviewInfo((prev) => ({ ...prev, courseIdx: id }));
     axios({
       url: listUrl,
       method: "post",
@@ -71,7 +77,7 @@ const Detail = ({ scrollTop }) => {
         Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
       },
       // params: {userId: userId}
-      data: { courseIdx: 1 },
+      data: { courseIdx: id },
     })
       .then((response) => {
         console.log(response.data);
@@ -85,7 +91,6 @@ const Detail = ({ scrollTop }) => {
   };
 
   React.useEffect(() => {
-    list();
     let get_local = localStorage.getItem("data");
     setCourseInfo(location.state.courseInfo);
     if (get_local == null) {
@@ -96,6 +101,7 @@ const Detail = ({ scrollTop }) => {
 
     let duplicateFlag = false;
     if (JSON.stringify(courseInfo) !== "{}") {
+      list();
       for (let i = 0; i < get_local.length; i++) {
         if (courseInfo.courseIdx === get_local[i].courseIdx) {
           duplicateFlag = true;
@@ -123,6 +129,10 @@ const Detail = ({ scrollTop }) => {
     setReviewData(copy);
   }, [cnt]);
 
+  useEffect(() => {
+    console.log(reviewList);
+  }, [reviewList, cnt]);
+
   // const style = { onclick=
   //   overflow: user.active ? "none" : "hidden",
   // };
@@ -130,15 +140,19 @@ const Detail = ({ scrollTop }) => {
   ///////////////////////////////////
 
   useEffect(() => {
+    setReviewInfo((prev) => ({ ...prev, courseIdx: id }));
     //데이터불러오는 axios
     //setCourse(response.data);
     axios({
       method: "get",
-      url: API_BASE_URL + "/api/course/getCourseList",
+      url: API_BASE_URL + "/api/course/getCourse",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+      },
+      params: { courseIdx: id },
     }).then((response) => {
-      // console.log(response);
-      // console.log(response.data);
-      setCourse(response.data);
+      console.log(response.data);
+      setCourse(response.data.getCourse);
     });
   }, []);
 
@@ -171,7 +185,7 @@ const Detail = ({ scrollTop }) => {
                 <b>클래스소개</b>
               </h5>
               <div className="class-content">
-                <CarouselFadeExample />
+                <CarouselFadeExample course={course} />
               </div>
             </section>
             <hr />

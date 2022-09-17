@@ -21,9 +21,8 @@ function Review({ review }) {
       <div className="review-box">
         {/* key={u.courserIdx} */}
         <img className="img2" src={require("../../img/img2.jpeg")}></img>
-        <span className="review-nickname">
-          {/* {review.user.userNickName} */}
-        </span>
+        <span className="review-nickname">{review.user.userNickName}</span>
+
         <div className="review-rating">
           <HoverRating courserRate={review.courserRate} />
         </div>
