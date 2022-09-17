@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Table from "../../ModuleComponents/Table";
+import Table from "../../ModuleComponents/Table/Table";
 import { TableMenuItems } from "../../ModuleComponents/TableMenuItems";
 
 const OpenedClassView = () => {

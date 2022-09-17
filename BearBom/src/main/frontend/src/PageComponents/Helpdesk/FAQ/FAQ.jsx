@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
-import "../css/faq.css";
+import "./faq.scss";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import faqData from "./faqData";
 import axios from "axios";
-import { API_BASE_URL } from "../app-config";
-import useStore from "../store/store.js";
+import { API_BASE_URL } from "../../../app-config";
+import useStore from "../../../store/store.js";
 
 const FAQ = ({ data }) => {
   // const [state, setState] = useState(faqData);
@@ -45,7 +44,7 @@ const FAQ = ({ data }) => {
         <strong>자주 묻는 질문</strong>
       </h5>
       <hr />
-      <div className="faq-main">
+      <div className="helpdesk_faq">
         {faq.map((a, i) => {
           return (
             <Accordion>

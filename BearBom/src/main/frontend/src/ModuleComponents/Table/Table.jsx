@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import "../css/salesview.css";
+import "./table.scss";
 // fetchedData는 서버에 연결된 상태로만 불러올 수 있기 때문에, 연결이 되지 않은 상태에서는
 // 아래의 salesData를 임시 데이터로 사용
-import salesData from "../PageComponents/AdminPage/salesData";
+import salesData from "../../PageComponents/Admin/salesData";
 import { CSVLink } from "react-csv";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-import excelDownload from "../images/excelDownload.png";
-import { TableMenuItems } from "../ModuleComponents/TableMenuItems";
+import excelDownload from "../../images/excelDownload.png";
+import { TableMenuItems } from "../TableMenuItems";
 
 // TableMenuItems 객체로 생성한 tableItems state를 사용하여 각 컴포넌트에 알맞은 데이터를 출력할 수 있도록 설계
 const Table = ({ setTab, tableItems, tableData, fetchedData }) => {
@@ -163,11 +163,11 @@ const Table = ({ setTab, tableItems, tableData, fetchedData }) => {
               {currentPageData.map((a, i) => {
                 return (
                   <tr key={i}>
-                    <td className="salesTd">{a[tableData[0]]}</td>
-                    <td className="salesTd">{a[tableData[1]]}</td>
-                    <td className="salesTd">{a[tableData[2]]}</td>
-                    <td className="salesTd">{a[tableData[3]]}</td>
-                    <td className="salesTd">{a[tableData[4]]}</td>
+                    <td className="salesTd">{a[tableData.data1]}</td>
+                    <td className="salesTd">{a[tableData.data2]}</td>
+                    <td className="salesTd">{a[tableData.data3]}</td>
+                    <td className="salesTd">{a[tableData.data4]}</td>
+                    <td className="salesTd">{a[tableData.data5]}</td>
                     {/* <td className="salesTd">{a[tableData[5]]}</td>
                     <td className="salesTd">{a[tableData[6]]}</td>
                     <td className="salesTd">

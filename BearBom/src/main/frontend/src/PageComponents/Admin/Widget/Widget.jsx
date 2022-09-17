@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./widget.scss";
 import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
@@ -7,13 +7,13 @@ import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
 import InsertChartOutlinedIcon from "@mui/icons-material/InsertChartOutlined";
 const Widget = ({ type }) => {
   let data;
-  let amount = 10000;
+  let number = 10000;
+  let amount = number.toLocaleString("ko-KR");
   let diff = 20;
   switch (type) {
     case "earning":
       data = {
         title: "매출",
-        isMoney: true,
         link: "주문 내역 조회",
         icon: <PaidOutlinedIcon className="icon" />,
       };
@@ -21,7 +21,6 @@ const Widget = ({ type }) => {
     case "order":
       data = {
         title: "주문",
-        isMoney: false,
         link: "주문 내역 조회",
         icon: <InsertChartOutlinedIcon className="icon" />,
       };
@@ -29,7 +28,6 @@ const Widget = ({ type }) => {
     case "user":
       data = {
         title: "회원",
-        isMoney: false,
         link: "회원 정보 조회",
         icon: <PersonOutlinedIcon className="icon" />,
       };
@@ -37,7 +35,6 @@ const Widget = ({ type }) => {
     case "class":
       data = {
         title: "강좌",
-        isMoney: false,
         link: "개설 강좌 조회",
         icon: <LocalLibraryOutlinedIcon className="icon" />,
       };
@@ -51,7 +48,10 @@ const Widget = ({ type }) => {
         <div className="left">
           <span className="title">{data.title}</span>
           <span className="counter">
-            {data.isMoney && "₩"} {amount}
+            {data.title === "매출" && "₩ " + amount}
+            {data.title === "주문" && amount + " 건"}
+            {data.title === "회원" && amount + " 명"}
+            {data.title === "강좌" && amount + " 개"}
           </span>
           <span className="link">{data.link}</span>
         </div>

@@ -4,8 +4,10 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Doughnut from "../Chart/Doughnut";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import useFetch from "../../../customHooks/useFetch";
 
 const Featured = () => {
+  const fetch = useFetch();
   return (
     <>
       <div className="featured">

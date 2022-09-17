@@ -46,7 +46,11 @@
         cursor: pointer;
 
         &:hover {
-          background-color: #ece8ff;
+          background-color: #c2c8c5;
+
+          span {
+            color: #fff;
+          }
         }
 
         .icon {

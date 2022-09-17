@@ -15,24 +15,40 @@ const Admin = () => {
             <p className="title">Main</p>
             <li>
               <AcUnitIcon className="icon" />
-              <span>Dashboard</span>
+              <span>메인메뉴</span>
+            </li>
+            <p className="title">Sales</p>
+            <li>
+              <AcUnitIcon className="icon" />
+              <span>매출 관리</span>
+            </li>
+            <p className="title">Order</p>
+            <li>
+              <AcUnitIcon className="icon" />
+              <span>주문 관리</span>
+            </li>
+            <p className="title">User</p>
+            <li>
+              <AcUnitIcon className="icon" />
+              <span>고객 관리</span>
+            </li>
+            <p className="title">Course</p>
+            <li>
+              <AcUnitIcon className="icon" />
+              <span>강좌 관리</span>
+            </li>
+            <p className="title">Helpdesk</p>
+            <li>
+              <AcUnitIcon className="icon" />
+              <span>공지사항 관리</span>
             </li>
             <li>
               <AcUnitIcon className="icon" />
-              <span>Dashboard</span>
+              <span>FAQ 관리</span>
             </li>
             <li>
               <AcUnitIcon className="icon" />
-              <span>Dashboard</span>
-            </li>
-            <p className="title">Useful</p>
-            <li>
-              <AcUnitIcon className="icon" />
-              <span>Dashboard</span>
-            </li>
-            <li>
-              <AcUnitIcon className="icon" />
-              <span>Dashboard</span>
+              <span>고객문의 관리</span>
             </li>
           </ul>
         </div>

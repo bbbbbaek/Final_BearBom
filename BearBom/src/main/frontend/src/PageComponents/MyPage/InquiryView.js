@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Table from "../../ModuleComponents/Table";
+import Table from "../../ModuleComponents/Table/Table";
 import { TableMenuItems } from "../../ModuleComponents/TableMenuItems";
 import useFetch from "../../customHooks/useFetch";
 import axios from "axios";
