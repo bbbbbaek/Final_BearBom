@@ -173,15 +173,11 @@ const Course = (props) => {
         courseStCost: courseStCost,
         courseEndCost: courseEndCost,
       },
-    }).then((response) => {
-      console.log(response);
-      setData(response.data.getSearchProducts);
+    }).then((responseSearchData) => {
+      console.log(responseSearchData);
+      window.location.href = "/course/";
     });
   };
-
-  // const onSubmitSearchHandler = async (e) => {
-  //   navigate("/course/search/" + courseSearch);
-  // };
 
   const [timeSlider, setTimeSlider] = useState([0, 1440]);
 
