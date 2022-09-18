@@ -42,4 +42,21 @@ public class CouseSearchController {
 			return errorMap;
 		}
 	}
+
+	@GetMapping("/getCourseList")
+	public Map<String, Object> getCourseList() {
+		try{
+			List<Map<String, Object>> getCourseList = courseService.getCourseList();
+
+			Map<String, Object> resultMap = new HashMap<>();
+
+			resultMap.put("getCourseList",getCourseList);
+
+			return resultMap;
+		} catch (Exception e) {
+			Map<String, Object> errorMap = new HashMap<String, Object>();
+			errorMap.put("error", e.getMessage());
+			return errorMap;
+		}
+	}
 }
