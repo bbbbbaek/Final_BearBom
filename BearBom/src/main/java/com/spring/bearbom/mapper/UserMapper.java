@@ -40,6 +40,8 @@ public interface UserMapper {
 //    @Insert("INSERT INTO T_USER VALUES (USER_ID = #{userId}, USER_NM = #{userNm}, USER_PW=#{userPw}, ROLE=#{role}, USER_ADDRESS = #{userAddress}, USER_NICK_NAME = #{userNickName}, USER_EMAIL = #{userEmail}, USER_POINT = #{userPoint}, USER_PW_FAIL_CNT = #{userPwFailCnt}, USER_TEL= #{userTel}, USER_YN = #{userYn}, USER_ZIPCODE = #{userZipcode})")
     void insertUserKakao(UserDTO userDTO);
     
+
+    
      
     
 }
