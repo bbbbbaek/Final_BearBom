@@ -3,5 +3,34 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
    
 <mapper namespace="com.spring.bearbom.mapper.MainMapper">
+    <select id="getCourseList" resultType="camelHashMap">
+        SELECT A.*
+             , IFNULL(B.RATE, 0) AS RATE
+            FROM T_COURSE A
+            LEFT OUTER JOIN (
+                                SELECT C.COURSE_IDX,
+                                       ROUND(AVG(C.COURSER_RATE), 2) AS RATE
+                                    FROM T_COURSER C
+                                    GROUP BY C.COURSE_IDX
+                            ) B
+            ON A.COURSE_IDX = B.COURSE_IDX
+            WHERE A.COURSE_USE_YN = 'Y'
+            ORDER BY A.COURSE_CNT DESC
+            LIMIT 10
+    </select>
 
+    <select id="getCourseEndDateList" resultType="camelHashMap">
+        SELECT A.*
+              ,IFNULL(B.RATE, 0) AS RATE
+            FROM T_COURSE A
+                 , (
+                        SELECT C.COURSE_IDX
+                               , ROUND(AVG(C.COURSER_RATE), 2) AS RATE
+                        FROM T_COURSER C
+                        GROUP BY C.COURSE_IDX
+                   ) B
+            WHERE COURSE_USE_YN = 'Y'
+            AND DATEDIFF(DATE(NOW()), COURSE_END_DATE) = 1
+            AND A.COURSE_IDX = B.COURSE_IDX
+    </select>
 </mapper>

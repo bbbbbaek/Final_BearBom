@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/dtd/DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="com.spring.bearbom.mapper.CourseMapper">
+    <select id="getLocationCodeList" resultType="camelHashMap">
+        SELECT *
+        	FROM T_CMMN_CODE
+        	WHERE CMMN_CODE_TYPE = 'B'
+    </select>
+    
+    <select id="getCategoryCodeList" resultType="camelHashMap">
+        SELECT *
+        	FROM T_CMMN_CODE
+        	WHERE CMMN_CODE_TYPE = 'A'
+    </select>
+
+    <select id="getCourseList" resultType="camelHashMap">
+        SELECT A.*
+            , IFNULL(B.RATE, 0) AS RATE
+            FROM T_COURSE A
+            LEFT OUTER JOIN (
+                            SELECT C.COURSE_IDX,
+                                ROUND(AVG(C.COURSER_RATE), 2) AS RATE
+                                FROM T_COURSER C
+                                GROUP BY C.COURSE_IDX
+                            ) B
+            ON A.COURSE_IDX = B.COURSE_IDX
+            WHERE A.COURSE_USE_YN = 'Y'
+            ORDER BY B.RATE DESC
+    </select>
+</mapper>

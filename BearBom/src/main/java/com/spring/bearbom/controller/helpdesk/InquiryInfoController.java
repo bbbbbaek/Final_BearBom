@@ -27,7 +27,7 @@ public class InquiryInfoController {
 	
 	//백단으로 보내서 저장시키는것
 	@PostMapping("/insertInquiry")
-	public ResponseEntity<?> insertInquiry(@RequestBody Inquiry inquiry){
+	public ResponseEntity<?> insertInquiry( Inquiry inquiry){
 		System.out.println(inquiry.getInquiryEmail());
 		System.out.println(inquiry.getInquirySort());
 		System.out.println(inquiry.getInquiryTitle());

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -10,7 +10,6 @@ import Slider from "@mui/material/Slider";
 import "../css/course.css";
 import {
   Button,
-  ButtonGroup,
   FormControl,
   InputLabel,
   MenuItem,
@@ -19,18 +18,22 @@ import {
 } from "@mui/material";
 import InputGroup from "react-bootstrap/InputGroup";
 import MiniCard from "./MiniCard";
+import CardSearch from "./CardSearch";
 import "../css/mainpage.css";
 import "../css/mainpage.scss";
 import styled from "styled-components";
 import "react-multi-carousel/lib/styles.css";
 import axios from "axios";
-import { post } from "axios";
 import { API_BASE_URL } from "../app-config";
 import { Link } from "react-router-dom";
 import "../css/btnDeco.scss";
 import "../css/classview.css";
-import classData from "../PageComponents/AdminPage/classData";
-import Pagination from "@mui/material/Pagination";
+
+import classData from "../PageComponents/Admin/classData";
+import Pagination from "../ModuleComponents/Pagination";
+
+// import Pagination from "@mui/material/Pagination";
+// import Pagination from "../ModuleComponents/Pagination";
 
 function valuetext(priceSlider) {
   return `${priceSlider}원`;
@@ -64,8 +67,25 @@ const Course = (props) => {
   const [courseStCost, setCourseStCost] = useState("");
   const [courseEndCost, setCourseEndCost] = useState("");
   const [courseLevelName, setCourseLevelName] = useState("");
+  const [locationCode, setLocationCode] = useState([]);
+  const [categoryCode, setCategoryCode] = useState([]);
 
   const [searchInfo, setSearchInfo] = useState({});
+
+  useEffect(() => {
+    axios({
+      url: "http://localhost:8080/api/course/getCommonCodeList",
+      method: "get",
+    })
+      .then((response) => {
+        console.log(response.data);
+        setLocationCode(response.data.locationCodeList);
+        setCategoryCode(response.data.categoryCodeList);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const addSearchInfo = (e) => {
     const newSearchInfo = {
@@ -183,272 +203,6 @@ const Course = (props) => {
 
   const [course, setCourse] = useState([]);
 
-  const stateText = [
-    {
-      id: "pp-01",
-      title: "Kids-story",
-      artist: "Thomas Buisson",
-      desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
-      thumbnail:
-        "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
-      price: 10,
-      pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
-    },
-    {
-      id: "pp-02",
-      title: "mockyapp",
-      artist: "Ahmed Amr",
-      desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
-      thumbnail:
-        "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/mockyapp.mp4",
-      price: 20,
-      pieUrl: "https://cloud.protopie.io/p/27631ac9d5",
-    },
-    {
-      id: "pp-03",
-      title: "mockyapp",
-      artist: "Ahmed Amr",
-      desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
-      thumbnail:
-        "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/mockyapp.mp4",
-      price: 20,
-      pieUrl: "https://cloud.protopie.io/p/27631ac9d5",
-    },
-    {
-      id: "pp-04",
-      title: "mockyapp",
-      artist: "Ahmed Amr",
-      desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
-      thumbnail:
-        "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/mockyapp.mp4",
-      price: 20,
-      pieUrl: "https://cloud.protopie.io/p/27631ac9d5",
-    },
-    {
-      id: "pp-05",
-      title: "Kids-story",
-      artist: "Thomas Buisson",
-      desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
-      thumbnail:
-        "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
-      price: 10,
-      pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
-    },
-    {
-      id: "pp-06",
-      title: "Kids-story",
-      artist: "Thomas Buisson",
-      desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
-      thumbnail:
-        "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
-      price: 10,
-      pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
-    },
-    {
-      id: "pp-07",
-      title: "Kids-story",
-      artist: "Thomas Buisson",
-      desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
-      thumbnail:
-        "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
-      price: 10,
-      pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
-    },
-    {
-      id: "pp-08",
-      title: "Kids-story",
-      artist: "Thomas Buisson",
-      desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
-      thumbnail:
-        "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
-      price: 10,
-      pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
-    },
-    {
-      id: "pp-09",
-      title: "Kids-story",
-      artist: "Thomas Buisson",
-      desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
-      thumbnail:
-        "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
-      price: 10,
-      pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
-    },
-    {
-      id: "pp-10",
-      title: "Kids-story",
-      artist: "Thomas Buisson",
-      desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
-      thumbnail:
-        "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
-      price: 10,
-      pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
-    },
-    {
-      id: "pp-11",
-      title: "Kids-story",
-      artist: "Thomas Buisson",
-      desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
-      thumbnail:
-        "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
-      price: 10,
-      pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
-    },
-    {
-      id: "pp-12",
-      title: "Kids-story",
-      artist: "Thomas Buisson",
-      desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
-      thumbnail:
-        "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
-      price: 10,
-      pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
-    },
-  ];
-
-  // const stateTextPage = [
-  //   {
-  //     id: "pp-01",
-  //     title: "Kids-story",
-  //     artist: "Thomas Buisson",
-  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
-  //     thumbnail:
-  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
-  //     price: 10,
-  //     pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
-  //   },
-  //   {
-  //     id: "pp-02",
-  //     title: "mockyapp",
-  //     artist: "Ahmed Amr",
-  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
-  //     thumbnail:
-  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/mockyapp.mp4",
-  //     price: 20,
-  //     pieUrl: "https://cloud.protopie.io/p/27631ac9d5",
-  //   },
-  //   {
-  //     id: "pp-03",
-  //     title: "mockyapp",
-  //     artist: "Ahmed Amr",
-  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
-  //     thumbnail:
-  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/mockyapp.mp4",
-  //     price: 20,
-  //     pieUrl: "https://cloud.protopie.io/p/27631ac9d5",
-  //   },
-  //   {
-  //     id: "pp-04",
-  //     title: "mockyapp",
-  //     artist: "Ahmed Amr",
-  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
-  //     thumbnail:
-  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/mockyapp.mp4",
-  //     price: 20,
-  //     pieUrl: "https://cloud.protopie.io/p/27631ac9d5",
-  //   },
-  //   {
-  //     id: "pp-05",
-  //     title: "Kids-story",
-  //     artist: "Thomas Buisson",
-  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
-  //     thumbnail:
-  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
-  //     price: 10,
-  //     pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
-  //   },
-  //   {
-  //     id: "pp-06",
-  //     title: "Kids-story",
-  //     artist: "Thomas Buisson",
-  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
-  //     thumbnail:
-  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
-  //     price: 10,
-  //     pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
-  //   },
-  //   {
-  //     id: "pp-07",
-  //     title: "Kids-story",
-  //     artist: "Thomas Buisson",
-  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
-  //     thumbnail:
-  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
-  //     price: 10,
-  //     pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
-  //   },
-  //   {
-  //     id: "pp-08",
-  //     title: "Kids-story",
-  //     artist: "Thomas Buisson",
-  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
-  //     thumbnail:
-  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
-  //     price: 10,
-  //     pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
-  //   },
-  //   {
-  //     id: "pp-09",
-  //     title: "Kids-story",
-  //     artist: "Thomas Buisson",
-  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
-  //     thumbnail:
-  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
-  //     price: 10,
-  //     pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
-  //   },
-  //   {
-  //     id: "pp-10",
-  //     title: "Kids-story",
-  //     artist: "Thomas Buisson",
-  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
-  //     thumbnail:
-  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
-  //     price: 10,
-  //     pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
-  //   },
-  //   {
-  //     id: "pp-11",
-  //     title: "Kids-story",
-  //     artist: "Thomas Buisson",
-  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
-  //     thumbnail:
-  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
-  //     price: 10,
-  //     pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
-  //   },
-  //   {
-  //     id: "pp-12",
-  //     title: "Kids-story",
-  //     artist: "Thomas Buisson",
-  //     desc: "This prototype was made with ProtoPie, the interactive prototyping tool for all digital produc",
-  //     thumbnail:
-  //       "https://prototype-shop.s3.ap-northeast-2.amazonaws.com/thumbnails/Kids-story_1.mp4",
-  //     price: 10,
-  //     pieUrl: "https://cloud.protopie.io/p/8a6461ad85",
-  //   },
-  // ];
-
-  const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 4,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
-  };
-
   const [index, setIndex] = useState(0);
 
   const handleSelect = (selectedIndex, e) => {
@@ -457,39 +211,13 @@ const Course = (props) => {
 
   let navigate = useNavigate();
 
-  // const [locationSearch, setLocationSearch] = React.useState("");
-
-  // const [courseType, setCourseType] = React.useState([]);
-
   const courseTypeChange = (e) => {
     setCourseType(() => {
       return e.target.value;
     });
   };
 
-  // let dataCategory = ["오프라인", "온라인"];
-
-  // let [courseOnOff, setCourseOnOff] = useState("");
-
-  // const toggleActiveCategory = (e) => {
-  //   setCourseOnOff((prev) => {
-  //     return e.target.value;
-  //   });
-  // };
-
-  // let dataWeek = ["평일", "토요일", "일요일"];
-
-  // let [courseStDate, setCourseStDate] = useState("");
-
-  // const toggleActiveWeek = (e) => {
-  //   setCourseStDate((prev) => {
-  //     return e.target.value;
-  //   });
-  // };
-
   const dataLevel = ["입문", "중급", "고급"];
-
-  // const [courseLevel, setCourseLevel] = useState("");
 
   const toggleActiveLevel = (e) => {
     setCourseLevel((prev) => {
@@ -499,27 +227,50 @@ const Course = (props) => {
     addSearchInfo(e);
   };
 
-  const [data, setData] = useState(stateText);
+  // const [data, setData] = useState(stateText);
+  const [data, setData] = useState([]);
   const [pageData, setPageData] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
 
   useEffect(() => {
-    setPageData(data.slice(0, 12));
+    (async () => {
+      await axios({
+        method: "get",
+        url: API_BASE_URL + "/api/course/getCourseList",
+      }).then((response) => {
+        console.log(response.data);
+        setData(response.data.getCourseList);
+      });
+
+      // setPageData(data.slice(0, 12));
+
+      // if (pageData.length !== 0) {
+      //   console.log(pageData.length);
+      // }
+    })();
   }, []);
 
-  useEffect(() => {
-    if (pageData.length !== 0) {
-      console.log(pageData.length);
-    }
-  }, [pageData]);
-  const pagingFunc = (pageNum) => {
-    setPageData(data.slice(10 * pageNum - 10, 10 * pageNum));
-  };
+  // useEffect(() => {
+  //   setPageData(data.slice(0, 12));
+  // }, []);
+
+  // useEffect(() => {
+  //   if (pageData.length !== 0) {
+  //     console.log(pageData.length);
+  //   }
+  // }, [pageData]);
+
+  // const pagingFunc = (pageNum) => {
+  //   setPageData(data.slice(10 * pageNum - 10, 12 * pageNum));
+  // };
+
+  //Pagination 추가
 
   return (
     <>
+      <br />
       <br />
       <Container>
         <form
@@ -537,6 +288,7 @@ const Course = (props) => {
                       <img
                         className="searchIcon2"
                         src={require("../images/search-icon3.png")}
+                        alt="test"
                       />
                     </InputGroup.Text>
                     <Form.Control
@@ -574,23 +326,12 @@ const Course = (props) => {
                       <MenuItem value="">
                         <em>지역검색</em>
                       </MenuItem>
-                      <MenuItem value={"전체"}>전체</MenuItem>
-                      <MenuItem value={"서울"}>서울</MenuItem>
-                      <MenuItem value={"경기"}>경기</MenuItem>
-                      <MenuItem value={"인천"}>인천</MenuItem>
-                      <MenuItem value={"강원"}>강원</MenuItem>
-                      <MenuItem value={"대구"}>대구</MenuItem>
-                      <MenuItem value={"부산"}>부산</MenuItem>
-                      <MenuItem value={"경상북도"}>경상북도</MenuItem>
-                      <MenuItem value={"경상남도"}>경상남도</MenuItem>
-                      <MenuItem value={"울산"}>울산</MenuItem>
-                      <MenuItem value={"광주"}>광주</MenuItem>
-                      <MenuItem value={"전라북도"}>전라북도</MenuItem>
-                      <MenuItem value={"전라남도"}>전라남도</MenuItem>
-                      <MenuItem value={"세종"}>세종</MenuItem>
-                      <MenuItem value={"제주"}>제주</MenuItem>
-                      <MenuItem value={"충청북도"}>충청북도</MenuItem>
-                      <MenuItem value={"충청남도"}>충청남도</MenuItem>
+                      <MenuItem value={"all"}>전체</MenuItem>
+                      {locationCode.map((code) => (
+                        <MenuItem value={code.cmmnCodeIdx}>
+                          {code.cmmnCodeNm}
+                        </MenuItem>
+                      ))}
                     </Select>
                   </FormControl>
                 </div>
@@ -618,18 +359,12 @@ const Course = (props) => {
                       <MenuItem value="">
                         <em>카테고리검색</em>
                       </MenuItem>
-                      <MenuItem value={"전체"}>전체</MenuItem>
-                      <MenuItem value={"핸드메이드"}>핸드메이드</MenuItem>
-                      <MenuItem value={"쿠킹"}>쿠킹</MenuItem>
-                      <MenuItem value={"플라워·가드닝"}>플라워·가드닝</MenuItem>
-                      <MenuItem value={"드로잉"}>드로잉</MenuItem>
-                      <MenuItem value={"음악"}>음악</MenuItem>
-                      <MenuItem value={"요가·필라테스"}>요가·필라테스</MenuItem>
-                      <MenuItem value={"레져·스포츠"}>레져·스포츠</MenuItem>
-                      <MenuItem value={"뷰티"}>뷰티</MenuItem>
-                      <MenuItem value={"반려동물"}>반려동물</MenuItem>
-                      <MenuItem value={"체험"}>체험</MenuItem>
-                      <MenuItem value={"자기계발"}>자기계발</MenuItem>
+                      <MenuItem value={"all"}>전체</MenuItem>
+                      {categoryCode.map((code) => (
+                        <MenuItem value={code.cmmnCodeIdx}>
+                          {code.cmmnCodeNm}
+                        </MenuItem>
+                      ))}
                     </Select>
                   </FormControl>
                 </div>
@@ -637,65 +372,7 @@ const Course = (props) => {
             </Col>
           </Row>
           <br />
-          {/* <Row>
-            <Col md={1} className="category-font">
-              유형
-            </Col>
-            <Col className="class-category">
-              <ButtonGroup name="btnGroup1">
-                <div className="container">
-                  {dataCategory.map((item, idx) => {
-                    return (
-                      <>
-                        <button
-                          value={idx}
-                          className={
-                            "btn" + (idx == courseOnOff ? " active" : "")
-                          }
-                          onClick={toggleActiveCategory}
-                          id="btnDeco"
-                          name="courseOnOff"
-                          // onChange={handleValueChange}
-                        >
-                          {item}
-                        </button>
-                      </>
-                    );
-                  })}
-                </div>
-              </ButtonGroup>
-            </Col>
-          </Row> */}
-          <br />
           <Row>
-            {/* <Col md={1} className="category-font">
-              요일
-            </Col>
-            <Col md={4} className="class-week">
-              <ButtonGroup name="btnGroup2">
-                <div className="container">
-                  {dataWeek.map((item, idx) => {
-                    return (
-                      <>
-                        <button
-                          value={idx}
-                          className={
-                            "btn" + (idx == courseStDate ? " active" : "")
-                          }
-                          onClick={toggleActiveWeek}
-                          id="btnDeco"
-                          name="courseStDate"
-                          // onChange={handleValueChange}
-                        >
-                          {item}
-                        </button>
-                      </>
-                    );
-                  })}
-                </div>
-              </ButtonGroup>
-            </Col> */}
-
             <Col md={1} className="category-font">
               난이도
             </Col>
@@ -839,7 +516,6 @@ const Course = (props) => {
                 variant="secondary"
                 size="lg"
                 id="searchBtn"
-                // onSubmit={onSubmitSearchHandler}
                 // onClick={}
               >
                 검색하기
@@ -858,45 +534,6 @@ const Course = (props) => {
       </Container>
       <br />
       <main id="wrapper" className="main-contents">
-        <div className="list-box h-2-box-panel main-wrapper-child-1">
-          <div>
-            <h1>
-              베어봄에서
-              <br />
-              당신의 취미를 찾아보세요
-            </h1>
-            <div class="appstore-btn-list-area"></div>
-          </div>
-          <div>
-            <h1>
-              솜씨를 뽐내주실 작가님,
-              <br />
-              여기 계시네요!
-            </h1>
-            <div class="class-open-page-move-area">
-              {/* class="btn class-open-page-move-btn" */}
-              <Button
-                className="class-open-page-move-btn"
-                variant="light"
-                // onClickClassRegist={onClickClassRegist}
-              >
-                <Link
-                  style={{ textDecoration: "none", color: "#ff5862" }}
-                  to="/course/registration"
-                >
-                  클래스 오픈하기
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-        <hr
-          style={{
-            width: "100%",
-            alignSelf: "center",
-            height: "1px",
-          }}
-        />
         <div className="list-box favorite-class-area">
           <div className="list-header">
             <h2>클래스 검색해서 베어봄!</h2>
@@ -908,26 +545,33 @@ const Course = (props) => {
               height: "1px",
             }}
           />
+          <label>
+            페이지 당 표시할 게시물 수:&nbsp;
+            <select
+              type="number"
+              value={limit}
+              onChange={({ target: { value } }) => setLimit(Number(value))}
+            >
+              <option value="10">10</option>
+              <option value="12">12</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+            </select>
+          </label>
           <div className="searchContent">
-            {pageData.map((minidata) => (
-              <MiniCard
-                id={minidata.id}
-                thumbnail={minidata.thumbnail}
-                title={minidata.title}
-                condition={true}
-              />
+            {data.slice(offset, offset + limit).map((data, i) => (
+              <div key={i}>
+                <CardSearch data={data} />
+              </div>
             ))}
           </div>
           <Stack spacing={2}>
             <Pagination
-              boundaryCount={10}
-              count={10}
-              color="primary"
-              showFirstButton={true}
-              showLastButton={true}
-              onChange={(e) => {
-                pagingFunc(e.target.textContent);
-              }}
+              total={data.length}
+              limit={limit}
+              page={page}
+              setPage={setPage}
             />
           </Stack>
         </div>
@@ -937,5 +581,3 @@ const Course = (props) => {
 };
 
 export default Course;
-
-const CarouselContainer = styled.div``;

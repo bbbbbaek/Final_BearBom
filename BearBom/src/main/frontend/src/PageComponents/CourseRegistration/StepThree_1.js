@@ -6,8 +6,11 @@ import {
   Select,
 } from "@mui/material";
 import React, { useEffect, useMemo, useState } from "react";
+import 'react-date-range/dist/styles.css'; // 캘린더 main style file
+import 'react-date-range/dist/theme/default.css'; // 캘린더 theme css file
 import "../../css/courseRegistration.css";
 import CourseStore from "./CourseStore";
+import RegClassCalendar from "./RegistrationComponents/RegClassCalendar";
 
 const range = (start, stop, step) => {
   let a = [start],
@@ -20,8 +23,8 @@ const range = (start, stop, step) => {
 
 const StepThree_1 = ({saveFormData}) => {
   //const { min } = CourseStore();
-  const [min, setMin] = useState();
-  const [max, setMax] = useState();
+  const [min, setMin] = useState(0);
+  const [max, setMax] = useState(0);
   const [formObj, setFormObj] = useState({});
 
   useEffect(() => {
@@ -29,11 +32,19 @@ const StepThree_1 = ({saveFormData}) => {
  }, [formObj]);
 
  useEffect(() => {
+  if(max<min&&!(max==0)){
+    window.alert("최소 인원은 최대 인원보다 클 수 없습니다.")
+  }else{
   setFormObj({...formObj, "courseMin": min})
+  }
  }, [min]);
 
  useEffect(() => {
+  if(max<min){
+    window.alert("최대 인원은 최소 인원보다 적을 수 없습니다.")
+  }else{
   setFormObj({...formObj, "courseMax": max})
+  }
  }, [max]);
 
   const handleMinPeople = (event) => {
@@ -67,7 +78,7 @@ const StepThree_1 = ({saveFormData}) => {
                 <div className="datailLabel">
                   <p>클래스 일정</p>
                 </div>
-                <div>여기에 캘린더 추가</div>
+                <div><RegClassCalendar saveFormData={saveFormData}/></div>
                 <p className="inputWar">*일정 지정 시 유의사항 적는곳.</p>
               </div>
               <div className="numCheck">
@@ -129,7 +140,7 @@ const StepThree_1 = ({saveFormData}) => {
                     </Select>
                   </FormControl>
                 </div>
-                <p className="inputWar">*인원 지정 시 유의사항 적는곳.</p>
+                <p className="inputWar">*최대 인원은 최소 인원 수 보다 많아야 합니다.</p>
               </div>
             </div>
           </div>

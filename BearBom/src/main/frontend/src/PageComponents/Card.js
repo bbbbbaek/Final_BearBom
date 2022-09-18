@@ -7,11 +7,21 @@ import LikeButton from "../ModuleComponents/LikeButton";
 import "../css/card.scss";
 import { API_BASE_URL } from "../app-config";
 import axios from "axios";
+
 const Card = ({ course }) => {
   const navigate = useNavigate();
   const [like, setLike] = useState(false);
   const [dataa, setDataa] = useState();
+  const courseCost = course.courseCost;
+  const courseCostChange = courseCost
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
+  const [testt, setTestt] = useState("");
+  const [flag, setFlag] = useState(false);
+  // console.log(typeof course.rate);
+
+  // console.log("ttttt", course);
   useEffect((e) => {
     const fetchData = async () => {
       // const res = await axios.get(`${API_BASE_URL}/api/like/getLikeList`);
@@ -44,7 +54,18 @@ const Card = ({ course }) => {
           console.log(error);
         });
     };
+    const test = (e) => {
+      if (course.rate === 0) {
+        setTestt("신규");
+        setFlag(false);
+      } else {
+        setTestt("평점 " + course.rate);
+
+        setFlag(true);
+      }
+    };
     fetchData();
+    test();
   }, []);
 
   const toggleLike = async (e) => {
@@ -86,14 +107,21 @@ const Card = ({ course }) => {
     <>
       <CardWrapper>
         {course.courseIdx}
-        <Link to={`/saw/${course.courseIdx}`} state={{ courseInfo: course }}>
+        <Link to={`/course/${course.courseIdx}`} state={{ courseInfo: course }}>
           <ImgContainer>
-            <div className="tag">95% 만족</div>
+            {/* <div className="tag">{course.rate}</div> */}
+            <div className="tag">
+              <div className={`message ${flag ? "success" : "error"}`}>
+                {testt}
+              </div>
+            </div>
+
+            {/* <div className="tag">{averageRating} 평점</div> */}
 
             <img
               className="img_test"
               src={`http://localhost:8080/upload/${course.courseThumbnailNm}`}
-              // style={{ width: "250px", height: "250px" }}
+              style={{ width: "250px", height: "250px" }}
               alt="test"
             ></img>
           </ImgContainer>
@@ -112,7 +140,7 @@ const Card = ({ course }) => {
           {/* 이쪽은 있을수도있고 없을수도있고 조건 처리 */}
           {/* {condition ? "true면 보임" : "false면 안보임"} */}
           {/* </div> */}
-          <div className="last_row">{course.courseCost}</div>
+          <div className="last_row">{courseCostChange}원</div>
         </TextContainer>
       </CardWrapper>
     </>
@@ -129,6 +157,7 @@ const TextContainer = styled.div`
   .first_row {
     font-weight: 600;
     font-size: 15px;
+    width: 250px;
   }
   .second_row {
     font-size: 13px;
@@ -152,7 +181,18 @@ const CardWrapper = styled.div`
   height: 100%;
   margin: 0 auto;
 `;
-
+// .tag {
+//   position: absolute;
+//   top: 5%;
+//   left: 5%;
+//   background-color: #6a82ec;
+//   border: 0.3px solid #6a82ec;
+//   padding: 3px 6px;
+//   color: white;
+//   border-radius: 7px;
+//   font-size: 10px;
+//   font-weight: 600;
+// }
 const ImgContainer = styled.div`
   position: relative;
   width: 85%;
@@ -168,15 +208,9 @@ const ImgContainer = styled.div`
     position: absolute;
     top: 5%;
     left: 5%;
-    background-color: #6a82ec;
-    border: 0.3px solid #6a82ec;
-    padding: 3px 6px;
+    padding: 3px 3px;
     color: white;
-    border-radius: 7px;
-    font-size: 10px;
-    font-weight: 600;
   }
-
   .place {
     position: absolute;
     bottom: 5%;
