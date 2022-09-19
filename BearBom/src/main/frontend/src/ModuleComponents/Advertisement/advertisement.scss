@@ -1,4 +1,4 @@
-.ads-wrapper {
+.advertisement {
   margin: 5%;
   width: 90%;
   min-height: 5rem;
@@ -11,14 +11,11 @@
   background-position-x: center;
   background-position-y: center;
   overflow: hidden;
-}
 
-.ads-pic {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-.ads-pic:hover {
-  cursor: pointer;
+  .picture {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    cursor: pointer;
+  }
 }

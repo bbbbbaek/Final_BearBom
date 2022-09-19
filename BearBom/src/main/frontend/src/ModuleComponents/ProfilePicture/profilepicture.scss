@@ -1,0 +1,51 @@
+.profilePicture {
+  width: 8rem;
+  height: 8rem;
+
+  .wrapper1 {
+    width: 8rem;
+    height: 8rem;
+    position: absolute;
+
+    .picture {
+      width: 8rem;
+      height: 8rem;
+      border-radius: 50%;
+      border: 1px solid #e1e2e3;
+      background-color: #e1e2e3;
+      outline: none;
+      appearance: none;
+      overflow: hidden;
+      background-size: 100% cover;
+      background-position-x: center;
+      background-position-y: center;
+      background-repeat: no-repeat;
+      position: relative;
+    }
+
+    #secretInput {
+      display: none;
+      position: relative;
+
+      ::file-selector-button {
+        display: none;
+      }
+    }
+
+    #label {
+      border-radius: 50%;
+      width: 3rem;
+      height: 3rem;
+      background-color: white;
+      background-image: url("https://media.istockphoto.com/vectors/camera-icon-vector-id1175387759?k=20&m=1175387759&s=170667a&w=0&h=_yh0Pa5U8zGIn6YHTkm6lv50VCWMSUDosBLgW8bLK08=");
+      border: 1px solid #e1e2e3;
+      background-size: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 1;
+      top: -3rem;
+      left: 5rem;
+      position: relative;
+    }
+  }
+}

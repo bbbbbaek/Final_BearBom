@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "../css/lecturerinfomodification.css";
-import adminProfileImage from "../images/adminProfileImage.png";
+import "./texteditor.scss";
+import adminProfileImage from "../../images/adminProfileImage.png";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import parse from "html-react-parser";

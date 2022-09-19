@@ -1,19 +1,19 @@
 import React from "react";
-import "../css/advertisement.css";
-import logo from "../images/logo.png";
-import onepic from "../images/onepic.jpg";
+import "./advertisement.scss";
+import logo from "../../images/logo.png";
+import onepic from "../../images/onepic.jpg";
 
 const Advertisement = () => {
   return (
     <>
       <div
-        className="ads-wrapper"
+        className="advertisement"
         // style={{ backgroundImage: `url(${onepic})` }}
       >
         <img
           src={onepic}
           alt="pic"
-          className="ads-pic"
+          className="picture"
           onClick={() => {
             console.log("link to ads page");
           }}

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./openedclassview.scss";
 import Table from "../../../ModuleComponents/Table/Table";
 
 const OpenedClassView = () => {
@@ -6,7 +7,13 @@ const OpenedClassView = () => {
 
   return (
     <>
-      <Table tableItems={tableItems} />
+      <div className="openedclassview">
+        <h5>
+          <strong>개설 클래스 조회</strong>
+        </h5>
+        <hr />
+        <Table tableItems={tableItems} />
+      </div>
     </>
   );
 };

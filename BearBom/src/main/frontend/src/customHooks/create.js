@@ -12,3 +12,11 @@ export const createItems = (
 export const createData = (data1, data2, data3, data4, data5, data6, data7) => {
   return { data1, data2, data3, data4, data5, data6, data7 };
 };
+
+export class Data {
+  constructor(title, prop, cell) {
+    this.title = title;
+    this.prop = prop;
+    this.cell = cell;
+  }
+}

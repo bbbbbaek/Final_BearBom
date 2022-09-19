@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import "../css/profilepicture.css";
-import adminProfileImage from "../images/adminProfileImage.png";
-import cameraButton from "../images/cameraButton.png";
+import "./profilepicture.scss";
+import adminProfileImage from "../../images/adminProfileImage.png";
 
 const ProfilePicture = () => {
   const [fileImage, setFileImage] = useState(adminProfileImage);
@@ -11,20 +10,20 @@ const ProfilePicture = () => {
   };
   return (
     <>
-      <div className="pp-main">
-        <div className="pp-wrapper">
+      <div className="profilePicture">
+        <div className="wrapper1">
           <div
-            className="pp-div"
+            className="picture"
             style={{ backgroundImage: `url(${fileImage})` }}
           ></div>
+
           <input
             accept="image/*"
-            className="pp-input"
-            id="pp-input"
+            id="secretInput"
             type="file"
             onChange={saveFileImage}
           />
-          <label htmlFor="pp-input" id="pp-label" />
+          <label htmlFor="secretInput" id="label" />
         </div>
       </div>
     </>

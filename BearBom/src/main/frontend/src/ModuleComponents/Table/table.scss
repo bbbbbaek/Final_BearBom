@@ -1,68 +1,88 @@
-.sales-filter-wrapper {
-  width: 100%;
-  height: 3rem;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  /* padding-right: 5rem; */
-  /* background-color: aqua; */
-}
+@import "../../variables";
 
-.sales-filter-wrapper input,
-select {
-  height: 2rem;
-  border: none;
-  border-bottom: 2px solid #7697a0;
-  background-color: #f5f5f5;
-  outline: none;
-}
-.sales-filter-wrapper input {
-  width: 15rem;
-}
-.sales-filter-wrapper select {
-  width: 5rem;
-}
-
-.sales-table-wrapper {
-  margin-left: 5%;
-  margin-right: 5%;
+.table_home {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-}
+  gap: 1.5rem;
 
-.salesTable {
-}
+  .top1 {
+    // background-color: aqua;
+    width: 100%;
+    height: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 1rem;
+    gap: 1rem;
 
-.salesTable-title {
-  font-weight: 700;
-}
+    .search {
+      border: 1px solid #7697a0;
+      height: 1.8rem;
+      display: flex;
+      flex-direction: row;
 
-.salesTd {
-  text-align: right;
-  height: 40px;
-  max-height: 2rem;
-  border-bottom: 1px solid lightgray;
-}
+      select,
+      input {
+        height: 100%;
+        border: none;
+        background-color: #fff;
+        outline: none;
+      }
 
-.veryShort {
-  min-width: 5%;
-}
-.short {
-  width: 10%;
-}
+      button {
+        line-height: 100%;
+        color: #fff;
+        font-weight: 600;
+        width: 4rem;
+        background-color: #7697a0;
+        border: 1px solid #7697a0;
+      }
+    }
+  }
 
-.medium {
-  min-width: 15%;
-}
+  .center {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
-.long {
-  max-width: 30%;
-  min-width: 100px;
-}
+    .row1 {
+      height: 2rem;
+      max-height: 5rem;
+      border-bottom: 1px solid lightgray;
+    }
 
-.pagination-wrapper {
-  margin-top: 2rem;
-  display: flex;
-  justify-content: center;
+    .row2 {
+      height: 3rem;
+      max-height: 5rem;
+      border-bottom: 1px solid lightgray;
+
+      &.hasImg {
+        height: 4rem;
+      }
+    }
+
+    .column {
+      padding-left: 10px;
+    }
+
+    .title {
+      font-weight: 600;
+      background-color: #e1e2e3;
+    }
+
+    .short {
+      flex: 1;
+    }
+
+    .long {
+      flex: 2;
+    }
+  }
+
+  .bottom {
+    @include flexCenter(row);
+    height: 2rem;
+  }
 }

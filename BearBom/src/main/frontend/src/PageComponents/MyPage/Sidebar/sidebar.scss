@@ -1,0 +1,93 @@
+@import "../../../variables";
+
+.mypage_sidebar {
+  flex: 2;
+  // border: 1px solid #e1e2e3;
+  min-height: 80vh;
+  // -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+  // box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+  box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
+
+  .mypageTitle {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #888;
+    // text-align: center;
+    margin: 0.5rem 0.5rem 0.5rem 1rem;
+  }
+
+  .top {
+    background-color: #edeae7;
+    margin: 10px;
+    padding: 2rem 0rem;
+    border: 1px solid #e1e2e3;
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+    // box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+    box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
+
+    .name {
+      margin: 1rem 0rem;
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+  }
+
+  hr {
+    margin: 0.5rem 0rem;
+    height: 0;
+    border: 1px solid #e1e2e3;
+  }
+
+  .center {
+    margin-left: 2rem;
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      .title {
+        font-size: 1rem;
+        font-weight: bold;
+        margin-top: 15px;
+        margin-bottom: 5px;
+      }
+
+      li {
+        display: flex;
+        align-items: center;
+        padding: 5px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #c2c8c5;
+
+          span {
+            color: #fff;
+          }
+        }
+
+        .icon {
+          font-size: 1.2rem;
+          color: #7697a0;
+          margin-right: 0.5rem;
+        }
+
+        span {
+          font-size: 1rem;
+          font-weight: 600;
+          color: #888;
+        }
+      }
+    }
+  }
+
+  .bottom {
+    @include flexCenter(row);
+  }
+}

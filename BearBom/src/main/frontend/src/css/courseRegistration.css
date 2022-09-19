@@ -1,6 +1,6 @@
- div {
-    /*border: 1px solid;*/
-} 
+div {
+  /*border: 1px solid;*/
+}
 
 .middle {
   display: flex;
@@ -9,7 +9,7 @@
   margin-left: 15px;
 }
 
-.fullline{
+.fullline {
   width: 100%;
   border-top: 2px solid #dbd7d3;
 }
@@ -39,7 +39,7 @@
   margin-right: 2%;
 }
 
-.inputBox{
+.inputBox {
   width: 100%;
   height: 40px;
   border-radius: 5px;
@@ -48,25 +48,25 @@
   margin-right: 2%;
 }
 
-.addclass{
+.addclass {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-bottom: 1px solid #cec3a7 ;
+  border-bottom: 1px solid #cec3a7;
 }
 
-.top{
+.top {
   display: flex;
   flex-direction: column;
   width: 100%;
   max-width: 1200px;
 }
 
-.step0{
+.step0 {
   margin-top: 25px;
 }
 
-.step{
+.step {
   font-weight: 700;
   font-size: 14px;
   margin-bottom: 12px;
@@ -79,7 +79,7 @@
   text-indent: 7px;
 }
 
-.contentName{
+.contentName {
   margin-top: 30px;
   width: 100%;
   display: flex;
@@ -93,7 +93,7 @@
   line-height: 1.5;
 }
 
-.contentWrap{
+.contentWrap {
   width: 100%;
   height: 100%;
   display: flex;
@@ -103,21 +103,21 @@
   flex-direction: column;
 }
 
-#button{
+#button {
   margin: 3px 5px;
 }
 
-.detailName{
-  color: #1F283D;
+.detailName {
+  color: #1f283d;
   font-size: 18px;
   font-weight: 700;
 }
 
-.contentDetail{
+.contentDetail {
   margin-bottom: 20px;
 }
 
-.nameUnderbar{
+.nameUnderbar {
   left: 0;
   width: 100%;
   bottom: 10px;
@@ -128,7 +128,7 @@
   background-color: #494853;
 }
 
-.detailEx{
+.detailEx {
   width: 100%;
   position: relative;
   max-width: 600px;
@@ -137,21 +137,17 @@
   background-color: #f0f0f0;
 }
 
-.nameWrap{
+.nameWrap {
   display: flex;
   align-items: center;
   flex-direction: row;
 }
 
-h5{
-  display: block;
-}
-
-.datilNameInfo{
+.datilNameInfo {
   padding: 10px 0px 10px 20px;
 }
 
-.detailLabel{
+.detailLabel {
   display: flex;
   position: relative;
   align-items: center;
@@ -159,24 +155,17 @@ h5{
   flex-direction: row;
 }
 
-.numCheck{
+.numCheck {
   margin-top: 30px;
   margin-left: 20px;
 }
 
-.detail{
+.detail {
   padding-top: 30px;
 }
 
-p{
-  margin-bottom: 0;
-  color: #494853;
-  font-size: 1rem;
-  font-weight: 500;
-}
-
-.inputWar{
-  color: #8F939E;
+.inputWar {
+  color: #8f939e;
   display: flex;
   font-size: 14px;
   font-weight: 400px;
@@ -184,7 +173,7 @@ p{
   margin-top: 10px;
 }
 
-.inputButtonWrap{
+.inputButtonWrap {
   display: flex;
   margin-top: 10px;
   flex-direction: row;
@@ -192,7 +181,7 @@ p{
   max-width: 550px;
 }
 
-.inputWrap{
+.inputWrap {
   box-sizing: border-box;
   position: relative;
   display: inline-flex;
@@ -200,18 +189,14 @@ p{
   width: 100%;
 }
 
-.subTitle{
+.subTitle {
   display: flex;
   align-items: center;
   flex-direction: row;
   margin-top: 15px;
 }
 
-h4{
-  margin: 0;
-}
-
-.selectButtonBox{
+.selectButtonBox {
   display: flex;
   margin-top: 40px;
   align-items: center;
@@ -219,16 +204,15 @@ h4{
   margin-left: 20px;
 }
 
-.selectBox{
+.selectBox {
   display: flex;
   margin-top: 20px;
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
-  
 }
 
-.minMaxBox{
+.minMaxBox {
   display: flex;
   margin-top: 20px;
   align-items: center;
@@ -237,17 +221,17 @@ h4{
   max-width: 400px;
 }
 
-.rightBtn{
+.rightBtn {
   margin-left: 30px;
 }
 
-.midRight{
+.midRight {
   height: 100%;
   margin-bottom: 20px;
   min-width: 75%;
 }
 
-.midStepBtn{
+.midStepBtn {
   width: 100%;
   height: 100%;
   display: flex;
@@ -266,7 +250,7 @@ h4{
   justify-content: flex-end;
 }
 
-.imgPrev{
+.imgPrev {
   width: 580px;
   height: 400px;
   position: relative;
@@ -278,22 +262,22 @@ h4{
   justify-content: center;
 }
 
-.imgBox img{
+.imgBox img {
   width: 100%;
   vertical-align: middle;
 }
 
-.imgDel{
+.imgDel {
   position: absolute;
   top: 5%;
   left: 90%;
   width: 100%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   font-size: 15px;
   text-align: center;
 }
 
-.imgAdd{
+.imgAdd {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -301,14 +285,14 @@ h4{
   position: relative;
   height: 100%;
   min-height: 400px;
-} 
+}
 
-.inputHfix{
+.inputHfix {
   min-height: 400px;
   height: 100%;
 }
 
-.difSelect{
+.difSelect {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -316,7 +300,7 @@ h4{
   max-width: 450px;
 }
 
-.runtimeInput{
+.runtimeInput {
   min-height: 48px;
   width: 100%;
   max-width: 360px;
@@ -325,12 +309,12 @@ h4{
   padding-left: 10px;
 }
 
-.runtimeInput:focus{
+.runtimeInput:focus {
   border-color: #675d58;
   outline: none;
 }
 
-.culi{
+.culi {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -338,7 +322,7 @@ h4{
   max-width: 600px;
 }
 
-.culiInput{
+.culiInput {
   min-height: 200px;
   width: 100%;
   max-width: 490px;
@@ -347,12 +331,12 @@ h4{
   padding-left: 10px;
 }
 
-.culiInput:focus{
+.culiInput:focus {
   border-color: #675d58;
   outline: none;
 }
 
-.lec{
+.lec {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -360,7 +344,7 @@ h4{
   max-width: 600px;
 }
 
-.lecInput{
+.lecInput {
   min-height: 200px;
   width: 100%;
   max-width: 600px;
@@ -369,46 +353,45 @@ h4{
   padding-left: 10px;
 }
 
-#wrap{
-  display:none;
-  border:1px solid;
-  width:500px;
-  height:300px;
-  margin:5px 0;
-  position:relative
+#wrap {
+  display: none;
+  border: 1px solid;
+  width: 500px;
+  height: 300px;
+  margin: 5px 0;
+  position: relative;
 }
 
-#btnFoldWrap{
-  cursor:pointer;
-  position:absolute;
-  right:0px;
-  top:-1px;
-  z-index:1
+#btnFoldWrap {
+  cursor: pointer;
+  position: absolute;
+  right: 0px;
+  top: -1px;
+  z-index: 1;
 }
 
-.addressWrap{
-  display:none;
-  border:1px solid;
-  width:500px;
-  height:300px;
-  margin:5px 0;
-  position:relative
+.addressWrap {
+  display: none;
+  border: 1px solid;
+  width: 500px;
+  height: 300px;
+  margin: 5px 0;
+  position: relative;
 }
 
-
-#btnFoldWrap{
-  cursor:pointer;
-  position:absolute;
-  right:0px;
-  top:-1px;
-  z-index:1
+#btnFoldWrap {
+  cursor: pointer;
+  position: absolute;
+  right: 0px;
+  top: -1px;
+  z-index: 1;
 }
 
-.midContent{
+.midContent {
   min-height: 700px;
 }
 
-.stepBtnBox{
+.stepBtnBox {
   margin-top: 10px;
   margin-right: 50px;
   display: flex;
@@ -417,9 +400,9 @@ h4{
   justify-content: flex-end;
 }
 
-.rdrMonthAndYearPickers select{
+.rdrMonthAndYearPickers select {
   -moz-appearance: none;
-       appearance: none;
+  appearance: none;
   -webkit-appearance: none;
   border: 0;
   background: transparent;
@@ -427,20 +410,21 @@ h4{
   border-radius: 4px;
   outline: 0;
   color: #3e484f;
-  background: url("data:image/svg+xml;utf8,<svg width='9px' height='6px' viewBox='0 0 9 6' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><g id='Artboard' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' transform='translate(-636.000000, -171.000000)' fill-opacity='0.368716033'><g id='input' transform='translate(172.000000, 37.000000)' fill='%230E242F' fill-rule='nonzero'><g id='Group-9' transform='translate(323.000000, 127.000000)'><path d='M142.280245,7.23952813 C141.987305,6.92353472 141.512432,6.92361662 141.219585,7.23971106 C140.926739,7.5558055 140.926815,8.06821394 141.219755,8.38420735 L145.498801,13 L149.780245,8.38162071 C150.073185,8.0656273 150.073261,7.55321886 149.780415,7.23712442 C149.487568,6.92102998 149.012695,6.92094808 148.719755,7.23694149 L145.498801,10.7113732 L142.280245,7.23952813 Z' id='arrow'></path></g></g></g></svg>") no-repeat;
+  background: url("data:image/svg+xml;utf8,<svg width='9px' height='6px' viewBox='0 0 9 6' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><g id='Artboard' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' transform='translate(-636.000000, -171.000000)' fill-opacity='0.368716033'><g id='input' transform='translate(172.000000, 37.000000)' fill='%230E242F' fill-rule='nonzero'><g id='Group-9' transform='translate(323.000000, 127.000000)'><path d='M142.280245,7.23952813 C141.987305,6.92353472 141.512432,6.92361662 141.219585,7.23971106 C140.926739,7.5558055 140.926815,8.06821394 141.219755,8.38420735 L145.498801,13 L149.780245,8.38162071 C150.073185,8.0656273 150.073261,7.55321886 149.780415,7.23712442 C149.487568,6.92102998 149.012695,6.92094808 148.719755,7.23694149 L145.498801,10.7113732 L142.280245,7.23952813 Z' id='arrow'></path></g></g></g></svg>")
+    no-repeat;
   background-position: right 8px center;
   cursor: pointer;
   text-align: center;
 }
 
-.rdrMonthAndYearPickers select:hover{
-    background-color: rgba(0,0,0,0.07);
-  }
+.rdrMonthAndYearPickers select:hover {
+  background-color: rgba(0, 0, 0, 0.07);
+}
 
-.rdrDateDisplayWrapper{
+.rdrDateDisplayWrapper {
   display: none;
 }
 
-.regCalender{
+.regCalender {
   margin: 20px 130px;
 }

@@ -39,7 +39,7 @@ const Inquiry = () => {
           <strong>1:1문의</strong>
         </h5>
         <hr />
-        <div className="body">
+        <div className="body1">
           {/* <form action="/action_page.php" method="post"> */}
           <label for="email">이메일</label>
           <input

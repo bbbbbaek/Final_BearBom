@@ -2,49 +2,61 @@ import React, { useState } from "react";
 import "./mypage.scss";
 import OpenedClassView from "../Menu/OpenedClassView";
 import QuickView from "../Quickview/QuickView";
-import SideBar from "../Sidebar/SideBar";
+import Sidebar from "../Sidebar/Sidebar";
 import TakenClassView from "../Menu/TakenClassView";
 import InquiryView from "../Menu/InquiryView";
 import WishlistView from "../Menu/WishlistView";
 import UserInfoModification from "../Menu/UserInfoModification";
 import LecturerInfoModification from "../Menu/LecturerInfoModification";
-import UserProfilePicture from "../UserProfilePicture";
-import InquiryWrite from "../Menu/InquiryWrite";
+import { useSelector } from "react-redux";
+import Inquiry from "../../Helpdesk/Inquiry/Inquiry";
+import RecentTransaction from "../Menu/RecentTransaction";
 
 const Mypage = () => {
-  const [tab, setTab] = useState(0);
+  let state = useSelector((state) => state.tab);
+  console.log(state);
 
   return (
     <>
-      <div className="mypage">
-        <div className="mypage-banner">mypage</div>
-        <div style={{ paddingLeft: "15%", paddingRight: "15%" }}>
-          <div className="mypage-container">
-            <div className="mypage-sidebar-wrapper">
-              <UserProfilePicture />
-              <hr />
-              <SideBar setTab={setTab} />
+      <div className="mypage_home">
+        <div className="banner"></div>
+        <div className="body">
+          <Sidebar />
+          <div className="wrapper">
+            <div className="quickview">
+              <QuickView type="taking" />
+              <QuickView type="taken" />
+              <QuickView type="molla" />
+              <QuickView type="liked" />
             </div>
-            <div className="mypage-content-wrapper">
-              <div className="mypage-quickview-wrapper">
-                <QuickView />
-              </div>
-              <div className={"mypage-content"}>
-                {
-                  [
-                    <TakenClassView />,
-                    <OpenedClassView />,
-                    <UserInfoModification />,
-                    <LecturerInfoModification />,
-                    <InquiryView />,
-                    <InquiryWrite />,
-                    <WishlistView />,
-                  ][tab]
-                }
-              </div>
+            <div className="content">
+              {
+                [
+                  <RecentTransaction />,
+                  <TakenClassView />,
+                  <OpenedClassView />,
+                  <UserInfoModification />,
+                  <LecturerInfoModification />,
+                  <InquiryView />,
+                  <Inquiry />,
+                  <WishlistView />,
+                ][state]
+              }
             </div>
           </div>
         </div>
+        {/* <div className={"mypage-content"}>
+            {
+              [
+                <TakenClassView />,
+                <OpenedClassView />,
+                <UserInfoModification />,
+                <LecturerInfoModification />,
+                <InquiryView />,
+                <InquiryWrite />,
+                <WishlistView />,
+              ][tab]
+            } */}
       </div>
     </>
   );
