@@ -40,62 +40,64 @@ const FAQ = ({ data }) => {
 
   return (
     <>
-      <h5>
-        <strong>자주 묻는 질문</strong>
-      </h5>
-      <hr />
-      <div className="helpdesk_faq">
-        {faq.map((a, i) => {
-          return (
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-              >
-                <Typography
-                  style={{ fontWeight: "bold" }}
-                  name="guideTitle"
-                  value={guideTitle}
+      <div className="faq">
+        <h5>
+          <strong>자주 묻는 질문</strong>
+        </h5>
+        <hr />
+        <div className="helpdesk_faq">
+          {faq.map((a, i) => {
+            return (
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
                 >
-                  {faq[i].guideTitle}
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography name="guideContent" value={guideContent}>
-                  {faq[i].guideContent}
-                </Typography>
-                {faq[i].guideTitle.includes("환불") ? (
-                  <>
-                    <p>2. 날짜 별 취소 및 환불 정책</p>
-                    <table className="table1">
-                      <tr className="tr1">
-                        <td className="td1">클래스 4일 이전 취소</td>
-                        <td className="td2">100% 환불</td>
-                      </tr>
-                      <tr className="tr1">
-                        <td className="td1">클래스 3일 전 취소</td>
-                        <td className="td2">70% 환불</td>
-                      </tr>
-                      <tr className="tr1">
-                        <td className="td1">클래스 2일 전 취소</td>
-                        <td className="td2">50% 환불</td>
-                      </tr>
-                      <tr className="tr1">
-                        <td className="td1">클래스 하루 전 또는 당일 취소</td>
-                        <td className="td2" style={{ color: "orange" }}>
-                          환불 불가
-                        </td>
-                      </tr>
-                    </table>
-                  </>
-                ) : (
-                  ""
-                )}
-              </AccordionDetails>
-            </Accordion>
-          );
-        })}
+                  <Typography
+                    style={{ fontWeight: "bold" }}
+                    name="guideTitle"
+                    value={guideTitle}
+                  >
+                    {faq[i].guideTitle}
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography name="guideContent" value={guideContent}>
+                    {faq[i].guideContent}
+                  </Typography>
+                  {faq[i].guideTitle.includes("환불") ? (
+                    <>
+                      <p>2. 날짜 별 취소 및 환불 정책</p>
+                      <table className="table1">
+                        <tr className="tr1">
+                          <td className="td1">클래스 4일 이전 취소</td>
+                          <td className="td2">100% 환불</td>
+                        </tr>
+                        <tr className="tr1">
+                          <td className="td1">클래스 3일 전 취소</td>
+                          <td className="td2">70% 환불</td>
+                        </tr>
+                        <tr className="tr1">
+                          <td className="td1">클래스 2일 전 취소</td>
+                          <td className="td2">50% 환불</td>
+                        </tr>
+                        <tr className="tr1">
+                          <td className="td1">클래스 하루 전 또는 당일 취소</td>
+                          <td className="td2" style={{ color: "orange" }}>
+                            환불 불가
+                          </td>
+                        </tr>
+                      </table>
+                    </>
+                  ) : (
+                    ""
+                  )}
+                </AccordionDetails>
+              </Accordion>
+            );
+          })}
+        </div>
       </div>
     </>
   );

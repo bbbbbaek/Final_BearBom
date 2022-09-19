@@ -1,15 +1,29 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./widget.scss";
 import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import LocalLibraryOutlinedIcon from "@mui/icons-material/LocalLibraryOutlined";
 import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
 import InsertChartOutlinedIcon from "@mui/icons-material/InsertChartOutlined";
+
 const Widget = ({ type }) => {
   let data;
   let number = 10000;
+  const [test, setTest] = useState(0);
   let amount = number.toLocaleString("ko-KR");
   let diff = 20;
+  useEffect(() => {
+    let counting = setInterval(function () {
+      if (test > number) {
+        setTest(number);
+        clearInterval(counting);
+        return;
+      }
+      console.log(test);
+      setTest(test + number / 20);
+      clearInterval(counting);
+    }, 400);
+  }, [test]);
   switch (type) {
     case "earning":
       data = {
@@ -48,7 +62,7 @@ const Widget = ({ type }) => {
         <div className="left">
           <span className="title">{data.title}</span>
           <span className="counter">
-            {data.title === "매출" && "₩ " + amount}
+            {data.title === "매출" && "₩ " + test}
             {data.title === "주문" && amount + " 건"}
             {data.title === "회원" && amount + " 명"}
             {data.title === "강좌" && amount + " 개"}

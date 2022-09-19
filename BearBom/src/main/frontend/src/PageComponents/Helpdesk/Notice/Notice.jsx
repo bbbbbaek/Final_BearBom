@@ -1,25 +1,34 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
+import "./notice.scss";
 import useFetch from "../../../customHooks/useFetch";
 import Table from "../../../ModuleComponents/Table/Table";
-import { createItems, createData } from "../../../customHooks/create";
+import { createItems, createData, Data } from "../../../customHooks/create";
 
 const Notice = () => {
-  let item = createItems(
-    "title",
-    "content",
-    "rgdate",
-    "mdfdate",
-    "seller",
-    "dop"
-  );
-  let data = createData(
-    "noticeIdx",
-    "noticeNm",
-    "noticeContent",
-    "noticeRegdate",
-    "noticeMdfdate"
-  );
+  let data = [
+    new Data("title", null, "noticeIdx"),
+    new Data("content", null, "noticeIdx"),
+    new Data("rgdate", null, "noticeIdx"),
+    new Data("mdfdate", null, "noticeIdx"),
+    new Data("seller", null, "noticeIdx"),
+    new Data("dop", null, "noticeIdx"),
+  ];
+
+  // let item = createItems(
+  //   "title",
+  //   "content",
+  //   "rgdate",
+  //   "mdfdate",
+  //   "seller",
+  //   "dop"
+  // );
+  // let data = createData(
+  //   "noticeIdx",
+  //   "noticeNm",
+  //   "noticeContent",
+  //   "noticeRegdate",
+  //   "noticeMdfdate"
+  // );
 
   let fetch = useFetch("/api/helpdesk/getNoticeList").data.data;
   let fetchedData = null;
@@ -28,9 +37,19 @@ const Notice = () => {
 
   return (
     <>
-      {fetchedData !== undefined ? (
-        <Table tableItems={item} tableData={data} fetchedData={fetchedData} />
-      ) : null}
+      <div className="notice">
+        <h5>
+          <strong>공지사항</strong>
+        </h5>
+        <hr />
+        {/* {fetchedData !== undefined ? ( */}
+        <Table
+          // tableItems={item}
+          tableData={data}
+          fetchedData={fetchedData}
+        />
+        {/* ) : null} */}
+      </div>
     </>
   );
 };

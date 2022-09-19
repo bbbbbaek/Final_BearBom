@@ -13,7 +13,7 @@ import Course from "./PageComponents/Course";
 import CourseRegistration from "./PageComponents/CourseRegistration";
 import Guide from "./PageComponents/Guide";
 import Helpdesk from "./PageComponents/Helpdesk/Home/Helpdesk";
-import Mypage from "./PageComponents/Mypage";
+import Mypage from "./PageComponents/MyPage/Home/Mypage";
 import Login from "./PageComponents/Login";
 import Join from "./PageComponents/Join";
 import Detail from "./PageComponents/Detail/Detail";

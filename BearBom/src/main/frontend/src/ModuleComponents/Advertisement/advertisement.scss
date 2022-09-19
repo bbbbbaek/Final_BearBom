@@ -1,0 +1,21 @@
+.advertisement {
+  margin: 5%;
+  width: 90%;
+  min-height: 5rem;
+  max-height: 20rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
+  overflow: hidden;
+
+  .picture {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    cursor: pointer;
+  }
+}
