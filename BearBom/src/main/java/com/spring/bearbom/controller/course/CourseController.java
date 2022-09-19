@@ -125,16 +125,19 @@ public class CourseController {
 		while(iterator.hasNext()) {
 			List<MultipartFile> list = multiPartHttpServletRequest.getFiles(iterator.next());
 			
-			//System.out.println(list.size());
 			
+			int fileIdx = -1;
 			for(MultipartFile m : list) {
 				System.out.println(m.getOriginalFilename());
-				int fileIdx = 0;
 				if(!m.isEmpty()) {
+					
 					CourseFile courseFile = new CourseFile();
 					//CourseFileId courseFileId = new CourseFileId();
 					//courseFileId.setCourse(course.getCourseIdx());
-					//courseFileId.setCourseFileIdx(fileIdx+=1);
+					int CourseFileIdx = courseService.findCourseFileIdxByCourseIdx(fileIdx);
+					System.out.println(CourseFileIdx + "-=-=-=-");
+					courseFile.setCourseFileIdx(CourseFileIdx);
+					
 					courseFile.setCourse(course);
 					
 					String uuid = UUID.randomUUID().toString();
@@ -148,7 +151,9 @@ public class CourseController {
 					m.transferTo(file);//테스트시죽일것
 					
 					
-				}
+				}/*else {
+					break;
+				}*/
 			}
 		}
 		//첫번째 이미지만 썸네일에 저장 후 리스트에서 삭제
@@ -159,10 +164,11 @@ public class CourseController {
 		//파일 업로드 끝
 		
 		courseService.courseRegistration(course);//테스트시죽일것
-		System.out.println(course);
-		System.out.println("-----------------------------");
+		//System.out.println(course);
+		
 		
 		courseService.courseFileSave(fileList);//테스트시죽일것
+		System.out.println("-----------------------------");
 		System.out.println(fileList);
 		
 		
