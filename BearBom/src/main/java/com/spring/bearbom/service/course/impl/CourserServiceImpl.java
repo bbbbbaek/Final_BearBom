@@ -37,11 +37,11 @@ public class CourserServiceImpl implements CourserService {
     }
 
 
-	@Override
-	public double updateRating(Courser courser) {
-		// TODO Auto-generated method stub
-		return courserMapper.updateRating(courser);
-	}
+//	@Override
+//	public double updateRating(Courser courser) {
+//		// TODO Auto-generated method stub
+//		return courserMapper.updateRating(courser);
+//	}
 
 //    @Override
 //    public List<Courser> updateRating1(Courser courser) {
@@ -54,5 +54,10 @@ public class CourserServiceImpl implements CourserService {
 //        List<Course> courseList = courseRepository.findAll();
         Course course = courserMapper.getCourse(courseIdx);
         return course;
+    }
+
+    @Override
+    public double updateRating(int courseIdx) {
+        return courserMapper.updateRating(courseIdx);
     }
 }

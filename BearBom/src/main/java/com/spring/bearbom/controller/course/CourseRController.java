@@ -37,17 +37,18 @@ public class CourseRController {
     
     @PostMapping("/getReviewList")
     public Map<String, Object> getReviewList(@RequestBody Course course) {
-    	System.out.println(course.getCourseIdx());
+    	System.out.println("/////////////"+course.getCourseIdx());
     	
     	Courser courser = new Courser();
     	courser.setCourse(course);
-    	
+
+        System.out.println("/////////" + courser);
     	List<Courser> reviewList = courserService.Review(courser);
     	
     	
 //    	List<Double> updateRating = courseRService.updateRating(courser);
     	
-    	double averageRating = courserService.updateRating(courser);
+    	double averageRating = courserService.updateRating(course.getCourseIdx());
     	
     	System.out.println(averageRating);
     	Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -86,8 +87,8 @@ public class CourseRController {
     	
     	
 //    	List<Double> updateRating = courseRService.updateRating(courser);
-    	
-    	double averageRating = courserService.updateRating(courser);
+
+    	double averageRating = courserService.updateRating(course.getCourseIdx());
     	
     	System.out.println(averageRating);
     	Map<String, Object> resultMap = new HashMap<String, Object>();
