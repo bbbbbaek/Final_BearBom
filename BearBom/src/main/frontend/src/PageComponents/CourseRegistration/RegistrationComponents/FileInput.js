@@ -20,7 +20,8 @@ const FilelInput = ({changeImages}) => {
       const fileList = Array.prototype.slice.call(e.target.files);
       setImageFile(e.target.files[0]);
       setImageFileList(fileList);
-      const $button = document.querySelector(".imgAddBtn");
+      console.log(imageFileList)
+      const $button = document.querySelector(".imgAddBtn2");
       $button.style.display = "none"
     }
   };
@@ -28,7 +29,7 @@ const FilelInput = ({changeImages}) => {
   // 이미지 삭제버튼 클릭시
   const removeSelectedImage = () => {
     setImageFile();
-    const $button = document.querySelector(".imgAddBtn");
+    const $button = document.querySelector(".imgAddBtn2");
     $button.style.display = "flex"
   };
 
@@ -37,7 +38,7 @@ const FilelInput = ({changeImages}) => {
   return (
     <>
       <div className="imgAdd">
-        <div className="imgAddBtn">
+        <div className="imgAddBtn2">
         <Button
             variant="outlined"
             onClick={() => inputRef.current.click()}
@@ -48,6 +49,7 @@ const FilelInput = ({changeImages}) => {
         <input
           accept="image/*"
           type="file"
+          multiple="multiple"
           onChange={imageChange}
           ref={inputRef}
           hidden

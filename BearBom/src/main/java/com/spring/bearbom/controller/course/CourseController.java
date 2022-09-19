@@ -2,7 +2,12 @@ package com.spring.bearbom.controller.course;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +49,34 @@ public class CourseController {
 //		
 		System.out.println(paramMap);
 		
+		//날짜변환부분
+		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+		LocalDateTime localDateTime = LocalDateTime.parse(String.valueOf(paramMap.get("courseStDate")).substring(0, 19),dateFormat);
+		LocalDateTime sendDate = localDateTime.plusHours(18);//DB서버로 전송시 9시간 minus되기 떄문에 미리 18시간 더해줌
+		Date stDate = java.sql.Timestamp.valueOf(sendDate);
+		//System.out.println(stDate);
+		
+		LocalDateTime localDateTime2 = LocalDateTime.parse(String.valueOf(paramMap.get("courseEndDate")).substring(0, 19),dateFormat);
+		LocalDateTime sendDate2 = localDateTime2.plusHours(18);//DB서버로 전송시 9시간 minus되기 떄문에 미리 18시간 더해줌
+		Date endDate = java.sql.Timestamp.valueOf(sendDate2);
+		//System.out.println(endDate);
+		
+//		String start = (String.valueOf(stDate));
+//		long setStDate = Long.parseLong(start);
+//		java.sql.Date sqlDate = new java.sql.Date(setStDate);
+//		System.out.println(sqlDate);
+		//long courseStDate = Long.parseLong(String.valueOf(paramMap.get("courseStDate")).substring(0, 19));
+		//String.valueOf(paramMap.get("courseEndDate")).substring(4, 15);
+		
+		/*DateTimeFormatter dateFormatForHour = DateTimeFormatter.ofPattern("HH");
+		LocalDateTime localDateTimeForHour = LocalDateTime.parse(String.valueOf(paramMap.get("courseStTime")),dateFormatForHour);
+		Date stTime = java.sql.Timestamp.valueOf(localDateTimeForHour);
+		System.out.println(stTime);*/
+		
+		
+		
+		
+		
 		/*코스등록 시작*/
 		Course course = new Course();
 		int courseIdx = courseService.findCourseIdx(0);
@@ -63,6 +96,14 @@ public class CourseController {
 		course.setCourseZipcode(String.valueOf(paramMap.get("courseZipcode")));
 		course.setCourseMax(Integer.valueOf(String.valueOf(paramMap.get("courseMax"))));
 		course.setCourseMin(Integer.valueOf(String.valueOf(paramMap.get("courseMin"))));
+		course.setCourseStDate(stDate);
+		course.setCourseEndDate(endDate);
+		
+		//course.setCourseStTime(null);
+		//course.setCourseEndTime(null);
+		
+		course.setCourseCost(Integer.valueOf(String.valueOf(paramMap.get("courseCost"))));
+		
 		System.out.println("---------------------------");
 		
 		//파일 업로드 시작
@@ -79,6 +120,7 @@ public class CourseController {
 		
 		
 		Iterator<String> iterator = multiPartHttpServletRequest.getFileNames();
+		System.out.println(multiPartHttpServletRequest.getFileNames());
 		
 		while(iterator.hasNext()) {
 			List<MultipartFile> list = multiPartHttpServletRequest.getFiles(iterator.next());

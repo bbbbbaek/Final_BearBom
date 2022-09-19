@@ -62,7 +62,7 @@ const StepTwo_2 = ({saveFormData}) => {
                 <p>추가 이미지 - 클래스에 대한 추가 이미지</p>
               </div>
               <div className="inputWrap inputHfix">
-                <FileInput changeImages={changeImages}/>
+                <FileInput changeImages={changeImages} saveFormData={saveFormData}/>
               </div>
               <p className="inputWar">*최대 4장 까지 등록 가능합니다.</p>
             </div>
