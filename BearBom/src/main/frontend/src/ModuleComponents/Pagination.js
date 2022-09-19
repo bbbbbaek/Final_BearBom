@@ -1,14 +1,23 @@
 import React from "react";
 import styled from "styled-components";
+import FirstPageIcon from "@mui/icons-material/FirstPage";
+import LastPageIcon from "@mui/icons-material/LastPage";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 const Pagination = ({ total, limit, page, setPage }) => {
   const numPages = Math.ceil(total / limit);
   return (
     <>
       <Nav>
-        <Button onClick={() => setPage(page - 1)} disabled={page === 1}>
+        <FirstPageIcon sx={{ fontSize: "1.3rem" }}></FirstPageIcon>
+        <ArrowBackIosNewIcon
+          onClick={() => setPage(page - 1)}
+          disabled={page === 1}
+          sx={{ fontSize: "0.85rem" }}
+        >
           &lt;
-        </Button>
+        </ArrowBackIosNewIcon>
         {Array(numPages)
           .fill()
           .map((_, i) => (
@@ -20,9 +29,14 @@ const Pagination = ({ total, limit, page, setPage }) => {
               {i + 1}
             </Button>
           ))}
-        <Button onClick={() => setPage(page + 1)} disabled={page === numPages}>
+        <ArrowForwardIosIcon
+          onClick={() => setPage(page + 1)}
+          disabled={page === numPages}
+          sx={{ fontSize: "0.85rem" }}
+        >
           &gt;
-        </Button>
+        </ArrowForwardIosIcon>
+        <LastPageIcon sx={{ fontSize: "1.3rem" }}></LastPageIcon>
       </Nav>
     </>
   );
@@ -32,36 +46,33 @@ const Nav = styled.nav`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 4px;
+  gap: 12px;
   margin: 16px;
 `;
-
+// background: #cec3a7;
+//    transform: translateY(-2px);
 const Button = styled.button`
   border: none;
-  border-radius: 8px;
-  padding: 8px;
-  margin: 0;
-  background: #cec3a7;
-  color: white;
-  font-size: 1rem;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 0.85rem;
 
+  color: black;
+  background: white;
   &:hover {
-    background: tomato;
+    background: #f7f7f7;
     cursor: pointer;
-    transform: translateY(-2px);
   }
 
   &[disabled] {
-    background: grey;
-    cursor: revert;
-    transform: revert;
+    background: ;
   }
 
   &[aria-current] {
-    background: #958a78;
-    font-weight: bold;
-    cursor: revert;
-    transform: revert;
+    background: #1976d2;
+    font-weight: ;
+    color: #fff;
   }
 `;
 

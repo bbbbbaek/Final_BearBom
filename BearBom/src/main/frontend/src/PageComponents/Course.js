@@ -61,7 +61,7 @@ const Course = (props) => {
   const [courseSearch, setCourseSearch] = useState("");
   const [locationSearch, setLocationSearch] = React.useState("");
   const [courseType, setCourseType] = React.useState("");
-  const [courseLevel, setCourseLevel] = useState("");
+  const [courseLevel, setCourseLevel] = useState(4);
   const [courseStTime, setCourseStTime] = useState("");
   const [courseEndTime, setCourseEndTime] = useState("");
   const [courseStCost, setCourseStCost] = useState("");
@@ -365,7 +365,7 @@ const Course = (props) => {
                         type="button"
                         value={idx}
                         className={
-                          "btn" + (idx == courseLevel ? " active" : "")
+                          "btn" + (idx === courseLevel ? " active" : "")
                         }
                         onClick={toggleActiveLevel}
                         id="btnDeco"

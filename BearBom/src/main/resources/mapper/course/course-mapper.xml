@@ -48,16 +48,14 @@
                 AND A.COURSE_NM LIKE CONCAT('%', #{searchProduct.courseSearch}, '%')
             </if>
             <if test="searchProduct.courseLocation != null and searchProduct.courseLocation != ''">
-                <if test="searchProduct.courseLocation == 'all'">
-
+                <if test="searchProduct.courseLocation != 'all'">
+                    AND A.COURSE_LOCATION = #{searchProduct.courseLocation}
                 </if>
-                AND A.COURSE_LOCATION = #{searchProduct.courseLocation}
             </if>
             <if test="searchProduct.courseCategory != null and searchProduct.courseCategory != ''">
-                <if test="searchProduct.courseCategory == 'all'">
-
+                <if test="searchProduct.courseCategory != 'all'">
+                    AND A.COURSE_CATEGORY = #{searchProduct.courseCategory}
                 </if>
-                AND A.COURSE_CATEGORY = #{searchProduct.courseCategory}
             </if>
             <if test="searchProduct.courseLevel != null and searchProduct.courseLevel != ''">
                 AND A.COURSE_LEVEL = #{searchProduct.courseLevel}
