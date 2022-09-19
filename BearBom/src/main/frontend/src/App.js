@@ -24,7 +24,6 @@ import LoginTest from "./PageComponents/JoinComponents/LoginTest";
 import Saw from "./PageComponents/Saw";
 import Admin from "./PageComponents/AdminPage/Admin";
 import Page404 from "./PageComponents/Page404";
-import Test123 from "./PageComponents/Detail/Test123";
 import RedirectForKakao from "./PageComponents/JoinComponents/RedirectForKakao";
 import RedirectForKakaoLogout from "./PageComponents/JoinComponents/RedirectForKakaoLogout";
 import KakaoPayRe from "./PageComponents/Detail/KakaoPayRe";
@@ -57,7 +56,6 @@ function App() {
           <Route path="/saw/:id" element={<Saw />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/*" element={<Page404 />} />
-          <Route path="/course/test" element={<Test123 />} />
           <Route path="/payready" element={<KakaoPayR />} />
           <Route path="/payresult" element={<KakaoPayRe />} />
           <Route path="/pwfind" element={<PwFind />} />

@@ -15,10 +15,13 @@ public interface CourserService {
 
 	
 
-	double updateRating(Courser courser);
+
+	double updateRating1(Courser courser);
 	
 
 	Course getCourse(int courseIdx);
+
+	double updateRating(int courseIdx);
     
 
 //	List<Course> getCourseList(Course course);
