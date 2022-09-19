@@ -71,30 +71,68 @@ const PwFind = () => {
   //   const userId = data.get("userId");
   //   const userEmail = data.get("userEmail");
 
-  const onSubmitJoinHandler = (e) => {
+  // 기존
+  // const onSubmitPwFindHandler = (e) => {
+  //   console.log({
+  //     userId: userId,
+  //     userEmail: userEmail,
+  //   });
+  //   e.preventDefault();
+
+  //   axios({
+  //     method: "post",
+  //     url: API_BASE_URL + "/api/user/pwFind",
+  //     data: {
+  //       userId: userId,
+  //       userEmail: userEmail,
+  //     },
+  //   }).then((response) => {
+  //     console.log(response);
+  //     navigate("/login");
+  //   });
+  // };
+
+  const onSubmitPwFindHandler = (e) => {
     console.log({
-      ...userInfo,
+      userId: userId,
+      userEmail: userEmail,
     });
     e.preventDefault();
 
     axios({
       method: "post",
-      url: API_BASE_URL + "/api/user/pwfind",
-      data: {
-        userId: userId,
-        userEmail: userEmail,
-      },
-    }).then((response) => {
-      console.log(response);
-      navigate("/login");
-    });
+      url: API_BASE_URL + "/api/user/login",
+      data: { userId: userId, userEmail: userEmail },
+    })
+      .then((response) => {
+        // console.log(response);
+        // navigate("/");
+        console.log(response);
+        localStorage.setItem("USER_ID", response.data.userId);
+        if (response.data.token) {
+          localStorage.setItem("ACCESS_TOKEN", response.data.token);
+          navigate("/");
+          alert("로그인 되었습니다.");
+        }
+      })
+      .catch((err) => {
+        if (err.response.data.error === "not exist id") {
+          alert("존재하지 않는 아이디입니다.");
+        } else if (err.response.data.error === "wrong password") {
+          alert("비밀번호를 확인해 주세요.");
+        } else if (err.response.data.error === "loging denied") {
+          alert(
+            "비밀번호 5회 오류로 사용이 제한됩니다. \n비밀번호 변경 후 이용해 주세요"
+          );
+        }
+      });
   };
 
   return (
     <>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-        <form onSubmit={onSubmitJoinHandler}>
+        <form onSubmit={onSubmitPwFindHandler}>
           <Box
             sx={{
               marginTop: 8,
