@@ -19,4 +19,6 @@ public interface CourseService {
 	List<Map<String, Object>> getCategoryCodeList();
 
     List<Map<String, Object>> getCourseList();
+
+	List<Map<String, Object>> getSearchProducts(Map<String, Object> paramMap);
 }

@@ -30,6 +30,7 @@ import RedirectForKakaoLogout from "./PageComponents/JoinComponents/RedirectForK
 import KakaoPayRe from "./PageComponents/Detail/KakaoPayRe";
 import KakaoPayR from "./PageComponents/Detail/KakaoPayR";
 import PwFind from "./PageComponents/PwFind";
+import CourseSearch from "./PageComponents/CourseSearch";
 
 function App() {
   return (
@@ -46,6 +47,10 @@ function App() {
           <Route path="/course" element={<Course />} />
           <Route path="/course/:id" element={<Detail />} />
           <Route path="/course/registration" element={<CourseRegistration />} />
+          <Route
+            path="/course/search/:courseSearch"
+            element={<CourseSearch />}
+          />
           <Route path="/guide" element={<Guide />} />
           <Route path="/helpdesk" element={<Helpdesk />} />
           <Route path="/mypage" element={<Mypage />} />

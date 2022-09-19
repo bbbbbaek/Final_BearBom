@@ -61,7 +61,7 @@ const Course = (props) => {
   const [courseSearch, setCourseSearch] = useState("");
   const [locationSearch, setLocationSearch] = React.useState("");
   const [courseType, setCourseType] = React.useState("");
-  const [courseLevel, setCourseLevel] = useState(4);
+  const [courseLevel, setCourseLevel] = useState("");
   const [courseStTime, setCourseStTime] = useState("");
   const [courseEndTime, setCourseEndTime] = useState("");
   const [courseStCost, setCourseStCost] = useState("");
@@ -173,15 +173,11 @@ const Course = (props) => {
         courseStCost: courseStCost,
         courseEndCost: courseEndCost,
       },
-    }).then((response) => {
-      console.log(response);
-      setData(response.data.getSearchProducts);
+    }).then((responseSearchData) => {
+      console.log(responseSearchData);
+      window.location.href = "/course/";
     });
   };
-
-  // const onSubmitSearchHandler = async (e) => {
-  //   navigate("/course/search/" + courseSearch);
-  // };
 
   const [timeSlider, setTimeSlider] = useState([0, 1440]);
 
@@ -365,7 +361,7 @@ const Course = (props) => {
                         type="button"
                         value={idx}
                         className={
-                          "btn" + (idx === courseLevel ? " active" : "")
+                          "btn" + (idx == courseLevel ? " active" : "")
                         }
                         onClick={toggleActiveLevel}
                         id="btnDeco"

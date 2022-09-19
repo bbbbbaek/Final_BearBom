@@ -16,6 +16,7 @@
     </select>
 
     <select id="getCourseList" resultType="camelHashMap">
+        <![CDATA[
         SELECT A.*
             , IFNULL(B.RATE, 0) AS RATE
             FROM T_COURSE A
@@ -27,6 +28,50 @@
                             ) B
             ON A.COURSE_IDX = B.COURSE_IDX
             WHERE A.COURSE_USE_YN = 'Y'
+            ORDER BY B.RATE DESC
+        ]]>
+    </select>
+
+    <select id="getSearchProducts" parameterType="map" resultType="camelHashMap">
+            SELECT A.*
+            , IFNULL(B.RATE, 0) AS RATE
+            FROM T_COURSE A
+            LEFT OUTER JOIN (
+                            SELECT C.COURSE_IDX,
+                                ROUND(AVG(C.COURSER_RATE), 2) AS RATE
+                                FROM T_COURSER C
+                                GROUP BY C.COURSE_IDX
+                            ) B
+            ON A.COURSE_IDX = B.COURSE_IDX
+            WHERE A.COURSE_USE_YN = 'Y'
+            <if test="searchProduct.courseSearch != null and searchProduct.courseSearch != ''">
+                AND A.COURSE_NM LIKE CONCAT('%', #{searchProduct.courseSearch}, '%')
+            </if>
+            <if test="searchProduct.courseLocation != null and searchProduct.courseLocation != ''">
+                <if test="searchProduct.courseLocation != 'all'">
+                    AND A.COURSE_LOCATION = #{searchProduct.courseLocation}
+                </if>
+            </if>
+            <if test="searchProduct.courseCategory != null and searchProduct.courseCategory != ''">
+                <if test="searchProduct.courseCategory != 'all'">
+                    AND A.COURSE_CATEGORY = #{searchProduct.courseCategory}
+                </if>
+            </if>
+            <if test="searchProduct.courseLevel != null and searchProduct.courseLevel != ''">
+                AND A.COURSE_LEVEL = #{searchProduct.courseLevel}
+            </if>
+            <if test="searchProduct.courseStTime != null and !searchProduct.courseStTime.equals('')">
+                <![CDATA[AND A.COURSE_ST_TIME >= #{searchProduct.courseStTime}]]>
+            </if>
+            <if test="searchProduct.courseEndTime != null and !searchProduct.courseEndTime.equals('')">
+                <![CDATA[AND A.COURSE_END_TIME <= #{searchProduct.courseEndTime}]]>
+            </if>
+            <if test="searchProduct.courseStCost != null and searchProduct.courseStCost != ''">
+                <![CDATA[AND A.COURSE_COST >= #{searchProduct.courseStCost}]]>
+            </if>
+            <if test="searchProduct.courseEndCost != null and searchProduct.courseEndCost != ''">
+                <![CDATA[AND A.COURSE_COST <= #{searchProduct.courseEndCost}]]>
+            </if>
             ORDER BY B.RATE DESC
     </select>
 </mapper>

@@ -34,7 +34,7 @@ public class MainController {
 
     @GetMapping("/getCourseList")
     public Map<String, Object> getCourseList(Course course) {
-        System.out.println("/////////"+course);
+//        System.out.println("/////////"+course);
         try {
 //            Courser courser = new Courser();
 //            courser.setCourse(course);
@@ -63,7 +63,7 @@ public class MainController {
 
     @GetMapping("/getCourseEndDateList")
     public Map<String, Object> getCourseEndDateList(Course course) {
-        System.out.println("/////////"+course);
+//        System.out.println("/////////"+course);
         try {
 //            Courser courser = new Courser();
 //            courser.setCourse(course);
