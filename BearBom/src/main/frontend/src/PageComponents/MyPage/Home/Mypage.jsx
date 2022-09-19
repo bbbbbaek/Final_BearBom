@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./mypage.scss";
 import OpenedClassView from "../Menu/OpenedClassView";
 import QuickView from "../Quickview/QuickView";
-import Sidebar from "../Sidebar/Sidebar";
+import Sidebar from "../Sidebar/SideBar";
 import TakenClassView from "../Menu/TakenClassView";
 import InquiryView from "../Menu/InquiryView";
 import WishlistView from "../Menu/WishlistView";
