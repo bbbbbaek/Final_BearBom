@@ -65,7 +65,7 @@ public class CourseRController {
         System.out.println(paramMap.get("courseIdx"));
         System.out.println(paramMap.get("courserRate"));
         System.out.println(paramMap.get("courserContent"));
-        System.out.println(userId);
+        System.out.println("/////////"+userId);
 
         Course course = new Course();
         Courser courser = new Courser();
