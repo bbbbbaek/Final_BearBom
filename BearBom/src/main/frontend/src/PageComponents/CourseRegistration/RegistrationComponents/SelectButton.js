@@ -13,7 +13,7 @@ const SelectButton = ({ children, selected, onClick, right}) => {
         variant="outlined"
         //className={right ? classes.basicBtnR : classes.basicBtn}
         color={selected ? "secondary" : "primary"}
-        style={selected ? { background: '#edeae7', minWidth:300 ,width: '100%' } : { minWidth:300 ,width: '100%' }}
+        style={selected ? { background: '#edeae7', minWidth:250 ,width: '100%' } : { minWidth:250 ,width: '100%' }}
         endIcon={selected
           ? <CheckCircleIcon color="secondary" fontSize="large" />
           : <CheckCircleIcon color="primary" fontSize="large" />}

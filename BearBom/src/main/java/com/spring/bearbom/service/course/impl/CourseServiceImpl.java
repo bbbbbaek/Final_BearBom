@@ -33,7 +33,11 @@ public class CourseServiceImpl implements CourseService {
 
 	@Override
 	public void courseFileSave(List<CourseFile> fileList) {
-		courseFileRepository.saveAll(fileList);
+		for(CourseFile courseFile : fileList) {
+			int fileIdx = courseMapper.getNextFileIdx(courseFile.getCourse().getCourseIdx());
+			courseFile.setCourseFileIdx(fileIdx);
+			courseFileRepository.save(courseFile);
+		}
 	}
 
 	@Override
@@ -68,12 +72,4 @@ public class CourseServiceImpl implements CourseService {
 
 		return courseMapper.getSearchProducts(pMap);
 	}
-
-	@Override
-	public int findCourseFileIdxByCourseIdx(int i) {
-		int newCourseFileIdx = i+1;
-		return newCourseFileIdx;
-	}
-
-
 }

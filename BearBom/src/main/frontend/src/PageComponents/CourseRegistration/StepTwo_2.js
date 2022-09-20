@@ -10,7 +10,7 @@ import "../../css/courseRegistration.css";
 import ThumbnailInput from "./RegistrationComponents/ThumbnailInput";
 import FileInput from "./RegistrationComponents/FileInput"
 
-const StepTwo_2 = ({saveFormData}) => {
+const StepTwo_2 = ({formData, saveFormData}) => {
   const [imageList, setImageList] = useState([]);
   const [formObj, setFormObj] = useState({});
 
@@ -30,6 +30,7 @@ const StepTwo_2 = ({saveFormData}) => {
   useEffect(() => {
      saveFormData(formObj);
   }, [formObj]);
+
 
   return (
     <form id="step_two_2_form">
@@ -61,8 +62,9 @@ const StepTwo_2 = ({saveFormData}) => {
               <div className="datailLabel">
                 <p>추가 이미지 - 클래스에 대한 추가 이미지</p>
               </div>
-              <div className="inputWrap inputHfix">
-                {/* <FileInput changeImages={changeImages}/> */}
+              <div className="inputMultiFileBox">
+                <FileInput changeImages={changeImages}/>
+                <FileInput changeImages={changeImages}/>
                 <FileInput changeImages={changeImages}/>
                 <FileInput changeImages={changeImages}/>
               </div>

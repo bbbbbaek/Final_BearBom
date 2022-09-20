@@ -74,4 +74,10 @@
             </if>
             ORDER BY B.RATE DESC
     </select>
+    
+    <select id="getNextFileIdx" parameterType="int" resultType="int">
+    	SELECT IFNULL(MAX(COURSE_FILE_IDX), -1) + 1
+    		FROM T_COURSE_FILE
+    		WHERE COURSE_IDX = #{courseIdx}
+    </select>
 </mapper>

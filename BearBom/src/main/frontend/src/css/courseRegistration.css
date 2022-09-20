@@ -438,3 +438,27 @@ div {
   justify-content: space-between;
   width: 400px;
 }
+
+.btnSpace{
+  width: 100px;
+}
+
+.inputMultiFileBox{
+  box-sizing: border-box;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+
+.multiImgDel{
+  position: absolute;
+  top: 5%;
+  left: 20%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  text-align: center;
+}
