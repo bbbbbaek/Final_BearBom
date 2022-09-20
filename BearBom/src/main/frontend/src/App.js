@@ -31,6 +31,10 @@ import KakaoPayRe from "./PageComponents/Detail/KakaoPayRe";
 import KakaoPayR from "./PageComponents/Detail/KakaoPayR";
 import PwFind from "./PageComponents/PwFind";
 import CourseSearch from "./PageComponents/CourseSearch";
+import Board from "./ModuleComponents/Board/Board";
+import Notice from "./PageComponents/Helpdesk/Notice/Notice";
+import FAQ from "./PageComponents/Helpdesk/FAQ/FAQ";
+import Inquiry from "./PageComponents/Helpdesk/Inquiry/Inquiry";
 
 function App() {
   return (
@@ -52,7 +56,14 @@ function App() {
             element={<CourseSearch />}
           />
           <Route path="/guide" element={<Guide />} />
-          <Route path="/helpdesk" element={<Helpdesk />} />
+          <Route path="/helpdesk" element={<Helpdesk />}>
+            <Route path="notice" element={<Notice />}>
+              <Route path=":id" element={<Board />} />
+            </Route>
+            <Route path="faq" element={<FAQ />} />
+            <Route path="inquiry" element={<Inquiry />} />
+          </Route>
+
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/loginTest" element={<LoginTest />} />

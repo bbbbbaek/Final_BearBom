@@ -18,7 +18,7 @@
 
     .search {
       border: 1px solid #7697a0;
-      height: 1.8rem;
+      height: 2rem;
       display: flex;
       flex-direction: row;
 
@@ -47,37 +47,56 @@
     flex-direction: column;
     justify-content: center;
 
-    .row1 {
-      height: 2rem;
-      max-height: 5rem;
-      border-bottom: 1px solid lightgray;
-    }
+    table {
+      width: 100%;
 
-    .row2 {
-      height: 3rem;
-      max-height: 5rem;
-      border-bottom: 1px solid lightgray;
-
-      &.hasImg {
-        height: 4rem;
+      .row_title {
+        text-transform: capitalize;
+        color: #fff;
+        height: 2.2rem;
+        max-height: 5rem;
+        border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+        font-weight: 600;
+        background-color: #94b0b7;
       }
-    }
 
-    .column {
-      padding-left: 10px;
-    }
+      .row_data {
+        height: 3rem;
+        max-height: 5rem;
+        border-bottom: 1px solid lightgray;
 
-    .title {
-      font-weight: 600;
-      background-color: #e1e2e3;
-    }
+        &.hasImg {
+          height: 4rem;
+        }
+      }
 
-    .short {
-      flex: 1;
-    }
+      .column {
+        padding-left: 10px;
+      }
 
-    .long {
-      flex: 2;
+      .index {
+        width: 5%;
+      }
+
+      .l10 {
+        width: 10%;
+        word-wrap: break-word;
+      }
+
+      .l20 {
+        width: 20%;
+        word-wrap: break-word;
+      }
+
+      .l30 {
+        width: 30%;
+        word-wrap: break-word;
+      }
+
+      .l40 {
+        width: 40%;
+        word-wrap: break-word;
+      }
     }
   }
 
