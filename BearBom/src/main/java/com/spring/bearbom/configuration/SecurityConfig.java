@@ -44,7 +44,8 @@ public class SecurityConfig{
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
 
-			.authorizeRequests().antMatchers("/", "/api/member/**", "/api/user/*","/api/guide/*","/api/**" , "/api/helpdesk/*", "/oauth/kakao", "/oauth/**","/upload/*", "/api/course/getCommonCodeList", "/api/course/searchCourse").permitAll()
+			.authorizeRequests().antMatchers("/", "/api/member/**", "/api/user/*","/api/guide/*" , "/api/helpdesk/*", "/oauth/kakao", "/oauth/**","/upload/*", "/api/course/getCommonCodeList", "/api/course/searchCourse").permitAll()
+								.antMatchers("/api/admin/**", "/admin/**").access("hasRole('ROLE_ADMIN')")
 								.anyRequest().authenticated();
 
 		//filter 등록

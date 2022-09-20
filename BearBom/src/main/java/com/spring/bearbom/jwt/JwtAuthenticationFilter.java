@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.spring.bearbom.entity.CustomUserDetails;
 import com.spring.bearbom.entity.User;
 import com.spring.bearbom.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,14 +47,19 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 				String username = jwtTokenProvider.validateAndGetUsername(token);
 
 				User user = userRepository.findByUserId(username);
+
+				CustomUserDetails customUserDetails = new CustomUserDetails(user);
 				//유효성 검사된 토큰은 security에 등록
 				//인증된 사용자로 설정
 				//
-				AbstractAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-						username, null, AuthorityUtils.NO_AUTHORITIES);
-
 //				AbstractAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-//						username, null, );
+//						username, null, AuthorityUtils.NO_AUTHORITIES);
+
+				AbstractAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+						username, null, customUserDetails.getAuthorities());
+
+				System.out.println("///////////authority"+customUserDetails.getAuthorities());
+
 
 				// new username , null, AuthorityUtils 3번째가 롤
 				// 이 유저네임을 뽑아오면은 이 유저 네임으로 유저 엔티티 객체로
