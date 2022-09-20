@@ -28,7 +28,7 @@ public class NoticeController {
 	
 	//공지사항 띄우는 것 
 	@PostMapping("/getNoticeList")
-	public ResponseEntity<?> getNoticeList( Notice notice) {
+	public ResponseEntity<?> getNoticeList(@RequestBody Notice notice) {
 		try {
 			
 			List<Notice> noticetest = noticeService.notice(notice);
