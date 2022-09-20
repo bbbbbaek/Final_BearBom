@@ -4,11 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.bearbom.dto.InquiryDTO;
 import com.spring.bearbom.dto.ResponseDTO;
 import com.spring.bearbom.dto.UserDTO;
 import com.spring.bearbom.entity.Inquiry;
@@ -24,12 +27,16 @@ public class AdminInquiryController {
 	@Autowired
 	private JwtTokenProvider jwtTokenProvider;
 	
-	@PostMapping("/getInquiryInfoReferenceList")
-	public ResponseEntity<?> getInquiryInfoReferenceList(@RequestBody Inquiry inquiry) {
+	@GetMapping("/getInquiryInfoReferenceList")
+	public ResponseEntity<?> getInquiryInfoReferenceList(InquiryDTO inquiryDTO, @AuthenticationPrincipal String userId) {
 		try {
+			inquiryDTO.setUserId(userId);
 			
-			List<Inquiry> inquiryInfoReference = adminService.inquiryInfoReference(inquiry);
-	    	ResponseDTO<Inquiry> response = new ResponseDTO<Inquiry>();
+			List<InquiryDTO> inquiryInfoReference = adminService.inquiryInfoReference(inquiryDTO);
+			
+			System.out.println(inquiryInfoReference);
+			
+	    	ResponseDTO<InquiryDTO> response = new ResponseDTO<InquiryDTO>();
 	    	response.setData(inquiryInfoReference);
 			
 			return ResponseEntity.ok().body(response);

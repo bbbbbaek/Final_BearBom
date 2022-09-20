@@ -19,7 +19,7 @@ const useFetch = (url, header) => {
       try {
         const res = await axios({
           url: API_BASE_URL + url,
-          method: "post",
+          method: "get",
           headers: header,
         });
         // console.log(res.data);

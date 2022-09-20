@@ -26,7 +26,7 @@ public class AdminNoticeController {
 
 	
 	//백단으로 보내서 저장시키는것
-	@PostMapping("insertNotice")
+	@PostMapping("/insertNotice")
 	public ResponseEntity<?> insertNotice(@RequestBody Notice notice, @AuthenticationPrincipal String userId){
 		System.out.println(notice.getNoticeIdx());
 		System.out.println(notice.getNoticeNm());
@@ -35,7 +35,6 @@ public class AdminNoticeController {
 		System.out.println(notice.getNoticeMdfdate());
 		System.out.println(notice.getNoticeUseYn());
 		System.out.println(userId);
-		
 		
 		Notice rhdwl = noticeService.insertNotice(notice);
 		
@@ -48,6 +47,7 @@ public class AdminNoticeController {
 		noticeDTO.setNoticeMdfdate(rhdwl.getNoticeMdfdate());
 		noticeDTO.setNoticeUseYn(rhdwl.getNoticeUseYn());
 		noticeDTO.setUserId(userId);
+		
 		
 		System.out.println(noticeDTO);
 		return ResponseEntity.ok().body(noticeDTO);

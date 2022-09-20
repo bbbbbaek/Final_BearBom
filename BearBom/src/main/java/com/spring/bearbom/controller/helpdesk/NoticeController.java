@@ -31,7 +31,7 @@ public class NoticeController {
 	public ResponseEntity<?> getNoticeList(@RequestBody Notice notice) {
 		try {
 			
-			List<Notice> noticetest = noticeService.notice(notice);
+			List<Notice> noticetest = noticeService.notice1(notice);
 	    	ResponseDTO<Notice> response = new ResponseDTO<Notice>();
 	    	response.setData(noticetest);
 			

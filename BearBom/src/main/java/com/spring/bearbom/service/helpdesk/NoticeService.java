@@ -6,7 +6,7 @@ import com.spring.bearbom.entity.Notice;
 
 public interface NoticeService {
 
-	List<Notice> notice(Notice notice);
+	List<Notice> notice1(Notice notice);
 
 	Notice insertNotice(Notice notice);
 
