@@ -56,9 +56,8 @@ function App() {
           />
           <Route path="/guide" element={<Guide />} />
           <Route path="/helpdesk" element={<Helpdesk />}>
-            <Route path="notice" element={<Notice />}>
-              <Route path=":id" element={<Board />} />
-            </Route>
+            <Route path="notice" element={<Notice />} />
+            <Route path="notice/:id" element={<Board />} />
             <Route path="faq" element={<FAQ />} />
             <Route path="inquiry" element={<Inquiry />} />
           </Route>

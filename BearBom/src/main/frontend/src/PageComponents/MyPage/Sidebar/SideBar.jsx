@@ -9,7 +9,7 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import ContentPasteSearchOutlinedIcon from "@mui/icons-material/ContentPasteSearchOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import { useDispatch, useSelector } from "react-redux";
-import { onChange } from "../store/store";
+import { onChange } from "../../../ModuleComponents/reduxStore/reduxStore";
 
 const Sidebar = () => {
   let state = useSelector((state) => state.tab);

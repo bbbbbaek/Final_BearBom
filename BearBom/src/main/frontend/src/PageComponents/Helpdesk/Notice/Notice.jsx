@@ -31,16 +31,12 @@ const Notice = () => {
         </h5>
         <hr />
         {/* {fetchedData !== undefined ? ( */}
-        {toggle ? (
-          <Board />
-        ) : (
-          <Table
-            tableInfo={tableInfo}
-            fetchedData={fetchedData}
-            toggle={toggle}
-            setToggle={setToggle}
-          />
-        )}
+        <Table
+          tableInfo={tableInfo}
+          fetchedData={fetchedData}
+          toggle={toggle}
+          setToggle={setToggle}
+        />
         {/* ) : null} */}
       </div>
     </>
