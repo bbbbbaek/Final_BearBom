@@ -28,6 +28,7 @@ const Mypage = () => {
         Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
       },
       // params: { courseIdx: id },
+      // test
     }).then((response) => {
       console.log(response.data);
       setGetUser(response.data.getUser);
