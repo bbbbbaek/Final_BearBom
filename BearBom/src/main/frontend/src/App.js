@@ -12,8 +12,8 @@ import Mainpage from "./PageComponents/Mainpage";
 import Course from "./PageComponents/Course";
 import CourseRegistration from "./PageComponents/CourseRegistration";
 import Guide from "./PageComponents/Guide";
-import Helpdesk from "./PageComponents/Helpdesk";
-import Mypage from "./PageComponents/Mypage";
+import Helpdesk from "./PageComponents/Helpdesk/Home/Helpdesk";
+import Mypage from "./PageComponents/MyPage/Home/Mypage";
 import Login from "./PageComponents/Login";
 import Join from "./PageComponents/Join";
 import Detail from "./PageComponents/Detail/Detail";
@@ -22,13 +22,14 @@ import Chatbot from "./ModuleComponents/Chatbot";
 import JoinTest from "./PageComponents/JoinComponents/JoinTest";
 import LoginTest from "./PageComponents/JoinComponents/LoginTest";
 import Saw from "./PageComponents/Saw";
-import Admin from "./PageComponents/AdminPage/Admin";
+import Admin from "./PageComponents/Admin/Home/Admin";
 import Page404 from "./PageComponents/Page404";
 import RedirectForKakao from "./PageComponents/JoinComponents/RedirectForKakao";
 import RedirectForKakaoLogout from "./PageComponents/JoinComponents/RedirectForKakaoLogout";
 import KakaoPayRe from "./PageComponents/Detail/KakaoPayRe";
 import KakaoPayR from "./PageComponents/Detail/KakaoPayR";
 import PwFind from "./PageComponents/PwFind";
+import CourseSearch from "./PageComponents/CourseSearch";
 
 function App() {
   return (
@@ -45,6 +46,10 @@ function App() {
           <Route path="/course" element={<Course />} />
           <Route path="/course/:id" element={<Detail />} />
           <Route path="/course/registration" element={<CourseRegistration />} />
+          <Route
+            path="/course/search/:courseSearch"
+            element={<CourseSearch />}
+          />
           <Route path="/guide" element={<Guide />} />
           <Route path="/helpdesk" element={<Helpdesk />} />
           <Route path="/mypage" element={<Mypage />} />

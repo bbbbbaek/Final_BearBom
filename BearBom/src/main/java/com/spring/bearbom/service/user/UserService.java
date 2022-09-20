@@ -12,6 +12,9 @@ public interface UserService {
 	User idCheck(String userId);
 
 	int idDuplicate(String userId);
+	
+	// 비밀번호 찾기
+//	User pwFind(String userId, String userEmail);
 }
 
 

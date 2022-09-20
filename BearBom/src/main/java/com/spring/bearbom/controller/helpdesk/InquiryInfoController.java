@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +28,7 @@ public class InquiryInfoController {
 	
 	//백단으로 보내서 저장시키는것
 	@PostMapping("/insertInquiry")
-	public ResponseEntity<?> insertInquiry(@RequestBody Inquiry inquiry){
+	public ResponseEntity<?> insertInquiry( Inquiry inquiry){
 		System.out.println(inquiry.getInquiryEmail());
 		System.out.println(inquiry.getInquirySort());
 		System.out.println(inquiry.getInquiryTitle());
