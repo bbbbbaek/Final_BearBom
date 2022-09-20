@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/dtd/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.bearbom.mapper.MypageMapper">
+    <select id="getInquiryReference" resultType="camelHashMap" parameterType="String">
+        <![CDATA[
+            SELECT * FROM T_INQUIRY WHERE USER_ID = #{userId}
+        ]]>
+    </select>
+</mapper>
