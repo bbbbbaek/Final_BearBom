@@ -6,10 +6,13 @@ import Widget from "../Widget/Widget";
 import Featured from "../Featured/Featured";
 import Chart from "../Chart/Chart";
 import useFetch from "../../../customHooks/useFetch";
-import TableCopy from "../Table/Table";
+
 import { useNavigate } from "react-router-dom";
+import SimpleTable from "../../../ModuleComponents/SimpleTable/SimpleTable";
+import LatestTransaction from "../LatestTransaction/LatestTransaction";
 
 const Admin = () => {
+
 
   const navigate = useNavigate();
 
@@ -38,10 +41,6 @@ const Admin = () => {
     }
   }, []);
 
-
-  function createTitle() {
-    return {};
-  }
   let fetch = useFetch("/api/helpdesk/getNoticeList").data.data;
   let fetchedData = null;
   fetchedData = fetch;
@@ -65,8 +64,7 @@ const Admin = () => {
               <Chart />
             </div>
             <div className="listContainer">
-              <div className="listTitle">Latest Transactions</div>
-              <TableCopy />
+              <LatestTransaction />
             </div>
           </div>
         </div>

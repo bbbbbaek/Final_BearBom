@@ -13,17 +13,26 @@ const Widget = ({ type }) => {
   let amount = number.toLocaleString("ko-KR");
   let diff = 20;
   useEffect(() => {
-    let counting = setInterval(function () {
-      if (test > number) {
-        setTest(number);
-        clearInterval(counting);
-        return;
-      }
-      console.log(test);
-      setTest(test + number / 20);
-      clearInterval(counting);
-    }, 400);
-  }, [test]);
+    // let counting = setInterval(() => {
+    //   setTest(test + number / 20);
+    //   console.log(test);
+    //   console.log(number);
+    //   if (test > number) {
+    //     clearInterval(counting);
+    //   }
+    // }, 1000);
+  }, []);
+
+  // let counting = setInterval(function () {
+  //   if (test > number) {
+  //     setTest(number);
+  //     clearInterval(counting);
+  //     return;
+  //   }
+  //   console.log(test);
+  //   setTest(test + number / 20);
+  //   clearInterval(counting);
+  // }, 400);
   switch (type) {
     case "earning":
       data = {

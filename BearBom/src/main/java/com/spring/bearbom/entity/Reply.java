@@ -25,6 +25,9 @@ public class Reply {
 
     @Column(nullable = false,columnDefinition = "char(1)")
     private char replyUseYn = 'N';
+    
+    @Column(nullable = false,columnDefinition = "char(1)")
+    private char replyYn = 'N';
 
     @Column(nullable = false)
     private int replyParent;
@@ -40,6 +43,6 @@ public class Reply {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name="HELPDESK_IDX")
-    private Helpdesk helpdesk;
+    @JoinColumn(name="INQUIRY_IDX")
+    private Inquiry inquiry;
 }

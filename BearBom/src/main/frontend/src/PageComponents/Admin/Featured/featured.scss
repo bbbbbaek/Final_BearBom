@@ -1,9 +1,10 @@
+@import "../../../variables";
+
 .featured {
   flex: 2;
-  -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
-  box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
   border-radius: 5px;
   padding: 1rem;
+  @include shadow();
 
   .top {
     display: flex;
@@ -13,9 +14,7 @@
     color: gray;
 
     .title {
-      margin: 0px;
-      font-size: 1.2rem;
-      font-weight: 600;
+      @include title();
     }
   }
 

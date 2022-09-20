@@ -4,3 +4,15 @@
   align-items: center;
   flex-direction: $direction;
 }
+
+@mixin shadow() {
+  box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
+  border-radius: 5px;
+}
+
+@mixin title() {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: gray;
+  margin-bottom: 1rem;
+}
