@@ -12,6 +12,7 @@ import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,6 +37,8 @@ public class UserController {
 	 EmailService emailService;
 	@PostMapping("/join")
 	public ResponseEntity<?> join(@RequestBody User user) {
+		
+
 		try {
 			System.out.println(passwordEncoder.getClass());
 			user.setUserPw(passwordEncoder.encode(user.getUserPw()));
@@ -70,7 +73,9 @@ public class UserController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody User user) {
+	public ResponseEntity<?> login(@RequestBody User user, @AuthenticationPrincipal String userId) {
+		System.out.println("/////////////////////////"+userId);
+		
 		//로그인 한 Member 객체 생성
 		User loginUser = userService.login(user.getUserId(), user.getUserPw());
 

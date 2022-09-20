@@ -55,7 +55,7 @@ const Header = () => {
   // }
   const onClicklogOut = (e) => {
     if (!isLogin) {
-      navigate("/joinTest");
+      navigate("/join");
     } else {
       localStorage.removeItem("USER_ID");
       localStorage.removeItem("ACCESS_TOKEN");
