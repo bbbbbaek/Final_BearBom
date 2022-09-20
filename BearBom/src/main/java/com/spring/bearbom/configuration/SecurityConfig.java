@@ -45,9 +45,7 @@ public class SecurityConfig{
 			.and()
 
 			.authorizeRequests().antMatchers("/", "/api/member/**", "/api/user/*","/api/guide/*","/api/**" , "/api/helpdesk/*", "/oauth/kakao", "/oauth/**","/upload/*", "/api/course/getCommonCodeList", "/api/course/searchCourse").permitAll()
-
 								.anyRequest().authenticated();
-
 
 		//filter 등록
 		//매 요청마다 corsfilter 실행 후 jwtAuthenticationFilter 실행
