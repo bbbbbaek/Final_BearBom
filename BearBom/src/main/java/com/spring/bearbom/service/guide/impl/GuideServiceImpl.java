@@ -14,6 +14,7 @@ public class GuideServiceImpl implements GuideService{
 
 	@Autowired
 	private GuideRepository guideRepository;
+	
 
 	@Override
 	public List<Guide> operation(Guide guide) {
@@ -22,6 +23,17 @@ public class GuideServiceImpl implements GuideService{
 		List<Guide> oprationList = guideRepository.findAll();
 		return oprationList;
 	}
+
+	@Override
+	public Guide insertFaq(Guide guide) {
+		int guideIdx = guideRepository.selectNextGuideIdx();
+		guide.setGuideIdx(guideIdx);
+		return guideRepository.save(guide);
+	}
+
+	
+
+	
 
 	
 }

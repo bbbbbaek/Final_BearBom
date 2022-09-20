@@ -24,13 +24,16 @@ import LoginTest from "./PageComponents/JoinComponents/LoginTest";
 import Saw from "./PageComponents/Saw";
 import Admin from "./PageComponents/Admin/Home/Admin";
 import Page404 from "./PageComponents/Page404";
-import Test123 from "./PageComponents/Detail/Test123";
 import RedirectForKakao from "./PageComponents/JoinComponents/RedirectForKakao";
 import RedirectForKakaoLogout from "./PageComponents/JoinComponents/RedirectForKakaoLogout";
 import KakaoPayRe from "./PageComponents/Detail/KakaoPayRe";
 import KakaoPayR from "./PageComponents/Detail/KakaoPayR";
 import PwFind from "./PageComponents/PwFind";
 import CourseSearch from "./PageComponents/CourseSearch";
+import Board from "./ModuleComponents/Board/Board";
+import Notice from "./PageComponents/Helpdesk/Notice/Notice";
+import FAQ from "./PageComponents/Helpdesk/FAQ/FAQ";
+import Inquiry from "./PageComponents/Helpdesk/Inquiry/Inquiry";
 
 function App() {
   return (
@@ -52,7 +55,14 @@ function App() {
             element={<CourseSearch />}
           />
           <Route path="/guide" element={<Guide />} />
-          <Route path="/helpdesk" element={<Helpdesk />} />
+          <Route path="/helpdesk" element={<Helpdesk />}>
+            <Route path="notice" element={<Notice />}>
+              <Route path=":id" element={<Board />} />
+            </Route>
+            <Route path="faq" element={<FAQ />} />
+            <Route path="inquiry" element={<Inquiry />} />
+          </Route>
+
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/loginTest" element={<LoginTest />} />
@@ -62,7 +72,6 @@ function App() {
           <Route path="/saw/:id" element={<Saw />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/*" element={<Page404 />} />
-          <Route path="/course/test" element={<Test123 />} />
           <Route path="/payready" element={<KakaoPayR />} />
           <Route path="/payresult" element={<KakaoPayRe />} />
           <Route path="/pwfind" element={<PwFind />} />

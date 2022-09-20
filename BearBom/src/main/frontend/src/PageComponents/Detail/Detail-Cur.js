@@ -11,7 +11,7 @@ function Cur() {
         </div>
 
         <div className="cur-box-img">
-          <img className="cur-img" src={require("../../img/img2.jpeg")}></img>
+          <img className="cur-img" src={require("../../img/blogo1.png")}></img>
         </div>
       </div>
       <div className="cur-box1">
@@ -21,7 +21,10 @@ function Cur() {
         </div>
 
         <div className="cur-box-img">
-          <img className="cur-img" src={require("../../img/img2.jpeg")}></img>
+          <img
+            className="cur-img"
+            src={require("../../img/class001.webp")}
+          ></img>
         </div>
       </div>
       <div className="cur-box1">
@@ -31,7 +34,10 @@ function Cur() {
         </div>
 
         <div className="cur-box-img">
-          <img className="cur-img" src={require("../../img/img2.jpeg")}></img>
+          <img
+            className="cur-img"
+            src={require("../../img/class002.webp")}
+          ></img>
         </div>
       </div>
     </>

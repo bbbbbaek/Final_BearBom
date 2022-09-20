@@ -144,11 +144,17 @@ const Login = () => {
         // console.log(response);
         // navigate("/");
         console.log(response);
+        localStorage.setItem("USER_ROLE", response.data.role);
         localStorage.setItem("USER_ID", response.data.userId);
         if (response.data.token) {
           localStorage.setItem("ACCESS_TOKEN", response.data.token);
-          navigate("/");
-          alert("로그인 되었습니다.");
+          if (localStorage.getItem("USER_ROLE") === "ROLE_USER") {
+            navigate("/");
+            alert("로그인 되었습니다.");
+          } else {
+            navigate("/admin");
+            alert("관리자 페이지입니다.");
+          }
         }
       })
       .catch((err) => {

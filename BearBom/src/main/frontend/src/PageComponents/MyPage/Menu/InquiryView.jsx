@@ -4,33 +4,22 @@ import Table from "../../../ModuleComponents/Table/Table";
 import useFetch from "../../../customHooks/useFetch";
 import axios from "axios";
 import { API_BASE_URL } from "../../../app-config";
+import { Data } from "../../../customHooks/create";
 
 const InquiryView = () => {
-  // const data = useFetch("/api/admin/getInquiryInfoReferenceList");
+  // index, title, content, regdate, userId, replyYN
+  let tableInfo = [
+    new Data("title", "long", "noticeIdx"),
+    new Data("content", "long", "noticeNm"),
+    new Data("rgdate", "short", "noticeContent"),
+    new Data("mdfdate", "long", "noticeRegdate"),
+    new Data("seller", "long", "noticeMdfdate"),
+    new Data("dop", "short", "noticeUseYn"),
+  ];
 
-  const [tableItems, setTableItems] = useState([
-    "문의 내역 조회",
-    "클래스명",
-    "매출",
-    "매출이익",
-    "수량",
-    "구매자",
-    "판매자",
-    "구매일자",
-  ]);
-  const [tableData, setTableData] = useState(
-    // new TableDataItems(
-    [
-      "inquiryIdx",
-      "inquiryEmail",
-      "inquirySort",
-      "inquiryTitle",
-      "inquiryContent",
-      // "user",
-    ]
-    // )
-  );
-  let fetch = useFetch("/api/admin/getInquiryInfoReferenceList");
+  let fetch = useFetch("/api/admin/getInquiryInfoReferenceList", {
+    Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+  });
   let fetchedData = null;
   fetchedData = fetch.data.data;
   console.log(fetchedData);
@@ -43,11 +32,7 @@ const InquiryView = () => {
         </h5>
         <hr />
         {/* {fetchedData !== undefined ? ( */}
-        <Table
-          tableItems={tableItems}
-          tableData={tableData}
-          fetchedData={fetchedData}
-        />
+        <Table tableInfo={tableInfo} fetchedData={fetchedData} />
         {/* ) : null} */}
       </div>
     </>

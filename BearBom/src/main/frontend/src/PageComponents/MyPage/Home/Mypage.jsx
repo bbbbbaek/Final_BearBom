@@ -29,6 +29,7 @@ const Mypage = () => {
       },
       // params: { courseIdx: id },
       // test
+      // test1
     }).then((response) => {
       console.log(response.data);
       setGetUser(response.data.getUser);

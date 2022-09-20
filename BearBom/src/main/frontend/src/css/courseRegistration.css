@@ -428,3 +428,13 @@ div {
 .regCalender {
   margin: 20px 130px;
 }
+
+
+.timeBox{
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 400px;
+}

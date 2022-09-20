@@ -28,11 +28,12 @@ public class InquiryInfoController {
 	
 	//백단으로 보내서 저장시키는것
 	@PostMapping("/insertInquiry")
-	public ResponseEntity<?> insertInquiry( Inquiry inquiry){
+	public ResponseEntity<?> insertInquiry(@RequestBody Inquiry inquiry,@AuthenticationPrincipal String userId){
 		System.out.println(inquiry.getInquiryEmail());
 		System.out.println(inquiry.getInquirySort());
 		System.out.println(inquiry.getInquiryTitle());
 		System.out.println(inquiry.getInquiryContent());
+		System.out.println(userId);
 		
 		Inquiry onetoone = inquiryInfoService.insertInquiry(inquiry);
 		InquiryDTO inquiryDTO = new InquiryDTO();
@@ -42,6 +43,7 @@ public class InquiryInfoController {
 		inquiryDTO.setInquirySort(onetoone.getInquirySort());
 		inquiryDTO.setInquiryTitle(onetoone.getInquiryTitle());
 		inquiryDTO.setInquiryContetnt(onetoone.getInquiryContent());
+		inquiryDTO.setUserId(userId);
 		
 		return ResponseEntity.ok().body(inquiryDTO);
 	}

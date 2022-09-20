@@ -15,7 +15,7 @@
   -webkit-box-orient: vertical;
   word-wrap: break-word;
   line-height: 1.5em;
-
   text-align: left;
   width: 100%;
+  border: 1px solid black;
 }

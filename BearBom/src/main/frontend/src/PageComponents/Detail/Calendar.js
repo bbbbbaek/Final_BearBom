@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import ko from "date-fns/locale/ko";
 import "../../css/apply.css";
 
-const Calendar2 = (props) => {
+const Calendar2 = (props, { course }) => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
