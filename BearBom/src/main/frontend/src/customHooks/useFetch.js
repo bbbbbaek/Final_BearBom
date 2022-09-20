@@ -7,7 +7,7 @@ import { API_BASE_URL } from "../app-config";
 // 사용법 예시
 // const data = useFetch("/api/inquiry", "get") 과 같이 입력하여 사용
 
-const useFetch = (url, postData) => {
+const useFetch = (url, header) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -20,7 +20,7 @@ const useFetch = (url, postData) => {
         const res = await axios({
           url: API_BASE_URL + url,
           method: "post",
-          data: postData,
+          headers: header,
         });
         // console.log(res.data);
         setData(res.data);

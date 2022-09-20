@@ -1,3 +1,5 @@
+@import "../../../variables";
+
 .mypage_widget {
   display: flex;
   flex-direction: column;
@@ -6,7 +8,7 @@
   padding: 1rem;
   // -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
   // box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
-  box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
+  @include shadow();
 
   border-radius: 5px;
   height: 9rem;
