@@ -71,6 +71,13 @@ body {
   padding-right: 10px;
   text-align: center;
 }
+
+.course-short-info {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+}
+
 .teacher {
   margin-top: 20px;
 }
@@ -345,7 +352,7 @@ body {
 .reviewmodal-btn {
   float: right;
   margin-right: 40px;
-  background-color: #1eb7e5;
+  background-color: #cbc7c3;
   border-radius: 5px;
   border: 1px solid rgb(0, 0, 0, 0);
 }
@@ -391,7 +398,7 @@ body {
 
 .navbar-expand {
   position: sticky;
-  top: 77px;
+  top: 81px;
   border-bottom: 1px solid #dbd7d3;
   z-index: 99;
   background-color: white;
@@ -427,7 +434,7 @@ body {
   left: 500px;
   border: 1px none;
   border-radius: 5px;
-  background-color: #dbd7b3;
+  background-color: #cbc7c3;
 }
 
 #review-box-list {

@@ -37,7 +37,7 @@ public class CourseRController {
     
     @PostMapping("/getReviewList")
     public Map<String, Object> getReviewList(@RequestBody Course course) {
-    	System.out.println("/////////////"+course.getCourseIdx());
+
     	
     	Courser courser = new Courser();
     	courser.setCourse(course);
@@ -65,7 +65,7 @@ public class CourseRController {
         System.out.println(paramMap.get("courseIdx"));
         System.out.println(paramMap.get("courserRate"));
         System.out.println(paramMap.get("courserContent"));
-        System.out.println("/////////"+userId);
+
 
         Course course = new Course();
         Courser courser = new Courser();
@@ -88,7 +88,12 @@ public class CourseRController {
     	
 //    	List<Double> updateRating = courseRService.updateRating(courser);
 
+    	
+    	//double averageRating = courserService.updateRating1(courser);
+
+
     	double averageRating = courserService.updateRating(course.getCourseIdx());
+
     	
     	System.out.println(averageRating);
     	Map<String, Object> resultMap = new HashMap<String, Object>();

@@ -1,93 +1,40 @@
-// import "../../css/test123.css";
-
-// function Test123() {
-//   return (
-//     <div className="carousel">
-//       <ul className="slides">
-//         <input type="radio" name="radio-buttons" id="img-1" checked />
-//         <li className="slide-container">
-//           <div className="slide-image">
-//             <img src={require("../../img/img2.jpeg")} />
-//           </div>
-//           <div className="carousel-controls">
-//             <label for="img-3" className="prev-slide">
-//               <span>&lsaquo;</span>
-//             </label>
-//             <label for="img-2" className="next-slide">
-//               <span>&rsaquo;</span>
-//             </label>
-//           </div>
-//         </li>
-//         <input type="radio" name="radio-buttons" id="img-2" />
-//         <li className="slide-container">
-//           <div className="slide-image">
-//             <img src={require("../../img/psy.jpeg")} />
-//           </div>
-//           <div className="carousel-controls">
-//             <label for="img-1" className="prev-slide">
-//               <span>&lsaquo;</span>
-//             </label>
-//             <label for="img-3" className="next-slide">
-//               <span>&rsaquo;</span>
-//             </label>
-//           </div>
-//         </li>
-//         <input type="radio" name="radio-buttons" id="img-3" />
-//         <li className="slide-container">
-//           <div className="slide-image">
-//             <img src={require("../../img/classInfo.png")} />
-//           </div>
-//           <div className="carousel-controls">
-//             <label for="img-2" className="prev-slide">
-//               <span>&lsaquo;</span>
-//             </label>
-//             <label for="img-1" className="next-slide">
-//               <span>&rsaquo;</span>
-//             </label>
-//           </div>
-//         </li>
-//         <div className="carousel-dots">
-//           <label for="img-1" className="carousel-dot" id="img-dot-1"></label>
-//           <label for="img-2" className="carousel-dot" id="img-dot-2"></label>
-//           <label for="img-3" className="carousel-dot" id="img-dot-3"></label>
-//         </div>
-//       </ul>
-//     </div>
-//   );
-// }
-
-// export default Test123;
-
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Box from "./Box";
 import "../../css/thumb.css";
 
-const choice = {
-  img1: {
-    name: "img1",
-    img: process.env.PUBLIC_URL + require("../../img/class001.webp"),
-  },
-  img2: {
-    name: "img2",
-    img: process.env.PUBLIC_URL + require("../../img/img2.jpeg"),
-  },
-  img3: {
-    name: "img3",
-    img: process.env.PUBLIC_URL + require("../../img/class002.webp"),
-  },
-  img4: {
-    name: "img4",
-    img: process.env.PUBLIC_URL + require("../../img/class003.webp"),
-  },
-};
+// const choice = {
+//   img1: {
+//     name: "img1",
+//     img: process.env.PUBLIC_URL + require("../../img/class001.webp"),
+//   },
+//   img2: {
+//     name: "img2",
+//     img: process.env.PUBLIC_URL + require("../../img/img2.jpeg"),
+//   },
+//   img3: {
+//     name: "img3",
+//     img: process.env.PUBLIC_URL + require("../../img/class002.webp"),
+//   },
+//   img4: {
+//     name: "img4",
+//     img: process.env.PUBLIC_URL + require("../../img/class003.webp"),
+//   },
+// };
 
-function Test123() {
-  const [userSelect, setUserSelect] = useState(choice.img1);
+function ImgBox({ course }) {
+  // const play = (userChoice) => {
+  //   setUserSelect(choice[userChoice]);
+  // };
 
-  const play = (userChoice) => {
-    setUserSelect(choice[userChoice]);
+  const [userSelect, setUserSelect] = useState();
+  const play = (a) => {
+    setUserSelect({
+      name: a,
+      img: `http://localhost:8080/upload/${course.courseThumbnailNm}`,
+    });
+    console.log(setUserSelect);
   };
 
   const responsive = {
@@ -109,6 +56,16 @@ function Test123() {
       items: 1,
     },
   };
+
+  useEffect(() => {
+    if (course.length !== 0)
+      setUserSelect({
+        name: `img1`,
+        img: `http://localhost:8080/upload/${course.courseThumbnailNm}`,
+      });
+    console.log(course.courseThumbnailNm);
+  }, [course]);
+
   return (
     <div className="main-thumb-box">
       <div className="main-thumb">
@@ -116,20 +73,26 @@ function Test123() {
       </div>
       <Carousel responsive={responsive}>
         <div className="btn-thumb-box">
+          {/* {course.map((a, index) => ( */}
           <input
             className="btn-thumb1"
-            onClick={() => play("img1")}
+            onClick={() => {
+              play("img1");
+              // play(a, index);
+              console.log("ㅁㅁㅁㅁㅁㅁ");
+            }}
             type="image"
-            src={require("../../img/class001.webp")}
+            src={`http://localhost:8080/upload/${course.courseThumbnailNm}`}
             alt="1번째 사진"
           ></input>
+          {/* ))} */}
         </div>
         <div className="btn-thumb-box">
           <input
             className="btn-thumb2"
             onClick={() => play("img2")}
             type="image"
-            src={require("../../img/img2.jpeg")}
+            src={`http://localhost:8080/upload/${course.courseThumbnailNm}`}
             alt="2번째 사진"
           ></input>
         </div>
@@ -200,4 +163,4 @@ function Test123() {
     </div>
   );
 }
-export default Test123;
+export default ImgBox;

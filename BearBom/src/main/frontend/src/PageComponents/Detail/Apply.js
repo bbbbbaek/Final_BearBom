@@ -1,18 +1,19 @@
 import Calendar2 from "./Calendar";
-import Calendar3 from "./Calendar3";
 import "../../css/apply.css";
 import { useEffect, useState, useRef } from "react";
 import LikeButton from "../../ModuleComponents/LikeButton";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_BASE_URL } from "../../app-config";
+import Swal from "sweetalert2";
 
-function Apply({ courseIdx }) {
+function Apply({ courseIdx, course }) {
   const [height, setHeight] = useState();
   const handleHeight = () => {
     setHeight(window.pageYOffset);
   };
   const [like, setLike] = useState(false);
+  const [courseCostChange, setCourseCostChange] = useState("");
   const calRef = useRef(null);
 
   //카카오페이 경로이동
@@ -20,6 +21,17 @@ function Apply({ courseIdx }) {
   const onClickBtn = () => {
     navigate(`/payready`);
   };
+
+  //금액 콤마 찍기
+  // console.log(typeof course.courseCost);
+  // console.log(course.courseCost);
+  useEffect(() => {
+    setCourseCostChange((prev) =>
+      (course.courseCost + "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    );
+  }, [course]);
+
+  // console.log(courseCostChange);
 
   useEffect((e) => {
     const fetchData = async () => {
@@ -80,6 +92,7 @@ function Apply({ courseIdx }) {
     // const res = await axios.post(`${API_BASE_URL}/api/like/{courseIdx}/insertLike`);
     const userId = localStorage.getItem("USER_ID");
     const token = localStorage.getItem("ACCESS_TOKEN");
+
     if (!token) {
       alert("찜하기를 위해 로그인해주세요 :)");
       navigate("/login");
@@ -112,6 +125,28 @@ function Apply({ courseIdx }) {
     // setLike(!like);
   };
 
+  const successAlert = () => {
+    // Swal.fire({
+    //   title: "Good job!",
+    //   text: "You clicked the button.",
+    //   icon: "success",
+    // });
+
+    Swal.fire({
+      title: "찜목록에 추가되었습니다.",
+      width: 600,
+      padding: "3em",
+      color: "#716add",
+      background: "#fff url(/images/trees.png)",
+      backdrop: `
+        rgba(0,0,123,0.4)
+        url("https://sweetalert2.github.io/images/nyan-cat.gif")
+         top
+        no-repeat
+      `,
+    });
+  };
+
   return (
     <>
       <div className="calendar-box1" ref={calRef}>
@@ -120,18 +155,28 @@ function Apply({ courseIdx }) {
           <Calendar2 />
         </div>
         <div className="apply-cost">
-          <span>예약 금액 1인</span>
+          <span>예약 금액 1인:</span>
           <span className="apply-cost-won">
-            <b>/40,000 원</b>
+            {/* <b>{courseCostChange}원</b> */}
+            <b>
+              {typeof courseCostChange !== "undefined"
+                ? courseCostChange
+                : (course.courseCost + "").replace(
+                    /\B(?=(\d{3})+(?!\d))/g,
+                    ","
+                  )}
+              원
+            </b>
           </span>
         </div>
 
         <div className="cal-btn-box">
-          <div className="cal-wishList">
-            <LikeButton like={like} onClick={toggleLike}></LikeButton>
-            찜하기
-          </div>
-
+          <button className="cal-wishList" onClick={successAlert}>
+            <LikeButton like={like} onClick={toggleLike}></LikeButton>찜하기
+          </button>
+          {/* <button>
+            <LikeModal></LikeModal>
+          </button> */}
           <button type="button" className="cal-apply" onClick={onClickBtn}>
             신청하기
           </button>

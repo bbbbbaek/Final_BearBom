@@ -36,6 +36,17 @@ public class CourserServiceImpl implements CourserService {
         return courserRepository.save(courser);
     }
 
+    @Override
+	public double updateRating(int courseIdx) {
+		// TODO Auto-generated method stub
+		return courserMapper.updateRating(courseIdx);
+	}
+
+	@Override
+	public double updateRating1(Courser courser) {
+		// TODO Auto-generated method stub
+		return courserMapper.updateRating1(courser);
+	}
 
 //	@Override
 //	public double updateRating(Courser courser) {
@@ -43,21 +54,12 @@ public class CourserServiceImpl implements CourserService {
 //		return courserMapper.updateRating(courser);
 //	}
 
-//    @Override
-//    public List<Courser> updateRating1(Courser courser) {
-//        // TODO Auto-generated method stub
-//        return courserMapper.updateRating1(courser);
-//    }
+
 
 	@Override
     public Course getCourse(int courseIdx) {
 //        List<Course> courseList = courseRepository.findAll();
         Course course = courserMapper.getCourse(courseIdx);
         return course;
-    }
-
-    @Override
-    public double updateRating(int courseIdx) {
-        return courserMapper.updateRating(courseIdx);
     }
 }

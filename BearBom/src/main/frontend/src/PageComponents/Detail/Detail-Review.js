@@ -2,6 +2,7 @@ import Modal from "./ReviewModal";
 import HoverRating from "./ReviewFeedback";
 import AutoHeightTextarea from "./AutoHeightTextarea";
 import React, { useState, useEffect } from "react";
+import InputModal from "./InputModal";
 //import * as React from 'react';
 
 function Review({ review }) {
@@ -22,11 +23,11 @@ function Review({ review }) {
         {/* key={u.courserIdx} */}
         <img className="img2" src={require("../../img/img2.jpeg")}></img>
         <span className="review-nickname">{review.user.userNickName}</span>
-
+        <span>{review.courserIdx}</span>
         <div className="review-rating">
           <HoverRating courserRate={review.courserRate} />
         </div>
-        <div className="review-textarea">
+        <div>
           {/* <AutoHeightTextarea readOnly courserContent={review.courserContent} /> */}
           <span>{review.courserContent}</span>
         </div>
