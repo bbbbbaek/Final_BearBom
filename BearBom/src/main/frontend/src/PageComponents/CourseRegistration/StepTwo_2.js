@@ -9,6 +9,10 @@ import React, { useEffect, useState } from "react";
 import "../../css/courseRegistration.css";
 import ThumbnailInput from "./RegistrationComponents/ThumbnailInput";
 import FileInput from "./RegistrationComponents/FileInput"
+import FileInput2 from "./RegistrationComponents/FileInput2"
+import FileInput3 from "./RegistrationComponents/FileInput"
+import FileInput4 from "./RegistrationComponents/FileInput"
+import MultiUploadByKm from "./RegistrationComponents/MultiUploadByKm";
 
 const StepTwo_2 = ({formData, saveFormData}) => {
   const [imageList, setImageList] = useState([]);
@@ -64,10 +68,13 @@ const StepTwo_2 = ({formData, saveFormData}) => {
               </div>
               <div className="inputMultiFileBox">
                 <FileInput changeImages={changeImages}/>
-                <FileInput changeImages={changeImages}/>
-                <FileInput changeImages={changeImages}/>
-                <FileInput changeImages={changeImages}/>
+                <FileInput2 changeImages={changeImages}/>
+                <FileInput3 changeImages={changeImages}/>
+                <FileInput4 changeImages={changeImages}/>
               </div>
+              {/* <div>
+                <MultiUploadByKm/>
+              </div> */}
               <p className="inputWar">*최대 4장 까지 등록 가능합니다.</p>
             </div>
           </div>

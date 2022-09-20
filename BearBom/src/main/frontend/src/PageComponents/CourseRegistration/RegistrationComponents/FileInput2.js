@@ -4,7 +4,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { width } from "@mui/system";
 
-const FilelInput = ({changeImages}) => {
+const FileInput2 = ({changeImages}) => {
   const [ImageFile, setImageFile] = useState();
   const [imageFileList, setImageFileList] = useState([]);
 //   const test = false;
@@ -21,7 +21,7 @@ const FilelInput = ({changeImages}) => {
       setImageFile(e.target.files[0]);
       setImageFileList(fileList);
       console.log(imageFileList)
-      const $button = document.querySelector(".multiImgAddBtn2");
+      const $button = document.querySelector(".multiImgAddBtn3");
       $button.style.display = "none"
     }
   };
@@ -29,7 +29,7 @@ const FilelInput = ({changeImages}) => {
   // 이미지 삭제버튼 클릭시
   const removeSelectedImage = () => {
     setImageFile();
-    const $button = document.querySelector(".multiImgAddBtn2");
+    const $button = document.querySelector(".multiImgAddBtn3");
     $button.style.display = "flex"
   };
 
@@ -38,7 +38,7 @@ const FilelInput = ({changeImages}) => {
   return (
     <>
       <div className="multiImgAdd">
-        <div className="multiImgAddBtn2">
+        <div className="multiImgAddBtn3">
         <Button
             variant="outlined"
             onClick={() => inputRef.current.click()}
@@ -71,7 +71,7 @@ const FilelInput = ({changeImages}) => {
                     alt="Thumbnail"
                     />
             </div>
-            <div className="multiImgDel2">
+            <div className="multiImgDel3">
             <button onClick={removeSelectedImage} style={styles.delete}>
               <HighlightOffIcon/>
             </button>
@@ -83,7 +83,7 @@ const FilelInput = ({changeImages}) => {
   );
 };
 
-export default FilelInput;
+export default FileInput2;
 
 // 이미지 스타일
 const styles = {
