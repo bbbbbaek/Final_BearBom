@@ -25,10 +25,18 @@ public class Mypage2ServiceImpl implements Mypage2Service{
 
 
 	@Override
-	public List<Map<String, Object>> updateInquiryReference(String userId) {
+	public void updateInquiryReference(InquiryDTO inquiryDTO) {
 		// TODO Auto-generated method stub
-		return mypage2Mapper.updateInquiryReference(userId);
+		mypage2Mapper.updateInquiryReference(inquiryDTO);
 	}
+
+
+//	@Override
+//	public List<Map<String, Object>> updateInquiryReference(InquiryDTO inquiryDTO) {
+//		// TODO Auto-generated method stub
+//		return mypage2Mapper.updateInquiryReference(inquiryDTO);
+//	}
+
 
 
 

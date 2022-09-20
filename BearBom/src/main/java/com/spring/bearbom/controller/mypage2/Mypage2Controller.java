@@ -8,19 +8,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.bearbom.dto.InquiryDTO;
 import com.spring.bearbom.service.mypage2.Mypage2Service;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
+@Slf4j
 @RequestMapping("/api/mypage2")
 public class Mypage2Controller {
 
 	@Autowired
 	private Mypage2Service mypage2Service;
 	
+	
+	//y 인것만 화면에 뿌려주는거
 	@GetMapping("/getInquiryReference")
 	public Map<String, Object> getInquiryReference(InquiryDTO inquiryDTO,@AuthenticationPrincipal String userId){
 		try {
@@ -36,22 +42,15 @@ public class Mypage2Controller {
 			return error;
 		}
 	}
-	
+	//y를 n으로 바꾸는 update
 	@PostMapping("/updateInquiryReference")
-	public Map<String, Object> updateInquiryReference(InquiryDTO inquiryDTO,@AuthenticationPrincipal String userId){
-		try {
+	public void updateInquiryReference(@RequestBody InquiryDTO inquiryDTO, @AuthenticationPrincipal String userId){	
 		inquiryDTO.setUserId(userId);
-		
-		List<Map<String, Object>> updateInquiryReference = mypage2Service.updateInquiryReference(inquiryDTO.getUserId());
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		resultMap.put("updateInquiryReference", updateInquiryReference);
-		
-		return resultMap;
-		} catch(Exception e) {
-			Map<String,Object> error = new HashMap<String,Object>();
-			error.put("error", e.getMessage());
-			return error;
-		}
+		System.out.println("before inquiryDTO : " +inquiryDTO);
+		log.info("inquiryDTO : {}", inquiryDTO);
+		mypage2Service.updateInquiryReference(inquiryDTO);
+		System.out.println("after inquiryDTO : " +inquiryDTO);
+	
 	}
 	
 }

@@ -12,7 +12,10 @@ public interface Mypage2Mapper {
 
 	List<Map<String, Object>> getInquiryReference(InquiryDTO inquiryDTO);
 
+	void updateInquiryReference(InquiryDTO inquiryDTO);
+
+//	List<Map<String, Object>> updateInquiryReference(InquiryDTO inquiryDTO);
+
 	
-	List<Map<String, Object>> updateInquiryReference(String userId);
 
 }

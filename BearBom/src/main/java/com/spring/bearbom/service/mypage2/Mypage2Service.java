@@ -9,6 +9,10 @@ public interface Mypage2Service {
 
 	List<Map<String, Object>> getInquiryReference(InquiryDTO inquiryDTO);
 
-	List<Map<String, Object>> updateInquiryReference(String userId);
+	void updateInquiryReference(InquiryDTO inquiryDTO);
+
+//	List<Map<String, Object>> updateInquiryReference(InquiryDTO inquiryDTO);
+//
+
 
 }

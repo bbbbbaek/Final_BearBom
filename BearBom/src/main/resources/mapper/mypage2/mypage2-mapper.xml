@@ -8,4 +8,10 @@
     SELECT * FROM T_INQUIRY WHERE USER_ID = #{userId} AND inquiry_use_yn = 'Y'
     ]]>
     </select>
+    
+    <update id="updateInquiryReference" parameterType="com.spring.bearbom.dto.InquiryDTO">
+    <![CDATA[
+    UPDATE T_INQUIRY SET INQUIRY_USE_YN = "N" WHERE USER_ID = #{userId} AND INQUIRY_IDX = #{inquiryIdx}
+    ]]>
+    </update>
 </mapper>
