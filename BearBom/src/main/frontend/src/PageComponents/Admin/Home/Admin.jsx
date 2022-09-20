@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Sidebar from "../Sidebar/Sidebar";
 import "./admin.scss";
 import Navbar from "../Navbar/Navbar";
@@ -7,8 +7,38 @@ import Featured from "../Featured/Featured";
 import Chart from "../Chart/Chart";
 import useFetch from "../../../customHooks/useFetch";
 import TableCopy from "../Table/Table";
+import { useNavigate } from "react-router-dom";
 
 const Admin = () => {
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("ACCESS_TOKEN");
+    const userRole = localStorage.getItem("USER_ROLE")
+    console.log(accessToken);
+    if (
+      accessToken === null ||
+      accessToken === "" ||
+      typeof accessToken === "undefined" 
+    ) {
+      alert("관리자 페이지입니다.");
+      navigate("/login");
+    }
+
+    if(
+      userRole === "ROLE_USER" && (
+      accessToken !== null ||
+      accessToken !== "" ||
+      typeof accessToken !== "undefined"
+      )
+    ) {
+      alert("관리자 계정 필요");
+      navigate("/");
+    }
+  }, []);
+
+
   function createTitle() {
     return {};
   }

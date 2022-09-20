@@ -147,6 +147,7 @@ const Login = () => {
         localStorage.setItem("USER_ID", response.data.userId);
         if (response.data.token) {
           localStorage.setItem("ACCESS_TOKEN", response.data.token);
+          localStorage.setItem("USER_ROLE", response.data.role);
           navigate("/");
           alert("로그인 되었습니다.");
         }
