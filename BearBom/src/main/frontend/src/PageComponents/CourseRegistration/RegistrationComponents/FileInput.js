@@ -73,7 +73,7 @@ const FilelInput = ({changeImages}) => {
             </div>
             <div className="multiImgDel">
             <button onClick={removeSelectedImage} style={styles.delete}>
-              <HighlightOffIcon/>
+              삭제<HighlightOffIcon/>
             </button>
             </div>
           </div>
