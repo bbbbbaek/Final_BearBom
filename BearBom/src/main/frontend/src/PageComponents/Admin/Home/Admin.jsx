@@ -12,34 +12,32 @@ import SimpleTable from "../../../ModuleComponents/SimpleTable/SimpleTable";
 import LatestTransaction from "../LatestTransaction/LatestTransaction";
 
 const Admin = () => {
-
-
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const accessToken = localStorage.getItem("ACCESS_TOKEN");
-    const userRole = localStorage.getItem("USER_ROLE")
-    console.log(accessToken);
-    if (
-      accessToken === null ||
-      accessToken === "" ||
-      typeof accessToken === "undefined" 
-    ) {
-      alert("관리자 페이지입니다.");
-      navigate("/login");
-    }
+  // useEffect(() => {
+  //   const accessToken = localStorage.getItem("ACCESS_TOKEN");
+  //   const userRole = localStorage.getItem("USER_ROLE")
+  //   console.log(accessToken);
+  //   if (
+  //     accessToken === null ||
+  //     accessToken === "" ||
+  //     typeof accessToken === "undefined"
+  //   ) {
+  //     alert("관리자 페이지입니다.");
+  //     navigate("/login");
+  //   }
 
-    if(
-      userRole === "ROLE_USER" && (
-      accessToken !== null ||
-      accessToken !== "" ||
-      typeof accessToken !== "undefined"
-      )
-    ) {
-      alert("관리자 계정 필요");
-      navigate("/");
-    }
-  }, []);
+  //   if(
+  //     userRole === "ROLE_USER" && (
+  //     accessToken !== null ||
+  //     accessToken !== "" ||
+  //     typeof accessToken !== "undefined"
+  //     )
+  //   ) {
+  //     alert("관리자 계정 필요");
+  //     navigate("/");
+  //   }
+  // }, []);
 
   let fetch = useFetch("/api/helpdesk/getNoticeList").data.data;
   let fetchedData = null;

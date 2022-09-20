@@ -4,8 +4,12 @@ import adminProfileImage from "../../images/adminProfileImage.png";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const Board = ({ tableInfo }) => {
+  const { params } = useParams();
+  console.log(params);
+
   const navigate = useNavigate();
   const backToList = () => {
     navigate(-1);
@@ -14,6 +18,13 @@ const Board = ({ tableInfo }) => {
   return (
     <>
       <div className="boardlist">
+        <button
+          onClick={() => {
+            console.log(params);
+          }}
+        >
+          param
+        </button>
         <div className="top1">
           <div className="title">해외진출 성장스토리 공모전</div>
           <button className="back" onClick={backToList}>

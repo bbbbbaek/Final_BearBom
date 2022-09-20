@@ -10,7 +10,7 @@ import excelDownload from "../../images/excelDownload.png";
 import { useNavigate } from "react-router-dom";
 
 // TableMenuItems 객체로 생성한 tableItems state를 사용하여 각 컴포넌트에 알맞은 데이터를 출력할 수 있도록 설계
-const Table = ({ setTab, tableInfo, fetchedData, toggle, setToggle }) => {
+const Table = ({ tableInfo, fetchedData }) => {
   // const [please, setPlease] = useState(fetchedData);
   const sortedData = [...dummyData].sort((a, b) => b.noticeIdx - a.noticeIdx);
   const [rawData] = useState(sortedData);
@@ -76,7 +76,7 @@ const Table = ({ setTab, tableInfo, fetchedData, toggle, setToggle }) => {
   // 테이블 바디 onClick 시, 상세 페이지로 이동하는 함수
   const moveToBoard = (element) => {
     let id = element.noticeIdx;
-    navigate(`/helpdesk/notice/${id}`);
+    navigate(`${id}`);
   };
 
   // 테이블에 클래스 추가해주는 함수
@@ -101,7 +101,6 @@ const Table = ({ setTab, tableInfo, fetchedData, toggle, setToggle }) => {
         <td
           className={insertClass(i)}
           onClick={() => {
-            setToggle(!toggle);
             moveToBoard(element);
           }}
         >
