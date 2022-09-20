@@ -5,7 +5,7 @@
 <mapper namespace="com.spring.bearbom.mapper.MypageMapper">
     <select id="getInquiryReference" resultType="camelHashMap" parameterType="String">
         <![CDATA[
-            SELECT * FROM T_INQUIRY WHERE USER_ID = #{userId}
+            SELECT * FROM T_INQUIRY WHERE USER_ID = #{userId} AND INQUIRY_USE_YN = 'Y'
         ]]>
     </select>
 </mapper>
