@@ -31,6 +31,7 @@ public class NoticeServiceImpl implements NoticeService{
 		notice.setNoticeIdx(noticeIdx);
 		return noticeRepository.save(notice);
 	}
+
 	
 	
 	//백단에 저장

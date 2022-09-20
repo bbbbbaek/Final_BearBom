@@ -15,6 +15,6 @@ public class NoticeDTO {
 	private LocalDateTime noticeRegdate;
 	private LocalDateTime noticeMdfdate;
 	private char noticeUseYn;
-	private User user;
+	private String userId;
 
 }
