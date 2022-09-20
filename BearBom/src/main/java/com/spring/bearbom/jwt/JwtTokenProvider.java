@@ -22,7 +22,8 @@ public class JwtTokenProvider {
 	//서명부분에서 유효성 검사에 사용될 키
 	private static final String SECRET_KEY = "Yml0Y2FtcDIyMnJlYWN0c3ByaW5nYm9vdGFwcA==";
 	Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes(StandardCharsets.UTF_8));
-	
+
+	// 로그인했을때 토큰 만들어줄려고
 	/*
 	 * 사용자 정보를 받아서 JWT 생성
 	 * JSON 문자열을 base64인코딩하고 뒷부분에 문자열을 서버에 있는 SECRET_KEY Hashing 하여 추가

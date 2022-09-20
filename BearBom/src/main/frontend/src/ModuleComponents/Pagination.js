@@ -10,11 +10,16 @@ const Pagination = ({ total, limit, page, setPage }) => {
   return (
     <>
       <Nav>
-        <FirstPageIcon sx={{ fontSize: "1.3rem" }}></FirstPageIcon>
+        <FirstPageIcon
+          onClick={() => setPage(1)}
+          sx={{ fontSize: "1.3rem" }}
+          style={{ cursor: "pointer" }}
+        ></FirstPageIcon>
         <ArrowBackIosNewIcon
           onClick={() => setPage(page - 1)}
           disabled={page === 1}
           sx={{ fontSize: "0.85rem" }}
+          style={{ cursor: "pointer" }}
         >
           &lt;
         </ArrowBackIosNewIcon>
@@ -33,10 +38,15 @@ const Pagination = ({ total, limit, page, setPage }) => {
           onClick={() => setPage(page + 1)}
           disabled={page === numPages}
           sx={{ fontSize: "0.85rem" }}
+          style={{ cursor: "pointer" }}
         >
           &gt;
         </ArrowForwardIosIcon>
-        <LastPageIcon sx={{ fontSize: "1.3rem" }}></LastPageIcon>
+        <LastPageIcon
+          sx={{ fontSize: "1.3rem" }}
+          style={{ cursor: "pointer" }}
+          onClick={() => setPage(numPages)}
+        ></LastPageIcon>
       </Nav>
     </>
   );

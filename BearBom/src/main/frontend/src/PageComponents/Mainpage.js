@@ -144,7 +144,7 @@ const Mainpage = () => {
                         className="get-local"
                         style={{ marginTop: "20px", display: "block" }}
                       >
-                        {a.courseNm + "        "}
+                        {a.courseNm + "           "}
                         <img
                           className="img_test"
                           src={`http://localhost:8080/upload/${a.courseThumbnailNm}`}

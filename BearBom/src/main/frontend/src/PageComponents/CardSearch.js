@@ -4,7 +4,7 @@ import styled from "styled-components";
 import HeartImg from "../../src/assets/heart.png";
 import EmptyHeartImg from "../../src/assets/empty-heart.png";
 import LikeButton from "../ModuleComponents/LikeButton";
-import "../css/card.scss";
+import "../css/cardSearch.scss";
 import { API_BASE_URL } from "../app-config";
 import axios from "axios";
 
@@ -126,9 +126,11 @@ const CardSearch = ({ data }) => {
             ></img>
           </ImgContainer>
         </Link>
-        <div className="like">
-          <LikeButton like={like} onClick={toggleLike}></LikeButton>
-        </div>
+        <LikeContainer className="like_div">
+          <div className="likeSearch">
+            <LikeButton like={like} onClick={toggleLike}></LikeButton>
+          </div>
+        </LikeContainer>
         <TextContainer>
           <div className="first_row">
             {/* props로 데이터 넘겨서 넣어주기 일단 dummy */}
@@ -193,6 +195,11 @@ const CardWrapper = styled.div`
 //   font-size: 10px;
 //   font-weight: 600;
 // }
+
+const LikeContainer = styled.div`
+  position: relative;
+`;
+
 const ImgContainer = styled.div`
   position: relative;
   width: 85%;
