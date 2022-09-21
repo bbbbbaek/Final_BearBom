@@ -1,6 +1,8 @@
 package com.spring.bearbom.mapper;
 
 import com.spring.bearbom.dto.UserDTO;
+import com.spring.bearbom.entity.User;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -39,10 +41,12 @@ public interface UserMapper {
     @Insert("INSERT INTO T_USER(USER_ID, USER_NM,USER_PW,role,USER_ADDRESS,USER_NICK_NAME,USER_EMAIL,USER_POINT,USER_PW_FAIL_CNT,USER_TEL,USER_YN,USER_ZIPCODE) VALUES (#{userId},#{userNm}, #{userPw}, #{role}, #{userAddress},  #{userNickName}, #{userEmail}, #{userPoint}, #{userPwFailCnt}, #{userTel}, #{userYn}, #{userZipcode})")
 //    @Insert("INSERT INTO T_USER VALUES (USER_ID = #{userId}, USER_NM = #{userNm}, USER_PW=#{userPw}, ROLE=#{role}, USER_ADDRESS = #{userAddress}, USER_NICK_NAME = #{userNickName}, USER_EMAIL = #{userEmail}, USER_POINT = #{userPoint}, USER_PW_FAIL_CNT = #{userPwFailCnt}, USER_TEL= #{userTel}, USER_YN = #{userYn}, USER_ZIPCODE = #{userZipcode})")
     void insertUserKakao(UserDTO userDTO);
+
+    // 유저 정보 수정 xml쿼리문 가져오기
+	void updateUser(User user);
+    
     
 
-    
-     
     
 }
 
