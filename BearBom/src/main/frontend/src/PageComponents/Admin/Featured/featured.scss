@@ -18,63 +18,76 @@
     }
   }
 
-  .bottom {
+  .content {
     padding: 1rem;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 1rem;
 
-    // .featuredChart {
-    //   width: 100px;
-    //   height: 100px;
-    // }
-
-    .title {
-      font-weight: 500;
-      color: gray;
-    }
-
-    .amount {
-      font-size: 30px;
-    }
-
-    .desc {
-      font-weight: 400;
-      font-size: 0.8rem;
-      color: gray;
-    }
-
-    .summary {
-      width: 100%;
+    .featuredChart {
       display: flex;
+      justify-content: center;
       align-items: center;
+      flex: 1;
+      width: 150px;
+      height: 150px;
+    }
+
+    .description {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
       justify-content: space-between;
+      align-items: center;
 
-      .item {
-        text-align: center;
+      .title {
+        font-weight: 500;
+        color: gray;
+      }
 
-        .itemTitle {
-          font-size: 1rem;
-          color: gray;
-        }
+      .amount {
+        font-size: 30px;
+      }
 
-        .itemResult {
-          display: flex;
-          align-items: center;
-          margin-top: 10px;
-          font-size: 1rem;
+      .summary {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
 
-          &.positive {
-            color: rgb(255, 80, 80);
+        .item {
+          text-align: center;
+
+          .itemTitle {
+            font-size: 1rem;
+            color: gray;
           }
 
-          &.negative {
-            color: rgb(80, 80, 255);
+          .itemResult {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            font-size: 1rem;
+
+            &.positive {
+              color: rgb(255, 80, 80);
+            }
+
+            &.negative {
+              color: rgb(80, 80, 255);
+            }
           }
         }
       }
     }
+  }
+  .desc {
+    margin-top: 1rem;
+    font-weight: 400;
+    font-size: 0.8rem;
+    color: gray;
+    text-align: center;
   }
 }

@@ -74,4 +74,17 @@
             </if>
             ORDER BY B.RATE DESC
     </select>
+    
+
+    <select id="getMyOpenedClassList" resultType="camelHashMap">
+    	SELECT *
+    		FROM T_COURSE
+    		WHERE USER_ID = #{userId}
+    </select>
+    
+    <select id="getNextFileIdx" parameterType="int" resultType="int">
+    	SELECT IFNULL(MAX(COURSE_FILE_IDX), -1) + 1
+    		FROM T_COURSE_FILE
+    		WHERE COURSE_IDX = #{courseIdx}
+    </select>
 </mapper>

@@ -1,6 +1,8 @@
 //import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 package com.spring.bearbom.controller.mypage;
 
+import com.spring.bearbom.dto.InquiryDTO;
+import com.spring.bearbom.service.mypage2.Mypage2Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -20,6 +22,10 @@ import com.spring.bearbom.service.user.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/mypage")
 @Slf4j
@@ -35,6 +41,9 @@ public class MypageController {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+
+	@Autowired
+	private Mypage2Service mypage2Service;
 
 	@GetMapping("/getUser")
 	public ResponseEntity<?> mypage(User user, @AuthenticationPrincipal String userId) { 
@@ -102,8 +111,43 @@ public class MypageController {
 		
 		// 실제 DB 저장 
 //		userService.updateUser(oldUser);
+<<<<<<< HEAD
 
 		return ResponseEntity.ok().body("success");
 	}
 	
 }
+=======
+//
+//		return ResponseEntity.ok().body("success");
+//	}
+
+	//y 인것만 화면에 뿌려주는거 맵퍼를이용한
+	@GetMapping("/getInquiryReference")
+	public Map<String, Object> getInquiryReference(InquiryDTO inquiryDTO, @AuthenticationPrincipal String userId){
+		try {
+			inquiryDTO.setUserId(userId);
+			List<Map<String, Object>> getInquiryReference1 = mypage2Service.getInquiryReference(inquiryDTO);
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+			resultMap.put("getInquiryReference1", getInquiryReference1);
+
+			return resultMap;
+		} catch(Exception e) {
+			Map<String,Object> error = new HashMap<String,Object>();
+			error.put("error", e.getMessage());
+			return error;
+		}
+	}
+	//y를 n으로 바꾸는 update
+	@PostMapping("/updateInquiryReference")
+	public void updateInquiryReference(@RequestBody InquiryDTO inquiryDTO, @AuthenticationPrincipal String userId){
+		inquiryDTO.setUserId(userId);
+		System.out.println("before inquiryDTO : " +inquiryDTO);
+		log.info("inquiryDTO : {}", inquiryDTO);
+		mypage2Service.updateInquiryReference(inquiryDTO);
+		System.out.println("after inquiryDTO : " +inquiryDTO);
+
+	}
+  	
+}
+>>>>>>> 3595f0ee37f19297cf6017702e514d39084b65a3

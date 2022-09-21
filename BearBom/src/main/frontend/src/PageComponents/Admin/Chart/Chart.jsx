@@ -58,7 +58,7 @@ const Chart = () => {
           </div>
         </div>
         <div className="content"></div>
-        <ResponsiveContainer width="100%" aspect={3 / 1}>
+        <ResponsiveContainer width="100%" aspect={4 / 1} maxHeight="300px">
           <LineChart
             width={500}
             height={300}

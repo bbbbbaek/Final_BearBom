@@ -34,6 +34,22 @@ import Board from "./ModuleComponents/Board/Board";
 import Notice from "./PageComponents/Helpdesk/Notice/Notice";
 import FAQ from "./PageComponents/Helpdesk/FAQ/FAQ";
 import Inquiry from "./PageComponents/Helpdesk/Inquiry/Inquiry";
+import TakenClassView from "./PageComponents/MyPage/Menu/TakenClassView";
+import OpenedClassView from "./PageComponents/MyPage/Menu/OpenedClassView";
+import UserInfoModification from "./PageComponents/MyPage/Menu/UserInfoModification";
+import LecturerInfoModification from "./PageComponents/MyPage/Menu/LecturerInfoModification";
+import InquiryView from "./PageComponents/MyPage/Menu/InquiryView";
+import WishlistView from "./PageComponents/MyPage/Menu/WishlistView";
+import { useState } from "react";
+import RecentTransaction from "./PageComponents/MyPage/Menu/RecentTransaction";
+import SalesMgmt from "./PageComponents/Admin/Menu/SalesMgmt";
+import OrderMgmt from "./PageComponents/Admin/Menu/OrderMgmt";
+import UserMgmt from "./PageComponents/Admin/Menu/UserMgmt";
+import CourseMgmt from "./PageComponents/Admin/Menu/CourseMgmt";
+import NoticeMgmt from "./PageComponents/Admin/Menu/NoticeMgmt";
+import FAQMgmt from "./PageComponents/Admin/Menu/FAQMgmt";
+import InquiryMgmt from "./PageComponents/Admin/Menu/InquiryMgmt";
+import QuickViewBox from "./PageComponents/Admin/Home/QuickViewBox";
 
 function App() {
   return (
@@ -56,21 +72,43 @@ function App() {
           />
           <Route path="/guide" element={<Guide />} />
           <Route path="/helpdesk" element={<Helpdesk />}>
-            <Route path="notice" element={<Notice />}>
-              <Route path=":id" element={<Board />} />
-            </Route>
+            <Route path="notice" element={<Notice />} />
+            <Route path="notice/:id" element={<Board />} />
             <Route path="faq" element={<FAQ />} />
             <Route path="inquiry" element={<Inquiry />} />
           </Route>
+          {/* myPage={myPage} setMyPage={setMyPage} */}
+          <Route path="/mypage" element={<Mypage />}>
+            <Route path="" element={<RecentTransaction />} />
+            <Route path="course/user" element={<TakenClassView />} />
+            <Route path="course/lecturer" element={<OpenedClassView />} />
+            <Route path="info/user" element={<UserInfoModification />} />
+            <Route
+              path="info/lecturer"
+              element={<LecturerInfoModification />}
+            />
+            <Route path="inquiry/view" element={<InquiryView />} />
+            <Route path="inquiry" element={<Inquiry />} />
+            <Route path="wishlist" element={<WishlistView />} />
+          </Route>
 
-          <Route path="/mypage" element={<Mypage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/loginTest" element={<LoginTest />} />
           <Route path="/join" element={<Join />} />
           <Route path="/joinTest" element={<JoinTest />} />
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/saw/:id" element={<Saw />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin" element={<Admin />}>
+            <Route path="" element={<QuickViewBox />} />
+            <Route path="sales" element={<SalesMgmt />} />
+            <Route path="orders" element={<OrderMgmt />} />
+            <Route path="users" element={<UserMgmt />} />
+            <Route path="courses" element={<CourseMgmt />} />
+            <Route path="notice" element={<NoticeMgmt />} />
+            <Route path="faq" element={<FAQMgmt />} />
+            <Route path="inquiry" element={<InquiryMgmt />} />
+          </Route>
+
           <Route path="/*" element={<Page404 />} />
           <Route path="/payready" element={<KakaoPayR />} />
           <Route path="/payresult" element={<KakaoPayRe />} />

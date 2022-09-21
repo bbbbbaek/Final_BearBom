@@ -1,18 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./mypage.scss";
-import OpenedClassView from "../Menu/OpenedClassView";
 import QuickView from "../Quickview/QuickView";
 import Sidebar from "../Sidebar/SideBar";
-import TakenClassView from "../Menu/TakenClassView";
-import InquiryView from "../Menu/InquiryView";
-import WishlistView from "../Menu/WishlistView";
-import UserInfoModification from "../Menu/UserInfoModification";
-import LecturerInfoModification from "../Menu/LecturerInfoModification";
 import { useSelector } from "react-redux";
-import Inquiry from "../../Helpdesk/Inquiry/Inquiry";
-import RecentTransaction from "../Menu/RecentTransaction";
 import axios from "axios";
 import { API_BASE_URL } from "../../../app-config";
+import { Outlet } from "react-router-dom";
 
 const Mypage = () => {
   // 테스트용
@@ -43,6 +36,7 @@ const Mypage = () => {
     <>
       <div className="mypage_home">
         <div className="banner"></div>
+        <button onClick={() => {}}>fetch!</button>
         <div className="body">
           <Sidebar />
           <div className="wrapper">
@@ -53,33 +47,10 @@ const Mypage = () => {
               <QuickView type="liked" />
             </div>
             <div className="content">
-              {
-                [
-                  <RecentTransaction />,
-                  <TakenClassView />,
-                  <OpenedClassView />,
-                  <UserInfoModification />,
-                  <LecturerInfoModification />,
-                  <InquiryView />,
-                  <Inquiry />,
-                  <WishlistView />,
-                ][state]
-              }
+              <Outlet />
             </div>
           </div>
         </div>
-        {/* <div className={"mypage-content"}>
-            {
-              [
-                <TakenClassView />,
-                <OpenedClassView />,
-                <UserInfoModification />,
-                <LecturerInfoModification />,
-                <InquiryView />,
-                <InquiryWrite />,
-                <WishlistView />,
-              ][tab]
-            } */}
       </div>
     </>
   );

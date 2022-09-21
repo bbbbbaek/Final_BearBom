@@ -10,9 +10,9 @@ import excelDownload from "../../images/excelDownload.png";
 import { useNavigate } from "react-router-dom";
 
 // TableMenuItems 객체로 생성한 tableItems state를 사용하여 각 컴포넌트에 알맞은 데이터를 출력할 수 있도록 설계
-const Table = ({ setTab, tableInfo, fetchedData, toggle, setToggle }) => {
+const Table = ({ tableInfo, fetchedData }) => {
   // const [please, setPlease] = useState(fetchedData);
-  const sortedData = [...dummyData].sort((a, b) => b.noticeIdx - a.noticeIdx);
+  const sortedData = [...fetchedData].sort((a, b) => b.noticeIdx - a.noticeIdx);
   const [rawData] = useState(sortedData);
   // data의 초깃값을 salesData로 설정하게 되면, rawData와 참조값이 같게 되면서 splice메소드 사용하여 data 변경 시, rawData의 값도 변경되는 문제 있음
   // --> 배열 복사를 통해 참조값이 다르도록 설정
@@ -76,7 +76,7 @@ const Table = ({ setTab, tableInfo, fetchedData, toggle, setToggle }) => {
   // 테이블 바디 onClick 시, 상세 페이지로 이동하는 함수
   const moveToBoard = (element) => {
     let id = element.noticeIdx;
-    navigate(`/helpdesk/notice/${id}`);
+    navigate(`${id}`);
   };
 
   // 테이블에 클래스 추가해주는 함수
@@ -101,7 +101,6 @@ const Table = ({ setTab, tableInfo, fetchedData, toggle, setToggle }) => {
         <td
           className={insertClass(i)}
           onClick={() => {
-            setToggle(!toggle);
             moveToBoard(element);
           }}
         >
@@ -116,7 +115,7 @@ const Table = ({ setTab, tableInfo, fetchedData, toggle, setToggle }) => {
     <>
       {/* fetchData를 받아왔을 때만 아래의 화면을 보여줄 수 있도록 삼항연산자 사용.
           해당 조건을 주지 않으면, 데이터를 받아오기 전에 fetchData는 배열이 아니기 때문에 아래 식들에서 오류가 남 */}
-      {dummyData ? (
+      {fetchedData ? (
         <>
           {/* <div>{fetchedData[0].tableData[0]}</div> */}
           {/* <div>{fetchedData[0][tableData[0]]}</div> */}

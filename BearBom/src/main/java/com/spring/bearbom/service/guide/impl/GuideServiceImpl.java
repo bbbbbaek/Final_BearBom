@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.bearbom.entity.Guide;
+import com.spring.bearbom.mapper.FaqMapper;
 import com.spring.bearbom.repository.GuideRepository;
 import com.spring.bearbom.service.guide.GuideService;
 
@@ -15,7 +16,11 @@ public class GuideServiceImpl implements GuideService{
 	@Autowired
 	private GuideRepository guideRepository;
 	
-
+	@Autowired
+	private FaqMapper faqMApper;
+	
+	
+	//Guide컨트롤러
 	@Override
 	public List<Guide> operation(Guide guide) {
 		// TODO Auto-generated method stub
@@ -24,6 +29,8 @@ public class GuideServiceImpl implements GuideService{
 		return oprationList;
 	}
 
+	
+	//Faq컨트롤러
 	@Override
 	public Guide insertFaq(Guide guide) {
 		int guideIdx = guideRepository.selectNextGuideIdx();
