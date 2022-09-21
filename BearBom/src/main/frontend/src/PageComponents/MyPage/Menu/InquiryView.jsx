@@ -4,7 +4,7 @@ import Table from "../../../ModuleComponents/Table/Table";
 import useFetch from "../../../customHooks/useFetch";
 import axios from "axios";
 import { API_BASE_URL } from "../../../app-config";
-import { Data } from "../../../customHooks/create";
+import { Data } from "../../../customHooks/createItems";
 
 const InquiryView = () => {
   // index, title, content, regdate, userId, replyYN

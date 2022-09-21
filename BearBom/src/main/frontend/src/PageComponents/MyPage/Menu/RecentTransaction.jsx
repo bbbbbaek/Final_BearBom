@@ -1,23 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SimpleTable from "../../../ModuleComponents/SimpleTable/SimpleTable";
 import "./recenttransaction.scss";
 import useFetch from "../../../customHooks/useFetch";
-import { Data } from "../../../customHooks/create";
+import { Data, recentTransactionItems } from "../../../customHooks/createItems";
+import axios from "axios";
 
 const RecentTransaction = () => {
-  let tableInfo = [
-    new Data("index", "tableCell", "noticeIdx"),
-    new Data("title", "tableCell", "noticeNm"),
-    new Data("content", "tableCell", "noticeContent"),
-    new Data("regdate", "tableCell", "noticeRegdate"),
-    new Data("mdfdate", "tableCell", "noticeMdfdate"),
-    new Data("merong", "tableCell", "noticeUseYn"),
-  ];
-
-  let fetch = useFetch("/api/helpdesk/getNoticeList").data.data;
-  let fetchedData = null;
-  fetchedData = fetch;
-  console.log(fetchedData);
+  let tableInfo = recentTransactionItems;
+  const [fetchedData, setFetchedData] = useState();
+  useEffect(() => {
+    axios
+      .get(
+        "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Order"
+      )
+      .then((res) => {
+        setFetchedData(res.data);
+      });
+  }, []);
 
   return (
     <>
@@ -26,9 +25,9 @@ const RecentTransaction = () => {
           <strong>최근 활동 내역</strong>
         </h5>
         <br />
-        {/* {fetchedData !== undefined ? ( */}
-        <SimpleTable tableInfo={tableInfo} fetchedData={fetchedData} />
-        {/* ) : null} */}
+        {fetchedData ? (
+          <SimpleTable tableInfo={tableInfo} fetchedData={fetchedData} />
+        ) : null}
       </div>
     </>
   );

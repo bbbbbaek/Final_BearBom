@@ -3,16 +3,37 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { API_BASE_URL } from "../app-config";
 
-// 서버 통신하는 useFetch Hooks
-// 사용법 예시
-// const data = useFetch("/api/inquiry", "get") 과 같이 입력하여 사용
+// ***** state 변경 시 마다 계속 렌더링 되는 성능 문제로 인해 해당 hooks 사용 금지 *****
 
-const useFetch = (url, header) => {
+const useFetch = (requestUrl, requestMethod, requestData, requestHeader) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
+  const fetchData = async () => {
+    console.log(requestData);
+    console.log("start server communication");
+    setLoading(true);
+    try {
+      const res = await axios({
+        // url: API_BASE_URL + requestUrl,
+        url: requestUrl,
+        method: requestMethod,
+        headers: requestHeader,
+        data: requestData ? requestData : null,
+      });
+      console.log(res.data);
+      setData(res.data);
+    } catch (err) {
+      setError(err);
+    }
+    setLoading(false);
+
+    console.log("continue");
+  };
+
   useEffect(() => {
+
     const fetchData = async () => {
       console.log("start data fetching");
       setLoading(true);
@@ -30,12 +51,19 @@ const useFetch = (url, header) => {
       setLoading(false);
     };
     fetchData();
-  }, [url]);
+  }, [requestUrl]);
 
   const reFetch = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(url);
+      const res = await axios({
+        // url: API_BASE_URL + requestUrl,
+        url: requestUrl,
+        method: requestMethod,
+        headers: requestHeader,
+        data: requestData ? requestData : null,
+      });
+      // console.log(res.data);
       setData(res.data);
     } catch (err) {
       setError(err);

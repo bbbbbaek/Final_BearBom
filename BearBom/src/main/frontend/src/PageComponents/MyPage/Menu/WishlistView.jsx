@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./wishlistview.scss";
 import Table from "../../../ModuleComponents/Table/Table";
 import useFetch from "../../../customHooks/useFetch";
-import { Data } from "../../../customHooks/create";
+import { Data } from "../../../customHooks/createItems";
 
 const WishlistView = () => {
   // index, title, content, rgdate, count, userId 필요

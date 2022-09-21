@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./takenclassview.scss";
 import useFetch from "../../../customHooks/useFetch";
 import Table from "../../../ModuleComponents/Table/Table";
-import { Data } from "../../../customHooks/create";
+import { Data } from "../../../customHooks/createItems";
 
 const TakenClassView = () => {
   // index, title, content, rgdate, count, userId 필요

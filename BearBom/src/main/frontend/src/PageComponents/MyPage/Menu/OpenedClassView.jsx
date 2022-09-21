@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./openedclassview.scss";
 import useFetch from "../../../customHooks/useFetch";
 import Table from "../../../ModuleComponents/Table/Table";
-import { Data } from "../../../customHooks/create";
+import { Data } from "../../../customHooks/createItems";
 
 const OpenedClassView = () => {
   const [tableItems, setTableItems] = useState();

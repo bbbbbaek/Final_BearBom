@@ -30,7 +30,7 @@ const Doughnut = () => {
       <div>
         <div
           className="doughnut-wrapper"
-          style={{ width: "200px", height: "200px", margin: "10px" }}
+          style={{ width: "150px", height: "150px", margin: "10px" }}
         >
           <svg viewBox="0 0 200 200">
             <circle
