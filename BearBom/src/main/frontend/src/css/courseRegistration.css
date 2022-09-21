@@ -623,3 +623,50 @@ div {
   position: relative;
   height: 100%;
 }
+
+.addressInput{
+  min-height: 35px;
+  width: 100%;
+  max-width: 200px;
+  border: 1px solid #bdb7ae;
+  border-radius: 5px;
+  padding-left: 10px;
+  margin-top: 5px;
+  margin-right: 5px;
+}
+
+.addressInput:focus {
+  border-color: #675d58;
+  outline: none;
+}
+
+.addressLongInput{
+  min-height: 35px;
+  width: 100%;
+  max-width: 405px;
+  border: 1px solid #bdb7ae;
+  border-radius: 5px;
+  padding-left: 10px;
+  margin-top: 5px;
+  margin-right: 5px;
+}
+
+.addressLongInput:focus {
+  border-color: #675d58;
+  outline: none;
+}
+
+.postCodeDiv{
+  border: solid 1px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 5px;
+  margin-top: 10px;
+}
+
+.editDetailEx{
+  height: 44px;
+} 
+
+.editInputWar{
+  margin-bottom: 15px;
+}

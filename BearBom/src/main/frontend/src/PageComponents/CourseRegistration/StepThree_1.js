@@ -12,6 +12,33 @@ import "../../css/courseRegistration.css";
 import CourseStore from "./CourseStore";
 import RegClassCalendar from "./RegistrationComponents/RegClassCalendar";
 
+
+const StepThree_1 = ({formData, saveFormData}) => {
+  //const { min } = CourseStore();
+  const [startTime, setStartTime] = useState();
+  const [endTime, setEndTime] = useState();
+  const [formObj, setFormObj] = useState({});
+
+  useEffect(() => {
+    saveFormData(formObj);
+ }, [formObj]);
+
+ useEffect(() => {
+  setFormObj({ ...formObj, courseStTime: startTime });
+}, [startTime]);
+
+useEffect(() => {
+  setFormObj({ ...formObj, courseEndTime: endTime });
+}, [endTime]);
+
+ const handleStTime = (event) => {
+  setStartTime(event.target.value);
+};
+
+const handleEndTime = (event) => {
+  setEndTime(event.target.value);
+};
+
 const range = (start, stop, step) => {
   let a = [start],
     b = start;
@@ -20,41 +47,6 @@ const range = (start, stop, step) => {
   }
   return a;
 };
-
-const StepThree_1 = ({saveFormData}) => {
-  //const { min } = CourseStore();
-  const [min, setMin] = useState(0);
-  const [max, setMax] = useState(0);
-  const [formObj, setFormObj] = useState({});
-
-  useEffect(() => {
-    saveFormData(formObj);
- }, [formObj]);
-
- useEffect(() => {
-  if(max<min&&!(max==0)){
-    window.alert("최소 인원은 최대 인원보다 클 수 없습니다.")
-  }else{
-  setFormObj({...formObj, "courseMin": min})
-  }
- }, [min]);
-
- useEffect(() => {
-  if(max<min){
-    window.alert("최대 인원은 최소 인원보다 적을 수 없습니다.")
-  }else{
-  setFormObj({...formObj, "courseMax": max})
-  }
- }, [max]);
-
-  const handleMinPeople = (event) => {
-    setMin(event.target.value);
-    CourseStore.setState({ min: event.target.value });
-  };
-
-  const handleMaxPeople = (event) => {
-    setMax(event.target.value);
-  };
 
   return (
     <form id="step_three_1_form">
@@ -81,67 +73,56 @@ const StepThree_1 = ({saveFormData}) => {
                 <div><RegClassCalendar saveFormData={saveFormData}/></div>
                 <p className="inputWar">*일정 지정 시 유의사항 적는곳.</p>
               </div>
-              <div className="numCheck">
-                <div className="datailLabel">
-                  <p>클래스 인원</p>
-                </div>
-                <div className="minMaxBox">
-                  <FormControl
-                    sx={{ minWidth: 150 }}
-                    style={{ marginLeft: 20 }}
-                    size="small"
-                  >
-                    <InputLabel id="demo-simple-select-label">
-                      최소 인원
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      value={min}
-                      label="Cate"
-                      onChange={handleMinPeople}
-                    >
-                      <MenuItem disabled value={0}>
-                        최소 인원
-                      </MenuItem>
-                      {range(1, 20, 1).map((item) => (
-                        <MenuItem value={item}>{item}명</MenuItem>
-                      ))}
-                      {range(30, 100, 10).map((item) => (
-                        <MenuItem value={item}>{item}명</MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                  <div>/</div>
-                  <FormControl
-                    sx={{ minWidth: 150 }}
-                    style={{ marginLeft: 0 }}
-                    size="small"
-                  >
-                    <InputLabel id="demo-simple-select-label">
-                      최대 인원
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      value={max}
-                      label="Cate"
-                      onChange={handleMaxPeople}
-                    >
-                      <MenuItem disabled value={0}>
-                        최대 인원
-                      </MenuItem>
-                      {range(1, 20, 1).map((item) => (
-                        <MenuItem value={item}>{item}명</MenuItem>
-                      ))}
-                      {range(30, 100, 10).map((item) => (
-                        <MenuItem value={item}>{item}명</MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </div>
-                <p className="inputWar">*최대 인원은 최소 인원 수 보다 많아야 합니다.</p>
+              <div className="contentDetail">
+            
+            <div className="numCheck lec">
+              <div className="timeBox">
+              <FormControl
+                sx={{ minWidth: 150 }}
+                style={{ marginLeft: 20 }}
+                size="small"
+              >
+                <InputLabel id="demo-simple-select-label">시작시간</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={startTime}
+                  label="Cate"
+                  onChange={handleStTime}
+                >
+                  <MenuItem disabled value={0}>
+                    시작시간
+                  </MenuItem>
+                  {range(1, 24, 1).map((item) => (
+                    <MenuItem value={item}>{item}:00</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <div>/</div>
+              <FormControl
+                sx={{ minWidth: 150 }}
+                style={{ marginLeft: 0 }}
+                size="small"
+              >
+                <InputLabel id="demo-simple-select-label">종료시간</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={endTime}
+                  label="Cate"
+                  onChange={handleEndTime}
+                >
+                  <MenuItem disabled value={0}>
+                    종료시간
+                  </MenuItem>
+                  {range(1, 24, 1).map((item) => (
+                    <MenuItem value={item}>{item}:00</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
               </div>
+            </div>
+          </div>
             </div>
           </div>
         </div>
