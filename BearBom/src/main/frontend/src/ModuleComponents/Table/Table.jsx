@@ -12,7 +12,9 @@ import { useNavigate } from "react-router-dom";
 // TableMenuItems 객체로 생성한 tableItems state를 사용하여 각 컴포넌트에 알맞은 데이터를 출력할 수 있도록 설계
 const Table = ({ tableInfo, fetchedData }) => {
   // const [please, setPlease] = useState(fetchedData);
-  const sortedData = [...fetchedData].sort((a, b) => b.noticeIdx - a.noticeIdx);
+  const sortedData = [...fetchedData].sort(
+    (a, b) => b[Object.keys(b)[0]] - a[Object.keys(a)[0]]
+  );
   const [rawData] = useState(sortedData);
   // data의 초깃값을 salesData로 설정하게 되면, rawData와 참조값이 같게 되면서 splice메소드 사용하여 data 변경 시, rawData의 값도 변경되는 문제 있음
   // --> 배열 복사를 통해 참조값이 다르도록 설정
@@ -62,7 +64,7 @@ const Table = ({ tableInfo, fetchedData }) => {
     // Math.floor 범위가 /10 하기 이전까지로만 지정돼서 안됐던 경험 있음
     let count = Math.floor(
       data.findLastIndex((a) => {
-        return a.noticeIdx >= 0;
+        return a[Object.keys(a)[0]] >= 0;
       }) / 10
     );
     setPageCount(count + 1);
@@ -75,7 +77,7 @@ const Table = ({ tableInfo, fetchedData }) => {
 
   // 테이블 바디 onClick 시, 상세 페이지로 이동하는 함수
   const moveToBoard = (element) => {
-    let id = element.noticeIdx;
+    let id = element[Object.keys(element)[0]];
     navigate(`${id}`);
   };
 
