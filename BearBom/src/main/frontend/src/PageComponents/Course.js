@@ -145,6 +145,19 @@ const Course = (props) => {
     addSearchInfo(e);
   };
 
+  const onClickReset = (e) => {
+    setCourseSearch("");
+    setLocationSearch("");
+    setCourseType("");
+    setCourseLevel(4);
+    setCourseStTime("");
+    setCourseEndTime("");
+    setCourseStCost("");
+    setCourseEndCost("");
+    setCourseLevelName("");
+    setTimeSlider([0, 1440]);
+    setPriceSlider([0, 1000000]);
+  };
   const onSubmitSearchHandler = (e) => {
     console.log({
       ...searchInfo,
@@ -365,7 +378,7 @@ const Course = (props) => {
                         type="button"
                         value={idx}
                         className={
-                          "btn" + (idx === courseLevel ? " active" : "")
+                          "btn" + (idx == courseLevel ? " active" : "")
                         }
                         onClick={toggleActiveLevel}
                         id="btnDeco"
@@ -485,9 +498,14 @@ const Course = (props) => {
                 variant="outline-dark"
                 size="lg"
                 id="refreshBtn"
+                onClick={onClickReset}
               >
-                <img id="resetIcon" src={require("../images/reset-icon.png")} />
                 초기화
+                <img
+                  id="resetIcon"
+                  src={require("../images/reset-icon.png")}
+                  alt="초기화"
+                />
               </Button>
             </Col>
             <Col xs lg="2">

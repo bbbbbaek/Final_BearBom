@@ -19,17 +19,23 @@ public interface CourserMapper {
 //	@Select("SELECT AVG(a.courser_rate) FROM t_courser a, t_course b  where a.course_idx = b.course_idx and a.course_idx = #{courseIdx}")
 //	public double updateRating1(Courser courser);
 	
-	
-	@Select("SELECT round(AVG(courser_rate),1) FROM t_courser")
-	public double updateRating(Courser courser);
-	
 
+
+	@Select("SELECT round(AVG(courser_rate),2) FROM t_courser")
+	public double updateRating1(Courser courser);
+	
+	@Select("SELECT round(AVG(courser_rate),2) FROM t_courser where course_idx = #{courseIdx}")
+	public double updateRating(int courseIdx);
+	
 //	@Select("select * from t_course where course_use_yn = 'Y' and course_idx = #{courseIdx} order by course_cnt desc")
 //    List<Course> getCourseList(Course course);
 	
 	@Select("select * from t_course where course_idx = #{courseIdx}")
     Course getCourse(@Param("courseIdx") int courseIdx);
-	
+
+	//@Select("select round(AVG(courser_rate),2) AS RATE from t_courser where course_idx = #{courseIdx}")
+	//double updateRating(int courseIdx);
+
 
 //	@Select("select * from t_course where course_use_yn = 'Y' order by course_cnt desc")
 //    List<Course> getCourseList(Course course);

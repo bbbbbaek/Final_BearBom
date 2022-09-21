@@ -95,6 +95,7 @@ const StepTwo_4 = ({saveFormData}) => {
             <div className="numCheck difSelect">
               <Typography>소요시간</Typography>
               <input className="runtimeInput"
+                        type='number'
                         onChange={(e) => setDurationTime(e.target.value)}
                         placeholder="소요 시간을 입력 해주세요"
                     ></input> 

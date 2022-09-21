@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../../css/admin-main.css";
 import BarSales from "./Chart/BarSales";
 import Doughnut from "./Chart/Doughnut";

@@ -1,34 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./notice.scss";
-import useFetch from "../../../customHooks/useFetch";
 import Table from "../../../ModuleComponents/Table/Table";
-import { createItems, createData, Data } from "../../../customHooks/create";
+import useFetch from "../../../customHooks/useFetch";
+import { Data } from "../../../customHooks/create";
+import Board from "../../../ModuleComponents/Board/Board";
 
 const Notice = () => {
-  let data = [
-    new Data("title", null, "noticeIdx"),
-    new Data("content", null, "noticeIdx"),
-    new Data("rgdate", null, "noticeIdx"),
-    new Data("mdfdate", null, "noticeIdx"),
-    new Data("seller", null, "noticeIdx"),
-    new Data("dop", null, "noticeIdx"),
+  // index, title, content, rgdate, count, userId 필요
+  let tableInfo = [
+    // title - prop - cell
+    new Data("title", "l10", "noticeIdx"),
+    new Data("content", "l40", "noticeNm"),
+    new Data("mdfdate", "l10", "noticeRegdate"),
+    new Data("seller", "l10", "noticeMdfdate"),
+    new Data("dop", "l10", "noticeUseYn"),
   ];
 
-  // let item = createItems(
-  //   "title",
-  //   "content",
-  //   "rgdate",
-  //   "mdfdate",
-  //   "seller",
-  //   "dop"
-  // );
-  // let data = createData(
-  //   "noticeIdx",
-  //   "noticeNm",
-  //   "noticeContent",
-  //   "noticeRegdate",
-  //   "noticeMdfdate"
-  // );
+  const [toggle, setToggle] = useState(false);
 
   let fetch = useFetch("/api/helpdesk/getNoticeList").data.data;
   let fetchedData = null;
@@ -43,11 +31,16 @@ const Notice = () => {
         </h5>
         <hr />
         {/* {fetchedData !== undefined ? ( */}
-        <Table
-          // tableItems={item}
-          tableData={data}
-          fetchedData={fetchedData}
-        />
+        {toggle ? (
+          <Board />
+        ) : (
+          <Table
+            tableInfo={tableInfo}
+            fetchedData={fetchedData}
+            toggle={toggle}
+            setToggle={setToggle}
+          />
+        )}
         {/* ) : null} */}
       </div>
     </>

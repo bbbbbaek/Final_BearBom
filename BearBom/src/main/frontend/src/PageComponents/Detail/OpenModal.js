@@ -6,12 +6,6 @@ import { useState } from "react";
 function OpenModal({ addReviewInfo, onWriteReview }) {
   const [modalOpen, setModalOpen] = useState(false);
 
-  // const openModal = () => {
-  //   setModalOpen(true);
-  // };
-  // const closeModal = () => {
-  //   setModalOpen(false);
-  // };
   return (
     <>
       <div className="review-modal-header">
@@ -33,7 +27,6 @@ function OpenModal({ addReviewInfo, onWriteReview }) {
           setModalOpen={setModalOpen}
           onWriteReview={onWriteReview}
           open={modalOpen}
-          // close={closeModal}
           header="후기"
         >
           <div className="modal-span">

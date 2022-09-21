@@ -15,7 +15,12 @@ import Notice from "./Detail-Notice";
 import Apply from "../Detail/Apply";
 import OpenModal from "./OpenModal";
 import Review from "../Detail/Detail-Review";
-import Test123 from "./Test123";
+import ImgBox from "./ImgBox";
+import InputModal from "./InputModal";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
+import FmdGoodIcon from "@mui/icons-material/FmdGood";
+import BarChartIcon from "@mui/icons-material/BarChart";
 
 const Detail = ({ scrollTop }) => {
   // 아래에 왜 초기값을 객체 형태로 주지 않으면 오류가 나는지 모르겠음
@@ -31,6 +36,18 @@ const Detail = ({ scrollTop }) => {
   const [reviewData, setReviewData] = useState([]);
   const [cnt, setCnt] = useState(0);
   const [averageRating, setaverageRating] = useState([]);
+  const [sort, setSort] = useState([]);
+  const [sortedData, setSortedData] = useState([]);
+  // const sortedData = [...reviewList].sort(
+  //   (a, b) => a.courserIdx - b.courserIdx
+  // );
+
+  useEffect(() => {
+    setSortedData([...reviewList].sort((a, b) => b.courserIdx - a.courserIdx));
+    console.log(sortedData);
+  }, [reviewList]);
+
+  console.log(sortedData);
 
   const addReviewInfo = (e) => {
     const newReviewInfo = {
@@ -84,6 +101,7 @@ const Detail = ({ scrollTop }) => {
         setReviewList(response.data.reviewList);
         setaverageRating(response.data.averageRating);
         setReviewData(response.data.reviewList.slice(0, 4));
+        console.log(reviewData);
       })
       .catch((e) => {
         console.log(e);
@@ -120,10 +138,11 @@ const Detail = ({ scrollTop }) => {
     }
   }, [courseInfo]);
 
+  //리뷰 더보기
   useEffect(() => {
     console.log(reviewList);
     console.log(reviewList.slice(4 * cnt, 4 * (cnt + 1)));
-    let copy = reviewData.concat(reviewList.slice(4 * cnt, 4 * (cnt + 1)));
+    let copy = reviewData.concat(sortedData.slice(4 * cnt, 4 * (cnt + 1)));
     // let copy = [...reviewData];
     console.log(copy);
     setReviewData(copy);
@@ -162,15 +181,29 @@ const Detail = ({ scrollTop }) => {
         <div className="info">
           <div className="main-info">
             <div className="main-img-box">
-              {/* <Thumb></Thumb> */}
-              {/* {course.map((data) => (
-                // 여기서 {}말고 ()로 하면 return 안해도 됨
-                //   이게 props 넣는거
-                <Test123 course={data} />
-              ))} */}
-              <Test123></Test123>
+              <ImgBox course={course} />
             </div>
-            <h4>Title</h4>
+            <h4>{course.courseNm}</h4>
+            <div className="course-short-info">
+              <div>
+                <BarChartIcon color="action" />
+                {course.courseLevel}
+              </div>
+              <div>
+                <AccessTimeIcon sx={{ fontSize: 30 }} color="action" />
+                {course.courseRuntime}시간
+              </div>
+              <div>
+                <FmdGoodIcon color="action" />
+                {course.courseAddress}
+                {course.courseAddressEx}
+              </div>
+              <div>
+                <SupervisorAccountIcon sx={{ fontSize: 30 }} color="action" />
+                {course.courseMin} ~ {course.courseMax}인
+              </div>
+            </div>
+
             <CourseNavbar />
             {/* <hr id="teacher" /> */}
             <section /* id="teacher" */ className="section-box">
@@ -194,11 +227,11 @@ const Detail = ({ scrollTop }) => {
             </section>
             <hr />
             <section id="time" className="section-box">
-              <Time />
+              <Time course={course} />
             </section>
             <hr />
             <section id="loc" className="section-box">
-              <Location />
+              <Location courseAddress={course.courseAddress} />
             </section>
             <hr />
             <section id="notice" className="section-box">
@@ -210,19 +243,24 @@ const Detail = ({ scrollTop }) => {
                 className="reviewList"
                 // style={{ height: woobin ? "auto" : "300px" }}
               >
+                <InputModal
+                  addReviewInfo={addReviewInfo}
+                  onWriteReview={onWriteReview}
+                />
                 <OpenModal
                   addReviewInfo={addReviewInfo}
                   onWriteReview={onWriteReview}
                 />
+
                 <div id="review-box-list">
-                  {reviewData.map((review) => (
-                    <Review review={review} />
-                  ))}
+                  {sortedData !== []
+                    ? sortedData.map((review) => <Review review={review} />)
+                    : null}
                   <button
                     className="more-btn"
                     onClick={() => {
                       // console.log(woobin);
-                      // console.log(reviewList);
+
                       // setWoobin(!woobin);
                       setCnt(cnt + 1);
                       // console.log(reviewData);
@@ -246,7 +284,7 @@ const Detail = ({ scrollTop }) => {
           </div>
           <div className="main-cal">
             <div>
-              <Apply courseIdx={id} />
+              <Apply courseIdx={id} course={course} />
             </div>
           </div>
         </div>

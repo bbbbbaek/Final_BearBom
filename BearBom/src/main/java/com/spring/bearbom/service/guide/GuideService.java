@@ -8,6 +8,8 @@ public interface GuideService {
 
 	List<Guide> operation(Guide guide);
 
+	Guide insertFaq(Guide guide);
+
 	
 
 }

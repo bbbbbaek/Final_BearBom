@@ -23,6 +23,11 @@ public interface CourseService {
     List<Map<String, Object>> getCourseList();
 
 	List<Map<String, Object>> getSearchProducts(Map<String, Object> paramMap);
+<<<<<<< HEAD
 	
 	List<Map<String, Object>> getMyOpenedClassList(String userId);
+=======
+
+	int findCourseFileIdxByCourseIdx(int i);
+>>>>>>> ec7b70143b7dc4eae761a6532313d1098f40a221
 }

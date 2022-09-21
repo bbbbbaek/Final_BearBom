@@ -76,5 +76,11 @@ public class CourseServiceImpl implements CourseService {
 		return courseMapper.getMyOpenedClassList(userId);
 	}
 
+	@Override
+	public int findCourseFileIdxByCourseIdx(int i) {
+		int newCourseFileIdx = i+1;
+		return newCourseFileIdx;
+	}
+
 
 }
