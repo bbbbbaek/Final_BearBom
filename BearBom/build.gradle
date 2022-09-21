@@ -44,7 +44,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 	implementation'com.google.code.gson:gson:2.8.7'
-	implementation 'org.springframework.scheduling'
 }
 
 tasks.named('test') {
