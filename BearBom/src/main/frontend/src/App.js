@@ -108,6 +108,7 @@ function App() {
             <Route path="faq" element={<FAQMgmt />} />
             <Route path="inquiry" element={<InquiryMgmt />} />
           </Route>
+
           <Route path="/*" element={<Page404 />} />
           <Route path="/payready" element={<KakaoPayR />} />
           <Route path="/payresult" element={<KakaoPayRe />} />

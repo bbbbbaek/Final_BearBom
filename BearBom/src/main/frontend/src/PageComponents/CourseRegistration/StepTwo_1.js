@@ -10,7 +10,7 @@ import CheckCircle from "@mui/icons-material/CheckCircle";
 import "../../css/courseRegistration.css";
 import SelectButton from "./RegistrationComponents/SelectButton";
 
-const StepTwo_1 = ({saveFormData}) => {
+const StepTwo_1 = ({formData, saveFormData}) => {
   const [category, setCategory] = useState("");
   const [className, setClassName] = useState();
   const [formObj, setFormObj] = useState({});
@@ -37,6 +37,11 @@ const StepTwo_1 = ({saveFormData}) => {
     setClassName(e.target.value);
   }
 
+  useEffect(() => {
+    setClassName(formData.courseNm);
+    setCategory(formData.courseCategory);
+  },[]);
+
 
   //const [menuItem, setMenuItem] = useState([]);
   //axios => setMenuItem
@@ -54,7 +59,7 @@ const StepTwo_1 = ({saveFormData}) => {
               </h5>
             </div>
             <div className="detailEx">
-              <p className="datilNameInfo">클래스 제목을 입력해 주세요</p>
+              <p className="datilNameInfo">아래에 클래스 제목을 입력해 주세요</p>
             </div>
             <div className="numCheck">
               <div className="datailLabel">

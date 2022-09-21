@@ -3,7 +3,8 @@ package com.spring.bearbom.controller.course;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Time;
-import java.time.LocalDate;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class CourseController {
 
 	@PostMapping("/courseRegistration")
 	public void courseRegistration(MultipartHttpServletRequest multiPartHttpServletRequest, HttpServletRequest request,
-			@RequestParam Map<String, Object> paramMap) throws IOException {
+			@RequestParam Map<String, Object> paramMap) throws IOException, ParseException {
 //		userService.updatePhoneNum(paramMap.get("phoneNum"));
 		
 		//유저정보
@@ -73,7 +74,13 @@ public class CourseController {
 		Date stTime = java.sql.Timestamp.valueOf(localDateTimeForHour);
 		System.out.println(stTime);*/
 		
+		//시간 변환부분
+		SimpleDateFormat timeFormatter = new SimpleDateFormat("HH");
+		long stTime = timeFormatter.parse(paramMap.get("courseStTime").toString()).getTime();
+		Time courseStTime = new Time(stTime);
 		
+		long endTime = timeFormatter.parse(paramMap.get("courseEndTime").toString()).getTime();
+		Time courseEndTime = new Time(endTime);
 		
 		
 		
@@ -98,9 +105,8 @@ public class CourseController {
 		course.setCourseMin(Integer.valueOf(String.valueOf(paramMap.get("courseMin"))));
 		course.setCourseStDate(stDate);
 		course.setCourseEndDate(endDate);
-		
-		//course.setCourseStTime(null);
-		//course.setCourseEndTime(null);
+		course.setCourseStTime(courseStTime);
+		course.setCourseEndTime(courseEndTime);
 		
 		course.setCourseCost(Integer.valueOf(String.valueOf(paramMap.get("courseCost"))));
 		
@@ -121,24 +127,26 @@ public class CourseController {
 		
 		Iterator<String> iterator = multiPartHttpServletRequest.getFileNames();
 		System.out.println(multiPartHttpServletRequest.getFileNames());
+		//int fileIdx = -1;
 		
 		while(iterator.hasNext()) {
 			List<MultipartFile> list = multiPartHttpServletRequest.getFiles(iterator.next());
 			
 			
-			int fileIdx = -1;
+			
 			for(MultipartFile m : list) {
 				System.out.println(m.getOriginalFilename());
+				
 				if(!m.isEmpty()) {
-					
+					//int CourseFileIdx = ++fileIdx;
+					Course course2 = new Course();
+					course2.setCourseIdx(courseIdx);
 					CourseFile courseFile = new CourseFile();
 					//CourseFileId courseFileId = new CourseFileId();
 					//courseFileId.setCourse(course.getCourseIdx());
-					int CourseFileIdx = courseService.findCourseFileIdxByCourseIdx(fileIdx);
-					System.out.println(CourseFileIdx + "-=-=-=-");
-					courseFile.setCourseFileIdx(CourseFileIdx);
-					
-					courseFile.setCourse(course);
+					//System.out.println(CourseFileIdx + "-=-=-=-");
+					courseFile.setCourse(course2);
+					//courseFile.setCourseFileIdx(CourseFileIdx);
 					
 					String uuid = UUID.randomUUID().toString();
 					courseFile.setCourseFileNewNm(uuid + m.getOriginalFilename());

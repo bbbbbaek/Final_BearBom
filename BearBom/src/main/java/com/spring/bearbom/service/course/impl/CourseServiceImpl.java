@@ -7,8 +7,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.bearbom.dto.LikeDto;
 import com.spring.bearbom.entity.Course;
 import com.spring.bearbom.entity.CourseFile;
+import com.spring.bearbom.entity.Notice;
 import com.spring.bearbom.mapper.CourseMapper;
 import com.spring.bearbom.repository.CourseFileRepository;
 import com.spring.bearbom.repository.CourseRepository;
@@ -33,7 +35,11 @@ public class CourseServiceImpl implements CourseService {
 
 	@Override
 	public void courseFileSave(List<CourseFile> fileList) {
-		courseFileRepository.saveAll(fileList);
+		for(CourseFile courseFile : fileList) {
+			int fileIdx = courseMapper.getNextFileIdx(courseFile.getCourse().getCourseIdx());
+			courseFile.setCourseFileIdx(fileIdx);
+			courseFileRepository.save(courseFile);
+		}
 	}
 
 	@Override
@@ -69,11 +75,16 @@ public class CourseServiceImpl implements CourseService {
 		return courseMapper.getSearchProducts(pMap);
 	}
 
+	
+	@Override
+    public List<Map<String, Object>> getMyOpenedClassList(String userId){
+		return courseMapper.getMyOpenedClassList(userId);
+	}
+
 	@Override
 	public int findCourseFileIdxByCourseIdx(int i) {
 		int newCourseFileIdx = i+1;
 		return newCourseFileIdx;
 	}
-
 
 }
