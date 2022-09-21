@@ -91,7 +91,6 @@ function App() {
             <Route path="inquiry" element={<Inquiry />} />
             <Route path="wishlist" element={<WishlistView />} />
           </Route>
-
           <Route path="/login" element={<Login />} />
           <Route path="/loginTest" element={<LoginTest />} />
           <Route path="/join" element={<Join />} />
