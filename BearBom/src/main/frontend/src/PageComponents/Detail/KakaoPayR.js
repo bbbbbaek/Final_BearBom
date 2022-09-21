@@ -57,7 +57,7 @@ const KakaoPayR = () => {
       url: "https://kapi.kakao.com/v1/payment/ready",
       method: "post",
       headers: {
-        Authorization: "KakaoAK e9b2a60cdcbf332af5df8ba23399b883",
+        Authorization: "KakaoAK ",
         "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
       },
       data: queryStr, //요청에 파라미터 보내줄 때 쿼리스트링으로 보내줘야 함

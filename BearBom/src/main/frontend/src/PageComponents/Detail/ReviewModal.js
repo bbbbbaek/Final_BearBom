@@ -27,11 +27,6 @@ const Modal = (props) => {
             </button>
           </header>
           <main>{props.children}</main>
-          <div>
-            <button type="button" className="close" onClick={handleClick}>
-              등록하기
-            </button>
-          </div>
         </section>
       ) : null}
     </div>

@@ -22,7 +22,7 @@ public class CourserServiceImpl implements CourserService {
 
     @Override
     public List<Courser> Review(Courser courser) {
-        List<Courser> reviewList  = courserRepository.findByCourse(courser.getCourse());
+        List<Courser> reviewList  = courserRepository.findByCourseOrderByCourserIdxDesc(courser.getCourse());
         for(Courser courser1 : reviewList) {
     		System.out.println(courser1.toString());
     	}

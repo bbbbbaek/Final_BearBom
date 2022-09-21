@@ -25,6 +25,7 @@ public class CourseDTO {
 	private String courseThumbnailOrgNm;
 	private String courseThumbnailPath;
 	
+	private String userId;
 	
 	
 	

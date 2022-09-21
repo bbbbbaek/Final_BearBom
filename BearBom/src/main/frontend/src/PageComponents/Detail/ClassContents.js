@@ -1,6 +1,6 @@
 import Carousel from "react-bootstrap/Carousel";
 import "../../css/detail.css";
-function CarouselFadeExample({ course, courseIdx }) {
+function ClassContents({ course, courseIdx }) {
   // const test = course[courseIdx].courseContents;
   // console.log(test);
   return (
@@ -55,4 +55,4 @@ function CarouselFadeExample({ course, courseIdx }) {
   );
 }
 
-export default CarouselFadeExample;
+export default ClassContents;

@@ -8,6 +8,11 @@ const Calendar2 = (props, { course }) => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
+  const Date1 = {
+    start: new Date("2022-09-21"),
+    end: new Date("2022-09-23"),
+  };
+
   const onChange = (dates) => {
     const [start, end] = dates;
     setStartDate(start);
@@ -23,10 +28,11 @@ const Calendar2 = (props, { course }) => {
       <div className={`react-datepicker__month-container ${props.width}`}>
         <DatePicker
           locale="ko"
+          dateFormat="YYYY년 MM월 DD일"
           selected={startDate}
           onChange={onChange}
-          startDate={startDate}
-          endDate={endDate}
+          startDate={Date1.start}
+          endDate={Date1.end}
           minDate={new Date()}
           // excludeDates={[addDays(new Date(), 1), addDays(new Date(), 5)]}
           selectsRange
