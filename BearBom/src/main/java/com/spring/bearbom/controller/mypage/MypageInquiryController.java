@@ -27,7 +27,7 @@ public class MypageInquiryController {
 	
 	
 	//y 인것만 화면에 뿌려주는거 맵퍼를이용한
-	@GetMapping("/getInquiryReference")
+	@GetMapping("/getInquiryReference1")
 	public Map<String, Object> getInquiryReference(InquiryDTO inquiryDTO,@AuthenticationPrincipal String userId){
 		try {
 		inquiryDTO.setUserId(userId);
@@ -43,7 +43,7 @@ public class MypageInquiryController {
 		}
 	}
 	//y를 n으로 바꾸는 update
-	@PostMapping("/updateInquiryReference")
+	@PostMapping("/updateInquiryReference1")
 	public void updateInquiryReference(@RequestBody InquiryDTO inquiryDTO, @AuthenticationPrincipal String userId){	
 		inquiryDTO.setUserId(userId);
 		System.out.println("before inquiryDTO : " +inquiryDTO);
