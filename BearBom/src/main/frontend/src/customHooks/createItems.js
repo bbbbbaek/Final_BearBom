@@ -12,7 +12,7 @@ export class Data {
 // 공지사항 (Notice)
 export const noticeItems = [
   new Data("번호", "l10", "noticeIdx"),
-  new Data("제목", "l40", "noticeNm"),
+  new Data("제목", "l40", "noticeTitle"),
   new Data("작성자", "l10", "user"),
   new Data("작성일", "l10", "noticeRegdate"),
   new Data("조회수", "l10", "noticeMdfdate"),
@@ -44,11 +44,11 @@ export const recentTransactionItems = [
 
 // 수강 클래스 조회
 export const takenClassItems = [
-  new Data("", "l10", "courseImage"),
   new Data("강의번호", "l10", "courseIdx"),
+  new Data("", "l10", "courseImage"),
   new Data("강의명", "l40", "courseTitle"),
   new Data("강사명", "l10", "user"),
-  new Data("구매일", "l10", "inquiryRegdate"),
+  new Data("구매일", "l10", "orderDate"),
   new Data("상태", "l10", "status"), // 없음
 ];
 
@@ -56,12 +56,12 @@ export const takenClassItems = [
 export const openedClassItems = [
   new Data("강의번호", "l10", "courseIdx"),
   new Data("", "l10", "courseImage"),
-  new Data("강의명", "l40", "courseTitle"),
+  new Data("강의명", "l30", "courseTitle"),
   new Data("강사명", "l10", "lecturer"),
   new Data("개설일", "l10", "courseRegdate"), // 없음
   new Data("시작일", "l10", "courseStDate"),
   new Data("종료일", "l10", "courseEndDate"),
-  new Data("완료여부", "l10", "status"), // 없음
+  new Data("상태", "l20", "status"), // 없음
 ];
 
 // 개인 정보 수정
@@ -87,12 +87,14 @@ export const inquiryItems = [
   // new Data("내용", "l40", "inquiryContent"),
   new Data("작성자", "l10", "user"),
   new Data("작성일", "l10", "inquiryRegdate"),
+  new Data("답변일", "l10", "inquiryReply"),
+  new Data("답변여부", "l10", "inquiryReply"),
 ];
 
 // 찜한 클래스 조회
-export const wishListClassItems = [
-  new Data("", "l10", "courseImage"),
+export const wishListItems = [
   new Data("강의번호", "l10", "courseIdx"),
+  new Data("", "l10", "courseImage"),
   new Data("강의명", "l40", "courseTitle"),
   new Data("강사명", "l10", "user"),
   new Data("구매일", "l10", "inquiryRegdate"),

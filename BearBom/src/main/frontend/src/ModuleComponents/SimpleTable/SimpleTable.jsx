@@ -10,8 +10,11 @@ import Paper from "@mui/material/Paper";
 import dummyData from "../../PageComponents/Admin/dummyData";
 
 const SimpleTable = ({ tableInfo, fetchedData }) => {
-  let data = [...dummyData];
-  let recentData = data.slice(data.length - 5, data.length);
+  // let data = [...dummyData];
+  let recentData = fetchedData.slice(
+    fetchedData.length - 5,
+    fetchedData.length
+  );
 
   // 테이블에 클래스 추가해주는 함수
   function classMaker(index) {

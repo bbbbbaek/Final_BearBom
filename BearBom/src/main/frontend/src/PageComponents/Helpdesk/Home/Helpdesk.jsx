@@ -10,14 +10,25 @@ import Board from "../../../ModuleComponents/Board/Board";
 import { useDispatch, useSelector } from "react-redux";
 import { onChange } from "../store/store";
 import { Outlet, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Helpdesk = () => {
   const navigate = useNavigate();
-
-  // Helpdesk의 default tab을 notice로 설정하기 위한 useEffect
+  const [fetchedData, setFetchedData] = useState();
   useEffect(() => {
+    axios
+      .get(
+        "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Notice"
+      )
+      .then((res) => {
+        setFetchedData(res.data);
+      });
     navigate("notice");
   }, []);
+  // Helpdesk의 default tab을 notice로 설정하기 위한 useEffect
+  // useEffect(() => {
+  //   navigate("notice");
+  // }, []);
 
   // navigate 함수(e.target의 id값으로 navigate)
   const onNavigate = (e) => {
@@ -45,9 +56,7 @@ const Helpdesk = () => {
           <br />
           {/* Modal부분 */}
           <div className="content">
-            {/* Helpdesk --> Notice --> Table --> Board 로 
-            tabContent를 props drilling 하지 않기 위한 전역 관리 필요*/}
-            <Outlet />
+            <Outlet context={{ fetchedData }} />
           </div>
         </div>
       </div>
