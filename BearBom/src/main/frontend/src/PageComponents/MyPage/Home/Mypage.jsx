@@ -3,11 +3,9 @@ import "./mypage.scss";
 import QuickView from "../Quickview/QuickView";
 import Sidebar from "../Sidebar/SideBar";
 import { useSelector } from "react-redux";
-
-import Inquiry from "../../Helpdesk/Inquiry/Inquiry";
-import RecentTransaction from "../Menu/RecentTransaction";
 import axios from "axios";
 import { API_BASE_URL } from "../../../app-config";
+import { Outlet } from "react-router-dom";
 
 const Mypage = () => {
   // 테스트용
@@ -38,13 +36,7 @@ const Mypage = () => {
     <>
       <div className="mypage_home">
         <div className="banner"></div>
-        <button
-          onClick={() => {
-            reFetch();
-          }}
-        >
-          fetch!
-        </button>
+        <button onClick={() => {}}>fetch!</button>
         <div className="body">
           <Sidebar />
           <div className="wrapper">
