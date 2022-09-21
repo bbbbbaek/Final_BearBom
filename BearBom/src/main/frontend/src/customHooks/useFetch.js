@@ -33,15 +33,14 @@ const useFetch = (requestUrl, requestMethod, requestData, requestHeader) => {
   };
 
   useEffect(() => {
-
     const fetchData = async () => {
       console.log("start data fetching");
       setLoading(true);
       try {
         const res = await axios({
-          url: API_BASE_URL + url,
-          method: "get",
-          headers: header,
+          url: API_BASE_URL + requestUrl,
+          method: requestMethod,
+          headers: requestHeader,
         });
         // console.log(res.data);
         setData(res.data);
