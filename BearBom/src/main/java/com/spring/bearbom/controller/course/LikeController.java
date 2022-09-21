@@ -78,6 +78,6 @@ public class LikeController {
 //        return new ResponseEntity<>(likeDto, HttpStatus.OK);
         return ResponseEntity.ok().body(likeDto);
     }
-    
+
 
 }
