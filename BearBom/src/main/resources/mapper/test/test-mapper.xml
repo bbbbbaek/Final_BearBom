@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/dtd/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.bearbom.mapper.TestMapper">
+    <select id="liketest" resultType="camelHashMap" parameterType="com.spring.bearbom.dto.CourseDTO">
+        <![CDATA[
+            SELECT A.*
+	        FROM T_COURSE A,
+		        T_LIKE B
+	        WHERE B.USER_ID = #{userId}
+	        AND A.COURSE_IDX =  B.COURSE_IDX
+        ]]>
+    </select>
+
+    <select id="likedCourseCnt" resultType="camelHashMap" parameterType="com.spring.bearbom.dto.CourseDTO">
+        <![CDATA[
+            SELECT COUNT(*) AS likedCourseCnt
+                FROM T_COURSE A,
+                     T_LIKE B
+                WHERE B.USER_ID = #{userId}
+                AND A.COURSE_IDX = B.COURSE_IDX
+        ]]>
+    </select>
+
+    <select id="takingCourseCnt" resultType="camelHashMap" parameterType="com.spring.bearbom.dto.CourseDTO">
+        <![CDATA[
+            SELECT COUNT(*) AS takingCourseCnt
+                FROM T_COURSE A,
+                     T_ORDER B
+                WHERE B.USER_ID = #{userId}
+                AND A.COURSE_IDX = B.COURSE_IDX
+                AND B.ORDER_YN = 'Y'
+                AND B.ORDER_USE_YN = 'Y'
+                AND A.COURSE_USE_YN = 'Y'
+                AND A.COURSE_ST_DATE <= #{takingCourseDate}
+                AND #{takingCourseDate} <= A.COURSE_END_DATE
+        ]]>
+    </select>
+
+    <select id="takenCourseCnt" resultType="camelHashMap" parameterType="com.spring.bearbom.dto.CourseDTO">
+        <![CDATA[
+            SELECT COUNT(*) AS takenCourseCnt
+                FROM T_COURSE A,
+                     T_ORDER B
+                WHERE B.USER_ID = #{userId}
+                AND A.COURSE_IDX = B.COURSE_IDX
+                AND B.ORDER_YN = 'Y'
+                AND B.ORDER_USE_YN = 'Y'
+                AND A.COURSE_USE_YN = 'N'
+        ]]>
+    </select>
+
+    <select id="openedCourseCnt" resultType="camelHashMap" parameterType="com.spring.bearbom.dto.CourseDTO">
+        <![CDATA[
+            SELECT COUNT(*) AS openedCourseCnt
+                FROM T_COURSE A
+                WHERE A.USER_ID = #{userId}
+        ]]>
+    </select>
+</mapper>
