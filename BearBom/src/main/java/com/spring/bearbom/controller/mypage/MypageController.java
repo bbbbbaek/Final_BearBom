@@ -3,9 +3,11 @@ package com.spring.bearbom.controller.mypage;
 
 import com.spring.bearbom.dto.CourseDTO;
 import com.spring.bearbom.dto.InquiryDTO;
+
 import com.spring.bearbom.service.mypage2.Mypage2Service;
 import com.spring.bearbom.service.test.TestService;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -48,8 +50,6 @@ public class MypageController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	@Autowired
-	private Mypage2Service mypage2Service;
 
 	private final TestService testService;
 
@@ -191,7 +191,6 @@ public class MypageController {
 			errorMap.put("error", e.getMessage());
 			return errorMap;
 		}
-	}
-
+	} 	
 }
 

@@ -1,14 +1,17 @@
 package com.spring.bearbom.mapper;
 
-import com.spring.bearbom.dto.InquiryDTO;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-
 import java.util.List;
 import java.util.Map;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.spring.bearbom.dto.InquiryDTO;
 
 @Mapper
 public interface MypageMapper {
 
-    List<Map<String, Object>> getInquiryReference(String userId);
+    //재현
+    List<Map<String, Object>> getInquiryReference(InquiryDTO inquiryDTO);
+
+	void updateInquiryReference(InquiryDTO inquiryDTO);
 }
