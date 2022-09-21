@@ -1,12 +1,18 @@
 package com.spring.bearbom.service.mypage;
 
-import java.util.List;
-
+import com.spring.bearbom.entity.User;
+import com.spring.bearbom.dto.InquiryDTO;
 import com.spring.bearbom.dto.CourseDTO;
 
-public interface MypageService {
+import java.util.List;
+import java.util.Map;
 
-	List<CourseDTO> getWishList(CourseDTO courseDTO);
+public interface MypageService {
+	User getUser(String userId);
+    List<Map<String, Object>> getInquiryReference(String userId);
+    
+    List<CourseDTO> getWishList(CourseDTO courseDTO);
 	List<CourseDTO> getWishCnt(CourseDTO courseDTO);
- 
+
+
 }

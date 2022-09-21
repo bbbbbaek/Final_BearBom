@@ -3,6 +3,8 @@ package com.spring.bearbom.entity;
 import javax.persistence.*;
 
 import lombok.Data;
+
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -13,7 +15,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicUpdate
 @IdClass(CourseFileId.class)
 public class CourseFile {
-	@Id
+	@Id //@GeneratedValue(strategy=GenerationType.AUTO) @ColumnDefault("int default 0")
 	private int courseFileIdx;
 	
 	@Column(nullable = false)

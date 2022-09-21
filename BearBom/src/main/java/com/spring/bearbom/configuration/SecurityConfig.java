@@ -44,10 +44,9 @@ public class SecurityConfig{
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
 
-			.authorizeRequests().antMatchers("/", "/api/member/**", "/api/user/*","/api/guide/*","/api/**" , "/api/helpdesk/*", "/oauth/kakao", "/oauth/**","/upload/*", "/api/course/getCommonCodeList", "/api/course/searchCourse").permitAll()
-
+			.authorizeRequests().antMatchers("/", "/api/member/**", "/api/user/*","/api/guide/*" , "/api/helpdesk/*", "/oauth/kakao", "/oauth/**","/upload/*", "/api/course/getCourseList","/api/course/getCommonCodeList", "/api/course/searchCourse","/api/main/**").permitAll()
+								.antMatchers("/api/admin/**", "/admin/**").access("hasRole('ROLE_ADMIN')")
 								.anyRequest().authenticated();
-
 
 		//filter 등록
 		//매 요청마다 corsfilter 실행 후 jwtAuthenticationFilter 실행

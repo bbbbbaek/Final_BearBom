@@ -1,12 +1,20 @@
 package com.spring.bearbom.entity;
 
-import lombok.Data;
+import java.sql.Time;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.*;
-import java.sql.Date;
-import java.sql.Time;
+import lombok.Data;
 
 @Entity
 @Table(name="T_COURSE")
@@ -30,12 +38,12 @@ public class Course {
 //	private String courseOneSeason;
 
 	@Column(nullable = false)
-	private char courseUseYn;
+	private char courseUseYn = 'Y';
 
 	@Column//(nullable = false)
 	private int courseCnt;
 	
-	@Column(nullable = false, columnDefinition = "default Y")
+	@Column(nullable = false)
 	private String courseLevel;
 	
 	@Column//(nullable = false)
@@ -47,13 +55,13 @@ public class Course {
 	@Column(nullable = false)
 	private String courseRuntime;
 
-	@Column//(nullable = false)
+	@Column(nullable = false)
 	private Date courseStDate;
 	
-	@Column//(nullable = false)
+	@Column(nullable = false)
 	private Date courseEndDate;
 	
-	@Column//(nullable = false)
+	@Column(nullable = false)
 	private int courseCost;
 	
 	@Column(nullable = false, columnDefinition = "int default 0")
@@ -71,13 +79,13 @@ public class Course {
 	@Column(nullable = false)
 	private String courseContents;
 
-	@Column//(nullable = false)
+	@Column(nullable = false)
 	private String courseThumbnailOrgNm;
 	
-	@Column//(nullable = false)
+	@Column(nullable = false)
 	private String courseThumbnailNm;
 	
-	@Column//(nullable = false)
+	@Column(nullable = false)
 	private String courseThumbnailPath;
 
 	@ManyToOne

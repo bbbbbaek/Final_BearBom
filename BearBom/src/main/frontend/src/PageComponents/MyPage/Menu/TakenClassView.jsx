@@ -1,18 +1,23 @@
 import React, { useState } from "react";
 import "./takenclassview.scss";
+import useFetch from "../../../customHooks/useFetch";
 import Table from "../../../ModuleComponents/Table/Table";
+import { Data } from "../../../customHooks/createItems";
 
 const TakenClassView = () => {
-  const [tableItems, setTableItems] = useState([
-    "수강 내역 조회",
-    "클래스명",
-    "매출",
-    "매출이익",
-    "수량",
-    "구매자",
-    "판매자",
-    "구매일자",
-  ]);
+  // index, title, content, rgdate, count, userId 필요
+  let tableInfo = [
+    new Data("title", "long", "noticeIdx"),
+    new Data("content", "long", "noticeNm"),
+    new Data("rgdate", "short", "noticeContent"),
+    new Data("mdfdate", "long", "noticeRegdate"),
+    new Data("seller", "long", "noticeMdfdate"),
+    new Data("dop", "short", "noticeUseYn"),
+  ];
+  let fetch = useFetch("/api/helpdesk/getNoticeList").data.data;
+  let fetchedData = null;
+  fetchedData = fetch;
+  console.log(fetchedData);
 
   return (
     <>
@@ -21,7 +26,9 @@ const TakenClassView = () => {
           <strong>수강 클래스 조회</strong>
         </h5>
         <hr />
-        <Table tableItems={tableItems} />
+        {/* {fetchedData !== undefined ? ( */}
+        <Table tableInfo={tableInfo} fetchedData={fetchedData} />
+        {/* ) : null} */}{" "}
       </div>
     </>
   );

@@ -12,6 +12,7 @@ import StepTwo_5 from "./CourseRegistration/StepTwo_5";
 import { Button, createTheme, ThemeProvider } from "@mui/material";
 import StepTwo_6 from "./CourseRegistration/StepTwo_6";
 import StepThree_1 from "./CourseRegistration/StepThree_1";
+import StepThree_2 from "./CourseRegistration/StepThree_2";
 import CourseStore from "./CourseRegistration/CourseStore";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -90,7 +91,7 @@ const CourseRegistration = () => {
   //const currentStep = 0;
 
   const returnButtonValue = useMemo(() => {
-    if (currentStep === 7) {
+    if (currentStep === 8) {
       return "등록";
     }
     return "다음";
@@ -127,13 +128,16 @@ const CourseRegistration = () => {
 
   const handleStepPlus = () => {
     setCurrentStep(currentStep + 1);
+    console.log(formData);
   };
 
   const handleStepMinus = () => {
     setCurrentStep(currentStep - 1);
+    //console.log(formData);
   };
 
   return (
+    <>
     <ThemeProvider theme={theme}>
         <div className="addclass">
           <div className="top">
@@ -158,14 +162,15 @@ const CourseRegistration = () => {
               <div className="midContent">
                 {
                   [
-                    <StepOne saveFormData={saveFormData}/>,
-                    <StepTwo_1 saveFormData={saveFormData}/>,
-                    <StepTwo_2 saveFormData={saveFormData}/>,
-                    <StepTwo_3 saveFormData={saveFormData}/>,
-                    <StepTwo_4 saveFormData={saveFormData}/>,
-                    <StepTwo_5 saveFormData={saveFormData}/>,
-                    <StepTwo_6 saveFormData={saveFormData}/>,
-                    <StepThree_1 saveFormData={saveFormData}/>,
+                    <StepOne formData={formData} saveFormData={saveFormData}/>,
+                    <StepTwo_1 formData={formData} saveFormData={saveFormData}/>,
+                    <StepTwo_2 formData={formData} saveFormData={saveFormData}/>,
+                    <StepTwo_3 formData={formData} saveFormData={saveFormData}/>,
+                    <StepTwo_4 formData={formData} saveFormData={saveFormData}/>,
+                    <StepTwo_5 formData={formData} saveFormData={saveFormData}/>,
+                    <StepTwo_6 formData={formData} saveFormData={saveFormData}/>,
+                    <StepThree_1 formData={formData} saveFormData={saveFormData}/>,
+                    <StepThree_2 formData={formData} saveFormData={saveFormData}/>,
                   ][currentStep]
                 }
               </div>
@@ -182,24 +187,24 @@ const CourseRegistration = () => {
                       이전
                     </Button>
                   )}
-                  {currentStep < 7 && (
+                  {currentStep < 8 && (
                   <Button
                     variant="outlined"
                     color="success"
                     size="large"
-                    disabled={currentStep >= 7}
+                    disabled={currentStep >= 8}
                     style={{ marginLeft: 20, background: "#dbd7d3" }}
                     onClick={handleStepPlus}
                   >
                     {returnButtonValue}
                   </Button>
                   )}
-                  {currentStep >= 7 && (
+                  {currentStep >= 8 && (
                   <Button
                     variant="outlined"
                     color="success"
                     size="large"
-                    disabled={currentStep < 7}
+                    disabled={currentStep < 8}
                     style={{ marginLeft: 20, background: "#dbd7d3" }}
                     type="button"
                     onClick={handleSubmit}
@@ -214,6 +219,7 @@ const CourseRegistration = () => {
           </div>
         </div>
     </ThemeProvider>
+    </>
   );
 };
 export default CourseRegistration;

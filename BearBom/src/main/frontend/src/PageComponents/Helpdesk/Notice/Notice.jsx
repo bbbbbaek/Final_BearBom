@@ -1,39 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import "./notice.scss";
-import useFetch from "../../../customHooks/useFetch";
 import Table from "../../../ModuleComponents/Table/Table";
-import { createItems, createData, Data } from "../../../customHooks/create";
+import { Data, noticeItems } from "../../../customHooks/createItems";
+import axios from "axios";
 
 const Notice = () => {
-  let data = [
-    new Data("title", null, "noticeIdx"),
-    new Data("content", null, "noticeIdx"),
-    new Data("rgdate", null, "noticeIdx"),
-    new Data("mdfdate", null, "noticeIdx"),
-    new Data("seller", null, "noticeIdx"),
-    new Data("dop", null, "noticeIdx"),
-  ];
-
-  // let item = createItems(
-  //   "title",
-  //   "content",
-  //   "rgdate",
-  //   "mdfdate",
-  //   "seller",
-  //   "dop"
-  // );
-  // let data = createData(
-  //   "noticeIdx",
-  //   "noticeNm",
-  //   "noticeContent",
-  //   "noticeRegdate",
-  //   "noticeMdfdate"
-  // );
-
-  let fetch = useFetch("/api/helpdesk/getNoticeList").data.data;
-  let fetchedData = null;
-  fetchedData = fetch;
-  console.log(fetchedData);
+  let tableInfo = noticeItems;
+  const [fetchedData, setFetchedData] = useState();
+  useEffect(() => {
+    axios
+      .get(
+        "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/notice"
+      )
+      .then((res) => {
+        setFetchedData(res.data);
+      });
+  }, []);
 
   return (
     <>
@@ -42,13 +24,9 @@ const Notice = () => {
           <strong>공지사항</strong>
         </h5>
         <hr />
-        {/* {fetchedData !== undefined ? ( */}
-        <Table
-          // tableItems={item}
-          tableData={data}
-          fetchedData={fetchedData}
-        />
-        {/* ) : null} */}
+        {fetchedData ? (
+          <Table tableInfo={tableInfo} fetchedData={fetchedData} />
+        ) : null}
       </div>
     </>
   );

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.bearbom.dto.NoticeDTO;
 import com.spring.bearbom.dto.ResponseDTO;
 import com.spring.bearbom.dto.UserDTO;
 import com.spring.bearbom.entity.Notice;
@@ -28,10 +27,10 @@ public class NoticeController {
 	
 	//공지사항 띄우는 것 
 	@PostMapping("/getNoticeList")
-	public ResponseEntity<?> getNoticeList( Notice notice) {
+	public ResponseEntity<?> getNoticeList(@RequestBody Notice notice) {
 		try {
 			
-			List<Notice> noticetest = noticeService.notice(notice);
+			List<Notice> noticetest = noticeService.notice1(notice);
 	    	ResponseDTO<Notice> response = new ResponseDTO<Notice>();
 	    	response.setData(noticetest);
 			

@@ -20,7 +20,8 @@ const FilelInput = ({changeImages}) => {
       const fileList = Array.prototype.slice.call(e.target.files);
       setImageFile(e.target.files[0]);
       setImageFileList(fileList);
-      const $button = document.querySelector(".imgAddBtn");
+      console.log(imageFileList)
+      const $button = document.querySelector(".multiImgAddBtn2");
       $button.style.display = "none"
     }
   };
@@ -28,7 +29,7 @@ const FilelInput = ({changeImages}) => {
   // 이미지 삭제버튼 클릭시
   const removeSelectedImage = () => {
     setImageFile();
-    const $button = document.querySelector(".imgAddBtn");
+    const $button = document.querySelector(".multiImgAddBtn2");
     $button.style.display = "flex"
   };
 
@@ -36,14 +37,14 @@ const FilelInput = ({changeImages}) => {
 
   return (
     <>
-      <div className="imgAdd">
-        <div className="imgAddBtn">
+      <div className="multiImgAdd">
+        <div className="multiImgAddBtn2">
         <Button
             variant="outlined"
             onClick={() => inputRef.current.click()}
             //  disabled={test}
             style={styles.container}
-            sx={{width:580, height:400, borderRadius:2}}
+            sx={{width:140, height:130, borderRadius:2}}
         >
         <input
           accept="image/*"
@@ -52,9 +53,9 @@ const FilelInput = ({changeImages}) => {
           ref={inputRef}
           hidden
         />
-        <div className="imgAddInner">
+        <div className="multiImgAddInner">
         <AddCircleOutlineIcon />
-        <p className="imgEx">
+        <p className="multiImgEx">
         이미지 추가하기
         </p>
         </div>
@@ -62,17 +63,17 @@ const FilelInput = ({changeImages}) => {
         </div>
 
         {ImageFile && (
-          <div className="imgPrev">
-            <div className="imgBox">
+          <div className="multiImgPrev">
+            <div className="multiImgBox">
                 <img
                     src={URL.createObjectURL(ImageFile)}
                     style={styles.image}
                     alt="Thumbnail"
                     />
             </div>
-            <div className="imgDel">
+            <div className="multiImgDel2">
             <button onClick={removeSelectedImage} style={styles.delete}>
-              삭제하기<HighlightOffIcon/>
+              <HighlightOffIcon/>
             </button>
             </div>
           </div>
@@ -87,6 +88,7 @@ export default FilelInput;
 // 이미지 스타일
 const styles = {
   container: {
+    marginRight:7
   },
   preview: {
     marginTop: 50,

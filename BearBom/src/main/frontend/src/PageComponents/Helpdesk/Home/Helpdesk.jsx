@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./helpdesk.scss";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
@@ -6,11 +6,24 @@ import Notice from "../Notice/Notice";
 import FAQ from "../FAQ/FAQ";
 import Inquiry from "../Inquiry/Inquiry";
 import banner from "../../../images/helpdesk-banner.png";
+import Board from "../../../ModuleComponents/Board/Board";
+import { useDispatch, useSelector } from "react-redux";
+import { onChange } from "../store/store";
+import { Outlet, useNavigate } from "react-router-dom";
 
 const Helpdesk = () => {
-  const [tabContent, setTabContent] = useState(0);
+  const navigate = useNavigate();
 
-  const onClickNotice = () => {};
+  // Helpdesk의 default tab을 notice로 설정하기 위한 useEffect
+  useEffect(() => {
+    navigate("notice");
+  }, []);
+
+  // navigate 함수(e.target의 id값으로 navigate)
+  const onNavigate = (e) => {
+    navigate(e.target.id);
+  };
+
   return (
     <>
       <div className="helpdesk_home">
@@ -18,31 +31,13 @@ const Helpdesk = () => {
         <br />
         <div className="body">
           <div className="menuBar">
-            <div
-              className="menu"
-              id=""
-              onClick={() => {
-                setTabContent(0);
-              }}
-            >
+            <div id="notice" className="menu" onClick={onNavigate}>
               공지사항
             </div>
-            <div
-              className="menu"
-              id=""
-              onClick={() => {
-                setTabContent(1);
-              }}
-            >
+            <div id="faq" className="menu" onClick={onNavigate}>
               FAQ
             </div>
-            <div
-              className="menu"
-              id=""
-              onClick={() => {
-                setTabContent(2);
-              }}
-            >
+            <div id="inquiry" className="menu" onClick={onNavigate}>
               1:1문의
             </div>
           </div>
@@ -50,7 +45,9 @@ const Helpdesk = () => {
           <br />
           {/* Modal부분 */}
           <div className="content">
-            {[<Notice />, <FAQ />, <Inquiry />][tabContent]}
+            {/* Helpdesk --> Notice --> Table --> Board 로 
+            tabContent를 props drilling 하지 않기 위한 전역 관리 필요*/}
+            <Outlet />
           </div>
         </div>
       </div>

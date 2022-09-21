@@ -1,3 +1,5 @@
+@import "../../../variables";
+
 .admin_home {
   display: flex;
 
@@ -5,30 +7,15 @@
     // background-color: lightblue;
     flex: 7;
 
-    .widgets,
-    .charts {
+    .widgets {
       display: flex;
       padding: 1rem;
       gap: 1rem;
     }
-
-    .charts {
-      padding: 5px 20px;
-    }
   }
-  .listContainer {
-    padding: 5px 20px;
-    -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
-    box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
-    padding: 20px;
-    margin: 20px;
-
-    .listTitle {
-      font-weight: bold;
-      font-size: 1.2rem;
-      color: gray;
-
-      margin-bottom: 1rem;
-    }
+  .content {
+    display: flex;
+    padding: 1rem;
+    gap: 1rem;
   }
 }

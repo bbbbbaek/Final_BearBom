@@ -718,7 +718,7 @@ const Join = () => {
 
               <hr />
 
-              <div className="easy_login_name">간편 로그인</div>
+              {/* <div className="easy_login_name">간편 로그인</div>
               <br />
               <div className="easy_login">
                 <div className="google_login">
@@ -751,7 +751,7 @@ const Join = () => {
                     ></img>
                   </a>
                 </div>
-              </div>
+              </div> */}
             </Box>
           </Box>
         </form>

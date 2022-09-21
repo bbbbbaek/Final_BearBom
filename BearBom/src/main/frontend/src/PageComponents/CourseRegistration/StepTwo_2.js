@@ -9,8 +9,16 @@ import React, { useEffect, useState } from "react";
 import "../../css/courseRegistration.css";
 import ThumbnailInput from "./RegistrationComponents/ThumbnailInput";
 import FileInput from "./RegistrationComponents/FileInput"
+import FileInput2 from "./RegistrationComponents/FileInput2"
+import FileInput3 from "./RegistrationComponents/FileInput"
+import FileInput4 from "./RegistrationComponents/FileInput"
+import MultiUploadByKm from "./RegistrationComponents/MultiUploadByKm";
+import FourFileInput1 from "./RegistrationComponents/FourFileInput1";
+import FourFileInput2 from "./RegistrationComponents/FourFileInput2";
+import FourFileInput3 from "./RegistrationComponents/FourFileInput3";
+import FourFileInput4 from "./RegistrationComponents/FourFileInput4";
 
-const StepTwo_2 = ({saveFormData}) => {
+const StepTwo_2 = ({formData, saveFormData}) => {
   const [imageList, setImageList] = useState([]);
   const [formObj, setFormObj] = useState({});
 
@@ -30,6 +38,7 @@ const StepTwo_2 = ({saveFormData}) => {
   useEffect(() => {
      saveFormData(formObj);
   }, [formObj]);
+
 
   return (
     <form id="step_two_2_form">
@@ -61,9 +70,20 @@ const StepTwo_2 = ({saveFormData}) => {
               <div className="datailLabel">
                 <p>추가 이미지 - 클래스에 대한 추가 이미지</p>
               </div>
-              <div className="inputWrap inputHfix">
-                <FileInput changeImages={changeImages}/>
+              <div className="inputMultiFileBox">
+                <FourFileInput1 formData={formData} changeImages={changeImages}/>
+                <FourFileInput2 formData={formData} changeImages={changeImages}/>
+                <FourFileInput3 formData={formData} changeImages={changeImages}/>
+                <FourFileInput4 formData={formData} changeImages={changeImages}/>
+
+                {/* <FileInput changeImages={changeImages}/>
+                <FileInput2 changeImages={changeImages}/>
+                <FileInput3 changeImages={changeImages}/>
+                <FileInput4 changeImages={changeImages}/> */}
               </div>
+              {/* <div>
+                <MultiUploadByKm/>
+              </div> */}
               <p className="inputWar">*최대 4장 까지 등록 가능합니다.</p>
             </div>
           </div>

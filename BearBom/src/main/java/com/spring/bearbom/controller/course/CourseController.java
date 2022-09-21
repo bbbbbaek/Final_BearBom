@@ -2,7 +2,13 @@ package com.spring.bearbom.controller.course;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +38,7 @@ public class CourseController {
 
 	@PostMapping("/courseRegistration")
 	public void courseRegistration(MultipartHttpServletRequest multiPartHttpServletRequest, HttpServletRequest request,
-			@RequestParam Map<String, Object> paramMap) throws IOException {
+			@RequestParam Map<String, Object> paramMap) throws IOException, ParseException {
 //		userService.updatePhoneNum(paramMap.get("phoneNum"));
 		
 		//유저정보
@@ -43,6 +49,40 @@ public class CourseController {
 		//userService.updateUserInfoForCoureseRegistraion(user);
 //		
 		System.out.println(paramMap);
+		
+		//날짜변환부분
+		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+		LocalDateTime localDateTime = LocalDateTime.parse(String.valueOf(paramMap.get("courseStDate")).substring(0, 19),dateFormat);
+		LocalDateTime sendDate = localDateTime.plusHours(18);//DB서버로 전송시 9시간 minus되기 떄문에 미리 18시간 더해줌
+		Date stDate = java.sql.Timestamp.valueOf(sendDate);
+		//System.out.println(stDate);
+		
+		LocalDateTime localDateTime2 = LocalDateTime.parse(String.valueOf(paramMap.get("courseEndDate")).substring(0, 19),dateFormat);
+		LocalDateTime sendDate2 = localDateTime2.plusHours(18);//DB서버로 전송시 9시간 minus되기 떄문에 미리 18시간 더해줌
+		Date endDate = java.sql.Timestamp.valueOf(sendDate2);
+		//System.out.println(endDate);
+		
+//		String start = (String.valueOf(stDate));
+//		long setStDate = Long.parseLong(start);
+//		java.sql.Date sqlDate = new java.sql.Date(setStDate);
+//		System.out.println(sqlDate);
+		//long courseStDate = Long.parseLong(String.valueOf(paramMap.get("courseStDate")).substring(0, 19));
+		//String.valueOf(paramMap.get("courseEndDate")).substring(4, 15);
+		
+		/*DateTimeFormatter dateFormatForHour = DateTimeFormatter.ofPattern("HH");
+		LocalDateTime localDateTimeForHour = LocalDateTime.parse(String.valueOf(paramMap.get("courseStTime")),dateFormatForHour);
+		Date stTime = java.sql.Timestamp.valueOf(localDateTimeForHour);
+		System.out.println(stTime);*/
+		
+		//시간 변환부분
+		SimpleDateFormat timeFormatter = new SimpleDateFormat("HH");
+		long stTime = timeFormatter.parse(paramMap.get("courseStTime").toString()).getTime();
+		Time courseStTime = new Time(stTime);
+		
+		long endTime = timeFormatter.parse(paramMap.get("courseEndTime").toString()).getTime();
+		Time courseEndTime = new Time(endTime);
+		
+		
 		
 		/*코스등록 시작*/
 		Course course = new Course();
@@ -63,6 +103,13 @@ public class CourseController {
 		course.setCourseZipcode(String.valueOf(paramMap.get("courseZipcode")));
 		course.setCourseMax(Integer.valueOf(String.valueOf(paramMap.get("courseMax"))));
 		course.setCourseMin(Integer.valueOf(String.valueOf(paramMap.get("courseMin"))));
+		course.setCourseStDate(stDate);
+		course.setCourseEndDate(endDate);
+		course.setCourseStTime(courseStTime);
+		course.setCourseEndTime(courseEndTime);
+		
+		course.setCourseCost(Integer.valueOf(String.valueOf(paramMap.get("courseCost"))));
+		
 		System.out.println("---------------------------");
 		
 		//파일 업로드 시작
@@ -79,21 +126,27 @@ public class CourseController {
 		
 		
 		Iterator<String> iterator = multiPartHttpServletRequest.getFileNames();
+		System.out.println(multiPartHttpServletRequest.getFileNames());
+		//int fileIdx = -1;
 		
 		while(iterator.hasNext()) {
 			List<MultipartFile> list = multiPartHttpServletRequest.getFiles(iterator.next());
 			
-			//System.out.println(list.size());
+			
 			
 			for(MultipartFile m : list) {
 				System.out.println(m.getOriginalFilename());
-				int fileIdx = 0;
+				
 				if(!m.isEmpty()) {
+					//int CourseFileIdx = ++fileIdx;
+					Course course2 = new Course();
+					course2.setCourseIdx(courseIdx);
 					CourseFile courseFile = new CourseFile();
 					//CourseFileId courseFileId = new CourseFileId();
 					//courseFileId.setCourse(course.getCourseIdx());
-					//courseFileId.setCourseFileIdx(fileIdx+=1);
-					courseFile.setCourse(course);
+					//System.out.println(CourseFileIdx + "-=-=-=-");
+					courseFile.setCourse(course2);
+					//courseFile.setCourseFileIdx(CourseFileIdx);
 					
 					String uuid = UUID.randomUUID().toString();
 					courseFile.setCourseFileNewNm(uuid + m.getOriginalFilename());
@@ -106,7 +159,9 @@ public class CourseController {
 					m.transferTo(file);//테스트시죽일것
 					
 					
-				}
+				}/*else {
+					break;
+				}*/
 			}
 		}
 		//첫번째 이미지만 썸네일에 저장 후 리스트에서 삭제
@@ -117,10 +172,11 @@ public class CourseController {
 		//파일 업로드 끝
 		
 		courseService.courseRegistration(course);//테스트시죽일것
-		System.out.println(course);
-		System.out.println("-----------------------------");
+		//System.out.println(course);
+		
 		
 		courseService.courseFileSave(fileList);//테스트시죽일것
+		System.out.println("-----------------------------");
 		System.out.println(fileList);
 		
 		

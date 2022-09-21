@@ -2,16 +2,17 @@ import React, { useEffect, useRef, useState } from "react";
 import "./table.scss";
 // fetchedData는 서버에 연결된 상태로만 불러올 수 있기 때문에, 연결이 되지 않은 상태에서는
 // 아래의 salesData를 임시 데이터로 사용
-import salesData from "../../PageComponents/Admin/salesData";
+import dummyData from "../../PageComponents/Admin/dummyData";
 import { CSVLink } from "react-csv";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import excelDownload from "../../images/excelDownload.png";
+import { useNavigate } from "react-router-dom";
 
 // TableMenuItems 객체로 생성한 tableItems state를 사용하여 각 컴포넌트에 알맞은 데이터를 출력할 수 있도록 설계
-const Table = ({ setTab, tableItems, tableData, fetchedData }) => {
+const Table = ({ tableInfo, fetchedData }) => {
   // const [please, setPlease] = useState(fetchedData);
-  const sortedData = [...salesData].sort((a, b) => b.idx - a.idx);
+  const sortedData = [...fetchedData].sort((a, b) => b.noticeIdx - a.noticeIdx);
   const [rawData] = useState(sortedData);
   // data의 초깃값을 salesData로 설정하게 되면, rawData와 참조값이 같게 되면서 splice메소드 사용하여 data 변경 시, rawData의 값도 변경되는 문제 있음
   // --> 배열 복사를 통해 참조값이 다르도록 설정
@@ -25,12 +26,15 @@ const Table = ({ setTab, tableItems, tableData, fetchedData }) => {
   const filterInputRef = useRef();
   const filterSelectRef = useRef();
 
+  const navigate = useNavigate();
+
   // 1. 필터 내용에 따라 data를 변경하는 함수
   const filteringData = (value, option) => {
     // setData를 이용해 변경하면 useEffect가 호출되므로 배열 메소드를 이용해 변경
     // data 초기화
     data.splice(0, data.length);
     // concat 메소드는 새로운 배열을 반환하므로, newData 변수에 저장
+
     const newData = data.concat(rawData);
     if (value === "") {
       let copy = [...rawData];
@@ -58,7 +62,7 @@ const Table = ({ setTab, tableItems, tableData, fetchedData }) => {
     // Math.floor 범위가 /10 하기 이전까지로만 지정돼서 안됐던 경험 있음
     let count = Math.floor(
       data.findLastIndex((a) => {
-        return a.idx >= 0;
+        return a.noticeIdx >= 0;
       }) / 10
     );
     setPageCount(count + 1);
@@ -69,11 +73,49 @@ const Table = ({ setTab, tableItems, tableData, fetchedData }) => {
     setCurrentPageData(data.slice(10 * pageNum - 10, 10 * pageNum));
   };
 
+  // 테이블 바디 onClick 시, 상세 페이지로 이동하는 함수
+  const moveToBoard = (element) => {
+    let id = element.noticeIdx;
+    navigate(`${id}`);
+  };
+
+  // 테이블에 클래스 추가해주는 함수
+  function insertClass(index) {
+    return "column " + tableInfo[index].prop;
+  }
+
+  // 테이블 헤드 반환하는 함수
+  const insertTH = (tableInfo) => {
+    let tableItem = [];
+    for (let i = 0; i < tableInfo.length; i++) {
+      tableItem.push(<td className={insertClass(i)}>{tableInfo[i].title}</td>);
+    }
+    return tableItem;
+  };
+
+  // 테이블 바디 반환하는 함수
+  const insertTD = (tableInfo, element) => {
+    let tableItem = [];
+    for (let i = 0; i < tableInfo.length; i++) {
+      tableItem.push(
+        <td
+          className={insertClass(i)}
+          onClick={() => {
+            moveToBoard(element);
+          }}
+        >
+          {element[tableInfo[i].cell]}
+        </td>
+      );
+    }
+    return tableItem;
+  };
+
   return (
     <>
       {/* fetchData를 받아왔을 때만 아래의 화면을 보여줄 수 있도록 삼항연산자 사용.
           해당 조건을 주지 않으면, 데이터를 받아오기 전에 fetchData는 배열이 아니기 때문에 아래 식들에서 오류가 남 */}
-      {salesData ? (
+      {fetchedData ? (
         <>
           {/* <div>{fetchedData[0].tableData[0]}</div> */}
           {/* <div>{fetchedData[0][tableData[0]]}</div> */}
@@ -107,36 +149,23 @@ const Table = ({ setTab, tableItems, tableData, fetchedData }) => {
               </div>
               <CSVLink data={data}>
                 <div style={{ textDecoration: "none" }}>
-                  <img src={excelDownload} />
+                  <img src={excelDownload} alt="excel" />
                 </div>
               </CSVLink>
             </div>
             <div className="center">
               <table>
-                <tr className="row1 title">
-                  <td className="column short"></td>
-                  <td className="column short">번호</td>
-                  <td className="column long">{tableData[0].title}</td>
-                  <td className="column short">{tableData[1].title}</td>
-                  <td className="column short">{tableData[2].title}</td>
-                  <td className="column short">{tableData[3].title}</td>
-                  <td className="column short">{tableData[4].title}</td>
-                  <td className="column short">{tableData[5].title}</td>
-                </tr>
+                {/* 테이블 헤드 부분 */}
+                <tr className="row_title">{insertTH(tableInfo)}</tr>
 
-                {/* {currentPageData.map((a, i) => {
+                {/* 테이블 바디 부분 */}
+                {currentPageData.map((a, i) => {
                   return (
-                    <tr className="row2" key={i}>
-                      <td className="column short"></td>
-                      <td className="column short">{a[tableData.data1]}</td>
-                      <td className="column long">{a[tableData.data2]}</td>
-                      <td className="column short">{a[tableData.data3]}</td>
-                      <td className="column short">{a[tableData.data4]}</td>
-                      <td className="column short">{a[tableData.data5]}</td>
-                      <td className="column short">{a[tableData.data6]}</td>
+                    <tr className="row_data" key={i}>
+                      {insertTD(tableInfo, a)}
                     </tr>
                   );
-                })} */}
+                })}
               </table>
             </div>
             <div className="bottom">

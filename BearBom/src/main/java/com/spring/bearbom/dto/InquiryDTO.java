@@ -10,5 +10,8 @@ public class InquiryDTO {
 	private String inquirySort;
 	private String inquiryTitle;
 	private String inquiryContetnt;
-	
+	private char inquiryUseYn;
+	private char inquiryYn;
+	private String userId;
+
 }

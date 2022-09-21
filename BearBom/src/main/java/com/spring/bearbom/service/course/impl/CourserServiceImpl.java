@@ -42,18 +42,19 @@ public class CourserServiceImpl implements CourserService {
 		return courserMapper.updateRating(courseIdx);
 	}
 
-	
 	@Override
 	public double updateRating1(Courser courser) {
 		// TODO Auto-generated method stub
 		return courserMapper.updateRating1(courser);
 	}
 
-//    @Override
-//    public List<Courser> updateRating1(Courser courser) {
-//        // TODO Auto-generated method stub
-//        return courserMapper.updateRating1(courser);
-//    }
+//	@Override
+//	public double updateRating(Courser courser) {
+//		// TODO Auto-generated method stub
+//		return courserMapper.updateRating(courser);
+//	}
+
+
 
 	@Override
     public Course getCourse(int courseIdx) {
