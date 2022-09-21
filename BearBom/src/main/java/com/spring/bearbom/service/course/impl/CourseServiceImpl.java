@@ -7,8 +7,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.bearbom.dto.LikeDto;
 import com.spring.bearbom.entity.Course;
 import com.spring.bearbom.entity.CourseFile;
+import com.spring.bearbom.entity.Notice;
 import com.spring.bearbom.mapper.CourseMapper;
 import com.spring.bearbom.repository.CourseFileRepository;
 import com.spring.bearbom.repository.CourseRepository;
@@ -67,6 +69,11 @@ public class CourseServiceImpl implements CourseService {
 //		courseEndTime=24:00, courseStCost=0, courseEndCost=1000000}
 
 		return courseMapper.getSearchProducts(pMap);
+	}
+	
+	@Override
+    public List<Map<String, Object>> getMyOpenedClassList(String userId){
+		return courseMapper.getMyOpenedClassList(userId);
 	}
 
 

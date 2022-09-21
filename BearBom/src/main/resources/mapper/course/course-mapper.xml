@@ -74,4 +74,10 @@
             </if>
             ORDER BY B.RATE DESC
     </select>
+    
+    <select id="getMyOpenedClassList" resultType="camelHashMap">
+    	SELECT *
+    		FROM T_COURSE
+    		WHERE USER_ID = #{userId}
+    </select>
 </mapper>
