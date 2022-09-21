@@ -88,6 +88,7 @@ function App() {
               element={<LecturerInfoModification />}
             />
             <Route path="inquiry/view" element={<InquiryView />} />
+            <Route path="inquiry/view/:id" element={<Board />} />
             <Route path="inquiry" element={<Inquiry />} />
             <Route path="wishlist" element={<WishlistView />} />
           </Route>
