@@ -30,15 +30,10 @@ public class CourseRController {
 
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
-
-//    @GetMapping("aaa")
-//    public ResponseEntity<> ttt (@RequestParam String userId)
-
     
     @PostMapping("/getReviewList")
     public Map<String, Object> getReviewList(@RequestBody Course course) {
 
-    	
     	Courser courser = new Courser();
     	courser.setCourse(course);
 
@@ -52,6 +47,8 @@ public class CourseRController {
     	
     	System.out.println(averageRating);
     	Map<String, Object> resultMap = new HashMap<String, Object>();
+    	
+    	courserService.updateCourseCnt(course.getCourseIdx());
     	
     	resultMap.put("reviewList", reviewList);
     	resultMap.put("averageRating", averageRating);

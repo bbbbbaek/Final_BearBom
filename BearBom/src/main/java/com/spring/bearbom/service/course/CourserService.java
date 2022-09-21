@@ -18,6 +18,10 @@ public interface CourserService {
 	Course getCourse(int courseIdx);
 
 	double updateRating(int courseIdx);
+
+	void updateCourseCnt(int courseIdx);
+	
+
     
 //	List<Course> getCourseList(Course course);
 //

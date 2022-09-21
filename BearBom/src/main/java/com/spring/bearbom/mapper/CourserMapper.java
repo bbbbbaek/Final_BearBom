@@ -1,11 +1,10 @@
 package com.spring.bearbom.mapper;
 
 
-import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.spring.bearbom.entity.Course;
 import com.spring.bearbom.entity.Courser;
@@ -32,6 +31,9 @@ public interface CourserMapper {
 	
 	@Select("select * from t_course where course_idx = #{courseIdx}")
     Course getCourse(@Param("courseIdx") int courseIdx);
+	
+	@Update("update t_course set course_cnt = course_cnt + 1 where course_idx=#{courseIdx}")
+	void updateCourseCnt(int courseIdx);
 
 	//@Select("select round(AVG(courser_rate),2) AS RATE from t_courser where course_idx = #{courseIdx}")
 	//double updateRating(int courseIdx);

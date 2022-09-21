@@ -62,4 +62,12 @@ public class CourserServiceImpl implements CourserService {
         Course course = courserMapper.getCourse(courseIdx);
         return course;
     }
+
+	@Override
+	public void updateCourseCnt(int courseIdx) {
+		// TODO Auto-generated method stub
+		courserMapper.updateCourseCnt(courseIdx);
+	}
+	
+
 }
