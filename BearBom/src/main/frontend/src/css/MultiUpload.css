@@ -1,0 +1,66 @@
+@media screen and (min-width: 768px) {
+    .grid-wrapper {
+      display: grid;
+      width: 670px;
+      height: 330px;
+      background-color: #fff;
+      grid-template-columns: repeat(4, 1fr);
+      justify-items: center;
+      align-items: center;
+    }
+  }
+  
+  @media screen and (max-width: 767px) {
+    .grid-wrapper {
+      display: grid;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      grid-template-columns: auto;
+      gap: 10px;
+      justify-items: center;
+      align-items: center;
+    }
+  }
+  
+  .grid-content {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    background-color: #ddddda;
+  }
+  .grid-content:nth-child(1) {
+    position: relative;
+    width: 315px;
+    height: 315px;
+    background-color: #ddddda;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .thumbnail {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .deleteButton:nth-child(1) {
+    scale: 100%;
+    position: absolute;
+    text-align: center;
+    position: absolute;
+    right: 0%;
+  }
+  
+  .deleteButton {
+    scale: 50%;
+    position: absolute;
+    text-align: center;
+    position: absolute;
+    right: 0%;
+    top: 0%;
+  }
+  

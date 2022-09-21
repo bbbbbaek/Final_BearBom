@@ -15,4 +15,6 @@ public interface CourseMapper {
 	List<Map<String, Object>> getCourseList();
 
 	List<Map<String, Object>> getSearchProducts(Map<String, Object> paramMap);
+	
+	int getNextFileIdx(int courseIdx);
 }
