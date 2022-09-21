@@ -1,25 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./openedclassview.scss";
 import useFetch from "../../../customHooks/useFetch";
 import Table from "../../../ModuleComponents/Table/Table";
-import { Data } from "../../../customHooks/createItems";
+import { openedClassItems } from "../../../customHooks/createItems";
+import axios from "axios";
 
 const OpenedClassView = () => {
-  const [tableItems, setTableItems] = useState();
-  // index, title, content, regdate, userId, replyYN
-  let tableInfo = [
-    new Data("title", "long", "noticeIdx"),
-    new Data("content", "long", "noticeNm"),
-    new Data("rgdate", "short", "noticeContent"),
-    new Data("mdfdate", "long", "noticeRegdate"),
-    new Data("seller", "long", "noticeMdfdate"),
-    new Data("dop", "short", "noticeUseYn"),
-  ];
-
-  let fetch = useFetch("/api/helpdesk/getNoticeList").data.data;
-  let fetchedData = null;
-  fetchedData = fetch;
-  console.log(fetchedData);
+  let tableInfo = openedClassItems;
+  const [fetchedData, setFetchedData] = useState();
+  useEffect(() => {
+    axios
+      .get(
+        "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Course"
+      )
+      .then((res) => {
+        setFetchedData(res.data);
+      });
+  }, []);
 
   return (
     <>
@@ -28,9 +25,9 @@ const OpenedClassView = () => {
           <strong>개설 클래스 조회</strong>
         </h5>
         <hr />
-        {/* {fetchedData !== undefined ? ( */}
-        <Table tableInfo={tableInfo} fetchedData={fetchedData} />
-        {/* ) : null} */}{" "}
+        {fetchedData ? (
+          <Table tableInfo={tableInfo} fetchedData={fetchedData} />
+        ) : null}
       </div>
     </>
   );
