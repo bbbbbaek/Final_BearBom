@@ -37,13 +37,12 @@ public class MainController {
     public Map<String, Object> getCourseList(Course course, @AuthenticationPrincipal String userId) {
 //        System.out.println("/////////"+course);
 
-<<<<<<< HEAD
-=======
+
 		System.out.println("/////////////////////////"+userId);
 
         System.out.println("///////////"+userId);
 
->>>>>>> 3595f0ee37f19297cf6017702e514d39084b65a3
+
         try {
 //            Courser courser = new Courser();
 //            courser.setCourse(course);

@@ -40,7 +40,7 @@ public class MypageServiceImpl implements MypageService {
 		return userRepository.findByUserId(userId);
 	}
 
-<<<<<<< HEAD
+
 	@Override
 	public void updateUser(User user) {
 		// TODO Auto-generated method stub
@@ -54,8 +54,7 @@ public class MypageServiceImpl implements MypageService {
 //		 return updateUser;
 ////		userRepository.save(user);
 //	}
-}
-=======
+
 
     @Override
     public List<Map<String, Object>> getInquiryReference(String userId) {
@@ -68,4 +67,4 @@ public class MypageServiceImpl implements MypageService {
 //    }
 
 }
->>>>>>> 3595f0ee37f19297cf6017702e514d39084b65a3
+

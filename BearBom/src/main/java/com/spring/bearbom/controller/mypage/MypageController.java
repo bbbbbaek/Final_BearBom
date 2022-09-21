@@ -111,13 +111,13 @@ public class MypageController {
 		
 		// 실제 DB 저장 
 //		userService.updateUser(oldUser);
-<<<<<<< HEAD
+
 
 		return ResponseEntity.ok().body("success");
 	}
 	
-}
-=======
+
+
 //
 //		return ResponseEntity.ok().body("success");
 //	}
@@ -148,6 +148,7 @@ public class MypageController {
 		System.out.println("after inquiryDTO : " +inquiryDTO);
 
 	}
+	
   	
 }
->>>>>>> 3595f0ee37f19297cf6017702e514d39084b65a3
+
