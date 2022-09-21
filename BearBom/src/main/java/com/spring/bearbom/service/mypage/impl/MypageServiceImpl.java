@@ -1,6 +1,7 @@
 package com.spring.bearbom.service.mypage.impl;
 
 
+import com.spring.bearbom.service.mypage.MypageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
