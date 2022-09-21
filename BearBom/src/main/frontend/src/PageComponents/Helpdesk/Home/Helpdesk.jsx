@@ -13,11 +13,14 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 const Helpdesk = () => {
   const navigate = useNavigate();
+
+  // Helpdesk의 default tab을 notice로 설정하기 위한 useEffect
   useEffect(() => {
     navigate("notice");
   }, []);
-  const [tabContent, setTabContent] = useState(0);
-  const onMove = (e) => {
+
+  // navigate 함수(e.target의 id값으로 navigate)
+  const onNavigate = (e) => {
     navigate(e.target.id);
   };
 
@@ -28,22 +31,14 @@ const Helpdesk = () => {
         <br />
         <div className="body">
           <div className="menuBar">
-            <div id="notice" className="menu" onClick={onMove}>
+            <div id="notice" className="menu" onClick={onNavigate}>
               공지사항
             </div>
-            <div id="faq" className="menu" onClick={onMove}>
+            <div id="faq" className="menu" onClick={onNavigate}>
               FAQ
             </div>
-            <div id="inquiry" className="menu" onClick={onMove}>
+            <div id="inquiry" className="menu" onClick={onNavigate}>
               1:1문의
-            </div>
-            <div
-              className="menu"
-              onClick={() => {
-                setTabContent(3);
-              }}
-            >
-              리스트
             </div>
           </div>
 

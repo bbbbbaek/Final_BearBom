@@ -2,7 +2,7 @@ import React from "react";
 import "./latesttransaction.scss";
 import SimpleTable from "../../../ModuleComponents/SimpleTable/SimpleTable";
 import useFetch from "../../../customHooks/useFetch";
-import { Data } from "../../../customHooks/create";
+import { Data } from "../../../customHooks/createItems";
 
 const LatestTransaction = () => {
   let tableInfo = [

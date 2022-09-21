@@ -20,6 +20,10 @@
 
     .top_right {
       display: flex;
+
+      select {
+        height: 10px;
+      }
     }
   }
 }

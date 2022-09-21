@@ -7,7 +7,7 @@ import Featured from "../Featured/Featured";
 import Chart from "../Chart/Chart";
 import useFetch from "../../../customHooks/useFetch";
 
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import SimpleTable from "../../../ModuleComponents/SimpleTable/SimpleTable";
 import LatestTransaction from "../LatestTransaction/LatestTransaction";
 
@@ -57,15 +57,12 @@ const Admin = () => {
               <Widget type="user" />
               <Widget type="class" />
             </div>
-            <div className="charts">
-              <Featured />
-              <Chart />
-            </div>
-            <div className="listContainer">
-              <LatestTransaction />
+            <div className="content">
+              <Outlet />
             </div>
           </div>
         </div>
+        {/* </div> */}
       </div>
     </>
   );

@@ -1,7 +1,7 @@
 /* 대체 왜 이건 안먹히는지 모르겠음 */
 
 .doughnut-wrapper {
-  width: "200px";
-  height: "200px";
+  width: "100%";
+  height: "100%";
   /* margin: "100px"; */
 }
