@@ -157,7 +157,7 @@ const inputPriceFormat = (e) => {
           <div className="contentDetail">
             <div className="nameWrap marTop">
               <h5 className="detailName">
-                수강금액
+                수강금액 
                 <div className="nameUnderbar"></div>
               </h5>
             </div>
