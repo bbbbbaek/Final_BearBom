@@ -5,10 +5,10 @@ import DaumPostcode from "react-daum-postcode";
 const KakaoAPI = ({ formData, saveFormData }) => {
   /////////////////////////////////////////////////////////
   //폼데이터 생성부분
-  // const [address, setAddress] = useState();
-  // //const [addressDef, setAddressDef] = useState();
-  // const [addressEx, setAddressEx] = useState();
-  // const [zipcode, setZipcode] = useState();
+  const [address, setAddress] = useState();
+  //const [addressDef, setAddressDef] = useState();
+  const [addressEx, setAddressEx] = useState();
+  const [zipcode, setZipcode] = useState();
 
   const [check, setCheck] = useState(false);
 
@@ -38,6 +38,18 @@ const KakaoAPI = ({ formData, saveFormData }) => {
     // setFormObj({...formObj, "addressEx": addressExRef.current.value})
     // setFormObj({...formObj, "zipcode": zipcodeRef.current.value})
   }, [addressDef]);
+
+  useEffect(() => {
+    setFormObj({ ...formObj, courseAddress: address });
+  }, [address]);
+
+  useEffect(() => {
+    setFormObj({ ...formObj, courseAddressEx: addressEx });
+  }, [addressEx]);
+
+  useEffect(() => {
+    setFormObj({ ...formObj, courseZipcode: zipcode });
+  }, [zipcode]);
 
   useEffect(() => {
     setAddressDef(formData.courseAddressDef);
@@ -94,13 +106,17 @@ const KakaoAPI = ({ formData, saveFormData }) => {
       }
       // 조합된 참고항목을 해당 필드에 넣는다.
       document.getElementById("sample3_extraAddress").value = extraAddr;
+      setAddressEx(extraAddr);
     } else {
       document.getElementById("sample3_extraAddress").value = "";
+      setAddressEx("");
     }
 
     // 우편번호와 주소 정보를 해당 필드에 넣는다.
     document.getElementById("sample3_postcode").value = data.zonecode;
+    setZipcode(data.zonecode);
     document.getElementById("sample3_address").value = addr;
+    setAddress(addr);
     // 커서를 상세주소 필드로 이동한다.
     document.getElementById("sample3_detailAddress").focus();
 

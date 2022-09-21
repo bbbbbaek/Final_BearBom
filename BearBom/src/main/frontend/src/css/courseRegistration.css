@@ -388,7 +388,8 @@ div {
 }
 
 .midContent {
-  min-height: 700px;
+  
+  min-height: 1050px;
 }
 
 .stepBtnBox {
@@ -426,7 +427,22 @@ div {
 }
 
 .regCalender {
-  margin: 20px 130px;
+  margin: 20px 130px 20px 35px;
+  display: flex;
+}
+
+.regCalCalender{
+  min-width: 350px;
+}
+.regCalToString{
+  margin: 30px 0px 0px 20px;
+  min-width: 180px;
+  font-size: 13px;
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  border-radius: 5px;
+  max-height: 110px;
+  padding: 5px;
+  font: rgba(0, 0, 0, 0.5);
 }
 
 
@@ -669,4 +685,13 @@ div {
 
 .editInputWar{
   margin-bottom: 15px;
+}
+
+.stepThree{
+  margin-top: 0px;
+  margin-left: 20px;
+}
+
+.marTop{
+  margin-top: 50px;
 }
