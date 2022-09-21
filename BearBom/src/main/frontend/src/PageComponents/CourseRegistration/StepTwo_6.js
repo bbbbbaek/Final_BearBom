@@ -62,23 +62,23 @@ const StepTwo_6 = ({saveFormData}) => {
                     label="Cate"
                     onChange={handleChangeLoca}
                   >
-                    <MenuItem value={201}>전체</MenuItem>
-                    <MenuItem value={202}>서울</MenuItem>
-                    <MenuItem value={203}>경기</MenuItem>
-                    <MenuItem value={204}>인천</MenuItem>
-                    <MenuItem value={205}>강원</MenuItem>
-                    <MenuItem value={206}>대구</MenuItem>
-                    <MenuItem value={207}>부산</MenuItem>
-                    <MenuItem value={208}>경상북도</MenuItem>
-                    <MenuItem value={209}>경상남도</MenuItem>
-                    <MenuItem value={210}>울산</MenuItem>
-                    <MenuItem value={211}>광주</MenuItem>
-                    <MenuItem value={212}>전라북도</MenuItem>
-                    <MenuItem value={213}>전라남도</MenuItem>
-                    <MenuItem value={214}>세종</MenuItem>
-                    <MenuItem value={215}>제주</MenuItem>
-                    <MenuItem value={216}>충청북도</MenuItem>
-                    <MenuItem value={217}>충청남도</MenuItem>
+                    {/* <MenuItem value={201}>전체</MenuItem> */}
+                    <MenuItem value={201}>서울</MenuItem>
+                    <MenuItem value={202}>경기</MenuItem>
+                    <MenuItem value={203}>인천</MenuItem>
+                    <MenuItem value={204}>강원</MenuItem>
+                    <MenuItem value={205}>대구</MenuItem>
+                    <MenuItem value={206}>부산</MenuItem>
+                    <MenuItem value={207}>경상북도</MenuItem>
+                    <MenuItem value={208}>경상남도</MenuItem>
+                    <MenuItem value={209}>울산</MenuItem>
+                    <MenuItem value={210}>광주</MenuItem>
+                    <MenuItem value={211}>전라북도</MenuItem>
+                    <MenuItem value={212}>전라남도</MenuItem>
+                    <MenuItem value={213}>세종</MenuItem>
+                    <MenuItem value={214}>제주</MenuItem>
+                    <MenuItem value={215}>충청북도</MenuItem>
+                    <MenuItem value={216}>충청남도</MenuItem>
                   </Select>
                 </FormControl>
               </div>

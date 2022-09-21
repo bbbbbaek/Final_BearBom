@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import axios from "axios";
+
 import "../css/join.scss";
 
 import Avatar from "@mui/material/Avatar";
@@ -14,14 +14,15 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
-import PopupPostCode from "./PopupPostCode";
-import { responsesAreSame } from "workbox-broadcast-update";
+import { useDaumPostcodePopup } from "react-daum-postcode";
+import axios from "axios";
 import { API_BASE_URL } from "../app-config";
 import { useNavigate } from "react-router-dom";
 
 const Join = () => {
   const navigate = useNavigate();
 
+  // 값 저장
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
   const [userRePw, setUserRePw] = useState("");
@@ -30,17 +31,37 @@ const Join = () => {
   const [userNickName, setUserNickName] = useState("");
   const [userTel, setUserTel] = useState("");
   const [userAddressDef, setUserAddressDef] = useState("");
-  const [zonecodee, setZonecodee] = useState("");
-  const [fullAddresss, setFullAddresss] = useState("");
+  const [usingTerm, setUsingTerm] = useState(false);
+  const [infoTerm, setInfoTerm] = useState(false);
 
-  const [userIdError, setUserIdError] = useState(true);
-  const [userPwError, setUserPwError] = useState(true);
-  const [userRePwError, setUserRePwError] = useState(true);
-  const [userEmailError, setUserEmailError] = useState(true);
-  const [userNmError, setUserNmError] = useState(true);
-  const [userNickNameError, setUserNickNameError] = useState(true);
-  const [userTelError, setUserTelError] = useState(true);
-  const [checkIdError, setCheckIdError] = useState(true);
+  // 이메일 체크
+  const [userEmailCheck, setUserEmailCheck] = useState("");
+  const [test, setTest] = useState("");
+
+  //오류메시지 상태 저장
+  const [userIdMessage, setUserIdMessage] = useState("");
+  const [userPwMessage, setUserPwMessage] = useState("");
+  const [userRePwMessage, setUserRePwMessage] = useState("");
+  const [userEmailMessage, setUserEmailMessage] = useState("");
+  const [userNmMessage, setUserNmMessage] = useState("");
+  const [userNickNameMessage, setUserNickNameMessage] = useState("");
+  const [userTelMessage, setUserTelMessage] = useState("");
+  const [usingTermMessage, setUsingTermMessage] = useState("");
+  const [infoTermMessage, setInfoTermMessage] = useState("");
+  const [userEmailCheckMessage, setUserEmailCheckMessage] = useState("");
+
+  //유효성 검사
+  const [isUserId, setIsUserId] = useState(false);
+  const [isUserPw, setIsUserPw] = useState(false);
+  const [isUserRePw, setIsUserRePw] = useState(false);
+  const [isUserEmail, setIsUserEmail] = useState(false);
+  const [isUserNm, setIsUserNm] = useState(false);
+  const [isUserNickName, setIsUserNickName] = useState(false);
+  const [isUserTel, setIsUserTel] = useState(false);
+  const [isUsingTerm, setIsUsingTerm] = useState(false);
+  const [isInfoTerm, setIsInfoTerm] = useState(false);
+  const [isIdCheckError, setIsIdCheckError] = useState(false);
+  const [isUserEmailCheckError, setIsUserEmailCheckError] = useState(false);
 
   const [userInfo, setUserInfo] = useState({});
 
@@ -52,134 +73,248 @@ const Join = () => {
 
     setUserInfo(newUserInfo);
   };
-  // 아이디 유효성 검사
-  const onChangeUserId = (e) => {
-    const userIdRegex = /^[a-zA-z0-9]{5,10}$/;
 
-    if (!e.target.value || userIdRegex.test(e.target.value))
-      setUserIdError(false);
-    else setUserIdError(true);
+  //우편번호 및 주소 조회(다음 우편번호 검색 서비스 사용)
+  const open = useDaumPostcodePopup(
+    "//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"
+  );
+
+  let [zipCode, setZipCode] = useState("");
+  let [fullAddress, setFullAddress] = useState("");
+
+  const handleComplete = (data) => {
+    fullAddress = data.address;
+    let extraAddress = "";
+
+    if (data.addressType === "R") {
+      if (data.bname !== "") {
+        extraAddress += data.bname;
+      }
+      if (data.buildingName !== "") {
+        extraAddress +=
+          extraAddress !== "" ? `, ${data.buildingName}` : data.buildingName;
+      }
+      fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
+      setZipCode(data.zonecode);
+      setFullAddress(fullAddress);
+    }
+  };
+
+  //우편번호 검색 버튼 클릭시
+  const handleClick = () => {
+    open({ onComplete: handleComplete });
+  }; //onComplete - 우편번호 검색이 끝났을 때 사용자가 선택한 정보를 받아올 콜백함수. 주소 데이터의 구성은 Daum 가이드를 참고.
+
+  //유효성
+  //아이디
+  const onChangeName = useCallback((e) => {
     setUserId(e.target.value);
-    addUserInfo(e);
-  };
+    if (e.target.value.length < 2 || e.target.value.length > 10) {
+      setUserIdMessage("2글자 이상 10글자 미만으로 입력해주세요.");
+      setIsUserId(false);
+    } else {
+      setUserIdMessage("올바른 이름 형식입니다.");
+      setIsUserId(true);
+      addUserInfo(e);
+    }
+  }, []);
 
-  // 비밀번호 유효성 검사
-  const onChangeUserPw = (e) => {
-    const userPwRegex =
-      // /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
+  // 이메일
+  const onChangeEmail = useCallback((e) => {
+    const emailRegex =
+      /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    const emailCurrent = e.target.value;
+    setUserEmail(emailCurrent);
+
+    if (!emailRegex.test(emailCurrent)) {
+      setUserEmailMessage("이메일 형식이 틀렸어요! 다시 확인해주세요");
+      setIsUserEmail(false);
+    } else {
+      setUserEmailMessage("올바른 이메일 형식이에요 : )");
+      setIsUserEmail(true);
+      addUserInfo(e);
+    }
+  }, []);
+
+  // 비밀번호
+  const onChangePassword = useCallback((e) => {
+    const passwordRegex =
       /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
-    if (!e.target.value || userPwRegex.test(e.target.value))
-      setUserPwError(false);
-    else setUserPwError(true);
+    const passwordCurrent = e.target.value;
+    setUserPw(passwordCurrent);
 
-    if (!userRePw || e.target.value === userRePw) setUserRePwError(false);
-    else setUserRePwError(true);
-    setUserPw(e.target.value);
-    addUserInfo(e);
-  };
-  const onChangeUserRePw = (e) => {
-    if (userPw === e.target.value) setUserRePwError(false);
-    else setUserRePwError(true);
-    setUserRePw(e.target.value);
-  };
+    if (!passwordRegex.test(passwordCurrent)) {
+      setUserPwMessage(
+        "숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!"
+      );
+      setIsUserPw(false);
+    } else {
+      setUserPwMessage("올바른 비밀번호 입니다.");
+      setIsUserPw(true);
+      addUserInfo(e);
+    }
+  }, []);
 
-  // 이메일 유효성 검사
-  const onChangeUserEmail = (e) => {
-    const userEmailRegex = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
-    if (!e.target.value || userEmailRegex.test(e.target.value))
-      setUserEmailError(false);
-    else setUserEmailError(true);
-    setUserEmail(e.target.value);
-    addUserInfo(e);
-  };
+  // 비밀번호 확인
+  const onChangePasswordConfirm = useCallback(
+    (e) => {
+      const passwordConfirmCurrent = e.target.value;
+      setUserRePw(passwordConfirmCurrent);
 
-  // 이름 유효성 검사
-  const onChangeUserNm = (e) => {
+      if (userPw === passwordConfirmCurrent) {
+        setUserRePwMessage("비밀번호가 일치합니다.");
+        setIsUserRePw(true);
+      } else {
+        setUserRePwMessage("비밀번호가 일치하지 않습니다.");
+        setIsUserRePw(false);
+        addUserInfo(e);
+      }
+    },
+    [userPw]
+  );
+
+  //이름
+  const onChangeUserNm = useCallback((e) => {
     const userNmRegex = /^[a-z|A-Zㅣ가-힣]+$/;
-    if (!e.target.value || userNmRegex.test(e.target.value))
-      setUserNmError(false);
-    else setUserNmError(true);
-    setUserNm(e.target.value);
+    const userNmCurrent = e.target.value;
+
+    setUserNm(userNmCurrent);
+    if (!userNmRegex.test(userNmCurrent)) {
+      setUserNmMessage(
+        "한글과 영문 대 소문자를 사용하세요.(특수기호, 공백 사용불가)"
+      );
+      setIsUserNm(false);
+    } else {
+      setUserNmMessage("올바른 이름입니다.");
+      setIsUserNm(true);
+      addUserInfo(e);
+    }
+  });
+
+  //별명
+  const onChangeUserNickName = useCallback((e) => {
+    const userNickNameCurrent = e.target.value;
+    setUserNickName(userNickNameCurrent);
     addUserInfo(e);
+  });
+
+  //이메일 인증
+  const onChangeEmailCheck = (e) => {
+    const emailCheckCurrent = e.target.value;
+    setUserEmailCheck(emailCheckCurrent);
+
+    if (test === e.target.value) {
+      setUserEmailCheckMessage("성공");
+      setIsUserEmailCheckError(true);
+    } else {
+      setUserEmailCheckMessage("실패");
+      setIsUserEmailCheckError(false);
+    }
+    console.log(userEmailCheck);
   };
 
-  // 닉네임 유효성 검사
-  const onChangeUserNickName = (e) => {
-    const userNickNameRegex = /^[a-z|A-Zㅣ가-힣]{2,10}$/;
-    if (!e.target.value || userNickNameRegex.test(e.target.value))
-      setUserNickNameError(false);
-    else setUserNickNameError(true);
-    setUserNickName(e.target.value);
-    addUserInfo(e);
-  };
-
-  // 전화번호 유효성 검사
-  const onChangeUserTel = (e) => {
+  //전화번호
+  const onChangeUserTel = useCallback((e) => {
     const userTelRegex = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}/;
-    if (!e.target.value || userTelRegex.test(e.target.value))
-      setUserTelError(false);
-    else setUserTelError(true);
-    setUserTel(e.target.value);
+    const userTelCurrent = e.target.value;
+    setUserTel(userTelCurrent);
+
+    if (!userTelRegex.test(userTelCurrent)) {
+      setUserTelMessage(" - 을 입력해 주세요.");
+      setIsUserTel(false);
+    } else {
+      setUserTelMessage("올바른 전화번호입니다.");
+      setIsUserTel(true);
+      addUserInfo(e);
+    }
+  });
+
+  //우편번호
+  const onChangeZipCode = (e) => {
+    const zipCodeCurrent = e.target.value;
+    setZipCode(zipCodeCurrent);
     addUserInfo(e);
   };
 
-  const validation = () => {
-    if (!userId) setUserIdError(true);
-    if (!userPw) setUserPwError(true);
-    if (!userRePw) setUserRePwError(true);
-    if (!userEmail) setUserEmailError(true);
-    if (!userNm) setUserNmError(true);
-    if (!userNickName) setUserNickNameError(true);
-    if (!userTel) setUserTelError(true);
-    if (!checkIdError) setCheckIdError(true);
-
-    if (
-      userId &&
-      userPw &&
-      userRePw &&
-      userEmail &&
-      userNm &&
-      userNickName &&
-      userTel &&
-      checkIdError
-    )
-      return true;
-    else return false;
-  };
-
-  const onUserAddressDefHandler = (e) => {
-    setUserAddressDef(e.currentTarget.value);
+  //주소
+  const onChangeFullAddress = (e) => {
+    const fullAddressCurrent = e.target.value;
+    setFullAddress(fullAddressCurrent);
     addUserInfo(e);
   };
 
-  const onZonecodeeHandler = (e) => {
-    setZonecodee(e.currentTarget.value);
+  //상세주소
+  const onChangeUserAddressDef = (e) => {
+    const userAddressDefCurrent = e.target.value;
+    setUserAddressDef(userAddressDefCurrent);
     addUserInfo(e);
   };
 
-  const onFullAddresssHandler = (e) => {
-    setFullAddresss(e.currentTarget.value);
-    addUserInfo(e);
+  //이용약관
+  const onChangeUsingTerm = (e) => {
+    setUsingTerm(e.target.checked);
+    setIsUsingTerm(e.target.checked);
   };
 
-  // 팝업창 상태 관리
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-
-  // 팝업창 열기
-  const openPostCode = () => {
-    setIsPopupOpen(true);
+  //개인정보 수집 이용
+  const onChangeInfoTerm = (e) => {
+    setInfoTerm(e.target.checked);
+    setIsInfoTerm(e.target.checked);
   };
 
-  // 팝업창 닫기
-  const closePostCode = () => {
-    setIsPopupOpen(false);
-  };
+  //회원가입 버튼 클릭
+  // const onSubmitJoinHandler = (e) => {
+  //   e.preventDefault();
 
-  const onSubmitHandler = (e) => {
+  //   const data = new FormData(e.target);
+  //   const userId = data.get("userId");
+  //   const userPw = data.get("userPw");
+  //   const userEmail = data.get("userEmail");
+  //   const userNm = data.get("userNm");
+  //   const userNickName = data.get("userNickName");
+  //   const userTel = data.get("userTel");
+  //   const userZipcode = data.get("userZipcode");
+  //   const userAddress = data.get("userAddress");
+  //   const userAddressDef = data.get("userAddressDef");
+  //   // multipart/form-data 이미지 헤더
+  //   try {
+  //     axios({
+  //       method: "post",
+  //       url: API_BASE_URL + "/api/user/joinTest",
+  //       data: {
+  //         userId: userId,
+  //         userPw: userPw,
+  //         userEmail: userEmail,
+  //         userNm: userNm,
+  //         userNickName: userNickName,
+  //         userTel: userTel,
+  //         userZipcode: userZipcode,
+  //         userAddress: userAddress,
+  //         userAddressDef: userAddressDef,
+  //       },
+  //       headers: {
+  //         Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+  //         "Content-Type": "application/json",
+  //       },
+  //     })
+  //       .then((response) => {
+  //         navigate("/login");
+  //       })
+  //       .catch((e) => {
+  //         console.log(e);
+  //       });
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
+
+  const onSubmitJoinHandler = (e) => {
     console.log({
       ...userInfo,
-      userZipcode: zonecodee,
-      userAddress: fullAddresss,
+
+      userZipcode: zipCode,
+      userAddress: fullAddress,
+      userAddressDef: userAddressDef,
     });
     e.preventDefault();
     // e.preventDefault();
@@ -199,24 +334,29 @@ const Join = () => {
     axios({
       method: "post",
       url: API_BASE_URL + "/api/user/join",
+
       // headers: {
       //   Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
       // },
 
-      data: { ...userInfo, userZipCode: zonecodee, userAddress: fullAddresss },
+      data: {
+        ...userInfo,
+        userId: userId,
+        userEmail: userEmail,
+        userZipcode: zipCode,
+        userAddress: fullAddress,
+        userAddressDef: userAddressDef,
+        userPw: userPw,
+        userNm: userNm,
+        userNickName: userNickName,
+        userTel: userTel,
+      },
+      // data: { ...userInfo, userZipCode: zonecodee, userAddress: fullAddresss },
     }).then((response) => {
       console.log(response);
-      window.location.href = "/login";
+      // window.location.href = "/login";
+      navigate("/loginTest");
     });
-
-    // }
-
-    // const joinObj = {};
-    // const formData = new FormData(e.target);
-
-    // formData.forEach(function (value, key) {
-    //   joinObj[key] = value;
-    // });
   };
 
   const idCheck = () => {
@@ -226,23 +366,53 @@ const Join = () => {
       data: { userId: userId },
     }).then((response) => {
       console.log(response);
-      if (response.data === "idFail") {
-        alert("이미 사용중인 아이디 입니다.");
-        setCheckIdError(true);
+
+      if (response.data === 1) {
+        alert("사용 불가능한 아이디입니다.");
+        // setCheckIdError(true);
+        setIsIdCheckError(false);
       } else {
         alert("사용 가능한 아이디 입니다.");
-        setCheckIdError(false);
-        //test
+        // setCheckIdError(false);
+        setIsIdCheckError(true);
       }
     });
   };
 
+  const emailConfirm = () => {
+    axios({
+      method: "post",
+      url: API_BASE_URL + "/api/user/emailConfirm",
+      data: { userEmail: userEmail },
+    }).then((response) => {
+      console.log(response);
+      // setUserEmailCheck(response.data);
+      console.log(response.data);
+      setTest(response.data);
+      // setUserEmailCheck(response.data);
+      // console.log(test);
+      // console.log(userEmailCheck);
+      // return response;
+    });
+    // .then((response) => {
+    //   console.log(test);
+    //   if (test === userEmailCheck) {
+    //     setUserEmailCheckMessage("성공");
+    //     setIsUserEmailCheckError(true);
+    //   } else {
+    //     setUserEmailCheckMessage("실패");
+    //     setIsUserEmailCheckError(false);
+    //   }
+    // });
+  };
+
   return (
     <>
+      {/* <ThemeProvider theme={theme}> */}
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-
-        <form onSubmit={onSubmitHandler}>
+        <form onSubmit={onSubmitJoinHandler}>
+          {/* <form noValidate onSubmit={handleSubmit}> */}
           <Box
             sx={{
               marginTop: 8,
@@ -255,25 +425,32 @@ const Join = () => {
             <Typography component="h1" variant="h5">
               회원가입
             </Typography>
-            <Box component="div" noValidate sx={{ mt: 3 }}>
+            <Box
+              noValidate
+              // onSubmit={handleSubmit}
+              sx={{ mt: 3 }}
+            >
               <Grid container spacing={2}>
                 <Grid item xs={8}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="userId"
-                    label="아이디"
-                    name="userId"
-                    autoFocus
-                    value={userId}
-                    onChange={onChangeUserId}
-                    // helperText={userIdError ? "아이디에러" : ""}
-                  />
-                  {userIdError && (
-                    <div className="invalid-input">
-                      5자 이상 10자 이하로 입력해 주세요.
-                    </div>
-                  )}
+                  <div className="formbox">
+                    <TextField
+                      required
+                      fullWidth
+                      id="userId"
+                      label="아이디"
+                      name="userId"
+                      autoFocus
+                      value={userId}
+                      onChange={onChangeName}
+                    />
+                    {userId.length > 0 && (
+                      <span
+                        className={`message ${isUserId ? "success" : "error"}`}
+                      >
+                        {userIdMessage}
+                      </span>
+                    )}
+                  </div>
                 </Grid>
                 <Grid item xs={4}>
                   <Button
@@ -281,179 +458,260 @@ const Join = () => {
                     onClick={idCheck}
                     fullWidth
                     sx={{ mt: 1 }}
+                    disabled={!isUserId}
                   >
                     중복 확인
                   </Button>
                 </Grid>
                 <Grid item xs={8}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="userEmail"
-                    label="이메일"
-                    name="userEmail"
-                    autoComplete="email"
-                    value={userEmail}
-                    onChange={onChangeUserEmail}
-                  />
-                  {userEmailError && (
-                    <div className="invalid-input">
-                      유효한 이메일 형식을 입력하세요.
-                    </div>
-                  )}
+                  <div className="formbox">
+                    <TextField
+                      required
+                      fullWidth
+                      id="userEmail"
+                      label="이메일"
+                      name="userEmail"
+                      autoComplete="email"
+                      value={userEmail}
+                      onChange={onChangeEmail}
+                    />
+                    {userEmail.length > 0 && (
+                      <span
+                        className={`message ${
+                          isUserEmail ? "success" : "error"
+                        }`}
+                      >
+                        {userEmailMessage}
+                      </span>
+                    )}
+                  </div>
                 </Grid>
                 <Grid item xs={4}>
-                  <Button type="button" fullWidth sx={{ mt: 1 }}>
-                    이메일 확인
+                  <Button
+                    type="button"
+                    onClick={emailConfirm}
+                    fullWidth
+                    sx={{ mt: 1 }}
+                    disabled={!isUserEmail}
+                  >
+                    이메일 인증
                   </Button>
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    name="userPw"
-                    label="비밀번호"
-                    type="password"
-                    id="userPw"
-                    value={userPw}
-                    onChange={onChangeUserPw}
-                  />
-                  {userPwError && (
-                    <div className="invalid-input">
-                      숫자 + 영문자 + 특수문자 조합으로 8자리 이상 입력해주세요.
-                    </div>
-                  )}
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    name="userRePw"
-                    label="비밀번호 확인"
-                    type="Password"
-                    id="userRePw"
-                    value={userRePw}
-                    onChange={onChangeUserRePw}
-                  />
-                  {userRePwError && (
-                    <div className="invalid-input">
-                      비밀번호가 일치하지 않습니다.
-                    </div>
-                  )}
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="userNm"
-                    label="이름"
-                    name="userNm"
-                    value={userNm}
-                    onChange={onChangeUserNm}
-                  />
-                  {userNmError && (
-                    <div className="invalid-input">
-                      한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용
-                      불가)
-                    </div>
-                  )}
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="userNickName"
-                    label="별명"
-                    name="userNickName"
-                    value={userNickName}
-                    onChange={onChangeUserNickName}
-                  />
-                  {userNickNameError && (
-                    <div className="invalid-input">
-                      2자 이상 10자 이내로 작성 가능합니다.
-                    </div>
-                  )}
-                </Grid>
-                <Grid item xs={8}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="userZipcode"
-                    label="우편번호"
-                    name="userZipCode"
-                    value={zonecodee}
-                    onChange={onZonecodeeHandler}
-                  />
-                </Grid>
-                <Grid item xs={4}>
-                  <Button onClick={openPostCode}>검색</Button>
-                  <div id="popupDom">
-                    {isPopupOpen && (
-                      <PopupPostCode
-                        setZonecodee={setZonecodee}
-                        setFullAddresss={setFullAddresss}
-                        onClose={closePostCode}
-                      />
+                  <div className="formbox">
+                    <TextField
+                      fullWidth
+                      id="userEmailCheck"
+                      label="이메일 코드 인증"
+                      name="userEmailCheck"
+                      value={userEmailCheck}
+                      onChange={onChangeEmailCheck}
+                    />
+                    {userEmailCheck.length > 0 && (
+                      <span
+                        className={`message ${
+                          isUserEmailCheckError ? "success" : "error"
+                        }`}
+                      >
+                        {userEmailCheckMessage}
+                      </span>
                     )}
                   </div>
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="userAddress"
-                    label="주소"
-                    name="userAddress"
-                    value={fullAddresss}
-                    onChange={onFullAddresssHandler}
-                  />
-                </Grid>{" "}
+                  <div className="formbox">
+                    <TextField
+                      required
+                      fullWidth
+                      name="userPw"
+                      label="비밀번호"
+                      type="password"
+                      id="userPw"
+                      value={userPw}
+                      onChange={onChangePassword}
+                    />
+                    {userPw.length > 0 && (
+                      <span
+                        className={`message ${isUserPw ? "success" : "error"}`}
+                      >
+                        {userPwMessage}
+                      </span>
+                    )}
+                  </div>
+                </Grid>
                 <Grid item xs={12}>
-                  <TextField
-                    fullWidth
-                    id="userAddressDef"
-                    label="상세주소"
-                    name="userAddressDef"
-                    onChange={onUserAddressDefHandler}
-                    value={userAddressDef}
-                  />
-                </Grid>{" "}
+                  <div className="formbox">
+                    <TextField
+                      required
+                      fullWidth
+                      name="userRePw"
+                      label="비밀번호 확인"
+                      type="Password"
+                      id="userRePw"
+                      value={userRePw}
+                      onChange={onChangePasswordConfirm}
+                    />
+                    {userRePw.length > 0 && (
+                      <span
+                        className={`message ${
+                          isUserRePw ? "success" : "error"
+                        }`}
+                      >
+                        {userRePwMessage}
+                      </span>
+                    )}
+                  </div>
+                </Grid>
                 <Grid item xs={12}>
-                  <TextField
-                    required
+                  <div className="formbox">
+                    <TextField
+                      required
+                      fullWidth
+                      id="userNm"
+                      label="이름"
+                      name="userNm"
+                      value={userNm}
+                      onChange={onChangeUserNm}
+                    />
+                    {userNm.length > 0 && (
+                      <span
+                        className={`message ${isUserNm ? "success" : "error"}`}
+                      >
+                        {userNmMessage}
+                      </span>
+                    )}
+                  </div>
+                </Grid>
+                <Grid item xs={12}>
+                  <div className="formbox">
+                    <TextField
+                      required
+                      fullWidth
+                      id="userNickName"
+                      label="별명"
+                      name="userNickName"
+                      value={userNickName}
+                      onChange={onChangeUserNickName}
+                    />
+                  </div>
+                </Grid>
+                <Grid item xs={12}>
+                  <div className="formbox">
+                    <TextField
+                      required
+                      fullWidth
+                      id="userTel"
+                      label="전화번호"
+                      name="userTel"
+                      value={userTel}
+                      onChange={onChangeUserTel}
+                    />
+                    {userTel.length > 0 && (
+                      <span
+                        className={`message ${isUserTel ? "success" : "error"}`}
+                      >
+                        {userTelMessage}
+                      </span>
+                    )}
+                  </div>
+                </Grid>
+                <Grid item xs={8}>
+                  <div className="formbox">
+                    <TextField
+                      required
+                      fullWidth
+                      id="userZipcode"
+                      label="우편번호"
+                      name="userZipcode"
+                      value={zipCode}
+                      onChange={onChangeZipCode}
+                    />
+                  </div>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  <Button
                     fullWidth
-                    id="userTel"
-                    label="전화번호"
-                    name="userTel"
-                    value={userTel}
-                    onChange={onChangeUserTel}
+                    sx={{ mt: 1 }}
+                    id="userZipSearch"
+                    onClick={handleClick}
+                  >
+                    주소 검색
+                  </Button>
+                </Grid>
+                <Grid item xs={12}>
+                  <div className="formbox">
+                    <TextField
+                      required
+                      fullWidth
+                      id="userAddress"
+                      label="주소"
+                      name="userAddress"
+                      value={fullAddress}
+                      onChange={onChangeFullAddress}
+                    />
+                  </div>
+                </Grid>
+                <Grid item xs={12}>
+                  <div className="formbox">
+                    <TextField
+                      fullWidth
+                      id="userAddressDef"
+                      label="상세주소"
+                      name="userAddressDef"
+                      value={userAddressDef}
+                      onChange={onChangeUserAddressDef}
+                    />
+                  </div>
+                </Grid>
+                {/*  const [usingTerm, setUsingTerm] = useState("");
+               const [infoTerm, setInfoTerm] = useState(""); */}
+                <Grid item xs={12}>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={usingTerm}
+                        color="primary"
+                        onChange={onChangeUsingTerm}
+                      />
+                    }
                   />
-                  {userTelError && (
-                    <div className="invalid-input">"-"을 입력해 주세요.</div>
-                  )}
+                  <Link href="#">(필수) 이용약관에</Link> 동의합니다.
                 </Grid>
                 <Grid item xs={12}>
                   <FormControlLabel
                     control={
-                      <Checkbox value="allowExtraEmails" color="primary" />
+                      <Checkbox
+                        checked={infoTerm}
+                        color="primary"
+                        onChange={onChangeInfoTerm}
+                      />
                     }
                   />
-                  <Link href="#">이용약관에</Link> 동의합니다.
-                </Grid>
-                <Grid item xs={12}>
-                  <FormControlLabel
-                    control={
-                      <Checkbox value="allowExtraEmails" color="primary" />
-                    }
-                  />
-                  <Link href="#">개인정보 수집·이용에</Link> 동의합니다.
+                  <Link href="#">(필수) 개인정보 수집·이용에</Link> 동의합니다.
                 </Grid>
               </Grid>
               <Button
+                // submit은 입력값 그대로 보내기 할 때,
+                // button은 입력값이 경우에 따라 다르게 사용 될 때??
                 type="submit"
+                // type="button"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                disabled={
+                  !(
+                    isUserId &&
+                    isUserPw &&
+                    isUserRePw &&
+                    isUserEmail &&
+                    isUserNm &&
+                    isUserTel &&
+                    isUsingTerm &&
+                    isInfoTerm &&
+                    isIdCheckError &&
+                    isUserEmailCheckError
+                  )
+                }
               >
                 회원가입
               </Button>
@@ -469,6 +727,7 @@ const Join = () => {
                       src={require("../img/google_login.png")}
                       width="50"
                       height="50"
+                      alt="t"
                     ></img>
                   </a>
                 </div>
@@ -478,6 +737,7 @@ const Join = () => {
                       src={require("../img/kakao_login.png")}
                       width="50"
                       height="50"
+                      alt="t"
                     ></img>
                   </a>
                 </div>
@@ -487,6 +747,7 @@ const Join = () => {
                       src={require("../img/naver_login.png")}
                       width="50"
                       height="50"
+                      alt="t"
                     ></img>
                   </a>
                 </div>
@@ -498,4 +759,5 @@ const Join = () => {
     </>
   );
 };
+
 export default Join;

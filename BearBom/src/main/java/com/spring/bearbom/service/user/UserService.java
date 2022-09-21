@@ -15,15 +15,6 @@ public interface UserService {
 	
 	// 비밀번호 찾기
 //	User pwFind(String userId, String userEmail);
+	
+//	User findByUserId(String userId);
 }
-
-
-
-
-
-
-
-
-
-
-

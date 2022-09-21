@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,7 +30,7 @@ public class NoticeController {
 	public ResponseEntity<?> getNoticeList(@RequestBody Notice notice) {
 		try {
 			
-			List<Notice> noticetest = noticeService.notice(notice);
+			List<Notice> noticetest = noticeService.notice1(notice);
 	    	ResponseDTO<Notice> response = new ResponseDTO<Notice>();
 	    	response.setData(noticetest);
 			

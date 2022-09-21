@@ -44,6 +44,7 @@ public class CourseSearchController {
 			resultMap.put("getSearchProducts", getSearchProducts);
 			return resultMap;
 
+
 		} catch (Exception e) {
 			Map<String, Object> errorMap = new HashMap<>();
 			errorMap.put("error", e.getMessage());

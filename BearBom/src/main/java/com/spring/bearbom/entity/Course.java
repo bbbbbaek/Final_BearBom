@@ -38,12 +38,12 @@ public class Course {
 //	private String courseOneSeason;
 
 	@Column(nullable = false)
-	private char courseUseYn;
+	private char courseUseYn = 'Y';
 
 	@Column//(nullable = false)
 	private int courseCnt;
 	
-	@Column(nullable = false, columnDefinition = "default Y")
+	@Column(nullable = false)
 	private String courseLevel;
 	
 	@Column//(nullable = false)

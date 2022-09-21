@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/dtd/DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="com.spring.bearbom.mapper.Mypage2Mapper" >
+    <select id="getInquiryReference" parameterType="com.spring.bearbom.dto.InquiryDTO" resultType="camelHashMap">
+    <![CDATA[
+    SELECT * FROM T_INQUIRY WHERE USER_ID = #{userId} AND inquiry_use_yn = 'Y'
+    ]]>
+    </select>
+    
+    <update id="updateInquiryReference" parameterType="com.spring.bearbom.dto.InquiryDTO">
+    <![CDATA[
+    UPDATE T_INQUIRY SET INQUIRY_USE_YN = "N" WHERE USER_ID = #{userId} AND INQUIRY_IDX = #{inquiryIdx}
+    ]]>
+    </update>
+</mapper>

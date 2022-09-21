@@ -128,13 +128,16 @@ const CourseRegistration = () => {
 
   const handleStepPlus = () => {
     setCurrentStep(currentStep + 1);
+    console.log(formData);
   };
 
   const handleStepMinus = () => {
     setCurrentStep(currentStep - 1);
+    //console.log(formData);
   };
 
   return (
+    <>
     <ThemeProvider theme={theme}>
         <div className="addclass">
           <div className="top">
@@ -159,15 +162,15 @@ const CourseRegistration = () => {
               <div className="midContent">
                 {
                   [
-                    <StepOne saveFormData={saveFormData}/>,
-                    <StepTwo_1 saveFormData={saveFormData}/>,
-                    <StepTwo_2 saveFormData={saveFormData}/>,
-                    <StepTwo_3 saveFormData={saveFormData}/>,
-                    <StepTwo_4 saveFormData={saveFormData}/>,
-                    <StepTwo_5 saveFormData={saveFormData}/>,
-                    <StepTwo_6 saveFormData={saveFormData}/>,
-                    <StepThree_1 saveFormData={saveFormData}/>,
-                    <StepThree_2 saveFormData={saveFormData}/>,
+                    <StepOne formData={formData} saveFormData={saveFormData}/>,
+                    <StepTwo_1 formData={formData} saveFormData={saveFormData}/>,
+                    <StepTwo_2 formData={formData} saveFormData={saveFormData}/>,
+                    <StepTwo_3 formData={formData} saveFormData={saveFormData}/>,
+                    <StepTwo_4 formData={formData} saveFormData={saveFormData}/>,
+                    <StepTwo_5 formData={formData} saveFormData={saveFormData}/>,
+                    <StepTwo_6 formData={formData} saveFormData={saveFormData}/>,
+                    <StepThree_1 formData={formData} saveFormData={saveFormData}/>,
+                    <StepThree_2 formData={formData} saveFormData={saveFormData}/>,
                   ][currentStep]
                 }
               </div>
@@ -216,6 +219,7 @@ const CourseRegistration = () => {
           </div>
         </div>
     </ThemeProvider>
+    </>
   );
 };
 export default CourseRegistration;

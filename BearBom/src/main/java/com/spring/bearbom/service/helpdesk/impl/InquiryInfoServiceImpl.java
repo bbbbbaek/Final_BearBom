@@ -3,7 +3,8 @@ package com.spring.bearbom.service.helpdesk.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spring.bearbom.entity.Inquiry;
+import com.spring.bearbom.dto.InquiryDTO;
+import com.spring.bearbom.mapper.InquiryMapper;
 import com.spring.bearbom.repository.InquiryRepository;
 import com.spring.bearbom.service.helpdesk.InquiryInfoService;
 
@@ -13,14 +14,24 @@ public class InquiryInfoServiceImpl implements InquiryInfoService{
 	@Autowired
 	private InquiryRepository inquiryRepository;
 	
-	
+	@Autowired
+	private InquiryMapper inquiryMapper;
+
 	@Override
-	public Inquiry insertInquiry(Inquiry inquiry) {
+	public void insertInquiry(InquiryDTO inquiryDTO) {
 		// TODO Auto-generated method stub
-		int inquiryIdx = inquiryRepository.selectNextinquiryIdx();
-		inquiry.setInquiryIdx(inquiryIdx);
-		return inquiryRepository.save(inquiry);
+		inquiryMapper.insertInquiry(inquiryDTO);
 	}
+
+
+	
+//	@Override
+//	public Inquiry insertInquiry(Inquiry inquiry) {
+//		// TODO Auto-generated method stub
+//		int inquiryIdx = inquiryRepository.selectNextinquiryIdx();
+//		inquiry.setInquiryIdx(inquiryIdx);
+//		return inquiryRepository.save(inquiry);
+//	}
 
 //	@Autowired
 //	private HelpdeskRepository helpdeskRepository;
