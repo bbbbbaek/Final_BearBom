@@ -62,7 +62,7 @@ const StepTwo_2 = ({formData, saveFormData}) => {
                 <p>대표 이미지 - 썸네일</p>
               </div>
               <div className="inputWrap inputHfix">
-                <ThumbnailInput changeImages={changeImages} />
+                <ThumbnailInput formData={formData} changeImages={changeImages} />
               </div>
               <p className="inputWar">*이미지 등록시 유의사항.</p>
             </div>
