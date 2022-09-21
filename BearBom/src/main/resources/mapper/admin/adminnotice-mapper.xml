@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/dtd/DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="com.spring.bearbom.mapper.MainMapper">
+
+    <!-- 관리자페이지 내 공지사항 초기화면 쿼리 -->   
+   <select id="getInquiryReference" parameterType="com.spring.bearbom.dto.NoticeDTO" resultType="camelHashMap">
+    <![CDATA[
+    	SELECT * FROM T_NOTICE
+    ]]>
+    </select>
+    
+    <!-- 관리자페이지 내 공지사항 등록 쿼리 -->
+    <insert id="ssss" parameterType="com.spring.bearbom.dto.NoticeDTO" >
+    	<![CDATA[
+    		insert into tablename("컬럼1","컬럼2","컬럼3","컬럼4","컬럼5") 
+    		velues("변수1","변수2","변수3","변수4","변수5",)
+    	]]>
+    </insert>
+
+    <!-- 관리자페이지 내 공지사항 삭제 쿼리 -->   
+    <update id="ddddd" parameterType="com.spring.bearbom.dto.NoticeDTO" >
+    	<![CDATA[
+    		UPDATE TABLENAME
+    		SET USE_YN = 'N'
+    		WHERE INDEXNO = "변수명"
+    	]]>
+    </update>
+    
+</mapper>
