@@ -9,9 +9,8 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import "../../css/courseRegistration.css";
-//import NumberFormat from 'react-number-format';
 
-const StepTwo_5 = ({ saveFormData }) => {
+const StepTwo_5 = ({ formData, saveFormData }) => {
 
   const [min, setMin] = useState(0);
   const [max, setMax] = useState(0);
@@ -59,6 +58,25 @@ const range = (start, stop, step) => {
     a.push((b += step || 1));
   }
   return a;
+};
+
+useEffect(() => {
+  setMin(formData.courseMin);
+  setMax(formData.courseMax);
+  setCost(formData.courseCost)
+},[]);
+
+const inputPriceFormat = (e) => {
+  const str=e;
+  const comma = (str) => {
+    str = String(str);
+    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
+  };
+  const uncomma = (str) => {
+    str = String(str);
+    return str.replace(/[^\d]+/g, "");
+  };
+  return comma(uncomma(str));
 };
 
   return (
@@ -136,11 +154,8 @@ const range = (start, stop, step) => {
                 </div>
                 <p className="inputWar">*최대 인원은 최소 인원 수 보다 많아야 합니다.</p>
               </div>
-
-          
-
           <div className="contentDetail">
-            <div className="nameWrap">
+            <div className="nameWrap marTop">
               <h5 className="detailName">
                 수강금액
                 <div className="nameUnderbar"></div>
@@ -151,15 +166,14 @@ const range = (start, stop, step) => {
             </div>
             <div className="numCheck difSelect">
               <Typography>수강비용</Typography>
-              {/* <NumberFormat */}
               <input
                 className="runtimeInput"
                 thousandSeparator={true}
                 placeholder="숫자만 입력해주세요."
                 onChange={(e) => setCost(e.target.value)}
                 prefix={"$"}
-                ></input>
-              {/* /> */}
+                value={cost}
+                 ></input>
             </div>
           </div>
         </div>

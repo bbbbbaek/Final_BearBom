@@ -8,7 +8,7 @@ import "../../css/courseRegistration.css";
 
 const StepTwo_4 = ({formData, saveFormData}) => {
   const [difficulty, setDifficulty] = useState("");
-  const [durationTime, setDurationTime] = useState(0);
+  const [durationTime, setDurationTime] = useState("");
   const [curriculum, setCurriculum] = useState("");
   const [formObj, setFormObj] = useState({});
 
