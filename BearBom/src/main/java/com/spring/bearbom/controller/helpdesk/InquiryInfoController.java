@@ -1,7 +1,5 @@
 package com.spring.bearbom.controller.helpdesk;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.spring.bearbom.dto.InquiryDTO;
 import com.spring.bearbom.entity.Inquiry;
 import com.spring.bearbom.jwt.JwtTokenProvider;
+import com.spring.bearbom.repository.InquiryRepository;
 import com.spring.bearbom.service.helpdesk.InquiryInfoService;
 
 @RestController
@@ -23,28 +22,36 @@ public class InquiryInfoController {
 	private InquiryInfoService inquiryInfoService;
 	
 	@Autowired
+	private InquiryRepository inquiryRepository;
+	
+	@Autowired
 	private JwtTokenProvider jwtTokenProvider;
 	
 	
 	//백단으로 보내서 저장시키는것
 	@PostMapping("/insertInquiry")
 	public ResponseEntity<?> insertInquiry(@RequestBody Inquiry inquiry,@AuthenticationPrincipal String userId){
-		System.out.println(inquiry.getInquiryEmail());
-		System.out.println(inquiry.getInquirySort());
-		System.out.println(inquiry.getInquiryTitle());
-		System.out.println(inquiry.getInquiryContent());
-		System.out.println(userId);
+		System.out.println("email : "+inquiry.getInquiryEmail());
+		System.out.println("sort : "+inquiry.getInquirySort());
+		System.out.println("title : "+inquiry.getInquiryTitle());
+		System.out.println("content : "+inquiry.getInquiryContent());
+		System.out.println("userId : "+userId);
+
+
+		int index = inquiryRepository.selectNextinquiryIdx();
 		
-		Inquiry onetoone = inquiryInfoService.insertInquiry(inquiry);
 		InquiryDTO inquiryDTO = new InquiryDTO();
 		
-		inquiryDTO.setInquiryIdx(onetoone.getInquiryIdx());
-		inquiryDTO.setInquiryEmail(onetoone.getInquiryEmail());
-		inquiryDTO.setInquirySort(onetoone.getInquirySort());
-		inquiryDTO.setInquiryTitle(onetoone.getInquiryTitle());
-		inquiryDTO.setInquiryContetnt(onetoone.getInquiryContent());
+		inquiryDTO.setInquiryIdx(index);
+		inquiryDTO.setInquiryEmail(inquiry.getInquiryEmail());
+		inquiryDTO.setInquirySort(inquiry.getInquirySort());
+		inquiryDTO.setInquiryTitle(inquiry.getInquiryTitle());
+		inquiryDTO.setInquiryContetnt(inquiry.getInquiryContent());
 		inquiryDTO.setUserId(userId);
 		
+		inquiryInfoService.insertInquiry(inquiryDTO);
+
+		System.out.println(inquiryDTO);
 		return ResponseEntity.ok().body(inquiryDTO);
 	}
 	

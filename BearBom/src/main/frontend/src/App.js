@@ -70,6 +70,9 @@ function App() {
           <Route path="/joinTest" element={<JoinTest />} />
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/saw/:id" element={<Saw />} />
+          {/* {localStorage.getItem("USER_ROLE") === "ROLE_ADMIN" && (
+            <Route path="/admin" element={<Admin />} />
+          )}*/}
           <Route path="/admin" element={<Admin />} />
           <Route path="/*" element={<Page404 />} />
           <Route path="/payready" element={<KakaoPayR />} />

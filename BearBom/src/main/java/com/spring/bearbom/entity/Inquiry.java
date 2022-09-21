@@ -33,10 +33,10 @@ public class Inquiry {
         private String inquiryContent;
         
         @Column(nullable = false,columnDefinition = "char(1)")
-        private char inquiryUseYn ='N';
+        private char inquiryUseYn ='Y';
         
         @Column(nullable = false,columnDefinition = "char(1)")
-        private char inquiryYn ='N';
+        private char inquiryYn ='Y';
         
         @ManyToOne
         @JoinColumn(name="USER_ID")

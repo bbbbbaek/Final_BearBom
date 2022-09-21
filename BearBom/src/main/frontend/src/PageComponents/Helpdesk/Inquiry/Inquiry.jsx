@@ -15,6 +15,9 @@ const Inquiry = () => {
       url: API_BASE_URL + "/api/helpdesk/insertInquiry",
       method: "post",
       data: inquiryInfo,
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+      },
     })
       .then(console.log("success"))
       .catch((e) => {
