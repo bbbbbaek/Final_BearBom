@@ -26,7 +26,7 @@ public class Mypage2Controller {
 	private Mypage2Service mypage2Service;
 	
 	
-	//y 인것만 화면에 뿌려주는거
+	//y 인것만 화면에 뿌려주는거 맵퍼를이용한
 	@GetMapping("/getInquiryReference")
 	public Map<String, Object> getInquiryReference(InquiryDTO inquiryDTO,@AuthenticationPrincipal String userId){
 		try {

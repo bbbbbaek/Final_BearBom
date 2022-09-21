@@ -15,8 +15,10 @@ public class FaqServiceImpl implements FaqService{
 
 	@Autowired
 	private GuideRepository guideRepository;
-@Autowired
-private FaqMapper faqMapper;
+	
+	@Autowired
+	private FaqMapper faqMapper;
+	
 	@Override
 	public List<Guide> faq(Guide guide) {
 		// TODO Auto-generated method stub

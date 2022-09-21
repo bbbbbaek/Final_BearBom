@@ -27,6 +27,7 @@ public class AdminInquiryController {
 	@Autowired
 	private JwtTokenProvider jwtTokenProvider;
 	
+	//관리자페이지에 1대1문의 화며에 뿌려주는것
 	@GetMapping("/getInquiryInfoReferenceList")
 	public ResponseEntity<?> getInquiryInfoReferenceList(InquiryDTO inquiryDTO, @AuthenticationPrincipal String userId) {
 		try {
