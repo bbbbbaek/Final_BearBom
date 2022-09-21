@@ -8,6 +8,11 @@ import java.util.Map;
 
 public interface MypageService {
 	User getUser(String userId);
+
+	
+	//유저 정보 수정
+	void updateUser(User user);
+
     List<Map<String, Object>> getInquiryReference(String userId);
 
 }

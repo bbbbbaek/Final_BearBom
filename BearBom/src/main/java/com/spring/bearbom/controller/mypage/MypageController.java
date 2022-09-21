@@ -54,7 +54,7 @@ public class MypageController {
 	private final TestService testService;
 
 	@GetMapping("/getUser")
-  public ResponseEntity<?> mypage(User user, @AuthenticationPrincipal String userId) { 
+	public ResponseEntity<?> mypage(User user, @AuthenticationPrincipal String userId) { 
 		System.out.println(userId);
 		try {
 //		System.out.println(passwordEncoder.getClass());
@@ -80,55 +80,52 @@ public class MypageController {
 
 		userDTO.setUserYn(getUser.getUserYn());
 
+
+		
 		System.out.println("///////////////"+ userDTO);
 		return ResponseEntity.ok().body(userDTO);
-	} catch(Exception e) {
+		} catch(Exception e) {
 		ResponseDTO<UserDTO> response = new ResponseDTO<>();
 
 		response.setError(e.getMessage());
 		return ResponseEntity.badRequest().body(response);
-	}
+		}
 	
 	}
-
-//	  유저 정보 가져오기 
-//	  @PostMapping("/getUser")
-//	  public ResponseEntity<?> getUser(@RequestBody User user) {
-//	  	try {
-//  		User u = userService.findbyUserId(user.getUserId());
-//  		  	
-//  		List<User> userList = new ArrayList<User>();
-//  		userList.add(u);
-//  		
-//  		ResponseDTO<User> response = new ResponseDTO<>();
-//  		response.setData(userList);
-//  		System.out.println("!!!!!!!");
-//  		return ResponseEntity.ok().body(response);
-//  		
-//	  	}catch(Exception e){
-//  		System.out.println(e.getMessage());
-//  		ResponseDTO<User> response = new ResponseDTO<>();
-//  		response.setError(e.getMessage());
-//  		return ResponseEntity.badRequest().body(response);
-//  	}
-//  }
-  
-//	  @PostMapping("updateUserInfo")
-//		public ResponseEntity<?> updateUserInfo(@RequestBody User user){
-//		// 등록된 사용자 정보를 조회한
-//		User oldUser = userService.findbyUserId(user.getUserId());
+		// 유저 정보 변경
+		@PostMapping("/updateUserInfo")
+		public ResponseEntity<?> updateUserInfo(@RequestBody User user, @AuthenticationPrincipal String userId){
+		// 등록된 사용자 정보를 조회한다 
+//		User oldUser = mypageService.getUser(user.getUserId());
 //
-//		// 화면 input 항목에서 받아온 값들을 변경
-//		oldUser.setUserName(user.getUserName());
-//		oldUser.setUserNickname(user.getUserNickname());
+//		// 화면 input 항목에서 받아온 값들을 변경한다 
+//		oldUser.setUserPw(user.getUserPw());
+//		oldUser.setUserNm(user.getUserNm());
+//		oldUser.setUserNickName(user.getUserNickName());
 //		oldUser.setUserTel(user.getUserTel());
-//		oldUser.setUserMail(user.getUserMail());
-//		oldUser.setUserZip(user.getUserZip());
-//		oldUser.setUserAddr(user.getUserAddr());
-//		oldUser.setUserAddrDetail(user.getUserAddrDetail());
-//
-//		// 실제 DB 저장 
+//		oldUser.setUserAddress(user.getUserAddress());
+//		oldUser.setUserAddressDef(user.getUserAddressDef());
+//		oldUser.setUserZipcode(user.getUserZipcode());
+//		oldUser.setUserEmail(user.getUserEmail());
+//		oldUser.setUserYn(user.getUserYn());
+		System.out.println("userId : "+user.getUserId());
+//		user.setUserId(userId);	
+			
+		mypageService.updateUser(user);
+		
+		User newUser = mypageService.getUser(user.getUserId());
+		
+		UserDTO userDTO = new UserDTO();
+		
+		// 실제 DB 저장 
 //		userService.updateUser(oldUser);
+
+
+		return ResponseEntity.ok().body("success");
+	}
+	
+
+
 //
 //		return ResponseEntity.ok().body("success");
 //	}
@@ -159,6 +156,7 @@ public class MypageController {
 		System.out.println("after inquiryDTO : " +inquiryDTO);
 
 	}
+
 
 	//마이페이지
 	// 수강 중인 강좌(takingCourseCnt), 수강 완료 강좌(takenCourseCnt),
@@ -194,4 +192,6 @@ public class MypageController {
 			return errorMap;
 		}
 	}
+
 }
+
