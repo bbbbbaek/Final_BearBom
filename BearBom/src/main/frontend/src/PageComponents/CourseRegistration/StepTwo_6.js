@@ -12,8 +12,9 @@ import SelectButton from "./RegistrationComponents/SelectButton";
 import KakaoAPI from "./RegistrationComponents/KakaoAPI";
 import KakaoAPI2 from "./RegistrationComponents/KakaoAPI2";
 import CourseStore from "./CourseStore";
+import KakaoAPITest from "./RegistrationComponents/KakaoAPITest";
 
-const StepTwo_6 = ({saveFormData}) => {
+const StepTwo_6 = ({formData, saveFormData}) => {
 
   const [location, setLocation] = useState("");
   const [formObj, setFormObj] = useState({});
@@ -29,6 +30,10 @@ const StepTwo_6 = ({saveFormData}) => {
   const handleChangeLoca = (event) => {
     setLocation(event.target.value);
   };
+
+  useEffect(() => {
+    setLocation(formData.courseLocation);
+  },[]);
 
   return (
     <form id="step_two_6_form">
@@ -65,20 +70,21 @@ const StepTwo_6 = ({saveFormData}) => {
                     {/* <MenuItem value={201}>전체</MenuItem> */}
                     <MenuItem value={201}>서울</MenuItem>
                     <MenuItem value={202}>경기</MenuItem>
-                    <MenuItem value={203}>인천</MenuItem>
-                    <MenuItem value={204}>강원</MenuItem>
+                    <MenuItem value={203}>부산</MenuItem>
+                    <MenuItem value={204}>인천</MenuItem>
                     <MenuItem value={205}>대구</MenuItem>
-                    <MenuItem value={206}>부산</MenuItem>
-                    <MenuItem value={207}>경상북도</MenuItem>
-                    <MenuItem value={208}>경상남도</MenuItem>
-                    <MenuItem value={209}>울산</MenuItem>
-                    <MenuItem value={210}>광주</MenuItem>
-                    <MenuItem value={211}>전라북도</MenuItem>
-                    <MenuItem value={212}>전라남도</MenuItem>
-                    <MenuItem value={213}>세종</MenuItem>
-                    <MenuItem value={214}>제주</MenuItem>
-                    <MenuItem value={215}>충청북도</MenuItem>
-                    <MenuItem value={216}>충청남도</MenuItem>
+                    <MenuItem value={206}>울산</MenuItem>
+                    <MenuItem value={207}>광주</MenuItem>
+                    <MenuItem value={208}>대전</MenuItem>
+                    <MenuItem value={209}>경상남도</MenuItem>
+                    <MenuItem value={210}>경상북도</MenuItem>
+                    <MenuItem value={211}>전라남도</MenuItem>
+                    <MenuItem value={212}>전라북도</MenuItem>
+                    <MenuItem value={213}>충청남도</MenuItem>
+                    <MenuItem value={214}>충청북도</MenuItem>
+                    <MenuItem value={215}>강원도</MenuItem>
+                    <MenuItem value={216}>제주도</MenuItem>
+                    <MenuItem value={217}>세종</MenuItem>
                   </Select>
                 </FormControl>
               </div>
@@ -91,9 +97,9 @@ const StepTwo_6 = ({saveFormData}) => {
               </div>
               <div className="kakaoPostCode">
                 <>{/* 카카오 주소, 지도 API 시작 */}
-
-                  <KakaoAPI saveFormData={saveFormData}/>
-                  <KakaoAPI2/>{/*지도 표출 안됨 수정중*/}
+                  {/* <KakaoAPITest formData={formData} saveFormData={saveFormData}/> */}
+                  <KakaoAPI formData={formData} saveFormData={saveFormData}/>
+                  {/*<KakaoAPI2/>지도 표출 안됨 수정중*/}
                 </>{/* 카카오 주소, 지도 API 종료 */}
               </div>
             </div>

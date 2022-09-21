@@ -1,7 +1,13 @@
 //import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 package com.spring.bearbom.controller.mypage;
 
+import com.spring.bearbom.dto.CourseDTO;
 import com.spring.bearbom.dto.InquiryDTO;
+
+import com.spring.bearbom.service.mypage2.Mypage2Service;
+import com.spring.bearbom.service.test.TestService;
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -21,6 +27,8 @@ import com.spring.bearbom.service.user.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +36,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/mypage")
 @Slf4j
+@RequiredArgsConstructor
 public class MypageController {
 	@Autowired
 	private UserService userService;
@@ -42,8 +51,10 @@ public class MypageController {
 	private PasswordEncoder passwordEncoder;
 
 
+	private final TestService testService;
+
 	@GetMapping("/getUser")
-  public ResponseEntity<?> mypage(User user, @AuthenticationPrincipal String userId) { 
+	public ResponseEntity<?> mypage(User user, @AuthenticationPrincipal String userId) { 
 		System.out.println(userId);
 		try {
 //		System.out.println(passwordEncoder.getClass());
@@ -69,59 +80,117 @@ public class MypageController {
 
 		userDTO.setUserYn(getUser.getUserYn());
 
+
+		
 		System.out.println("///////////////"+ userDTO);
 		return ResponseEntity.ok().body(userDTO);
-	} catch(Exception e) {
+		} catch(Exception e) {
 		ResponseDTO<UserDTO> response = new ResponseDTO<>();
 
 		response.setError(e.getMessage());
 		return ResponseEntity.badRequest().body(response);
-	}
+		}
 	
 	}
-
-//	  유저 정보 가져오기 
-//	  @PostMapping("/getUser")
-//	  public ResponseEntity<?> getUser(@RequestBody User user) {
-//	  	try {
-//  		User u = userService.findbyUserId(user.getUserId());
-//  		  	
-//  		List<User> userList = new ArrayList<User>();
-//  		userList.add(u);
-//  		
-//  		ResponseDTO<User> response = new ResponseDTO<>();
-//  		response.setData(userList);
-//  		System.out.println("!!!!!!!");
-//  		return ResponseEntity.ok().body(response);
-//  		
-//	  	}catch(Exception e){
-//  		System.out.println(e.getMessage());
-//  		ResponseDTO<User> response = new ResponseDTO<>();
-//  		response.setError(e.getMessage());
-//  		return ResponseEntity.badRequest().body(response);
-//  	}
-//  }
-  
-//	  @PostMapping("updateUserInfo")
-//		public ResponseEntity<?> updateUserInfo(@RequestBody User user){
-//		// 등록된 사용자 정보를 조회한
-//		User oldUser = userService.findbyUserId(user.getUserId());
+		// 유저 정보 변경
+		@PostMapping("/updateUserInfo")
+		public ResponseEntity<?> updateUserInfo(@RequestBody User user, @AuthenticationPrincipal String userId){
+		// 등록된 사용자 정보를 조회한다 
+//		User oldUser = mypageService.getUser(user.getUserId());
 //
-//		// 화면 input 항목에서 받아온 값들을 변경
-//		oldUser.setUserName(user.getUserName());
-//		oldUser.setUserNickname(user.getUserNickname());
+//		// 화면 input 항목에서 받아온 값들을 변경한다 
+//		oldUser.setUserPw(user.getUserPw());
+//		oldUser.setUserNm(user.getUserNm());
+//		oldUser.setUserNickName(user.getUserNickName());
 //		oldUser.setUserTel(user.getUserTel());
-//		oldUser.setUserMail(user.getUserMail());
-//		oldUser.setUserZip(user.getUserZip());
-//		oldUser.setUserAddr(user.getUserAddr());
-//		oldUser.setUserAddrDetail(user.getUserAddrDetail());
-//
-//		// 실제 DB 저장 
+//		oldUser.setUserAddress(user.getUserAddress());
+//		oldUser.setUserAddressDef(user.getUserAddressDef());
+//		oldUser.setUserZipcode(user.getUserZipcode());
+//		oldUser.setUserEmail(user.getUserEmail());
+//		oldUser.setUserYn(user.getUserYn());
+		System.out.println("userId : "+user.getUserId());
+//		user.setUserId(userId);	
+			
+		mypageService.updateUser(user);
+		
+		User newUser = mypageService.getUser(user.getUserId());
+		
+		UserDTO userDTO = new UserDTO();
+		
+		// 실제 DB 저장 
 //		userService.updateUser(oldUser);
+
+
+		return ResponseEntity.ok().body("success");
+	}
+	
+
+
 //
 //		return ResponseEntity.ok().body("success");
 //	}
 
-	
-  	
+	//y 인것만 화면에 뿌려주는거 맵퍼를이용한
+	@GetMapping("/getInquiryReference")
+	public Map<String, Object> getInquiryReference(InquiryDTO inquiryDTO, @AuthenticationPrincipal String userId){
+		try {
+			inquiryDTO.setUserId(userId);
+			List<Map<String, Object>> getInquiryReference1 = mypage2Service.getInquiryReference(inquiryDTO);
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+			resultMap.put("getInquiryReference1", getInquiryReference1);
+
+			return resultMap;
+		} catch(Exception e) {
+			Map<String,Object> error = new HashMap<String,Object>();
+			error.put("error", e.getMessage());
+			return error;
+		}
+	}
+	//y를 n으로 바꾸는 update
+	@PostMapping("/updateInquiryReference")
+	public void updateInquiryReference(@RequestBody InquiryDTO inquiryDTO, @AuthenticationPrincipal String userId){
+		inquiryDTO.setUserId(userId);
+		System.out.println("before inquiryDTO : " +inquiryDTO);
+		log.info("inquiryDTO : {}", inquiryDTO);
+		mypage2Service.updateInquiryReference(inquiryDTO);
+		System.out.println("after inquiryDTO : " +inquiryDTO);
+
+	}
+
+
+	//마이페이지
+	// 수강 중인 강좌(takingCourseCnt), 수강 완료 강좌(takenCourseCnt),
+	// 개설한 강좌(openedCourseCnt), 찜한 클래스(likedCourseCnt) 수량 컨트롤러
+	@GetMapping("/getMyPageCnt")
+	public Map<String, Object> getMyPageCnt(@AuthenticationPrincipal String userId) {
+		// 수강 중인 강좌를 위한 현재 날짜
+		LocalDate date = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+		System.out.println(date.format(formatter));
+		try{
+			CourseDTO courseDTO = new CourseDTO();
+			courseDTO.setUserId(userId);
+			courseDTO.setTakingCourseDate(date.format(formatter));
+
+			System.out.println("courseDTO : /////" +courseDTO);
+			List<Map<String, Object>> likedCourseCnt = testService.likedCourseCnt(courseDTO);
+			List<Map<String, Object>> takingCourseCnt = testService.takingCourseCnt(courseDTO);
+			List<Map<String, Object>> takenCourseCnt = testService.takenCourseCnt(courseDTO);
+			List<Map<String, Object>> openedCourseCnt = testService.openedCourseCnt(courseDTO);
+
+			Map<String, Object> resultMap = new HashMap<>();
+			resultMap.put("likedCourseCnt", likedCourseCnt);
+			resultMap.put("takingCourseCnt",takingCourseCnt);
+			resultMap.put("takenCourseCnt", takenCourseCnt);
+			resultMap.put("openedCourseCnt", openedCourseCnt);
+			return resultMap;
+
+		}catch (Exception e) {
+			Map<String, Object> errorMap = new HashMap<>();
+			errorMap.put("error", e.getMessage());
+			return errorMap;
+		}
+	} 	
 }
+
