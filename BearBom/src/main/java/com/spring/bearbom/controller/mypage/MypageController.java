@@ -1,44 +1,28 @@
 //import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 package com.spring.bearbom.controller.mypage;
 
-<<<<<<< HEAD
-=======
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
->>>>>>> 29a84b79a9766a470866bac7ed6941483ea65a6b
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-<<<<<<< HEAD
-=======
 import com.spring.bearbom.dto.CourseDTO;
->>>>>>> 29a84b79a9766a470866bac7ed6941483ea65a6b
-import com.spring.bearbom.dto.InquiryDTO;
 import com.spring.bearbom.dto.ResponseDTO;
 import com.spring.bearbom.dto.UserDTO;
 import com.spring.bearbom.entity.User;
 import com.spring.bearbom.jwt.JwtTokenProvider;
 import com.spring.bearbom.service.mypage.MypageService;
-<<<<<<< HEAD
-import com.spring.bearbom.service.mypage2.Mypage2Service;
-=======
 import com.spring.bearbom.service.test.TestService;
->>>>>>> 29a84b79a9766a470866bac7ed6941483ea65a6b
 import com.spring.bearbom.service.user.UserService;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/mypage")
@@ -87,15 +71,11 @@ public class MypageController {
 
 			userDTO.setUserYn(getUser.getUserYn());
 
-<<<<<<< HEAD
-		System.out.println("///////////////"+ userDTO);
-		return ResponseEntity.ok().body(userDTO);
-=======
 
 
 			System.out.println("///////////////"+ userDTO);
 			return ResponseEntity.ok().body(userDTO);
->>>>>>> 29a84b79a9766a470866bac7ed6941483ea65a6b
+
 		} catch(Exception e) {
 			ResponseDTO<UserDTO> response = new ResponseDTO<>();
 
@@ -104,10 +84,7 @@ public class MypageController {
 		}
 
 	}
-<<<<<<< HEAD
-	
-=======
->>>>>>> 29a84b79a9766a470866bac7ed6941483ea65a6b
+
 	// 유저 정보 변경
 	@PostMapping("/updateUserInfo")
 	public ResponseEntity<?> updateUserInfo(@RequestBody User user, @AuthenticationPrincipal String userId){
@@ -137,10 +114,10 @@ public class MypageController {
 //		userService.updateUser(oldUser);
 		return ResponseEntity.ok().body("success");
 	}
-<<<<<<< HEAD
-		
+
+
 	//====================================================================================================//
-	
+
 	// 유저 탈퇴
 //	@PostMapping("deleteUserInfo")
 //	public ResponseEntity<?> deleteUserInfo(@RequestBody User user, @AuthenticationPrincipal String userId){
@@ -161,26 +138,26 @@ public class MypageController {
 //			
 //		}
 //	}
-	
+
 	// 유저 탈퇴 Y-> N 
-		@PostMapping("/deleteUserInfo")
-		public Map<String, String> deleteUserInfo(@AuthenticationPrincipal String userId){
-			try {
-				Map<String, String> resultMap = new HashMap<String, String>();
-				
-				String message = mypageService.deleteUserInfo(userId);
-				
-				resultMap.put("message", message);
-				
-				return resultMap;
-			} catch(Exception e) {
-				Map<String, String> error = new HashMap<String, String>();
-				error.put("error", e.getMessage());
-				return error;
-			}
+	@PostMapping("/deleteUserInfo")
+	public Map<String, String> deleteUserInfo(@AuthenticationPrincipal String userId){
+		try {
+			Map<String, String> resultMap = new HashMap<String, String>();
+
+			String message = mypageService.deleteUserInfo(userId);
+
+			resultMap.put("message", message);
+
+			return resultMap;
+		} catch(Exception e) {
+			Map<String, String> error = new HashMap<String, String>();
+			error.put("error", e.getMessage());
+			return error;
 		}
-}
-=======
+	}
+
+
 
 
 
@@ -219,21 +196,21 @@ public class MypageController {
 		}
 	}
 
-	
+
 	/* mypage 찜한 클래스 갯수 */
 	@GetMapping("/getWishCnt")
 	public Map<String, Object> getWishCnt(@AuthenticationPrincipal String userId) {
-		 CourseDTO courseDTO = new CourseDTO();
-		 log.info("userId : {}", userId);
-		 
+		CourseDTO courseDTO = new CourseDTO();
+		log.info("userId : {}", userId);
+
 		try {
 			courseDTO.setUserId(userId);
-			
+
 			List<CourseDTO> wishCntList = mypageService.getWishCnt(courseDTO);
 			Map<String, Object> resultMap = new HashMap<String, Object>();
-			
+
 			resultMap.put("wishCntList", wishCntList);
-			
+
 			return resultMap;
 		}
 		catch (Exception e){
@@ -242,8 +219,8 @@ public class MypageController {
 			return errorMap;
 		}
 	}
-  	
+
 
 }
 
->>>>>>> 29a84b79a9766a470866bac7ed6941483ea65a6b
+
