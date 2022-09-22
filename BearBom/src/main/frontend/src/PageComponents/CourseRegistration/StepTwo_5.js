@@ -6,7 +6,7 @@ import {
 import React, { useEffect, useState } from "react";
 import "../../css/courseRegistration.css";
 
-const StepTwo_5 = ({saveFormData}) => {
+const StepTwo_5 = ({formData, saveFormData}) => {
   const [lecturerInfo, setLecturerInfo] = useState("");
   const [formObj, setFormObj] = useState({});
 
@@ -19,6 +19,10 @@ const StepTwo_5 = ({saveFormData}) => {
  useEffect(() => {
   setFormObj({...formObj, "lecturerInfo": lecturerInfo, "userId" : userId})
  }, [lecturerInfo]);
+
+ useEffect(() => {
+  setLecturerInfo(formData.lecturerInfo);
+},[]);
 
 
   return (
@@ -39,6 +43,7 @@ const StepTwo_5 = ({saveFormData}) => {
             <div className="numCheck lec">
               <textarea className="lecInput"
                         multiline
+                        value={lecturerInfo}
                         placeholder={'소개글을 작성해 주세요\n최소 40자 이상'}
                         onChange={(e) => setLecturerInfo(e.target.value)}
                     ></textarea> 

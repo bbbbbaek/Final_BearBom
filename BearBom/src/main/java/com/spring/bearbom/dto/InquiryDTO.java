@@ -1,5 +1,7 @@
 package com.spring.bearbom.dto;
 
+import java.time.LocalDateTime;
+
 import lombok.Data;
 
 @Data
@@ -13,5 +15,8 @@ public class InquiryDTO {
 	private char inquiryUseYn;
 	private char inquiryYn;
 	private String userId;
+//	private String inquiryReplyContent;
+//	private char inquiryReplyYn;
+//	private LocalDateTime inquiryReplyDate;
 
 }

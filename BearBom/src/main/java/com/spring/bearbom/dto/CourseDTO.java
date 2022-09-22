@@ -26,9 +26,9 @@ public class CourseDTO {
 	private String courseThumbnailPath;
 	
 	private String userId;
-	
-	
-	
+
+	//마이페이지 수강 중인 날짜를 위함
+	private String takingCourseDate;
 	
 	
 	

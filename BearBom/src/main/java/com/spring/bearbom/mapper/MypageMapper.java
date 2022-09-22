@@ -1,12 +1,9 @@
 package com.spring.bearbom.mapper;
 
-
 import java.util.List;
 import java.util.Map;
-
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-
 import com.spring.bearbom.dto.CourseDTO;
 import com.spring.bearbom.dto.InquiryDTO;
 
@@ -21,5 +18,8 @@ public interface MypageMapper {
 //	@Select("SELECT COUNT(A.course_idx) AS CNT FROM T_COURSE A, (SELECT * FROM T_LIKE) B WHERE A.USER_ID = #{userId} AND A.COURSE_IDX = B.COURSE_IDX")
 	
 
-    List<Map<String, Object>> getInquiryReference(String userId);
+    //재현
+    List<Map<String, Object>> getInquiryReference(InquiryDTO inquiryDTO);
+
+	void updateInquiryReference(InquiryDTO inquiryDTO);
 }

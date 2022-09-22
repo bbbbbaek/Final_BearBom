@@ -12,7 +12,7 @@ import FileInput from "./RegistrationComponents/FileInput"
 import Editor from "./RegistrationComponents/Editor";
 
 
-const StepTwo_3 = ({saveFormData}) => {
+const StepTwo_3 = ({formData, saveFormData}) => {
   const [contents, setContents] = useState();
   const [formObj, setFormObj] = useState({});
 
@@ -32,6 +32,10 @@ const StepTwo_3 = ({saveFormData}) => {
   const handleContents = (e) => {
     setContents(e.target.value);
   };
+
+  useEffect(() => {
+    setContents(formData.courseContents);
+  },[]);
 
   return (
     <form id="step_two_3_form">

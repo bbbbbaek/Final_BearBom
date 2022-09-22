@@ -212,7 +212,7 @@ const CourseRegistration = () => {
                   >
                     등록
                   </Button>)}
-                  <div>{currentStep}</div>
+                  {/* <div>{currentStep}</div> */}
                 </div>
               </div>
             </div>
