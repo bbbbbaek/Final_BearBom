@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.bearbom.dto.GuideDTO;
 import com.spring.bearbom.dto.InquiryDTO;
 import com.spring.bearbom.dto.ResponseDTO;
 import com.spring.bearbom.dto.UserDTO;
@@ -48,4 +49,15 @@ public class AdminInquiryController {
 			return ResponseEntity.badRequest().body(response);
 		}
 	}
+	
+	@PostMapping("updateInquiry")
+	public void updateInquiry(@RequestBody InquiryDTO inquiryDTO, @AuthenticationPrincipal String userId){	
+		inquiryDTO.setUserId(userId);
+		System.out.println("before inquiryDTO : " +inquiryDTO);
+		adminService.updateInquiry(inquiryDTO);
+		System.out.println("after guideDTO : " +inquiryDTO);
+	
+	}
+	
+	
 }

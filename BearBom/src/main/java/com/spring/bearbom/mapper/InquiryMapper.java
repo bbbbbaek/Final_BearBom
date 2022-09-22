@@ -25,6 +25,8 @@ public interface InquiryMapper {
 
 	@Select("SELECT * FROM T_INQUIRY WHERE INQUIRY_USE_YN = 'Y'")
 	List<InquiryDTO> inquiryInfoReference(InquiryDTO inquiryDTO);
+
+	void updateInquiry(InquiryDTO inquiryDTO);
 	
 	
 			

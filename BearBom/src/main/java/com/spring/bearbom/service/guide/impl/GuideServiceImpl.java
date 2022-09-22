@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.bearbom.dto.GuideDTO;
 import com.spring.bearbom.entity.Guide;
 import com.spring.bearbom.mapper.FaqMapper;
 import com.spring.bearbom.repository.GuideRepository;
@@ -36,6 +37,14 @@ public class GuideServiceImpl implements GuideService{
 		int guideIdx = guideRepository.selectNextGuideIdx();
 		guide.setGuideIdx(guideIdx);
 		return guideRepository.save(guide);
+	}
+
+	
+	// 업데이트
+
+	@Override
+	public void updateFaq(GuideDTO guideDTO) {
+		faqMApper.updateFaq(guideDTO);
 	}
 
 	

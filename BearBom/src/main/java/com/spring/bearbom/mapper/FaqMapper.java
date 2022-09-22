@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import com.spring.bearbom.dto.GuideDTO;
 import com.spring.bearbom.entity.Guide;
 import com.spring.bearbom.entity.Inquiry;
 
@@ -12,6 +13,8 @@ import com.spring.bearbom.entity.Inquiry;
 public interface FaqMapper {
 	@Select("SELECT * FROM t_guide WHERE GUIDE_USE_YN = 'Y'")
 	List<Guide> faq(Guide guide);
+
+	void updateFaq(GuideDTO guideDTO);
 	
 	
 }

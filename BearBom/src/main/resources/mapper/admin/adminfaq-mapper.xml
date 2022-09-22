@@ -17,17 +17,16 @@
     		insert into tablename("컬럼1","컬럼2","컬럼3","컬럼4","컬럼5") 
     		velues("변수1","변수2","변수3","변수4","변수5",)
     	]]>
-    </insert>
+    </insert>-->
 
-     관리자페이지 내 공지사항 삭제 쿼리  
-    <update id="ddddd" parameterType="com.spring.bearbom.dto.NoticeDTO" >
-    	<![CDATA[
-    		UPDATE TABLENAME
-    		SET USE_YN = 'N'
-    		WHERE INDEXNO = "변수명"
-    	]]>
+    <update id="updateFaq" parameterType="com.spring.bearbom.dto.GuideDTO">
+    <![CDATA[
+    	UPDATE T_GUIDE 
+    		SET GUIDE_USE_YN = "N" 
+    		WHERE GUIDE_IDX = #{guideIdx}
+    		  
+    ]]>
     </update>
-    -->
     
     
 </mapper>
