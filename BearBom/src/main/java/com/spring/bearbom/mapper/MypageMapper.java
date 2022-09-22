@@ -18,15 +18,12 @@ public interface MypageMapper {
 //	@Select("SELECT COUNT(A.course_idx) AS CNT FROM T_COURSE A, (SELECT * FROM T_LIKE) B WHERE A.USER_ID = #{userId} AND A.COURSE_IDX = B.COURSE_IDX")
 	
 
-<<<<<<< HEAD
-    List<Map<String, Object>> getInquiryReference(String userId);
-    
+
     // 유저 탈퇴 Y->N 0922
     void deleteUserInfo(String userId);
-=======
+
     //재현
     List<Map<String, Object>> getInquiryReference(InquiryDTO inquiryDTO);
 
 	void updateInquiryReference(InquiryDTO inquiryDTO);
->>>>>>> 29a84b79a9766a470866bac7ed6941483ea65a6b
 }
