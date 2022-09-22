@@ -1,7 +1,22 @@
 package com.spring.bearbom.service.mypage.impl;
 
+<<<<<<< HEAD
+
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.spring.bearbom.entity.User;
+import com.spring.bearbom.mapper.MypageMapper;
+import com.spring.bearbom.mapper.UserMapper;
+import com.spring.bearbom.repository.UserRepository;
+import com.spring.bearbom.service.mypage.MypageService;
+=======
+import java.util.List;
+import java.util.Map;
+>>>>>>> 29a84b79a9766a470866bac7ed6941483ea65a6b
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,6 +60,10 @@ public class MypageServiceImpl implements MypageService{
 		return userRepository.findByUserId(userId);
 	}
 
+<<<<<<< HEAD
+	//===========================================================//
+	// 유저 정보 수정
+=======
 
 //    @Override
 //    public List<Map<String, Object>> getInquiryReference(String userId) {
@@ -53,6 +72,7 @@ public class MypageServiceImpl implements MypageService{
 
 
 
+>>>>>>> 29a84b79a9766a470866bac7ed6941483ea65a6b
 	@Override
 	public void updateUser(User user) {
 		// TODO Auto-generated method stub
@@ -65,12 +85,30 @@ public class MypageServiceImpl implements MypageService{
 //	}
 
 	// 유저 정보 수정
-	// mapper로 바꿀 것
-//	 @Override
-//	public void updateUser(User user) {
+	// @Override
+//		public void updateUser(User user) {
 //		 return updateUser;
-////		userRepository.save(user);
+//		userRepository.save(user);
 //	}
+	
+	// 유저 탈퇴
+//	@Override
+//	public void deleteUser(User user) {
+//		userMapper.deleteUser(user);
+//	}
+	
+	// 유저 탈퇴 0922
+	@Override
+    public String deleteUserInfo(String userId) {
+		try {
+			mypageMapper.deleteUserInfo(userId);
+			
+			return "sussecc";
+		} catch(Exception e) {
+			return "fail : " + e.getMessage();
+		}
+    }
+	//===========================================================//
 
 
 //    @Override

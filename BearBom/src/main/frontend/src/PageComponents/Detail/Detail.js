@@ -163,10 +163,13 @@ const Detail = ({ scrollTop }) => {
       localStorage.setItem("data", JSON.stringify(get_local));
     }
   }, [course]);
+<<<<<<< HEAD
+=======
   // React.useEffect(() => {
   //   let get_local = localStorage.getItem("data");
   //   if (location.state) setCourseInfo(location.state.courseInfo);
   //   else setCourseInfo(course);
+>>>>>>> 29a84b79a9766a470866bac7ed6941483ea65a6b
 
   //   if (get_local == null) {
   //     get_local = [];

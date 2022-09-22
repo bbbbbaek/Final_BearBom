@@ -13,6 +13,18 @@
 	        AND A.COURSE_IDX =  B.COURSE_IDX
         ]]>
     </select>
+<<<<<<< HEAD
+    
+    <update id="deleteUserInfo" parameterType="string">
+    	<![CDATA[
+            UPDATE T_USER
+            	SET
+            		USE_YN = 'N'
+            	WHERE USER_ID = #{userId}
+        ]]>
+    </update>
+</mapper>
+=======
 
     <select id="getWishCnt" resultType="camelHashMap" parameterType="com.spring.bearbom.dto.CourseDTO">
         <![CDATA[
@@ -45,3 +57,4 @@
         <![CDATA[
             SELECT * FROM T_INQUIRY WHERE USER_ID = #{userId} AND INQUIRY_USE_YN = 'Y'
         ]]> -->
+>>>>>>> 29a84b79a9766a470866bac7ed6941483ea65a6b

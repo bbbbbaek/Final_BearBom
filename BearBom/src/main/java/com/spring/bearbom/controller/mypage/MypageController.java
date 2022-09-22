@@ -1,8 +1,11 @@
 //import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 package com.spring.bearbom.controller.mypage;
 
+<<<<<<< HEAD
+=======
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+>>>>>>> 29a84b79a9766a470866bac7ed6941483ea65a6b
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,14 +20,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+<<<<<<< HEAD
+=======
 import com.spring.bearbom.dto.CourseDTO;
+>>>>>>> 29a84b79a9766a470866bac7ed6941483ea65a6b
 import com.spring.bearbom.dto.InquiryDTO;
 import com.spring.bearbom.dto.ResponseDTO;
 import com.spring.bearbom.dto.UserDTO;
 import com.spring.bearbom.entity.User;
 import com.spring.bearbom.jwt.JwtTokenProvider;
 import com.spring.bearbom.service.mypage.MypageService;
+<<<<<<< HEAD
+import com.spring.bearbom.service.mypage2.Mypage2Service;
+=======
 import com.spring.bearbom.service.test.TestService;
+>>>>>>> 29a84b79a9766a470866bac7ed6941483ea65a6b
 import com.spring.bearbom.service.user.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -77,10 +87,15 @@ public class MypageController {
 
 			userDTO.setUserYn(getUser.getUserYn());
 
+<<<<<<< HEAD
+		System.out.println("///////////////"+ userDTO);
+		return ResponseEntity.ok().body(userDTO);
+=======
 
 
 			System.out.println("///////////////"+ userDTO);
 			return ResponseEntity.ok().body(userDTO);
+>>>>>>> 29a84b79a9766a470866bac7ed6941483ea65a6b
 		} catch(Exception e) {
 			ResponseDTO<UserDTO> response = new ResponseDTO<>();
 
@@ -89,6 +104,10 @@ public class MypageController {
 		}
 
 	}
+<<<<<<< HEAD
+	
+=======
+>>>>>>> 29a84b79a9766a470866bac7ed6941483ea65a6b
 	// 유저 정보 변경
 	@PostMapping("/updateUserInfo")
 	public ResponseEntity<?> updateUserInfo(@RequestBody User user, @AuthenticationPrincipal String userId){
@@ -116,10 +135,52 @@ public class MypageController {
 
 		// 실제 DB 저장 
 //		userService.updateUser(oldUser);
-
-
 		return ResponseEntity.ok().body("success");
 	}
+<<<<<<< HEAD
+		
+	//====================================================================================================//
+	
+	// 유저 탈퇴
+//	@PostMapping("deleteUserInfo")
+//	public ResponseEntity<?> deleteUserInfo(@RequestBody User user, @AuthenticationPrincipal String userId){
+//		// 등록된 사용자 정보를 조회 
+//
+//		mypageService.deleteUser(user);
+//		
+//		User newUser = mypageService.getUser(user.getUserId());
+//		
+//		UserDTO userDTO = new UserDTO();
+//		
+//		if(newUser == null) {
+//			return ResponseEntity.ok().body("이미 탈퇴한 회원입니다");
+//		}else {
+//			// DB에서 삭제 
+//			mypageService.deleteUser(newUser);
+//			return ResponseEntity.ok().body("탈퇴 성공!");
+//			
+//		}
+//	}
+	
+	// 유저 탈퇴 Y-> N 
+		@PostMapping("/deleteUserInfo")
+		public Map<String, String> deleteUserInfo(@AuthenticationPrincipal String userId){
+			try {
+				Map<String, String> resultMap = new HashMap<String, String>();
+				
+				String message = mypageService.deleteUserInfo(userId);
+				
+				resultMap.put("message", message);
+				
+				return resultMap;
+			} catch(Exception e) {
+				Map<String, String> error = new HashMap<String, String>();
+				error.put("error", e.getMessage());
+				return error;
+			}
+		}
+}
+=======
 
 
 
@@ -185,3 +246,4 @@ public class MypageController {
 
 }
 
+>>>>>>> 29a84b79a9766a470866bac7ed6941483ea65a6b

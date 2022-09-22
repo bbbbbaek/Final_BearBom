@@ -37,4 +37,7 @@
 			</set>
 			WHERE USER_ID = #{userId}
 	</update>
+	
+	
+	
 </mapper>
