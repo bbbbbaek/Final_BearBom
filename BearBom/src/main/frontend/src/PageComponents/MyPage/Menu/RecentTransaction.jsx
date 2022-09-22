@@ -14,7 +14,6 @@ const RecentTransaction = () => {
         "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Order"
       )
       .then((res) => {
-        console.log(res.data);
         setFetchedData(res.data);
       });
   }, []);

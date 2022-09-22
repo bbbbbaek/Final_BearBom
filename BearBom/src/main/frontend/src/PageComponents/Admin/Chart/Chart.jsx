@@ -47,7 +47,7 @@ const Chart = () => {
     <>
       <div className="chart">
         <div className="top">
-          <div className="title">최근 6개월 매출 추이</div>
+          최근 6개월 매출 추이
           <div className="top_right">
             <select name="hello" id="" ref={optionRef}>
               <option value="6months">6개월</option>
@@ -57,7 +57,6 @@ const Chart = () => {
             <MoreVertIcon />
           </div>
         </div>
-        <div className="content"></div>
         <ResponsiveContainer width="100%" aspect={4 / 1} maxHeight="300px">
           <LineChart
             width={500}

@@ -12,10 +12,18 @@
       padding: 1rem;
       gap: 1rem;
     }
-  }
-  .content {
-    display: flex;
-    padding: 1rem;
-    gap: 1rem;
+
+    .charts {
+      display: flex;
+      padding: 1rem;
+      gap: 1rem;
+    }
+    .content {
+      @include shadow();
+      display: flex;
+      padding: 1rem;
+      gap: 1rem;
+      margin: 1rem;
+    }
   }
 }

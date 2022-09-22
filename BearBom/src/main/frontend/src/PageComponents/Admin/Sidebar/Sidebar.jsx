@@ -26,12 +26,12 @@ const Sidebar = () => {
         <div className="center">
           <ul>
             <p className="title">Main</p>
-            <li id="" onClickCapture={onNavigate}>
+            <li id="" onClick={onNavigate}>
               <HomeIcon className="icon" />
               <span>메인메뉴</span>
             </li>
             <p className="title">Sales</p>
-            <li id="sales" onClickCapture={onNavigate}>
+            <li id="sales" onClick={onNavigate}>
               <PaidOutlinedIcon className="icon" />
               <span>매출 관리</span>
             </li>
