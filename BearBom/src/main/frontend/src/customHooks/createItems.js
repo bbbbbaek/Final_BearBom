@@ -32,6 +32,8 @@ export const faqItems = [
 // 좌상단 프로필
 export const profileItems = ["사진", "이름", "이메일", "연락처"];
 
+// 상단 widget
+
 // 최근 거래 내역 (메인메뉴)
 export const recentTransactionItems = [
   new Data("주문번호", "l10", "orderIdx"),
@@ -100,3 +102,12 @@ export const wishListItems = [
   new Data("구매일", "l10", "inquiryRegdate"),
   new Data("상태", "l10", "status"), // 없음
 ];
+
+// ----------------------- 관리자 페이지 -----------------------
+
+// 1. Navbar
+
+// 문의 내역(메세지 모양 아이콘)
+export const inquiryAlarm = [];
+
+// FAQ

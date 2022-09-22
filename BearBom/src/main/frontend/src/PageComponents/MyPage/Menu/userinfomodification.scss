@@ -1,3 +1,21 @@
+@import "../../../variables";
+
 .userinfomodification {
   width: 100%;
+
+  .content2 {
+    @include flexCenter(column);
+
+    li {
+      list-style: none;
+      margin: 20px;
+
+      label {
+        width: 200px;
+      }
+      input {
+        width: 500px;
+      }
+    }
+  }
 }
