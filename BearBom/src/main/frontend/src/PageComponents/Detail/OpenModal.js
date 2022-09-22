@@ -5,7 +5,10 @@ import { useState } from "react";
 
 function OpenModal({ addReviewInfo, onWriteReview }) {
   const [modalOpen, setModalOpen] = useState(false);
-
+  const handleClick = () => {
+    onWriteReview();
+    setModalOpen(!modalOpen);
+  };
   return (
     <>
       <div className="review-modal-header">
@@ -36,6 +39,11 @@ function OpenModal({ addReviewInfo, onWriteReview }) {
             <SubmitRating addReviewInfo={addReviewInfo} />
           </div>
           <AutoHeightTextarea addReviewInfo={addReviewInfo} />
+          <div className="regist">
+            <button type="button" onClick={handleClick}>
+              등록하기
+            </button>
+          </div>
         </Modal>
       ) : null}
     </>

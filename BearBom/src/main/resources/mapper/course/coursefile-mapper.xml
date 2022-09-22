@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/dtd/DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="com.spring.bearbom.mapper.CourseFileMapper">
+    <select id="getCourseFileList" resultType="camelHashMap">
+        SELECT A.*
+        	FROM T_COURSE_FILE A,
+        	T_COURSE B 
+        	WHERE A.COURSE_IDX = #{couseIdx} 
+        	AND A.COURSE_IDX = B.COURSE_IDX
+    </select>
+    
+    
+</mapper>

@@ -49,7 +49,13 @@ import CourseMgmt from "./PageComponents/Admin/Menu/CourseMgmt";
 import NoticeMgmt from "./PageComponents/Admin/Menu/NoticeMgmt";
 import FAQMgmt from "./PageComponents/Admin/Menu/FAQMgmt";
 import InquiryMgmt from "./PageComponents/Admin/Menu/InquiryMgmt";
+
 import QuickViewBox from "./PageComponents/Admin/Home/QuickViewBox";
+import CardSelect from "./PageComponents/Detail/PayCardOption";
+import PayWindow from "./PageComponents/Detail/PayWindow";
+
+import LatestTransaction from "./PageComponents/Admin/Menu/LatestTransaction";
+import BoardWrite from "./ModuleComponents/BoardWrite/BoardWrite";
 
 function App() {
   return (
@@ -77,7 +83,6 @@ function App() {
             <Route path="faq" element={<FAQ />} />
             <Route path="inquiry" element={<Inquiry />} />
           </Route>
-          {/* myPage={myPage} setMyPage={setMyPage} */}
           <Route path="/mypage" element={<Mypage />}>
             <Route path="" element={<RecentTransaction />} />
             <Route path="course/user" element={<TakenClassView />} />
@@ -91,6 +96,7 @@ function App() {
             <Route path="inquiry/view/:id" element={<Board />} />
             <Route path="inquiry" element={<Inquiry />} />
             <Route path="wishlist" element={<WishlistView />} />
+            <Route path="wishlist/:id" element={<Board />} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/loginTest" element={<LoginTest />} />
@@ -99,20 +105,28 @@ function App() {
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/saw/:id" element={<Saw />} />
           <Route path="/admin" element={<Admin />}>
-            <Route path="" element={<QuickViewBox />} />
+            <Route path="" element={<LatestTransaction />} />
             <Route path="sales" element={<SalesMgmt />} />
             <Route path="orders" element={<OrderMgmt />} />
             <Route path="users" element={<UserMgmt />} />
+            {/* 유저 정보 클릭 시 띄울 컴포넌트 만들어야 함 */}
             <Route path="courses" element={<CourseMgmt />} />
+            <Route path="courses/:id" element={<Board />} />
+            {/* 공지, FAQ, 문의 답변 작성할 수 있는 컴포넌트 만들어야 함 */}
             <Route path="notice" element={<NoticeMgmt />} />
+            <Route path="notice/:id" element={<Board />} />
             <Route path="faq" element={<FAQMgmt />} />
+            <Route path="faq/:id" element={<Board />} />
+            <Route path="faq/board" element={<BoardWrite />} />
             <Route path="inquiry" element={<InquiryMgmt />} />
+            <Route path="inquiry/:id" element={<Board />} />
           </Route>
-
           <Route path="/*" element={<Page404 />} />
           <Route path="/payready" element={<KakaoPayR />} />
           <Route path="/payresult" element={<KakaoPayRe />} />
           <Route path="/pwfind" element={<PwFind />} />
+          {/* <Route path="/payoption" element={<CardSelect />} /> */}
+          <Route path="/paywindow" element={<PayWindow />} />
         </Routes>
         <Top />
         <Chatbot />

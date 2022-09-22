@@ -18,21 +18,28 @@ function Review({ review }) {
 
   return (
     <>
-      {/* {reviewList.data.map((u, index) => ( */}
       <div className="review-box">
-        {/* key={u.courserIdx} */}
-        <img className="img2" src={require("../../img/img2.jpeg")}></img>
+        <img className="img2" src={require("../../img/blogo1.png")}></img>
         <span className="review-nickname">{review.user.userNickName}</span>
-        <span>{review.courserIdx}</span>
+
+        <span>{review.courserRegdate}</span>
         <div className="review-rating">
           <HoverRating courserRate={review.courserRate} />
         </div>
         <div>
-          {/* <AutoHeightTextarea readOnly courserContent={review.courserContent} /> */}
           <span>{review.courserContent}</span>
         </div>
       </div>
-      {/* // ))} */}
+      {/* <div className="review-box">
+        <img className="u0" src={require("../../img/blogo1.png")}></img>
+
+        <div className="u1">{review.user.userNickName}</div>
+        <div className="u2">
+          <HoverRating courserRate={review.courserRate} />
+        </div>
+        <div className="u3">{review.courserRegdate}</div>
+        <div className="u4">{review.courserContent}</div>
+      </div> */}
     </>
   );
 }

@@ -17,10 +17,6 @@ const Sidebar = () => {
   const onNavigate = (e) => {
     navigate(e.target.id);
   };
-  let state = useSelector((state) => state.tab);
-  let dispatch = useDispatch();
-  console.log(state);
-
   return (
     <>
       <div className="mypage_sidebar">
@@ -35,57 +31,41 @@ const Sidebar = () => {
         <div className="center">
           <ul>
             <p className="title">Main</p>
-            <li>
+            <li id="" onClickCapture={onNavigate}>
               <HomeIcon className="icon" />
-              <span id="" onClick={onNavigate}>
-                메인메뉴
-              </span>
+              <span>메인메뉴</span>
             </li>
             <p className="title">Course</p>
-            <li>
+            <li id="course/user" onClickCapture={onNavigate}>
               <ContentPasteSearchOutlinedIcon className="icon" />
-              <span id="course/user" onClick={onNavigate}>
-                수강 클래스 조회
-              </span>
+              <span>수강 클래스 조회</span>
             </li>
-            <li>
+            <li id="course/lecturer" onClickCapture={onNavigate}>
               <ContentPasteSearchOutlinedIcon className="icon" />
-              <span id="course/lecturer" onClick={onNavigate}>
-                개설 클래스 조회
-              </span>
+              <span>개설 클래스 조회</span>
             </li>
             <p className="title">User</p>
-            <li>
+            <li id="info/user" onClickCapture={onNavigate}>
               <AccountCircleOutlinedIcon className="icon" />
-              <span id="info/user" onClick={onNavigate}>
-                개인 정보 수정
-              </span>
+              <span>개인 정보 수정</span>
             </li>
-            <li>
+            <li id="info/lecturer" onClickCapture={onNavigate}>
               <AccountCircleOutlinedIcon className="icon" />
-              <span id="info/lecturer" onClick={onNavigate}>
-                강사 프로필 수정
-              </span>
+              <span>강사 프로필 수정</span>
             </li>
             <p className="title">Inquiry</p>
-            <li>
+            <li id="inquiry/view" onClickCapture={onNavigate}>
               <Inventory2OutlinedIcon className="icon" />
-              <span id="inquiry/view" onClick={onNavigate}>
-                문의 내역 조회
-              </span>
+              <span>문의 내역 조회</span>
             </li>
-            <li>
+            <li id="inquiry" onClickCapture={onNavigate}>
               <NotificationsOutlinedIcon className="icon" />
-              <span id="inquiry" onClick={onNavigate}>
-                문의하기
-              </span>
+              <span>문의하기</span>
             </li>
             <p className="title">Wishlist</p>
-            <li>
+            <li id="wishlist" onClickCapture={onNavigate}>
               <FavoriteBorderOutlinedIcon className="icon" />
-              <span id="wishlist" onClick={onNavigate}>
-                찜한 클래스 조회
-              </span>
+              <span>찜한 클래스 조회</span>
             </li>
           </ul>
         </div>
