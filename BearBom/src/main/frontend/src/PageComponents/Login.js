@@ -155,7 +155,7 @@ const Login = () => {
             alert("로그인 되었습니다.");
           } else {
             navigate("/admin");
-            alert("관리자 페이지입니다.");
+            alert("관리자 계정입니다.");
           }
         }
       })

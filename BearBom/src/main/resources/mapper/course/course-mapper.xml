@@ -102,4 +102,15 @@
 			    WHERE COURSE_END_DATE <= DATE_FORMAT(now(), '%Y-%m-%d');
 		]]>
     </update>
+
+    <!-- 수강 클래스 조회 -->
+    <select id="getTakenClassList" resultType="camelHashMap">
+        SELECT A.*
+        FROM T_COURSE A,
+        T_ORDER B
+        WHERE B.USER_ID = #{userId}
+        AND B.ORDER_YN = 'Y'
+        AND B.ORDER_USE_YN = 'Y'
+        AND A.COURSE_IDX = B.COURSE_IDX;
+    </select>
 </mapper>

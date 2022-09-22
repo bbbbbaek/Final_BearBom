@@ -99,5 +99,8 @@ public class CourseServiceImpl implements CourseService {
 		courseMapper.setSqlSafe();
 		
 	}
-
+	@Override
+	public List<Map<String, Object>> getTakenClassList(String userId){
+		return courseMapper.getTakenClassList(userId);
+	}
 }
