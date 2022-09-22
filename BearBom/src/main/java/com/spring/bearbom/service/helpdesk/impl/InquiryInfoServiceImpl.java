@@ -11,8 +11,6 @@ import com.spring.bearbom.service.helpdesk.InquiryInfoService;
 @Service
 public class InquiryInfoServiceImpl implements InquiryInfoService{
 
-	@Autowired
-	private InquiryRepository inquiryRepository;
 	
 	@Autowired
 	private InquiryMapper inquiryMapper;
