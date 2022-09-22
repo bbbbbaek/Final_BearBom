@@ -11,4 +11,7 @@ import java.util.Map;
 public interface MypageMapper {
 
     List<Map<String, Object>> getInquiryReference(String userId);
+    
+    // 유저 탈퇴 Y->N 0922
+    void deleteUserInfo(String userId);
 }

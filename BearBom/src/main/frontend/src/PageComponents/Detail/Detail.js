@@ -110,7 +110,9 @@ const Detail = ({ scrollTop }) => {
 
   React.useEffect(() => {
     let get_local = localStorage.getItem("data");
-    setCourseInfo(location.state.courseInfo);
+    if (location.state) setCourseInfo(location.state.courseInfo);
+    else setCourseInfo(course);
+
     if (get_local == null) {
       get_local = [];
     } else {
@@ -136,7 +138,7 @@ const Detail = ({ scrollTop }) => {
 
       localStorage.setItem("data", JSON.stringify(get_local));
     }
-  }, [courseInfo]);
+  }, [course]);
 
   //리뷰 더보기
   useEffect(() => {

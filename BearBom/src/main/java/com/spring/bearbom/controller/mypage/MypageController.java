@@ -1,8 +1,10 @@
 //import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 package com.spring.bearbom.controller.mypage;
 
-import com.spring.bearbom.dto.InquiryDTO;
-import com.spring.bearbom.service.mypage2.Mypage2Service;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -13,18 +15,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.bearbom.dto.InquiryDTO;
 import com.spring.bearbom.dto.ResponseDTO;
 import com.spring.bearbom.dto.UserDTO;
 import com.spring.bearbom.entity.User;
 import com.spring.bearbom.jwt.JwtTokenProvider;
 import com.spring.bearbom.service.mypage.MypageService;
+import com.spring.bearbom.service.mypage2.Mypage2Service;
 import com.spring.bearbom.service.user.UserService;
 
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/mypage")
@@ -72,8 +72,6 @@ public class MypageController {
 
 		userDTO.setUserYn(getUser.getUserYn());
 
-
-		
 		System.out.println("///////////////"+ userDTO);
 		return ResponseEntity.ok().body(userDTO);
 		} catch(Exception e) {
@@ -84,9 +82,10 @@ public class MypageController {
 		}
 	
 	}
-		// 유저 정보 변경
-		@PostMapping("/updateUserInfo")
-		public ResponseEntity<?> updateUserInfo(@RequestBody User user, @AuthenticationPrincipal String userId){
+	
+	// 유저 정보 변경
+	@PostMapping("/updateUserInfo")
+	public ResponseEntity<?> updateUserInfo(@RequestBody User user, @AuthenticationPrincipal String userId){
 		// 등록된 사용자 정보를 조회한다 
 //		User oldUser = mypageService.getUser(user.getUserId());
 //
@@ -111,44 +110,47 @@ public class MypageController {
 		
 		// 실제 DB 저장 
 //		userService.updateUser(oldUser);
-
-
 		return ResponseEntity.ok().body("success");
 	}
+		
+	//====================================================================================================//
 	
-
-
+	// 유저 탈퇴
+//	@PostMapping("deleteUserInfo")
+//	public ResponseEntity<?> deleteUserInfo(@RequestBody User user, @AuthenticationPrincipal String userId){
+//		// 등록된 사용자 정보를 조회 
 //
-//		return ResponseEntity.ok().body("success");
+//		mypageService.deleteUser(user);
+//		
+//		User newUser = mypageService.getUser(user.getUserId());
+//		
+//		UserDTO userDTO = new UserDTO();
+//		
+//		if(newUser == null) {
+//			return ResponseEntity.ok().body("이미 탈퇴한 회원입니다");
+//		}else {
+//			// DB에서 삭제 
+//			mypageService.deleteUser(newUser);
+//			return ResponseEntity.ok().body("탈퇴 성공!");
+//			
+//		}
 //	}
-
-	//y 인것만 화면에 뿌려주는거 맵퍼를이용한
-	@GetMapping("/getInquiryReference")
-	public Map<String, Object> getInquiryReference(InquiryDTO inquiryDTO, @AuthenticationPrincipal String userId){
-		try {
-			inquiryDTO.setUserId(userId);
-			List<Map<String, Object>> getInquiryReference1 = mypage2Service.getInquiryReference(inquiryDTO);
-			Map<String, Object> resultMap = new HashMap<String, Object>();
-			resultMap.put("getInquiryReference1", getInquiryReference1);
-
-			return resultMap;
-		} catch(Exception e) {
-			Map<String,Object> error = new HashMap<String,Object>();
-			error.put("error", e.getMessage());
-			return error;
-		}
-	}
-	//y를 n으로 바꾸는 update
-	@PostMapping("/updateInquiryReference")
-	public void updateInquiryReference(@RequestBody InquiryDTO inquiryDTO, @AuthenticationPrincipal String userId){
-		inquiryDTO.setUserId(userId);
-		System.out.println("before inquiryDTO : " +inquiryDTO);
-		log.info("inquiryDTO : {}", inquiryDTO);
-		mypage2Service.updateInquiryReference(inquiryDTO);
-		System.out.println("after inquiryDTO : " +inquiryDTO);
-
-	}
 	
-  	
+	// 유저 탈퇴 Y-> N 
+		@PostMapping("/deleteUserInfo")
+		public Map<String, String> deleteUserInfo(@AuthenticationPrincipal String userId){
+			try {
+				Map<String, String> resultMap = new HashMap<String, String>();
+				
+				String message = mypageService.deleteUserInfo(userId);
+				
+				resultMap.put("message", message);
+				
+				return resultMap;
+			} catch(Exception e) {
+				Map<String, String> error = new HashMap<String, String>();
+				error.put("error", e.getMessage());
+				return error;
+			}
+		}
 }
-
