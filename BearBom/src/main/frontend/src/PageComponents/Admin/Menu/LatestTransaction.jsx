@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import "./takenclassview.scss";
-import Table from "../../../ModuleComponents/Table/Table";
-import { takenClassItems } from "../../../customHooks/createItems";
+import SimpleTable from "../../../ModuleComponents/SimpleTable/SimpleTable";
+import { recentTransactionItems } from "../../../customHooks/createItems";
 import axios from "axios";
 
-const TakenClassView = () => {
-  let tableInfo = takenClassItems;
+const LatestTransaction = () => {
+  let tableInfo = recentTransactionItems;
   const [fetchedData, setFetchedData] = useState();
   useEffect(() => {
     axios
@@ -13,24 +12,23 @@ const TakenClassView = () => {
         "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Order"
       )
       .then((res) => {
-        console.log(res.data);
         setFetchedData(res.data);
       });
   }, []);
 
   return (
     <>
-      <div className="takenclassview">
+      <div className="listTitle" style={{ width: "100%" }}>
         <h5>
-          <strong>수강 클래스 조회</strong>
+          <strong>최근 결제 내역</strong>
         </h5>
-        <hr />
+        <br />
         {fetchedData ? (
-          <Table tableInfo={tableInfo} fetchedData={fetchedData} />
+          <SimpleTable tableInfo={tableInfo} fetchedData={fetchedData} />
         ) : null}
       </div>
     </>
   );
 };
 
-export default TakenClassView;
+export default LatestTransaction;

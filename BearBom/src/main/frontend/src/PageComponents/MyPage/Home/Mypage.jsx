@@ -8,7 +8,7 @@ import { API_BASE_URL } from "../../../app-config";
 import { Outlet } from "react-router-dom";
 
 const Mypage = () => {
-  const [status, setStatus] = useState([]);
+  const [statusData, setStatusData] = useState();
   let URL1 =
     "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Course";
   let URL2 =
@@ -27,30 +27,43 @@ const Mypage = () => {
   //     setFetchedData(res[2].data);
   //   });
   // }, []);
+
+  // 유저 정보
   useEffect(() => {
-    axios
-      .get(
-        "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/MypageQuickView"
-      )
-      .then((res) => {
-        setFetchedData(res);
-        console.log(fetchedData);
-      });
+    const promise1 = axios({
+      method: "get",
+      url: API_BASE_URL + "/api/mypage/getUser",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+      },
+    });
+    const promise2 = axios({
+      method: "get",
+      url: API_BASE_URL + "/api/mypage/getMyPageCnt",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+      },
+    });
+
+    Promise.all([promise1, promise2]).then((res) => {
+      setFetchedData(res[0].data);
+      setStatusData(res[1].data);
+    });
   }, []);
 
   return (
     <>
-      {fetchedData ? (
+      {fetchedData && statusData ? (
         <div className="mypage_home">
           <div className="banner"></div>
           <div className="body">
             <Sidebar />
             <div className="wrapper">
               <div className="quickview">
-                <QuickView type="taking" fetchedData={fetchedData} />
-                <QuickView type="taken" fetchedData={fetchedData} />
-                <QuickView type="opened" fetchedData={fetchedData} />
-                <QuickView type="liked" fetchedData={fetchedData} />
+                <QuickView type="taking" statusData={statusData} />
+                <QuickView type="taken" statusData={statusData} />
+                <QuickView type="opened" statusData={statusData} />
+                <QuickView type="liked" statusData={statusData} />
               </div>
               <div className="content">
                 <Outlet context={{ fetchedData }} />

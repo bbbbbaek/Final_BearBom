@@ -12,16 +12,16 @@ const Featured = () => {
     <>
       <div className="featured">
         <div className="top">
-          <div className="title">일매출</div>
+          매출 현황
           <MoreVertIcon />
         </div>
-        <div className="content">
+        <div className="content1">
           <div className="featuredChart">
             <Doughnut />
           </div>
           <div className="description">
-            <p className="title">금일 매출</p>
-            <p className="amount">$420</p>
+            <p className="title">오늘의 매출</p>
+            <p className="amount">2,300,000원</p>
             <div className="summary">
               <div className="item">
                 <div className="itemTitle">지난 주</div>

@@ -49,7 +49,13 @@ const SimpleTable = ({ tableInfo, fetchedData }) => {
       <div className="table">
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
+            <TableHead
+              style={{
+                backgroundColor: "#DDDDDA",
+                color: "#fff",
+                fontWeight: "bold",
+              }}
+            >
               <TableRow>{tableHead(tableInfo)}</TableRow>
             </TableHead>
             <TableBody>
