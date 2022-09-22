@@ -1,5 +1,6 @@
 package com.spring.bearbom.controller.admin;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -36,6 +37,25 @@ public class AdminFaqController {
 		
 		return ResponseEntity.ok().body(guide);
 	}
+	
+	//y를 n으로 바꾸는 update
+	@PostMapping("updateFaq")
+	public void updateFaq(@RequestBody GuideDTO guideDTO, @AuthenticationPrincipal String userId){	
+		guideDTO.setUserId(userId);
+		System.out.println("before inquiryDTO : " +guideDTO);
+		guideService.updateFaq(guideDTO);
+		System.out.println("after guideDTO : " +guideDTO);
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//백단에 저장하는것
 //	@PostMapping("/insertFaq")

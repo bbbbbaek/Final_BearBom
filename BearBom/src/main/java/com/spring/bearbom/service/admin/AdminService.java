@@ -9,6 +9,8 @@ public interface AdminService {
 
 	List<InquiryDTO> inquiryInfoReference(InquiryDTO inquiryDTO);
 
+	void updateInquiry(InquiryDTO inquiryDTO);
+
 //	List<Inquiry> inquiryInfoReference(Inquiry inquiry);
 
 }

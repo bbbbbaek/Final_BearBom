@@ -21,12 +21,12 @@
     </insert>
 
      관리자페이지 내 공지사항 삭제 쿼리 -->   
-    <update id="ddddd" parameterType="com.spring.bearbom.dto.NoticeDTO" >
-    	<![CDATA[
-    		UPDATE TABLENAME
-    		SET USE_YN = 'N'
-    		WHERE INDEXNO = "변수명"
-    	]]>
+   <update id="updateNotice" parameterType="com.spring.bearbom.dto.NoticeDTO">
+    <![CDATA[
+    	UPDATE T_NOTICE 
+    		SET NOTICE_USE_YN = "N" 
+    		WHERE NOTICE_IDX = #{noticeIdx}
+    ]]>
     </update>
    
 </mapper>

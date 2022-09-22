@@ -24,6 +24,12 @@ public class AdminServiceImpl implements AdminService{
 		List<InquiryDTO> inquiryInfoReferenceList = inquiryMapper.inquiryInfoReference(inquiryDTO);
 		return inquiryInfoReferenceList;
 	}
+
+	@Override
+	public void updateInquiry(InquiryDTO inquiryDTO) {
+		// TODO Auto-generated method stub
+		inquiryMapper.updateInquiry(inquiryDTO);
+	}
 	
 //	@Override
 //	public List<Inquiry> inquiryInfoReference(Inquiry inquiry) {

@@ -19,6 +19,8 @@ public interface NoticeMapper {
 	@Insert("insert into t_notice value (#{noticeIdx}, #{noticeTitle}, #{noticeContent}, #{noticeMdfdate}, #{noticeRegdate}, #{userId})")
 	void insertNotice(NoticeDTO noticeDTO);
 
+	void updateNotice(NoticeDTO noticeDTO);
+
 	
 	
 //	@Select()

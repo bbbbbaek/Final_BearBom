@@ -50,7 +50,7 @@ import NoticeMgmt from "./PageComponents/Admin/Menu/NoticeMgmt";
 import FAQMgmt from "./PageComponents/Admin/Menu/FAQMgmt";
 import InquiryMgmt from "./PageComponents/Admin/Menu/InquiryMgmt";
 
-import QuickViewBox from "./PageComponents/Admin/Home/QuickViewBox";
+// import QuickViewBox from "./PageComponents/Admin/Home/QuickViewBox";
 import CardSelect from "./PageComponents/Detail/PayCardOption";
 import PayWindow from "./PageComponents/Detail/PayWindow";
 

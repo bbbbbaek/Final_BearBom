@@ -37,6 +37,12 @@ public class NoticeServiceImpl implements NoticeService{
 		noticeMapper.insertNotice(noticeDTO);
 	}
 
+	@Override
+	public void updateNotice(NoticeDTO noticeDTO) {
+		// TODO Auto-generated method stub
+		noticeMapper.updateNotice(noticeDTO);
+	}
+
 
 //	@Override
 //	public Notice insertNotice(Notice notice) {
