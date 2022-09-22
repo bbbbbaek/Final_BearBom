@@ -1,6 +1,7 @@
 package com.spring.bearbom.entity;
 
 import java.sql.Time;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -40,16 +41,16 @@ public class Course {
 	@Column(nullable = false)
 	private char courseUseYn = 'Y';
 
-	@Column//(nullable = false)
-	private int courseCnt;
+	@Column(nullable = false)
+	private int courseCnt = 0;
 	
 	@Column(nullable = false)
 	private String courseLevel;
 	
-	@Column//(nullable = false)
+	@Column(nullable = false)
 	private Time courseStTime;
 	
-	@Column//(nullable = false)
+	@Column(nullable = false)
 	private Time courseEndTime;
 
 	@Column(nullable = false)
@@ -60,6 +61,9 @@ public class Course {
 	
 	@Column(nullable = false)
 	private Date courseEndDate;
+	
+	@Column(nullable = false)
+	private LocalDateTime courseRegdate = LocalDateTime.now().plusHours(9);
 	
 	@Column(nullable = false)
 	private int courseCost;

@@ -21,10 +21,10 @@ public class Order {
 	private int orderPri;
 
 	@Column(nullable = false)
-	private LocalDateTime orderRegdate = LocalDateTime.now();
+	private LocalDateTime orderRegdate = LocalDateTime.now().plusHours(9);
 
-	@Column(nullable = false)
-	private LocalDateTime orderCandate = LocalDateTime.now();
+	@Column//(nullable = false)
+	private LocalDateTime orderCandate; // = LocalDateTime.now();
 
 	@Column(nullable = false,columnDefinition = "char(1)")
 	private char orderYn = 'N';
