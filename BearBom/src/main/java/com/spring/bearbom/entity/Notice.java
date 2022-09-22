@@ -18,7 +18,7 @@ public class Notice {
     private int noticeIdx;
 
     @Column(nullable = false)
-    private String noticeNm;
+    private String noticeTitle;
 
     @Column(nullable = false, columnDefinition = "varchar(1000)")
     private String noticeContent;

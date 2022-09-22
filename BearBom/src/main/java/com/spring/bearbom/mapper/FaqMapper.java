@@ -12,4 +12,6 @@ import com.spring.bearbom.entity.Inquiry;
 public interface FaqMapper {
 	@Select("SELECT * FROM t_guide WHERE GUIDE_USE_YN = 'Y'")
 	List<Guide> faq(Guide guide);
+	
+	
 }

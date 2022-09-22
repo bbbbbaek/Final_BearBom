@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.bearbom.dto.NoticeDTO;
 import com.spring.bearbom.entity.Notice;
 import com.spring.bearbom.mapper.NoticeMapper;
 import com.spring.bearbom.repository.NoticeRepository;
@@ -31,12 +32,19 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public Notice insertNotice(Notice notice) {
+	public void insertNotice(NoticeDTO noticeDTO) {
 		// TODO Auto-generated method stub
-		int noticeIdx = noticeRepository.selectNextnoticeIdx();
-		notice.setNoticeIdx(noticeIdx);
-		return noticeRepository.save(notice);
+		noticeMapper.insertNotice(noticeDTO);
 	}
+
+
+//	@Override
+//	public Notice insertNotice(Notice notice) {
+//		// TODO Auto-generated method stub
+//		int noticeIdx = noticeRepository.selectNextnoticeIdx();
+//		notice.setNoticeIdx(noticeIdx);
+//		return noticeRepository.save(notice);
+//	}
 
 	
 	

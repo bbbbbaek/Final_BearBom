@@ -2,10 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/dtd/DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
    
-<mapper namespace="com.spring.bearbom.mapper.AdminMapper">
+<mapper namespace="com.spring.bearbom.mapper.FaqMapper">
 
-	 
-    <!-- 관리자페이지 내 공지사항 초기화면 쿼리   
+    <!-- 관리자페이지 내 공지사항 초기화면 쿼리    
    <select id="getInquiryReference" parameterType="com.spring.bearbom.dto.NoticeDTO" resultType="camelHashMap">
     <![CDATA[
     	SELECT * FROM T_NOTICE
@@ -20,7 +19,7 @@
     	]]>
     </insert>
 
-     관리자페이지 내 공지사항 삭제 쿼리 -->   
+     관리자페이지 내 공지사항 삭제 쿼리  
     <update id="ddddd" parameterType="com.spring.bearbom.dto.NoticeDTO" >
     	<![CDATA[
     		UPDATE TABLENAME
@@ -28,5 +27,7 @@
     		WHERE INDEXNO = "변수명"
     	]]>
     </update>
-   
+    -->
+    
+    
 </mapper>

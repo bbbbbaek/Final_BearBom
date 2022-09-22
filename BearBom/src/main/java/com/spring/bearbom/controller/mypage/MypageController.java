@@ -123,61 +123,6 @@ public class MypageController {
 
 
 
-//
-//		return ResponseEntity.ok().body("success");
-//	}
-
-	//y 인것만 화면에 뿌려주는거 맵퍼를이용한
-	@GetMapping("/getInquiryReference")
-	public Map<String, Object> getInquiryReference(InquiryDTO inquiryDTO, @AuthenticationPrincipal String userId){
-		try {
-			inquiryDTO.setUserId(userId);
-			List<Map<String, Object>> getInquiryReference1 = mypageService.getInquiryReference(inquiryDTO);
-			Map<String, Object> resultMap = new HashMap<String, Object>();
-			resultMap.put("getInquiryReference1", getInquiryReference1);
-
-			return resultMap;
-		} catch(Exception e) {
-			Map<String,Object> error = new HashMap<String,Object>();
-			error.put("error", e.getMessage());
-			return error;
-		}
-	}
-	//y를 n으로 바꾸는 update
-	@PostMapping("/updateInquiryReference")
-	public void updateInquiryReference(@RequestBody InquiryDTO inquiryDTO, @AuthenticationPrincipal String userId){
-		inquiryDTO.setUserId(userId);
-		System.out.println("before inquiryDTO : " +inquiryDTO);
-		log.info("inquiryDTO : {}", inquiryDTO);
-		mypageService.updateInquiryReference(inquiryDTO);
-		System.out.println("after inquiryDTO : " +inquiryDTO);
-
-	}
-	
-	/* 마이페이지 찜한 클래스 조회 */
-	@GetMapping("/getWishList")
-	public Map<String, Object> getWishList(@AuthenticationPrincipal String userId) {
-		 CourseDTO courseDTO = new CourseDTO();
-		 log.info("userId : {}", userId);
-		 
-		try {
-			courseDTO.setUserId(userId);
-			
-			List<CourseDTO> wishList = mypageService.getWishList(courseDTO);
-			Map<String, Object> resultMap = new HashMap<String, Object>();
-			resultMap.put("wishList", wishList);
-			
-			return resultMap;
-		}
-		catch (Exception e){
-			Map<String, Object> errorMap = new HashMap<String, Object>();
-			errorMap.put("error", e.getMessage());
-			return errorMap;
-			}
-		}
-
-
-
 	//마이페이지
 	// 수강 중인 강좌(takingCourseCnt), 수강 완료 강좌(takenCourseCnt),
 	// 개설한 강좌(openedCourseCnt), 찜한 클래스(likedCourseCnt) 수량 컨트롤러
