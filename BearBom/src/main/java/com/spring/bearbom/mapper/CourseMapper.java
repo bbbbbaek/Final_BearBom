@@ -23,4 +23,8 @@ public interface CourseMapper {
 
 	int getNextFileIdx(int courseIdx);
 
+	void updateCourseUseYnByDay();
+
+	void setSqlSafe();
+
 }

@@ -29,6 +29,10 @@ public interface CourseService {
 
 
 	int findCourseFileIdxByCourseIdx(int i);
+
+	void updateCourseUseYnByDay();
+
+	void setSqlSafe();
 	
 }
 

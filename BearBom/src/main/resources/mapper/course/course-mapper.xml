@@ -87,4 +87,19 @@
     		FROM T_COURSE_FILE
     		WHERE COURSE_IDX = #{courseIdx}
     </select>
+    
+    
+    <update id="setSqlSafe">
+   		 <![CDATA[
+	    	SET SQL_SAFE_UPDATES = 0;
+		]]>
+    </update>
+    
+    <update id="updateCourseUseYnByDay">
+    	<![CDATA[
+	    	UPDATE T_COURSE
+				SET COURSE_USE_YN = 'N'
+			    WHERE COURSE_END_DATE <= DATE_FORMAT(now(), '%Y-%m-%d');
+		]]>
+    </update>
 </mapper>
