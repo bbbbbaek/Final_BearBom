@@ -27,5 +27,7 @@ public interface InquiryMapper {
 	List<InquiryDTO> inquiryInfoReference(InquiryDTO inquiryDTO);
 	
 	
+			
+	
 
 }

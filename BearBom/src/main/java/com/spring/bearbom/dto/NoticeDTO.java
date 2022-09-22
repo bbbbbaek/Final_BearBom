@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class NoticeDTO {
 	private int noticeIdx;
-	private String noticeNm;
+	private String noticeTitle;
 	private String noticeContent;
 	private LocalDateTime noticeRegdate;
 	private LocalDateTime noticeMdfdate;

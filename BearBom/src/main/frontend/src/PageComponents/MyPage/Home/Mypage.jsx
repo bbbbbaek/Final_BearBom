@@ -8,50 +8,70 @@ import { API_BASE_URL } from "../../../app-config";
 import { Outlet } from "react-router-dom";
 
 const Mypage = () => {
-  // 테스트용
-  const [getUser, setGetUser] = useState("");
+  const [statusData, setStatusData] = useState();
+  let URL1 =
+    "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Course";
+  let URL2 =
+    "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Order";
+  let URL3 =
+    "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Inquiry";
+  const [fetchedData, setFetchedData] = useState();
+  // useEffect(() => {
+  //   const promise1 = axios.get(URL1);
+  //   const promise2 = axios.get(URL2);
+  //   const promise3 = axios.get(URL3);
+  //   Promise.all([promise1, promise2, promise3]).then((res) => {
+  //     console.log(res);
+  //     console.log(res[0].data);
+  //     console.log(res[2].data);
+  //     setFetchedData(res[2].data);
+  //   });
+  // }, []);
+
+  // 유저 정보
   useEffect(() => {
-    // setReviewInfo((prev) => ({ …prev }));
-    //데이터불러오는 axios
-    //setCourse(response.data);
-    axios({
+    const promise1 = axios({
       method: "get",
       url: API_BASE_URL + "/api/mypage/getUser",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
       },
-      // params: { courseIdx: id },
-      // test
-      // test1
-    }).then((response) => {
-      console.log(response.data);
-      setGetUser(response.data.getUser);
+    });
+    const promise2 = axios({
+      method: "get",
+      url: API_BASE_URL + "/api/mypage/getMyPageCnt",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+      },
+    });
+
+    Promise.all([promise1, promise2]).then((res) => {
+      setFetchedData(res[0].data);
+      setStatusData(res[1].data);
     });
   }, []);
 
-  let state = useSelector((state) => state.tab);
-  console.log(state);
-
   return (
     <>
-      <div className="mypage_home">
-        <div className="banner"></div>
-        <button onClick={() => {}}>fetch!</button>
-        <div className="body">
-          <Sidebar />
-          <div className="wrapper">
-            <div className="quickview">
-              <QuickView type="taking" />
-              <QuickView type="taken" />
-              <QuickView type="molla" />
-              <QuickView type="liked" />
-            </div>
-            <div className="content">
-              <Outlet />
+      {fetchedData && statusData ? (
+        <div className="mypage_home">
+          <div className="banner"></div>
+          <div className="body">
+            <Sidebar />
+            <div className="wrapper">
+              <div className="quickview">
+                <QuickView type="taking" statusData={statusData} />
+                <QuickView type="taken" statusData={statusData} />
+                <QuickView type="opened" statusData={statusData} />
+                <QuickView type="liked" statusData={statusData} />
+              </div>
+              <div className="content">
+                <Outlet context={{ fetchedData }} />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      ) : null}
     </>
   );
 };

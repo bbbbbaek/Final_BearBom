@@ -10,7 +10,7 @@ const Notice = () => {
   useEffect(() => {
     axios
       .get(
-        "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/notice"
+        "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Notice"
       )
       .then((res) => {
         setFetchedData(res.data);

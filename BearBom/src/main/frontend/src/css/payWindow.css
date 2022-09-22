@@ -1,0 +1,13 @@
+.card-select {
+  display: flex;
+  justify-content: space-around;
+}
+
+.installments-select {
+  display: flex;
+  justify-content: space-around;
+}
+
+.MuiTabs-flexContainer {
+  text-align: center;
+}

@@ -7,7 +7,7 @@ import axios from "axios";
 import Thumb from "../Detail/Thumb";
 import CourseNavbar from "./Navbar";
 import Teacher from "./Teacher";
-import CarouselFadeExample from "../Detail/Test.js";
+import ClassContents from "./ClassContents.js";
 import Cur from "./Detail-Cur";
 import Time from "./Detail-Time";
 import Location from "../Detail/Location";
@@ -21,6 +21,7 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import FmdGoodIcon from "@mui/icons-material/FmdGood";
 import BarChartIcon from "@mui/icons-material/BarChart";
+import TabsWrappedLabel from "./Tab";
 
 const Detail = ({ scrollTop }) => {
   // 아래에 왜 초기값을 객체 형태로 주지 않으면 오류가 나는지 모르겠음
@@ -32,20 +33,66 @@ const Detail = ({ scrollTop }) => {
   const [reviewInfo, setReviewInfo] = useState({ courseIdx: 1 });
   const [courseInfo, setCourseInfo] = useState({});
   const location = useLocation();
+  const [cnt, setCnt] = useState(0);
   const [reviewList, setReviewList] = useState([]);
   const [reviewData, setReviewData] = useState([]);
-  const [cnt, setCnt] = useState(0);
   const [averageRating, setaverageRating] = useState([]);
-  const [sort, setSort] = useState([]);
+  const [sortedList, setSortedList] = useState([]);
   const [sortedData, setSortedData] = useState([]);
+  const userId = localStorage.getItem("USER_ID");
+  console.log(userId);
   // const sortedData = [...reviewList].sort(
   //   (a, b) => a.courserIdx - b.courserIdx
   // );
 
+  const list = () => {
+    setReviewInfo((prev) => ({ ...prev, courseIdx: id }));
+    axios({
+      url: API_BASE_URL + "/api/course/getReviewList",
+      method: "post",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+      },
+      // params: {userId: userId}
+      data: { courseIdx: id },
+    })
+      .then((response) => {
+        console.log(response.data);
+        setaverageRating(response.data.averageRating);
+        setReviewList(response.data.reviewList);
+        setReviewData(response.data.reviewList.slice(0, 4));
+
+        setSortedList(
+          response.data.reviewList.sort((a, b) => {
+            console.log(a);
+            console.log(b);
+            return b.courserIdx - a.courserIdx;
+          })
+        );
+
+        console.log(reviewData);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+  console.log(sortedList);
+  console.log(sortedData);
+  //리뷰 더보기
   useEffect(() => {
-    setSortedData([...reviewList].sort((a, b) => b.courserIdx - a.courserIdx));
-    console.log(sortedData);
-  }, [reviewList]);
+    let copy = reviewData.concat(reviewList.slice(4 * cnt, 4 * (cnt + 1)));
+    // let copy = [...reviewData];
+    console.log(copy);
+    setReviewData(copy);
+  }, [cnt]);
+
+  useEffect(() => {
+    // setSortedList([...reviewList].sort((a, b) => b.courserIdx - a.courserIdx));
+    let copy1 = sortedData.concat(sortedList.slice(4 * cnt, 4 * (cnt + 1)));
+    // setSortedData([...sortedList].slice(4 * cnt, 4 * (cnt + 1)));
+    console.log(copy1);
+    setSortedData(copy1);
+  }, [cnt]);
 
   console.log(sortedData);
 
@@ -81,32 +128,9 @@ const Detail = ({ scrollTop }) => {
     });
   };
 
-  let listUrl = "http://localhost:8080/api/course/getReviewList";
-
-  const userId = localStorage.getItem("USER_ID");
-  console.log(userId);
-  const list = () => {
-    setReviewInfo((prev) => ({ ...prev, courseIdx: id }));
-    axios({
-      url: listUrl,
-      method: "post",
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
-      },
-      // params: {userId: userId}
-      data: { courseIdx: id },
-    })
-      .then((response) => {
-        console.log(response.data);
-        setReviewList(response.data.reviewList);
-        setaverageRating(response.data.averageRating);
-        setReviewData(response.data.reviewList.slice(0, 4));
-        console.log(reviewData);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
+  useEffect(() => {
+    setSortedData(sortedList.slice(0, 4));
+  }, [sortedList]);
 
   React.useEffect(() => {
     let get_local = localStorage.getItem("data");
@@ -139,19 +163,43 @@ const Detail = ({ scrollTop }) => {
       localStorage.setItem("data", JSON.stringify(get_local));
     }
   }, [course]);
+<<<<<<< HEAD
+=======
+  // React.useEffect(() => {
+  //   let get_local = localStorage.getItem("data");
+  //   if (location.state) setCourseInfo(location.state.courseInfo);
+  //   else setCourseInfo(course);
+>>>>>>> 29a84b79a9766a470866bac7ed6941483ea65a6b
 
-  //리뷰 더보기
-  useEffect(() => {
-    console.log(reviewList);
-    console.log(reviewList.slice(4 * cnt, 4 * (cnt + 1)));
-    let copy = reviewData.concat(sortedData.slice(4 * cnt, 4 * (cnt + 1)));
-    // let copy = [...reviewData];
-    console.log(copy);
-    setReviewData(copy);
-  }, [cnt]);
+  //   if (get_local == null) {
+  //     get_local = [];
+  //   } else {
+  //     get_local = JSON.parse(get_local);
+  //   }
+
+  //   let duplicateFlag = false;
+  //   if (JSON.stringify(courseInfo) !== "{}") {
+  //     list();
+  //     for (let i = 0; i < get_local.length; i++) {
+  //       if (courseInfo.courseIdx === get_local[i].courseIdx) {
+  //         duplicateFlag = true;
+  //         break;
+  //       }
+  //     }
+  //     if (!duplicateFlag) {
+  //       get_local.push(courseInfo);
+  //     }
+
+  //     if (get_local.length > 5) {
+  //       get_local.splice(0, 1);
+  //     }
+
+  //     localStorage.setItem("data", JSON.stringify(get_local));
+  //   }
+  // }, [course]);
 
   useEffect(() => {
-    console.log(reviewList);
+    console.log(sortedList);
   }, [reviewList, cnt]);
 
   // const style = { onclick=
@@ -185,7 +233,8 @@ const Detail = ({ scrollTop }) => {
             <div className="main-img-box">
               <ImgBox course={course} />
             </div>
-            <h4>{course.courseNm}</h4>
+
+            <h4 className="courseNm">{course.courseNm}</h4>
             <div className="course-short-info">
               <div>
                 <BarChartIcon color="action" />
@@ -205,7 +254,7 @@ const Detail = ({ scrollTop }) => {
                 {course.courseMin} ~ {course.courseMax}인
               </div>
             </div>
-
+            {/* <TabsWrappedLabel /> */}
             <CourseNavbar />
             {/* <hr id="teacher" /> */}
             <section /* id="teacher" */ className="section-box">
@@ -220,7 +269,7 @@ const Detail = ({ scrollTop }) => {
                 <b>클래스소개</b>
               </h5>
               <div className="class-content">
-                <CarouselFadeExample course={course} />
+                <ClassContents course={course} />
               </div>
             </section>
             <hr />
@@ -245,24 +294,24 @@ const Detail = ({ scrollTop }) => {
                 className="reviewList"
                 // style={{ height: woobin ? "auto" : "300px" }}
               >
-                <InputModal
+                {/* <InputModal
                   addReviewInfo={addReviewInfo}
                   onWriteReview={onWriteReview}
-                />
+                /> */}
                 <OpenModal
                   addReviewInfo={addReviewInfo}
                   onWriteReview={onWriteReview}
                 />
 
                 <div id="review-box-list">
-                  {sortedData !== []
-                    ? sortedData.map((review) => <Review review={review} />)
+                  {reviewData !== []
+                    ? reviewData.map((review) => <Review review={review} />)
                     : null}
                   <button
                     className="more-btn"
                     onClick={() => {
                       // console.log(woobin);
-
+                      console.log(sortedList);
                       // setWoobin(!woobin);
                       setCnt(cnt + 1);
                       // console.log(reviewData);

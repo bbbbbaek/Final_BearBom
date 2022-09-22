@@ -10,8 +10,11 @@ import Paper from "@mui/material/Paper";
 import dummyData from "../../PageComponents/Admin/dummyData";
 
 const SimpleTable = ({ tableInfo, fetchedData }) => {
-  let data = [...dummyData];
-  let recentData = data.slice(data.length - 5, data.length);
+  // let data = [...dummyData];
+  let recentData = fetchedData.slice(
+    fetchedData.length - 5,
+    fetchedData.length
+  );
 
   // 테이블에 클래스 추가해주는 함수
   function classMaker(index) {
@@ -46,7 +49,13 @@ const SimpleTable = ({ tableInfo, fetchedData }) => {
       <div className="table">
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
+            <TableHead
+              style={{
+                backgroundColor: "#DDDDDA",
+                color: "#fff",
+                fontWeight: "bold",
+              }}
+            >
               <TableRow>{tableHead(tableInfo)}</TableRow>
             </TableHead>
             <TableBody>

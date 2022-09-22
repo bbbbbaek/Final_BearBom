@@ -35,7 +35,7 @@ export default function HoverRating(review) {
       }}
     >
       <Typography variant="caption" display="block" gutterBottom>
-        rating:{review.courserRate}
+        {/* rating:{review.courserRate} */}
       </Typography>
       <Rating
         name="hover-feedback"

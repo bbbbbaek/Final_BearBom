@@ -1,37 +1,41 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./quickview.scss";
-import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
 import OpenInNewOutlinedIcon from "@mui/icons-material/OpenInNewOutlined";
-const QuickView = ({ type }) => {
+const QuickView = ({ type, statusData }) => {
   let data;
   let number = 12;
   let amount = number.toLocaleString("ko-KR");
+  const [value1] = Object.values(Object.values(statusData)[0][0]);
+  const [value2] = Object.values(Object.values(statusData)[1][0]);
+  const [value3] = Object.values(Object.values(statusData)[2][0]);
+  const [value4] = Object.values(Object.values(statusData)[3][0]);
+
   switch (type) {
     case "taking":
       data = {
-        title: "수강 중인 강좌",
-        type: "class",
+        title: "수강 중인 클래스",
+        value: value1,
         icon: <OpenInNewOutlinedIcon className="icon" />,
       };
       break;
     case "taken":
       data = {
-        title: "수강 완료 강좌",
-        type: "class",
+        title: "수강 완료 클래스",
+        value: value2,
         icon: <OpenInNewOutlinedIcon className="icon" />,
       };
       break;
-    case "molla":
+    case "opened":
       data = {
-        title: "모르겠는 강좌",
-        type: "class",
+        title: "개설한 클래스",
+        value: value3,
         icon: <OpenInNewOutlinedIcon className="icon" />,
       };
       break;
     case "liked":
       data = {
         title: "찜한 클래스",
-        type: "class",
+        value: value4,
         icon: <OpenInNewOutlinedIcon className="icon" />,
       };
       break;
@@ -47,10 +51,10 @@ const QuickView = ({ type }) => {
         </div>
         <div className="bottom">
           <span className="counter">
-            {data.type === "class" && amount + " 개"}
-            {data.type === "주문" && amount + " 건"}
-            {data.type === "회원" && amount + " 명"}
-            {data.type === "강좌" && amount + " 개"}
+            {type === "taking" && data.value + "개"}
+            {type === "taken" && data.value + "개"}
+            {type === "opened" && data.value + "개"}
+            {type === "liked" && data.value + "개"}
           </span>
         </div>
       </div>

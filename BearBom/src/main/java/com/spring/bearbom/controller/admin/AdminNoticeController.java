@@ -32,28 +32,44 @@ public class AdminNoticeController {
 	@PostMapping("/insertNotice")
 	public ResponseEntity<?> insertNotice(@RequestBody Notice notice, @AuthenticationPrincipal String userId){
 		System.out.println(notice.getNoticeIdx());
-		System.out.println(notice.getNoticeNm());
+		System.out.println(notice.getNoticeTitle());
 		System.out.println(notice.getNoticeContent());
 		System.out.println(notice.getNoticeRegdate());
 		System.out.println(notice.getNoticeMdfdate());
 		System.out.println(notice.getNoticeUseYn());
 		System.out.println(userId);
 		
-		Notice rhdwl = noticeService.insertNotice(notice);
-		
 		NoticeDTO noticeDTO = new NoticeDTO();
-
-		noticeDTO.setNoticeIdx(rhdwl.getNoticeIdx());
-		noticeDTO.setNoticeNm(rhdwl.getNoticeNm());
-		noticeDTO.setNoticeContent(rhdwl.getNoticeContent());
-		noticeDTO.setNoticeRegdate(rhdwl.getNoticeRegdate());
-		noticeDTO.setNoticeMdfdate(rhdwl.getNoticeMdfdate());
-		noticeDTO.setNoticeUseYn(rhdwl.getNoticeUseYn());
-		noticeDTO.setUserId(userId);
 		
+		noticeDTO.setNoticeIdx(notice.getNoticeIdx());
+		noticeDTO.setNoticeTitle(notice.getNoticeTitle());
+		noticeDTO.setNoticeContent(notice.getNoticeContent());
+		noticeDTO.setNoticeRegdate(notice.getNoticeRegdate());
+		noticeDTO.setNoticeMdfdate(notice.getNoticeMdfdate());
+		noticeDTO.setNoticeUseYn(notice.getNoticeUseYn());
 		
-		System.out.println(noticeDTO);
+		noticeService.insertNotice(noticeDTO);
+		
 		return ResponseEntity.ok().body(noticeDTO);
+		
+		
+		
+		
+//		Notice rhdwl = noticeService.insertNotice(notice);
+//		
+//		NoticeDTO noticeDTO = new NoticeDTO();
+//
+//		noticeDTO.setNoticeIdx(rhdwl.getNoticeIdx());
+//		noticeDTO.setNoticeNm(rhdwl.getNoticeNm());
+//		noticeDTO.setNoticeContent(rhdwl.getNoticeContent());
+//		noticeDTO.setNoticeRegdate(rhdwl.getNoticeRegdate());
+//		noticeDTO.setNoticeMdfdate(rhdwl.getNoticeMdfdate());
+//		noticeDTO.setNoticeUseYn(rhdwl.getNoticeUseYn());
+//		noticeDTO.setUserId(userId);
+		
+//		
+//		System.out.println(noticeDTO);
+//		return ResponseEntity.ok().body(noticeDTO);
 		
 	}
 	

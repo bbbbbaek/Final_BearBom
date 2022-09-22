@@ -1,5 +1,6 @@
 package com.spring.bearbom.service.mypage.impl;
 
+<<<<<<< HEAD
 
 import java.util.List;
 import java.util.Map;
@@ -12,22 +13,46 @@ import com.spring.bearbom.mapper.MypageMapper;
 import com.spring.bearbom.mapper.UserMapper;
 import com.spring.bearbom.repository.UserRepository;
 import com.spring.bearbom.service.mypage.MypageService;
+=======
+import java.util.List;
+import java.util.Map;
+>>>>>>> 29a84b79a9766a470866bac7ed6941483ea65a6b
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.spring.bearbom.dto.CourseDTO;
+import com.spring.bearbom.dto.InquiryDTO;
+import com.spring.bearbom.entity.User;
+import com.spring.bearbom.mapper.MypageMapper;
+import com.spring.bearbom.mapper.UserMapper;
+import com.spring.bearbom.repository.UserRepository;
+import com.spring.bearbom.service.mypage.MypageService;
 
 @Service
-public class MypageServiceImpl implements MypageService {
-	
+public class MypageServiceImpl implements MypageService{
+
 	@Autowired
 	private UserMapper userMapper;
 
-
+	@Autowired
+	MypageMapper mypageMapper;
+	
 	@Autowired
 	private UserRepository userRepository;
-  
-  @Autowired
-  private MypageMapper mypageMapper;
-
 	
+	@Override
+	public List<CourseDTO> getWishList(CourseDTO courseDTO) {
+		// TODO Auto-generated method stub
+		return mypageMapper.getWishList(courseDTO);
+	}
+	
+	@Override
+	public List<CourseDTO> getWishCnt(CourseDTO courseDTO) {
+		// TODO Auto-generated method stub
+		return mypageMapper.getWishCnt(courseDTO);
+	}
+  
 	@Override
 	public User getUser(String userId) {
 //		User getUser = userrepository.findbyUserId(userId);
@@ -35,14 +60,30 @@ public class MypageServiceImpl implements MypageService {
 		return userRepository.findByUserId(userId);
 	}
 
+<<<<<<< HEAD
 	//===========================================================//
 	// 유저 정보 수정
+=======
+
+//    @Override
+//    public List<Map<String, Object>> getInquiryReference(String userId) {
+//        return mypageMapper.getInquiryReference(userId);
+//    }
+
+
+
+>>>>>>> 29a84b79a9766a470866bac7ed6941483ea65a6b
 	@Override
 	public void updateUser(User user) {
 		// TODO Auto-generated method stub
 		userMapper.updateUser(user);
 	}
-	
+
+//	@Override
+//	public List<Map<String, Object>> getInquiryReference(String userId) {
+//		return null;
+//	}
+
 	// 유저 정보 수정
 	// @Override
 //		public void updateUser(User user) {
@@ -70,15 +111,31 @@ public class MypageServiceImpl implements MypageService {
 	//===========================================================//
 
 
-    @Override
-    public List<Map<String, Object>> getInquiryReference(String userId) {
-        return mypageMapper.getInquiryReference(userId);
-    }
-
 //    @Override
 //    public List<Map<String, Object>> getInquiryReference(String userId) {
 //        return mypageMapper.getInquiryReference(userId);
 //    }
 
+//    @Override
+//    public List<Map<String, Object>> getInquiryReference(String userId) {
+//        return mypageMapper.getInquiryReference(userId);
+//    }
+    
+    
+	//재현
+    
+	@Override
+	public List<Map<String, Object>> getInquiryReference(InquiryDTO inquiryDTO) {
+		// TODO Auto-generated method stub
+		return mypageMapper.getInquiryReference(inquiryDTO);
+	}
+
+
+	@Override
+	public void updateInquiryReference(InquiryDTO inquiryDTO) {
+		// TODO Auto-generated method stub
+		mypageMapper.updateInquiryReference(inquiryDTO);
+	}
+    
 }
 

@@ -1,59 +1,77 @@
+import { Button } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import DaumPostcode from "react-daum-postcode";
 
-const KakaoAPI = ({saveFormData}) => {
+const KakaoAPI = ({ formData, saveFormData }) => {
   /////////////////////////////////////////////////////////
   //폼데이터 생성부분
-  // const [address, setAddress] = useState();
-  // const [addressDef, setAddressDef] = useState();
-  // const [addressEx, setAddressEx] = useState();
-  // const [zipcode, setZipcode] = useState();
+  const [address, setAddress] = useState();
+  //const [addressDef, setAddressDef] = useState();
+  const [addressEx, setAddressEx] = useState();
+  const [zipcode, setZipcode] = useState();
+
+  const [check, setCheck] = useState(false);
 
   const [formObj, setFormObj] = useState({});
   const [addressDef, setAddressDef] = useState();
-  const zipcodeRef = useRef()
+  const zipcodeRef = useRef();
   //const addressDefRef = useRef()
-  const addressExRef = useRef()
-  const addressRef = useRef()
+  const addressExRef = useRef();
+  const addressRef = useRef();
   useEffect(() => {
     saveFormData(formObj);
- }, [formObj]);
+  }, [formObj]);
 
-//  useEffect(() => {
-  
-//  }, [address]);
+  //  useEffect(() => {
 
- useEffect(() => {
-  setFormObj({...formObj, "courseAddressDef": addressDef, "courseAddress": addressRef.current.value, "courseAddressEx": addressExRef.current.value, "courseZipcode": zipcodeRef.current.value})
-  // setFormObj({...formObj, "address": addressRef.current.value})
-  // setFormObj({...formObj, "addressEx": addressExRef.current.value})
-  // setFormObj({...formObj, "zipcode": zipcodeRef.current.value})
- }, [addressDef]);
+  //  }, [address]);
 
-//  useEffect(() => {
-  
-//  }, [addressEx]);
+  useEffect(() => {
+    setFormObj({
+      ...formObj,
+      courseAddressDef: addressDef,
+      courseAddress: addressRef.current.value,
+      courseAddressEx: addressExRef.current.value,
+      courseZipcode: zipcodeRef.current.value,
+    });
+    // setFormObj({...formObj, "address": addressRef.current.value})
+    // setFormObj({...formObj, "addressEx": addressExRef.current.value})
+    // setFormObj({...formObj, "zipcode": zipcodeRef.current.value})
+  }, [addressDef]);
 
-//  useEffect(() => {
-  
-//  }, [zipcode]);
+  useEffect(() => {
+    setFormObj({ ...formObj, courseAddress: address });
+  }, [address]);
+
+  useEffect(() => {
+    setFormObj({ ...formObj, courseAddressEx: addressEx });
+  }, [addressEx]);
+
+  useEffect(() => {
+    setFormObj({ ...formObj, courseZipcode: zipcode });
+  }, [zipcode]);
+
+  useEffect(() => {
+    setAddressDef(formData.courseAddressDef);
+    if (formData.courseZipcode) {
+      const $zipcode = document.querySelector(".zipcode");
+      $zipcode.value = formData.courseZipcode;
+    }
+
+    if (formData.courseAddress) {
+      const $zipcode = document.querySelector(".addressLong");
+      $zipcode.value = formData.courseAddress;
+    }
+
+    if (formData.courseAddressEx) {
+      const $zipcode = document.querySelector(".addressExtra");
+      $zipcode.value = formData.courseAddressEx;
+    }
+  }, []);
+
   ////////////////////////////////////////////////////////////////////////////
-
-
-  // 우편번호 찾기 찾기 화면을 넣을 element
-  var element_wrap = document.getElementById("wrap");
-
-  function foldDaumPostcode() {
-    // iframe을 넣은 element를 안보이게 한다.
-    element_wrap.style.display = "none";
-  }
-
-  // 현재 scroll 위치를 저장해놓는다.
-  var currentScroll = Math.max(
-    document.body.scrollTop,
-    document.documentElement.scrollTop
-  );
   const onCompletePost = (data) => {
+    setCheck(false);
     // 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
     // 각 주소의 노출 규칙에 따라 주소를 조합한다.
@@ -88,53 +106,77 @@ const KakaoAPI = ({saveFormData}) => {
       }
       // 조합된 참고항목을 해당 필드에 넣는다.
       document.getElementById("sample3_extraAddress").value = extraAddr;
+      setAddressEx(extraAddr);
     } else {
       document.getElementById("sample3_extraAddress").value = "";
+      setAddressEx("");
     }
 
     // 우편번호와 주소 정보를 해당 필드에 넣는다.
     document.getElementById("sample3_postcode").value = data.zonecode;
+    setZipcode(data.zonecode);
     document.getElementById("sample3_address").value = addr;
+    setAddress(addr);
     // 커서를 상세주소 필드로 이동한다.
     document.getElementById("sample3_detailAddress").focus();
 
-    // iframe을 넣은 element를 안보이게 한다.
-    // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
-    element_wrap.style.display = "none";
-
-    // 우편번호 찾기 화면이 보이기 이전으로 scroll 위치를 되돌린다.
-    document.body.scrollTop = currentScroll;
+    const $button = document.querySelector(".postCodeDiv");
+    $button.style.display = "none";
   };
-  // 우편번호 찾기 화면 크기가 조정되었을때 실행할 코드를 작성하는 부분. iframe을 넣은 element의 높이값을 조정한다.
-  //     onresize : function(size) {
-  //         element_wrap.style.height = size.height+'px';
-  //     },
-  //     width : '100%',
-  //     height : '100%'
-  // }).embed(element_wrap);
-
-  // iframe을 넣은 element를 보이게 한다.
-  //element_wrap.style.display = 'block';
   /////////////////////////////////////////////////////////////////////////////
   return (
     <div>
       <div>
-        <input type="text" id="sample3_postcode" placeholder="우편번호" ref={zipcodeRef} />
         <input
+          type="text"
+          className="addressInput zipcode"
+          id="sample3_postcode"
+          placeholder="우편번호"
+          ref={zipcodeRef}
+        />
+        <Button
+          variant="outlined"
+          color="success"
+          size="large"
+          style={{
+            marginLeft: 10,
+            background: "#dbd7d3",
+            height: 30,
+            width: 100,
+            fontSize: 13,
+          }}
           type="button"
-          onclick="sample6_execDaumPostcode()"
-          value="우편번호 찾기"
+          onClick={() => setCheck(true)}
+        >
+          주소찾기
+        </Button>
 
+        <br />
+        <input
+          type="text"
+          className="addressLongInput addressLong"
+          id="sample3_address"
+          placeholder="주소"
+          ref={addressRef}
         />
         <br />
-        <input type="text" id="sample3_address" placeholder="주소" ref={addressRef} />
-        <br />
-        <input type="text" id="sample3_detailAddress" placeholder="상세주소"
-        onChange={(e) => setAddressDef(e.target.value)}
-        //ref={addressDefRef} 
+        <input
+          type="text"
+          className="addressInput"
+          id="sample3_detailAddress"
+          placeholder="상세주소"
+          onChange={(e) => setAddressDef(e.target.value)}
+          value={addressDef}
+          //ref={addressDefRef}
         />
-        <input type="text" id="sample3_extraAddress" placeholder="참고항목" ref={addressExRef} />
-        <div
+        <input
+          type="text"
+          className="addressInput addressExtra"
+          id="sample3_extraAddress"
+          placeholder="참고항목"
+          ref={addressExRef}
+        />
+        {/* <div
           id="wrap addressWrap"
         >
           <img
@@ -143,8 +185,12 @@ const KakaoAPI = ({saveFormData}) => {
             onclick={foldDaumPostcode}
             alt="접기 버튼"
           />
-        </div>
-        <DaumPostcode autoClose onComplete={onCompletePost} />
+        </div> */}
+        {check ? (
+          <div className="postCodeDiv">
+            <DaumPostcode onComplete={onCompletePost} />
+          </div>
+        ) : null}
       </div>
     </div>
   );

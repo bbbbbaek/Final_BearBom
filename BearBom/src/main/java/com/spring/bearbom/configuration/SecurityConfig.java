@@ -44,7 +44,7 @@ public class SecurityConfig{
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
 
-			.authorizeRequests().antMatchers("/", "/api/member/**", "/api/user/*","/api/guide/*" , "/api/helpdesk/*", "/oauth/kakao", "/oauth/**","/upload/*", "/api/course/getCourseList","/api/course/getCommonCodeList", "/api/course/searchCourse","/api/main/**").permitAll()
+			.authorizeRequests().antMatchers("/", "/api/member/**", "/api/user/*","/api/guide/*" , "/api/helpdesk/*", "/oauth/kakao", "/oauth/**","/upload/*", "/api/course/getCourseList","/api/course/getCommonCodeList", "/api/course/searchCourse","/api/main/**","/api/course/couseSearchController","/api/mypage/**").permitAll()
 								.antMatchers("/api/admin/**", "/admin/**").access("hasRole('ROLE_ADMIN')")
 								.anyRequest().authenticated();
 

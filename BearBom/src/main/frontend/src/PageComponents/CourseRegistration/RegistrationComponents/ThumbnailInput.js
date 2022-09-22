@@ -4,7 +4,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { width } from "@mui/system";
 
-const ThumbnailInput = ({changeImages}) => {
+const ThumbnailInput = ({formData, changeImages}) => {
   const [selectedImage, setSelectedImage] = useState();
   const [formObj, setFormObj] = useState({});
 
@@ -31,6 +31,13 @@ const ThumbnailInput = ({changeImages}) => {
   };
 
   const inputRef = useRef();
+
+   useEffect(() => {
+     if(formData.imageList) {
+     setSelectedImage(formData.imageList[0]);
+     const $button = document.querySelector(".imgAddBtn");
+     $button.style.display = "none"}
+   },[]);
 
   return (
     <>

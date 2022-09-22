@@ -31,6 +31,14 @@ const FourFileInput2 = ({formData, changeImages}) => {
   };
 
   const inputRef = useRef();
+  
+  useEffect(() => {
+    if(formData.imageList && (formData.imageList.length>2)){
+     setSelectedImage(formData.imageList[2]);
+     const $button = document.querySelector(".multiImgAddBtn2");
+     $button.style.display = "none"
+    }
+   },[]);
 
   return (
     <>

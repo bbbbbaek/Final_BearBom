@@ -6,9 +6,9 @@ import {
 import React, { useEffect, useState } from "react";
 import "../../css/courseRegistration.css";
 
-const StepTwo_4 = ({saveFormData}) => {
+const StepTwo_4 = ({formData, saveFormData}) => {
   const [difficulty, setDifficulty] = useState("");
-  const [durationTime, setDurationTime] = useState(0);
+  const [durationTime, setDurationTime] = useState("");
   const [curriculum, setCurriculum] = useState("");
   const [formObj, setFormObj] = useState({});
 
@@ -45,6 +45,12 @@ const StepTwo_4 = ({saveFormData}) => {
       </Button>
     );
   };
+
+  useEffect(() => {
+    setDifficulty(formData.courseLevel);
+    setDurationTime(formData.courseRuntime);
+    setCurriculum(formData.courseLevelContent);
+  },[]);
 
 
   return (
@@ -98,6 +104,7 @@ const StepTwo_4 = ({saveFormData}) => {
                         type='number'
                         onChange={(e) => setDurationTime(e.target.value)}
                         placeholder="소요 시간을 입력 해주세요"
+                        value={durationTime}
                     ></input> 
             </div>
             <div className="numCheck culi">
@@ -106,6 +113,7 @@ const StepTwo_4 = ({saveFormData}) => {
                         multiline
                         placeholder={'커리큘럼을 자유롭게 작성해 주세요\n최대 600자'}
                         onChange={(e) => setCurriculum(e.target.value)}
+                        value={curriculum}
                     ></textarea> 
             </div>
           </div>

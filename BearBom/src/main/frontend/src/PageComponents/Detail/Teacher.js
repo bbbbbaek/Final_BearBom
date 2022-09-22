@@ -68,7 +68,9 @@ function Teacher({ averageRating }) {
             alt="aa"
           ></img>
         </div>
-        <div className="teacher-content">너무 유익합니다.</div>
+        <div className="teacher-content">
+          너무 유익합니다. 너무 유익합니다. 너무 유익합니다.
+        </div>
         <div>누적 수강생</div>
         <div className="teacher-num">124명</div>
         <div>평균 평점</div>

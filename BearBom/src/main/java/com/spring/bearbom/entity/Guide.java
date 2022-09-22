@@ -30,6 +30,6 @@ public class Guide {
     private LocalDateTime guideMdfdate = LocalDateTime.now();
 
     @Column(nullable = false,columnDefinition = "char(1)")
-    private char guideUseYn ='N';
+    private char guideUseYn ='Y';
 
 }

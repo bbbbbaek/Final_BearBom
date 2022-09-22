@@ -3,11 +3,17 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.spring.bearbom.mapper.MypageMapper">
-    <select id="getInquiryReference" resultType="camelHashMap" parameterType="String">
+    
+    <select id="getWishList" resultType="camelHashMap" parameterType="com.spring.bearbom.dto.CourseDTO">
         <![CDATA[
-            SELECT * FROM T_INQUIRY WHERE USER_ID = #{userId} AND INQUIRY_USE_YN = 'Y'
+            SELECT A.*
+	        FROM T_COURSE A,
+		        T_LIKE B
+	        WHERE B.USER_ID = #{userId}
+	        AND A.COURSE_IDX =  B.COURSE_IDX
         ]]>
     </select>
+<<<<<<< HEAD
     
     <update id="deleteUserInfo" parameterType="string">
     	<![CDATA[
@@ -18,3 +24,34 @@
         ]]>
     </update>
 </mapper>
+=======
+
+    <select id="getWishCnt" resultType="camelHashMap" parameterType="com.spring.bearbom.dto.CourseDTO">
+        <![CDATA[
+            SELECT COUNT(*) AS likedCourseCnt
+                FROM T_COURSE A,
+                     T_LIKE B
+                WHERE B.USER_ID = #{userId}
+                AND A.COURSE_IDX = B.COURSE_IDX
+        ]]>
+    </select>
+   
+    <select id="getInquiryReference" parameterType="com.spring.bearbom.dto.InquiryDTO" resultType="camelHashMap">
+    <![CDATA[
+    SELECT * FROM T_INQUIRY WHERE USER_ID = #{userId} AND inquiry_use_yn = 'Y'
+    ]]>
+    </select>
+    
+     <update id="updateInquiryReference" parameterType="com.spring.bearbom.dto.InquiryDTO">
+    <![CDATA[
+    UPDATE T_INQUIRY SET INQUIRY_USE_YN = "N" WHERE USER_ID = #{userId} AND INQUIRY_IDX = #{inquiryIdx}
+    ]]>
+    </update>
+    
+       
+</mapper>
+    <!-- <select id="getInquiryReference" resultType="camelHashMap" parameterType="String">
+        <![CDATA[
+            SELECT * FROM T_INQUIRY WHERE USER_ID = #{userId} AND INQUIRY_USE_YN = 'Y'
+        ]]> -->
+>>>>>>> 29a84b79a9766a470866bac7ed6941483ea65a6b

@@ -1,28 +1,30 @@
 import React, { useState, useEffect } from "react";
 import "./inquiryview.scss";
 import Table from "../../../ModuleComponents/Table/Table";
-import useFetch from "../../../customHooks/useFetch";
 import axios from "axios";
 import { API_BASE_URL } from "../../../app-config";
-import { Data } from "../../../customHooks/createItems";
+import { inquiryItems } from "../../../customHooks/createItems";
 
 const InquiryView = () => {
-  // index, title, content, regdate, userId, replyYN
-  let tableInfo = [
-    new Data("title", "long", "noticeIdx"),
-    new Data("content", "long", "noticeNm"),
-    new Data("rgdate", "short", "noticeContent"),
-    new Data("mdfdate", "long", "noticeRegdate"),
-    new Data("seller", "long", "noticeMdfdate"),
-    new Data("dop", "short", "noticeUseYn"),
-  ];
-
-  let fetch = useFetch("/api/admin/getInquiryInfoReferenceList", {
-    Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
-  });
-  let fetchedData = null;
-  fetchedData = fetch.data.data;
-  console.log(fetchedData);
+  let tableInfo = inquiryItems;
+  const [fetchedData, setFetchedData] = useState();
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: API_BASE_URL + "/api/mypage/getInquiryReference1",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+      },
+    })
+      // .get(
+      //   // "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Inquiry"
+      //   "http://localhost:8080/api/mypage/getInquiryReference1"
+      // )
+      .then((res) => {
+        console.log(Object.values(res.data)[0]);
+        setFetchedData(Object.values(res.data)[0]);
+      });
+  }, []);
 
   return (
     <>
@@ -31,9 +33,16 @@ const InquiryView = () => {
           <strong>문의 내역 조회</strong>
         </h5>
         <hr />
-        {/* {fetchedData !== undefined ? ( */}
-        <Table tableInfo={tableInfo} fetchedData={fetchedData} />
-        {/* ) : null} */}
+        <button
+          onClick={() => {
+            console.log(fetchedData);
+          }}
+        >
+          click
+        </button>
+        {fetchedData ? (
+          <Table tableInfo={tableInfo} fetchedData={fetchedData} />
+        ) : null}
       </div>
     </>
   );
