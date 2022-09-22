@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.spring.bearbom.dto.LikeDto;
 import com.spring.bearbom.entity.Course;
@@ -102,5 +103,23 @@ public class CourseServiceImpl implements CourseService {
 	@Override
 	public List<Map<String, Object>> getTakenClassList(String userId){
 		return courseMapper.getTakenClassList(userId);
+	}
+	
+	//관리자페이지 강좌 관리 게시물 뿌려주는 부분
+	@Override
+	public List<Map<String, Object>> getAllCourseList() {
+		return courseMapper.getAllCourseList();
+	}
+	
+	//관리자페이지 게시물 승인 처리 부분
+	@Override
+	public void updateCourseStatus(@RequestBody Map<String, Object> paramMap) {
+		courseMapper.updateCourseStatus(paramMap);
+	}
+	
+	//관리자페이지 게시물 삭제 처리 부분
+	@Override
+	public void deleteCourseStatus(@RequestBody Map<String, Object> paramMap) {
+		courseMapper.deleteCourseStatus(paramMap);
 	}
 }
