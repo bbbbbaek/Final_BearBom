@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import "./inquiry.scss";
 import axios from "axios";
 import { API_BASE_URL } from "../../../app-config";
-import useFetch from "../../../customHooks/useFetch";
 
 const Inquiry = () => {
   const navigate = useNavigate();
@@ -42,6 +41,13 @@ const Inquiry = () => {
           <strong>1:1문의</strong>
         </h5>
         <hr />
+        <button
+          onClick={() => {
+            navigate("payment");
+          }}
+        >
+          payment
+        </button>
         <div className="body1">
           {/* <form action="/action_page.php" method="post"> */}
           <label for="email">이메일</label>

@@ -188,7 +188,9 @@ const Table = ({ tableInfo, fetchedData }) => {
             </div>
           </div>
         </>
-      ) : null}
+      ) : (
+        <div>조회한 내역이 없습니다.</div>
+      )}
     </>
   );
 };
