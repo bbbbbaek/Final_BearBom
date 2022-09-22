@@ -17,6 +17,10 @@ public interface InquiryMapper {
 //	@Select("SELECT * FROM T_INQUIRY WHERE INQUIRY_USE_YN = 'Y'")
 //	List<Inquiry> inquiryInfoReference(Inquiry inquiry);
 	
+	
+	//이건 헬프데스크 일대일문의 쿼리
+	
+	
 	@Insert("insert into t_inquiry value (#{inquiryIdx}, #{inquiryEmail}, #{inquirySort}, #{inquiryTitle}, #{inquiryContetnt}, #{userId}, 'Y', 'Y')")
 	void insertInquiry(InquiryDTO inquiryDTO);
 //	@Insert("insert into t_inquiry value (#{inquiryIdx}, #{inquiryEmail}, #{inquirySort}, #{inquiryTitle}, #{inquiryContetnt}, #{userId}, 'Y', 'Y')")
@@ -26,6 +30,10 @@ public interface InquiryMapper {
 	@Select("SELECT * FROM T_INQUIRY WHERE INQUIRY_USE_YN = 'Y'")
 	List<InquiryDTO> inquiryInfoReference(InquiryDTO inquiryDTO);
 
+	
+	
+	
+	
 	void updateInquiry(InquiryDTO inquiryDTO);
 	
 	

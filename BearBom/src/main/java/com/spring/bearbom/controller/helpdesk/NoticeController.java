@@ -43,6 +43,9 @@ public class NoticeController {
 		}
 	}
 	
+	
+	
+	
 //	@PostMapping("insertNotice")
 //	public ResponseEntity<?> insertNotice(@RequestBody Notice notice){
 //		System.out.println(notice.getNoticeIdx());

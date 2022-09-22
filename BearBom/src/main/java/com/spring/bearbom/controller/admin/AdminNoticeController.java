@@ -79,6 +79,8 @@ public class AdminNoticeController {
 		System.out.println("after noticeDTO : " +noticeDTO);
 	
 	}
+	
+
 
 	
 	

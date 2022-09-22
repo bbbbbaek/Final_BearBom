@@ -1,5 +1,7 @@
 package com.spring.bearbom.service.helpdesk.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,12 @@ public class InquiryInfoServiceImpl implements InquiryInfoService{
 	public void insertInquiry(InquiryDTO inquiryDTO) {
 		// TODO Auto-generated method stub
 		inquiryMapper.insertInquiry(inquiryDTO);
+	}
+
+	@Override
+	public List<InquiryDTO> inquiryInfoReference(InquiryDTO inquiryDTO) {
+		List<InquiryDTO> inquiryInfoReferenceList = inquiryMapper.inquiryInfoReference(inquiryDTO);
+		return inquiryInfoReferenceList;
 	}
 
 

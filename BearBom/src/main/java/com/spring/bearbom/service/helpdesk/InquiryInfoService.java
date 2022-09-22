@@ -10,6 +10,8 @@ public interface InquiryInfoService {
 
 	void insertInquiry(InquiryDTO inquiryDTO);
 
+	List<InquiryDTO> inquiryInfoReference(InquiryDTO inquiryDTO);
+
 
 //
 //	List<Helpdesk> inquiryInfo(Helpdesk helpdesk);

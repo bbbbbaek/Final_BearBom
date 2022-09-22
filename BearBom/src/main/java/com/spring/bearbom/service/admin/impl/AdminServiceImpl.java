@@ -6,38 +6,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.bearbom.dto.InquiryDTO;
-import com.spring.bearbom.mapper.InquiryMapper;
+import com.spring.bearbom.mapper.AdminInquiryMapper;
 import com.spring.bearbom.repository.InquiryRepository;
 import com.spring.bearbom.service.admin.AdminService;
 
 @Service
 public class AdminServiceImpl implements AdminService{
-	@Autowired
-	private InquiryRepository inquiryRepository;
 
 	@Autowired
-	private InquiryMapper inquiryMapper;
+	private AdminInquiryMapper adminInquiryMapper;
 
 	@Override
-	public List<InquiryDTO> inquiryInfoReference(InquiryDTO inquiryDTO) {
+	public List<InquiryDTO> inquiryInfoReference() {
 		// TODO Auto-generated method stub
-		List<InquiryDTO> inquiryInfoReferenceList = inquiryMapper.inquiryInfoReference(inquiryDTO);
-		return inquiryInfoReferenceList;
+		return adminInquiryMapper.adminInquiryMapper();
 	}
 
 	@Override
 	public void updateInquiry(InquiryDTO inquiryDTO) {
 		// TODO Auto-generated method stub
-		inquiryMapper.updateInquiry(inquiryDTO);
+		adminInquiryMapper.updateInquiry(inquiryDTO);
 	}
+
 	
-//	@Override
-//	public List<Inquiry> inquiryInfoReference(Inquiry inquiry) {
-//		// TODO Auto-generated method stub
-////		List<Inquiry> inquiryInfoReferenceList = inquiryRepository.findAll();
-////		return inquiryInfoReferenceList;
-//		List<Inquiry> inquiryInfoReferenceList = inquiryMapper.inquiryInfoReference(inquiry);
-//		return inquiryInfoReferenceList;
-//	}
+	
+
 
 }

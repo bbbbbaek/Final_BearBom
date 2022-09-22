@@ -4,6 +4,12 @@
    
 <mapper namespace="com.spring.bearbom.mapper.AdminMapper">
 
+<!-- 관리자페이지 내 공지사항 초기화면 쿼리  --> 
+   <select id="inquiryInfoReference" parameterType="com.spring.bearbom.dto.InquiryDTO" resultType="camelHashMap">
+    <![CDATA[
+    	SELECT * FROM T_INQUIRY
+    ]]>
+    </select>
 	 
     <!-- 관리자페이지 내 공지사항 초기화면 쿼리   
    <select id="getInquiryReference" parameterType="com.spring.bearbom.dto.NoticeDTO" resultType="camelHashMap">
