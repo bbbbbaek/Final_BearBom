@@ -1,6 +1,22 @@
 //import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 package com.spring.bearbom.controller.mypage;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.spring.bearbom.dto.CourseDTO;
 import com.spring.bearbom.dto.InquiryDTO;
 import com.spring.bearbom.dto.ResponseDTO;
@@ -10,19 +26,9 @@ import com.spring.bearbom.jwt.JwtTokenProvider;
 import com.spring.bearbom.service.mypage.MypageService;
 import com.spring.bearbom.service.test.TestService;
 import com.spring.bearbom.service.user.UserService;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/mypage")
@@ -147,6 +153,29 @@ public class MypageController {
 		System.out.println("after inquiryDTO : " +inquiryDTO);
 
 	}
+	
+	/* 마이페이지 찜한 클래스 조회 */
+	@GetMapping("/getWishList")
+	public Map<String, Object> getWishList(@AuthenticationPrincipal String userId) {
+		 CourseDTO courseDTO = new CourseDTO();
+		 log.info("userId : {}", userId);
+		 
+		try {
+			courseDTO.setUserId(userId);
+			
+			List<CourseDTO> wishList = mypageService.getWishList(courseDTO);
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+			resultMap.put("wishList", wishList);
+			
+			return resultMap;
+		}
+		catch (Exception e){
+			Map<String, Object> errorMap = new HashMap<String, Object>();
+			errorMap.put("error", e.getMessage());
+			return errorMap;
+			}
+		}
+
 
 
 	//마이페이지
@@ -183,5 +212,31 @@ public class MypageController {
 			return errorMap;
 		}
 	}
+
+	
+	/* mypage 찜한 클래스 갯수 */
+	@GetMapping("/getWishCnt")
+	public Map<String, Object> getWishCnt(@AuthenticationPrincipal String userId) {
+		 CourseDTO courseDTO = new CourseDTO();
+		 log.info("userId : {}", userId);
+		 
+		try {
+			courseDTO.setUserId(userId);
+			
+			List<CourseDTO> wishCntList = mypageService.getWishCnt(courseDTO);
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+			
+			resultMap.put("wishCntList", wishCntList);
+			
+			return resultMap;
+		}
+		catch (Exception e){
+			Map<String, Object> errorMap = new HashMap<String, Object>();
+			errorMap.put("error", e.getMessage());
+			return errorMap;
+		}
+	}
+  	
+
 }
 
