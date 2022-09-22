@@ -1,12 +1,15 @@
 package com.spring.bearbom.service.user.impl;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
 import com.spring.bearbom.entity.User;
 import com.spring.bearbom.mapper.UserMapper;
 import com.spring.bearbom.repository.UserRepository;
 import com.spring.bearbom.service.user.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceimpl implements UserService {
@@ -90,7 +93,13 @@ public class UserServiceimpl implements UserService {
 		return "aaa";
 	}
 
-
+	// admin 유저 정보 불러오기
+	@Override
+	   public List<User> getUserList(){
+//	      return userRepository.findAll();
+		return userMapper.getUserList();
+	   }
+	
 
 
 }

@@ -3,6 +3,8 @@ package com.spring.bearbom.mapper;
 import com.spring.bearbom.dto.UserDTO;
 import com.spring.bearbom.entity.User;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -45,6 +47,8 @@ public interface UserMapper {
     //============================================================//
     // 유저 정보 수정 xml쿼리문 가져오기
 	void updateUser(User user);
+
+	List<User> getUserList();
 
 }
 

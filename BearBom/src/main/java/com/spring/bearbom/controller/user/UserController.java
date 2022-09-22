@@ -1,24 +1,29 @@
 package com.spring.bearbom.controller.user;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.spring.bearbom.dto.ResponseDTO;
 import com.spring.bearbom.dto.UserDTO;
 import com.spring.bearbom.entity.User;
 import com.spring.bearbom.jwt.JwtTokenProvider;
 import com.spring.bearbom.service.email.EmailService;
 import com.spring.bearbom.service.user.UserService;
-import lombok.extern.slf4j.Slf4j;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/api/user")
@@ -151,6 +156,25 @@ public class UserController {
 		return ResponseEntity.ok().body(confirm);
 	}
 	
+	// admin 유저 정보 불러오기 0922
+	@GetMapping("/getUserList")
+    public Map<String, Object> getUserList(){
+    	try {
+    		Map<String, Object> returnMap = new HashMap<String, Object>();
+    		
+    		List<User> userList = userService.getUserList();
+    		
+    		returnMap.put("userList", userList);
+    		
+    		return returnMap;
+    		
+    	}catch(Exception e){
+    		Map<String, Object> errorMap = new HashMap<String, Object>();
+    		errorMap.put("error", e.getMessage());
+    		return errorMap;
+    	}
+    };
+ // admin 유저 정보 불러오기 0922
 	
 
 }
