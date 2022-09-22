@@ -33,6 +33,8 @@ public interface CourseService {
 	void updateCourseUseYnByDay();
 
 	void setSqlSafe();
-	
+
+
+	List<Map<String, Object>> getTakenClassList(String userId);
 }
 

@@ -27,4 +27,5 @@ public interface CourseMapper {
 
 	void setSqlSafe();
 
+	List<Map<String, Object>> getTakenClassList(String userId);
 }
