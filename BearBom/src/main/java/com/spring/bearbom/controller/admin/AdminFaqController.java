@@ -40,8 +40,8 @@ public class AdminFaqController {
 	
 	//y를 n으로 바꾸는 update
 	@PostMapping("updateFaq")
-	public void updateFaq(@RequestBody GuideDTO guideDTO, @AuthenticationPrincipal String userId){	
-		guideDTO.setUserId(userId);
+	public void updateFaq(@RequestBody GuideDTO guideDTO){	
+		
 		System.out.println("before inquiryDTO : " +guideDTO);
 		guideService.updateFaq(guideDTO);
 		System.out.println("after guideDTO : " +guideDTO);

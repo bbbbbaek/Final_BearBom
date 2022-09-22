@@ -72,8 +72,8 @@ public class AdminNoticeController {
 //		return ResponseEntity.ok().body(noticeDTO);
 		
 	@PostMapping("/updateNotice")
-	public void updateNotice(@RequestBody NoticeDTO noticeDTO, @AuthenticationPrincipal String userId){	
-		noticeDTO.setUserId(userId);
+	public void updateNotice(@RequestBody NoticeDTO noticeDTO){	
+		
 		System.out.println("before noticeDTO : " +noticeDTO);
 		noticeService.updateNotice(noticeDTO);
 		System.out.println("after noticeDTO : " +noticeDTO);
