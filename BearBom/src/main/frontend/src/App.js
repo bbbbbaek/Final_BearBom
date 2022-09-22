@@ -50,7 +50,8 @@ import NoticeMgmt from "./PageComponents/Admin/Menu/NoticeMgmt";
 import FAQMgmt from "./PageComponents/Admin/Menu/FAQMgmt";
 import InquiryMgmt from "./PageComponents/Admin/Menu/InquiryMgmt";
 import QuickViewBox from "./PageComponents/Admin/Home/QuickViewBox";
-
+import CardSelect from "./PageComponents/Detail/PayCardOption";
+import PayWindow from "./PageComponents/Detail/PayWindow";
 function App() {
   return (
     <>
@@ -113,6 +114,8 @@ function App() {
           <Route path="/payready" element={<KakaoPayR />} />
           <Route path="/payresult" element={<KakaoPayRe />} />
           <Route path="/pwfind" element={<PwFind />} />
+          {/* <Route path="/payoption" element={<CardSelect />} /> */}
+          <Route path="/paywindow" element={<PayWindow />} />
         </Routes>
         <Top />
         <Chatbot />

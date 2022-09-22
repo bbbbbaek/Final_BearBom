@@ -3,6 +3,9 @@ import "react-multi-carousel/lib/styles.css";
 import { useState, useEffect } from "react";
 import Box from "./Box";
 import "../../css/thumb.css";
+import axios from "axios";
+import { API_BASE_URL } from "../../app-config";
+import { useParams } from "react-router-dom";
 
 // const choice = {
 //   img1: {
@@ -24,17 +27,26 @@ import "../../css/thumb.css";
 // };
 
 function ImgBox({ course }) {
-  // const play = (userChoice) => {
-  //   setUserSelect(choice[userChoice]);
+  const { id } = useParams();
+  const [courseFile, setCourseFile] = useState([]);
+  const [userSelect, setUserSelect] = useState();
+  // const play = (a, index) => {
+  //   setUserSelect({
+  //     name: a,
+  //     img: `http://localhost:8080/upload/${course.courseThumbnailNm}`,
+  //   });
+  //   console.log(setUserSelect);
   // };
 
-  const [userSelect, setUserSelect] = useState();
-  const play = (a) => {
+  const play = (a, index) => {
+    console.log(a);
+    console.log(index);
+    const nameNum = index + 1;
+    console.log(nameNum);
     setUserSelect({
-      name: a,
-      img: `http://localhost:8080/upload/${course.courseThumbnailNm}`,
+      name: `img${nameNum}`,
+      img: `http://localhost:8080/upload/${a.img}`,
     });
-    console.log(setUserSelect);
   };
 
   const responsive = {
@@ -58,13 +70,48 @@ function ImgBox({ course }) {
   };
 
   useEffect(() => {
-    if (course.length !== 0)
+    if (courseFile.length !== 0) {
+      console.log(courseFile);
       setUserSelect({
         name: `img1`,
-        img: `http://localhost:8080/upload/${course.courseThumbnailNm}`,
+        img: `http://localhost:8080/upload/${courseFile[0].img}`,
       });
-    console.log(course.courseThumbnailNm);
-  }, [course]);
+    }
+    //console.log(courseFile.courseFileNewNm);
+  }, [courseFile]);
+
+  useEffect(() => {
+    // setCourseFile((prev) => ({ ...prev, courseIdx: id }));
+    //데이터불러오는 axios
+    //setCourse(response.data);
+    axios({
+      method: "get",
+      url: API_BASE_URL + "/api/course/getCourseFile",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+      },
+      params: { courseIdx: id },
+    }).then((response) => {
+      console.log(response.data);
+      response.data.getCourseFile.map((file, index) => {
+        // const tempFile = [
+        //   ...courseFile,
+        //   {
+        //     name: `img${index + 1}`,
+        //     img: `http://localhost:8080/upload/${file.courseFileNewNm}`,
+        //   },
+        // ];
+        setCourseFile((prev) => [
+          ...prev,
+          {
+            name: `img${index + 1}`,
+            img: file.courseFileNewNm,
+          },
+        ]);
+      });
+      console.log(courseFile);
+    });
+  }, []);
 
   return (
     <div className="main-thumb-box">
@@ -72,21 +119,18 @@ function ImgBox({ course }) {
         <Box item={userSelect} />
       </div>
       <Carousel responsive={responsive}>
-        <div className="btn-thumb-box">
-          {/* {course.map((a, index) => ( */}
-          <input
-            className="btn-thumb1"
-            onClick={() => {
-              play("img1");
-              // play(a, index);
-              console.log("ㅁㅁㅁㅁㅁㅁ");
-            }}
-            type="image"
-            src={`http://localhost:8080/upload/${course.courseThumbnailNm}`}
-            alt="1번째 사진"
-          ></input>
-          {/* ))} */}
-        </div>
+        {courseFile &&
+          courseFile.map((a, index) => (
+            <div className="btn-thumb-box">
+              <input
+                className="btn-thumb1"
+                onClick={() => play(a, index)}
+                type="image"
+                src={`http://localhost:8080/upload/${a.img}`}
+                alt="1번째 사진"
+              ></input>
+            </div>
+          ))}
       </Carousel>
     </div>
   );

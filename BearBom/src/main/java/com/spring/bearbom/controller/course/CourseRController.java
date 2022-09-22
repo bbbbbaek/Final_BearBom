@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.bearbom.dto.CourserDTO;
 import com.spring.bearbom.entity.Course;
+import com.spring.bearbom.entity.CourseFile;
 import com.spring.bearbom.entity.Courser;
 import com.spring.bearbom.entity.User;
 import com.spring.bearbom.jwt.JwtTokenProvider;
@@ -109,6 +108,17 @@ public class CourseRController {
         Map<String, Object> resultMap = new HashMap<String, Object>();
         
         resultMap.put("getCourse", getCourse);
+        return resultMap;
+    }
+    
+    @GetMapping("/getCourseFile")
+    public Map<String, Object> getCourseFile(@RequestParam("courseIdx") int courseIdx) {
+    	
+    	List<CourseFile> getCourseFile = courserService.getCourseFile(courseIdx);
+    	
+    	Map<String, Object> resultMap = new HashMap<String, Object>();
+    	
+    	resultMap.put("getCourseFile", getCourseFile);
         return resultMap;
     }
 }

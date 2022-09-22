@@ -58,9 +58,10 @@ const Detail = ({ scrollTop }) => {
     })
       .then((response) => {
         console.log(response.data);
+        setaverageRating(response.data.averageRating);
         setReviewList(response.data.reviewList);
         setReviewData(response.data.reviewList.slice(0, 4));
-        setaverageRating(response.data.averageRating);
+
         setSortedList(
           response.data.reviewList.sort((a, b) => {
             console.log(a);
@@ -133,7 +134,9 @@ const Detail = ({ scrollTop }) => {
 
   React.useEffect(() => {
     let get_local = localStorage.getItem("data");
-    setCourseInfo(location.state.courseInfo);
+    if (location.state) setCourseInfo(location.state.courseInfo);
+    else setCourseInfo(course);
+
     if (get_local == null) {
       get_local = [];
     } else {
@@ -159,7 +162,38 @@ const Detail = ({ scrollTop }) => {
 
       localStorage.setItem("data", JSON.stringify(get_local));
     }
-  }, [courseInfo]);
+  }, [course]);
+  // React.useEffect(() => {
+  //   let get_local = localStorage.getItem("data");
+  //   if (location.state) setCourseInfo(location.state.courseInfo);
+  //   else setCourseInfo(course);
+
+  //   if (get_local == null) {
+  //     get_local = [];
+  //   } else {
+  //     get_local = JSON.parse(get_local);
+  //   }
+
+  //   let duplicateFlag = false;
+  //   if (JSON.stringify(courseInfo) !== "{}") {
+  //     list();
+  //     for (let i = 0; i < get_local.length; i++) {
+  //       if (courseInfo.courseIdx === get_local[i].courseIdx) {
+  //         duplicateFlag = true;
+  //         break;
+  //       }
+  //     }
+  //     if (!duplicateFlag) {
+  //       get_local.push(courseInfo);
+  //     }
+
+  //     if (get_local.length > 5) {
+  //       get_local.splice(0, 1);
+  //     }
+
+  //     localStorage.setItem("data", JSON.stringify(get_local));
+  //   }
+  // }, [course]);
 
   useEffect(() => {
     console.log(sortedList);
@@ -196,6 +230,7 @@ const Detail = ({ scrollTop }) => {
             <div className="main-img-box">
               <ImgBox course={course} />
             </div>
+
             <h4 className="courseNm">{course.courseNm}</h4>
             <div className="course-short-info">
               <div>

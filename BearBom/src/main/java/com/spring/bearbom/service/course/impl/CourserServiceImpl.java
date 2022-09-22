@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.bearbom.entity.Course;
+import com.spring.bearbom.entity.CourseFile;
 import com.spring.bearbom.entity.Courser;
+import com.spring.bearbom.mapper.CourseFileMapper;
 import com.spring.bearbom.mapper.CourserMapper;
 import com.spring.bearbom.repository.CourserRepository;
 import com.spring.bearbom.service.course.CourserService;
@@ -19,6 +21,9 @@ public class CourserServiceImpl implements CourserService {
 
     @Autowired
     private CourserMapper courserMapper;
+    
+    @Autowired
+    private CourseFileMapper courseFileMapper;
 
     @Override
     public List<Courser> Review(Courser courser) {
@@ -67,6 +72,11 @@ public class CourserServiceImpl implements CourserService {
 	public void updateCourseCnt(int courseIdx) {
 		// TODO Auto-generated method stub
 		courserMapper.updateCourseCnt(courseIdx);
+	}
+
+	@Override
+	public List<CourseFile> getCourseFile(int courseIdx) {
+		return courseFileMapper.getCourseFileList(courseIdx);
 	}
 	
 
