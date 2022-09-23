@@ -7,9 +7,11 @@ import com.spring.bearbom.entity.Inquiry;
 
 public interface AdminService {
 
-	List<InquiryDTO> inquiryInfoReference(InquiryDTO inquiryDTO);
+	List<InquiryDTO> inquiryInfoReference();
 
 	void updateInquiry(InquiryDTO inquiryDTO);
+
+	
 
 //	List<Inquiry> inquiryInfoReference(Inquiry inquiry);
 

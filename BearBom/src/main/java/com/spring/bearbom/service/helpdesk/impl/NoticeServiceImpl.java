@@ -23,9 +23,6 @@ public class NoticeServiceImpl implements NoticeService{
 	// 그냥 보여주는것
 	@Override
 	public List<Notice> notice1(Notice notice) {
-		// TODO Auto-generated method stub
-//		List<Notice> noticeList = noticeRepository.findAll();
-//		return noticeList;
 		
 		List<Notice> notice3 = noticeMapper.notice1(notice);
 		return notice3;

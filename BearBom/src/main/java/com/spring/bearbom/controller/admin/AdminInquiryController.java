@@ -28,13 +28,12 @@ public class AdminInquiryController {
 	@Autowired
 	private JwtTokenProvider jwtTokenProvider;
 	
-	//관리자페이지에 1대1문의 화며에 뿌려주는것
 	@GetMapping("/getInquiryInfoReferenceList")
-	public ResponseEntity<?> getInquiryInfoReferenceList(InquiryDTO inquiryDTO, @AuthenticationPrincipal String userId) {
+	public ResponseEntity<?> getInquiryInfoReferenceList() {
 		try {
-			inquiryDTO.setUserId(userId);
 			
-			List<InquiryDTO> inquiryInfoReference = adminService.inquiryInfoReference(inquiryDTO);
+			
+			List<InquiryDTO> inquiryInfoReference = adminService.inquiryInfoReference();
 			
 			System.out.println(inquiryInfoReference);
 			
@@ -50,9 +49,11 @@ public class AdminInquiryController {
 		}
 	}
 	
-	@PostMapping("updateInquiry")
-	public void updateInquiry(@RequestBody InquiryDTO inquiryDTO, @AuthenticationPrincipal String userId){	
-		inquiryDTO.setUserId(userId);
+	
+	
+	@PostMapping("/updateInquiry")
+	public void updateInquiry(@RequestBody InquiryDTO inquiryDTO){	
+		
 		System.out.println("before inquiryDTO : " +inquiryDTO);
 		adminService.updateInquiry(inquiryDTO);
 		System.out.println("after guideDTO : " +inquiryDTO);

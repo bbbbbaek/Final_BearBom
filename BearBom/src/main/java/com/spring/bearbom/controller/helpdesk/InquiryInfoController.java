@@ -1,14 +1,19 @@
 package com.spring.bearbom.controller.helpdesk;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.bearbom.dto.InquiryDTO;
+import com.spring.bearbom.dto.ResponseDTO;
+import com.spring.bearbom.dto.UserDTO;
 import com.spring.bearbom.entity.Inquiry;
 import com.spring.bearbom.jwt.JwtTokenProvider;
 import com.spring.bearbom.repository.InquiryRepository;
@@ -54,6 +59,28 @@ public class InquiryInfoController {
 		System.out.println(inquiryDTO);
 		return ResponseEntity.ok().body(inquiryDTO);
 	}
+	
+	@GetMapping("/getInquiryInfoReferenceList")
+	public ResponseEntity<?> getInquiryInfoReferenceList(InquiryDTO inquiryDTO, @AuthenticationPrincipal String userId) {
+		try {
+			inquiryDTO.setUserId(userId);
+			
+			List<InquiryDTO> inquiryInfoReference = inquiryInfoService.inquiryInfoReference(inquiryDTO);
+			
+			System.out.println(inquiryInfoReference);
+			
+	    	ResponseDTO<InquiryDTO> response = new ResponseDTO<InquiryDTO>();
+	    	response.setData(inquiryInfoReference);
+			
+			return ResponseEntity.ok().body(response);
+		} catch(Exception e) {
+			ResponseDTO<UserDTO> response = new ResponseDTO<>();
+
+			response.setError(e.getMessage());
+			return ResponseEntity.badRequest().body(response);
+		}
+	}
+	
 	
 	
 	
