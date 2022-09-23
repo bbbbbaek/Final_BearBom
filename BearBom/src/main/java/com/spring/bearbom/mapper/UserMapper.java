@@ -1,14 +1,15 @@
 package com.spring.bearbom.mapper;
 
-import com.spring.bearbom.dto.UserDTO;
-import com.spring.bearbom.entity.User;
-
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+
+import com.spring.bearbom.dto.UserDTO;
+import com.spring.bearbom.entity.User;
 
 @Mapper
 public interface UserMapper {
@@ -49,6 +50,26 @@ public interface UserMapper {
 	void updateUser(User user);
 
 	List<User> getUserList();
+
+	
+	// admin 유저 탈퇴 시키시
+//	@Update("UPDATE T_USER SET USER_YN = 'N' WHERE USER_ID = #{userId}")
+//	void adminDeleteUser(UserDTO userDTO);
+	
+	// admin 유저 탈퇴 시키시
+	@Update("UPDATE T_USER SET USER_YN = 'N' WHERE USER_ID = #{userId}")
+	void adminDeleteUser(Map<String, Object> paramMap);
+
+
+
+//    <update id="adminDeleteUser" parameterType="com.spring.bearbom.dto.UserDTO">
+//   <![CDATA[
+//        UPDATE T_USER
+//           SET
+//              USER_YN = 'N'
+//           WHERE USER_ID = #{userId}
+//    ]]>
+//</update>
 
 }
 

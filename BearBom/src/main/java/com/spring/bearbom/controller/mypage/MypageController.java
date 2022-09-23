@@ -139,7 +139,7 @@ public class MypageController {
 //      }
 //   }
 
-   // 유저 탈퇴 Y-> N 
+   // 유저 탈퇴 Y -> N 
    @PostMapping("/deleteUserInfo")
    public Map<String, String> deleteUserInfo(@AuthenticationPrincipal String userId){
       try {
@@ -156,9 +156,6 @@ public class MypageController {
          return error;
       }
    }
-
-
-
 
 
    //마이페이지

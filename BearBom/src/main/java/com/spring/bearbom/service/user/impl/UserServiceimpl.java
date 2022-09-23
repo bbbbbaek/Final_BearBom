@@ -1,11 +1,13 @@
 package com.spring.bearbom.service.user.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.spring.bearbom.dto.UserDTO;
 import com.spring.bearbom.entity.User;
 import com.spring.bearbom.mapper.UserMapper;
 import com.spring.bearbom.repository.UserRepository;
@@ -99,6 +101,28 @@ public class UserServiceimpl implements UserService {
 //	      return userRepository.findAll();
 		return userMapper.getUserList();
 	   }
+
+//	@Override
+//	public void adminDeleteUser(String userId) {
+//		// TODO Auto-generated method stub
+//		userMapper.adminDeleteUser(userId);
+//	}
+//	@Override
+//	public void adminDeleteUser(UserDTO userDTO) {
+//		// TODO Auto-generated method stub
+//		userMapper.adminDeleteUser(userDTO);
+//	}
+	
+	// 0923 admin 유저 정보 삭제시키기
+	@Override
+	public void adminDeleteUser(Map<String, Object> paramMap) {
+		// TODO Auto-generated method stub
+		userMapper.adminDeleteUser(paramMap);
+	}
+
+
+
+	
 	
 
 

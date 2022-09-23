@@ -1,7 +1,9 @@
 package com.spring.bearbom.service.user;
 
 import java.util.List;
+import java.util.Map;
 
+import com.spring.bearbom.dto.UserDTO;
 import com.spring.bearbom.entity.User;
 
 public interface UserService {
@@ -15,6 +17,15 @@ public interface UserService {
 	
 	// admin 유저 정보 불러오기 0922
 	List<User> getUserList();
+
+	
+	// admin 유저 탈퇴 시키기
+//	void adminDeleteUser(String userId);
+//	void adminDeleteUser(UserDTO userDTO);
+	
+	// admin 유저 탈퇴 시키기
+	void adminDeleteUser(Map<String, Object> paramMap);
+
 	
 	// 비밀번호 찾기
 //	User pwFind(String userId, String userEmail);
