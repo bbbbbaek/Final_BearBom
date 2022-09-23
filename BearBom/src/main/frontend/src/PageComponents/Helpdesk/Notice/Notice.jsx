@@ -9,9 +9,14 @@ const Notice = () => {
   let tableInfo = noticeItems;
   const [fetchedData, setFetchedData] = useState();
   useEffect(() => {
-    axios.post(API_BASE_URL + "/api/helpdesk/getNoticeList").then((res) => {
-      setFetchedData(res.data);
-    });
+    axios
+      .post(API_BASE_URL + "/api/helpdesk/getNoticeList")
+      .then((res) => {
+        setFetchedData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   return (
