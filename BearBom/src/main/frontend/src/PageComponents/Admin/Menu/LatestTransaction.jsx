@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from "react";
 import SimpleTable from "../../../ModuleComponents/SimpleTable/SimpleTable";
-import { recentTransactionItems } from "../../../customHooks/createItems";
 import axios from "axios";
+import { latestTransactionItems } from "../../../customHooks/createItems";
+import { API_BASE_URL } from "../../../app-config";
 
 const LatestTransaction = () => {
-  let tableInfo = recentTransactionItems;
+  let tableInfo = latestTransactionItems;
   const [fetchedData, setFetchedData] = useState();
   useEffect(() => {
-    axios
-      .get(
-        "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Order"
-      )
-      .then((res) => {
-        setFetchedData(res.data);
-      });
+    axios.get(API_BASE_URL + "").then((res) => {
+      setFetchedData(res.data);
+    });
   }, []);
 
   return (

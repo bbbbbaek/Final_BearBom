@@ -3,18 +3,15 @@ import "./notice.scss";
 import Table from "../../../ModuleComponents/Table/Table";
 import { Data, noticeItems } from "../../../customHooks/createItems";
 import axios from "axios";
+import { API_BASE_URL } from "../../../app-config";
 
 const Notice = () => {
   let tableInfo = noticeItems;
   const [fetchedData, setFetchedData] = useState();
   useEffect(() => {
-    axios
-      .get(
-        "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Notice"
-      )
-      .then((res) => {
-        setFetchedData(res.data);
-      });
+    axios.post(API_BASE_URL + "/api/helpdesk/getNoticeList").then((res) => {
+      setFetchedData(res.data);
+    });
   }, []);
 
   return (

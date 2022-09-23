@@ -1,14 +1,14 @@
 import React from "react";
 import "./quickview.scss";
 import OpenInNewOutlinedIcon from "@mui/icons-material/OpenInNewOutlined";
-const QuickView = ({ type, statusData }) => {
+const QuickView = ({ type, widgetData }) => {
   let data;
   let number = 12;
   let amount = number.toLocaleString("ko-KR");
-  const [value1] = Object.values(Object.values(statusData)[0][0]);
-  const [value2] = Object.values(Object.values(statusData)[1][0]);
-  const [value3] = Object.values(Object.values(statusData)[2][0]);
-  const [value4] = Object.values(Object.values(statusData)[3][0]);
+  const [value1] = Object.values(Object.values(widgetData)[0][0]);
+  const [value2] = Object.values(Object.values(widgetData)[1][0]);
+  const [value3] = Object.values(Object.values(widgetData)[2][0]);
+  const [value4] = Object.values(Object.values(widgetData)[3][0]);
 
   switch (type) {
     case "taking":

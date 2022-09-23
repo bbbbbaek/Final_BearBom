@@ -10,11 +10,13 @@ import Paper from "@mui/material/Paper";
 import dummyData from "../../PageComponents/Admin/dummyData";
 
 const SimpleTable = ({ tableInfo, fetchedData }) => {
-  // let data = [...dummyData];
   let recentData = fetchedData.slice(
     fetchedData.length - 5,
     fetchedData.length
   );
+  let sortedData = recentData.sort((a, b) => {
+    return b.orderIdx - a.orderIdx;
+  });
 
   // 테이블에 클래스 추가해주는 함수
   function classMaker(index) {
@@ -59,7 +61,7 @@ const SimpleTable = ({ tableInfo, fetchedData }) => {
               <TableRow>{tableHead(tableInfo)}</TableRow>
             </TableHead>
             <TableBody>
-              {recentData.map((a) => (
+              {sortedData.map((a) => (
                 <TableRow
                   key={a.data1}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

@@ -5,8 +5,6 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import dummyData from "../../PageComponents/Admin/dummyData";
-import { useState } from "react";
 import { useOutletContext } from "react-router-dom";
 
 const Board = ({ tableInfo }) => {

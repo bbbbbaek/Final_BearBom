@@ -89,8 +89,8 @@ export const inquiryItems = [
   // new Data("내용", "l40", "inquiryContent"),
   new Data("작성자", "l10", "user"),
   new Data("작성일", "l10", "inquiryRegdate"),
-  new Data("답변일", "l10", "inquiryReply"),
-  new Data("답변여부", "l10", "inquiryReply"),
+  new Data("답변일", "l10", "inquiryReplydate"),
+  new Data("답변여부", "l10", "inquiryReplyYn"),
 ];
 
 // 찜한 클래스 조회
@@ -105,9 +105,83 @@ export const wishListItems = [
 
 // ----------------------- 관리자 페이지 -----------------------
 
-// 1. Navbar
+// 최근 거래 내역 (메인메뉴)
+export const latestTransactionItems = [
+  new Data("주문번호", "l10", "orderIdx"),
+  new Data("", "l10", "courseImage"),
+  new Data("강의명", "l40", "courseTitle"),
+  new Data("강사명", "l10", "lecturer"),
+  new Data("구매일", "l10", "orderDate"),
+  new Data("상태", "l10", "status"), // 없음
+];
 
-// 문의 내역(메세지 모양 아이콘)
-export const inquiryAlarm = [];
+// 매출 관리
+export const salesMgmtItems = [
+  new Data("주문번호", "l10", "orderIdx"),
+  new Data("강의명", "l40", "courseTitle"),
+  new Data("판매자", "l10", "lecturerId"),
+  new Data("구매자", "l10", "userId"),
+  new Data("매출액", "l20", "courseCost"),
+  new Data("거래일자", "l10", "orderDate"),
+];
 
-// FAQ
+// 주문 관리
+export const orderMgmtItems = [
+  new Data("주문번호", "l10", "orderIdx"),
+  new Data("", "l10", "courseImage"),
+  new Data("강의명", "l30", "courseTitle"),
+  new Data("판매자", "l10", "lecturerId"),
+  new Data("구매자", "l10", "userId"),
+  new Data("구매일", "l10", "orderDate"),
+];
+
+// 고객 관리
+export const userMgmtItems = [
+  new Data("아이디", "l20", "userId"),
+  new Data("이름", "l30", "userNm"),
+  new Data("닉네임", "l10", "userNickname"),
+  new Data("이메일", "l20", "userEmail"),
+  new Data("연락처", "l20", "userTel"),
+  new Data("가입일", "l10", "userRegdate"),
+];
+
+// 강좌 관리
+export const courseMgmtItems = [
+  new Data("강의번호", "l10", "courseIdx"),
+  new Data("", "l10", "courseImage"),
+  new Data("강의명", "l40", "courseTitle"),
+  new Data("강사명", "l10", "user"),
+  new Data("구매일", "l10", "orderDate"),
+  new Data("상태", "l10", "status"), // 없음
+];
+
+// 공지사항 관리
+export const noticeMgmtItems = [
+  new Data("번호", "l10", "noticeIdx"),
+  new Data("제목", "l40", "noticeTitle"),
+  // new Data("제목", "l40", "noticeContent"),
+  new Data("작성자", "l10", "user"),
+  new Data("작성일", "l10", "noticeRegdate"),
+  new Data("조회수", "l10", "noticeMdfdate"),
+];
+
+// FAQ 관리
+export const faqMgmtItems = [
+  new Data("번호", "l10", "guideIdx"),
+  new Data("제목", "l40", "guideTitle"),
+  // new Data("내용", "l40", "guideContent"),
+  new Data("작성일", "l10", "guideRegdate"),
+  new Data("수정일", "l10", "guideMdfdate"),
+];
+
+// 고객문의 관리
+export const inquiryMgmtItems = [
+  new Data("번호", "l10", "inquiryIdx"),
+  new Data("종류", "l10", "inquirySort"),
+  new Data("제목", "l40", "inquiryTitle"),
+  // new Data("내용", "l40", "inquiryContent"),
+  new Data("작성자", "l10", "user"),
+  new Data("작성일", "l10", "inquiryRegdate"),
+  new Data("답변일", "l10", "inquiryReplydate"),
+  new Data("답변여부", "l10", "inquiryReplyYn"),
+];

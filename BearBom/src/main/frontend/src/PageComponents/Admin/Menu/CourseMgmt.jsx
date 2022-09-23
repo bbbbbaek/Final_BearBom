@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import Table from "../../../ModuleComponents/Table/Table";
 import axios from "axios";
 import { API_BASE_URL } from "../../../app-config";
-import { inquiryItems } from "../../../customHooks/createItems";
+import { courseMgmtItems } from "../../../customHooks/createItems";
 
 const CourseMgmt = () => {
-  let tableInfo = inquiryItems;
+  let tableInfo = courseMgmtItems;
   const [fetchedData, setFetchedData] = useState();
   useEffect(() => {
     axios

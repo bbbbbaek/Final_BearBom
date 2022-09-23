@@ -33,13 +33,6 @@ const InquiryView = () => {
           <strong>문의 내역 조회</strong>
         </h5>
         <hr />
-        <button
-          onClick={() => {
-            console.log(fetchedData);
-          }}
-        >
-          click
-        </button>
         {fetchedData ? (
           <Table tableInfo={tableInfo} fetchedData={fetchedData} />
         ) : null}

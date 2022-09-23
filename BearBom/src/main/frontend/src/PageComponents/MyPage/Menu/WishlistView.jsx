@@ -5,18 +5,15 @@ import useFetch from "../../../customHooks/useFetch";
 import { wishListItems } from "../../../customHooks/createItems";
 import axios from "axios";
 import { useEffect } from "react";
+import { API_BASE_URL } from "../../../app-config";
 
 const WishlistView = () => {
   let tableInfo = wishListItems;
   const [fetchedData, setFetchedData] = useState();
   useEffect(() => {
-    axios
-      .get(
-        "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Course"
-      )
-      .then((res) => {
-        setFetchedData(res.data);
-      });
+    axios.get(API_BASE_URL + "/api/like/getLikeList").then((res) => {
+      setFetchedData(res.data);
+    });
   }, []);
   return (
     <>

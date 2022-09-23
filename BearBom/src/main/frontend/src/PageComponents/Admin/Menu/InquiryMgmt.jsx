@@ -9,9 +9,7 @@ const InquiryMgmt = () => {
   const [fetchedData, setFetchedData] = useState();
   useEffect(() => {
     axios
-      .get(
-        "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Inquiry"
-      )
+      .get(API_BASE_URL + "/api/admin/getInquiryInfoReferenceList")
       .then((res) => {
         setFetchedData(res.data);
       });

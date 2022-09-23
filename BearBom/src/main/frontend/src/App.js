@@ -55,6 +55,7 @@ import PayWindow from "./PageComponents/Detail/PayWindow";
 
 import LatestTransaction from "./PageComponents/Admin/Menu/LatestTransaction";
 import BoardWrite from "./ModuleComponents/BoardWrite/BoardWrite";
+import PaymentTest from "./ModuleComponents/Payment/PaymentTest";
 
 function App() {
   return (
@@ -81,6 +82,7 @@ function App() {
             <Route path="notice/:id" element={<Board />} />
             <Route path="faq" element={<FAQ />} />
             <Route path="inquiry" element={<Inquiry />} />
+            <Route path="inquiry/payment" element={<PaymentTest />} />
           </Route>
           <Route path="/mypage" element={<Mypage />}>
             <Route path="" element={<RecentTransaction />} />

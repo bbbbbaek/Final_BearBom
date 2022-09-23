@@ -2,19 +2,15 @@ import React, { useState, useEffect } from "react";
 import Table from "../../../ModuleComponents/Table/Table";
 import axios from "axios";
 import { API_BASE_URL } from "../../../app-config";
-import { inquiryItems } from "../../../customHooks/createItems";
+import { inquiryItems, userMgmtItems } from "../../../customHooks/createItems";
 
 const UserMgmt = () => {
-  let tableInfo = inquiryItems;
+  let tableInfo = userMgmtItems;
   const [fetchedData, setFetchedData] = useState();
   useEffect(() => {
-    axios
-      .get(
-        "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/User"
-      )
-      .then((res) => {
-        setFetchedData(res.data);
-      });
+    axios.get(API_BASE_URL + "/api/admin/getUserList").then((res) => {
+      setFetchedData(res.data);
+    });
   }, []);
 
   return (
