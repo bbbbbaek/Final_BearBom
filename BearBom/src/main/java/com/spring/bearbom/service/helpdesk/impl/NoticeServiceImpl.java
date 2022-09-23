@@ -40,6 +40,12 @@ public class NoticeServiceImpl implements NoticeService{
 		noticeMapper.updateNotice(noticeDTO);
 	}
 
+	@Override
+	public void mdfNotice(NoticeDTO noticeDTO) {
+		noticeMapper.mdfNotice(noticeDTO);
+		
+	}
+
 
 //	@Override
 //	public Notice insertNotice(Notice notice) {

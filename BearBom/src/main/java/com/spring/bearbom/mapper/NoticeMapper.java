@@ -24,6 +24,9 @@ public interface NoticeMapper {
 	@Update("update t_notice set notice_use_yn = 'N' where NOTICE_IDX = #{noticeIdx}")
 	void updateNotice(NoticeDTO noticeDTO);
 
+	@Update("update t_notice set notice_title = #{inquiryTitle} notice_content = #{inquiryContent} where NOTICE_IDX = #{noticeIdx}")
+	void mdfNotice(NoticeDTO noticeDTO);
+
 	
 	
 //	@Select()
