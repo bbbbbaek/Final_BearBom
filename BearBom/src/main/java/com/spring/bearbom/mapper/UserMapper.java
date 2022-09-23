@@ -56,7 +56,7 @@ public interface UserMapper {
 //	@Update("UPDATE T_USER SET USER_YN = 'N' WHERE USER_ID = #{userId}")
 //	void adminDeleteUser(UserDTO userDTO);
 	
-	// admin 유저 탈퇴 시키시
+	// admin 유저 탈퇴 시키기
 	@Update("UPDATE T_USER SET USER_YN = 'N' WHERE USER_ID = #{userId}")
 	void adminDeleteUser(Map<String, Object> paramMap);
 
