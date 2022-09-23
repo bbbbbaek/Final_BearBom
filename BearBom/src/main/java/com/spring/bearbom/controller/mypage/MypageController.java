@@ -69,13 +69,26 @@ public class MypageController {
          userDTO.setUserAddressDef(getUser.getUserAddressDef());
          userDTO.setUserTel(getUser.getUserTel());
 
+<<<<<<< HEAD
          userDTO.setUserYn(getUser.getUserYn());
 
 
+=======
+			userDTO.setUserYn(getUser.getUserYn());
+
+
+
+			System.out.println("///////////////"+ userDTO);
+			return ResponseEntity.ok().body(userDTO);
+
+		} catch(Exception e) {
+			ResponseDTO<UserDTO> response = new ResponseDTO<>();
+>>>>>>> 02cfacf445f3e16f14b9fcc48e37d95c1c51b575
 
          System.out.println("///////////////"+ userDTO);
          return ResponseEntity.ok().body(userDTO);
 
+<<<<<<< HEAD
       } catch(Exception e) {
          ResponseDTO<UserDTO> response = new ResponseDTO<>();
 
@@ -90,6 +103,15 @@ public class MypageController {
    public ResponseEntity<?> updateUserInfo(@RequestBody User user, @AuthenticationPrincipal String userId){
       // 등록된 사용자 정보를 조회한다 
 //      User oldUser = mypageService.getUser(user.getUserId());
+=======
+	}
+
+	// 유저 정보 변경
+	@PostMapping("/updateUserInfo")
+	public ResponseEntity<?> updateUserInfo(@RequestBody User user, @AuthenticationPrincipal String userId){
+		// 등록된 사용자 정보를 조회한다 
+//		User oldUser = mypageService.getUser(user.getUserId());
+>>>>>>> 02cfacf445f3e16f14b9fcc48e37d95c1c51b575
 //
 //      // 화면 input 항목에서 받아온 값들을 변경한다 
 //      oldUser.setUserPw(user.getUserPw());
@@ -110,6 +132,7 @@ public class MypageController {
 
       UserDTO userDTO = new UserDTO();
 
+<<<<<<< HEAD
       // 실제 DB 저장 
 //      userService.updateUser(oldUser);
       return ResponseEntity.ok().body("success");
@@ -156,6 +179,56 @@ public class MypageController {
          return error;
       }
    }
+=======
+		// 실제 DB 저장 
+//		userService.updateUser(oldUser);
+		return ResponseEntity.ok().body("success");
+	}
+
+
+	//====================================================================================================//
+
+	// 유저 탈퇴
+//	@PostMapping("deleteUserInfo")
+//	public ResponseEntity<?> deleteUserInfo(@RequestBody User user, @AuthenticationPrincipal String userId){
+//		// 등록된 사용자 정보를 조회 
+//
+//		mypageService.deleteUser(user);
+//		
+//		User newUser = mypageService.getUser(user.getUserId());
+//		
+//		UserDTO userDTO = new UserDTO();
+//		
+//		if(newUser == null) {
+//			return ResponseEntity.ok().body("이미 탈퇴한 회원입니다");
+//		}else {
+//			// DB에서 삭제 
+//			mypageService.deleteUser(newUser);
+//			return ResponseEntity.ok().body("탈퇴 성공!");
+//			
+//		}
+//	}
+
+	// 유저 탈퇴 Y-> N 
+	@PostMapping("/deleteUserInfo")
+	public Map<String, String> deleteUserInfo(@AuthenticationPrincipal String userId){
+		try {
+			Map<String, String> resultMap = new HashMap<String, String>();
+
+			String message = mypageService.deleteUserInfo(userId);
+
+			resultMap.put("message", message);
+
+			return resultMap;
+		} catch(Exception e) {
+			Map<String, String> error = new HashMap<String, String>();
+			error.put("error", e.getMessage());
+			return error;
+		}
+	}
+
+
+>>>>>>> 02cfacf445f3e16f14b9fcc48e37d95c1c51b575
 
 
    //마이페이지
@@ -194,6 +267,7 @@ public class MypageController {
    }
 
 
+<<<<<<< HEAD
    /* mypage 찜한 클래스 갯수 */
    @GetMapping("/getWishCnt")
    public Map<String, Object> getWishCnt(@AuthenticationPrincipal String userId) {
@@ -216,7 +290,36 @@ public class MypageController {
          return errorMap;
       }
    }
+=======
+
+	/* mypage 찜한 클래스 갯수 */
+	@GetMapping("/getWishCnt")
+	public Map<String, Object> getWishCnt(@AuthenticationPrincipal String userId) {
+		CourseDTO courseDTO = new CourseDTO();
+		log.info("userId : {}", userId);
+
+		try {
+			courseDTO.setUserId(userId);
+
+			List<CourseDTO> wishCntList = mypageService.getWishCnt(courseDTO);
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+
+			resultMap.put("wishCntList", wishCntList);
+
+			return resultMap;
+		}
+		catch (Exception e){
+			Map<String, Object> errorMap = new HashMap<String, Object>();
+			errorMap.put("error", e.getMessage());
+			return errorMap;
+		}
+	}
+>>>>>>> 02cfacf445f3e16f14b9fcc48e37d95c1c51b575
 
 
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 02cfacf445f3e16f14b9fcc48e37d95c1c51b575

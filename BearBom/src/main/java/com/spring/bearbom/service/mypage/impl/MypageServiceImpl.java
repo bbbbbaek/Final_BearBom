@@ -19,6 +19,7 @@ public class MypageServiceImpl implements MypageService{
    @Autowired
    private UserMapper userMapper;
 
+<<<<<<< HEAD
    @Autowired
    MypageMapper mypageMapper;
 
@@ -55,6 +56,39 @@ public class MypageServiceImpl implements MypageService{
 //   public List<Map<String, Object>> getInquiryReference(String userId) {
 //      return null;
 //   }
+=======
+	@Autowired
+	MypageMapper mypageMapper;
+
+	@Autowired
+	private UserRepository userRepository;
+
+	@Override
+	public List<CourseDTO> getWishList(CourseDTO courseDTO) {
+		// TODO Auto-generated method stub
+		return mypageMapper.getWishList(courseDTO);
+	}
+
+	@Override
+	public List<CourseDTO> getWishCnt(CourseDTO courseDTO) {
+		// TODO Auto-generated method stub
+		return mypageMapper.getWishCnt(courseDTO);
+	}
+
+	@Override
+	public User getUser(String userId) {
+//		User getUser = userrepository.findbyUserId(userId);
+
+		return userRepository.findByUserId(userId);
+	}
+
+
+	@Override
+	public void updateUser(User user) {
+		// TODO Auto-generated method stub
+		userMapper.updateUser(user);
+	}
+>>>>>>> 02cfacf445f3e16f14b9fcc48e37d95c1c51b575
 
    // 유저 정보 수정
    // @Override
@@ -63,6 +97,7 @@ public class MypageServiceImpl implements MypageService{
 //      userRepository.save(user);
 //   }
 
+<<<<<<< HEAD
    // 유저 탈퇴
 //   @Override
 //   public void deleteUser(User user) {
@@ -81,6 +116,33 @@ public class MypageServiceImpl implements MypageService{
       }
    }
    //===========================================================//
+=======
+	// 유저 정보 수정
+	// @Override
+//		public void updateUser(User user) {
+//		 return updateUser;
+//		userRepository.save(user);
+//	}
+
+	// 유저 탈퇴
+//	@Override
+//	public void deleteUser(User user) {
+//		userMapper.deleteUser(user);
+//	}
+
+	// 유저 탈퇴 0922
+	@Override
+	public String deleteUserInfo(String userId) {
+		try {
+			mypageMapper.deleteUserInfo(userId);
+
+			return "sussecc";
+		} catch(Exception e) {
+			return "fail : " + e.getMessage();
+		}
+	}
+	//===========================================================//
+>>>>>>> 02cfacf445f3e16f14b9fcc48e37d95c1c51b575
 
 
 //    @Override
@@ -92,6 +154,7 @@ public class MypageServiceImpl implements MypageService{
 //    public List<Map<String, Object>> getInquiryReference(String userId) {
 //        return mypageMapper.getInquiryReference(userId);
 //    }
+<<<<<<< HEAD
 
 
    //재현
@@ -108,5 +171,23 @@ public class MypageServiceImpl implements MypageService{
       // TODO Auto-generated method stub
       mypageMapper.updateInquiryReference(inquiryDTO);
    }
+=======
+
+
+	//재현
+
+	@Override
+	public List<Map<String, Object>> getInquiryReference(InquiryDTO inquiryDTO) {
+		// TODO Auto-generated method stub
+		return mypageMapper.getInquiryReference(inquiryDTO);
+	}
+
+
+	@Override
+	public void updateInquiryReference(InquiryDTO inquiryDTO) {
+		// TODO Auto-generated method stub
+		mypageMapper.updateInquiryReference(inquiryDTO);
+	}
+>>>>>>> 02cfacf445f3e16f14b9fcc48e37d95c1c51b575
 
 }

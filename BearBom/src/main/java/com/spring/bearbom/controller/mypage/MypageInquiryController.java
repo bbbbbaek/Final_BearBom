@@ -27,13 +27,13 @@ public class MypageInquiryController {
 	
 	
 	//y 인것만 화면에 뿌려주는거 맵퍼를이용한
-	@GetMapping("/getInquiryReference")
+	@GetMapping("/getInquiryReference1")
 	public Map<String, Object> getInquiryReference(InquiryDTO inquiryDTO,@AuthenticationPrincipal String userId){
 		try {
 		inquiryDTO.setUserId(userId);
 		List<Map<String, Object>> getInquiryReference = mypageService.getInquiryReference(inquiryDTO);
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-		resultMap.put("getInquiryReference", getInquiryReference);
+		resultMap.put("getInquiryReference1", getInquiryReference);
 		
 		return resultMap;
 		} catch(Exception e) {

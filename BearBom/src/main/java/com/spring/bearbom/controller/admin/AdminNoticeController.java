@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.bearbom.dto.InquiryDTO;
 import com.spring.bearbom.dto.NoticeDTO;
 import com.spring.bearbom.entity.Notice;
 import com.spring.bearbom.jwt.JwtTokenProvider;
@@ -52,8 +53,7 @@ public class AdminNoticeController {
 		
 		return ResponseEntity.ok().body(noticeDTO);
 		
-		
-		
+	}
 		
 //		Notice rhdwl = noticeService.insertNotice(notice);
 //		
@@ -71,16 +71,16 @@ public class AdminNoticeController {
 //		System.out.println(noticeDTO);
 //		return ResponseEntity.ok().body(noticeDTO);
 		
-	}
+	@PostMapping("/updateNotice")
+	public void updateNotice(@RequestBody NoticeDTO noticeDTO, @AuthenticationPrincipal String userId){	
+		noticeDTO.setUserId(userId);
+		System.out.println("before noticeDTO : " +noticeDTO);
+		noticeService.updateNotice(noticeDTO);
+		System.out.println("after noticeDTO : " +noticeDTO);
 	
-//	@GetMapping("/noticeReference")
-//	public Map<String, Object> noticeReference(NoticeDTO noticeDTO){
-//		try {
-//			
-//		}catch(Exception e) {
-//			Map<String,Object> error = new HashMap<String,Object>();
-//			error.put("error", e.getMessage());
-//			return error;
-//	}
-//}
+	}
+
+	
+	
+	
 }

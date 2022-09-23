@@ -7,9 +7,7 @@
         SELECT A.*
         	FROM T_COURSE_FILE A,
         	T_COURSE B 
-        	WHERE A.COURSE_IDX = #{couseIdx} 
+        	WHERE A.COURSE_IDX = #{courseIdx}
         	AND A.COURSE_IDX = B.COURSE_IDX
     </select>
-    
-    
 </mapper>

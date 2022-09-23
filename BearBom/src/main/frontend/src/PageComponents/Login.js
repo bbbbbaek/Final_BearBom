@@ -17,12 +17,10 @@ import Container from "@mui/material/Container";
 import axios from "axios";
 import { API_BASE_URL } from "../app-config";
 import { useNavigate } from "react-router-dom";
-
+import LoginKaKao from "./JoinComponents/LoginKaKao";
 const Login = () => {
   const navigate = useNavigate();
 
-  // test
-  // test
   // // Cookie 관련 선언
   // const [cookies, setCookie, removeCookie] = useCookies(["rememberUserId"]); // #Cookies 이름
   // const [isRemember, setIsRemember] = useState(false); // #아이디 저장 체크박스 체크 유무
@@ -155,7 +153,7 @@ const Login = () => {
             alert("로그인 되었습니다.");
           } else {
             navigate("/admin");
-            alert("관리자 페이지입니다.");
+            alert("관리자 계정입니다.");
           }
         }
       })
@@ -284,16 +282,7 @@ const Login = () => {
                     ></img>
                   </a>
                 </div>
-                <div className="kakao_login">
-                  <a href="https://accounts.kakao.com/login?continue=https%3A%2F%2Fcs.kakao.com%2Fhelps%3Fcategory%3D166%26locale%3Dko%26service%3D52">
-                    <img
-                      src={require("../img/kakao_login.png")}
-                      height="50"
-                      width="50"
-                      alt="kakao"
-                    ></img>
-                  </a>
-                </div>
+                <LoginKaKao></LoginKaKao>
                 <div className="naver_login">
                   <a href="https://nid.naver.com/nidlogin.login">
                     <img

@@ -23,4 +23,9 @@ public interface CourseMapper {
 
 	int getNextFileIdx(int courseIdx);
 
+	void updateCourseUseYnByDay();
+
+	void setSqlSafe();
+
+	List<Map<String, Object>> getTakenClassList(String userId);
 }

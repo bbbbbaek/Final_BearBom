@@ -42,6 +42,7 @@
     
      <update id="updateInquiryReference" parameterType="com.spring.bearbom.dto.InquiryDTO">
     <![CDATA[
+<<<<<<< HEAD
        UPDATE T_INQUIRY 
           SET INQUIRY_USE_YN = "N" 
           WHERE USER_ID = #{userId} 
@@ -49,3 +50,13 @@
     ]]>
     </update>
 </mapper>
+=======
+    	UPDATE T_INQUIRY 
+    		SET INQUIRY_USE_YN = "N" 
+    		WHERE USER_ID = #{userId} 
+    		  AND INQUIRY_IDX = #{inquiryIdx}
+    ]]>
+    </update>
+</mapper>
+
+>>>>>>> 02cfacf445f3e16f14b9fcc48e37d95c1c51b575

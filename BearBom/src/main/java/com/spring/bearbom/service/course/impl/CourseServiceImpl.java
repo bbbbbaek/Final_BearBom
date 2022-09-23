@@ -87,4 +87,20 @@ public class CourseServiceImpl implements CourseService {
 		return newCourseFileIdx;
 	}
 
+	@Override
+	public void updateCourseUseYnByDay() {
+		
+		courseMapper.updateCourseUseYnByDay();
+		
+	}
+
+	@Override
+	public void setSqlSafe() {
+		courseMapper.setSqlSafe();
+		
+	}
+	@Override
+	public List<Map<String, Object>> getTakenClassList(String userId){
+		return courseMapper.getTakenClassList(userId);
+	}
 }

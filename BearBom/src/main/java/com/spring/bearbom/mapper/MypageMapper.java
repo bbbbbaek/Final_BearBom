@@ -19,11 +19,20 @@ public interface MypageMapper {
    
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 02cfacf445f3e16f14b9fcc48e37d95c1c51b575
     // 유저 탈퇴 Y->N 0922
     void deleteUserInfo(String userId);
 
     //재현
     List<Map<String, Object>> getInquiryReference(InquiryDTO inquiryDTO);
 
+<<<<<<< HEAD
     void updateInquiryReference(InquiryDTO inquiryDTO);
 }
+=======
+	void updateInquiryReference(InquiryDTO inquiryDTO);
+}
+>>>>>>> 02cfacf445f3e16f14b9fcc48e37d95c1c51b575

@@ -24,9 +24,14 @@
 	<!-- 관리자페이지 일대일문의 삭제하는 쿼리문 -->
 	<update id="updateInquiryReference" parameterType="com.spring.bearbom.dto.InquiryDTO">
     <![CDATA[
-    UPDATE T_INQUIRY SET INQUIRY_USE_YN = "N" WHERE USER_ID = #{userId} AND INQUIRY_IDX = #{inquiryIdx}
+    UPDATE T_INQUIRY 
+    SET INQUIRY_USE_YN = "N" 
+    WHERE INQUIRY_IDX = #{inquiryIdx}
     ]]>
     </update>
+    
+    
+    
 
     <!-- 관리자페이지 내 공지사항 삭제 쿼리   
     <update id="ddddd" parameterType="com.spring.bearbom.dto.NoticeDTO" >
