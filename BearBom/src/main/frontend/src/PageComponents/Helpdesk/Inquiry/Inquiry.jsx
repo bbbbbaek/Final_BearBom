@@ -3,26 +3,41 @@ import { useNavigate } from "react-router-dom";
 import "./inquiry.scss";
 import axios from "axios";
 import { API_BASE_URL } from "../../../app-config";
+import { useEffect } from "react";
 
 const Inquiry = () => {
   const navigate = useNavigate();
   const [inquiryInfo, setInquiryInfo] = useState({ inquirySort: "user" });
+  const [test, setTest] = useState();
+  const sortRef = useRef();
+  const titleRef = useRef();
+  const contentRef = useRef();
 
   const onSubmit = () => {
-    console.log(inquiryInfo);
     axios({
       url: API_BASE_URL + "/api/helpdesk/insertInquiry",
       method: "post",
-      data: inquiryInfo,
+      // data: inquiryInfo,
+      data: {
+        inquirySort: sortRef.current.value,
+        inquiryTitle: titleRef.current.value,
+        inquiryContent: contentRef.current.value,
+      },
       headers: {
         Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
       },
     })
-      .then(console.log("success"))
+      .then(() => {
+        alert("문의 등록이 완료되었습니다.");
+        navigate("/helpdesk");
+      })
       .catch((e) => {
         console.log(e);
       });
   };
+  useEffect(() => {
+    console.log("useEffect");
+  }, [test]);
 
   const handleChange = (e) => {
     console.log(e.target.name);
@@ -41,16 +56,17 @@ const Inquiry = () => {
           <strong>1:1문의</strong>
         </h5>
         <hr />
-        <button
+        {/* <button
           onClick={() => {
-            navigate("payment");
+            // navigate("payment");
+            console.log(test);
           }}
         >
           payment
-        </button>
+        </button> */}
         <div className="body1">
           {/* <form action="/action_page.php" method="post"> */}
-          <label for="email">이메일</label>
+          {/* <label for="email">이메일</label>
           <input
             className="input"
             type="text"
@@ -59,15 +75,16 @@ const Inquiry = () => {
             placeholder="답변 받으실 이메일 주소를 입력해주세요"
             value={inquiryInfo.inquiryEmail}
             onChange={handleChange}
-          />
+          /> */}
 
           <label for="sort">문의종류</label>
           <select
             id="sort"
             name="inquirySort"
             className="input"
-            value={inquiryInfo.inquirySort}
-            onChange={handleChange}
+            // value={inquiryInfo.inquirySort}
+            // onChange={handleChange}
+            ref={sortRef}
           >
             <option value="user">로그인/회원가입</option>
             <option value="payment">결제</option>
@@ -81,8 +98,9 @@ const Inquiry = () => {
             type="text"
             name="inquiryTitle"
             placeholder="제목을 입력해주세요."
-            value={inquiryInfo.inquiryTitle}
-            onChange={handleChange}
+            // value={inquiryInfo.inquiryTitle}
+            // onChange={handleChange}
+            ref={titleRef}
           />
           <label for="content">내용</label>
           <textarea
@@ -90,8 +108,9 @@ const Inquiry = () => {
             name="inquiryContent"
             cols="50"
             rows="10"
-            value={inquiryInfo.inquiryContent}
-            onChange={handleChange}
+            // value={inquiryInfo.inquiryContent}
+            // onChange={handleChange}
+            ref={contentRef}
           ></textarea>
 
           <input

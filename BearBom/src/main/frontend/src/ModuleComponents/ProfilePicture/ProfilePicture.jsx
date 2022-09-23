@@ -1,21 +1,35 @@
 import React, { useState } from "react";
 import "./profilepicture.scss";
 import adminProfileImage from "../../images/adminProfileImage.png";
+import unknownUser from "../../images/unknownUser.png";
+import { onRequest } from "../../ModuleComponents/UsefulFunctions/ApiService";
 
-const ProfilePicture = () => {
+const ProfilePicture = ({ pictureData }) => {
   const [fileImage, setFileImage] = useState(adminProfileImage);
   const saveFileImage = (e) => {
     setFileImage(URL.createObjectURL(e.target.files[0]));
+    const fileData = URL.createObjectURL(e.target.files[0]);
     console.log(fileImage);
+
+    // 서버에 업로드한 이미지 post하는 코드 필요
+
+    onRequest("/api/mypage/updateUserPhoto", "post", fileData);
   };
   return (
     <>
       <div className="profilePicture">
         <div className="wrapper1">
-          <div
-            className="picture"
-            style={{ backgroundImage: `url(${fileImage})` }}
-          ></div>
+          {pictureData ? (
+            <div
+              className="picture"
+              style={{ backgroundImage: `url(${fileImage})` }}
+            ></div>
+          ) : (
+            <div
+              className="picture"
+              style={{ backgroundImage: `url(${fileImage})` }}
+            ></div>
+          )}
 
           <input
             accept="image/*"

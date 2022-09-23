@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useRef } from "react";
-import { onRequest } from "../ApiService";
+import { onRequest } from "../../ModuleComponents/UsefulFunctions/ApiService";
 import "./boardwrite.scss";
 
 const BoardWrite = () => {

@@ -8,14 +8,14 @@ import { API_BASE_URL } from "../../../app-config";
 import { Outlet } from "react-router-dom";
 
 const Mypage = () => {
-  const [statusData, setStatusData] = useState();
-  let URL1 =
-    "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Course";
-  let URL2 =
-    "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Order";
-  let URL3 =
-    "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Inquiry";
-  const [fetchedData, setFetchedData] = useState();
+  // 아래 주석 내용은 무시하세요
+
+  // let URL1 =
+  //   "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Course";
+  // let URL2 =
+  //   "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Order";
+  // let URL3 =
+  //   "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Inquiry";
   // useEffect(() => {
   //   const promise1 = axios.get(URL1);
   //   const promise2 = axios.get(URL2);
@@ -28,8 +28,11 @@ const Mypage = () => {
   //   });
   // }, []);
 
-  // 유저 정보
+  const [userData, setUserData] = useState(); // 로그인한 유저 정보
+  const [widgetData, setWidgetData] = useState(); // Widget에 보일 클래스 개수 정보
+
   useEffect(() => {
+    // 유저 정보 - From 백수현
     const promise1 = axios({
       method: "get",
       url: API_BASE_URL + "/api/mypage/getUser",
@@ -37,6 +40,7 @@ const Mypage = () => {
         Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
       },
     });
+    // 위젯 카운트 정보 - From 이종현
     const promise2 = axios({
       method: "get",
       url: API_BASE_URL + "/api/mypage/getMyPageCnt",
@@ -46,27 +50,29 @@ const Mypage = () => {
     });
 
     Promise.all([promise1, promise2]).then((res) => {
-      setFetchedData(res[0].data);
-      setStatusData(res[1].data);
+      setUserData(res[0].data);
+      setWidgetData(res[1].data);
+      console.log(res[0].data);
+      console.log(res[1].data);
     });
   }, []);
 
   return (
     <>
-      {fetchedData && statusData ? (
+      {userData && widgetData ? (
         <div className="mypage_home">
           <div className="banner"></div>
           <div className="body">
-            <Sidebar />
+            <Sidebar userData={userData} />
             <div className="wrapper">
               <div className="quickview">
-                <QuickView type="taking" statusData={statusData} />
-                <QuickView type="taken" statusData={statusData} />
-                <QuickView type="opened" statusData={statusData} />
-                <QuickView type="liked" statusData={statusData} />
+                <QuickView type="taking" widgetData={widgetData} />
+                <QuickView type="taken" widgetData={widgetData} />
+                <QuickView type="opened" widgetData={widgetData} />
+                <QuickView type="liked" widgetData={widgetData} />
               </div>
               <div className="content">
-                <Outlet context={{ fetchedData }} />
+                <Outlet context={{ userData }} />
               </div>
             </div>
           </div>

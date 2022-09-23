@@ -8,13 +8,9 @@ const NoticeMgmt = () => {
   let tableInfo = inquiryItems;
   const [fetchedData, setFetchedData] = useState();
   useEffect(() => {
-    axios
-      .get(
-        "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Notice"
-      )
-      .then((res) => {
-        setFetchedData(res.data);
-      });
+    axios.get(API_BASE_URL + "/api/helpdesk/getNoticeList").then((res) => {
+      setFetchedData(res.data);
+    });
   }, []);
 
   return (

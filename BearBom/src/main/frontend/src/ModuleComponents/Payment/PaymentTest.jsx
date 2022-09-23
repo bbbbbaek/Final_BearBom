@@ -1,6 +1,6 @@
 import React from "react";
 
-function PaymentTest() {
+const PaymentTest = () => {
   function onClickPayment() {
     /* 1. 가맹점 식별하기 */
     const { IMP } = window;
@@ -8,7 +8,7 @@ function PaymentTest() {
 
     /* 2. 결제 데이터 정의하기 */
     const data = {
-      pg: "html5_inicis", // PG사
+      pg: "nictest00m", // PG사
       pay_method: "card", // 결제수단
       merchant_uid: `mid_${new Date().getTime()}`, // 주문번호
       amount: 1000, // 결제금액
@@ -34,8 +34,13 @@ function PaymentTest() {
       alert(`결제 실패: ${error_msg}`);
     }
   }
-
-  return <button onClick={onClickPayment}>결제하기</button>;
-}
+  return (
+    <>
+      <div className="">
+        <button onClick={onClickPayment}>결제하기</button>
+      </div>
+    </>
+  );
+};
 
 export default PaymentTest;
