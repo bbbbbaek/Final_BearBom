@@ -10,7 +10,7 @@ const Notice = () => {
   const [fetchedData, setFetchedData] = useState();
   useEffect(() => {
     axios
-      .post(API_BASE_URL + "/api/helpdesk/getNoticeList")
+      .get(API_BASE_URL + "/api/helpdesk/getNoticeList")
       .then((res) => {
         setFetchedData(res.data);
       })
