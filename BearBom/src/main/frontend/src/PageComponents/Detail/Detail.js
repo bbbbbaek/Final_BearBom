@@ -116,6 +116,7 @@ const Detail = ({ scrollTop }) => {
       url: API_BASE_URL + "/api/course/writeReview",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+        //"Content-Type" : "multipart/form-data"
       },
       data: reviewInfo,
     }).then((response) => {
@@ -163,11 +164,14 @@ const Detail = ({ scrollTop }) => {
       localStorage.setItem("data", JSON.stringify(get_local));
     }
   }, [course]);
+<<<<<<< HEAD
+=======
 
   // React.useEffect(() => {
   //   let get_local = localStorage.getItem("data");
   //   if (location.state) setCourseInfo(location.state.courseInfo);
   //   else setCourseInfo(course);
+>>>>>>> 02cfacf445f3e16f14b9fcc48e37d95c1c51b575
 
   //   if (get_local == null) {
   //     get_local = [];
