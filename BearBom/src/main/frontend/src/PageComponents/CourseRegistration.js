@@ -58,7 +58,7 @@ const theme = createTheme({
 });
 
 const CourseRegistration = () => {
-  const navigete = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const accessToken = localStorage.getItem("ACCESS_TOKEN");
@@ -68,7 +68,7 @@ const CourseRegistration = () => {
       accessToken === "" ||
       typeof accessToken === "undefined"
     ) {
-      navigete("/login");
+      navigate("/login");
     }
   }, []);
 
@@ -120,10 +120,16 @@ const CourseRegistration = () => {
           "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
         },
       })
-        .then((response) => {})
+        .then((response) => {
+          //등록이 완료되면
+          alert("클래스 등록이 완료되었습니다. \n관리자 승인 후 게시됩니다.")
+          navigate("/")
+        })
         .catch((e) => {
           console.log(e);
+          alert("등록에 실패하였습니다. \n빈 항목이 있는지 확인해 주세요.")
         });
+      
   };
 
   const handleStepPlus = () => {
