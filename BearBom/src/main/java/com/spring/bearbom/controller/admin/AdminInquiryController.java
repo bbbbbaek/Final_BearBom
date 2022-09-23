@@ -51,7 +51,7 @@ public class AdminInquiryController {
 	
 	
 	
-	@PostMapping("updateInquiry")
+	@PostMapping("/updateInquiry")
 	public void updateInquiry(@RequestBody InquiryDTO inquiryDTO){	
 		
 		System.out.println("before inquiryDTO : " +inquiryDTO);

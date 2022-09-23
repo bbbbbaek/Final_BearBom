@@ -39,7 +39,7 @@ public class AdminFaqController {
 	}
 	
 	//y를 n으로 바꾸는 update
-	@PostMapping("updateFaq")
+	@PostMapping("/updateFaq")
 	public void updateFaq(@RequestBody GuideDTO guideDTO){	
 		
 		System.out.println("before inquiryDTO : " +guideDTO);
