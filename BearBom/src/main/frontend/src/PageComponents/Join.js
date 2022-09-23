@@ -715,46 +715,12 @@ const Join = () => {
               >
                 회원가입
               </Button>
-
-              <hr />
-
-              <div className="easy_login_name">간편 로그인</div>
-              <br />
-              <div className="easy_login">
-                <div className="google_login">
-                  <a href="https://accounts.google.com/ServiceLogin/identifier?service=accountsettings&continue=https%3A%2F%2Fmyaccount.google.com%3Futm_source%3Daccount-marketing-page%26utm_medium%3Dgo-to-account-button&flowName=GlifWebSignIn&flowEntry=ServiceLogin">
-                    <img
-                      src={require("../img/google_login.png")}
-                      width="50"
-                      height="50"
-                      alt="t"
-                    ></img>
-                  </a>
-                </div>
-                <div className="kakao_login">
-                  <a href="https://accounts.kakao.com/login?continue=https%3A%2F%2Fcs.kakao.com%2Fhelps%3Fcategory%3D166%26locale%3Dko%26service%3D52">
-                    <img
-                      src={require("../img/kakao_login.png")}
-                      width="50"
-                      height="50"
-                      alt="t"
-                    ></img>
-                  </a>
-                </div>
-                <div className="naver_login">
-                  <a href="https://nid.naver.com/nidlogin.login">
-                    <img
-                      src={require("../img/naver_login.png")}
-                      width="50"
-                      height="50"
-                      alt="t"
-                    ></img>
-                  </a>
-                </div>
-              </div>
             </Box>
           </Box>
         </form>
+        <br></br>
+        <br></br>
+        <br></br>
       </Container>
     </>
   );
