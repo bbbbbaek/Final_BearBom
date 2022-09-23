@@ -113,4 +113,25 @@
         AND B.ORDER_USE_YN = 'Y'
         AND A.COURSE_IDX = B.COURSE_IDX;
     </select>
+    
+    <!-- 모든 클래스 조회 -->
+    <select id="getAllCourseList" resultType="camelHashMap">
+    	SELECT *
+    		FROM T_COURSE
+    </select>
+    
+    <!-- 클래스 승인 처리 -->
+    <update id="updateCourseStatus" parameterType="map">
+    	UPDATE T_COURSE
+    		SET COURSE_USE_YN = 'Y'
+    		WHERE COURSE_IDX = #{courseIdx}
+    </update>
+    
+    <!-- 게시물 삭제 처리 -->
+    <update id="deleteCourseStatus" parameterType="map">
+    	UPDATE T_COURSE
+    		SET COURSE_USE_YN = 'N'
+    		WHERE COURSE_IDX = #{courseIdx}
+    </update>
+    
 </mapper>

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.spring.bearbom.entity.Course;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Mapper
 public interface CourseMapper {
@@ -28,4 +29,10 @@ public interface CourseMapper {
 	void setSqlSafe();
 
 	List<Map<String, Object>> getTakenClassList(String userId);
+	
+	List<Map<String, Object>> getAllCourseList();
+	
+	void updateCourseStatus(@RequestBody Map<String, Object> paramMap);
+	
+	void deleteCourseStatus(@RequestBody Map<String, Object> paramMap);
 }
