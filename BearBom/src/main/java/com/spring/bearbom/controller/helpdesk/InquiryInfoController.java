@@ -32,7 +32,7 @@ public class InquiryInfoController {
 	@Autowired
 	private JwtTokenProvider jwtTokenProvider;
 	
-	
+	//
 	//백단으로 보내서 저장시키는것
 	@PostMapping("/insertInquiry")
 	public ResponseEntity<?> insertInquiry(@RequestBody Inquiry inquiry,@AuthenticationPrincipal String userId){
@@ -52,6 +52,14 @@ public class InquiryInfoController {
 		inquiryDTO.setInquirySort(inquiry.getInquirySort());
 		inquiryDTO.setInquiryTitle(inquiry.getInquiryTitle());
 		inquiryDTO.setInquiryContetnt(inquiry.getInquiryContent());
+		inquiryDTO.setInquiryUseYn(inquiry.getInquiryUseYn());
+		inquiryDTO.setInquiryYn(inquiry.getInquiryYn());
+		inquiryDTO.setInquiryRegdate(inquiry.getInquiryRegdate());
+//		inquiryDTO.setReplyRegdate(inquiry.getReplyRegdate());
+//		inquiryDTO.setReplyYn(inquiry.getReplyYn());
+//		inquiryDTO.setReplyTitle(inquiry.getReplyTitle());
+//		inquiryDTO.setReplyContent(inquiry.getReplyContent());
+		
 		inquiryDTO.setUserId(userId);
 		
 		inquiryInfoService.insertInquiry(inquiryDTO);
