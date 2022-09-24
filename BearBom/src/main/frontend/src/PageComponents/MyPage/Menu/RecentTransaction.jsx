@@ -10,7 +10,14 @@ const RecentTransaction = () => {
   let tableInfo = recentTransactionItems;
   const [fetchedData, setFetchedData] = useState();
   useEffect(() => {
-    axios.get(API_BASE_URL + "/api/mypage/getUser").then((res) => {
+    axios({
+      method: "get",
+      // url: API_BASE_URL + /api/mypage/getRecentTransaction,
+      url: "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Order",
+      // headers: {
+      //   Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+      // },
+    }).then((res) => {
       setFetchedData(res.data);
     });
   }, []);
