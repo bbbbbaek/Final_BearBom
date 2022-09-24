@@ -8,13 +8,12 @@ import { useEffect } from "react";
 const Inquiry = () => {
   const navigate = useNavigate();
   const [inquiryInfo, setInquiryInfo] = useState({ inquirySort: "user" });
-  const [test, setTest] = useState();
   const sortRef = useRef();
   const titleRef = useRef();
   const contentRef = useRef();
 
-  const onSubmit = () => {
-    axios({
+  const onSubmit = async () => {
+    await axios({
       url: API_BASE_URL + "/api/helpdesk/insertInquiry",
       method: "post",
       // data: inquiryInfo,
@@ -29,15 +28,12 @@ const Inquiry = () => {
     })
       .then(() => {
         alert("문의 등록이 완료되었습니다.");
-        navigate("/helpdesk");
+        navigate("/mypage/inquiry");
       })
       .catch((e) => {
         console.log(e);
       });
   };
-  useEffect(() => {
-    console.log("useEffect");
-  }, [test]);
 
   const handleChange = (e) => {
     console.log(e.target.name);

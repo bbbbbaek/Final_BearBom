@@ -3,19 +3,24 @@ import "./takenclassview.scss";
 import Table from "../../../ModuleComponents/Table/Table";
 import { takenClassItems } from "../../../customHooks/createItems";
 import axios from "axios";
+import { API_BASE_URL } from "../../../app-config";
 
 const TakenClassView = () => {
   let tableInfo = takenClassItems;
   const [fetchedData, setFetchedData] = useState();
   useEffect(() => {
-    axios
-      .get(
-        "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Order"
-      )
+    axios({
+      method: "get",
+      url: API_BASE_URL + "/api/course/getTakenClassList",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+      },
+    })
       .then((res) => {
-        console.log(res.data);
-        setFetchedData(res.data);
-      });
+        console.log(...Object.values(res.data));
+        setFetchedData(...Object.values(res.data));
+      })
+      .catch((err) => err);
   }, []);
 
   return (
