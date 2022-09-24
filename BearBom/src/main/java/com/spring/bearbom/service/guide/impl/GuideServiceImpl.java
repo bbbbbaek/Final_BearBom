@@ -47,6 +47,14 @@ public class GuideServiceImpl implements GuideService{
 		faqMApper.updateFaq(guideDTO);
 	}
 
+
+	@Override
+	public void mdfFaq(GuideDTO guideDTO) {
+		faqMApper.mdfFaq(guideDTO);
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 
 	

@@ -3,7 +3,6 @@ package com.spring.bearbom.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,6 +47,12 @@ public class AdminFaqController {
 	
 	}
 	
+	//게시글수정 정보
+	
+	@PostMapping("/mdfFaq")
+	public void mdfFaq(@RequestBody GuideDTO guideDTO) {
+		guideService.mdfFaq(guideDTO);
+	}
 	
 	
 	

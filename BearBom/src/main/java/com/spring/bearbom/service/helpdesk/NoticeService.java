@@ -13,4 +13,6 @@ public interface NoticeService {
 
 	void updateNotice(NoticeDTO noticeDTO);
 
+	void mdfNotice(NoticeDTO noticeDTO);
+
 }

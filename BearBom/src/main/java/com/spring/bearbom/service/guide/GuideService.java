@@ -18,6 +18,9 @@ public interface GuideService {
 	void updateFaq(GuideDTO guideDTO);
 
 
+	void mdfFaq(GuideDTO guideDTO);
+
+
 	
 
 }

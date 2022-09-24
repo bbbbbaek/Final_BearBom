@@ -17,6 +17,8 @@ public interface FaqMapper {
 
 	@Update("update t_guide set guide_use_yn ='N' where GUIDE_IDX = #{guideIdx}")
 	void updateFaq(GuideDTO guideDTO);
-	
-	
+
+	//수정 정보저장
+	@Update("update t_guide set guide_title = #{guideTitle} guide_content = #{guideContent} where GUIDE_IDX = #{guideIdx}")
+	void mdfFaq(GuideDTO guideDTO);
 }
