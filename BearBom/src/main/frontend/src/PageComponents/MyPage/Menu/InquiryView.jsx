@@ -15,15 +15,10 @@ const InquiryView = () => {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
       },
-    })
-      // .get(
-      //   // "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Inquiry"
-      //   "http://localhost:8080/api/mypage/getInquiryReference1"
-      // )
-      .then((res) => {
-        console.log(Object.values(res.data)[0]);
-        setFetchedData(Object.values(res.data)[0]);
-      });
+    }).then((res) => {
+      console.log(Object.values(res.data)[0]);
+      setFetchedData(Object.values(res.data)[0]);
+    });
   }, []);
 
   return (

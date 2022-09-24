@@ -4,18 +4,24 @@ import useFetch from "../../../customHooks/useFetch";
 import Table from "../../../ModuleComponents/Table/Table";
 import { openedClassItems } from "../../../customHooks/createItems";
 import axios from "axios";
+import { API_BASE_URL } from "../../../app-config";
 
 const OpenedClassView = () => {
   let tableInfo = openedClassItems;
   const [fetchedData, setFetchedData] = useState();
   useEffect(() => {
-    axios
-      .get(
-        "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Course"
-      )
+    axios({
+      method: "get",
+      url: API_BASE_URL + "/api/course/getMyOpenedClassList",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+      },
+    })
       .then((res) => {
-        setFetchedData(res.data);
-      });
+        console.log(...Object.values(res.data));
+        setFetchedData(...Object.values(res.data));
+      })
+      .catch((err) => err);
   }, []);
 
   return (
@@ -26,7 +32,7 @@ const OpenedClassView = () => {
         </h5>
         <hr />
         {fetchedData ? (
-          <Table tableInfo={tableInfo} fetchedData={fetchedData} />
+          <Table tableInfo={tableInfo} fetchedData={fetchedData} imageYn="Y" />
         ) : null}
       </div>
     </>

@@ -12,7 +12,7 @@ const Notice = () => {
     axios
       .get(API_BASE_URL + "/api/helpdesk/getNoticeList")
       .then((res) => {
-        setFetchedData(res.data);
+        setFetchedData(res.data.data);
       })
       .catch((err) => {
         console.log(err);

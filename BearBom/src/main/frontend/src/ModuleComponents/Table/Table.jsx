@@ -8,9 +8,10 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import excelDownload from "../../images/excelDownload.png";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../../app-config";
 
 // TableMenuItems 객체로 생성한 tableItems state를 사용하여 각 컴포넌트에 알맞은 데이터를 출력할 수 있도록 설계
-const Table = ({ tableInfo, fetchedData }) => {
+const Table = ({ tableInfo, fetchedData, imageYn }) => {
   // const [please, setPlease] = useState(fetchedData);
   const sortedData = [...fetchedData].sort(
     (a, b) => b[Object.keys(b)[0]] - a[Object.keys(a)[0]]
@@ -82,11 +83,21 @@ const Table = ({ tableInfo, fetchedData }) => {
   };
 
   // 테이블에 클래스 추가해주는 함수
-  function insertClass(index) {
+  const insertClass = (index) => {
     return "column " + tableInfo[index].prop;
-  }
+  };
 
-  // 테이블 헤드 반환하는 함수
+  // 테이블에 이미지(Thumb)가 포함되어 있는지 확인하는 함수
+  const checkIfThumbnailExists = (text) => {
+    let result;
+    for (let i = 0; i < tableInfo.length; i++) {
+      const [test] = [tableInfo[i].cell];
+      if (test.includes(text)) result = "Y";
+    }
+    return result;
+  };
+
+  // 테이블 헤드 반환하는 함수 (Row)
   const insertTH = (tableInfo) => {
     let tableItem = [];
     for (let i = 0; i < tableInfo.length; i++) {
@@ -95,7 +106,22 @@ const Table = ({ tableInfo, fetchedData }) => {
     return tableItem;
   };
 
-  // 테이블 바디 반환하는 함수
+  // 테이블 바디 반환하는 함수 (Row)
+  const insertTDT = (tableInfo, element) => {
+    let tableItem = [];
+    for (let i = 0; i < tableInfo.length; i++) {
+      tableItem.push(
+        <td
+          className={insertClass(i)}
+          onClick={() => {
+            moveToBoard(element);
+          }}
+        >
+          {API_BASE_URL + "upload" + element[tableInfo[i].cell]}
+        </td>
+      );
+    }
+  };
   const insertTD = (tableInfo, element) => {
     let tableItem = [];
     for (let i = 0; i < tableInfo.length; i++) {
@@ -110,6 +136,7 @@ const Table = ({ tableInfo, fetchedData }) => {
         </td>
       );
     }
+
     return tableItem;
   };
 
@@ -119,8 +146,6 @@ const Table = ({ tableInfo, fetchedData }) => {
           해당 조건을 주지 않으면, 데이터를 받아오기 전에 fetchData는 배열이 아니기 때문에 아래 식들에서 오류가 남 */}
       {fetchedData ? (
         <>
-          {/* <div>{fetchedData[0].tableData[0]}</div> */}
-          {/* <div>{fetchedData[0][tableData[0]]}</div> */}
           <div className="table_home">
             <div className="top1">
               <div className="search">
@@ -157,14 +182,20 @@ const Table = ({ tableInfo, fetchedData }) => {
             </div>
             <div className="center">
               <table>
-                {/* 테이블 헤드 부분 */}
+                {/* 테이블 헤드 부분 (Column) */}
                 <tr className="row_title">{insertTH(tableInfo)}</tr>
 
-                {/* 테이블 바디 부분 */}
+                {/* 테이블 바디 부분 (Column) */}
                 {currentPageData.map((a, i) => {
                   return (
                     <tr className="row_data" key={i}>
-                      {insertTD(tableInfo, a)}
+                      {/* 조건을 여기에 주면 안될 것 같음 */}
+                      {
+                        // checkIfThumbnailExists("Thumb")
+                        //   ? insertTDT(tableInfo, a)
+                        //   :
+                        insertTD(tableInfo, a)
+                      }
                     </tr>
                   );
                 })}
