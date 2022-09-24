@@ -226,8 +226,9 @@ public class MypageController {
 	}
 
 	// 회원 프로필 사진 변경
+	// 주의 : 파일 한개만 가져올 때는 axios contextType이 "multipart/form-data"라도 MultipartHttpServletRequest 사용안함
 	@PostMapping("/updateUserPhoto")
-	public void updateUserPhoto(// MultipartHttpServletRequest multiPartHttpServletRequest,
+	public void updateUserPhoto(
 			@RequestParam Map<String, Object> paramMap, HttpServletRequest request,
 			@AuthenticationPrincipal String userId) throws IllegalStateException, IOException {
 		System.out.println(paramMap);
@@ -247,7 +248,10 @@ public class MypageController {
 
 		Iterator<String> iterator = multiPartHttpServletRequest.getFileNames();
 		System.out.println(multiPartHttpServletRequest.getFileNames());
-
+		System.out.println(iterator.hasNext());
+		
+		//최초 마이페이지 로딩시 에러 방지
+		if(iterator.hasNext()) {
 		while (iterator.hasNext()) {
 			List<MultipartFile> list = multiPartHttpServletRequest.getFiles(iterator.next());
 
@@ -277,7 +281,8 @@ public class MypageController {
 
 		// 사진 업데이트
 		System.out.println(user);
-		//userService.updateUserPhoto(user);
+		userService.updateUserPhoto(user);
+		}
 
 		//프로필 사진 업데이트 끝
 
