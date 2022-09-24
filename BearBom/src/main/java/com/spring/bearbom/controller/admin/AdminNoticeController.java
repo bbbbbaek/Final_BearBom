@@ -80,6 +80,11 @@ public class AdminNoticeController {
 	
 	}
 	
+	//정보 수정
+	@PostMapping("/mdfNotice")
+	public void mdfNotice(@RequestBody NoticeDTO noticeDTO) {
+		noticeService.mdfNotice(noticeDTO);
+	}
 
 
 	

@@ -15,7 +15,9 @@ import { useNavigate } from "react-router-dom";
 const Sidebar = ({ userData }) => {
   const navigate = useNavigate();
   const onNavigate = (e) => {
+    e.stopPropagation();
     navigate(e.target.id);
+    console.log("navigate");
   };
   return (
     <>
@@ -34,39 +36,39 @@ const Sidebar = ({ userData }) => {
               <p className="title">Main</p>
               <li id="" onClickCapture={onNavigate}>
                 <HomeIcon className="icon" />
-                <span>메인메뉴</span>
+                <span id="">메인메뉴</span>
               </li>
               <p className="title">Course</p>
-              <li id="course/user" onClickCapture={onNavigate}>
+              <li id="course/user" onClick={onNavigate}>
                 <ContentPasteSearchOutlinedIcon className="icon" />
-                <span>수강 클래스 조회</span>
+                <span id="course/user">수강 클래스 조회</span>
               </li>
-              <li id="course/lecturer" onClickCapture={onNavigate}>
+              <li id="course/lecturer" onClick={onNavigate}>
                 <ContentPasteSearchOutlinedIcon className="icon" />
-                <span>개설 클래스 조회</span>
+                <span id="course/lecturer">개설 클래스 조회</span>
               </li>
               <p className="title">User</p>
               <li id="info/user" onClickCapture={onNavigate}>
                 <AccountCircleOutlinedIcon className="icon" />
-                <span>개인 정보 수정</span>
+                <span id="info/user">개인 정보 수정</span>
               </li>
               <li id="info/lecturer" onClickCapture={onNavigate}>
                 <AccountCircleOutlinedIcon className="icon" />
-                <span>강사 프로필 수정</span>
+                <span id="info/lecturer">강사 프로필 수정</span>
               </li>
               <p className="title">Inquiry</p>
               <li id="inquiry/view" onClickCapture={onNavigate}>
                 <Inventory2OutlinedIcon className="icon" />
-                <span>문의 내역 조회</span>
+                <span id="inquiry/view">문의 내역 조회</span>
               </li>
               <li id="inquiry" onClickCapture={onNavigate}>
                 <NotificationsOutlinedIcon className="icon" />
-                <span>문의하기</span>
+                <span id="inquiry">문의하기</span>
               </li>
               <p className="title">Wishlist</p>
               <li id="wishlist" onClickCapture={onNavigate}>
                 <FavoriteBorderOutlinedIcon className="icon" />
-                <span>찜한 클래스 조회</span>
+                <span id="wishlist">찜한 클래스 조회</span>
               </li>
             </ul>
           </div>

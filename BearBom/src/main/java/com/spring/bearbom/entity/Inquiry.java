@@ -22,8 +22,8 @@ public class Inquiry {
         @Id
         private int inquiryIdx;
 
-        @Column(nullable = false, columnDefinition = "varchar(100)")
-        private String inquiryEmail;
+//        @Column(nullable = false, columnDefinition = "varchar(100)")
+//        private String inquiryEmail;
 
         @Column(nullable = false, columnDefinition = "varchar(100)")
         private String inquirySort;

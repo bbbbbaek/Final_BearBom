@@ -13,7 +13,7 @@ export class Data {
 export const noticeItems = [
   new Data("번호", "l10", "noticeIdx"),
   new Data("제목", "l40", "noticeTitle"),
-  new Data("작성자", "l10", "user"),
+  // new Data("작성자", "l10", "user"),
   new Data("작성일", "l10", "noticeRegdate"),
   new Data("조회수", "l10", "noticeMdfdate"),
 ];
@@ -47,19 +47,19 @@ export const recentTransactionItems = [
 // 수강 클래스 조회
 export const takenClassItems = [
   new Data("강의번호", "l10", "courseIdx"),
-  new Data("", "l10", "courseImage"),
-  new Data("강의명", "l40", "courseTitle"),
-  new Data("강사명", "l10", "user"),
-  new Data("구매일", "l10", "orderDate"),
-  new Data("상태", "l10", "status"), // 없음
+  new Data("", "l20", "courseThumbnailOrgNm"),
+  new Data("강의명", "l40", "courseNm"),
+  new Data("강사명", "l10", "courseRegdate"),
+  new Data("구매일", "l10", "courseRegdate"),
+  new Data("상태", "l10", "courseUseYn"), // 없음
 ];
 
 // 개설 클래스 조회
 export const openedClassItems = [
-  new Data("강의번호", "l10", "courseIdx"),
-  new Data("", "l10", "courseImage"),
-  new Data("강의명", "l30", "courseTitle"),
-  new Data("강사명", "l10", "lecturer"),
+  new Data("뮻", "l10", "courseIdx"),
+  new Data("이미지", "l30", "courseThumbnailOrgNm"),
+  new Data("강의명", "l30", "courseNm"),
+  // new Data("강사명", "l10", "user"),
   new Data("개설일", "l10", "courseRegdate"), // 없음
   new Data("시작일", "l10", "courseStDate"),
   new Data("종료일", "l10", "courseEndDate"),

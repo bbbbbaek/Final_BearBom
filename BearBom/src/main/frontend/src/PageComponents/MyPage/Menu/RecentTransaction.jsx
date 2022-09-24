@@ -4,18 +4,15 @@ import "./recenttransaction.scss";
 import useFetch from "../../../customHooks/useFetch";
 import { Data, recentTransactionItems } from "../../../customHooks/createItems";
 import axios from "axios";
+import { API_BASE_URL } from "../../../app-config";
 
 const RecentTransaction = () => {
   let tableInfo = recentTransactionItems;
   const [fetchedData, setFetchedData] = useState();
   useEffect(() => {
-    axios
-      .get(
-        "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Order"
-      )
-      .then((res) => {
-        setFetchedData(res.data);
-      });
+    axios.get(API_BASE_URL + "/api/mypage/getUser").then((res) => {
+      setFetchedData(res.data);
+    });
   }, []);
 
   return (

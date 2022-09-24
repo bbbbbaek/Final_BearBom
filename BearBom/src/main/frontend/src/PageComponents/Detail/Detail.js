@@ -135,6 +135,7 @@ const Detail = ({ scrollTop }) => {
 
   React.useEffect(() => {
     let get_local = localStorage.getItem("data");
+    console.log(location.state);
     if (location.state) setCourseInfo(location.state.courseInfo);
     else setCourseInfo(course);
 

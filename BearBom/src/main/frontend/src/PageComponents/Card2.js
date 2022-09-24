@@ -103,7 +103,6 @@ const Card2 = ({ endday }) => {
   return (
     <>
       <CardWrapper>
-        {endday.courseIdx}
         <Link to={`/course/${endday.courseIdx}`} state={{ courseInfo: endday }}>
           <ImgContainer>
             <div className="tag">
