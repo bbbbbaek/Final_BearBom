@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/dtd/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.bearbom.mapper.AdminMapper">
+    <select id="totalSales" parameterType="map" resultType="camelHashMap">
+        <![CDATA[
+            SELECT SUM(ORDER_PRI) AS totalSales
+                FROM T_ORDER
+        ]]>
+    </select>
+    <select id="totalOrders" parameterType="map" resultType="camelHashMap">
+        <![CDATA[
+            SELECT COUNT(*) AS totalOrders
+                FROM T_ORDER
+        ]]>
+    </select>
+    <select id="totalUsers" parameterType="map" resultType="camelHashMap">
+        <![CDATA[
+            SELECT COUNT(*) AS totalUsers
+                FROM T_USER
+        ]]>
+    </select>
+    <select id="totalCourses" parameterType="map" resultType="camelHashMap">
+        <![CDATA[
+            SELECT COUNT(*) AS totalCourses
+                FROM T_COURSE
+        ]]>
+    </select>
+    <select id="todaySales" parameterType="map" resultType="camelHashMap">
+        <![CDATA[
+            SELECT SUM(ORDER_PRI) AS todaySales
+                FROM T_ORDER
+                WHERE ORDER_REGDATE
+                    BETWEEN CONCAT(DATE_FORMAT(NOW(), '%Y-%m-%d'), ' 00:00:00')
+                    AND CONCAT(DATE_FORMAT(NOW(), '%Y-%m-%d'), ' 23:59:59')
+                AND ORDER_USE_YN = 'Y'
+        ]]>
+    </select>
+    <select id="orderList" parameterType="map" resultType="camelHashMap">
+        <![CDATA[
+            SELECT * FROM T_ORDER
+        ]]>
+    </select>
+
+</mapper>

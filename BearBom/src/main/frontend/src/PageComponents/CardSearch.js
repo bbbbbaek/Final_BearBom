@@ -106,7 +106,6 @@ const CardSearch = ({ data }) => {
   return (
     <>
       <CardWrapper>
-        {data.courseIdx}
         <Link to={`/course/${data.courseIdx}`} state={{ courseInfo: data }}>
           <ImgContainer>
             {/* <div className="tag">{course.rate}</div> */}
