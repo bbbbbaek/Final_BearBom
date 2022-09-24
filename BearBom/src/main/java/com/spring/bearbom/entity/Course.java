@@ -39,7 +39,7 @@ public class Course {
 //	private String courseOneSeason;
 
 	@Column(nullable = false)
-	private char courseUseYn = 'Y';
+	private char courseUseYn = 'D';
 
 	@Column(nullable = false)
 	private int courseCnt = 0;
