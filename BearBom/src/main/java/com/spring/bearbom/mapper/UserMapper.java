@@ -41,7 +41,7 @@ public interface UserMapper {
     @Select("SELECT USER_PW_FAIL_CNT FROM T_USER WHERE USER_ID=#{userId}")
     int checkFailCnt(String userId);
     
-    @Insert("INSERT INTO T_USER(USER_ID, USER_NM,USER_PW,role,USER_ADDRESS,USER_NICK_NAME,USER_EMAIL,USER_POINT,USER_PW_FAIL_CNT,USER_TEL,USER_YN,USER_ZIPCODE) VALUES (#{userId},#{userNm}, #{userPw}, #{role}, #{userAddress},  #{userNickName}, #{userEmail}, #{userPoint}, #{userPwFailCnt}, #{userTel}, #{userYn}, #{userZipcode})")
+    @Insert("INSERT INTO T_USER(USER_ID, USER_NM,USER_PW,role,USER_ADDRESS,USER_NICK_NAME,USER_EMAIL,USER_POINT,USER_PW_FAIL_CNT,USER_TEL,USER_YN,USER_ZIPCODE) VALUES (#{userId},#{userNm}, #{userPw}, #{role}, #{userAddress}, #{userNickName}, #{userEmail}, #{userPoint}, #{userPwFailCnt}, #{userTel}, #{userYn}, #{userZipcode})")
 //    @Insert("INSERT INTO T_USER VALUES (USER_ID = #{userId}, USER_NM = #{userNm}, USER_PW=#{userPw}, ROLE=#{role}, USER_ADDRESS = #{userAddress}, USER_NICK_NAME = #{userNickName}, USER_EMAIL = #{userEmail}, USER_POINT = #{userPoint}, USER_PW_FAIL_CNT = #{userPwFailCnt}, USER_TEL= #{userTel}, USER_YN = #{userYn}, USER_ZIPCODE = #{userZipcode})")
     void insertUserKakao(UserDTO userDTO);
 
@@ -59,6 +59,8 @@ public interface UserMapper {
 	// admin 유저 탈퇴 시키기
 	@Update("UPDATE T_USER SET USER_YN = 'N' WHERE USER_ID = #{userId}")
 	void adminDeleteUser(Map<String, Object> paramMap);
+
+	void updateUserPhoto(User user);
 
 
 

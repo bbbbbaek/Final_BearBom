@@ -1,6 +1,7 @@
 import React from "react";
 import "./modal.scss";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+
 const Modal = ({ modal, setModal }) => {
   const onSaveChange = () => {
     // 엑시오스 요청
@@ -9,6 +10,7 @@ const Modal = ({ modal, setModal }) => {
   const onCancelChange = () => {
     setModal(false);
   };
+
   return (
     <>
       <div className="modal">

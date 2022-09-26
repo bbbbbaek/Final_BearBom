@@ -47,18 +47,20 @@ public class InquiryInfoController {
 
 		InquiryDTO inquiryDTO = new InquiryDTO();
 
-		inquiryDTO.setInquiryIdx(index);
-//      inquiryDTO.setInquiryEmail(inquiry.getInquiryEmail());
+		
+		inquiryDTO.setInquiryIdx(inquiry.getInquiryIdx());
+//		inquiryDTO.setInquiryEmail(inquiry.getInquiryEmail());
 		inquiryDTO.setInquirySort(inquiry.getInquirySort());
 		inquiryDTO.setInquiryTitle(inquiry.getInquiryTitle());
 		inquiryDTO.setInquiryContetnt(inquiry.getInquiryContent());
 		inquiryDTO.setInquiryUseYn(inquiry.getInquiryUseYn());
 		inquiryDTO.setInquiryYn(inquiry.getInquiryYn());
 		inquiryDTO.setInquiryRegdate(inquiry.getInquiryRegdate());
-//      inquiryDTO.setReplyRegdate(inquiry.getReplyRegdate());
-//      inquiryDTO.setReplyYn(inquiry.getReplyYn());
-//      inquiryDTO.setReplyTitle(inquiry.getReplyTitle());
-//      inquiryDTO.setReplyContent(inquiry.getReplyContent());
+
+		inquiryDTO.setReplyRegdate(inquiry.getReplyRegdate());
+		inquiryDTO.setReplyYn(inquiry.getReplyYn());
+		inquiryDTO.setReplyTitle(inquiry.getReplyTitle());
+		inquiryDTO.setReplyContent(inquiry.getReplyContent());
 
 		inquiryDTO.setUserId(userId);
 

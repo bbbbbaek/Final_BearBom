@@ -270,7 +270,7 @@ const Login = () => {
                   <Link href="PwFind">비밀번호 찾기</Link>
                 </Grid>
                 <Grid item>
-                  <Link href="joinTest">회원가입</Link>
+                  <Link href="join">회원가입</Link>
                 </Grid>
               </Grid>
 
