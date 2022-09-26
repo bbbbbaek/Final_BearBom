@@ -15,7 +15,7 @@ export const noticeItems = [
   new Data("제목", "l40", "noticeTitle"),
   // new Data("작성자", "l10", "user"),
   new Data("작성일", "l10", "noticeRegdate"),
-  new Data("조회수", "l10", "noticeMdfdate"),
+  // new Data("조회수", "l10", "noticeMdfdate"),
 ];
 
 // FAQ - helpdesk 말고 관리자 페이지에서 조회할 때만 사용하기
@@ -139,10 +139,10 @@ export const orderMgmtItems = [
 export const userMgmtItems = [
   new Data("아이디", "l20", "userId"),
   new Data("이름", "l30", "userNm"),
-  new Data("닉네임", "l10", "userNickname"),
+  new Data("닉네임", "l10", "userNickName"),
   new Data("이메일", "l20", "userEmail"),
   new Data("연락처", "l20", "userTel"),
-  new Data("가입일", "l10", "userRegdate"),
+  // new Data("가입일", "l10", "userRegdate"),
 ];
 
 // 강좌 관리

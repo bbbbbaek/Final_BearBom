@@ -120,6 +120,12 @@ public class UserServiceimpl implements UserService {
 		userMapper.adminDeleteUser(paramMap);
 	}
 
+	@Override
+	public void updateUserPhoto(User user) {
+		userMapper.updateUserPhoto(user);
+		
+	}
+
 
 
 	

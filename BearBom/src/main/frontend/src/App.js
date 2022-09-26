@@ -7,6 +7,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./PageComponents/Header";
+import NewHeader from "./PageComponents/Header/NewHeader";
 import Footer from "./PageComponents/Footer";
 import Mainpage from "./PageComponents/Mainpage";
 import Course from "./PageComponents/Course";
@@ -55,13 +56,27 @@ import PayWindow from "./PageComponents/Detail/PayWindow";
 
 import LatestTransaction from "./PageComponents/Admin/Menu/LatestTransaction";
 import BoardWrite from "./ModuleComponents/BoardWrite/BoardWrite";
-import PaymentTest from "./ModuleComponents/Payment/PaymentTest";
+import Payment from "./ModuleComponents/Payment/Payment";
 
 function App() {
+  const [fetchedData, setFetchedData] = useState([
+    {
+      Title: 1,
+      user: 1,
+      Content: 1,
+      Regdate: 1,
+    },
+    {
+      Title: 2,
+      user: 2,
+      Content: 2,
+      Regdate: 2,
+    },
+  ]);
   return (
     <>
-      <Header />
-      <div style={{ paddingTop: "60px" }}>
+      <NewHeader />
+      <div>
         <Routes>
           <Route path="/" element={<Mainpage />} />
           <Route path="/oauth/kakao" element={<RedirectForKakao />} />
@@ -79,10 +94,9 @@ function App() {
           <Route path="/guide" element={<Guide />} />
           <Route path="/helpdesk" element={<Helpdesk />}>
             <Route path="notice" element={<Notice />} />
-            <Route path="notice/:id" element={<Board />} />
+            <Route path="notice/:id" element={<Board type="notice" />} />
             <Route path="faq" element={<FAQ />} />
             <Route path="inquiry" element={<Inquiry />} />
-            <Route path="inquiry/payment" element={<PaymentTest />} />
           </Route>
           <Route path="/mypage" element={<Mypage />}>
             <Route path="" element={<RecentTransaction />} />
@@ -94,10 +108,11 @@ function App() {
               element={<LecturerInfoModification />}
             />
             <Route path="inquiry/view" element={<InquiryView />} />
-            <Route path="inquiry/view/:id" element={<Board />} />
+            <Route path="inquiry/view/:id" element={<Board type="inquiry" />} />
             <Route path="inquiry" element={<Inquiry />} />
             <Route path="wishlist" element={<WishlistView />} />
             <Route path="wishlist/:id" element={<Board />} />
+            <Route path="payment" element={<Payment />} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/loginTest" element={<LoginTest />} />
@@ -112,15 +127,17 @@ function App() {
             <Route path="users" element={<UserMgmt />} />
             {/* 유저 정보 클릭 시 띄울 컴포넌트 만들어야 함 */}
             <Route path="courses" element={<CourseMgmt />} />
-            <Route path="courses/:id" element={<Board />} />
             {/* 공지, FAQ, 문의 답변 작성할 수 있는 컴포넌트 만들어야 함 */}
             <Route path="notice" element={<NoticeMgmt />} />
-            <Route path="notice/:id" element={<Board />} />
+            <Route path="notice/:id" element={<Board type="admin_notice" />} />
             <Route path="faq" element={<FAQMgmt />} />
-            <Route path="faq/:id" element={<Board />} />
+            <Route path="faq/:id" element={<Board type="admin_faq" />} />
             <Route path="faq/board" element={<BoardWrite />} />
             <Route path="inquiry" element={<InquiryMgmt />} />
-            <Route path="inquiry/:id" element={<Board />} />
+            <Route
+              path="inquiry/:id"
+              element={<Board type="admin_inquiry" />}
+            />
           </Route>
           <Route path="/*" element={<Page404 />} />
           <Route path="/payready" element={<KakaoPayR />} />

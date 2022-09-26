@@ -6,13 +6,61 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useOutletContext } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
+import { API_BASE_URL } from "../../app-config";
 
-const Board = ({ tableInfo }) => {
+const Board = ({ type }) => {
   const navigate = useNavigate();
   const params = useParams();
-  const { fetchedData } = useOutletContext();
+  const [fetchedData, setFetchedData] = useState();
+  // 각 페이지에 맞는 내용을 가져와야 하므로 switch-case 구문 사용하여 가져올 데이터 정의
+  useEffect(() => {
+    switch (type) {
+      case "notice":
+        axios.get(API_BASE_URL + "/api/helpdesk/getNoticeList").then((res) => {
+          setFetchedData(res.data.data);
+        });
+        break;
+      case "inquiry":
+        axios
+          .get(API_BASE_URL + "/api/mypage/getInquiryReference1")
+          .then((res) => {
+            setFetchedData(res.data.data);
+          });
+        break;
+      case "admin_notice":
+        axios.get(API_BASE_URL + "/api/helpdesk/getNoticeList").then((res) => {
+          setFetchedData(res.data.data);
+        });
+        break;
+      case "admin_faq":
+        axios.get(API_BASE_URL + "/api/helpdesk/getFaqList").then((res) => {
+          setFetchedData(res.data.data);
+        });
+        break;
+      default:
+        break;
+    }
+  });
 
-  // ***** fetchedData 받아와야 함 *****
+  // 파라미터 제외한 window.location.pathname 리턴하는 함수
+  // 이전글, 다음글 넘어가기 위함 --> 목록으로 돌아가기에도 사용할 수 있음!!!
+  const urlWithoutParam = () => {
+    switch (type) {
+      case "notice":
+        return "/helpdesk/notice";
+      case "inquiry":
+        return "/mypage/inquiry/view";
+      case "admin_notice":
+        return "/admin/notice";
+      case "admin_faq":
+        return "/admin/faq";
+      default:
+        break;
+    }
+  };
 
   // DB 테이블마다 컬럼의 key값이 상이하고(.title 사용 불가) 순서가 상이하기(배열 인덱스값 사용 불가) 때문에,
   // Board 컴포넌트에서 어떤 key값을 출력해야할지 정하기 어려움
@@ -27,39 +75,50 @@ const Board = ({ tableInfo }) => {
     return string;
   };
 
-  // 현재 board의 data
-  const [boardData] = fetchedData.filter((element) => {
-    return element[Object.keys(element)[0]] === parseInt(params.id);
-  });
+  // 현재 글 데이터
+  const returnBoardData = () => {
+    const [boardData] = fetchedData.filter((element) => {
+      return element[Object.keys(element)[0]] === parseInt(params.id);
+    });
+    return boardData;
+  };
 
   // 이전 글 데이터
-  const [prevData] = fetchedData.filter((element) => {
-    return element[Object.keys(element)[0]] === parseInt(params.id) - 1;
-  });
+  const returnPrevData = () => {
+    const [prevData] = fetchedData.filter((element) => {
+      return element[Object.keys(element)[0]] === parseInt(params.id) - 1;
+    });
+    return prevData;
+  };
 
   // 다음 글 데이터
-  const [nextData] = fetchedData.filter((element) => {
-    return element[Object.keys(element)[0]] === parseInt(params.id) + 1;
-  });
+  const returnNextData = () => {
+    const [nextData] = fetchedData.filter((element) => {
+      return element[Object.keys(element)[0]] === parseInt(params.id) + 1;
+    });
+    return nextData;
+  };
 
   // 목록으로 돌아가기
   const backToList = () => {
-    navigate(-1);
+    navigate(urlWithoutParam());
   };
 
   // 이전 글로 이동
   const onMoveToPrevBoard = () => {
-    if (prevData) {
-      let id = parseInt(boardData[Object.keys(boardData)[0]]) - 1;
-      navigate(`/helpdesk/notice/${id}`);
+    if (returnPrevData()) {
+      let id =
+        parseInt(returnBoardData()[Object.keys(returnBoardData())[0]]) - 1;
+      navigate(`${urlWithoutParam()}/${id}`);
     }
   };
 
   // 다음 글로 이동
   const onMoveToNextBoard = () => {
-    if (nextData) {
-      let id = parseInt(boardData[Object.keys(boardData)[0]]) + 1;
-      navigate(`/helpdesk/notice/${id}`);
+    if (returnNextData()) {
+      let id =
+        parseInt(returnBoardData()[Object.keys(returnBoardData())[0]]) + 1;
+      navigate(`${urlWithoutParam()}/${id}`);
     }
   };
 
@@ -68,7 +127,9 @@ const Board = ({ tableInfo }) => {
       {fetchedData ? (
         <div className="boardlist">
           <div className="top1">
-            <div className="title">{boardData[onFindObjKey("Title")]}</div>
+            <div className="title">
+              {returnBoardData()[onFindObjKey("Title")]}
+            </div>
             <button className="back" onClick={backToList}>
               목록
             </button>
@@ -76,20 +137,24 @@ const Board = ({ tableInfo }) => {
           <div className="others">
             <div className="writer">
               <img src={adminProfileImage} alt="pp" />
-              <div className="name1">{boardData[onFindObjKey("user")]}</div>
+              <div className="name1">
+                {returnBoardData()[onFindObjKey("user")]}
+              </div>
             </div>
             <div className="etc">
               <div>등록일</div>
               <div>
-                {boardData[onFindObjKey("Mdfdate")] ||
-                  boardData[onFindObjKey("Regdate")]}
+                {returnBoardData()[onFindObjKey("Mdfdate")] ||
+                  returnBoardData()[onFindObjKey("Regdate")]}
               </div>
               <div>조회수</div>
-              <div>{boardData.noticeMdfdate}</div>
+              <div>{returnBoardData().noticeMdfdate}</div>
             </div>
           </div>
           <hr />
-          <div className="content1">{boardData[onFindObjKey("Content")]}</div>
+          <div className="content1">
+            {returnBoardData()[onFindObjKey("Content")]}
+          </div>
           <div className="bottom">
             <div className="move" id="border" onClick={onMoveToNextBoard}>
               <div className="left">
@@ -97,8 +162,8 @@ const Board = ({ tableInfo }) => {
                 &nbsp;&nbsp;다음글
               </div>
               <div className="right">
-                {nextData ? (
-                  nextData[onFindObjKey("Title")]
+                {returnNextData() ? (
+                  returnNextData()[onFindObjKey("Title")]
                 ) : (
                   <div>다음 글이 없습니다.</div>
                 )}
@@ -110,8 +175,8 @@ const Board = ({ tableInfo }) => {
                 &nbsp;&nbsp;이전글
               </div>
               <div className="right">
-                {prevData ? (
-                  prevData[onFindObjKey("Title")]
+                {returnPrevData() ? (
+                  returnPrevData()[onFindObjKey("Title")]
                 ) : (
                   <div>이전 글이 없습니다.</div>
                 )}

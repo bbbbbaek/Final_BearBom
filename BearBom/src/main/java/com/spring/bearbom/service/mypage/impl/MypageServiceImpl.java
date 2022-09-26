@@ -48,6 +48,7 @@ public class MypageServiceImpl implements MypageService{
 	@Override
 	public void updateUser(User user) {
 		// TODO Auto-generated method stub
+		System.out.println(user.toString());
 		userMapper.updateUser(user);
 	}
 

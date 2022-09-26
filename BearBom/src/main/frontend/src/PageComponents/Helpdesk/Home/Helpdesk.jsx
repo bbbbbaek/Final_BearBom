@@ -11,24 +11,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { onChange } from "../store/store";
 import { Outlet, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_BASE_URL } from "../../../app-config";
 
 const Helpdesk = () => {
   const navigate = useNavigate();
   const [fetchedData, setFetchedData] = useState();
+
   useEffect(() => {
-    axios
-      .get(
-        "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Notice"
-      )
-      .then((res) => {
-        setFetchedData(res.data);
-      });
+    axios({
+      method: "get",
+      url: API_BASE_URL + "/api/helpdesk/getNoticeList",
+    }).then((res) => {
+      setFetchedData(res.data);
+    });
     navigate("notice");
   }, []);
-  // Helpdesk의 default tab을 notice로 설정하기 위한 useEffect
-  // useEffect(() => {
-  //   navigate("notice");
-  // }, []);
 
   // navigate 함수(e.target의 id값으로 navigate)
   const onNavigate = (e) => {

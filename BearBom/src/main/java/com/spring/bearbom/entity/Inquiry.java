@@ -1,9 +1,5 @@
 package com.spring.bearbom.entity;
 
-import lombok.Data;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -12,6 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
+import lombok.Data;
 
 @Entity
 @Table(name="T_INQUIRY")
@@ -22,8 +23,6 @@ public class Inquiry {
         @Id
         private int inquiryIdx;
 
-//        @Column(nullable = false, columnDefinition = "varchar(100)")
-//        private String inquiryEmail;
 
         @Column(nullable = false, columnDefinition = "varchar(100)")
         private String inquirySort;
@@ -33,12 +32,13 @@ public class Inquiry {
 
         @Column(nullable = false, columnDefinition = "varchar(2000)")
         private String inquiryContent;
-        
+
         @Column(nullable = false,columnDefinition = "char(1)")
         private char inquiryUseYn ='Y';
-        
+
         @Column(nullable = false,columnDefinition = "char(1)")
         private char inquiryYn ='Y';
+
         
         @Column(nullable = false)
         private LocalDateTime inquiryRegdate = LocalDateTime.now();
@@ -54,9 +54,11 @@ public class Inquiry {
 
         @Column(columnDefinition = "varchar(2000)")
         private String replyContent;
-        
 
-        
+
+
+
+
         @ManyToOne
         @JoinColumn(name="USER_ID")
         private User user;
@@ -66,4 +68,3 @@ public class Inquiry {
 
 
 }
-

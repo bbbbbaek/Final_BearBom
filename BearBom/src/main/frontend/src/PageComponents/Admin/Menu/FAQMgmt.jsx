@@ -35,13 +35,6 @@ const FAQMgmt = () => {
           글쓰기
         </button>
         <hr />
-        <button
-          onClick={() => {
-            console.log(fetchedData);
-          }}
-        >
-          click
-        </button>
         {fetchedData ? (
           <Table tableInfo={tableInfo} fetchedData={fetchedData} />
         ) : null}
