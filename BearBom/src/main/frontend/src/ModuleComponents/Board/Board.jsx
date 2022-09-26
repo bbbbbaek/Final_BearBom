@@ -12,9 +12,11 @@ import axios from "axios";
 import { API_BASE_URL } from "../../app-config";
 
 const Board = ({ type }) => {
+  const userRole = localStorage.getItem("USER_ROLE");
   const navigate = useNavigate();
   const params = useParams();
   const [fetchedData, setFetchedData] = useState();
+  const [writingMode, setWritingMode] = useState(false);
   // 각 페이지에 맞는 내용을 가져와야 하므로 switch-case 구문 사용하여 가져올 데이터 정의
   useEffect(() => {
     switch (type) {
@@ -44,6 +46,10 @@ const Board = ({ type }) => {
         break;
     }
   });
+
+  const onClickWrite = () => {
+    setWritingMode(true);
+  };
 
   // 파라미터 제외한 window.location.pathname 리턴하는 함수
   // 이전글, 다음글 넘어가기 위함 --> 목록으로 돌아가기에도 사용할 수 있음!!!
@@ -128,11 +134,22 @@ const Board = ({ type }) => {
         <div className="boardlist">
           <div className="top1">
             <div className="title">
-              {returnBoardData()[onFindObjKey("Title")]}
+              {writingMode ? (
+                <input type="text" />
+              ) : (
+                returnBoardData()[onFindObjKey("Title")]
+              )}
             </div>
-            <button className="back" onClick={backToList}>
-              목록
-            </button>
+            <div className="buttons">
+              {userRole === "ROLE_ADMIN" && (
+                <button className="write" onClick={onClickWrite}>
+                  수정
+                </button>
+              )}
+              <button className="back" onClick={backToList}>
+                목록
+              </button>
+            </div>
           </div>
           <div className="others">
             <div className="writer">

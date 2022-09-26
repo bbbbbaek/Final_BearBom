@@ -135,47 +135,52 @@ const Header = () => {
         </div>
         <div className="user">
           {/* reduxStore state인 loginStatus는 객체로 반환되므로, .loginStatus로 한번 더 접근해줘야 함 */}
+
           {loginStatus.loginStatus ? (
-            <ul id="isLoggedIn">
-              <li>
-                <img
-                  src={
-                    fetchedData.userPhotoOrgNm
-                      ? `${API_BASE_URL}/upload/${fetchedData.userPhotoOrgNm}`
-                      : defaultProfilePicture
-                  }
-                  alt=""
-                  id="/mypage"
-                  onClick={onClickThumbnail}
-                />
-              </li>
-              <li id="/mypage" onClick={onClickMenu}>
-                {fetchedData.userNickName} 님
-              </li>
-              <li>
-                <ShoppingCartOutlinedIcon
-                  style={{ position: "relative" }}
-                  onClick={() => {
-                    setCartAlarm(!cartAlarm);
-                    setPushAlarm(false);
-                  }}
-                />
-                {cartAlarm ? <AlarmBar type="cart" /> : null}
-                <div className="notif">1</div>
-              </li>
-              <li>
-                <NotificationsNoneOutlinedIcon
-                  style={{ position: "relative" }}
-                  onClick={() => {
-                    setPushAlarm(!pushAlarm);
-                    setCartAlarm(false);
-                  }}
-                />
-                {pushAlarm ? <AlarmBar type="push" /> : null}
-                <div className="notif">2</div>
-              </li>
-              <li onClick={onClickLogout}>로그아웃</li>
-            </ul>
+            localStorage.getItem("test") === "kakao" ? (
+              <LogoutKaKao />
+            ) : (
+              <ul id="isLoggedIn">
+                <li>
+                  <img
+                    src={
+                      fetchedData.userPhotoOrgNm
+                        ? `${API_BASE_URL}/upload/${fetchedData.userPhotoOrgNm}`
+                        : defaultProfilePicture
+                    }
+                    alt=""
+                    id="/mypage"
+                    onClick={onClickThumbnail}
+                  />
+                </li>
+                <li id="/mypage" onClick={onClickMenu}>
+                  {fetchedData.userNickName} 님
+                </li>
+                <li>
+                  <ShoppingCartOutlinedIcon
+                    style={{ position: "relative" }}
+                    onClick={() => {
+                      setCartAlarm(!cartAlarm);
+                      setPushAlarm(false);
+                    }}
+                  />
+                  {cartAlarm ? <AlarmBar type="cart" /> : null}
+                  <div className="notif">1</div>
+                </li>
+                <li>
+                  <NotificationsNoneOutlinedIcon
+                    style={{ position: "relative" }}
+                    onClick={() => {
+                      setPushAlarm(!pushAlarm);
+                      setCartAlarm(false);
+                    }}
+                  />
+                  {pushAlarm ? <AlarmBar type="push" /> : null}
+                  <div className="notif">2</div>
+                </li>
+                <li onClick={onClickLogout}>로그아웃</li>
+              </ul>
+            )
           ) : (
             <ul id="inNotLoggedIn">
               <li id="/login" onClick={onClickMenu}>
