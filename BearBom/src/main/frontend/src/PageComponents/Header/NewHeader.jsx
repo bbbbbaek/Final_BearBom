@@ -23,6 +23,8 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+
+
   const checkLocalStorage = localStorage.getItem("USER_ID");
   const loginStatus = useSelector((state) => state);
   // 새로고침하게 될 경우, reduxStore가 초기화되면서 로그아웃되는 것을 방지하기 위함
@@ -138,7 +140,10 @@ const Header = () => {
 
           {loginStatus.loginStatus ? (
             localStorage.getItem("test") === "kakao" ? (
+              <div>
+              <div>{checkLocalStorage}</div>
               <LogoutKaKao />
+              </div>
             ) : (
               <ul id="isLoggedIn">
                 <li>

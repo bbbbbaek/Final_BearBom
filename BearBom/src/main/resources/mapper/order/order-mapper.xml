@@ -12,15 +12,15 @@
 			    WHERE B.USER_ID = #{userId}
 				    AND B.ORDER_YN = 'N'
 				    AND B.ORDER_USE_YN = 'Y'
-				    AND A.COURSE_IDX = B.COURSE_IDX;
+				    AND A.COURSE_IDX = B.COURSE_IDX
 		  ]]>
    </select>
    
-   <select id="getOrder" parameterType="com.spring.bearbom.dto.OrderDTO" resultType="order">
+   <select id="getOrder" parameterType="com.spring.bearbom.dto.OrderDTO" resultType="com.spring.bearbom.entity.Order">
     	<![CDATA[
     		SELECT * FROM T_ORDER
 				WHERE USER_ID = #{userId}
-				AND COURSE_IDX = #{courseIdx};
+				AND COURSE_IDX = #{courseIdx}
 		]]>
    </select>
    
