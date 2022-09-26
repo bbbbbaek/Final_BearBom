@@ -6,6 +6,7 @@ import { wishListItems } from "../../../customHooks/createItems";
 import axios from "axios";
 import { useEffect } from "react";
 import { API_BASE_URL } from "../../../app-config";
+import ResultNotFound from "../../../ModuleComponents/ResultNotFound/ResultNotFound";
 
 const WishlistView = () => {
   let tableInfo = wishListItems;
@@ -24,7 +25,9 @@ const WishlistView = () => {
         <hr />
         {fetchedData ? (
           <Table tableInfo={tableInfo} fetchedData={fetchedData} />
-        ) : null}
+        ) : (
+          <ResultNotFound />
+        )}
       </div>
     </>
   );

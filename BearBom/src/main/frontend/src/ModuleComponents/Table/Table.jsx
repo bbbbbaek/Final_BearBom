@@ -9,13 +9,26 @@ import Stack from "@mui/material/Stack";
 import excelDownload from "../../images/excelDownload.png";
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../../app-config";
+import Board from "../Board/Board";
 
 // TableMenuItems 객체로 생성한 tableItems state를 사용하여 각 컴포넌트에 알맞은 데이터를 출력할 수 있도록 설계
 const Table = ({ tableInfo, fetchedData, imageYn }) => {
-  // const [please, setPlease] = useState(fetchedData);
+  const [sortType, setSortType] = useState("Idx");
+
+  const returnValueOfKey = (Key) => {
+    const test = Object.keys(fetchedData[0]).map((element) => {
+      return element.includes(Key);
+    });
+    const number = test.indexOf(true);
+    const text = [Object.keys(fetchedData[0])[number]];
+    const string = text.toString();
+    return string;
+  };
+
   const sortedData = [...fetchedData].sort(
-    (a, b) => b[Object.keys(b)[0]] - a[Object.keys(a)[0]]
+    (a, b) => b[returnValueOfKey(sortType)] - a[returnValueOfKey(sortType)]
   );
+
   const [rawData] = useState(sortedData);
   // data의 초깃값을 salesData로 설정하게 되면, rawData와 참조값이 같게 되면서 splice메소드 사용하여 data 변경 시, rawData의 값도 변경되는 문제 있음
   // --> 배열 복사를 통해 참조값이 다르도록 설정
@@ -54,6 +67,7 @@ const Table = ({ tableInfo, fetchedData, imageYn }) => {
       setData(copy);
     }
   };
+
   // 2. data가 바뀔 때마다, currentPageData 변경하고, paging 함수 실행
   useEffect(() => {
     setCurrentPageData(data.slice(0, 10));
@@ -65,7 +79,7 @@ const Table = ({ tableInfo, fetchedData, imageYn }) => {
     // Math.floor 범위가 /10 하기 이전까지로만 지정돼서 안됐던 경험 있음
     let count = Math.floor(
       data.findLastIndex((a) => {
-        return a[Object.keys(a)[0]] >= 0;
+        return a[returnValueOfKey(sortType)] >= 0;
       }) / 10
     );
     setPageCount(count + 1);
@@ -77,9 +91,46 @@ const Table = ({ tableInfo, fetchedData, imageYn }) => {
   };
 
   // 테이블 바디 onClick 시, 상세 페이지로 이동하는 함수
-  const moveToBoard = (element) => {
-    let id = element[Object.keys(element)[0]];
-    navigate(`${id}`);
+  const moveToBoard = (element, type) => {
+    let id = element[returnValueOfKey("Idx")];
+    let path = window.location.pathname;
+    switch (path) {
+      case "/helpdesk/notice":
+        navigate(`${id}`);
+        break;
+      case "/mypage/wishlist":
+        navigate(`/course/${id}`);
+        break;
+      case "/mypage/course/user":
+        navigate(`/course/${id}`);
+        break;
+      case "/mypage/course/lecturer":
+        navigate(`/course/${id}`);
+        break;
+      case "/mypage/inquiry/view":
+        navigate(`${id}`);
+        break;
+      case "/admin/sales":
+        break;
+      case "/admin/orders":
+        break;
+      case "/admin/users":
+        break;
+      case "/admin/courses":
+        navigate(`/course/${id}`);
+        break;
+      case "/admin/notice":
+        navigate(`${id}`);
+        break;
+      case "/admin/faq":
+        navigate(`${id}`);
+        break;
+      case "/admin/inquiry":
+        navigate(`${id}`);
+        break;
+      default:
+        break;
+    }
   };
 
   // 테이블에 클래스 추가해주는 함수
@@ -87,17 +138,7 @@ const Table = ({ tableInfo, fetchedData, imageYn }) => {
     return "column " + tableInfo[index].prop;
   };
 
-  // 테이블에 이미지(Thumb)가 포함되어 있는지 확인하는 함수
-  const checkIfThumbnailExists = (text) => {
-    let result;
-    for (let i = 0; i < tableInfo.length; i++) {
-      const [test] = [tableInfo[i].cell];
-      if (test.includes(text)) result = "Y";
-    }
-    return result;
-  };
-
-  // 테이블 헤드 반환하는 함수 (Row)
+  // 테이블 헤드 반환하는 함수 (가로)
   const insertTH = (tableInfo) => {
     let tableItem = [];
     for (let i = 0; i < tableInfo.length; i++) {
@@ -106,7 +147,7 @@ const Table = ({ tableInfo, fetchedData, imageYn }) => {
     return tableItem;
   };
 
-  // 테이블 바디 반환하는 함수 (Row)
+  // 테이블 바디 반환하는 함수 (가로)
   const insertTDT = (tableInfo, element) => {
     let tableItem = [];
     for (let i = 0; i < tableInfo.length; i++) {
@@ -142,85 +183,93 @@ const Table = ({ tableInfo, fetchedData, imageYn }) => {
 
   return (
     <>
-      {/* fetchData를 받아왔을 때만 아래의 화면을 보여줄 수 있도록 삼항연산자 사용.
-          해당 조건을 주지 않으면, 데이터를 받아오기 전에 fetchData는 배열이 아니기 때문에 아래 식들에서 오류가 남 */}
       {fetchedData ? (
-        <>
-          <div className="table_home">
-            <div className="top1">
-              <div className="search">
-                <select name="duration" ref={filterSelectRef}>
-                  {/* 전체 필터로 검색 시, 구매자, 판매자, 강의명 모든 조건에서 검색할 수 있도록 처리해야 하나 아직 못함 */}
-                  <option value="all">전체</option>
-                  <option value="userId">구매자</option>
-                  <option value="lecturerId">판매자</option>
-                  <option value="className">강의명</option>
-                </select>
-                <input
-                  type="text"
-                  ref={filterInputRef}
-                  onChange={(e) => {
-                    setInputValue(e.target.value);
-                  }}
-                />
-                <button
-                  onClick={() => {
-                    filteringData(
-                      filterInputRef.current.value,
-                      filterSelectRef.current.value
-                    );
-                  }}
-                >
-                  검색
-                </button>
-              </div>
-              <CSVLink data={data}>
-                <div style={{ textDecoration: "none" }}>
-                  <img src={excelDownload} alt="excel" />
-                </div>
-              </CSVLink>
-            </div>
-            <div className="center">
-              <table>
-                {/* 테이블 헤드 부분 (Column) */}
-                <tr className="row_title">{insertTH(tableInfo)}</tr>
-
-                {/* 테이블 바디 부분 (Column) */}
-                {currentPageData.map((a, i) => {
-                  return (
-                    <tr className="row_data" key={i}>
-                      {/* 조건을 여기에 주면 안될 것 같음 */}
-                      {
-                        // checkIfThumbnailExists("Thumb")
-                        //   ? insertTDT(tableInfo, a)
-                        //   :
-                        insertTD(tableInfo, a)
-                      }
-                    </tr>
+        <div className="table_home">
+          <div className="top1">
+            <div className="search">
+              <select
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  setSortType(e.target.value);
+                }}
+                name="sort"
+              >
+                <option value="Idx">날짜</option>
+                <option value="Title">구매자</option>
+                {/* <option value="lecturerId">판매자</option>
+                <option value="className">강의명</option> */}
+              </select>
+              <select name="duration" ref={filterSelectRef}>
+                {/* 전체 필터로 검색 시, 구매자, 판매자, 강의명 모든 조건에서 검색할 수 있도록 처리해야 하나 아직 못함 */}
+                <option value="all">전체</option>
+                <option value="userId">구매자</option>
+                <option value="lecturerId">판매자</option>
+                <option value="className">강의명</option>
+              </select>
+              <input
+                type="text"
+                ref={filterInputRef}
+                onChange={(e) => {
+                  setInputValue(e.target.value);
+                }}
+              />
+              <button
+                onClick={() => {
+                  filteringData(
+                    filterInputRef.current.value,
+                    filterSelectRef.current.value
                   );
-                })}
-              </table>
+                }}
+              >
+                검색
+              </button>
             </div>
-            <div className="bottom">
-              <Stack spacing={1}>
-                <Pagination
-                  boundaryCount={5}
-                  count={pageCount}
-                  color="primary"
-                  defaultPage={1}
-                  showFirstButton={true}
-                  showLastButton={true}
-                  // 2번째 인자가 current page를 받는 인자임
-                  onChange={(e, page) => {
-                    changeCurrentPageData(page);
-                  }}
-                />
-              </Stack>
-            </div>
+            <CSVLink data={data}>
+              <div style={{ textDecoration: "none" }}>
+                <img src={excelDownload} alt="excel" />
+              </div>
+            </CSVLink>
           </div>
-        </>
+          <div className="center">
+            <table>
+              {/* 테이블 헤드 부분 (세로) */}
+              <tr className="row_title">{insertTH(tableInfo)}</tr>
+
+              {/* 테이블 바디 부분 (세로) */}
+              {currentPageData.map((a, i) => {
+                return (
+                  <tr className="row_data" key={i}>
+                    {/* 조건을 여기에 주면 안될 것 같음 */}
+                    {
+                      // checkIfThumbnailExists("Thumb")
+                      //   ? insertTDT(tableInfo, a)
+                      //   :
+                      insertTD(tableInfo, a)
+                    }
+                  </tr>
+                );
+              })}
+            </table>
+          </div>
+          <div className="bottom">
+            <Stack spacing={1}>
+              <Pagination
+                boundaryCount={5}
+                count={pageCount}
+                color="primary"
+                defaultPage={1}
+                showFirstButton={true}
+                showLastButton={true}
+                // 2번째 인자가 current page를 받는 인자임
+                onChange={(e, page) => {
+                  changeCurrentPageData(page);
+                }}
+              />
+            </Stack>
+          </div>
+        </div>
       ) : (
-        <div>조회한 내역이 없습니다.</div>
+        <div>조회할 내역이 없습니다.</div>
       )}
     </>
   );

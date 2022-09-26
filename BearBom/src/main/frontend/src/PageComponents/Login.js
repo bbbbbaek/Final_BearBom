@@ -18,8 +18,11 @@ import axios from "axios";
 import { API_BASE_URL } from "../app-config";
 import { useNavigate } from "react-router-dom";
 import LoginKaKao from "./JoinComponents/LoginKaKao";
+import { useDispatch } from "react-redux";
+import { onLogin } from "../ModuleComponents/reduxStore/reduxStore";
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // test
   // // Cookie 관련 선언
@@ -151,9 +154,11 @@ const Login = () => {
           localStorage.setItem("ACCESS_TOKEN", response.data.token);
           if (localStorage.getItem("USER_ROLE") === "ROLE_USER") {
             navigate("/");
+            dispatch(onLogin());
             alert("로그인 되었습니다.");
           } else {
             navigate("/admin");
+            dispatch(onLogin());
             alert("관리자 계정입니다.");
           }
         }

@@ -16,7 +16,9 @@ const LecturerInfoModification = () => {
 
   return (
     <>
-      {modal && <Modal/>}
+
+      {modal && <Modal modal={modal} setModal={setModal} />}
+
       <div className="lecturerinfomdf">
         <h5>
           <strong>강사 프로필 수정</strong>

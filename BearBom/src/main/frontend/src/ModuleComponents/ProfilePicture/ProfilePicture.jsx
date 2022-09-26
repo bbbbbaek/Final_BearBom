@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from "react";
 import "./profilepicture.scss";
 import adminProfileImage from "../../images/adminProfileImage.png";
-import unknownUser from "../../images/unknownUser.png";
+import defaultProfilePicture from "../../images/defaultProfilePicture.png";
 import { onRequest } from "../../ModuleComponents/UsefulFunctions/ApiService";
 import axios from "axios";
 
 const ProfilePicture = ({ pictureData }) => {
+
+//0926 광민 확인 필요
+//  const [fileImage, setFileImage] = useState(defaultProfilePicture);
+//  const saveFileImage = (e) => {
+//setFileImage(URL.createObjectURL(e.target.files[0]));
+ //   const fileData = URL.createObjectURL(e.target.files[0]);
+  //  console.log(fileImage);
+
   const [fileImage, setFileImage] = useState(adminProfileImage);
   const [fileData, setFileData] = useState();
   const [formData, setFormData] = useState({});
