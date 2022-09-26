@@ -80,6 +80,7 @@ const Payment = () => {
         orderNm: "아직 데이터 매핑 못했습니다;",
         pgNm: "아직 데이터 매핑 못했습니다;",
         paymentMethod: "아직 데이터 매핑 못했습니다;",
+        orderPri : cart[0].courseCost,
       };
       onRequest("/api/order/updateOrderYn", "post", data);
       alert("결제가 정상적으로 완료되었습니다.");

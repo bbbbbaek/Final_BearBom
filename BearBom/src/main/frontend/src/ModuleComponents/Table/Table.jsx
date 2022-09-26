@@ -177,7 +177,8 @@ const Table = ({ tableInfo, fetchedData, imageYn }) => {
         </td>
       );
     }
-
+    console.log("-------------------------------------------------------------");
+    console.log(fetchedData);
     return tableItem;
   };
 
