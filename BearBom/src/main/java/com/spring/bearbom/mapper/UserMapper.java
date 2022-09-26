@@ -60,6 +60,8 @@ public interface UserMapper {
 	@Update("UPDATE T_USER SET USER_YN = 'N' WHERE USER_ID = #{userId}")
 	void adminDeleteUser(Map<String, Object> paramMap);
 
+	void updateUserPhoto(User user);
+
 
 
 //    <update id="adminDeleteUser" parameterType="com.spring.bearbom.dto.UserDTO">
