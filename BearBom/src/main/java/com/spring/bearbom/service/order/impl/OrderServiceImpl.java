@@ -45,4 +45,9 @@ public class OrderServiceImpl implements OrderService {
 		return selectOrder;
 	}
 
+	@Override
+	public void updateOrderYn(Order order) {
+		orderRepository.save(order);
+	}
+
 }

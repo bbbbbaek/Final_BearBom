@@ -16,5 +16,7 @@ public interface OrderService {
 
 	Order getOrder(OrderDTO orderDto);
 
+	void updateOrderYn(Order order);
+
 
 }
