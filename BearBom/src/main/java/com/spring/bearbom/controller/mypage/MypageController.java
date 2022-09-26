@@ -113,7 +113,11 @@ public class MypageController {
 //		oldUser.setUserZipcode(user.getUserZipcode());
 //		oldUser.setUserEmail(user.getUserEmail());
 //		oldUser.setUserYn(user.getUserYn());
-
+		
+		// 비밀번호 수정 후 저장
+		if(user.getUserPw() != null && !user.getUserPw().equals("")) {
+			user.setUserPw(passwordEncoder.encode(user.getUserPw()));
+		}
 		System.out.println("userId : "+user.getUserTel());
 		
 		// 0926 userId 가져옴

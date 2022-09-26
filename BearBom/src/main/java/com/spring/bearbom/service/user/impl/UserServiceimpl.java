@@ -125,6 +125,13 @@ public class UserServiceimpl implements UserService {
 		userMapper.updateUserPhoto(user);
 		
 	}
+	
+	// 0926 비밀번호 수정 저장
+//	@Override
+//	public void updateUserInfo(User user) {
+//		userMapper.updateUserInfo(user);
+//		
+//	}
 
 
 
