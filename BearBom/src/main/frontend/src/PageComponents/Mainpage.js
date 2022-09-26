@@ -189,7 +189,7 @@ const Mainpage = () => {
         </div>
         <div className="list-box favorite-class-area">
           <div className="list-header">
-            <h2>베어봄이 검증한 이달의 인기클래스!</h2>
+            <h2>베어봄이 검증한 인기클래스!</h2>
           </div>
           <div>
             <CarouselContainer>
