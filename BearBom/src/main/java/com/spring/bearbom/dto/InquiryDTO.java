@@ -11,7 +11,7 @@ public class InquiryDTO {
 	//   private String inquiryEmail;
 	private String inquirySort;
 	private String inquiryTitle;
-	private String inquiryContetnt;
+	private String inquiryContent;
 	private char inquiryUseYn;
 	private char inquiryYn;
 	private LocalDateTime inquiryRegdate;
