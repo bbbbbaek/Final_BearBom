@@ -23,8 +23,6 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-
-
   const checkLocalStorage = localStorage.getItem("USER_ID");
   const loginStatus = useSelector((state) => state);
   // 새로고침하게 될 경우, reduxStore가 초기화되면서 로그아웃되는 것을 방지하기 위함
@@ -36,22 +34,39 @@ const Header = () => {
     userId: false,
     userPhotoOrgNm: false,
   });
+  const [orderData, setOrderData] = useState();
 
-  // 로그인 하면 유저 데이터를 가져오는 부분
+  // 로그인 하면 유저 + 주문 데이터를 가져오는 부분
   useEffect(() => {
     if (loginStatus.loginStatus) {
-      axios({
+      const promise1 = axios({
         method: "get",
         url: API_BASE_URL + "/api/mypage/getUser",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
         },
-      }).then((res) => {
-        console.log(res.data);
-        setFetchedData(res.data);
+      });
+      const promise2 = axios({
+        method: "get",
+        url: API_BASE_URL + "/api/order/getOrderList",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+        },
+      });
+
+      Promise.all([promise1, promise2]).then((res) => {
+        console.log(res);
+        console.log(res[0].data);
+        console.log(res[1].data);
+        setFetchedData(res[0].data);
+        setOrderData(res[1].data);
       });
     } else return;
   }, [loginStatus]);
+
+  // then((res) => {
+  //   console.log(res.data);
+  //   setFetchedData(res.data);
 
   // 로그아웃
   const onClickLogout = () => {
@@ -93,14 +108,14 @@ const Header = () => {
     <>
       <div className="header">
         <div className="logo">
-          <div
+          <button
             onClick={() => {
               console.log(fetchedData);
-              console.log(loginStatus);
+              console.log(orderData);
             }}
           >
             test
-          </div>
+          </button>
           <img
             id="/"
             className="logoImage"
@@ -141,8 +156,8 @@ const Header = () => {
           {loginStatus.loginStatus ? (
             localStorage.getItem("test") === "kakao" ? (
               <div>
-              <div>{checkLocalStorage}</div>
-              <LogoutKaKao />
+                <div>{checkLocalStorage}</div>
+                <LogoutKaKao />
               </div>
             ) : (
               <ul id="isLoggedIn">
@@ -169,7 +184,9 @@ const Header = () => {
                       setPushAlarm(false);
                     }}
                   />
-                  {cartAlarm ? <AlarmBar type="cart" /> : null}
+                  {cartAlarm ? (
+                    <AlarmBar type="cart" orderData={orderData} />
+                  ) : null}
                   <div className="notif">1</div>
                 </li>
                 <li>

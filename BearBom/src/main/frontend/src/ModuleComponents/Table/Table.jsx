@@ -9,10 +9,11 @@ import Stack from "@mui/material/Stack";
 import excelDownload from "../../images/excelDownload.png";
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../../app-config";
-import Board from "../Board/Board";
 
 // TableMenuItems 객체로 생성한 tableItems state를 사용하여 각 컴포넌트에 알맞은 데이터를 출력할 수 있도록 설계
-const Table = ({ tableInfo, fetchedData, imageYn }) => {
+const Table = ({ tableInfo, fetchedData }) => {
+  const userRole = localStorage.getItem("USER_ROLE");
+  const [writingMode, setWritingMode] = useState(false);
   const [sortType, setSortType] = useState("Idx");
 
   const returnValueOfKey = (Key) => {

@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import Table from "../../../ModuleComponents/Table/Table";
 import axios from "axios";
 import { API_BASE_URL } from "../../../app-config";
-import { inquiryItems } from "../../../customHooks/createItems";
+import {
+  inquiryItems,
+  inquiryMgmtItems,
+} from "../../../customHooks/createItems";
 
 const InquiryMgmt = () => {
-  let tableInfo = inquiryItems;
+  let tableInfo = inquiryMgmtItems;
   const [fetchedData, setFetchedData] = useState();
   useEffect(() => {
     axios({
@@ -15,7 +18,7 @@ const InquiryMgmt = () => {
         Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
       },
     }).then((res) => {
-      setFetchedData(res.data);
+      setFetchedData(res.data.data);
     });
   }, []);
 
