@@ -4,6 +4,24 @@
    
 <mapper namespace="com.spring.bearbom.mapper.OrderMapper">
    
+   <select id="getOrderedCourseListByUser" parameterType="string" resultType="camelHashMap">
+  		 <![CDATA[
+		   SELECT A.* 
+			   FROM T_COURSE A,
+			       T_ORDER B
+			    WHERE B.USER_ID = #{userId}
+				    AND B.ORDER_YN = 'N'
+				    AND B.ORDER_USE_YN = 'Y'
+				    AND A.COURSE_IDX = B.COURSE_IDX;
+		  ]]>
+   </select>
    
+   <select id="getOrder" parameterType="com.spring.bearbom.dto.OrderDTO" resultType="order">
+    	<![CDATA[
+    		SELECT * FROM T_ORDER
+				WHERE USER_ID = #{userId}
+				AND COURSE_IDX = #{courseIdx};
+		]]>
+   </select>
    
 </mapper>
