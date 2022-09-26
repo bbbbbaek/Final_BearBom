@@ -44,5 +44,17 @@
  			SELECT * FROM T_USER;
         ]]>
     </select>
+
+    <update id="updateUserPhoto">
+   		 <![CDATA[
+   		 UPDATE T_USER
+   		 	SET
+   		 		USER_PHOTO_NEW_NM = #{userPhotoNewNm},
+   		 		USER_PHOTO_ORG_NM = #{userPhotoOrgNm},
+   		 		USER_PHOTO_PATH = #{userPhotoPath}
+ 			WHERE USER_ID = #{userId}
+        ]]>
+    </update>
+
 </mapper>
 

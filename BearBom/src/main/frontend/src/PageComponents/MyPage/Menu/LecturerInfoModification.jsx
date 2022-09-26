@@ -9,9 +9,14 @@ import Modal from "../../../ModuleComponents/Modal/Modal";
 const LecturerInfoModification = () => {
   const [boardData, setBoardData] = useState("");
   const [modal, setModal] = useState(false);
+
+  const [nickName, setNickName] = useState();
+  const [formData, setFormData] = useState({});
+
+
   return (
     <>
-      {modal && <Modal />}
+      {modal && <Modal/>}
       <div className="lecturerinfomdf">
         <h5>
           <strong>강사 프로필 수정</strong>

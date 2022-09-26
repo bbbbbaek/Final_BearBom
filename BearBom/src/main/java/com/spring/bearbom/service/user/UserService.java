@@ -26,6 +26,8 @@ public interface UserService {
 	// admin 유저 탈퇴 시키기
 	void adminDeleteUser(Map<String, Object> paramMap);
 
+	void updateUserPhoto(User user);
+
 	
 	// 비밀번호 찾기
 //	User pwFind(String userId, String userEmail);

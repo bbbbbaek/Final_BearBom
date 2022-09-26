@@ -2,6 +2,8 @@ import React from "react";
 import "./modal.scss";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 const Modal = () => {
+
+  
   return (
     <>
       <div className="modal">
