@@ -81,7 +81,7 @@ const Payment = () => {
         pgNm: "아직 데이터 매핑 못했습니다;",
         paymentMethod: "아직 데이터 매핑 못했습니다;",
       };
-      onRequest(API_BASE_URL + "/api/order/updateOrderYn", "post", data);
+      onRequest("/api/order/updateOrderYn", "post", data);
       alert("결제가 정상적으로 완료되었습니다.");
       console.log(data);
     } else {

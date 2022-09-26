@@ -50,4 +50,10 @@ public class OrderServiceImpl implements OrderService {
 		orderRepository.save(order);
 	}
 
+	@Override
+	public Order findByOrderIdx(int orderIdx) {
+		Order orderTemp = orderMapper.findByOrderIdx(orderIdx);
+		return orderTemp;
+	}
+
 }
