@@ -44,16 +44,16 @@ public class Inquiry {
         @Column(nullable = false)
         private LocalDateTime inquiryRegdate = LocalDateTime.now();
         
-        @Column(nullable = false)
+        @Column(nullable = true)
         private LocalDateTime replyRegdate = LocalDateTime.now();
         
-        @Column(nullable = false,columnDefinition = "char(1)")
+        @Column(columnDefinition = "char(1)")
         private char replyYn ='N';
         
-        @Column(nullable = false, columnDefinition = "varchar(300)")
+        @Column(columnDefinition = "varchar(300)")
         private String replyTitle;
 
-        @Column(nullable = false, columnDefinition = "varchar(2000)")
+        @Column(columnDefinition = "varchar(2000)")
         private String replyContent;
 
 //        @Column(nullable = false,columnDefinition = "char(1)")

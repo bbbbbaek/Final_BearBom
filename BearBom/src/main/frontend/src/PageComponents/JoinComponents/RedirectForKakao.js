@@ -22,7 +22,7 @@ function RedirectForKakao() {
         navigate("/");
       } catch (e) {
         console.error(e);
-        navigate("/loginTest");
+        navigate("/login");
       }
     })();
   }, []);
