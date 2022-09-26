@@ -18,7 +18,7 @@
     	<![CDATA[
             UPDATE T_USER
             	SET
-            		USE_YN = 'N'
+            		USER_YN = 'N'
             	WHERE USER_ID = #{userId}
         ]]>
     </update>
