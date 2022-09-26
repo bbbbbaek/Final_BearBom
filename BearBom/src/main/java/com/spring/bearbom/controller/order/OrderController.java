@@ -98,7 +98,7 @@ public class OrderController {
 		LocalDateTime payDate = LocalDateTime.now().plusHours(9);
 		orderTemp.setPaymentDate(payDate);
 		orderTemp.setOrderYn('Y');
-		System.out.println("=-=-==-===--==-=-----");
+		System.out.println("-=-=-=-=-=-=-=-=-=-=-~~~~");
 		System.out.println(orderTemp);
 		orderService.updateOrderYn(orderTemp);
 		
