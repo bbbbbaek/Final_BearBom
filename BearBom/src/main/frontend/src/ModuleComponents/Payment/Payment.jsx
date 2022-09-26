@@ -28,7 +28,7 @@ const Payment = () => {
     // 강의 정보
     const promise2 = axios({
       method: "get",
-      url: "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Order",
+      url: API_BASE_URL + "/api/order/getOrderList",
     });
     Promise.all([promise1, promise2]).then((res) => {
       setUserData(res[0].data);
