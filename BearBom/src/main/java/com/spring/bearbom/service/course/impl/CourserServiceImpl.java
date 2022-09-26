@@ -79,5 +79,10 @@ public class CourserServiceImpl implements CourserService {
 		return courseFileMapper.getCourseFileList(courseIdx);
 	}
 	
+	@Override
+	public int getCourseCurCnt(String userId) {
+		return courserMapper.getCourseCurCnt(userId);
+	}
+	
 
 }

@@ -16,9 +16,9 @@ function CourseNavbar() {
           <AnchorLink className="nav-list" href="#cur">
             커리큘럼
           </AnchorLink>
-          <AnchorLink className="nav-list" href="#time">
+          {/* <AnchorLink className="nav-list" href="#time">
             시간표
-          </AnchorLink>
+          </AnchorLink> */}
           <AnchorLink className="nav-list" href="#loc">
             위치
           </AnchorLink>

@@ -2,36 +2,36 @@ import Calendar2 from "./Calendar";
 import "../../css/apply.css";
 import { useEffect, useState, useRef } from "react";
 import LikeButton from "../../ModuleComponents/LikeButton";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { API_BASE_URL } from "../../app-config";
 import Swal from "sweetalert2";
 
 function Apply({ courseIdx, course }) {
+  const { id } = useParams(); //id를 통해 강의id로 이동
   const [height, setHeight] = useState();
-  const handleHeight = () => {
-    setHeight(window.pageYOffset);
-  };
+  // const handleHeight = () => {
+  //   setHeight(window.pageYOffset);
+  // };
   const [like, setLike] = useState(false);
   const [courseCostChange, setCourseCostChange] = useState("");
   const calRef = useRef(null);
 
   //카카오페이 경로이동
   const navigate = useNavigate();
-  const onClickBtn = () => {
-    navigate(`/payready`);
+  const onClickBtn = async () => {
+    await axios({
+      method: "post",
+      url: API_BASE_URL + "/api/order/orderRegistration",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+      },
+      data: { courseIdx: id },
+    }).then((response) => {
+      console.log(response);
+    });
+    navigate(`/mypage/payment`);
   };
-
-  //금액 콤마 찍기
-  // console.log(typeof course.courseCost);
-  // console.log(course.courseCost);
-  useEffect(() => {
-    setCourseCostChange((prev) =>
-      (course.courseCost + "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-    );
-  }, [course]);
-
-  // console.log(courseCostChange);
 
   useEffect((e) => {
     const fetchData = async () => {
@@ -69,6 +69,12 @@ function Apply({ courseIdx, course }) {
   }, []);
 
   useEffect(() => {
+    setCourseCostChange((prev) =>
+      (course.courseCost + "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    );
+  }, [course]);
+  //스크롤효과
+  /* useEffect(() => {
     if (height > 1000) {
       calRef.current.style.opacity = 0;
       calRef.current.style.transition = "opacity 0.7s";
@@ -86,8 +92,9 @@ function Apply({ courseIdx, course }) {
     return () => {
       window.removeEventListener("scroll", handleHeight); // addEventListener 함수를 삭제
     };
-  });
+  }); */
 
+  //찜하기를 위한 axios
   const toggleLike = async (e) => {
     // const res = await axios.post(`${API_BASE_URL}/api/like/{id}/insertLike`);
     const userId = localStorage.getItem("USER_ID");
@@ -124,34 +131,15 @@ function Apply({ courseIdx, course }) {
   };
   ///////////////////////////////////
 
-  const successAlert = () => {
-    // Swal.fire({
-    //   title: "Good job!",
-    //   text: "You clicked the button.",
-    //   icon: "success",
-    // });
-
-    Swal.fire({
-      title: "찜목록에 추가되었습니다.",
-      width: 600,
-      padding: "3em",
-      color: "#716add",
-      background: "#fff url(/images/trees.png)",
-      backdrop: `
-        rgba(0,0,123,0.4)
-        url("https://sweetalert2.github.io/images/nyan-cat.gif")
-         top
-        no-repeat
-      `,
-    });
-  };
-
   return (
     <>
       <div className="calendar-box1" ref={calRef}>
-        <h3>Title</h3>
+        <h3>{course.courseNm}</h3>
         <div className="cal-box">
-          <Calendar2 />
+          <Calendar2
+            stDate={course.courseStDate}
+            endDate={course.courseEndDate}
+          />
         </div>
         <div className="apply-cost">
           <span>예약 금액 1인:</span>
@@ -170,12 +158,10 @@ function Apply({ courseIdx, course }) {
         </div>
 
         <div className="cal-btn-box">
-          <button className="cal-wishList" onClick={successAlert}>
+          <button className="cal-wishList">
             <LikeButton like={like} onClick={toggleLike}></LikeButton>찜하기
           </button>
-          {/* <button>
-            <LikeModal></LikeModal>
-          </button> */}
+
           <button type="button" className="cal-apply" onClick={onClickBtn}>
             신청하기
           </button>

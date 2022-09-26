@@ -1,9 +1,5 @@
-/* @fontface {
-  font-family: "Noto Sans", cursive;
-  src: url("https://fonts.googleapis.com/css?family=Noto Sans");
-} */
 body {
-  /* font-family: "Noto Sans", cursive; */
+  margin: 0 auto;
 }
 
 .detail-main {
@@ -104,6 +100,10 @@ body {
   grid-column: 1 / span 2;
   grid-row: 1 / 8;
   text-align: center;
+}
+
+.course-cur-cnt {
+  width: 80px;
 }
 
 .teacher-content {
@@ -336,10 +336,16 @@ body {
 }
 
 .review-nickname {
+  margin-left: 20px;
 }
 
 .review-rating {
   float: right;
+  display: flex;
+}
+
+.review-rating-clear {
+  clear: both;
 }
 
 .review-input {
@@ -428,15 +434,20 @@ body {
 
 .reviewList {
   min-height: 600px;
-  margin-bottom: 300px;
+  margin-left: 30px;
   /* overflow: scroll; */
 }
 
+.btn-position {
+  width: 100%;
+  text-align: center;
+}
+
 .more-btn {
-  /* position: absolute;
+  /* /* position: absolute;
   left: 500px; */
-  position: absolute;
-  left: 500px;
+  /* position: absolute;
+  left: 800px; */
   border: 1px none;
   border-radius: 5px;
   background-color: #cbc7c3;
@@ -444,6 +455,11 @@ body {
 
 #review-box-list {
   height: 100%;
+}
+
+.MuiTabs-flexContainer {
+  display: flex;
+  justify-content: space-between;
 }
 
 #nana {
@@ -469,12 +485,18 @@ body {
   background-color: bisque;
 }
 
-/* #img55 {
-  position: relative;
-  z-index: 1;
+@media screen and (max-width: 1024px) {
+  .main-cal {
+    display: none;
+  }
+
+  .main-info {
+    width: 100%;
+  }
 }
-#btn55 {
-  position: relative;
-  z-index: 2;
-  top: -60px;
-} */
+
+@media screen and (max-width: 500px) {
+  #main-box {
+    height: 300px;
+  }
+}
