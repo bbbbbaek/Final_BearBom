@@ -8,12 +8,11 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.bearbom.dto.OrderDTO;
@@ -29,8 +28,9 @@ public class OrderController {
 	OrderService orderService;
 	
 	@PostMapping("/orderRegistration")
-	public void courseRegistration(HttpServletRequest request, @RequestParam Map<String, Object> paramMap,
+	public void courseRegistration(HttpServletRequest request, @RequestBody Map<String, Object> paramMap,
 			@AuthenticationPrincipal String userId) {
+		System.out.println("------------courseRegistration시작---------");
 		Order order = new Order();
 		User user = new User();
 		Course course = new Course();
@@ -49,7 +49,7 @@ public class OrderController {
 	
 	@GetMapping("/getOrderList")
 	public Map<String, Object> getOrderList(@AuthenticationPrincipal String userId){
-		
+		System.out.println("------------getOrderList시작---------");
 		try {
           Map<String, Object> resultMap = new HashMap<String, Object>();
           List<Course> getOrderedCourseList = orderService.getOrderedCourseListByUser(userId);
@@ -66,8 +66,10 @@ public class OrderController {
 	}
 	
 	@PostMapping("/updateOrderYn")
-	public void updateOrderYn(HttpServletRequest request, @RequestParam Map<String, Object> paramMap,
+	public void updateOrderYn(HttpServletRequest request, 
+			@RequestBody Map<String, Object> paramMap,
 			@AuthenticationPrincipal String userId) {
+		System.out.println("------------updateOrderYn시작---------");
 		System.out.println("paramMap :  "+paramMap);
 		System.out.println(Integer.parseInt(String.valueOf(paramMap.get("courseIdx"))));
 		int courseIdx = (Integer.parseInt(String.valueOf(paramMap.get("courseIdx"))));
@@ -76,14 +78,27 @@ public class OrderController {
 		orderDto.setUserId(userId);
 		Order order = orderService.getOrder(orderDto);
 		
-		order.setOrderNm(String.valueOf(paramMap.get("orderNm")));
-		order.setPgNm(String.valueOf(paramMap.get("pgNm")));
-		order.setPaymentMethod(String.valueOf(paramMap.get("paymentMethod")));
-		LocalDateTime payDate = LocalDateTime.now().plusHours(9);
-		order.setPaymentDate(payDate);
-		order.setOrderYn('Y');
+		Order orderTemp = orderService.findByOrderIdx(order.getOrderIdx());
+		System.out.println("1991" +orderTemp);
 		
-		orderService.updateOrderYn(order);
+		Course course = new Course();
+		course.setCourseIdx(courseIdx);
+		orderTemp.setCourse(course);
+		
+		User user = new User();
+		user.setUserId(userId);
+		orderTemp.setUser(user);
+		
+		orderTemp.setOrderPri(Integer.parseInt(String.valueOf(paramMap.get("OrderPri"))));
+		orderTemp.setOrderNm(String.valueOf(paramMap.get("orderNm")));
+		orderTemp.setPgNm(String.valueOf(paramMap.get("pgNm")));
+		orderTemp.setPaymentMethod(String.valueOf(paramMap.get("paymentMethod")));
+		LocalDateTime payDate = LocalDateTime.now().plusHours(9);
+		orderTemp.setPaymentDate(payDate);
+		orderTemp.setOrderYn('Y');
+		System.out.println("=-=-==-===--==-=");
+		System.out.println(orderTemp);
+		orderService.updateOrderYn(orderTemp);
 		
 	}
 }

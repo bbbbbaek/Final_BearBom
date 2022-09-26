@@ -16,6 +16,7 @@ import StepThree_2 from "./CourseRegistration/StepThree_2";
 import CourseStore from "./CourseRegistration/CourseStore";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { onRequest } from "../ModuleComponents/UsefulFunctions/ApiService";
 
 //const [formData1, setFormData1] = useState({});
 
@@ -142,6 +143,16 @@ const CourseRegistration = () => {
     //console.log(formData);
   };
 
+  const test = () => {
+    let data = {
+      courseIdx: 46,
+      orderNm: "아직 데이터 매핑 못했습니다;",
+      pgNm: "아직 데이터 매핑 못했습니다;",
+      paymentMethod: "아직 데이터 매핑 못했습니다;",
+    };
+    onRequest("/api/order/updateOrderYn", "post", data);
+  }
+
   return (
     <>
     <ThemeProvider theme={theme}>
@@ -152,16 +163,15 @@ const CourseRegistration = () => {
               <h4>&nbsp;등록페이지</h4>
             </div>
             <div className="progressbar">
-              <CenteredTabs></CenteredTabs>
+              <CenteredTabs currentStep={currentStep} setCurrentStep={setCurrentStep}/>
             </div>
           </div>
           <div className="fullline"></div>
           <div className="middle">
             <div className="leftbar">
-              <div className="step0 step">Step 1. 인증 및 클래스 유형</div>
-              <div className="step">Step 2. 클래스 소개</div>
+              <div className="step0 step">Step 1. 호스트 및 클래스 유형</div>
+              <div className="step">Step 2. 클래스 소개 및 위치</div>
               <div className="step">Step 3. 금액 및 일정</div>
-              <div className="step">Step 4. 클래스 위치</div>
             </div>
             <div className="midline" />
             <div className="midRight">
@@ -218,6 +228,7 @@ const CourseRegistration = () => {
                   >
                     등록
                   </Button>)}
+                  <button onClick={test}>pat test</button>
                   {/* <div>{currentStep}</div> */}
                 </div>
               </div>
