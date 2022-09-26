@@ -79,6 +79,9 @@ public class OrderController {
 		order.setPaymentMethod(String.valueOf(paramMap.get("paymentMethod")));
 		LocalDateTime payDate = LocalDateTime.now().plusHours(9);
 		order.setPaymentDate(payDate);
+		order.setOrderYn('Y');
+		
+		orderService.updateOrderYn(order);
 		
 	}
 }
