@@ -50,10 +50,6 @@ import CourseMgmt from "./PageComponents/Admin/Menu/CourseMgmt";
 import NoticeMgmt from "./PageComponents/Admin/Menu/NoticeMgmt";
 import FAQMgmt from "./PageComponents/Admin/Menu/FAQMgmt";
 import InquiryMgmt from "./PageComponents/Admin/Menu/InquiryMgmt";
-
-import CardSelect from "./PageComponents/Detail/PayCardOption";
-import PayWindow from "./PageComponents/Detail/PayWindow";
-
 import LatestTransaction from "./PageComponents/Admin/Menu/LatestTransaction";
 import BoardWrite from "./ModuleComponents/BoardWrite/BoardWrite";
 import Payment from "./ModuleComponents/Payment/Payment";
@@ -143,8 +139,6 @@ function App() {
           <Route path="/payready" element={<KakaoPayR />} />
           <Route path="/payresult" element={<KakaoPayRe />} />
           <Route path="/pwfind" element={<PwFind />} />
-          {/* <Route path="/payoption" element={<CardSelect />} /> */}
-          <Route path="/paywindow" element={<PayWindow />} />
         </Routes>
         <Top />
         <Chatbot />

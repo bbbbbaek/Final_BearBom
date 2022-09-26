@@ -15,31 +15,40 @@ function Review({ review }) {
   const closeModal = () => {
     setModalOpen(false);
   };
+  const [startDate, setStartDate] = useState(new Date());
+
+  const dayday1 = new Date(review.courserRegdate);
+  const dayday2 = new Date(new Date());
+  const dayday3 = (dayday2 - dayday1) / (60 * 60 * 24 * 1000);
+  let result;
+  if (dayday3 >= 1) {
+    result = parseInt(dayday3);
+  }
+  function getFee(isMember) {
+    return isMember ? "$2.00" : "$10.00";
+  }
+  var result1 = dayday3 >= 1 ? `${(result = parseInt(dayday3))}일전` : "방금";
 
   return (
     <>
       <div className="review-box">
-        <img className="img2" src={require("../../img/blogo1.png")}></img>
-        <span className="review-nickname">{review.user.userNickName}</span>
+        <div className="review-container">
+          <img className="img2" src={require("../../img/blogo1.png")}></img>
+          <span className="review-nickname">{review.user.userNickName}</span>
 
-        <span>{review.courserRegdate}</span>
-        <div className="review-rating">
-          <HoverRating courserRate={review.courserRate} />
+          <div className="review-rating">
+            <div>
+              <HoverRating courserRate={review.courserRate} />
+            </div>
+
+            <div className="review-date">{result1}</div>
+          </div>
         </div>
+
         <div>
           <span>{review.courserContent}</span>
         </div>
       </div>
-      {/* <div className="review-box">
-        <img className="u0" src={require("../../img/blogo1.png")}></img>
-
-        <div className="u1">{review.user.userNickName}</div>
-        <div className="u2">
-          <HoverRating courserRate={review.courserRate} />
-        </div>
-        <div className="u3">{review.courserRegdate}</div>
-        <div className="u4">{review.courserContent}</div>
-      </div> */}
     </>
   );
 }

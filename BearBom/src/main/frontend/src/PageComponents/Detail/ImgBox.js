@@ -7,36 +7,10 @@ import axios from "axios";
 import { API_BASE_URL } from "../../app-config";
 import { useParams } from "react-router-dom";
 
-// const choice = {
-//   img1: {
-//     name: "img1",
-//     img: process.env.PUBLIC_URL + require("../../img/class001.webp"),
-//   },
-//   img2: {
-//     name: "img2",
-//     img: process.env.PUBLIC_URL + require("../../img/img2.jpeg"),
-//   },
-//   img3: {
-//     name: "img3",
-//     img: process.env.PUBLIC_URL + require("../../img/class002.webp"),
-//   },
-//   img4: {
-//     name: "img4",
-//     img: process.env.PUBLIC_URL + require("../../img/class003.webp"),
-//   },
-// };
-
 function ImgBox({ course }) {
   const { id } = useParams();
   const [courseFile, setCourseFile] = useState([]);
   const [userSelect, setUserSelect] = useState();
-  // const play = (a, index) => {
-  //   setUserSelect({
-  //     name: a,
-  //     img: `http://localhost:8080/upload/${course.courseThumbnailNm}`,
-  //   });
-  //   console.log(setUserSelect);
-  // };
 
   const play = (a, index) => {
     console.log(a);
@@ -77,13 +51,9 @@ function ImgBox({ course }) {
         img: `http://localhost:8080/upload/${courseFile[0].img}`,
       });
     }
-    //console.log(courseFile.courseFileNewNm);
   }, [courseFile]);
 
   useEffect(() => {
-    // setCourseFile((prev) => ({ ...prev, courseIdx: id }));
-    //데이터불러오는 axios
-    //setCourse(response.data);
     axios({
       method: "get",
       url: API_BASE_URL + "/api/course/getCourseFile",
@@ -94,13 +64,6 @@ function ImgBox({ course }) {
     }).then((response) => {
       console.log(response.data);
       response.data.getCourseFile.map((file, index) => {
-        // const tempFile = [
-        //   ...courseFile,
-        //   {
-        //     name: `img${index + 1}`,
-        //     img: `http://localhost:8080/upload/${file.courseFileNewNm}`,
-        //   },
-        // ];
         setCourseFile((prev) => [
           ...prev,
           {

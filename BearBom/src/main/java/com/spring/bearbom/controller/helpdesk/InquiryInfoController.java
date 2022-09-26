@@ -42,11 +42,12 @@ public class InquiryInfoController {
 		System.out.println("content : "+inquiry.getInquiryContent());
 		System.out.println("userId : "+userId);
 
-
+//
 		int index = inquiryRepository.selectNextinquiryIdx();
 
 		InquiryDTO inquiryDTO = new InquiryDTO();
 
+		
 		
 		inquiryDTO.setInquiryIdx(inquiry.getInquiryIdx());
 //		inquiryDTO.setInquiryEmail(inquiry.getInquiryEmail());

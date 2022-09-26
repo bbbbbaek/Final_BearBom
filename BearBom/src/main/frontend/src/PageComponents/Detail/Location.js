@@ -12,15 +12,6 @@ const Location = ({ courseAddress }) => {
     console.log(courseAddress);
 
     var map = new kakao.maps.Map(container, options);
-    // var markerPosition = new kakao.maps.LatLng(
-    //   37.365264512305174,
-    //   127.10676860117488
-    // );
-    // var marker = new kakao.maps.Marker({
-    //   position: markerPosition,
-    // });
-    // marker.setMap(map);
-    // 주소-좌표 변환 객체를 생성합니다
     var geocoder = new kakao.maps.services.Geocoder();
 
     // 주소로 좌표를 검색합니다

@@ -21,6 +21,7 @@ import com.spring.bearbom.dto.UserDTO;
 import com.spring.bearbom.entity.User;
 import com.spring.bearbom.jwt.JwtTokenProvider;
 import com.spring.bearbom.service.email.EmailService;
+import com.spring.bearbom.service.mypage.MypageService;
 import com.spring.bearbom.service.user.UserService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +32,9 @@ import lombok.extern.slf4j.Slf4j;
 public class UserController {
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private MypageService mypageService;
 
 	@Autowired
 	private JwtTokenProvider jwtTokenProvider;
@@ -58,7 +62,7 @@ public class UserController {
 			userDTO.setUserId(joinUser.getUserId());
 			userDTO.setUserPw(joinUser.getUserPw());
 			userDTO.setRole(joinUser.getRole());
-			userDTO.setUserEmail(joinUser.getUserEmail()); //
+			userDTO.setUserEmail(joinUser.getUserEmail()); 
 			userDTO.setUserNm(joinUser.getUserNm());
 			userDTO.setUserNickName(joinUser.getUserNickName());
 			userDTO.setUserAddress(joinUser.getUserAddress());
@@ -76,6 +80,22 @@ public class UserController {
 			return ResponseEntity.badRequest().body(response);
 		}
 	}
+	
+	// 0926 비밀번호 수정 저장
+	@PostMapping("/updateUserInfo")
+	public ResponseEntity<?> updatePw(@RequestBody User user, @AuthenticationPrincipal String userId) {
+		user.setUserPw(passwordEncoder.encode(user.getUserPw()));
+		
+		user.setUserId(userId);
+
+		mypageService.updateUser(user);
+
+		UserDTO userDTO = new UserDTO();
+
+		return ResponseEntity.ok().body("success");
+	}
+	
+	///////////////////////////////////////////////////////////////
 
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody User user, @AuthenticationPrincipal String userId) {
@@ -174,7 +194,7 @@ public class UserController {
     		return errorMap;
     	}
     };
- // admin 유저 정보 불러오기 0922
+
 	
 
 }

@@ -1,12 +1,18 @@
 package com.spring.bearbom.entity;
 
-import javax.persistence.*;
+import java.time.LocalDateTime;
 
-import lombok.Data;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import java.time.LocalDateTime;
+import lombok.Data;
 
 @Entity
 @Data
@@ -17,7 +23,7 @@ public class Order {
 	@Id
 	private int orderIdx;
 
-	@Column(nullable = false)
+	@Column//(nullable = false)
 	private int orderPri;
 
 	@Column(nullable = false)
@@ -30,7 +36,19 @@ public class Order {
 	private char orderYn = 'N';
 
 	@Column(nullable = false,columnDefinition = "char(1)")
-	private char orderUseYn = 'N';
+	private char orderUseYn = 'Y';
+	
+	@Column
+	private String orderNm;
+	
+	@Column
+	private String paymentMethod;
+	
+	@Column
+	private LocalDateTime paymentDate;
+	
+	@Column
+	private String PgNm;
 
 	@ManyToOne
 	@JoinColumn(name="USER_ID")

@@ -27,6 +27,22 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.spring.bearbom.dto.CourseDTO;
 import com.spring.bearbom.dto.ResponseDTO;
 import com.spring.bearbom.dto.UserDTO;
@@ -113,7 +129,11 @@ public class MypageController {
 //		oldUser.setUserZipcode(user.getUserZipcode());
 //		oldUser.setUserEmail(user.getUserEmail());
 //		oldUser.setUserYn(user.getUserYn());
-
+		
+		// 비밀번호 수정 후 저장
+		if(user.getUserPw() != null && !user.getUserPw().equals("")) {
+			user.setUserPw(passwordEncoder.encode(user.getUserPw()));
+		}
 		System.out.println("userId : "+user.getUserTel());
 		
 		// 0926 userId 가져옴
@@ -202,6 +222,27 @@ public class MypageController {
 
 		} catch (Exception e) {
 			Map<String, Object> errorMap = new HashMap<>();
+			errorMap.put("error", e.getMessage());
+			return errorMap;
+		}
+	}
+
+	@GetMapping("/getWishList")
+	public Map<String, Object> getWishList(@AuthenticationPrincipal String userId) {
+		 CourseDTO courseDTO = new CourseDTO();
+		 log.info("userId : {}", userId);
+		 
+		try {
+			courseDTO.setUserId(userId);
+			
+			List<CourseDTO> wishList = mypageService.getWishList(courseDTO);
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+			resultMap.put("wishList", wishList);
+			
+			return resultMap;
+		}
+		catch (Exception e){
+			Map<String, Object> errorMap = new HashMap<String, Object>();
 			errorMap.put("error", e.getMessage());
 			return errorMap;
 		}
