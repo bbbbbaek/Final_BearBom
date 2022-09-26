@@ -43,44 +43,19 @@ public class Inquiry {
         @Column(nullable = false)
         private LocalDateTime inquiryRegdate = LocalDateTime.now();
         
-        @Column(nullable = false)
-        private LocalDateTime replyRegdate = LocalDateTime.now();
+        @Column(nullable = true)
+        private LocalDateTime replyRegdate;
         
-        @Column(nullable = false,columnDefinition = "char(1)")
+        @Column(columnDefinition = "char(1)")
         private char replyYn ='N';
         
-        @Column(nullable = false, columnDefinition = "varchar(300)")
+        @Column(columnDefinition = "varchar(300)")
         private String replyTitle;
 
-        @Column(nullable = false, columnDefinition = "varchar(2000)")
+        @Column(columnDefinition = "varchar(2000)")
         private String replyContent;
         
-//        @Column(nullable = true)
-//        private LocalDateTime replyRegdate;
-//        
-//        @Column(nullable = true,columnDefinition = "char(1)")
-//        private char replyYn ='N';
-//        
-//        @Column(nullable = true, columnDefinition = "varchar(300)")
-//        private String replyTitle;
-//
-//        @Column(nullable = true, columnDefinition = "varchar(2000)")
-//        private String replyContent;
-        
-        
-//        @Column(nullable = false,columnDefinition = "char(1)")
-//        private char inquiryReplyYn ='N';
-//        
-//        @Column(nullable = false, columnDefinition = "varchar(2000)")
-//        private String inquiryReplyContent;
-//        
-//        @Column(nullable = false)
-//        private LocalDateTime inquiryReplyDate = LocalDateTime.now();
-        
-        
-        
-        
-        
+
         
         @ManyToOne
         @JoinColumn(name="USER_ID")
