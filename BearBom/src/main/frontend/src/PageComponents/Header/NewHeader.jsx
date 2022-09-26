@@ -135,6 +135,7 @@ const Header = () => {
         </div>
         <div className="user">
           {/* reduxStore state인 loginStatus는 객체로 반환되므로, .loginStatus로 한번 더 접근해줘야 함 */}
+
           {loginStatus.loginStatus ? (
             <ul id="isLoggedIn">
               <li>
