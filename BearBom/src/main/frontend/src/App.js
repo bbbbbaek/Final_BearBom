@@ -55,20 +55,6 @@ import BoardWrite from "./ModuleComponents/BoardWrite/BoardWrite";
 import Payment from "./ModuleComponents/Payment/Payment";
 
 function App() {
-  const [fetchedData, setFetchedData] = useState([
-    {
-      Title: 1,
-      user: 1,
-      Content: 1,
-      Regdate: 1,
-    },
-    {
-      Title: 2,
-      user: 2,
-      Content: 2,
-      Regdate: 2,
-    },
-  ]);
   return (
     <>
       <NewHeader />

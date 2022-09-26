@@ -2,23 +2,18 @@ import React, { useState, useEffect } from "react";
 import Table from "../../../ModuleComponents/Table/Table";
 import axios from "axios";
 import { API_BASE_URL } from "../../../app-config";
-import { faqItems, inquiryItems } from "../../../customHooks/createItems";
+import { faqMgmtItems } from "../../../customHooks/createItems";
 import { useNavigate } from "react-router-dom";
 
 const FAQMgmt = () => {
-  let tableInfo = faqItems;
+  let tableInfo = faqMgmtItems;
   const navigate = useNavigate();
   const [fetchedData, setFetchedData] = useState();
   useEffect(() => {
-    axios
-      .get(
-        // "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/FAQ"
-        API_BASE_URL + "/api/helpdesk/getFaqList"
-      )
-      .then((res) => {
-        setFetchedData(res.data.data);
-        console.log("test");
-      });
+    axios.get(API_BASE_URL + "/api/helpdesk/getFaqList").then((res) => {
+      setFetchedData(res.data.data);
+      console.log("test");
+    });
   }, []);
 
   return (
@@ -27,13 +22,6 @@ const FAQMgmt = () => {
         <h5>
           <strong>FAQ 관리</strong>
         </h5>
-        <button
-          onClick={() => {
-            navigate("board");
-          }}
-        >
-          글쓰기
-        </button>
         <hr />
         {fetchedData ? (
           <Table tableInfo={tableInfo} fetchedData={fetchedData} />

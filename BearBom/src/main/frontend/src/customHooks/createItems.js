@@ -160,9 +160,9 @@ export const noticeMgmtItems = [
   new Data("번호", "l10", "noticeIdx"),
   new Data("제목", "l40", "noticeTitle"),
   // new Data("제목", "l40", "noticeContent"),
-  new Data("작성자", "l10", "user"),
+  // new Data("작성자", "l10", "user"),
   new Data("작성일", "l10", "noticeRegdate"),
-  new Data("조회수", "l10", "noticeMdfdate"),
+  new Data("삭제", "l10", "noticeMdfdate"),
 ];
 
 // FAQ 관리
