@@ -40,6 +40,34 @@ public class Inquiry {
         @Column(nullable = false,columnDefinition = "char(1)")
         private char inquiryYn ='Y';
         
+        @Column(nullable = false)
+        private LocalDateTime inquiryRegdate = LocalDateTime.now();
+        
+        @Column(nullable = false)
+        private LocalDateTime replyRegdate = LocalDateTime.now();
+        
+        @Column(nullable = false,columnDefinition = "char(1)")
+        private char replyYn ='N';
+        
+        @Column(nullable = false, columnDefinition = "varchar(300)")
+        private String replyTitle;
+
+        @Column(nullable = false, columnDefinition = "varchar(2000)")
+        private String replyContent;
+        
+//        @Column(nullable = true)
+//        private LocalDateTime replyRegdate;
+//        
+//        @Column(nullable = true,columnDefinition = "char(1)")
+//        private char replyYn ='N';
+//        
+//        @Column(nullable = true, columnDefinition = "varchar(300)")
+//        private String replyTitle;
+//
+//        @Column(nullable = true, columnDefinition = "varchar(2000)")
+//        private String replyContent;
+        
+        
 //        @Column(nullable = false,columnDefinition = "char(1)")
 //        private char inquiryReplyYn ='N';
 //        
