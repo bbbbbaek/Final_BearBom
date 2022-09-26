@@ -53,7 +53,7 @@ public class InquiryInfoController {
 //		inquiryDTO.setInquiryEmail(inquiry.getInquiryEmail());
 		inquiryDTO.setInquirySort(inquiry.getInquirySort());
 		inquiryDTO.setInquiryTitle(inquiry.getInquiryTitle());
-		inquiryDTO.setInquiryContetnt(inquiry.getInquiryContent());
+		inquiryDTO.setInquiryContent(inquiry.getInquiryContent());
 		inquiryDTO.setInquiryUseYn(inquiry.getInquiryUseYn());
 		inquiryDTO.setInquiryYn(inquiry.getInquiryYn());
 		inquiryDTO.setInquiryRegdate(inquiry.getInquiryRegdate());
