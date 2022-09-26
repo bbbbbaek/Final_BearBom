@@ -8,11 +8,15 @@ const InquiryMgmt = () => {
   let tableInfo = inquiryItems;
   const [fetchedData, setFetchedData] = useState();
   useEffect(() => {
-    axios
-      .get(API_BASE_URL + "/api/admin/getInquiryInfoReferenceList")
-      .then((res) => {
-        setFetchedData(res.data);
-      });
+    axios({
+      method: "get",
+      url: API_BASE_URL + "/api/admin/getInquiryInfoReferenceList",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+      },
+    }).then((res) => {
+      setFetchedData(res.data);
+    });
   }, []);
 
   return (

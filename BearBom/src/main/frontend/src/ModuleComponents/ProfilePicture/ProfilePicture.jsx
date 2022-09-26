@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import "./profilepicture.scss";
 import adminProfileImage from "../../images/adminProfileImage.png";
-import unknownUser from "../../images/unknownUser.png";
+import defaultProfilePicture from "../../images/defaultProfilePicture.png";
 import { onRequest } from "../../ModuleComponents/UsefulFunctions/ApiService";
 
 const ProfilePicture = ({ pictureData }) => {
-  const [fileImage, setFileImage] = useState(adminProfileImage);
+  const [fileImage, setFileImage] = useState(defaultProfilePicture);
   const saveFileImage = (e) => {
     setFileImage(URL.createObjectURL(e.target.files[0]));
     const fileData = URL.createObjectURL(e.target.files[0]);

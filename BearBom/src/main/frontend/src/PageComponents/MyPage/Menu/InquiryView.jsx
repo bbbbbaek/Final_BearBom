@@ -16,6 +16,7 @@ const InquiryView = () => {
         Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
       },
     }).then((res) => {
+      console.log(res);
       console.log(Object.values(res.data)[0]);
       setFetchedData(Object.values(res.data)[0]);
     });

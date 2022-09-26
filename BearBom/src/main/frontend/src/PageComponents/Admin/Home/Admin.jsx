@@ -14,7 +14,7 @@ const Admin = () => {
 
   useEffect(() => {
     const accessToken = localStorage.getItem("ACCESS_TOKEN");
-    const userRole = localStorage.getItem("USER_ROLE")
+    const userRole = localStorage.getItem("USER_ROLE");
     console.log(accessToken);
     if (
       accessToken === null ||
@@ -25,12 +25,11 @@ const Admin = () => {
       navigate("/login");
     }
 
-    if(
-      userRole === "ROLE_USER" && (
-      accessToken !== null ||
-      accessToken !== "" ||
-      typeof accessToken !== "undefined"
-      )
+    if (
+      userRole === "ROLE_USER" &&
+      (accessToken !== null ||
+        accessToken !== "" ||
+        typeof accessToken !== "undefined")
     ) {
       alert("관리자 계정 필요");
       navigate("/");
@@ -50,7 +49,7 @@ const Admin = () => {
   return (
     <>
       {fetchedData ? (
-        <div style={{ marginTop: "15px" }}>
+        <div>
           <div className="admin_home">
             <Sidebar />
             <div className="homeContainer">

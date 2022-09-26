@@ -1,0 +1,5 @@
+@import "../../variables";
+.resultnotfound {
+  @include flexCenter(row);
+  height: 200px;
+}

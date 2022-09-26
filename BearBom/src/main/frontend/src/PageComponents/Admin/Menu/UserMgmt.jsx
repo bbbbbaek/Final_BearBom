@@ -8,8 +8,15 @@ const UserMgmt = () => {
   let tableInfo = userMgmtItems;
   const [fetchedData, setFetchedData] = useState();
   useEffect(() => {
-    axios.get(API_BASE_URL + "/api/admin/getUserList").then((res) => {
-      setFetchedData(res.data);
+    axios({
+      method: "get",
+      url: API_BASE_URL + "/api/admin/getUserList",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+      },
+    }).then((res) => {
+      console.log(res.data.userList);
+      setFetchedData(res.data.userList);
     });
   }, []);
 

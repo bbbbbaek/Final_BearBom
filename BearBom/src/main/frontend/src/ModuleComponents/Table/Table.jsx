@@ -9,8 +9,7 @@ import Stack from "@mui/material/Stack";
 import excelDownload from "../../images/excelDownload.png";
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../../app-config";
-import { returnValueOfKey } from "../../customHooks/usefulFunctions";
-import { accordionClasses } from "@mui/material";
+import Board from "../Board/Board";
 
 // TableMenuItems 객체로 생성한 tableItems state를 사용하여 각 컴포넌트에 알맞은 데이터를 출력할 수 있도록 설계
 const Table = ({ tableInfo, fetchedData, imageYn }) => {
@@ -29,7 +28,6 @@ const Table = ({ tableInfo, fetchedData, imageYn }) => {
   const sortedData = [...fetchedData].sort(
     (a, b) => b[returnValueOfKey(sortType)] - a[returnValueOfKey(sortType)]
   );
-  console.log(sortedData);
 
   const [rawData] = useState(sortedData);
   // data의 초깃값을 salesData로 설정하게 되면, rawData와 참조값이 같게 되면서 splice메소드 사용하여 data 변경 시, rawData의 값도 변경되는 문제 있음
@@ -93,9 +91,46 @@ const Table = ({ tableInfo, fetchedData, imageYn }) => {
   };
 
   // 테이블 바디 onClick 시, 상세 페이지로 이동하는 함수
-  const moveToBoard = (element) => {
+  const moveToBoard = (element, type) => {
     let id = element[returnValueOfKey("Idx")];
-    navigate(`${id}`);
+    let path = window.location.pathname;
+    switch (path) {
+      case "/helpdesk/notice":
+        navigate(`${id}`);
+        break;
+      case "/mypage/wishlist":
+        navigate(`/course/${id}`);
+        break;
+      case "/mypage/course/user":
+        navigate(`/course/${id}`);
+        break;
+      case "/mypage/course/lecturer":
+        navigate(`/course/${id}`);
+        break;
+      case "/mypage/inquiry/view":
+        navigate(`${id}`);
+        break;
+      case "/admin/sales":
+        break;
+      case "/admin/orders":
+        break;
+      case "/admin/users":
+        break;
+      case "/admin/courses":
+        navigate(`/course/${id}`);
+        break;
+      case "/admin/notice":
+        navigate(`${id}`);
+        break;
+      case "/admin/faq":
+        navigate(`${id}`);
+        break;
+      case "/admin/inquiry":
+        navigate(`${id}`);
+        break;
+      default:
+        break;
+    }
   };
 
   // 테이블에 클래스 추가해주는 함수
@@ -103,7 +138,7 @@ const Table = ({ tableInfo, fetchedData, imageYn }) => {
     return "column " + tableInfo[index].prop;
   };
 
-  // 테이블 헤드 반환하는 함수 (Row)
+  // 테이블 헤드 반환하는 함수 (가로)
   const insertTH = (tableInfo) => {
     let tableItem = [];
     for (let i = 0; i < tableInfo.length; i++) {
@@ -112,7 +147,7 @@ const Table = ({ tableInfo, fetchedData, imageYn }) => {
     return tableItem;
   };
 
-  // 테이블 바디 반환하는 함수 (Row)
+  // 테이블 바디 반환하는 함수 (가로)
   const insertTDT = (tableInfo, element) => {
     let tableItem = [];
     for (let i = 0; i < tableInfo.length; i++) {
@@ -150,14 +185,6 @@ const Table = ({ tableInfo, fetchedData, imageYn }) => {
     <>
       {fetchedData ? (
         <div className="table_home">
-          <button
-            onClick={() => {
-              console.log(sortType);
-              console.log(data);
-            }}
-          >
-            dd
-          </button>
           <div className="top1">
             <div className="search">
               <select
@@ -205,10 +232,10 @@ const Table = ({ tableInfo, fetchedData, imageYn }) => {
           </div>
           <div className="center">
             <table>
-              {/* 테이블 헤드 부분 (Column) */}
+              {/* 테이블 헤드 부분 (세로) */}
               <tr className="row_title">{insertTH(tableInfo)}</tr>
 
-              {/* 테이블 바디 부분 (Column) */}
+              {/* 테이블 바디 부분 (세로) */}
               {currentPageData.map((a, i) => {
                 return (
                   <tr className="row_data" key={i}>
