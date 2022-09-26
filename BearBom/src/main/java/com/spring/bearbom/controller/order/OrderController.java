@@ -31,6 +31,7 @@ public class OrderController {
 	@PostMapping("/orderRegistration")
 	public void courseRegistration(HttpServletRequest request, @RequestParam Map<String, Object> paramMap,
 			@AuthenticationPrincipal String userId) {
+		System.out.println("------------courseRegistration시작---------");
 		Order order = new Order();
 		User user = new User();
 		Course course = new Course();
@@ -49,7 +50,7 @@ public class OrderController {
 	
 	@GetMapping("/getOrderList")
 	public Map<String, Object> getOrderList(@AuthenticationPrincipal String userId){
-		
+		System.out.println("------------getOrderList시작---------");
 		try {
           Map<String, Object> resultMap = new HashMap<String, Object>();
           List<Course> getOrderedCourseList = orderService.getOrderedCourseListByUser(userId);
@@ -68,6 +69,7 @@ public class OrderController {
 	@PostMapping("/updateOrderYn")
 	public void updateOrderYn(HttpServletRequest request, @RequestParam Map<String, Object> paramMap,
 			@AuthenticationPrincipal String userId) {
+		System.out.println("------------updateOrderYn시작---------");
 		System.out.println("paramMap :  "+paramMap);
 		System.out.println(Integer.parseInt(String.valueOf(paramMap.get("courseIdx"))));
 		int courseIdx = (Integer.parseInt(String.valueOf(paramMap.get("courseIdx"))));
