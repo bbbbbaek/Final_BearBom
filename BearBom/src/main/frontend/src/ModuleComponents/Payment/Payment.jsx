@@ -1,13 +1,44 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./payment.scss";
 import kakaopay from "../../images/kakaopay.png";
 import tosspay from "../../images/tosspay.png";
 import creditcard from "../../images/creditcard.png";
 import banktransfer from "../../images/banktransfer.png";
 import ResultNotFound from "../ResultNotFound/ResultNotFound";
+import { onRequest } from "../UsefulFunctions/ApiService";
+import data from "../data";
+import axios from "axios";
+import { useState } from "react";
+import { API_BASE_URL } from "../../app-config";
 
 const Payment = () => {
-  let fetchedData = [1, 2, 3];
+  const [userData, setUserData] = useState();
+  const [fetchedData, setFetchedData] = useState();
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    // 유저 정보
+    const promise1 = axios({
+      method: "get",
+      url: API_BASE_URL + "/api/mypage/getUser",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+      },
+    });
+    // 강의 정보
+    const promise2 = axios({
+      method: "get",
+      url: "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Order",
+    });
+    Promise.all([promise1, promise2]).then((res) => {
+      setUserData(res[0].data);
+      setFetchedData(res[1].data);
+      console.log(res[0].data);
+      console.log(res[1].data);
+    });
+  }, []);
+  let paymentInfo;
+
   function onClickPayment(paymentInfo) {
     /* 1. 가맹점 식별하기 */
     const { IMP } = window;
@@ -18,13 +49,13 @@ const Payment = () => {
       pg: paymentInfo[0], // PG사
       pay_method: paymentInfo[1], // 결제수단
       merchant_uid: `mid_${new Date().getTime()}`, // 주문번호
-      amount: 100, // 결제금액
-      name: "베어봄 결제 연동 Test", // 주문명
-      buyer_name: "김광민", // 구매자 이름
-      buyer_tel: "01012341234", // 구매자 전화번호
-      buyer_email: "example@example", // 구매자 이메일
-      buyer_addr: "신사동 661-16", // 구매자 주소
-      buyer_postcode: "06018", // 구매자 우편번호
+      amount: cart[0].courseCost, // 결제금액
+      name: cart[0].courseNm, // 주문명
+      buyer_name: userData.userNm, // 구매자 이름
+      buyer_tel: userData.userTel, // 구매자 전화번호
+      buyer_email: userData.userEmail, // 구매자 이메일
+      buyer_addr: userData.userEmail, // 구매자 주소
+      buyer_postcode: userData.userZipcode, // 구매자 우편번호
     };
 
     /* 4. 결제 창 호출하기 */
@@ -39,14 +70,46 @@ const Payment = () => {
     console.log(success);
     console.log(error_msg);
     if (success) {
+      console.log(success);
+      let data = {
+        courseIdx: cart[0].courseIdx,
+        orderNm: "아직 데이터 매핑 못했습니다;",
+        pgNm: "아직 데이터 매핑 못했습니다;",
+        paymentMethod: "아직 데이터 매핑 못했습니다;",
+      };
+      onRequest(API_BASE_URL + "/api/order/updateOrderYn", "post", data);
       alert("결제가 정상적으로 완료되었습니다.");
     } else {
       alert(`결제 실패: ${error_msg}`);
     }
   }
 
+  const onSelectOrder = (index) => {
+    let selectedArray = fetchedData.filter((a) => {
+      return a.courseIdx === index;
+    });
+    // cart에 해당 array가 담겨있는지 체크
+    const test = cart.filter((a) => {
+      return a.courseIdx === index;
+    });
+
+    if (Array.isArray(test) && test.length === 0) {
+      cart.push(...selectedArray);
+    } else {
+      cart.splice(cart.indexOf(test.courseIdx === index), 1);
+    }
+  };
+
   const onSelectPG = (e) => {
-    let paymentInfo;
+    let otherInfo = {
+      courseCost: cart[0].courseCost,
+      courseNm: cart[0].courseNm,
+      userNm: userData.userNm,
+      userTel: userData.userTel,
+      userEmail: userData.userEmail,
+      userAddress: userData.userEmail,
+      userZipcode: userData.userZipcode,
+    };
     switch (e.target.id) {
       case "kakaopay":
         paymentInfo = ["kakaopay.TC0ONETIME", "kakaopay"];
@@ -63,7 +126,6 @@ const Payment = () => {
       default:
         break;
     }
-    console.log(paymentInfo);
     onClickPayment(paymentInfo);
   };
 
@@ -73,6 +135,13 @@ const Payment = () => {
         <h5>
           <strong>장바구니</strong>
         </h5>
+        <button
+          onClick={() => {
+            console.log(cart);
+          }}
+        >
+          click
+        </button>
         <hr />
         {fetchedData ? (
           <div className="payment_body">
@@ -91,14 +160,21 @@ const Payment = () => {
                 {fetchedData.map((a, i) => {
                   return (
                     <tr>
-                      <td>box</td>
-                      <td>1</td>
-                      <td>img</td>
-                      <td>누구와 함께하는 블라블라</td>
-                      <td>2012/12/12</td>
-                      <td>2012/12/12</td>
-                      <td>2012/12/12</td>
-                      <td>300,000</td>
+                      <td>
+                        <input
+                          type="checkbox"
+                          onClick={() => {
+                            onSelectOrder(a.courseIdx);
+                          }}
+                        />
+                      </td>
+                      <td>{a.courseIdx}</td>
+                      <td>{a.courseThumb}</td>
+                      <td>{a.courseNm}</td>
+                      <td>{a.userId}</td>
+                      <td>{a.courseStDate}</td>
+                      <td>{a.courseEndDate}</td>
+                      <td>{a.courseCost}</td>
                     </tr>
                   );
                 })}

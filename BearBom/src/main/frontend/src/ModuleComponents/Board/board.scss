@@ -15,18 +15,38 @@
       height: 2rem;
     }
 
-    .back {
-      width: 3rem;
-      height: 2rem;
-      background-color: #e1e2e3;
-      border: none;
-      border-radius: 2px;
+    .buttons {
+      display: flex;
+      gap: 1rem;
 
-      &:hover {
-        transform: scale(0.98);
+      .write {
+        width: 3rem;
+        height: 2rem;
         background-color: #7697a0;
         color: #fff;
+        border: none;
+        border-radius: 2px;
         font-weight: bold;
+
+        &:hover {
+          transform: scale(0.98);
+          background-color: #4a707a;
+        }
+      }
+
+      .back {
+        width: 3rem;
+        height: 2rem;
+        background-color: #e1e2e3;
+        border: none;
+        border-radius: 2px;
+
+        &:hover {
+          transform: scale(0.98);
+          background-color: #7697a0;
+          color: #fff;
+          font-weight: bold;
+        }
       }
     }
   }
