@@ -101,9 +101,10 @@ public class MypageController {
 //		oldUser.setUserZipcode(user.getUserZipcode());
 //		oldUser.setUserEmail(user.getUserEmail());
 //		oldUser.setUserYn(user.getUserYn());
-		System.out.println("userId : "+user.getUserId());
-//		user.setUserId(userId);	
-
+		System.out.println("userId : "+user.getUserTel());
+		
+		// 0926 userId 가져옴
+		user.setUserId(userId);
 		mypageService.updateUser(user);
 
 		User newUser = mypageService.getUser(user.getUserId());
@@ -143,6 +144,7 @@ public class MypageController {
 	@PostMapping("/deleteUserInfo")
 	public Map<String, String> deleteUserInfo(@AuthenticationPrincipal String userId){
 		try {
+			System.out.println("///////////////////////////////"+userId);
 			Map<String, String> resultMap = new HashMap<String, String>();
 
 			String message = mypageService.deleteUserInfo(userId);

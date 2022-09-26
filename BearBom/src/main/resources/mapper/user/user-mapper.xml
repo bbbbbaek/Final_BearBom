@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/dtd/DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
    
-<mapper namespace="com.spring.bearbom.mapper.UserMapper">
-	<update id="updateUser">
+<mapper namespace="com.spring.bearbom.mapper.UserMapper" >
+	<update id="updateUser" parameterType="user">
 		UPDATE T_USER
 			<set> 
 				<if test='userPw != null and !("").equals(userPw)'>
@@ -13,7 +13,7 @@
 					USER_NM = #{userNm},
 				</if>
 				<if test='userNickName != null and !("").equals(userNickName)'>
-					USER_NICKNAME = #{userNickName},
+					USER_NICK_NAME = #{userNickName},
 				</if>
 				<if test='userTel != null and !("").equals(userTel)'>
 					USER_TEL = #{userTel},
@@ -22,7 +22,7 @@
 					USER_ADDRESS = #{userAddress},
 				</if>
 				<if test='userAddressDef != null and !("").equals(userAddressDef)'>
-					USER_ADDRESSDEF = #{userAddressDef},
+					USER_ADDRESS_DEF = #{userAddressDef},
 				</if>
 				<if test='userZipcode != null and !("").equals(userZipcode)'>
 					USER_ZIPCODE = #{userZipcode},
@@ -38,13 +38,11 @@
 			WHERE USER_ID = #{userId}
 	</update>
 	
+	
 	 <select id="getUserList" resultType="camelHashMap">
         <![CDATA[
  			SELECT * FROM T_USER;
         ]]>
     </select>
-    
-
-	
 </mapper>
 
