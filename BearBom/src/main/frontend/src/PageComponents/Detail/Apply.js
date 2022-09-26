@@ -2,12 +2,13 @@ import Calendar2 from "./Calendar";
 import "../../css/apply.css";
 import { useEffect, useState, useRef } from "react";
 import LikeButton from "../../ModuleComponents/LikeButton";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { API_BASE_URL } from "../../app-config";
 import Swal from "sweetalert2";
 
 function Apply({ courseIdx, course }) {
+  const { id } = useParams(); //id를 통해 강의id로 이동
   const [height, setHeight] = useState();
   // const handleHeight = () => {
   //   setHeight(window.pageYOffset);
@@ -18,8 +19,18 @@ function Apply({ courseIdx, course }) {
 
   //카카오페이 경로이동
   const navigate = useNavigate();
-  const onClickBtn = () => {
-    navigate(`/payready`);
+  const onClickBtn = async () => {
+    await axios({
+      method: "post",
+      url: API_BASE_URL + "/api/order/orderRegistration",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+      },
+      data: { courseIdx: id },
+    }).then((response) => {
+      console.log(response);
+    });
+    navigate(`/mypage/payment`);
   };
 
   useEffect((e) => {
