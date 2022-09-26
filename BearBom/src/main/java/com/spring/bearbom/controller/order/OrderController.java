@@ -68,6 +68,8 @@ public class OrderController {
 	@PostMapping("/updateOrderYn")
 	public void updateOrderYn(HttpServletRequest request, @RequestParam Map<String, Object> paramMap,
 			@AuthenticationPrincipal String userId) {
+		System.out.println("paramMap :  "+paramMap);
+		System.out.println(Integer.parseInt(String.valueOf(paramMap.get("courseIdx"))));
 		int courseIdx = (Integer.parseInt(String.valueOf(paramMap.get("courseIdx"))));
 		OrderDTO orderDto = new OrderDTO();
 		orderDto.setCourseIdx(courseIdx);

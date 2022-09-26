@@ -29,10 +29,14 @@ const Payment = () => {
     const promise2 = axios({
       method: "get",
       url: API_BASE_URL + "/api/order/getOrderList",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+      },
     });
     Promise.all([promise1, promise2]).then((res) => {
       setUserData(res[0].data);
-      setFetchedData(res[1].data);
+      setFetchedData(res[1].data.getOrderedCourseList);
+      console.log(res[1].data.getOrderedCourseList);
       console.log(res[0].data);
       console.log(res[1].data);
     });
@@ -79,6 +83,7 @@ const Payment = () => {
       };
       onRequest(API_BASE_URL + "/api/order/updateOrderYn", "post", data);
       alert("결제가 정상적으로 완료되었습니다.");
+      console.log(data);
     } else {
       alert(`결제 실패: ${error_msg}`);
     }
