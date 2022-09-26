@@ -4,6 +4,7 @@ import Table from "../../../ModuleComponents/Table/Table";
 import { takenClassItems } from "../../../customHooks/createItems";
 import axios from "axios";
 import { API_BASE_URL } from "../../../app-config";
+import ResultNotFound from "../../../ModuleComponents/ResultNotFound/ResultNotFound";
 
 const TakenClassView = () => {
   let tableInfo = takenClassItems;
@@ -32,7 +33,9 @@ const TakenClassView = () => {
         <hr />
         {fetchedData ? (
           <Table tableInfo={tableInfo} fetchedData={fetchedData} />
-        ) : null}
+        ) : (
+          <ResultNotFound />
+        )}
       </div>
     </>
   );

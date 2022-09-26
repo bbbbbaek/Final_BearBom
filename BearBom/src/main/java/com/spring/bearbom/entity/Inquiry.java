@@ -33,27 +33,43 @@ public class Inquiry {
 
         @Column(nullable = false, columnDefinition = "varchar(2000)")
         private String inquiryContent;
-        
+
         @Column(nullable = false,columnDefinition = "char(1)")
         private char inquiryUseYn ='Y';
-        
+
         @Column(nullable = false,columnDefinition = "char(1)")
         private char inquiryYn ='Y';
+
         
+        @Column(nullable = false)
+        private LocalDateTime inquiryRegdate = LocalDateTime.now();
+        
+        @Column(nullable = false)
+        private LocalDateTime replyRegdate = LocalDateTime.now();
+        
+        @Column(nullable = false,columnDefinition = "char(1)")
+        private char replyYn ='N';
+        
+        @Column(nullable = false, columnDefinition = "varchar(300)")
+        private String replyTitle;
+
+        @Column(nullable = false, columnDefinition = "varchar(2000)")
+        private String replyContent;
+
 //        @Column(nullable = false,columnDefinition = "char(1)")
 //        private char inquiryReplyYn ='N';
-//        
+//
 //        @Column(nullable = false, columnDefinition = "varchar(2000)")
 //        private String inquiryReplyContent;
-//        
+//
 //        @Column(nullable = false)
 //        private LocalDateTime inquiryReplyDate = LocalDateTime.now();
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
         @ManyToOne
         @JoinColumn(name="USER_ID")
         private User user;
@@ -63,4 +79,3 @@ public class Inquiry {
 
 
 }
-

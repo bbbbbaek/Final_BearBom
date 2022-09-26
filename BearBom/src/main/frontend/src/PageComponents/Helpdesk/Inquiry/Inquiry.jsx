@@ -4,6 +4,7 @@ import "./inquiry.scss";
 import axios from "axios";
 import { API_BASE_URL } from "../../../app-config";
 import { useEffect } from "react";
+import { now } from "moment";
 
 const Inquiry = () => {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ const Inquiry = () => {
         inquirySort: sortRef.current.value,
         inquiryTitle: titleRef.current.value,
         inquiryContent: contentRef.current.value,
+        // inquiryRegdate: new Date(),
       },
       headers: {
         Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
@@ -52,14 +54,6 @@ const Inquiry = () => {
           <strong>1:1문의</strong>
         </h5>
         <hr />
-        {/* <button
-          onClick={() => {
-            // navigate("payment");
-            console.log(test);
-          }}
-        >
-          payment
-        </button> */}
         <div className="body1">
           {/* <form action="/action_page.php" method="post"> */}
           {/* <label for="email">이메일</label>

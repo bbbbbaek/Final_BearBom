@@ -27,10 +27,10 @@ const UserInfoModification = () => {
     await onRequest("/api/mypage/updateUserInfo", "post", {
       userPw: userPw.current.value,
       userNm: userNm.current.value,
-      userNickName: userNickName.current.value,
+      // userNickName: userNickName.current.value,
       userTel: userTel.current.value,
       userAddress: userAddress.current.value,
-      userAddressDef: userAddressDef.current.value,
+      // userAddressDef: userAddressDef.current.value,
       userZipcode: userZipcode.current.value,
       userEmail: userEmail.current.value,
     });
@@ -47,11 +47,9 @@ const UserInfoModification = () => {
   };
 
   const onLeave = async () => {
-    await onRequest("/api/mypage/deleteUserInfo", "post", [
-      {
-        userYn: "N",
-      },
-    ])
+    await onRequest("/api/mypage/deleteUserInfo", "post", {
+      userYn: "N",
+    })
       .then((res) => {
         console.log(res);
       })

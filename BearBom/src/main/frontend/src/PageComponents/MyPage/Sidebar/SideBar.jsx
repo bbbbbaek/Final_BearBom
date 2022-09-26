@@ -8,6 +8,7 @@ import Advertisement from "../../../ModuleComponents/Advertisement/Advertisement
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import ContentPasteSearchOutlinedIcon from "@mui/icons-material/ContentPasteSearchOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { useDispatch, useSelector } from "react-redux";
 import { onChange } from "../../../ModuleComponents/reduxStore/reduxStore";
 import { useNavigate } from "react-router-dom";
@@ -38,6 +39,16 @@ const Sidebar = ({ userData }) => {
                 <HomeIcon className="icon" />
                 <span id="">메인메뉴</span>
               </li>
+              <p className="title">Wishlist</p>
+              <li id="payment" onClickCapture={onNavigate}>
+                <ShoppingCartOutlinedIcon className="icon" />
+                <span id="payment">장바구니</span>
+              </li>
+              <li id="wishlist" onClickCapture={onNavigate}>
+                <FavoriteBorderOutlinedIcon className="icon" />
+                <span id="wishlist">찜한 클래스 조회</span>
+              </li>
+
               <p className="title">Course</p>
               <li id="course/user" onClick={onNavigate}>
                 <ContentPasteSearchOutlinedIcon className="icon" />
@@ -64,11 +75,6 @@ const Sidebar = ({ userData }) => {
               <li id="inquiry" onClickCapture={onNavigate}>
                 <NotificationsOutlinedIcon className="icon" />
                 <span id="inquiry">문의하기</span>
-              </li>
-              <p className="title">Wishlist</p>
-              <li id="wishlist" onClickCapture={onNavigate}>
-                <FavoriteBorderOutlinedIcon className="icon" />
-                <span id="wishlist">찜한 클래스 조회</span>
               </li>
             </ul>
           </div>

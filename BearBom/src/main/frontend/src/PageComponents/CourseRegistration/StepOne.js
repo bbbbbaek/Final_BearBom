@@ -49,18 +49,18 @@ const StepOne = ({ formData, saveFormData }) => {
   return (
     <form id="step_one_form">
       <div className="content content1">
-        <div className="contentName">Step.1 인증 및 클래스 유형</div>
+        <div className="contentName">Step.1 호스트 정보 및 클래스 유형</div>
         <div className="contentWrap">
           <div className="contentDetail">
             <div className="nameWrap">
               <h5 className="detailName">
-                번호인증
+                연락처 확인
                 <div className="nameUnderbar"></div>
               </h5>
             </div>
             <div className="detailEx">
               <p className="datilNameInfo">
-                클래스 등록 전 호스트님을 인증해주세요.
+                클래스 등록 전 호스트님의 연락가능한 번호를 적어주세요.
               </p>
             </div>
             <div className="numCheck">
@@ -79,17 +79,17 @@ const StepOne = ({ formData, saveFormData }) => {
                     onChange={handlePhoneNum}
                   ></input>
                 </div>
-                <Button
+                {/* <Button //인증문자 전송버튼
                   variant="contained"
                   size="small"
                   color="primary"
                   style={{ minWidth: 80 }}
                 >
                   문자전송
-                </Button>
+                </Button> */}
               </div>
               <p className="numCheck1 inputWar">
-                * 번호 인증은 최초 1회만 하면 되게끔 만들고 싶다
+                * 실제 연락 가능한 번호를 적어주세요.
               </p>
             </div>
           </div>
