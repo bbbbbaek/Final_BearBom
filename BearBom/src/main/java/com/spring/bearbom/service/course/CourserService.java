@@ -23,6 +23,8 @@ public interface CourserService {
 	void updateCourseCnt(int courseIdx);
 	
 	List<CourseFile> getCourseFile(int courseIdx);
+	
+	int getCourseCurCnt(String userId);
     
 //	List<Course> getCourseList(Course course);
 //

@@ -101,13 +101,33 @@ public class CourseRController {
     }
     
     @GetMapping("/getCourse")
-    public Map<String, Object> getCourse(@RequestParam("courseIdx") int courseIdx) {
+    public Map<String, Object> getCourse(@RequestParam("courseIdx") int courseIdx, @AuthenticationPrincipal String userId) {
     
         Course getCourse = courserService.getCourse(courseIdx);
+        int getCourseCurCnt = courserService.getCourseCurCnt(userId);
+        
+        //코스 디테일 리뷰 리스트 받아가
+        Courser courser = new Courser();
+        
+    	courser.setCourse(getCourse);
+
+        System.out.println("/////////" + courser);
+    	List<Courser> reviewList = courserService.Review(courser);
+    	
+    	
+//    	List<Double> updateRating = courseRService.updateRating(courser);
+    	
+    	double averageRating = courserService.updateRating(getCourse.getCourseIdx());
+        
         
         Map<String, Object> resultMap = new HashMap<String, Object>();
-        
+//        int getCourseCurCnt = courserService.getCourseCurCnt(userId)
         resultMap.put("getCourse", getCourse);
+        resultMap.put("getCourseCurCnt", getCourseCurCnt);
+        resultMap.put("reviewList", reviewList);
+    	resultMap.put("averageRating", averageRating);
+        
+        
         return resultMap;
     }
     
