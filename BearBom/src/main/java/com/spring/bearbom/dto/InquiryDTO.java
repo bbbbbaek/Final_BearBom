@@ -22,9 +22,5 @@ public class InquiryDTO {
 	private String replyContent;
 	private String userId;
 	
-	
-//	private String inquiryReplyContent;
-//	private char inquiryReplyYn;
-//	private LocalDateTime inquiryReplyDate;
 
 }

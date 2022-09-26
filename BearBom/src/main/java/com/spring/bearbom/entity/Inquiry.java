@@ -1,9 +1,5 @@
 package com.spring.bearbom.entity;
 
-import lombok.Data;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -12,6 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
+import lombok.Data;
 
 @Entity
 @Table(name="T_INQUIRY")
@@ -22,8 +23,6 @@ public class Inquiry {
         @Id
         private int inquiryIdx;
 
-//        @Column(nullable = false, columnDefinition = "varchar(100)")
-//        private String inquiryEmail;
 
         @Column(nullable = false, columnDefinition = "varchar(100)")
         private String inquirySort;
@@ -44,27 +43,17 @@ public class Inquiry {
         @Column(nullable = false)
         private LocalDateTime inquiryRegdate = LocalDateTime.now();
         
-        @Column(nullable = false)
-        private LocalDateTime replyRegdate = LocalDateTime.now();
+        @Column(nullable = true)
+        private LocalDateTime replyRegdate;
         
-        @Column(nullable = false,columnDefinition = "char(1)")
+        @Column(columnDefinition = "char(1)")
         private char replyYn ='N';
         
-        @Column(nullable = false, columnDefinition = "varchar(300)")
+        @Column(columnDefinition = "varchar(300)")
         private String replyTitle;
 
-        @Column(nullable = false, columnDefinition = "varchar(2000)")
+        @Column(columnDefinition = "varchar(2000)")
         private String replyContent;
-
-//        @Column(nullable = false,columnDefinition = "char(1)")
-//        private char inquiryReplyYn ='N';
-//
-//        @Column(nullable = false, columnDefinition = "varchar(2000)")
-//        private String inquiryReplyContent;
-//
-//        @Column(nullable = false)
-//        private LocalDateTime inquiryReplyDate = LocalDateTime.now();
-
 
 
 
