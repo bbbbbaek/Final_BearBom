@@ -77,7 +77,7 @@ const Payment = () => {
         orderPri: cart[0].courseCost,
       };
 
-      onRequest(API_BASE_URL + "/api/order/updateOrderYn", "post", data)
+      onRequest("/api/order/updateOrderYn", "post", data)
         .then(alert("결제가 정상적으로 완료되었습니다."))
         .catch((err) => {
           alert("알 수 없는 이유로 결제에 실패했습니다.");
