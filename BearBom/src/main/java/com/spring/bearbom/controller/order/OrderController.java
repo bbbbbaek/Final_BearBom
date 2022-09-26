@@ -93,7 +93,7 @@ public class OrderController {
 		orderTemp.setOrderNm(String.valueOf(paramMap.get("orderNm")));
 		orderTemp.setPgNm(String.valueOf(paramMap.get("pgNm")));
 		orderTemp.setPaymentMethod(String.valueOf(paramMap.get("paymentMethod")));
-		LocalDateTime payDate = LocalDateTime.now();
+		LocalDateTime payDate = LocalDateTime.now().plusHours(9);
 		orderTemp.setPaymentDate(payDate);
 		orderTemp.setOrderYn('Y');
 		System.out.println("=-=-==-===--==-=");
