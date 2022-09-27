@@ -13,6 +13,7 @@ import com.spring.bearbom.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -67,6 +68,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 				authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 				SecurityContext securityContext = SecurityContextHolder.createEmptyContext();
 				securityContext.setAuthentication(authenticationToken);
+
+//				Authentication test = securityContext.getAuthentication();
+//				test.getCredentials();
 				
 				SecurityContextHolder.setContext(securityContext);
 			}

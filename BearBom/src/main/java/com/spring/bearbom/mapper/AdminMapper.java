@@ -18,4 +18,6 @@ public interface AdminMapper {
     List<Map<String, Object>> orderList();
 
     List<Map<String, Object>> todaySales();
+
+
 }

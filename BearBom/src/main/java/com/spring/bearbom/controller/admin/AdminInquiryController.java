@@ -63,7 +63,7 @@ public class AdminInquiryController {
 	public void updateInquiry(@RequestBody Map<String, Object> paramMap) {
 		System.out.println("////paramMap : "+paramMap);
 		System.out.println(paramMap.get("inquiryIdx"));
-		adminService.updateInquiry(paramMap);
+		adminService.updateInquiry(Integer.valueOf(String.valueOf(paramMap.get("id"))));
 	}
 	
 	
