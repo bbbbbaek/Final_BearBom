@@ -40,6 +40,7 @@ const LecturerInfoModification = () => {
       lecturerInfo: profileRef,
     });
   };
+  console.log(profileRef);
 
   return (
     <>
