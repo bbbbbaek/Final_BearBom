@@ -27,11 +27,7 @@ public class AdminServiceImpl implements AdminService{
 		return adminInquiryMapper.adminInquiryMapper();
 	}
 
-	@Override
-	public void updateInquiry(Map<String, Object> paramMap) {
-		// TODO Auto-generated method stub
-		adminInquiryMapper.updateInquiry(paramMap);
-	}
+
 //	@Override
 //	public void updateInquiry(InquiryDTO inquiryDTO) {
 //		// TODO Auto-generated method stub
@@ -68,7 +64,10 @@ public class AdminServiceImpl implements AdminService{
 		return adminMapper.todaySales();
 	}
 
-
+	@Override
+	public void updateInquiry(Integer id) {
+		adminInquiryMapper.updateInquiry(id);
+	}
 
 
 }
