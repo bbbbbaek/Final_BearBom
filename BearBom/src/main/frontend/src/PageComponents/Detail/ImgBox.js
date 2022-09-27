@@ -7,16 +7,13 @@ import axios from "axios";
 import { API_BASE_URL } from "../../app-config";
 import { useParams } from "react-router-dom";
 
-function ImgBox({ course }) {
+function ImgBox() {
   const { id } = useParams();
   const [courseFile, setCourseFile] = useState([]);
   const [userSelect, setUserSelect] = useState();
 
   const play = (a, index) => {
-    console.log(a);
-    console.log(index);
     const nameNum = index + 1;
-    console.log(nameNum);
     setUserSelect({
       name: `img${nameNum}`,
       img: `http://localhost:8080/upload/${a.img}`,
@@ -25,7 +22,6 @@ function ImgBox({ course }) {
 
   const responsive = {
     superLargeDesktop: {
-      // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
       items: 5,
     },
@@ -45,7 +41,6 @@ function ImgBox({ course }) {
 
   useEffect(() => {
     if (courseFile.length !== 0) {
-      console.log(courseFile);
       setUserSelect({
         name: `img1`,
         img: `http://localhost:8080/upload/${courseFile[0].img}`,
@@ -62,7 +57,6 @@ function ImgBox({ course }) {
       },
       params: { courseIdx: id },
     }).then((response) => {
-      console.log(response.data);
       response.data.getCourseFile.map((file, index) => {
         setCourseFile((prev) => [
           ...prev,
@@ -72,7 +66,6 @@ function ImgBox({ course }) {
           },
         ]);
       });
-      console.log(courseFile);
     });
   }, []);
 

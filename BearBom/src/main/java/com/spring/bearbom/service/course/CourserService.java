@@ -12,8 +12,6 @@ public interface CourserService {
 
     Courser WriteReview(Courser courser);
 
-//	List<Double> updateRating(Courser courser);
-
 	double updateRating1(Courser courser);
 
 	Course getCourse(int courseIdx);
@@ -26,8 +24,4 @@ public interface CourserService {
 	
 	int getCourseCurCnt(String userId);
     
-//	List<Course> getCourseList(Course course);
-//
-//
-//    List<Courser> updateRating1(Courser courser);
 }

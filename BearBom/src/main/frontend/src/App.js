@@ -27,8 +27,6 @@ import Admin from "./PageComponents/Admin/Home/Admin";
 import Page404 from "./PageComponents/Page404";
 import RedirectForKakao from "./PageComponents/JoinComponents/RedirectForKakao";
 import RedirectForKakaoLogout from "./PageComponents/JoinComponents/RedirectForKakaoLogout";
-import KakaoPayRe from "./PageComponents/Detail/KakaoPayRe";
-import KakaoPayR from "./PageComponents/Detail/KakaoPayR";
 import PwFind from "./PageComponents/PwFind";
 import CourseSearch from "./PageComponents/CourseSearch";
 import Board from "./ModuleComponents/Board/Board";
@@ -122,8 +120,7 @@ function App() {
             />
           </Route>
           <Route path="/*" element={<Page404 />} />
-          <Route path="/payready" element={<KakaoPayR />} />
-          <Route path="/payresult" element={<KakaoPayRe />} />
+
           <Route path="/pwfind" element={<PwFind />} />
         </Routes>
         <Top />

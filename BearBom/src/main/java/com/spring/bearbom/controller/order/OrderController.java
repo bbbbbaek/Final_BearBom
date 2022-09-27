@@ -30,7 +30,7 @@ public class OrderController {
 	@PostMapping("/orderRegistration")
 	public void courseRegistration(HttpServletRequest request, @RequestBody Map<String, Object> paramMap,
 			@AuthenticationPrincipal String userId) {
-		System.out.println("------------courseRegistration시작---------");
+
 		Order order = new Order();
 		User user = new User();
 		Course course = new Course();
