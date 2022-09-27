@@ -115,5 +115,18 @@
         }
       }
     }
+    .kakaoLoginBox {
+      display: flex;
+      gap: 1rem;
+
+      .kakaoId {
+        width: auto;
+        height: auto;
+      }
+      .kakaoLogout {
+        width: auto;
+        height: auto;
+      }
+    }
   }
 }

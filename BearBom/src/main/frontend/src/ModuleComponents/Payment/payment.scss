@@ -28,14 +28,26 @@
           .l40 {
             width: 40%;
           }
-
-          .th {
-            border: none;
+          .center {
+            text-align: center;
           }
+          .left {
+            text-align: left;
+          }
+          .right {
+            text-align: right;
+          }
+
           td {
-            border: 1px solid black;
+            border-bottom: 2px solid #c2c8c5;
             min-height: 50px;
           }
+        }
+
+        .th {
+          background-color: #7697a0;
+          color: #fff;
+          font-weight: 600;
         }
       }
     }

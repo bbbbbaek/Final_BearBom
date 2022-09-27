@@ -26,7 +26,7 @@ const Admin = () => {
     }
 
     if (
-      userRole === "ROLE_USER" &&
+      (userRole === "ROLE_USER" || userRole === "ROLE_LECTURER") &&
       (accessToken !== null ||
         accessToken !== "" ||
         typeof accessToken !== "undefined")

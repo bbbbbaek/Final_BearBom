@@ -58,7 +58,7 @@ public class AdminNoticeController {
 		return ResponseEntity.ok().body(noticeDTO);
 		
 	}
-		
+
 
 	@PostMapping("updateNotice")
 	public void updateNotice(@RequestBody Map<String, Object> paramMap) {

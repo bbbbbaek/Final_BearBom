@@ -49,7 +49,8 @@ import NoticeMgmt from "./PageComponents/Admin/Menu/NoticeMgmt";
 import FAQMgmt from "./PageComponents/Admin/Menu/FAQMgmt";
 import InquiryMgmt from "./PageComponents/Admin/Menu/InquiryMgmt";
 import LatestTransaction from "./PageComponents/Admin/Menu/LatestTransaction";
-import BoardWrite from "./ModuleComponents/BoardWrite/BoardWrite";
+import FaqWrite from "./ModuleComponents/BoardWrite/FaqWrite";
+import NoticeWrite from "./ModuleComponents/BoardWrite/NoticeWrite";
 import Payment from "./ModuleComponents/Payment/Payment";
 
 function App() {
@@ -110,9 +111,13 @@ function App() {
             {/* 공지, FAQ, 문의 답변 작성할 수 있는 컴포넌트 만들어야 함 */}
             <Route path="notice" element={<NoticeMgmt />} />
             <Route path="notice/:id" element={<Board type="admin_notice" />} />
+            <Route
+              path="notice/write"
+              element={<NoticeWrite type="admin_notice" />}
+            />
             <Route path="faq" element={<FAQMgmt />} />
             <Route path="faq/:id" element={<Board type="admin_faq" />} />
-            <Route path="faq/board" element={<BoardWrite />} />
+            <Route path="faq/write" element={<FaqWrite />} />
             <Route path="inquiry" element={<InquiryMgmt />} />
             <Route
               path="inquiry/:id"

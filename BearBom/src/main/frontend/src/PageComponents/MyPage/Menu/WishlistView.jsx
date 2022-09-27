@@ -12,8 +12,15 @@ const WishlistView = () => {
   let tableInfo = wishListItems;
   const [fetchedData, setFetchedData] = useState();
   useEffect(() => {
-    axios.get(API_BASE_URL + "/api/like/getLikeList").then((res) => {
-      setFetchedData(res.data);
+    axios({
+      method: "get",
+      url: API_BASE_URL + "/api/mypage/getWishList",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+      },
+    }).then((res) => {
+      console.log(res.data.wishList);
+      setFetchedData(res.data.wishList);
     });
   }, []);
   return (

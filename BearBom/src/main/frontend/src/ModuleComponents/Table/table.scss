@@ -16,6 +16,20 @@
     padding-right: 1rem;
     gap: 1rem;
 
+    button {
+      line-height: 100%;
+      color: #fff;
+      font-weight: 600;
+      width: 4rem;
+      height: 2rem;
+      background-color: #7697a0;
+
+      &:hover {
+        transform: scale(0.95);
+        background-color: #4a707a;
+      }
+    }
+
     .search {
       border: 1px solid #7697a0;
       height: 2rem;
