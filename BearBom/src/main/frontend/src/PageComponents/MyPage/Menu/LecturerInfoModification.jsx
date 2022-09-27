@@ -37,9 +37,10 @@ const LecturerInfoModification = () => {
   const onClickSave = () => {
     alert("강사 프로필 수정이 완료되었습니다.");
     onRequest("/api/mypage/updateLecturerInfo", "post", {
-      lecturerInfo: profileRef,
+      lecturerInfo: profileRef.current.value,
     });
   };
+  console.log(profileRef);
 
   return (
     <>
@@ -71,7 +72,7 @@ const LecturerInfoModification = () => {
                 cols="30"
                 rows="10"
                 ref={profileRef}
-                defaultValue={fetchedData.lecturerInfo}
+                defaultValue={fetchedData}
               ></textarea>
               {/* <TextEditor boardData={boardData} setBoardData={setBoardData} /> */}
             </div>
