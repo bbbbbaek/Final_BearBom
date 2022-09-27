@@ -43,7 +43,7 @@ export default function DetailTabs({ averageRating, course, CurCnt }) {
           </div>
         </TabPanel>
         <TabPanel value="3">
-          <Cur />
+          <Cur course={course} />
         </TabPanel>
         <TabPanel value="4">
           <Location courseAddress={course.courseAddress} />

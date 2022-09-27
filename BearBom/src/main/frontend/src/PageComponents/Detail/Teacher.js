@@ -4,11 +4,11 @@ function Teacher({ averageRating, CurCnt }) {
       <div className="teacher-container">
         <div className="teacher-profile">
           {/* {reviewData[2].user.userNm} */}
-          <img
+          {/* <img
             className="teacher-img"
-            src={require("../../img/img2.jpeg")}
+            src={`http://localhost:8080/upload/${review.user.userPhotoNewNm}`}
             alt="aa"
-          ></img>
+          ></img> */}
         </div>
         <div className="teacher-content">
           너무 유익합니다. 너무 유익합니다. 너무 유익합니다.

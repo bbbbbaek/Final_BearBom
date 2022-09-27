@@ -1,4 +1,4 @@
-function Cur() {
+function Cur({ course }) {
   return (
     <>
       <h5>
@@ -6,15 +6,16 @@ function Cur() {
       </h5>
       <div className="cur-box1">
         <div className="cur-box-step">
-          <span>STEP.1</span>
-          <p>그리기</p>
+          {/* <span>STEP.1</span>
+          <p>그리기</p> */}
+          {course.courseLevelContent}
         </div>
 
-        <div className="cur-box-img">
+        {/* <div className="cur-box-img">
           <img className="cur-img" src={require("../../img/blogo1.png")}></img>
-        </div>
+        </div> */}
       </div>
-      <div className="cur-box1">
+      {/* <div className="cur-box1">
         <div className="cur-box-step">
           <span>STEP.2</span>
           <p>그리기</p>
@@ -39,7 +40,7 @@ function Cur() {
             src={require("../../img/class002.webp")}
           ></img>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

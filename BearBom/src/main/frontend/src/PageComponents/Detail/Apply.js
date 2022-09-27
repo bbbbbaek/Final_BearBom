@@ -8,14 +8,9 @@ import { API_BASE_URL } from "../../app-config";
 
 function Apply({ courseIdx, course }) {
   const { id } = useParams(); //id를 통해 강의id로 이동
-  const [height, setHeight] = useState();
-  // const handleHeight = () => {
-  //   setHeight(window.pageYOffset);
-  // };
   const [like, setLike] = useState(false);
   const [courseCostChange, setCourseCostChange] = useState("");
   const calRef = useRef(null);
-  console.log(id);
   //카카오페이 경로이동
   const navigate = useNavigate();
   const onClickBtn = async () => {
@@ -78,26 +73,6 @@ function Apply({ courseIdx, course }) {
       (course.courseCost + "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     );
   }, [course]);
-  //스크롤효과
-  /* useEffect(() => {
-    if (height > 1000) {
-      calRef.current.style.opacity = 0;
-      calRef.current.style.transition = "opacity 0.7s";
-    } else {
-      calRef.current.style.opacity = 1;
-    }
-    // console.log("test");
-  }, [height]);
-
-  useEffect(() => {
-    const watch = () => {
-      window.addEventListener("scroll", handleHeight);
-    };
-    watch(); // addEventListener 함수를 실행
-    return () => {
-      window.removeEventListener("scroll", handleHeight); // addEventListener 함수를 삭제
-    };
-  }); */
 
   //찜하기를 위한 axios
   const toggleLike = async (e) => {
