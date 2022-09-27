@@ -30,13 +30,6 @@ const TakenClassView = () => {
         <h5>
           <strong>수강 클래스 조회</strong>
         </h5>
-        <button
-          onClick={() => {
-            console.log(fetchedData);
-          }}
-        >
-          click
-        </button>
         <hr />
         {!fetchedData || fetchedData.length === 0 ? (
           <ResultNotFound />

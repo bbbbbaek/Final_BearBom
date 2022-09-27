@@ -37,11 +37,11 @@ export const profileItems = ["사진", "이름", "이메일", "연락처"];
 // 최근 거래 내역 (메인메뉴)
 export const recentTransactionItems = [
   new Data("주문번호", "l10", "orderIdx"),
-  new Data("", "l10", "courseImage"),
+  new Data("이미지", "l10", "courseImage"),
   new Data("강의명", "l40", "courseNm"),
   new Data("강사명", "l10", "userId"),
   new Data("구매일", "l10", "orderDate"),
-  new Data("상태", "l10", "status"), // 없음
+  // new Data("상태", "l10", "status"), // 없음
 ];
 
 // 수강 클래스 조회
@@ -49,21 +49,21 @@ export const takenClassItems = [
   new Data("강의번호", "l10", "courseIdx"),
   new Data("", "l20", "courseThumbnailOrgNm"),
   new Data("강의명", "l40", "courseNm"),
-  new Data("강사명", "l10", "courseRegdate"),
+  new Data("강사명", "l10", "userId"),
   new Data("구매일", "l10", "courseRegdate"),
-  new Data("상태", "l10", "courseUseYn"), // 없음
+  // new Data("상태", "l10", "courseUseYn"), // 없음
 ];
 
 // 개설 클래스 조회
 export const openedClassItems = [
-  new Data("뮻", "l10", "courseIdx"),
+  new Data("강의번호", "l10", "courseIdx"),
   new Data("이미지", "l30", "courseThumbnailOrgNm"),
   new Data("강의명", "l30", "courseNm"),
   // new Data("강사명", "l10", "user"),
   new Data("개설일", "l10", "courseRegdate"), // 없음
   new Data("시작일", "l10", "courseStDate"),
   new Data("종료일", "l10", "courseEndDate"),
-  new Data("상태", "l20", "status"), // 없음
+  // new Data("상태", "l20", "status"), // 없음
 ];
 
 // 개인 정보 수정
@@ -110,7 +110,7 @@ export const latestTransactionItems = [
   new Data("강의명", "l40", "courseNm"),
   new Data("강사명", "l10", "userId"),
   new Data("바보", "l10", "courseStTime"),
-  new Data("상태", "l10", "status"), // 없음
+  // new Data("상태", "l10", "status"), // 없음
 ];
 
 // 매출 관리

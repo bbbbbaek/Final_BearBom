@@ -13,7 +13,7 @@ function Review({ review }) {
   function getFee(isMember) {
     return isMember ? "$2.00" : "$10.00";
   }
-  var result1 = dayday3 >= 1 ? `${(result = parseInt(dayday3))}일전` : "방금";
+  var result1 = dayday3 >= 1 ? `${(result1 = parseInt(dayday3))}일전` : "방금";
   console.log(review.user.userPhotoNewNm);
   return (
     <>

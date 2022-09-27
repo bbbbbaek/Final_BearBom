@@ -83,6 +83,7 @@ const Board = ({ type }) => {
         break;
     }
   };
+  console.log(params);
 
   // 파라미터 제외한 window.location.pathname 리턴하는 함수
   // 이전글, 다음글 넘어가기 위함 --> 목록으로 돌아가기에도 사용할 수 있음!!!
@@ -206,12 +207,7 @@ const Board = ({ type }) => {
             </div>
             <div className="etc">
               <div>등록일</div>
-              <div>
-                {returnBoardData()[onFindObjKey("Mdfdate")] ||
-                  returnBoardData()[onFindObjKey("Regdate")]}
-              </div>
-              <div>조회수</div>
-              <div>{returnBoardData().noticeMdfdate}</div>
+              <div>{returnBoardData()[onFindObjKey("Regdate")]}</div>
             </div>
           </div>
           <hr />
