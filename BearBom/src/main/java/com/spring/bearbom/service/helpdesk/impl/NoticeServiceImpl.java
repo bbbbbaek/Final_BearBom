@@ -1,6 +1,7 @@
 package com.spring.bearbom.service.helpdesk.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,8 @@ import com.spring.bearbom.service.helpdesk.NoticeService;
 @Service
 public class NoticeServiceImpl implements NoticeService{
 
-	@Autowired
-	private NoticeRepository noticeRepository;
+//	@Autowired
+//	private NoticeRepository noticeRepository;
 	
 	@Autowired
 	private NoticeMapper noticeMapper;
@@ -34,17 +35,23 @@ public class NoticeServiceImpl implements NoticeService{
 		noticeMapper.insertNotice(noticeDTO);
 	}
 
-	@Override
-	public void updateNotice(NoticeDTO noticeDTO) {
-		// TODO Auto-generated method stub
-		noticeMapper.updateNotice(noticeDTO);
-	}
+//	@Override
+//	public void updateNotice(NoticeDTO noticeDTO) {
+//		// TODO Auto-generated method stub
+//		noticeMapper.updateNotice(noticeDTO);
+//	}
 
 	@Override
 	public void mdfNotice(NoticeDTO noticeDTO) {
 		noticeMapper.mdfNotice(noticeDTO);
 		
 	}
+
+	@Override
+	public void updateNotice(Map<String, Object> paramMap) {
+	// TODO Auto-generated method stub
+	noticeMapper.updateNotice(paramMap);
+}
 
 
 //	@Override

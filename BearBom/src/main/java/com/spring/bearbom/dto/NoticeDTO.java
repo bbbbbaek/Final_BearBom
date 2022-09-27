@@ -12,8 +12,8 @@ public class NoticeDTO {
 	private int noticeIdx;
 	private String noticeTitle;
 	private String noticeContent;
-	private LocalDateTime noticeRegdate;
-	private LocalDateTime noticeMdfdate;
+	private String noticeRegdate;
+	private String noticeMdfdate;
 	private char noticeUseYn;
 	private String userId;
 

@@ -1,8 +1,13 @@
 package com.spring.bearbom.controller.admin;
 
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,27 +29,36 @@ public class AdminFaqController {
 	
 //	백단에 저장하는것
 	@PostMapping("/insertFaq")
-	public ResponseEntity<?> insertFaq (@RequestBody Guide guide) {
-		Guide rkdlem = guideService.insertFaq(guide);
+	public ResponseEntity<?> insertFaq (@RequestBody Guide guide, @AuthenticationPrincipal String userId) {
+		LocalDate date = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+		GuideDTO guideDTO = new GuideDTO();
 		
-		guide.setGuideIdx(rkdlem.getGuideIdx());
-		guide.setGuideTitle(rkdlem.getGuideTitle());
-		guide.setGuideContent(rkdlem.getGuideContent());
-		guide.setGuideMdfdate(rkdlem.getGuideMdfdate());
-		guide.setGuideRegdate(rkdlem.getGuideRegdate());
-		guide.setGuideUseYn(rkdlem.getGuideUseYn());
+		guideDTO.setGuideIdx(guide.getGuideIdx());
+		guideDTO.setGuideTitle(guide.getGuideTitle());
+		guideDTO.setGuideContent(guide.getGuideContent());
+		guideDTO.setGuideRegdate(guide.getGuideRegdate().format(formatter));
+		guideDTO.setGuideMdfdate(guide.getGuideMdfdate().format(formatter));
+		guideDTO.setGuideUseYn(guide.getGuideUseYn());
 		
-		return ResponseEntity.ok().body(guide);
+		guideService.insertFaq(guideDTO);
+		
+		return ResponseEntity.ok().body(guideDTO);
 	}
 	
 	//y를 n으로 바꾸는 update
-	@PostMapping("/updateFaq")
-	public void updateFaq(@RequestBody GuideDTO guideDTO){	
-		
-		System.out.println("before inquiryDTO : " +guideDTO);
-		guideService.updateFaq(guideDTO);
-		System.out.println("after guideDTO : " +guideDTO);
+//	@PostMapping("/updateFaq")
+//	public void updateFaq(@RequestBody GuideDTO guideDTO){	
+//		
+//		System.out.println("before inquiryDTO : " +guideDTO);
+//		guideService.updateFaq(guideDTO);
+//		System.out.println("after guideDTO : " +guideDTO);
+//	}
 	
+	@PostMapping("updateFaq")
+	public void updateFaq(@RequestBody Map<String, Object> paramMap) {
+		guideService.updateFaq(paramMap);
 	}
 	
 	//게시글수정 정보

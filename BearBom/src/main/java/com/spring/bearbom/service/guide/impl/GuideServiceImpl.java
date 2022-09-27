@@ -1,6 +1,7 @@
 package com.spring.bearbom.service.guide.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,16 @@ public class GuideServiceImpl implements GuideService{
 	private GuideRepository guideRepository;
 	
 	@Autowired
-	private FaqMapper faqMApper;
+	private FaqMapper faqMapper;
 	
+	
+	//백단에 저장하는것
+	@Override
+	public void insertFaq(GuideDTO guideDTO) {
+		// TODO Auto-generated method stub
+		faqMapper.insertFaq(guideDTO);
+		
+	}
 	
 	//Guide컨트롤러
 	@Override
@@ -31,29 +40,34 @@ public class GuideServiceImpl implements GuideService{
 	}
 
 	
-	//Faq컨트롤러
-	@Override
-	public Guide insertFaq(Guide guide) {
-		int guideIdx = guideRepository.selectNextGuideIdx();
-		guide.setGuideIdx(guideIdx);
-		return guideRepository.save(guide);
-	}
-
-	
 	// 업데이트
 
-	@Override
-	public void updateFaq(GuideDTO guideDTO) {
-		faqMApper.updateFaq(guideDTO);
-	}
+//	@Override
+//	public void updateFaq(GuideDTO guideDTO) {
+//		faqMapper.updateFaq(guideDTO);
+//	}
 
 
 	@Override
 	public void mdfFaq(GuideDTO guideDTO) {
-		faqMApper.mdfFaq(guideDTO);
+		faqMapper.mdfFaq(guideDTO);
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void updateFaq(Map<String, Object> paramMap) {
+		// TODO Auto-generated method stub
+		faqMapper.updateFaq(paramMap);
+	}
+
+
+	
+
+
+	
+
+	
 
 	
 
