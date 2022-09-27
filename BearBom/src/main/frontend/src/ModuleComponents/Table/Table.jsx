@@ -178,7 +178,8 @@ const Table = ({ tableInfo, fetchedData }) => {
         </td>
       );
     }
-
+    console.log("-------------------------------------------------------------");
+    console.log(fetchedData);
     return tableItem;
   };
 

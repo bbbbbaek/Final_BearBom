@@ -84,19 +84,21 @@ public class OrderController {
 		Course course = new Course();
 		course.setCourseIdx(courseIdx);
 		orderTemp.setCourse(course);
+		System.out.println("courseCom");
 		
 		User user = new User();
 		user.setUserId(userId);
 		orderTemp.setUser(user);
+		System.out.println("userCom");
 		
-		orderTemp.setOrderPri(Integer.parseInt(String.valueOf(paramMap.get("OrderPri"))));
+		orderTemp.setOrderPri(Integer.parseInt(String.valueOf(paramMap.get("orderPri"))));
 		orderTemp.setOrderNm(String.valueOf(paramMap.get("orderNm")));
 		orderTemp.setPgNm(String.valueOf(paramMap.get("pgNm")));
 		orderTemp.setPaymentMethod(String.valueOf(paramMap.get("paymentMethod")));
 		LocalDateTime payDate = LocalDateTime.now().plusHours(9);
 		orderTemp.setPaymentDate(payDate);
 		orderTemp.setOrderYn('Y');
-		System.out.println("=-=-==-===--==-=");
+		System.out.println("-=-=-=-=-=-=-=-=-=-=-~~~~");
 		System.out.println(orderTemp);
 		orderService.updateOrderYn(orderTemp);
 		

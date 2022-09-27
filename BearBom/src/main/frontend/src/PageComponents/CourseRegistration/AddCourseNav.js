@@ -36,9 +36,9 @@ export default function CenteredTabs( {currentStep, setCurrentStep}) {
       }}
       disableRipple>
         <Tab label="호스트 및 클래스 유형" sx={{ minWidth: { sm: 220 } }}/>
-        <Tab label=" > " sx={{ minWidth: { sm: 80 } }}/>
+        <Tab label=" > > > " sx={{ minWidth: { sm: 80 } }}/>
         <Tab label="클래스 소개 및 위치" sx={{ minWidth: { sm: 220 } }}/>
-        <Tab label=" > " sx={{ minWidth: { sm: 80 } }}/>
+        <Tab label=" > > > " sx={{ minWidth: { sm: 80 } }}/>
         <Tab label="금액 및 일정" sx={{ minWidth: { sm: 220 } }}/>
       </Tabs>
   );

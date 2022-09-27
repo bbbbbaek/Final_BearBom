@@ -1,0 +1,51 @@
+<h1><img src="https://user-images.githubusercontent.com/107159105/192440999-c585aba8-e23a-4092-9776-d99217f559b0.png" width="35" height="35">
+ 베어봄 (Bear-Bom)</h1>
+<p>근거리에 거주하고있는 사용자들이 서로 원하는 물건을 공동으로 저렴하게 구매하고 <br>
+  구독서비스 파티원을 쉽게 구할 수 있는 <b>위치 기반 근거리 쉐어링 플랫폼</b></p><br>
+
+
+<h1><img src="https://cdn.icon-icons.com/icons2/2104/PNG/512/calendar_icon_129329.png"  width="35" height="35"> 프로젝트 기간</h1>
+2022.08.17 ~ 2022.09.30<br><br>
+
+
+
+<h1><img src="https://cdn-icons-png.flaticon.com/512/5090/5090029.png" width="35" height="35"> 주요 기능</h1>
+<li>기능1<br>
+&nbsp;&nbsp; : 블라<br><br></li><br>
+
+<li>기능2<br>
+&nbsp;&nbsp; : 블라<br><br></li><br>
+
+<li>기능3<br>
+&nbsp;&nbsp; : 블라<br><br></li><br>
+
+<h1>👩‍💻팀명</h1>
+
+여기에 이미지
+
+
+
+
+<h1>👥팀원</h1><br>
+
+여기에 이미지
+<br>
+
+<h1>💻 사용기술 / 개발도구</h1><br>
+
+
+여기에 이미지
+<br><br>
+
+<h1>💿DB설계</h1><br>
+
+여기에 이미지
+<br><br>
+
+
+
+
+<h1>:open_file_folder: 베어봄 발표영상 & PPT</h1><br>
+<a href="https://www.youtube.com/watch?v=NJmLpGdZnQw&t=23s" target="_blank">베어봄 시연 영상</a><br>
+<a href="https://moonhy7.github.io/N-PLIT/nplit_ppt.pdf" target="_blank">베어봄 PPT</a>
+<br><br>
