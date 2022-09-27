@@ -56,6 +56,7 @@ const Mypage = () => {
       console.log(res[1].data);
     });
   }, [updateUserInfo]);
+  console.log(userData);
 
   return (
     <>

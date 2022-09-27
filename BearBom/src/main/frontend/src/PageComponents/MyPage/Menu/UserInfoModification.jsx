@@ -13,6 +13,7 @@ const UserInfoModification = ({}) => {
   const { userData, setUpdateUserInfo, updateUserInfo } = useOutletContext();
 
   const userPw = useRef();
+  const userPwCheck = useRef();
   const userNm = useRef();
   const userNickName = useRef();
   const userTel = useRef();
@@ -77,8 +78,8 @@ const UserInfoModification = ({}) => {
                 <input type="text" id="userPw" ref={userPw} />
               </li>
               <li>
-                <label htmlFor="userPw">비밀번호 확인</label>
-                <input type="text" id="userPw" ref={userPw} />
+                <label htmlFor="userPwCheck">비밀번호 확인</label>
+                <input type="text" id="userPwCheck" ref={userPwCheck} />
               </li>
               <li>
                 <label htmlFor="userNm">이름</label>

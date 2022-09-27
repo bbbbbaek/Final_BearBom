@@ -36,6 +36,7 @@ export const profileItems = ["사진", "이름", "이메일", "연락처"];
 
 // 최근 거래 내역 (메인메뉴)
 export const recentTransactionItems = [
+  new Data("", "l5", ""),
   new Data("주문번호", "l10", "orderIdx"),
   new Data("이미지", "l10", "courseImage"),
   new Data("강의명", "l40", "courseNm"),
@@ -44,10 +45,21 @@ export const recentTransactionItems = [
   // new Data("상태", "l10", "status"), // 없음
 ];
 
+// 찜한 클래스 조회
+export const wishListItems = [
+  new Data("", "l5", ""),
+  new Data("강의번호", "l10", "courseIdx"),
+  new Data("이미지", "l10", "courseThumbnailNm"),
+  new Data("강의명", "l40", "courseNm"),
+  new Data("강사명", "l10", "userId"),
+  new Data("시작일", "l10", "courseStDate"),
+];
+
 // 수강 클래스 조회
 export const takenClassItems = [
+  new Data("", "l5", ""),
   new Data("강의번호", "l10", "courseIdx"),
-  new Data("", "l20", "courseThumbnailOrgNm"),
+  new Data("이미지", "l20", "courseThumbnailNm"),
   new Data("강의명", "l40", "courseNm"),
   new Data("강사명", "l10", "userId"),
   new Data("구매일", "l10", "courseRegdate"),
@@ -56,8 +68,9 @@ export const takenClassItems = [
 
 // 개설 클래스 조회
 export const openedClassItems = [
+  new Data("", "l5", ""),
   new Data("강의번호", "l10", "courseIdx"),
-  new Data("이미지", "l30", "courseThumbnailOrgNm"),
+  new Data("이미지", "l10", "courseThumbnailNm"),
   new Data("강의명", "l30", "courseNm"),
   // new Data("강사명", "l10", "user"),
   new Data("개설일", "l10", "courseRegdate"), // 없음
@@ -83,28 +96,22 @@ export const lecturerProfileItems = ["사진", "닉네임", "내용"];
 
 // 문의 내역 조회
 export const inquiryItems = [
-  new Data("번호", "l10", "inquiryIdx"),
+  new Data("", "l5", ""),
+  new Data("문의번호", "l10", "inquiryIdx"),
   new Data("종류", "l10", "inquirySort"),
-  new Data("제목", "l40", "inquiryTitle"),
+  new Data("제목", "l30", "inquiryTitle"),
   // new Data("내용", "l40", "inquiryContent"),
-  new Data("작성자", "l10", "user"),
+  new Data("작성자", "l10", "userId"),
   new Data("작성일", "l10", "inquiryRegdate"),
   new Data("답변일", "l10", "inquiryReplydate"),
   new Data("답변여부", "l10", "inquiryReplyYn"),
-];
-
-// 찜한 클래스 조회
-export const wishListItems = [
-  new Data("강의번호", "l10", "courseIdx"),
-  new Data("", "l10", "courseImage"),
-  new Data("강의명", "l40", "courseNm"),
-  new Data("강사명", "l10", "userId"),
 ];
 
 // ----------------------- 관리자 페이지 -----------------------
 
 // 최근 거래 내역 (메인메뉴)
 export const latestTransactionItems = [
+  new Data("", "l5", ""),
   new Data("주문번호", "l10", "orderIdx"),
   new Data("", "l10", "courseImage"),
   new Data("강의명", "l40", "courseNm"),
@@ -115,6 +122,7 @@ export const latestTransactionItems = [
 
 // 매출 관리
 export const salesMgmtItems = [
+  new Data("", "l5", ""),
   new Data("주문번호", "l10", "orderIdx"),
   new Data("강의명", "l40", "courseTitle"),
   new Data("판매자", "l10", "lecturerId"),
@@ -125,6 +133,7 @@ export const salesMgmtItems = [
 
 // 주문 관리
 export const orderMgmtItems = [
+  new Data("", "l5", ""),
   new Data("주문번호", "l10", "orderIdx"),
   new Data("", "l10", "courseImage"),
   new Data("강의명", "l30", "courseTitle"),
@@ -135,6 +144,7 @@ export const orderMgmtItems = [
 
 // 고객 관리
 export const userMgmtItems = [
+  new Data("", "l5", ""),
   new Data("아이디", "l20", "userId"),
   new Data("이름", "l30", "userNm"),
   new Data("닉네임", "l10", "userNickName"),
@@ -145,6 +155,7 @@ export const userMgmtItems = [
 
 // 강좌 관리
 export const courseMgmtItems = [
+  new Data("", "l5", ""),
   new Data("강의번호", "l10", "courseIdx"),
   new Data("강의명", "l40", "courseNm"),
   new Data("시작일", "l10", "courseStDate"),
@@ -156,6 +167,7 @@ export const courseMgmtItems = [
 
 // 공지사항 관리
 export const noticeMgmtItems = [
+  new Data("", "l5", ""),
   new Data("번호", "l10", "noticeIdx"),
   new Data("제목", "l40", "noticeTitle"),
   // new Data("제목", "l40", "noticeContent"),
@@ -166,6 +178,7 @@ export const noticeMgmtItems = [
 
 // FAQ 관리
 export const faqMgmtItems = [
+  new Data("", "l5", ""),
   new Data("번호", "l10", "guideIdx"),
   new Data("제목", "l40", "guideTitle"),
   // new Data("내용", "l40", "guideContent"),
@@ -175,6 +188,7 @@ export const faqMgmtItems = [
 
 // 고객문의 관리
 export const inquiryMgmtItems = [
+  new Data("", "l5", ""),
   new Data("번호", "l10", "inquiryIdx"),
   new Data("종류", "l10", "inquirySort"),
   new Data("제목", "l40", "inquiryTitle"),

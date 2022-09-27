@@ -88,7 +88,7 @@
         padding-left: 10px;
       }
 
-      .index {
+      .l5 {
         width: 5%;
       }
 
@@ -111,11 +111,22 @@
         width: 40%;
         word-wrap: break-word;
       }
+
+      .index {
+        width: 30px;
+        text-align: right;
+      }
     }
   }
 
   .bottom {
     @include flexCenter(row);
     height: 2rem;
+  }
+
+  .smallImage {
+    width: 35px;
+    height: 35px;
+    // border-radius: 50%;
   }
 }

@@ -26,7 +26,7 @@ const Sidebar = ({ userData }) => {
         <div className="mypage_sidebar">
           <div className="mypageTitle">마이페이지</div>
           <div className="top">
-            <ProfilePicture pictureData={userData.userPhotoOrgNm} />
+            <ProfilePicture userData={userData} />
             <span className="name">{userData.userNickName} 님</span>
             <span className="else">{userData.userEmail}</span>
             <span className="else">{userData.userTel}</span>

@@ -14,7 +14,6 @@ import { onRequest } from "../UsefulFunctions/ApiService";
 // TableMenuItems 객체로 생성한 tableItems state를 사용하여 각 컴포넌트에 알맞은 데이터를 출력할 수 있도록 설계
 const Table = ({ tableInfo, fetchedData }) => {
   const userRole = localStorage.getItem("USER_ROLE");
-  const [writingMode, setWritingMode] = useState(false);
   const [sortType, setSortType] = useState("Idx");
 
   const returnValueOfKey = (Key) => {
@@ -45,6 +44,8 @@ const Table = ({ tableInfo, fetchedData }) => {
   const filterSelectRef = useRef();
 
   const navigate = useNavigate();
+
+  // --------------------------- 페이징 처리 관련 함수 ---------------------------
 
   // 1. 필터 내용에 따라 data를 변경하는 함수
   const filteringData = (value, option) => {
@@ -92,7 +93,9 @@ const Table = ({ tableInfo, fetchedData }) => {
     setCurrentPageData(data.slice(10 * pageNum - 10, 10 * pageNum));
   };
 
-  // 테이블 바디 onClick 시, 상세 페이지로 이동하는 함수
+  // --------------------------- 페이징 처리 관련 함수 끝 ---------------------------
+
+  // 테이블 바디 클릭 시, 상세 페이지로 이동하는 함수
   const moveToBoard = (element, type) => {
     let id = element[returnValueOfKey("Idx")];
     let path = window.location.pathname;
@@ -135,15 +138,26 @@ const Table = ({ tableInfo, fetchedData }) => {
     }
   };
 
+  // 강좌 등록 관리자 승인 버튼 클릭 함수
   const onClickApprove = (index) => {
     // let selectedArray = fetchedData.filter((a) => {
     //   return a.courseIdx === index;
     // });
     onRequest("/api/admin/updateCourseStatus", "post", { courseIdx: index });
   };
+
+  // 강좌 등록 관리자 삭제 버튼 클릭 함수
   const onClickDelete = (index) => {
     onRequest("/api/admin/deleteCourseStatus", "post", { courseIdx: index });
   };
+
+  // 글쓰기 버튼 클릭 함수
+  const onClickWrite = () => {
+    navigate("write");
+  };
+
+  //--------------------------- 테이블 만드는 부분 ---------------------------
+
   // 테이블에 클래스 추가해주는 함수
   const insertClass = (index) => {
     return "column " + tableInfo[index].prop;
@@ -159,27 +173,11 @@ const Table = ({ tableInfo, fetchedData }) => {
   };
 
   // 테이블 바디 반환하는 함수 (가로)
-  const insertTDT = (tableInfo, element) => {
-    console.log(fetchedData);
-    let tableItem = [];
-    for (let i = 0; i < tableInfo.length; i++) {
-      tableItem.push(
-        <td
-          className={insertClass(i)}
-          onClick={() => {
-            moveToBoard(element);
-          }}
-        >
-          {element[tableInfo[i].cell]}
-        </td>
-      );
-    }
-  };
+  // 다양한 조건을 줌으로써 데이터 형태에 맞게 출력 가능
   const insertTD = (tableInfo, element) => {
-    console.log(fetchedData);
     let tableItem = [];
     for (let i = 0; i < tableInfo.length; i++) {
-      console.log(tableInfo[i].cell);
+      // date 형식
       if (tableInfo[i].cell.includes("Regdate")) {
         tableItem.push(
           <td
@@ -193,7 +191,8 @@ const Table = ({ tableInfo, fetchedData }) => {
             )}
           </td>
         );
-      } else if (tableInfo[i].cell === "approval") {
+        // 관리자 승인 버튼
+      } else if (tableInfo[i].title === "승인") {
         tableItem.push(
           <td className={insertClass(i)}>
             <button
@@ -206,7 +205,8 @@ const Table = ({ tableInfo, fetchedData }) => {
             </button>
           </td>
         );
-      } else if (tableInfo[i].cell === "delete") {
+        // 관리자 삭제 버튼
+      } else if (tableInfo[i].title === "삭제") {
         tableItem.push(
           <td className={insertClass(i)}>
             <button
@@ -219,10 +219,18 @@ const Table = ({ tableInfo, fetchedData }) => {
             </button>
           </td>
         );
+        // 이미지 파일
       } else if (tableInfo[i].title === "이미지") {
         tableItem.push(
-          <td className={insertClass(i)}>{element[tableInfo[i].cell]}</td>
+          <td className={insertClass(i)}>
+            <img
+              className="smallImage"
+              src={`${API_BASE_URL}/upload/${element[tableInfo[i].cell]}`}
+              alt="no_img"
+            />
+          </td>
         );
+        // 그 외 일반 string 데이터
       } else {
         tableItem.push(
           <td
@@ -240,9 +248,7 @@ const Table = ({ tableInfo, fetchedData }) => {
     return tableItem;
   };
 
-  const onClickWrite = () => {
-    navigate("write");
-  };
+  //--------------------------- 테이블 만드는 부분 끝 ---------------------------
 
   return (
     <>

@@ -10,16 +10,17 @@ import { API_BASE_URL } from "../../../app-config";
 import ResultNotFound from "../../../ModuleComponents/ResultNotFound/ResultNotFound";
 import { onRequest } from "../../../ModuleComponents/UsefulFunctions/ApiService";
 import { useRef } from "react";
+import { useOutletContext } from "react-router-dom";
 
 const LecturerInfoModification = () => {
   const [fetchedData, setFetchedData] = useState();
-
   const [boardData, setBoardData] = useState("");
   const [modal, setModal] = useState(false);
 
   const [nickName, setNickName] = useState();
   const [formData, setFormData] = useState({});
   const profileRef = useRef();
+  const { userData } = useOutletContext();
 
   useEffect(() => {
     axios({
@@ -54,7 +55,7 @@ const LecturerInfoModification = () => {
           <div className="body3">
             <div className="left">
               <img id="picture" src={defaultProfilePicture} alt="pp" />
-              <span>aa</span>
+              <span>{userData.userNickName}</span>
               <button
                 onClick={
                   onClickSave
@@ -66,9 +67,11 @@ const LecturerInfoModification = () => {
             </div>
             <div></div>
             <div className="right">
+              프로필 소개
+              <br />
               <textarea
                 name=""
-                id=""
+                id="textarea"
                 cols="30"
                 rows="10"
                 ref={profileRef}
