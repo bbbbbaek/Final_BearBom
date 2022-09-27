@@ -33,8 +33,12 @@ public interface NoticeMapper {
 	
 	
 	
+//	@Update("update t_notice set notice_use_yn = 'N' where NOTICE_IDX = #{noticeIdx}")
+//	void updateNotice(Map<String, Object> paramMap);
+
+	
 	@Update("update t_notice set notice_use_yn = 'N' where NOTICE_IDX = #{noticeIdx}")
-	void updateNotice(Map<String, Object> paramMap);
+	void updateNotice(Integer id);
 	
 
 	

@@ -55,10 +55,16 @@ public class GuideServiceImpl implements GuideService{
 		
 	}
 
+//	@Override
+//	public void updateFaq(Map<String, Object> paramMap) {
+//		// TODO Auto-generated method stub
+//		faqMapper.updateFaq(paramMap);
+//	}
+
 	@Override
-	public void updateFaq(Map<String, Object> paramMap) {
+	public void updateFaq(Integer id) {
 		// TODO Auto-generated method stub
-		faqMapper.updateFaq(paramMap);
+		faqMapper.updateFaq(id);
 	}
 
 

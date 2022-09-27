@@ -62,7 +62,7 @@ public class AdminNoticeController {
 
 	@PostMapping("updateNotice")
 	public void updateNotice(@RequestBody Map<String, Object> paramMap) {
-		noticeService.updateNotice(paramMap);
+		noticeService.updateNotice(Integer.valueOf(String.valueOf(paramMap.get("id"))));
 	}
 	
 	

@@ -34,6 +34,10 @@ public interface FaqMapper {
 	void insertFaq(GuideDTO guideDTO);
 
 	
+//	@Update("update t_guide set guide_use_yn ='N' where GUIDE_IDX = #{guideIdx}")
+//	void updateFaq(Map<String, Object> paramMap);
+
+	
 	@Update("update t_guide set guide_use_yn ='N' where GUIDE_IDX = #{guideIdx}")
-	void updateFaq(Map<String, Object> paramMap); 
+	void updateFaq(Integer id); 
 }
