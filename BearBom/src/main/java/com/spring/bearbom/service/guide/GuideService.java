@@ -20,7 +20,10 @@ public interface GuideService {
 	void mdfFaq(GuideDTO guideDTO);
 	
 	
-	void updateFaq(Map<String, Object> paramMap);
+//	void updateFaq(Map<String, Object> paramMap);
+	
+	
+	void updateFaq(Integer valueOf);
 
 
 	

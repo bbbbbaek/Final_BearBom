@@ -47,6 +47,13 @@ public class AdminFaqController {
 		return ResponseEntity.ok().body(guideDTO);
 	}
 	
+	
+	
+	
+	
+	
+	
+	
 	//y를 n으로 바꾸는 update
 //	@PostMapping("/updateFaq")
 //	public void updateFaq(@RequestBody GuideDTO guideDTO){	
@@ -58,8 +65,11 @@ public class AdminFaqController {
 	
 	@PostMapping("updateFaq")
 	public void updateFaq(@RequestBody Map<String, Object> paramMap) {
-		guideService.updateFaq(paramMap);
+		guideService.updateFaq(Integer.valueOf(String.valueOf(paramMap.get("id"))));
 	}
+	
+	
+	
 	
 	//게시글수정 정보
 	
