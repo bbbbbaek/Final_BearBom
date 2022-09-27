@@ -17,6 +17,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +29,7 @@ import com.spring.bearbom.entity.Course;
 import com.spring.bearbom.entity.CourseFile;
 import com.spring.bearbom.entity.User;
 import com.spring.bearbom.service.course.CourseService;
+import com.spring.bearbom.service.user.UserService;
 
 @RestController
 @RequestMapping("/api/course")
@@ -35,19 +37,20 @@ public class CourseController {
 	
 	@Autowired
 	CourseService courseService;
+	
+	@Autowired
+	UserService userService;
 
 	@PostMapping("/courseRegistration")
 	public void courseRegistration(MultipartHttpServletRequest multiPartHttpServletRequest, HttpServletRequest request,
-			@RequestParam Map<String, Object> paramMap) throws IOException, ParseException {
-//		userService.updatePhoneNum(paramMap.get("phoneNum"));
+			@RequestParam Map<String, Object> paramMap, @AuthenticationPrincipal String userId) throws IOException, ParseException {
 		
 		//유저정보
-		User user = new User();
-		user.setUserId(String.valueOf(paramMap.get("userId")));
-		//user.setUserTel(String.valueOf(paramMap.get("userTel")));
-		//user.setRole("ROLE_LECTURER");
-		//userService.updateUserInfoForCoureseRegistraion(user);
-//		
+		User user = userService.getUser(userId);
+		user.setUserTel(String.valueOf(paramMap.get("userTel")));
+		user.setRole("ROLE_LECTURER");
+		user.setLecturerInfo(String.valueOf(paramMap.get("lecturerInfo")));
+		
 		System.out.println(paramMap);
 		
 		//날짜변환부분

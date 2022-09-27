@@ -695,3 +695,11 @@ div {
 .marTop{
   margin-top: 50px;
 }
+
+.contentsArea{
+  min-width: 600px;
+  min-height: 300px;
+  padding: 10px 15px;
+  border: 1px solid #bdb7ae;
+  border-radius: 5px;
+}

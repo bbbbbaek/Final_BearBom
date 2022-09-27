@@ -143,16 +143,6 @@ const CourseRegistration = () => {
     //console.log(formData);
   };
 
-  const test = () => {
-    let data = {
-      courseIdx: 46,
-      orderNm: "아직 데이터 매핑 못했습니다;",
-      pgNm: "아직 데이터 매핑 못했습니다;",
-      paymentMethod: "아직 데이터 매핑 못했습니다;",
-    };
-    onRequest("/api/order/updateOrderYn", "post", data);
-  }
-
   return (
     <>
     <ThemeProvider theme={theme}>
@@ -228,7 +218,6 @@ const CourseRegistration = () => {
                   >
                     등록
                   </Button>)}
-                  <button onClick={test}>pat test</button>
                   {/* <div>{currentStep}</div> */}
                 </div>
               </div>
