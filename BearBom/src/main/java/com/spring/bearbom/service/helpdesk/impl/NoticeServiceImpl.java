@@ -48,10 +48,16 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public void updateNotice(Map<String, Object> paramMap) {
-	// TODO Auto-generated method stub
-	noticeMapper.updateNotice(paramMap);
-}
+	public void updateNotice(Integer id) {
+		// TODO Auto-generated method stub
+		noticeMapper.updateNotice(id);
+	}
+
+//	@Override
+//	public void updateNotice(Map<String, Object> paramMap) {
+//	// TODO Auto-generated method stub
+//	noticeMapper.updateNotice(paramMap);
+//}
 
 
 //	@Override

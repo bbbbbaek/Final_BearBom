@@ -12,10 +12,12 @@ public interface NoticeService {
 
 	void insertNotice(NoticeDTO noticeDTO);
 
-//	void updateNotice(NoticeDTO noticeDTO);
 
 	void mdfNotice(NoticeDTO noticeDTO);
+//
+//	void updateNotice(Map<String, Object> paramMap);
 
-	void updateNotice(Map<String, Object> paramMap);
+	void updateNotice(Integer valueOf);
+	
 
 }
