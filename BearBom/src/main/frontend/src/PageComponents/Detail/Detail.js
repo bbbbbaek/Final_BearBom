@@ -132,75 +132,78 @@ const Detail = () => {
       setTeacherInfo(response.data.userInfo);
     });
   }, []);
-
+  console.log(teacherInfo);
   return (
     <>
-      <div className="main-container">
-        <div className="info">
-          <div className="main-info">
-            <div className="main-img-box">
-              <ImgBox course={course} />
-            </div>
-            <h4 className="courseNm">{course.courseNm}</h4>
-            <div className="course-short-info">
-              <div>
-                <BarChartIcon color="action" />
-                {course.courseLevel}
+      {teacherInfo ? (
+        <div className="main-container">
+          <div className="info">
+            <div className="main-info">
+              <div className="main-img-box">
+                <ImgBox course={course} />
               </div>
-              <div>
-                <AccessTimeIcon sx={{ fontSize: 30 }} color="action" />
-                {course.courseRuntime}시간
-              </div>
-              <div>
-                <FmdGoodIcon color="action" />
-                {course.courseAddress}
-                {course.courseAddressEx}
-              </div>
-              <div>
-                <SupervisorAccountIcon sx={{ fontSize: 30 }} color="action" />
-                {course.courseMin} ~ {course.courseMax}인
-              </div>
-            </div>
-            <DetailTabs
-              id="Detail-Tabs"
-              averageRating={averageRating}
-              course={course}
-              CurCnt={CurCnt}
-            />
-            <hr />
-            <section id="review" className="section-box">
-              <div className="reviewList">
-                <OpenModal
-                  addReviewInfo={addReviewInfo}
-                  onWriteReview={onWriteReview}
-                />
-
-                <div id="review-box-list">
-                  {reviewData !== []
-                    ? reviewData.map((review) => <Review review={review} />)
-                    : null}
-                  <div className="btn-position">
-                    <button
-                      className="more-btn"
-                      onClick={() => {
-                        setCnt(cnt + 1);
-                      }}
-                    >
-                      더보기
-                    </button>
-                  </div>
+              <h4 className="courseNm">{course.courseNm}</h4>
+              <div className="course-short-info">
+                <div>
+                  <BarChartIcon color="action" />
+                  {course.courseLevel}
+                </div>
+                <div>
+                  <AccessTimeIcon sx={{ fontSize: 30 }} color="action" />
+                  {course.courseRuntime}시간
+                </div>
+                <div>
+                  <FmdGoodIcon color="action" />
+                  {course.courseAddress}
+                  {course.courseAddressEx}
+                </div>
+                <div>
+                  <SupervisorAccountIcon sx={{ fontSize: 30 }} color="action" />
+                  {course.courseMin} ~ {course.courseMax}인
                 </div>
               </div>
-            </section>
-          </div>
-          <div className="main-cal">
-            <div>
-              <Apply id="Apply" courseIdx={id} course={course} />
+              <DetailTabs
+                id="Detail-Tabs"
+                averageRating={averageRating}
+                course={course}
+                CurCnt={CurCnt}
+                teacherInfo={teacherInfo}
+              />
+              <hr />
+              <section id="review" className="section-box">
+                <div className="reviewList">
+                  <OpenModal
+                    addReviewInfo={addReviewInfo}
+                    onWriteReview={onWriteReview}
+                  />
+
+                  <div id="review-box-list">
+                    {reviewData !== []
+                      ? reviewData.map((review) => <Review review={review} />)
+                      : null}
+                    <div className="btn-position">
+                      <button
+                        className="more-btn"
+                        onClick={() => {
+                          setCnt(cnt + 1);
+                        }}
+                      >
+                        더보기
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </section>
             </div>
-            <div></div>
+            <div className="main-cal">
+              <div>
+                <Apply id="Apply" courseIdx={id} course={course} />
+              </div>
+              <div></div>
+            </div>
           </div>
         </div>
-      </div>
+      ) : null}
     </>
   );
 };
