@@ -8,13 +8,16 @@ const CourseMgmt = () => {
   let tableInfo = courseMgmtItems;
   const [fetchedData, setFetchedData] = useState();
   useEffect(() => {
-    axios
-      .get(
-        "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Course"
-      )
-      .then((res) => {
-        setFetchedData(res.data);
-      });
+    axios({
+      method: "get",
+      url: API_BASE_URL + "/api/admin/getAllCourseList",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+      },
+    }).then((res) => {
+      console.log(res.data.allCourseList);
+      setFetchedData(res.data.allCourseList);
+    });
   }, []);
 
   return (

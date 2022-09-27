@@ -9,6 +9,7 @@ import Stack from "@mui/material/Stack";
 import excelDownload from "../../images/excelDownload.png";
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../../app-config";
+import { onRequest } from "../UsefulFunctions/ApiService";
 
 // TableMenuItems 객체로 생성한 tableItems state를 사용하여 각 컴포넌트에 알맞은 데이터를 출력할 수 있도록 설계
 const Table = ({ tableInfo, fetchedData }) => {
@@ -134,6 +135,15 @@ const Table = ({ tableInfo, fetchedData }) => {
     }
   };
 
+  const onClickApprove = (index) => {
+    // let selectedArray = fetchedData.filter((a) => {
+    //   return a.courseIdx === index;
+    // });
+    onRequest("/api/admin/updateCourseStatus", "post", { courseIdx: index });
+  };
+  const onClickDelete = (index) => {
+    onRequest("/api/admin/deleteCourseStatus", "post", { courseIdx: index });
+  };
   // 테이블에 클래스 추가해주는 함수
   const insertClass = (index) => {
     return "column " + tableInfo[index].prop;
@@ -150,21 +160,7 @@ const Table = ({ tableInfo, fetchedData }) => {
 
   // 테이블 바디 반환하는 함수 (가로)
   const insertTDT = (tableInfo, element) => {
-    let tableItem = [];
-    for (let i = 0; i < tableInfo.length; i++) {
-      tableItem.push(
-        <td
-          className={insertClass(i)}
-          onClick={() => {
-            moveToBoard(element);
-          }}
-        >
-          {API_BASE_URL + "upload" + element[tableInfo[i].cell]}
-        </td>
-      );
-    }
-  };
-  const insertTD = (tableInfo, element) => {
+    console.log(fetchedData);
     let tableItem = [];
     for (let i = 0; i < tableInfo.length; i++) {
       tableItem.push(
@@ -178,8 +174,73 @@ const Table = ({ tableInfo, fetchedData }) => {
         </td>
       );
     }
-
+  };
+  const insertTD = (tableInfo, element) => {
+    console.log(fetchedData);
+    let tableItem = [];
+    for (let i = 0; i < tableInfo.length; i++) {
+      console.log(tableInfo[i].cell);
+      if (tableInfo[i].cell.includes("Regdate")) {
+        tableItem.push(
+          <td
+            className={insertClass(i)}
+            onClick={() => {
+              moveToBoard(element);
+            }}
+          >
+            {Intl.DateTimeFormat("kr").format(
+              new Date(element[tableInfo[i].cell])
+            )}
+          </td>
+        );
+      } else if (tableInfo[i].cell === "approval") {
+        tableItem.push(
+          <td className={insertClass(i)}>
+            <button
+              id="approve"
+              onClick={() => {
+                onClickApprove(element.courseIdx);
+              }}
+            >
+              승인
+            </button>
+          </td>
+        );
+      } else if (tableInfo[i].cell === "delete") {
+        tableItem.push(
+          <td className={insertClass(i)}>
+            <button
+              id="delete"
+              onClick={() => {
+                onClickDelete(element.courseIdx);
+              }}
+            >
+              삭제
+            </button>
+          </td>
+        );
+      } else {
+        tableItem.push(
+          <td
+            className={insertClass(i)}
+            onClick={() => {
+              moveToBoard(element);
+            }}
+          >
+            {element[tableInfo[i].cell]}
+          </td>
+        );
+      }
+    }
     return tableItem;
+  };
+
+  const onClickWrite = () => {
+    navigate("write");
+  };
+
+  const checkingDataType = (element, type) => {
+    console.log(typeof element);
   };
 
   return (
@@ -187,6 +248,12 @@ const Table = ({ tableInfo, fetchedData }) => {
       {fetchedData ? (
         <div className="table_home">
           <div className="top1">
+            {userRole === "ROLE_ADMIN" && (
+              <button style={{ marginRight: "1rem" }} onClick={onClickWrite}>
+                글쓰기
+              </button>
+            )}
+
             <div className="search">
               <select
                 onChange={(e) => {
@@ -246,6 +313,7 @@ const Table = ({ tableInfo, fetchedData }) => {
                       //   ? insertTDT(tableInfo, a)
                       //   :
                       insertTD(tableInfo, a)
+                      // checkingDataType(a)
                     }
                   </tr>
                 );

@@ -72,7 +72,7 @@ public class AdminNoticeController {
 //		return ResponseEntity.ok().body(noticeDTO);
 		
 	@PostMapping("/updateNotice")
-	public void updateNotice(@RequestBody NoticeDTO noticeDTO){	
+	public void updateNotice( NoticeDTO noticeDTO){
 		
 		System.out.println("before noticeDTO : " +noticeDTO);
 		noticeService.updateNotice(noticeDTO);

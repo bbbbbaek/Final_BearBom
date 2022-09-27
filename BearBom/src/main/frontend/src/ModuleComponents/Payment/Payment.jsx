@@ -9,6 +9,7 @@ import { onRequest } from "../UsefulFunctions/ApiService";
 import axios from "axios";
 import { useState } from "react";
 import { API_BASE_URL } from "../../app-config";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
 const Payment = () => {
   const [userData, setUserData] = useState();
@@ -77,7 +78,7 @@ const Payment = () => {
         orderPri: cart[0].courseCost,
       };
 
-      onRequest(API_BASE_URL + "/api/order/updateOrderYn", "post", data)
+      onRequest("/api/order/updateOrderYn", "post", data)
         .then(alert("결제가 정상적으로 완료되었습니다."))
         .catch((err) => {
           alert("알 수 없는 이유로 결제에 실패했습니다.");
@@ -85,7 +86,6 @@ const Payment = () => {
           console.log(err);
           return err;
         });
-
     } else {
       alert(`결제 실패: ${error_msg}`);
     }
@@ -137,6 +137,19 @@ const Payment = () => {
     onClickPayment(paymentInfo);
   };
 
+  const onClickTrashCan = () => {
+    if (window.confirm("delete?")) {
+      fetchedData.forEach(
+        fetchedData.splice(
+          fetchedData.filter(fetchedData.courseIdx === cart.courseIdx),
+          1
+        )
+      );
+    } else {
+      return false;
+    }
+  };
+
   return (
     <>
       <div className="payment">
@@ -150,20 +163,25 @@ const Payment = () => {
           <div className="payment_body">
             <div className="table">
               <table>
-                <tr>
-                  <td className="th l5"></td>
-                  <td className="th l10">번호</td>
-                  <td className="th l5"></td>
-                  <td className="th l40">강의명</td>
-                  <td className="th l15">강사명</td>
-                  <td className="th l15">시작일</td>
-                  <td className="th l15">종료일</td>
-                  <td className="th l15">가격</td>
+                <tr className="th">
+                  <td className=" l5 center">
+                    <DeleteOutlineOutlinedIcon
+                      onClick={onClickTrashCan}
+                      style={{ cursor: "pointer" }}
+                    />
+                  </td>
+                  <td className=" l5 right">번호</td>
+                  <td className=" l5"></td>
+                  <td className=" l40">강의명</td>
+                  <td className=" l15">강사명</td>
+                  <td className=" l15">시작일</td>
+                  <td className=" l15">종료일</td>
+                  <td className=" l15">가격</td>
                 </tr>
                 {fetchedData.map((a, i) => {
                   return (
                     <tr>
-                      <td>
+                      <td className="center">
                         <input
                           type="checkbox"
                           onClick={() => {
@@ -171,7 +189,7 @@ const Payment = () => {
                           }}
                         />
                       </td>
-                      <td>{a.courseIdx}</td>
+                      <td className="right">{a.courseIdx}</td>
                       <td>{a.courseThumb}</td>
                       <td>{a.courseNm}</td>
                       <td>{a.userId}</td>

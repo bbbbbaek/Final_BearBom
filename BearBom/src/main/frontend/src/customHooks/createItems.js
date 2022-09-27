@@ -24,7 +24,7 @@ export const faqItems = [
   new Data("제목", "l40", "guideTitle"),
   // new Data("내용", "l40", "guideContent"),
   new Data("작성일", "l10", "guideRegdate"),
-  new Data("수정일", "l10", "guideMdfdate"),
+  // new Data("수정일", "l10", "guideMdfdate"),
 ];
 
 // ----------------------- 마이페이지 -----------------------
@@ -38,8 +38,8 @@ export const profileItems = ["사진", "이름", "이메일", "연락처"];
 export const recentTransactionItems = [
   new Data("주문번호", "l10", "orderIdx"),
   new Data("", "l10", "courseImage"),
-  new Data("강의명", "l40", "courseTitle"),
-  new Data("강사명", "l10", "lecturer"),
+  new Data("강의명", "l40", "courseNm"),
+  new Data("강사명", "l10", "userId"),
   new Data("구매일", "l10", "orderDate"),
   new Data("상태", "l10", "status"), // 없음
 ];
@@ -97,10 +97,8 @@ export const inquiryItems = [
 export const wishListItems = [
   new Data("강의번호", "l10", "courseIdx"),
   new Data("", "l10", "courseImage"),
-  new Data("강의명", "l40", "courseTitle"),
-  new Data("강사명", "l10", "user"),
-  new Data("구매일", "l10", "inquiryRegdate"),
-  new Data("상태", "l10", "status"), // 없음
+  new Data("강의명", "l40", "courseNm"),
+  new Data("강사명", "l10", "userId"),
 ];
 
 // ----------------------- 관리자 페이지 -----------------------
@@ -109,9 +107,9 @@ export const wishListItems = [
 export const latestTransactionItems = [
   new Data("주문번호", "l10", "orderIdx"),
   new Data("", "l10", "courseImage"),
-  new Data("강의명", "l40", "courseTitle"),
-  new Data("강사명", "l10", "lecturer"),
-  new Data("구매일", "l10", "orderDate"),
+  new Data("강의명", "l40", "courseNm"),
+  new Data("강사명", "l10", "userId"),
+  new Data("바보", "l10", "courseStTime"),
   new Data("상태", "l10", "status"), // 없음
 ];
 
@@ -148,11 +146,12 @@ export const userMgmtItems = [
 // 강좌 관리
 export const courseMgmtItems = [
   new Data("강의번호", "l10", "courseIdx"),
-  new Data("", "l10", "courseImage"),
-  new Data("강의명", "l40", "courseTitle"),
-  new Data("강사명", "l10", "user"),
-  new Data("구매일", "l10", "orderDate"),
-  new Data("상태", "l10", "status"), // 없음
+  new Data("강의명", "l40", "courseNm"),
+  new Data("시작일", "l10", "courseStDate"),
+  new Data("강사명", "l10", "userId"),
+  new Data("상태", "l10", "courseUseYn"), // 없음
+  new Data("승인", "l10", "approval"), // 없음
+  new Data("삭제", "l10", "delete"), // 없음
 ];
 
 // 공지사항 관리
@@ -171,7 +170,7 @@ export const faqMgmtItems = [
   new Data("제목", "l40", "guideTitle"),
   // new Data("내용", "l40", "guideContent"),
   new Data("작성일", "l10", "guideRegdate"),
-  new Data("수정일", "l10", "guideMdfdate"),
+  // new Data("수정일", "l10", "guideMdfdate"),
 ];
 
 // 고객문의 관리

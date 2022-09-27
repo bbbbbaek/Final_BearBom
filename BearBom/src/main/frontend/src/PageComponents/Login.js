@@ -152,7 +152,10 @@ const Login = () => {
         localStorage.setItem("USER_ID", response.data.userId);
         if (response.data.token) {
           localStorage.setItem("ACCESS_TOKEN", response.data.token);
-          if (localStorage.getItem("USER_ROLE") === "ROLE_USER") {
+          if (
+            localStorage.getItem("USER_ROLE") === "ROLE_USER" ||
+            localStorage.getItem("USER_ROLE") === "ROLE_LECTURER"
+          ) {
             navigate("/");
             dispatch(onLogin());
             alert("로그인 되었습니다.");

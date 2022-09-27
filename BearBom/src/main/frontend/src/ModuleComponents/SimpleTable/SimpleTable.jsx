@@ -7,10 +7,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import dummyData from "../../PageComponents/Admin/dummyData";
 
-const SimpleTable = ({ tableInfo, fetchedData }) => {
-  console.log(fetchedData);
+const SimpleTable = ({ tableInfo, fetchedData, filterType }) => {
   let recentData = fetchedData.slice(
     fetchedData.length - 5,
     fetchedData.length

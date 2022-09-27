@@ -72,6 +72,7 @@ const Header = () => {
   const onClickLogout = () => {
     localStorage.removeItem("USER_ID");
     localStorage.removeItem("ACCESS_TOKEN");
+    localStorage.clear();
     dispatch(onLogout());
     setFetchedData({
       userId: false,
@@ -108,14 +109,6 @@ const Header = () => {
     <>
       <div className="header">
         <div className="logo">
-          <button
-            onClick={() => {
-              console.log(fetchedData);
-              console.log(orderData);
-            }}
-          >
-            test
-          </button>
           <img
             id="/"
             className="logoImage"
@@ -145,9 +138,9 @@ const Header = () => {
             <li id="/helpdesk" onClick={onClickMenu}>
               고객센터
             </li>
-            <li id="/mypage" onClick={onClickMypage}>
+            {/* <li id="/mypage" onClick={onClickMypage}>
               마이페이지
-            </li>
+            </li> */}
           </ul>
         </div>
         <div className="user">
@@ -155,9 +148,11 @@ const Header = () => {
 
           {loginStatus.loginStatus ? (
             localStorage.getItem("test") === "kakao" ? (
-              <div>
-                <div>{checkLocalStorage}</div>
-                <LogoutKaKao />
+              <div className="kakaoLoginBox">
+                <div className="kakaoId">{checkLocalStorage}</div>
+                <div className="kakaoLogout" onClick={onClickLogout}>
+                  <LogoutKaKao />
+                </div>
               </div>
             ) : (
               <ul id="isLoggedIn">

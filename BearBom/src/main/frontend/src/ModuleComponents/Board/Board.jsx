@@ -10,6 +10,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import { API_BASE_URL } from "../../app-config";
+import { onRequest } from "../UsefulFunctions/ApiService";
 
 const Board = ({ type }) => {
   const userRole = localStorage.getItem("USER_ROLE");
@@ -59,6 +60,30 @@ const Board = ({ type }) => {
 
   const onClickWrite = () => {
     setWritingMode(true);
+  };
+
+  const onClickDelete = () => {
+    switch (type) {
+      case "admin_notice":
+        if (window.confirm("삭제하시겠습니까?")) {
+          onRequest("/api/admin/updateNotice", "post", {
+            noticeIdx: params,
+          });
+        }
+        break;
+      case "admin_faq":
+        if (window.confirm("삭제하시겠습니까?")) {
+          onRequest("/api/admin/updateFaq", "post", { guideIdx: params });
+        }
+        break;
+      case "admin_inquiry":
+        if (window.confirm("삭제하시겠습니까?")) {
+          onRequest("/api/admin/updateInquiry", "post", { inquiryIdx: params });
+        }
+        break;
+      default:
+        break;
+    }
   };
 
   // 파라미터 제외한 window.location.pathname 리턴하는 함수
@@ -155,15 +180,18 @@ const Board = ({ type }) => {
             <div className="buttons">
               {userRole === "ROLE_ADMIN" && (
                 <>
-                  {type === "admin_inquiry" ? (
-                    <button className="write" onClick={onClickWrite}>
-                      답변
+                  {type === "admin_notice" ||
+                  type === "admin_faq" ||
+                  type === "admin_inquiry" ? (
+                    <button className="write" onClick={onClickDelete}>
+                      삭제
                     </button>
                   ) : null}
-
-                  <button className="write" onClick={onClickWrite}>
-                    수정
-                  </button>
+                  {type !== "admin_inquiry" ? (
+                    <button className="write" onClick={onClickWrite}>
+                      수정
+                    </button>
+                  ) : null}
                 </>
               )}
               <button className="back" onClick={backToList}>
