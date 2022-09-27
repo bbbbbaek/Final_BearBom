@@ -31,6 +31,7 @@ export default function RegStepper({currentStep}) {
       description: <RegStepperDetail3 currentStep={currentStep}/>,
     },
   ];
+  
 
   useEffect(() => {
     if(currentStep<=0){
