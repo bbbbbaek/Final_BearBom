@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { API_BASE_URL } from "../../app-config";
 function Teacher({ averageRating, CurCnt }) {
   return (
     <>
@@ -6,7 +9,7 @@ function Teacher({ averageRating, CurCnt }) {
           {/* {reviewData[2].user.userNm} */}
           {/* <img
             className="teacher-img"
-            src={`http://localhost:8080/upload/${review.user.userPhotoNewNm}`}
+            src={`http://localhost:8080/upload/${teacherInfo.userPhotoNewNm}`}
             alt="aa"
           ></img> */}
         </div>

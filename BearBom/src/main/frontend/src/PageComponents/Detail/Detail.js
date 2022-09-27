@@ -24,6 +24,7 @@ const Detail = () => {
   const [averageRating, setaverageRating] = useState([]); //평균평점을 담은 State
   const location = useLocation(); //URL을
   const [CurCnt, setCurCnt] = useState(0);
+  const [teacherInfo, setTeacherInfo] = useState();
   // const userId = localStorage.getItem("USER_ID"); //유저 아이디를
   // const navigate = useNavigate(); //결제를 위한 navigate
 
@@ -128,6 +129,7 @@ const Detail = () => {
       setaverageRating(response.data.averageRating);
       setReviewList(response.data.reviewList);
       setReviewData(response.data.reviewList.slice(0, 4));
+      setTeacherInfo(response.data.userInfo);
     });
   }, []);
 
