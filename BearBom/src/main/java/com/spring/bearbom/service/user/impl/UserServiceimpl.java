@@ -132,6 +132,12 @@ public class UserServiceimpl implements UserService {
 		System.out.println(regUser);
 		return regUser;
 	}
+
+	@Override
+	public void updateUserInfo(User user) {
+		userRepository.save(user);
+		
+	}
 	
 	// 0926 비밀번호 수정 저장
 //	@Override
