@@ -11,12 +11,12 @@ const RecentTransaction = () => {
   useEffect(() => {
     axios({
       method: "get",
-      url: API_BASE_URL + "/api/order/getOrderList",
+      url: API_BASE_URL + "/api/order/allOrderList",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
       },
     }).then((res) => {
-      console.log(res.data.getOrderedCourseList);
+      console.log(res);
       setFetchedData(res.data.getOrderedCourseList);
     });
   }, []);
@@ -27,7 +27,7 @@ const RecentTransaction = () => {
         <h5>
           <strong>최근 주문 내역</strong>
         </h5>
-        <br />
+        <hr />
         {fetchedData ? (
           <SimpleTable
             tableInfo={tableInfo}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./featured.scss";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Doughnut from "../Chart/Doughnut";
@@ -6,8 +6,12 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import useFetch from "../../../customHooks/useFetch";
 
-const Featured = () => {
-  const fetch = useFetch();
+const Featured = ({ widgetData }) => {
+  const rawSales = widgetData.totalSales[0].totalsales;
+  const sales = rawSales.toLocaleString("ko-KR");
+  const targetRef = useRef();
+  // const target = targetRef.current.value;
+
   return (
     <>
       <div className="featured">
@@ -17,11 +21,14 @@ const Featured = () => {
         </div>
         <div className="content1">
           <div className="featuredChart">
-            <Doughnut />
+            <Doughnut
+              rawSales={rawSales}
+              // target={target}
+            />
           </div>
           <div className="description">
             <p className="title">오늘의 매출</p>
-            <p className="amount">2,300,000원</p>
+            <p className="amount">{sales}원</p>
             <div className="summary">
               <div className="item">
                 <div className="itemTitle">지난 주</div>
@@ -40,10 +47,8 @@ const Featured = () => {
             </div>
           </div>
         </div>
-        <p className="desc">
-          이전 거래를 처리 중입니다. 최근 거래는 매출에 포함되지 않을 수
-          있습니다.
-        </p>
+        <br />
+        <p className="desc">최근 거래는 매출에 포함되지 않을 수 있습니다.</p>
       </div>
     </>
   );

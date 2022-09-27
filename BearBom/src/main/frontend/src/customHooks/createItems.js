@@ -145,11 +145,14 @@ export const orderMgmtItems = [
 // 고객 관리
 export const userMgmtItems = [
   new Data("", "l5", ""),
-  new Data("아이디", "l20", "userId"),
-  new Data("이름", "l30", "userNm"),
+  new Data("아이디", "l10", "userId"),
+  new Data("이름", "l10", "userNm"),
   new Data("닉네임", "l10", "userNickName"),
-  new Data("이메일", "l20", "userEmail"),
-  new Data("연락처", "l20", "userTel"),
+  new Data("이메일", "l10", "userEmail"),
+  new Data("연락처", "l10", "userTel"),
+  new Data("연락처", "l20", "userAddress"),
+  new Data("삭제", "l5", "delete"), // 없음
+
   // new Data("가입일", "l10", "userRegdate"),
 ];
 
@@ -161,7 +164,6 @@ export const courseMgmtItems = [
   new Data("시작일", "l10", "courseStDate"),
   new Data("강사명", "l10", "userId"),
   new Data("상태", "l10", "courseUseYn"), // 없음
-  new Data("승인", "l10", "approval"), // 없음
   new Data("삭제", "l10", "delete"), // 없음
 ];
 
@@ -183,18 +185,20 @@ export const faqMgmtItems = [
   new Data("제목", "l40", "guideTitle"),
   // new Data("내용", "l40", "guideContent"),
   new Data("작성일", "l10", "guideRegdate"),
+  new Data("삭제", "l10", ""),
   // new Data("수정일", "l10", "guideMdfdate"),
 ];
 
 // 고객문의 관리
 export const inquiryMgmtItems = [
   new Data("", "l5", ""),
-  new Data("번호", "l10", "inquiryIdx"),
-  new Data("종류", "l10", "inquirySort"),
-  new Data("제목", "l40", "inquiryTitle"),
+  new Data("번호", "l5", "inquiryIdx"),
+  new Data("문의종류", "l10", "inquirySort"),
+  new Data("제목", "l30", "inquiryTitle"),
   // new Data("내용", "l40", "inquiryContent"),
-  new Data("작성자", "l10", "user"),
+  new Data("작성자", "l10", "userId"),
   new Data("작성일", "l10", "inquiryRegdate"),
   new Data("답변일", "l10", "inquiryReplydate"),
   new Data("답변여부", "l10", "inquiryReplyYn"),
+  new Data("삭제", "l10", ""),
 ];

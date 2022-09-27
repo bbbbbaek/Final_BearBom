@@ -129,4 +129,29 @@
     height: 35px;
     // border-radius: 50%;
   }
+
+  .approved {
+    color: #284492;
+    font-weight: 600;
+  }
+  .deleted {
+    color: #c32b46;
+    font-weight: 600;
+  }
+  .pending {
+    text-align: center;
+    font-weight: 600;
+    border: none;
+    width: 60px;
+    height: 30px;
+    color: #fff;
+    background-color: #7697a0;
+    border-radius: 3px;
+
+    &:hover {
+      transform: scale(0.95);
+      background-color: #4a707a;
+      font-weight: 700;
+    }
+  }
 }

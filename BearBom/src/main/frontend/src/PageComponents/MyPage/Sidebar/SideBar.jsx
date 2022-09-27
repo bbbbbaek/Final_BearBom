@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { onChange } from "../../../ModuleComponents/reduxStore/reduxStore";
 import { useNavigate } from "react-router-dom";
 
-const Sidebar = ({ userData }) => {
+const Sidebar = ({ userData, updateUserInfo, setUpdateUserInfo }) => {
   const navigate = useNavigate();
   const onNavigate = (e) => {
     e.stopPropagation();
@@ -26,7 +26,11 @@ const Sidebar = ({ userData }) => {
         <div className="mypage_sidebar">
           <div className="mypageTitle">마이페이지</div>
           <div className="top">
-            <ProfilePicture userData={userData} />
+            <ProfilePicture
+              userData={userData}
+              updateUserInfo={updateUserInfo}
+              setUpdateUserInfo={setUpdateUserInfo}
+            />
             <span className="name">{userData.userNickName} 님</span>
             <span className="else">{userData.userEmail}</span>
             <span className="else">{userData.userTel}</span>

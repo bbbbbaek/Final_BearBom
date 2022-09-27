@@ -10,7 +10,7 @@ import { API_BASE_URL } from "../../../app-config";
 import ResultNotFound from "../../../ModuleComponents/ResultNotFound/ResultNotFound";
 import { onRequest } from "../../../ModuleComponents/UsefulFunctions/ApiService";
 import { useRef } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 const LecturerInfoModification = () => {
   const [fetchedData, setFetchedData] = useState();
@@ -20,6 +20,7 @@ const LecturerInfoModification = () => {
   const [nickName, setNickName] = useState();
   const [formData, setFormData] = useState({});
   const profileRef = useRef();
+  const navigate = useNavigate();
   const { userData } = useOutletContext();
 
   useEffect(() => {
@@ -36,10 +37,11 @@ const LecturerInfoModification = () => {
   }, []);
 
   const onClickSave = () => {
-    alert("강사 프로필 수정이 완료되었습니다.");
     onRequest("/api/mypage/updateLecturerInfo", "post", {
       lecturerInfo: profileRef.current.value,
     });
+    alert("강사 프로필 수정이 완료되었습니다.");
+    navigate("/mypage");
   };
   console.log(profileRef);
 
@@ -54,7 +56,17 @@ const LecturerInfoModification = () => {
           <hr />
           <div className="body3">
             <div className="left">
-              <img id="picture" src={defaultProfilePicture} alt="pp" />
+              <img
+                id="picture"
+                src={
+                  userData.userPhotoNewNm
+                    ? `${API_BASE_URL}/upload/${userData.userPhotoNewNm}`
+                    : userData.userPhotoOrgNm
+                    ? `${API_BASE_URL}/upload/${userData.userPhotoOrgNm}`
+                    : defaultProfilePicture
+                }
+                alt="pp"
+              />
               <span>{userData.userNickName}</span>
               <button
                 onClick={

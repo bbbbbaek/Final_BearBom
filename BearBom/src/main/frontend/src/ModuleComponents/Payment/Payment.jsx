@@ -196,7 +196,7 @@ const Payment = () => {
                       <td>{a.userId}</td>
                       <td>{a.courseStDate}</td>
                       <td>{a.courseEndDate}</td>
-                      <td>{a.courseCost.toLocaleString()}</td>
+                      <td className="right">{a.courseCost.toLocaleString()}</td>
                     </tr>
                   );
                 })}
