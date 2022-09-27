@@ -98,11 +98,12 @@ public class MypageController {
 			userDTO.setUserAddress(getUser.getUserAddress());
 			userDTO.setUserAddressDef(getUser.getUserAddressDef());
 			userDTO.setUserTel(getUser.getUserTel());
+			
 
 			userDTO.setUserYn(getUser.getUserYn());
 
 			System.out.println("///////////////" + userDTO);
-			return ResponseEntity.ok().body(userDTO);
+			return ResponseEntity.ok().body(getUser);
 
 		} catch (Exception e) {
 			ResponseDTO<UserDTO> response = new ResponseDTO<>();
