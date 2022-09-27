@@ -27,7 +27,7 @@ const Mypage = () => {
   //     setFetchedData(res[2].data);
   //   });
   // }, []);
-
+  const [updateUserInfo, setUpdateUserInfo] = useState(0);
   const [userData, setUserData] = useState(); // 로그인한 유저 정보
   const [widgetData, setWidgetData] = useState(); // Widget에 보일 클래스 개수 정보
 
@@ -55,7 +55,7 @@ const Mypage = () => {
       console.log(res[0].data);
       console.log(res[1].data);
     });
-  }, []);
+  }, [updateUserInfo]);
 
   return (
     <>
@@ -63,7 +63,11 @@ const Mypage = () => {
         <div className="mypage_home">
           <div className="banner"></div>
           <div className="body">
-            <Sidebar userData={userData} />
+            <Sidebar
+              updateUserInfo={updateUserInfo}
+              setUpdateUserInfo={setUpdateUserInfo}
+              userData={userData}
+            />
             <div className="wrapper">
               <div className="quickview">
                 <QuickView type="taking" widgetData={widgetData} />
@@ -72,7 +76,9 @@ const Mypage = () => {
                 <QuickView type="liked" widgetData={widgetData} />
               </div>
               <div className="content">
-                <Outlet context={{ userData }} />
+                <Outlet
+                  context={{ userData, updateUserInfo, setUpdateUserInfo }}
+                />
               </div>
             </div>
           </div>

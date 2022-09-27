@@ -4,6 +4,7 @@ import adminProfileImage from "../../images/adminProfileImage.png";
 import defaultProfilePicture from "../../images/defaultProfilePicture.png";
 import { onRequest } from "../../ModuleComponents/UsefulFunctions/ApiService";
 import axios from "axios";
+import { API_BASE_URL } from "../../app-config";
 
 const ProfilePicture = ({ pictureData }) => {
   //0926 광민 확인 필요
@@ -37,7 +38,7 @@ const ProfilePicture = ({ pictureData }) => {
     console.log(fileData);
     console.log(formData);
     axios({
-      url: "http://localhost:8080/api/mypage/updateUserPhoto",
+      url: API_BASE_URL + "/api/mypage/updateUserPhoto",
       method: "POST",
       data: formData,
       headers: {
@@ -46,11 +47,11 @@ const ProfilePicture = ({ pictureData }) => {
       },
     })
       .then((response) => {
-        //alert("프로필 사진 변경이 완료되었습니다.")
+        alert("프로필 사진 변경이 완료되었습니다.");
       })
       .catch((e) => {
         console.log(e);
-        //alert("프로필 사진 변경에 실패하였습니다.")
+        alert("프로필 사진 변경에 실패하였습니다.");
       });
   }, [formData]);
 
