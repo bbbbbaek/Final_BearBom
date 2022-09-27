@@ -24,4 +24,11 @@
 		]]>
    </select>
    
+   <select id="findByOrderIdx" parameterType="int" resultType="com.spring.bearbom.entity.Order">
+	   <![CDATA[
+	    		SELECT * FROM T_ORDER
+					WHERE ORDER_IDX = #{orderIdx}
+		]]>
+   </select>
+   
 </mapper>

@@ -18,5 +18,7 @@ public interface OrderService {
 
 	void updateOrderYn(Order order);
 
+	Order findByOrderIdx(int orderIdx);
+
 
 }

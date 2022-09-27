@@ -29,6 +29,7 @@ const Board = ({ type }) => {
         axios
           .get(API_BASE_URL + "/api/mypage/getInquiryReference1")
           .then((res) => {
+            console.log(res.data);
             setFetchedData(res.data.data);
           });
         break;
@@ -39,13 +40,22 @@ const Board = ({ type }) => {
         break;
       case "admin_faq":
         axios.get(API_BASE_URL + "/api/helpdesk/getFaqList").then((res) => {
+          console.log(res.data.data);
           setFetchedData(res.data.data);
         });
+        break;
+      case "admin_inquiry":
+        axios
+          .get(API_BASE_URL + "/api/helpdesk/getInquiryInfoReferenceList")
+          .then((res) => {
+            console.log(res.data.data);
+            setFetchedData(res.data.data);
+          });
         break;
       default:
         break;
     }
-  });
+  }, []);
 
   const onClickWrite = () => {
     setWritingMode(true);
@@ -63,6 +73,8 @@ const Board = ({ type }) => {
         return "/admin/notice";
       case "admin_faq":
         return "/admin/faq";
+      case "admin_inquiry":
+        return "/admin/inquiry";
       default:
         break;
     }
@@ -142,9 +154,17 @@ const Board = ({ type }) => {
             </div>
             <div className="buttons">
               {userRole === "ROLE_ADMIN" && (
-                <button className="write" onClick={onClickWrite}>
-                  수정
-                </button>
+                <>
+                  {type === "admin_inquiry" ? (
+                    <button className="write" onClick={onClickWrite}>
+                      답변
+                    </button>
+                  ) : null}
+
+                  <button className="write" onClick={onClickWrite}>
+                    수정
+                  </button>
+                </>
               )}
               <button className="back" onClick={backToList}>
                 목록

@@ -6,7 +6,6 @@ import creditcard from "../../images/creditcard.png";
 import banktransfer from "../../images/banktransfer.png";
 import ResultNotFound from "../ResultNotFound/ResultNotFound";
 import { onRequest } from "../UsefulFunctions/ApiService";
-import data from "../data";
 import axios from "axios";
 import { useState } from "react";
 import { API_BASE_URL } from "../../app-config";
@@ -15,6 +14,7 @@ const Payment = () => {
   const [userData, setUserData] = useState();
   const [fetchedData, setFetchedData] = useState();
   const [cart, setCart] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
     // 유저 정보
@@ -36,9 +36,6 @@ const Payment = () => {
     Promise.all([promise1, promise2]).then((res) => {
       setUserData(res[0].data);
       setFetchedData(res[1].data.getOrderedCourseList);
-      console.log(res[1].data.getOrderedCourseList);
-      console.log(res[0].data);
-      console.log(res[1].data);
     });
   }, []);
   let paymentInfo;
@@ -69,21 +66,26 @@ const Payment = () => {
   /* 3. 콜백 함수 정의하기 */
   function callback(response) {
     const { success, merchant_uid, error_msg } = response;
-    console.log(response);
-    console.log(merchant_uid);
-    console.log(success);
-    console.log(error_msg);
     if (success) {
+      // 콘솔에 띄울 성공 메시지라 삭제하지 않기
       console.log(success);
       let data = {
         courseIdx: cart[0].courseIdx,
-        orderNm: "아직 데이터 매핑 못했습니다;",
-        pgNm: "아직 데이터 매핑 못했습니다;",
-        paymentMethod: "아직 데이터 매핑 못했습니다;",
+        orderNm: merchant_uid,
+        pgNm: paymentInfo[0],
+        paymentMethod: paymentInfo[1],
+        orderPri: cart[0].courseCost,
       };
-      onRequest(API_BASE_URL + "/api/order/updateOrderYn", "post", data);
-      alert("결제가 정상적으로 완료되었습니다.");
-      console.log(data);
+
+      onRequest(API_BASE_URL + "/api/order/updateOrderYn", "post", data)
+        .then(alert("결제가 정상적으로 완료되었습니다."))
+        .catch((err) => {
+          alert("알 수 없는 이유로 결제에 실패했습니다.");
+          // 콘솔에 띄울 에러 메시지라 삭제하지 않기
+          console.log(err);
+          return err;
+        });
+
     } else {
       alert(`결제 실패: ${error_msg}`);
     }
@@ -94,27 +96,28 @@ const Payment = () => {
       return a.courseIdx === index;
     });
     // cart에 해당 array가 담겨있는지 체크
-    const test = cart.filter((a) => {
+    const checkingCart = cart.filter((a) => {
       return a.courseIdx === index;
     });
-
-    if (Array.isArray(test) && test.length === 0) {
+    // cart 배열에 클릭한 상품이 담겨 있으면 splice, 안담겨 있으면 push
+    if (Array.isArray(checkingCart) && checkingCart.length === 0) {
       cart.push(...selectedArray);
     } else {
-      cart.splice(cart.indexOf(test.courseIdx === index), 1);
+      cart.splice(cart.indexOf(checkingCart.courseIdx === index), 1);
     }
+    console.log(cart);
+    const getTotalPrice = () => {
+      let sum = 0;
+      for (let i = 0; i < cart.length; i++) {
+        sum += cart[i].courseCost;
+      }
+      return sum;
+    };
+    console.log(getTotalPrice());
+    setTotalPrice(getTotalPrice());
   };
 
   const onSelectPG = (e) => {
-    let otherInfo = {
-      courseCost: cart[0].courseCost,
-      courseNm: cart[0].courseNm,
-      userNm: userData.userNm,
-      userTel: userData.userTel,
-      userEmail: userData.userEmail,
-      userAddress: userData.userEmail,
-      userZipcode: userData.userZipcode,
-    };
     switch (e.target.id) {
       case "kakaopay":
         paymentInfo = ["kakaopay.TC0ONETIME", "kakaopay"];
@@ -140,21 +143,16 @@ const Payment = () => {
         <h5>
           <strong>장바구니</strong>
         </h5>
-        <button
-          onClick={() => {
-            console.log(cart);
-          }}
-        >
-          click
-        </button>
         <hr />
-        {fetchedData ? (
+        {!fetchedData || fetchedData.length === 0 ? (
+          <ResultNotFound />
+        ) : (
           <div className="payment_body">
             <div className="table">
               <table>
                 <tr>
                   <td className="th l5"></td>
-                  <td className="th l5">번호</td>
+                  <td className="th l10">번호</td>
                   <td className="th l5"></td>
                   <td className="th l40">강의명</td>
                   <td className="th l15">강사명</td>
@@ -185,7 +183,9 @@ const Payment = () => {
                 })}
               </table>
             </div>
-            <div className="sum">총 주문금액 : 10000원</div>
+            <div className="sum">
+              총 주문금액 : {totalPrice.toLocaleString()}원
+            </div>
             <span>결제 수단을 선택해주세요</span>
             <hr />
             <div className="paymentMethod">
@@ -207,8 +207,6 @@ const Payment = () => {
               </div>
             </div>
           </div>
-        ) : (
-          <ResultNotFound />
         )}
       </div>
     </>

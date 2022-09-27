@@ -15,4 +15,6 @@ public interface OrderMapper {
 
 	Order getOrder(OrderDTO orderDto);
 
+	Order findByOrderIdx(int orderIdx);
+
 }
