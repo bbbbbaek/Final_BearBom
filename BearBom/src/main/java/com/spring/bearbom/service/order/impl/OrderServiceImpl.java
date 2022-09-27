@@ -56,4 +56,10 @@ public class OrderServiceImpl implements OrderService {
 		return orderTemp;
 	}
 
+	@Override
+	public List<Course> getAllOrderList() {
+		List<Course> allOrder = orderMapper.getAllOrder();
+		return allOrder;
+	}
+
 }

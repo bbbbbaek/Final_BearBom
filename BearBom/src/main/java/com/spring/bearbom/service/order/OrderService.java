@@ -20,5 +20,7 @@ public interface OrderService {
 
 	Order findByOrderIdx(int orderIdx);
 
+	List<Course> getAllOrderList();
+
 
 }

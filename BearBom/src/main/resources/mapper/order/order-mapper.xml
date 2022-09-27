@@ -31,4 +31,10 @@
 		]]>
    </select>
    
+   <select id="getAllOrder" resultType="List">
+	   <![CDATA[
+		    		SELECT * FROM T_ORDER
+		]]>
+   </select>
+   
 </mapper>
