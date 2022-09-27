@@ -107,13 +107,14 @@ public class CourseRController {
     	List<Courser> reviewList = courserService.Review(courser);
     	
     	double averageRating = courserService.updateRating(getCourse.getCourseIdx());
-        
+        List<User> userInfo = courserService.userInfo(userId);
+    	
         Map<String, Object> resultMap = new HashMap<String, Object>();
         resultMap.put("getCourse", getCourse);
         resultMap.put("getCourseCurCnt", getCourseCurCnt);
         resultMap.put("reviewList", reviewList);
     	resultMap.put("averageRating", averageRating);
-        
+        resultMap.put("userInfo", userInfo);
         
         return resultMap;
     }

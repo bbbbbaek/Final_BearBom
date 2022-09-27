@@ -1,6 +1,8 @@
 package com.spring.bearbom.mapper;
 
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -43,4 +45,7 @@ public interface CourserMapper {
 
 	@Select("select a.* from t_user a, t_course b where a.user_id = b.user_id and b.course_idx = #{courseIdx}")
 	public User getTeacherInfo(int courseIdx);
+
+	@Select("SELECT * FROM T_USER WHERE USER_ID = #{userId}")
+	public List<User> userInfo(String userId);
 }
