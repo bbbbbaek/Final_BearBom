@@ -23,14 +23,11 @@ public class Order {
 	@Id
 	private int orderIdx;
 
-	@Column//(nullable = false)
+	@Column(nullable = false)
 	private int orderPri;
 
 	@Column(nullable = false)
 	private LocalDateTime orderRegdate = LocalDateTime.now().plusHours(9);
-
-	@Column//(nullable = false)
-	private LocalDateTime orderCandate; // = LocalDateTime.now();
 
 	@Column(nullable = false,columnDefinition = "char(1)")
 	private char orderYn = 'N';
