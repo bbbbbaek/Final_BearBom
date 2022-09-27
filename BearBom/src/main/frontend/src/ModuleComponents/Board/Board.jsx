@@ -66,19 +66,17 @@ const Board = ({ type }) => {
     switch (type) {
       case "admin_notice":
         if (window.confirm("삭제하시겠습니까?")) {
-          onRequest("/api/admin/updateNotice", "post", {
-            noticeIdx: params,
-          });
+          onRequest("/api/admin/updateNotice", "post", params);
         }
         break;
       case "admin_faq":
         if (window.confirm("삭제하시겠습니까?")) {
-          onRequest("/api/admin/updateFaq", "post", { guideIdx: params });
+          onRequest("/api/admin/updateFaq", "post", params);
         }
         break;
       case "admin_inquiry":
         if (window.confirm("삭제하시겠습니까?")) {
-          onRequest("/api/admin/updateInquiry", "post", { inquiryIdx: params });
+          onRequest("/api/admin/updateInquiry", "post", params);
         }
         break;
       default:
