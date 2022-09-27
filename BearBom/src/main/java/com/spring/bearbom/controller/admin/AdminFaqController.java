@@ -47,6 +47,13 @@ public class AdminFaqController {
 		return ResponseEntity.ok().body(guideDTO);
 	}
 	
+	
+	
+	
+	
+	
+	
+	
 	//y를 n으로 바꾸는 update
 //	@PostMapping("/updateFaq")
 //	public void updateFaq(@RequestBody GuideDTO guideDTO){	
