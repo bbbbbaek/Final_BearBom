@@ -27,6 +27,10 @@ public interface UserService {
 	void adminDeleteUser(Map<String, Object> paramMap);
 
 	void updateUserPhoto(User user);
+
+	User getUser(String userId);
+
+	void updateUserInfo(User user);
 	
 	// 0926 비밀번호 수정 저장
 //	void updateUserInfo(User user);

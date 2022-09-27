@@ -43,8 +43,7 @@ const Top = () => {
           className="topbutton" // 버튼 노출 여부
           onClick={handleTop} // 버튼 클릭시 함수 호출
         >
-          <span className="sapnbut"></span>
-          TOP
+          <span className="sapnbut">TOP</span>
         </button>
         <div class="inner"></div>
       </div>

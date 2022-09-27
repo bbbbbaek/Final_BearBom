@@ -39,9 +39,6 @@ public class CourseRController {
         System.out.println("/////////" + courser);
     	List<Courser> reviewList = courserService.Review(courser);
     	
-    	
-//    	List<Double> updateRating = courseRService.updateRating(courser);
-    	
     	double averageRating = courserService.updateRating(course.getCourseIdx());
     	
     	System.out.println(averageRating);
@@ -76,17 +73,9 @@ public class CourseRController {
         courser.setCourserContent(paramMap.get("courserContent"));
         courser.setCourserRate(paramMap.get("courserRate"));
 
-        //System.out.println(courser.getCourse().getCourseIdx());
         Courser review = courserService.WriteReview(courser);
         
         List<Courser> reviewList = courserService.Review(courser);
-    	
-    	
-//    	List<Double> updateRating = courseRService.updateRating(courser);
-
-    	
-    	//double averageRating = courserService.updateRating1(courser);
-
 
     	double averageRating = courserService.updateRating(course.getCourseIdx());
 
@@ -101,9 +90,12 @@ public class CourseRController {
     }
     
     @GetMapping("/getCourse")
-    public Map<String, Object> getCourse(@RequestParam("courseIdx") int courseIdx, @AuthenticationPrincipal String userId) {
+    public Map<String, Object> getCourse(@RequestParam("courseIdx") int courseIdx) {
     
         Course getCourse = courserService.getCourse(courseIdx);
+        
+        String userId = getCourse.getUser().getUserId();
+        
         int getCourseCurCnt = courserService.getCourseCurCnt(userId);
         
         //코스 디테일 리뷰 리스트 받아가
@@ -114,14 +106,9 @@ public class CourseRController {
         System.out.println("/////////" + courser);
     	List<Courser> reviewList = courserService.Review(courser);
     	
-    	
-//    	List<Double> updateRating = courseRService.updateRating(courser);
-    	
     	double averageRating = courserService.updateRating(getCourse.getCourseIdx());
         
-        
         Map<String, Object> resultMap = new HashMap<String, Object>();
-//        int getCourseCurCnt = courserService.getCourseCurCnt(userId)
         resultMap.put("getCourse", getCourse);
         resultMap.put("getCourseCurCnt", getCourseCurCnt);
         resultMap.put("reviewList", reviewList);

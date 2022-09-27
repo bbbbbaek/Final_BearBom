@@ -10,8 +10,8 @@ public class GuideDTO {
 	private int guideIdx;
 	private String guideTitle;
 	private String guideContent;
-	private LocalDateTime guideRegdate;
-	private LocalDateTime guideMdfdate;
+	private String guideRegdate;
+	private String guideMdfdate;
 	private char guideUseYn;
 	private String userId;
 }

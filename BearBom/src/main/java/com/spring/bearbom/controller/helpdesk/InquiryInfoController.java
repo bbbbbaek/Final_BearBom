@@ -1,5 +1,7 @@
 package com.spring.bearbom.controller.helpdesk;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,9 @@ public class InquiryInfoController {
 		System.out.println("userId : "+userId);
 
 //
+		LocalDate date = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
 		int index = inquiryRepository.selectNextinquiryIdx();
 
 		InquiryDTO inquiryDTO = new InquiryDTO();
@@ -56,9 +61,9 @@ public class InquiryInfoController {
 		inquiryDTO.setInquiryContent(inquiry.getInquiryContent());
 		inquiryDTO.setInquiryUseYn(inquiry.getInquiryUseYn());
 		inquiryDTO.setInquiryYn(inquiry.getInquiryYn());
-		inquiryDTO.setInquiryRegdate(inquiry.getInquiryRegdate());
-
+		inquiryDTO.setInquiryRegdate(inquiry.getInquiryRegdate().format(formatter));
 		inquiryDTO.setReplyRegdate(inquiry.getReplyRegdate());
+		
 		inquiryDTO.setReplyYn(inquiry.getReplyYn());
 		inquiryDTO.setReplyTitle(inquiry.getReplyTitle());
 		inquiryDTO.setReplyContent(inquiry.getReplyContent());

@@ -24,20 +24,10 @@ public class CourseSearchController {
 
 	@PostMapping("/searchCourse")
 	public Map<String, Object> searchCourse(@RequestBody Map<String, Object> paramMap) {
-//		public void searchCourse(@RequestBody Map<String, Object> paramMap) {
 
 		System.out.println(paramMap.toString());
 		Course course = new Course();
 		try{
-
-//			course.setCourseLocation((String) paramMap.get("courseLocation"));
-//			course.setCourseCategory(String.valueOf(paramMap.get("courseCategory")));
-//			course.setCourseLevel((String) paramMap.get("courseLevel"));
-//			course.setCourseNm((String) paramMap.get("courseSearch"));
-//			course.setCourseStTime((Time) paramMap.get("courseStTime"));
-//			course.setCourseEndTime((Time) paramMap.get("courseEndTime"));
-//			course.setCourseStCost((Integer) paramMap.get("courseStCost"));
-//			course.setCourseEndCost((Integer) paramMap.get("courseEndCost"));
 
 			List<Map<String,Object>> getSearchProducts = courseService.getSearchProducts(paramMap);
 			Map<String, Object> resultMap = new HashMap<>();
@@ -90,26 +80,26 @@ public class CourseSearchController {
 		}
 	}
 
-// 개설 클래스 조회
-@GetMapping("/getMyOpenedClassList")
-public Map<String, Object> getMyOpenedClassList(@AuthenticationPrincipal String userId/*, @RequestBody Map<String, Object> paramMap*/){
-	try {
-		Map<String, Object> returnMap = new HashMap<String, Object>();
-
-		//paramMap.put("userId", userId);
-		//넘겨줄 데이터가 있을경우 courseService.getMyOpenedClassList(paramMap.put("userId", userId);
-		List<Map<String, Object>> myOpenedClassList = courseService.getMyOpenedClassList(userId);
-
-		returnMap.put("myOpenedClassList", myOpenedClassList);
-
-		return returnMap;
-	} catch(Exception e) {
-		Map<String, Object> errorMap = new HashMap<String, Object>();
-
-		errorMap.put("error", e.getMessage());
-		return errorMap;
+	// 개설 클래스 조회
+	@GetMapping("/getMyOpenedClassList")
+	public Map<String, Object> getMyOpenedClassList(@AuthenticationPrincipal String userId/*, @RequestBody Map<String, Object> paramMap*/){
+		try {
+			Map<String, Object> returnMap = new HashMap<String, Object>();
+	
+			//paramMap.put("userId", userId);
+			//넘겨줄 데이터가 있을경우 courseService.getMyOpenedClassList(paramMap.put("userId", userId);
+			List<Map<String, Object>> myOpenedClassList = courseService.getMyOpenedClassList(userId);
+	
+			returnMap.put("myOpenedClassList", myOpenedClassList);
+	
+			return returnMap;
+		} catch(Exception e) {
+			Map<String, Object> errorMap = new HashMap<String, Object>();
+	
+			errorMap.put("error", e.getMessage());
+			return errorMap;
+		}
 	}
-}
 
 	//수강 클래스 조회
 	@GetMapping("/getTakenClassList")

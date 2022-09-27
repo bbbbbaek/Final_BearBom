@@ -332,5 +332,23 @@ public class MypageController {
 		//프로필 사진 업데이트 끝
 
 	}
+	
+	@GetMapping("/getLecturerInfo")
+	public String getLecturerInfo(HttpServletRequest request,
+			@AuthenticationPrincipal String userId) {
+		User user = userService.getUser(userId);
+		String lecturerInfo = user.getLecturerInfo();
+		return lecturerInfo;
+	}
+	
+	
+	@PostMapping("/updateLecturerInfo")
+	public void updateLecturerInfo(@RequestBody Map<String, Object> paramMap, HttpServletRequest request,
+			@AuthenticationPrincipal String userId) {
+		User user = userService.getUser(userId);
+		user.setLecturerInfo(String.valueOf(paramMap.get("lecturerInfo")));
+		user.setRole("ROLE_LECTURER");
+		userService.updateUserInfo(user);
+	}
 
 }

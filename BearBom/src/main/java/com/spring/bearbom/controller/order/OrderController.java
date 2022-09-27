@@ -30,7 +30,7 @@ public class OrderController {
 	@PostMapping("/orderRegistration")
 	public void courseRegistration(HttpServletRequest request, @RequestBody Map<String, Object> paramMap,
 			@AuthenticationPrincipal String userId) {
-		System.out.println("------------courseRegistration시작---------");
+
 		Order order = new Order();
 		User user = new User();
 		Course course = new Course();
@@ -84,19 +84,21 @@ public class OrderController {
 		Course course = new Course();
 		course.setCourseIdx(courseIdx);
 		orderTemp.setCourse(course);
+		System.out.println("courseCom");
 		
 		User user = new User();
 		user.setUserId(userId);
 		orderTemp.setUser(user);
+		System.out.println("userCom");
 		
-		orderTemp.setOrderPri(Integer.parseInt(String.valueOf(paramMap.get("OrderPri"))));
+		orderTemp.setOrderPri(Integer.parseInt(String.valueOf(paramMap.get("orderPri"))));
 		orderTemp.setOrderNm(String.valueOf(paramMap.get("orderNm")));
 		orderTemp.setPgNm(String.valueOf(paramMap.get("pgNm")));
 		orderTemp.setPaymentMethod(String.valueOf(paramMap.get("paymentMethod")));
 		LocalDateTime payDate = LocalDateTime.now().plusHours(9);
 		orderTemp.setPaymentDate(payDate);
 		orderTemp.setOrderYn('Y');
-		System.out.println("=-=-==-===--==-=");
+		System.out.println("-=-=-=-=-=-=-=-=-=-=-~~~~");
 		System.out.println(orderTemp);
 		orderService.updateOrderYn(orderTemp);
 		

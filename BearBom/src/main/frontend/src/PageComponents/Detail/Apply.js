@@ -1,11 +1,10 @@
-import Calendar2 from "./Calendar";
+import Calendar from "./Calendar";
 import "../../css/apply.css";
 import { useEffect, useState, useRef } from "react";
 import LikeButton from "../../ModuleComponents/LikeButton";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { API_BASE_URL } from "../../app-config";
-import Swal from "sweetalert2";
 
 function Apply({ courseIdx, course }) {
   const { id } = useParams(); //id를 통해 강의id로 이동
@@ -16,10 +15,19 @@ function Apply({ courseIdx, course }) {
   const [like, setLike] = useState(false);
   const [courseCostChange, setCourseCostChange] = useState("");
   const calRef = useRef(null);
-
+  console.log(id);
   //카카오페이 경로이동
   const navigate = useNavigate();
   const onClickBtn = async () => {
+    console.log({
+      courseIdx: id,
+    });
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    if (!token) {
+      alert("신청을 위해 로그인해주세요 :)");
+      navigate("/login");
+      return;
+    }
     await axios({
       method: "post",
       url: API_BASE_URL + "/api/order/orderRegistration",
@@ -35,9 +43,6 @@ function Apply({ courseIdx, course }) {
 
   useEffect((e) => {
     const fetchData = async () => {
-      // const res = await axios.get(`${API_BASE_URL}/api/like/getLikeList`);
-      // console.log(res);
-      // if (res.data.type === "liked") setLike(true);
       const userId = localStorage.getItem("USER_ID");
       const token = localStorage.getItem("ACCESS_TOKEN");
       if (!token) {
@@ -136,7 +141,7 @@ function Apply({ courseIdx, course }) {
       <div className="calendar-box1" ref={calRef}>
         <h3>{course.courseNm}</h3>
         <div className="cal-box">
-          <Calendar2
+          <Calendar
             stDate={course.courseStDate}
             endDate={course.courseEndDate}
           />

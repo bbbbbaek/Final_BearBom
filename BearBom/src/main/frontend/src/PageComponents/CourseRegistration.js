@@ -9,7 +9,7 @@ import CoPresentIcon from "@mui/icons-material/CoPresent";
 import "../css/courseRegistration.css";
 import StepTwo_4 from "./CourseRegistration/StepTwo_4";
 import StepTwo_5 from "./CourseRegistration/StepTwo_5";
-import { Button, createTheme, ThemeProvider } from "@mui/material";
+import { Button, createTheme, Stepper, ThemeProvider } from "@mui/material";
 import StepTwo_6 from "./CourseRegistration/StepTwo_6";
 import StepThree_1 from "./CourseRegistration/StepThree_1";
 import StepThree_2 from "./CourseRegistration/StepThree_2";
@@ -17,6 +17,8 @@ import CourseStore from "./CourseRegistration/CourseStore";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { onRequest } from "../ModuleComponents/UsefulFunctions/ApiService";
+import RegStepper from "./CourseRegistration/RegStepper";
+import { margin } from "@mui/system";
 
 //const [formData1, setFormData1] = useState({});
 
@@ -143,16 +145,6 @@ const CourseRegistration = () => {
     //console.log(formData);
   };
 
-  const test = () => {
-    let data = {
-      courseIdx: 46,
-      orderNm: "아직 데이터 매핑 못했습니다;",
-      pgNm: "아직 데이터 매핑 못했습니다;",
-      paymentMethod: "아직 데이터 매핑 못했습니다;",
-    };
-    onRequest("/api/order/updateOrderYn", "post", data);
-  }
-
   return (
     <>
     <ThemeProvider theme={theme}>
@@ -169,9 +161,10 @@ const CourseRegistration = () => {
           <div className="fullline"></div>
           <div className="middle">
             <div className="leftbar">
-              <div className="step0 step">Step 1. 호스트 및 클래스 유형</div>
+              <RegStepper currentStep={currentStep}/>
+              {/* <div className="step0 step">Step 1. 호스트 및 클래스 유형</div>
               <div className="step">Step 2. 클래스 소개 및 위치</div>
-              <div className="step">Step 3. 금액 및 일정</div>
+              <div className="step">Step 3. 금액 및 일정</div> */}
             </div>
             <div className="midline" />
             <div className="midRight">
@@ -228,7 +221,6 @@ const CourseRegistration = () => {
                   >
                     등록
                   </Button>)}
-                  <button onClick={test}>pat test</button>
                   {/* <div>{currentStep}</div> */}
                 </div>
               </div>

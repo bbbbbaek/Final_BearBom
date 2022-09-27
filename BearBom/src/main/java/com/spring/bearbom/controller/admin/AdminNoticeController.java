@@ -1,18 +1,17 @@
 package com.spring.bearbom.controller.admin;
 
-import java.util.HashMap;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.bearbom.dto.InquiryDTO;
 import com.spring.bearbom.dto.NoticeDTO;
 import com.spring.bearbom.entity.Notice;
 import com.spring.bearbom.jwt.JwtTokenProvider;
@@ -39,46 +38,43 @@ public class AdminNoticeController {
 		System.out.println(notice.getNoticeMdfdate());
 		System.out.println(notice.getNoticeUseYn());
 		System.out.println(userId);
+		// 수강 중인 강좌를 위한 현재 날짜
+		LocalDate date = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
 		
 		NoticeDTO noticeDTO = new NoticeDTO();
 		
 		noticeDTO.setNoticeIdx(notice.getNoticeIdx());
 		noticeDTO.setNoticeTitle(notice.getNoticeTitle());
 		noticeDTO.setNoticeContent(notice.getNoticeContent());
-		noticeDTO.setNoticeRegdate(notice.getNoticeRegdate());
-		noticeDTO.setNoticeMdfdate(notice.getNoticeMdfdate());
+		noticeDTO.setNoticeRegdate(notice.getNoticeRegdate().format(formatter));
+		noticeDTO.setNoticeMdfdate(notice.getNoticeMdfdate().format(formatter));
 		noticeDTO.setNoticeUseYn(notice.getNoticeUseYn());
+		noticeDTO.setUserId(userId);
 		
 		noticeService.insertNotice(noticeDTO);
 		
 		return ResponseEntity.ok().body(noticeDTO);
 		
 	}
-		
-//		Notice rhdwl = noticeService.insertNotice(notice);
-//		
-//		NoticeDTO noticeDTO = new NoticeDTO();
-//
-//		noticeDTO.setNoticeIdx(rhdwl.getNoticeIdx());
-//		noticeDTO.setNoticeNm(rhdwl.getNoticeNm());
-//		noticeDTO.setNoticeContent(rhdwl.getNoticeContent());
-//		noticeDTO.setNoticeRegdate(rhdwl.getNoticeRegdate());
-//		noticeDTO.setNoticeMdfdate(rhdwl.getNoticeMdfdate());
-//		noticeDTO.setNoticeUseYn(rhdwl.getNoticeUseYn());
-//		noticeDTO.setUserId(userId);
-		
-//		
-//		System.out.println(noticeDTO);
-//		return ResponseEntity.ok().body(noticeDTO);
-		
-	@PostMapping("/updateNotice")
-	public void updateNotice( NoticeDTO noticeDTO){
-		
-		System.out.println("before noticeDTO : " +noticeDTO);
-		noticeService.updateNotice(noticeDTO);
-		System.out.println("after noticeDTO : " +noticeDTO);
-	
+
+
+	@PostMapping("updateNotice")
+	public void updateNotice(@RequestBody Map<String, Object> paramMap) {
+		noticeService.updateNotice(paramMap);
 	}
+	
+	
+	
+//	@PostMapping("/updateNotice")
+//	public void updateNotice(NoticeDTO noticeDTO){	
+//		
+//		System.out.println("before noticeDTO : " +noticeDTO);
+//		noticeService.updateNotice(noticeDTO);
+//		System.out.println("after noticeDTO : " +noticeDTO);
+//	
+//	}
 	
 	//정보 수정
 	@PostMapping("/mdfNotice")

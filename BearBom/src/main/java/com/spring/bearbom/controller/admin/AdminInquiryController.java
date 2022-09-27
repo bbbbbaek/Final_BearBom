@@ -1,6 +1,7 @@
 package com.spring.bearbom.controller.admin;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -51,14 +52,18 @@ public class AdminInquiryController {
 	
 	
 	
-	@PostMapping("/updateInquiry")
-	public void updateInquiry(@RequestBody InquiryDTO inquiryDTO){	
-		
-		System.out.println("before inquiryDTO : " +inquiryDTO);
-		adminService.updateInquiry(inquiryDTO);
-		System.out.println("after guideDTO : " +inquiryDTO);
-	
+//	@PostMapping("/updateInquiry")
+//	public void updateInquiry(@RequestBody InquiryDTO inquiryDTO){	
+//		
+//		System.out.println("before inquiryDTO : " +inquiryDTO);
+//		adminService.updateInquiry(inquiryDTO);
+//		System.out.println("after guideDTO : " +inquiryDTO);
+//	}
+	@PostMapping("updateInquiry")
+	public void updateInquiry(@RequestBody Map<String, Object> paramMap) {
+		adminService.updateInquiry(paramMap);
 	}
+	
 	
 	
 }

@@ -1,4 +1,4 @@
-function Teacher({ averageRating, course, CurCnt }) {
+function Teacher({ averageRating, CurCnt }) {
   return (
     <>
       <div className="teacher-container">
@@ -13,16 +13,11 @@ function Teacher({ averageRating, course, CurCnt }) {
         <div className="teacher-content">
           너무 유익합니다. 너무 유익합니다. 너무 유익합니다.
         </div>
-        <div className="course-cur-cnt">누적 수강생</div>
+        <div className="course-cur-cnt">강좌 수강생</div>
         <div className="teacher-num">{CurCnt}</div>
         <div>평균 평점</div>
         <div className="teacher-num">{averageRating}</div>
       </div>
-      {/* <div id="nana">
-        <div id="box1">1</div>
-        <div id="box2">2</div>
-        <div id="box3">3</div>
-      </div> */}
     </>
   );
 }

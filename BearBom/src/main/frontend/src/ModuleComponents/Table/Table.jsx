@@ -232,6 +232,10 @@ const Table = ({ tableInfo, fetchedData }) => {
         );
       }
     }
+
+    console.log("-------------------------------------------------------------");
+    console.log(fetchedData);
+
     return tableItem;
   };
 

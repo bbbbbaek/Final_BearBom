@@ -30,7 +30,7 @@ public class Notice {
     private LocalDateTime noticeMdfdate = LocalDateTime.now();
 
     @Column(nullable = false,columnDefinition = "char(1)")
-    private char noticeUseYn = 'N';
+    private char noticeUseYn = 'Y';
 
     @ManyToOne
     @JoinColumn(name="USER_ID")

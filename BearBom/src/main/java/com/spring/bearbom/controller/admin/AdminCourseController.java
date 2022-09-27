@@ -19,6 +19,7 @@ public class AdminCourseController {
 	@Autowired
 	private CourseService courseService;
 	
+	// 강좌 관리 게시물 불러오기
 	@GetMapping("/getAllCourseList")
 	public Map<String, Object> getAllCourseList() {
 		try {
@@ -38,11 +39,13 @@ public class AdminCourseController {
 		}
 	}
 	
+	// 게시물 승인 처리
 	@PostMapping("/updateCourseStatus")
 	public void updateCourseStatus(@RequestBody Map<String, Object> paramMap) {
 		courseService.updateCourseStatus(paramMap);
 	}
 	
+	// 게시물 삭제 처리
 	@PostMapping("/deleteCourseStatus")
 	public void deleteCourseStatus(@RequestBody Map<String, Object> paramMap) {
 		courseService.deleteCourseStatus(paramMap);
