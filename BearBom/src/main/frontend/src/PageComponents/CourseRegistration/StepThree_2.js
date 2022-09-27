@@ -82,16 +82,16 @@ const inputPriceFormat = (e) => {
   return (
     <form id="step_two_5_form">
       <div className="content content1">
-        <div className="contentName">Step.3 금액 및 일정</div>
+        <div className="contentName">Step.3 금액 및 인원</div>
         <div className="contentWrap">
           <div className="nameWrap">
               <h5 className="detailName">
-                수강시간
+                수강인원
                 <div className="nameUnderbar"></div>
               </h5>
             </div>
             <div className="detailEx editDetailEx">
-              <p className="datilNameInfo">수강시간을 설정해주세요.</p>
+              <p className="datilNameInfo">수강인원을 설정해주세요.</p>
             </div>
           <div className="numCheck">
                 <div className="datailLabel">

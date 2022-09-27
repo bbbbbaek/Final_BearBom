@@ -20,6 +20,8 @@ div {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 20px;
+
 }
 
 .content {
@@ -702,4 +704,18 @@ div {
   padding: 10px 15px;
   border: 1px solid #bdb7ae;
   border-radius: 5px;
+}
+
+.regStepper span{
+  text-align: right !important;
+  padding-right: 5px;
+}
+
+.regStepDetail{
+  margin-top: 5px;
+  margin-left: 15px;
+}
+
+.stepDeLabel{
+  font-size: 12px;
 }
