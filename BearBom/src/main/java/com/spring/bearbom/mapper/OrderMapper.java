@@ -17,4 +17,6 @@ public interface OrderMapper {
 
 	Order findByOrderIdx(int orderIdx);
 
+	List<Course> getAllOrder();
+
 }

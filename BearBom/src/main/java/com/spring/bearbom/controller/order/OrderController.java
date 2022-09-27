@@ -1,6 +1,7 @@
 package com.spring.bearbom.controller.order;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,12 +21,16 @@ import com.spring.bearbom.entity.Course;
 import com.spring.bearbom.entity.Order;
 import com.spring.bearbom.entity.User;
 import com.spring.bearbom.service.order.OrderService;
+import com.spring.bearbom.service.user.UserService;
 
 @RestController
 @RequestMapping("/api/order")
 public class OrderController {
 	@Autowired
 	OrderService orderService;
+	
+	@Autowired
+	UserService userService;
 	
 	@PostMapping("/orderRegistration")
 	public void courseRegistration(HttpServletRequest request, @RequestBody Map<String, Object> paramMap,
@@ -102,5 +107,32 @@ public class OrderController {
 		System.out.println(orderTemp);
 		orderService.updateOrderYn(orderTemp);
 		
+	}
+	
+	
+	@GetMapping("/allOrderList")
+	public Map<String, Object> allOrderList(@AuthenticationPrincipal String userId){
+		System.out.println("------------allOrderList시작---------");
+		try {
+          Map<String, Object> resultMap = new HashMap<String, Object>();
+          User checkUser = userService.getUser(userId);
+          String userRole = checkUser.getRole();
+          if(userRole=="ROLE_ADMIN") {
+          List<Course> allOrderList = orderService.getAllOrderList();
+          resultMap.put("allOrderList", allOrderList);
+          System.out.println(resultMap);
+          return resultMap;
+          }else {
+        	  List<Course> noList = new ArrayList<>();
+        	  resultMap.put("no Puedes Acceptar", noList);
+        	return resultMap;
+          }
+          
+      } catch (Exception e) {
+          Map<String, Object> errorMap = new HashMap<String, Object>();
+          errorMap.put("error",e.getMessage());
+          return errorMap;
+          
+      }
 	}
 }
