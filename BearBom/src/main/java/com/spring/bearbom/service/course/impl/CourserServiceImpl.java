@@ -77,6 +77,12 @@ public class CourserServiceImpl implements CourserService {
 	public int getCourseCurCnt(String userId) {
 		return courserMapper.getCourseCurCnt(userId);
 	}
+
+	@Override
+	public List<User> userInfo(String userId) {
+		// TODO Auto-generated method stub
+		return courserMapper.userInfo(userId);
+	}
 	
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import com.spring.bearbom.entity.Course;
 import com.spring.bearbom.entity.CourseFile;
 import com.spring.bearbom.entity.Courser;
+import com.spring.bearbom.entity.User;
 
 public interface CourserService {
 
@@ -23,5 +24,7 @@ public interface CourserService {
 	List<CourseFile> getCourseFile(int courseIdx);
 	
 	int getCourseCurCnt(String userId);
+
+	List<User> userInfo(String userId);
     
 }

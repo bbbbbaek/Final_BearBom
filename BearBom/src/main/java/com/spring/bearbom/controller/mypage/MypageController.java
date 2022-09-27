@@ -351,5 +351,6 @@ public class MypageController {
 		user.setRole("ROLE_LECTURER");
 		userService.updateUserInfo(user);
 	}
+	
 
 }
