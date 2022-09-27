@@ -6,11 +6,11 @@ import { useRef } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { onRequest } from "../../../ModuleComponents/UsefulFunctions/ApiService";
 
-const UserInfoModification = () => {
+const UserInfoModification = ({}) => {
   let tableInfo = takenClassItems;
   // userData는 이미 Mypage 렌더링 시 받아오기 때문에,
   // useOutletContext를 사용하여 서버로부터 데이터를 다시 받지 않고 처음에 받은 데이터를 props 전송 받음
-  const { userData } = useOutletContext();
+  const { userData, setUpdateUserInfo, updateUserInfo } = useOutletContext();
 
   const userPw = useRef();
   const userNm = useRef();
@@ -35,6 +35,8 @@ const UserInfoModification = () => {
       userEmail: userEmail.current.value,
     });
     alert("회원 정보 수정이 완료되었습니다.");
+    setUpdateUserInfo(updateUserInfo + 1);
+    navigate("/mypage");
   };
 
   const onClickLeave = () => {
@@ -59,22 +61,6 @@ const UserInfoModification = () => {
     alert("회원 탈퇴 처리가 완료되었습니다.");
     navigate("/");
   };
-
-  class Items {
-    constructor(label, input) {
-      this.label = label;
-      this.input = input;
-    }
-  }
-  const items = [
-    new Items("이름", "userNm"),
-    new Items("닉네임", "userNickName"),
-    new Items("연락처", "userTel"),
-    new Items("주소", "userAddress"),
-    new Items("상세주소", "userAddressDef"),
-    new Items("우편번호", "userZipcode"),
-    new Items("이메일", "userEmail"),
-  ];
 
   return (
     <>
@@ -158,7 +144,6 @@ const UserInfoModification = () => {
                 />
               </li>
             </ul>
-            <div>{userData.userYn}</div>
             <div className="buttons">
               <button id="save" onClick={onSubmit}>
                 저장

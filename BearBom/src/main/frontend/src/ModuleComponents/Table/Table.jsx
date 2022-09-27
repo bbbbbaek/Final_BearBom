@@ -219,6 +219,10 @@ const Table = ({ tableInfo, fetchedData }) => {
             </button>
           </td>
         );
+      } else if (tableInfo[i].title === "이미지") {
+        tableItem.push(
+          <td className={insertClass(i)}>{element[tableInfo[i].cell]}</td>
+        );
       } else {
         tableItem.push(
           <td
@@ -233,18 +237,11 @@ const Table = ({ tableInfo, fetchedData }) => {
       }
     }
 
-    console.log("-------------------------------------------------------------");
-    console.log(fetchedData);
-
     return tableItem;
   };
 
   const onClickWrite = () => {
     navigate("write");
-  };
-
-  const checkingDataType = (element, type) => {
-    console.log(typeof element);
   };
 
   return (

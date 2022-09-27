@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SimpleTable from "../../../ModuleComponents/SimpleTable/SimpleTable";
 import "./recenttransaction.scss";
-import useFetch from "../../../customHooks/useFetch";
-import { Data, recentTransactionItems } from "../../../customHooks/createItems";
+import { recentTransactionItems } from "../../../customHooks/createItems";
 import axios from "axios";
 import { API_BASE_URL } from "../../../app-config";
 
