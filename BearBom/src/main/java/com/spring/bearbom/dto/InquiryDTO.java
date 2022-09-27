@@ -14,7 +14,7 @@ public class InquiryDTO {
 	private String inquiryContent;
 	private char inquiryUseYn;
 	private char inquiryYn;
-	private LocalDateTime inquiryRegdate;
+	private String inquiryRegdate;
 
 	private LocalDateTime replyRegdate;
 	private char replyYn;

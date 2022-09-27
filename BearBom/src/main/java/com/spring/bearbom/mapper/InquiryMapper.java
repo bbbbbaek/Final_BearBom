@@ -23,7 +23,7 @@ public interface InquiryMapper {
 	@Insert("insert into t_inquiry(INQUIRY_IDX, INQUIRY_SORT, INQUIRY_TITLE, INQUIRY_CONTENT, INQUIRY_USE_YN, INQUIRY_YN, INQUIRY_REGDATE, REPLY_REGDATE, REPLY_YN, REPLY_TITLE, REPLY_CONTENT, USER_ID) value (("
 			+ "					SELECT IFNULL(MAX(INQUIRY_IDX),0) + 1"
 			+ "					FROM T_INQUIRY A"
-			+ "				), #{inquirySort}, #{inquiryTitle}, #{inquiryContetnt}, 'Y', 'Y', #{inquiryRegdate},#{replyRegdate},'N', #{replyTitle}, #{replyContent}, #{userId})")
+			+ "				), #{inquirySort}, #{inquiryTitle}, #{inquiryContent}, 'Y', 'Y', #{inquiryRegdate},#{replyRegdate},'N', #{replyTitle}, #{replyContent}, #{userId})")
 
 	void insertInquiry(InquiryDTO inquiryDTO);
 //   @Insert("insert into t_inquiry value (#{inquiryIdx}, #{inquiryEmail}, #{inquirySort}, #{inquiryTitle}, #{inquiryContetnt}, #{userId}, 'Y', 'Y')")

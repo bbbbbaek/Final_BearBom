@@ -10,7 +10,8 @@ public interface AdminService {
 
 	List<InquiryDTO> inquiryInfoReference();
 
-	void updateInquiry(InquiryDTO inquiryDTO);
+	void updateInquiry(Map<String, Object> paramMap);
+//	void updateInquiry(InquiryDTO inquiryDTO);
 
     List<Map<String, Object>> totalSales();
 
@@ -23,6 +24,8 @@ public interface AdminService {
 	List<Map<String, Object>> orderList();
 
 	List<Map<String, Object>> todaySales();
+
+
 
 
 //	List<Inquiry> inquiryInfoReference(Inquiry inquiry);
