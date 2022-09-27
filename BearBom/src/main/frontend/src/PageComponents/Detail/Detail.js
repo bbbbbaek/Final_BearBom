@@ -37,11 +37,7 @@ const Detail = () => {
       },
       data: { courseIdx: id },
     })
-      .then((response) => {
-        console.log(response.data);
-
-        console.log(reviewData);
-      })
+      .then((response) => {})
       .catch((e) => {
         console.log(e);
       });
@@ -50,7 +46,7 @@ const Detail = () => {
   //리뷰 더보기 4개씩 나누기
   useEffect(() => {
     let copy = reviewData.concat(reviewList.slice(4 * cnt, 4 * (cnt + 1)));
-    console.log(copy);
+
     setReviewData(copy);
   }, [cnt]);
 
@@ -65,11 +61,6 @@ const Detail = () => {
 
   //리뷰작성 데이터 DB에 저장하는 axios
   const onWriteReview = () => {
-    console.log({
-      ...reviewInfo,
-      courseIdx: id,
-    });
-
     axios({
       method: "post",
       url: API_BASE_URL + "/api/course/writeReview",
@@ -78,7 +69,6 @@ const Detail = () => {
       },
       data: reviewInfo,
     }).then((response) => {
-      console.log(response);
       setReviewList(response.data.reviewList);
       setaverageRating(response.data.averageRating);
       setReviewData(response.data.reviewList.slice(0, 4));
@@ -86,9 +76,10 @@ const Detail = () => {
     });
   };
 
+  //찜하기 기능(로그인 예외 처리)
   React.useEffect(() => {
     let get_local = localStorage.getItem("data");
-    console.log(`1111111111 ${location.state}`);
+
     if (location.state) setCourseInfo(location.state.courseInfo);
     else setCourseInfo((prev) => ({ ...prev, ...course }));
 
@@ -148,7 +139,6 @@ const Detail = () => {
             <div className="main-img-box">
               <ImgBox course={course} />
             </div>
-
             <h4 className="courseNm">{course.courseNm}</h4>
             <div className="course-short-info">
               <div>
@@ -177,10 +167,7 @@ const Detail = () => {
             />
             <hr />
             <section id="review" className="section-box">
-              <div
-                className="reviewList"
-                // style={{ height: woobin ? "auto" : "300px" }}
-              >
+              <div className="reviewList">
                 <OpenModal
                   addReviewInfo={addReviewInfo}
                   onWriteReview={onWriteReview}
@@ -208,6 +195,7 @@ const Detail = () => {
             <div>
               <Apply id="Apply" courseIdx={id} course={course} />
             </div>
+            <div></div>
           </div>
         </div>
       </div>

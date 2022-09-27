@@ -38,6 +38,8 @@ body {
   width: 30%;
   height: 100%;
   position: sticky;
+  padding-right: 10px;
+  text-align: center;
 }
 .main-img-box {
   margin: 24px 0px 50px 0px;
@@ -66,11 +68,6 @@ body {
   color: black;
   font-weight: bold;
   text-decoration-line: blink;
-}
-
-.main-cal {
-  padding-right: 10px;
-  text-align: center;
 }
 
 .course-short-info {
@@ -190,19 +187,11 @@ body {
 }
 
 .calendar-box {
-  /* position: sticky;
-  top: 1px;
-  box-sizing: border-box;
-  border: 1px black solid;
-  background-color: edeae7;
-  margin: auto;
-  border-radius: 5px;
-  margin-left: 10px;
-   */
   display: flex;
   flex-direction: column;
   position: sticky;
-  top: 80px;
+  top: 100px;
+
   width: 100%;
   word-break: keep-all;
   padding-left: 50px;
@@ -403,12 +392,10 @@ body {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  position: sticky;
   top: 80px;
 }
 
 .navbar-expand {
-  position: sticky;
   top: 81px;
   border-bottom: 1px solid #dbd7d3;
   z-index: 2;
@@ -435,7 +422,6 @@ body {
 .reviewList {
   min-height: 600px;
   margin-left: 30px;
-  /* overflow: scroll; */
 }
 
 .btn-position {
@@ -444,10 +430,6 @@ body {
 }
 
 .more-btn {
-  /* /* position: absolute;
-  left: 500px; */
-  /* position: absolute;
-  left: 800px; */
   border: 1px none;
   border-radius: 5px;
   background-color: #cbc7c3;
@@ -460,29 +442,6 @@ body {
 .MuiTabs-flexContainer {
   display: flex;
   justify-content: space-between;
-}
-
-#nana {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-}
-
-#box1 {
-  background-color: #00ffbb;
-  grid-row: 1/3;
-}
-
-#box2 {
-  background-color: red;
-}
-
-#box3 {
-  background-color: blue;
-}
-
-#box4 {
-  background-color: bisque;
 }
 
 @media screen and (max-width: 1024px) {

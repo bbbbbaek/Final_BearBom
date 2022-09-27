@@ -9,23 +9,9 @@ import Teacher from "./Teacher";
 import ClassContents from "./ClassContents.js";
 import Cur from "./Detail-Cur";
 import Location from "../Detail/Location";
-import OpenModal from "./OpenModal";
-import Review from "../Detail/Detail-Review";
-import CardSelect from "./PayCardOption";
-import InstallmentsSelect from "./PayInstallmentOption";
-import { fontSize } from "@mui/system";
-// import "../../css/payWindow.css";
 
-export default function DetailTabs({
-  addReviewInfo,
-  onWriteReview,
-
-  averageRating,
-  course,
-  CurCnt,
-}) {
+export default function DetailTabs({ averageRating, course, CurCnt }) {
   const [value, setValue] = React.useState("1");
-  const [cnt, setCnt] = useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -46,11 +32,7 @@ export default function DetailTabs({
             <b>강사소개</b>
           </h5>
 
-          <Teacher
-            averageRating={averageRating}
-            course={course}
-            CurCnt={CurCnt}
-          />
+          <Teacher averageRating={averageRating} CurCnt={CurCnt} />
         </TabPanel>
         <TabPanel value="2">
           <h5>

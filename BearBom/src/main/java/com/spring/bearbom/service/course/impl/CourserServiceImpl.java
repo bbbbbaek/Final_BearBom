@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.spring.bearbom.entity.Course;
 import com.spring.bearbom.entity.CourseFile;
 import com.spring.bearbom.entity.Courser;
+import com.spring.bearbom.entity.User;
 import com.spring.bearbom.mapper.CourseFileMapper;
 import com.spring.bearbom.mapper.CourserMapper;
 import com.spring.bearbom.repository.CourserRepository;
@@ -53,18 +54,11 @@ public class CourserServiceImpl implements CourserService {
 		return courserMapper.updateRating1(courser);
 	}
 
-//	@Override
-//	public double updateRating(Courser courser) {
-//		// TODO Auto-generated method stub
-//		return courserMapper.updateRating(courser);
-//	}
-
-
-
 	@Override
     public Course getCourse(int courseIdx) {
-//        List<Course> courseList = courseRepository.findAll();
         Course course = courserMapper.getCourse(courseIdx);
+        User teacherInfo = courserMapper.getTeacherInfo(courseIdx);
+        course.setUser(teacherInfo);
         return course;
     }
 

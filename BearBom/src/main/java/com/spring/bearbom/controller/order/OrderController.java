@@ -8,10 +8,10 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,8 +29,10 @@ public class OrderController {
 	OrderService orderService;
 	
 	@PostMapping("/orderRegistration")
-	public void courseRegistration(HttpServletRequest request, @RequestParam Map<String, Object> paramMap,
+	public void courseRegistration(HttpServletRequest request, @RequestBody Map<String, Object> paramMap,
 			@AuthenticationPrincipal String userId) {
+		System.out.println(paramMap.get("courseIdx"));
+		System.out.println("//////////"+paramMap);
 		Order order = new Order();
 		User user = new User();
 		Course course = new Course();
