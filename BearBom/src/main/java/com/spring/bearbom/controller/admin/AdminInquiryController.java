@@ -61,6 +61,8 @@ public class AdminInquiryController {
 //	}
 	@PostMapping("updateInquiry")
 	public void updateInquiry(@RequestBody Map<String, Object> paramMap) {
+		System.out.println("////paramMap : "+paramMap);
+		System.out.println(paramMap.get("inquiryIdx"));
 		adminService.updateInquiry(paramMap);
 	}
 	
