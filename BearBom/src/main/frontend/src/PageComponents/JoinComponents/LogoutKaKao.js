@@ -1,12 +1,11 @@
 import React from "react";
-import { Button } from "react-bootstrap";
 import { KAKAO_LOGOUT_URL } from "./OAuth";
 
 const LogoutKaKao = () => {
   return (
     <a
       href={KAKAO_LOGOUT_URL}
-      style={{ textDecoration: "none", color: "#0000008c" }}
+      style={{ textDecoration: "none", color: "#212529" }}
     >
       로그아웃
     </a>
