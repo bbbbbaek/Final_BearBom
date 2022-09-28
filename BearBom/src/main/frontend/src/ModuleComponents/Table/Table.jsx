@@ -150,7 +150,7 @@ const Table = ({ tableInfo, fetchedData }) => {
 
   // 강좌 등록 - 관리자 삭제 버튼 클릭 함수
   const onClickDelete = (index) => {
-    if (window.confirm("해당 강좌를 삭제하시겠습니까?")) {
+    if (window.confirm("해당 내용을 삭제하시겠습니까?")) {
       onRequest("/api/admin/deleteCourseStatus", "post", { courseIdx: index });
     }
   };
