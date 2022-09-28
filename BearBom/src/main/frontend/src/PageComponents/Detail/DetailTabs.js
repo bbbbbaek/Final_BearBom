@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useState } from "react";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
@@ -10,7 +9,12 @@ import ClassContents from "./ClassContents.js";
 import Cur from "./Detail-Cur";
 import Location from "../Detail/Location";
 
-export default function DetailTabs({ averageRating, course, CurCnt }) {
+export default function DetailTabs({
+  averageRating,
+  course,
+  CurCnt,
+  teacherInfo,
+}) {
   const [value, setValue] = React.useState("1");
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -32,7 +36,11 @@ export default function DetailTabs({ averageRating, course, CurCnt }) {
             <b>강사소개</b>
           </h5>
 
-          <Teacher averageRating={averageRating} CurCnt={CurCnt} />
+          <Teacher
+            averageRating={averageRating}
+            CurCnt={CurCnt}
+            teacherInfo={teacherInfo}
+          />
         </TabPanel>
         <TabPanel value="2">
           <h5>
