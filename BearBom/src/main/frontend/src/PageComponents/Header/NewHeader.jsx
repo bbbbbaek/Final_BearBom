@@ -25,6 +25,8 @@ const Header = () => {
 
   const checkLocalStorage = localStorage.getItem("USER_ID");
   const loginStatus = useSelector((state) => state);
+  const refreshUpdates = useSelector((state) => state);
+
   // 새로고침하게 될 경우, reduxStore가 초기화되면서 로그아웃되는 것을 방지하기 위함
   if (checkLocalStorage && !loginStatus.loginStatus) dispatch(onLogin());
 
@@ -62,7 +64,7 @@ const Header = () => {
         setOrderData(res[1].data);
       });
     } else return;
-  }, [loginStatus]);
+  }, [loginStatus, refreshUpdates]);
 
   // then((res) => {
   //   console.log(res.data);
@@ -159,11 +161,13 @@ const Header = () => {
                 <li>
                   <img
                     src={
-                      fetchedData.userPhotoOrgNm
+                      fetchedData.userPhotoNewNm
+                        ? `${API_BASE_URL}/upload/${fetchedData.userPhotoNewNm}`
+                        : fetchedData.userPhotoOrgNm
                         ? `${API_BASE_URL}/upload/${fetchedData.userPhotoOrgNm}`
                         : defaultProfilePicture
                     }
-                    alt=""
+                    alt="pp"
                     id="/mypage"
                     onClick={onClickThumbnail}
                   />

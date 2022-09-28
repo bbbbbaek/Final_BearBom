@@ -8,8 +8,15 @@ const LatestTransaction = () => {
   let tableInfo = latestTransactionItems;
   const [fetchedData, setFetchedData] = useState();
   useEffect(() => {
-    axios.get(API_BASE_URL + "").then((res) => {
-      setFetchedData(res.data);
+    axios({
+      method: "get",
+      url: API_BASE_URL + "/api/order/allOrderList",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+      },
+    }).then((res) => {
+      console.log(res);
+      setFetchedData(res.data.getOrderedCourseList);
     });
   }, []);
 

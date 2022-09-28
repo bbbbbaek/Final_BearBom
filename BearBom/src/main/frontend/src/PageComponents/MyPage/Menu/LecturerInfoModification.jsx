@@ -10,16 +10,18 @@ import { API_BASE_URL } from "../../../app-config";
 import ResultNotFound from "../../../ModuleComponents/ResultNotFound/ResultNotFound";
 import { onRequest } from "../../../ModuleComponents/UsefulFunctions/ApiService";
 import { useRef } from "react";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 const LecturerInfoModification = () => {
   const [fetchedData, setFetchedData] = useState();
-
   const [boardData, setBoardData] = useState("");
   const [modal, setModal] = useState(false);
 
   const [nickName, setNickName] = useState();
   const [formData, setFormData] = useState({});
   const profileRef = useRef();
+  const navigate = useNavigate();
+  const { userData } = useOutletContext();
 
   useEffect(() => {
     axios({
@@ -35,10 +37,11 @@ const LecturerInfoModification = () => {
   }, []);
 
   const onClickSave = () => {
-    alert("강사 프로필 수정이 완료되었습니다.");
     onRequest("/api/mypage/updateLecturerInfo", "post", {
       lecturerInfo: profileRef.current.value,
     });
+    alert("강사 프로필 수정이 완료되었습니다.");
+    navigate("/mypage");
   };
   console.log(profileRef);
 
@@ -53,8 +56,18 @@ const LecturerInfoModification = () => {
           <hr />
           <div className="body3">
             <div className="left">
-              <img id="picture" src={defaultProfilePicture} alt="pp" />
-              <span>aa</span>
+              <img
+                id="picture"
+                src={
+                  userData.userPhotoNewNm
+                    ? `${API_BASE_URL}/upload/${userData.userPhotoNewNm}`
+                    : userData.userPhotoOrgNm
+                    ? `${API_BASE_URL}/upload/${userData.userPhotoOrgNm}`
+                    : defaultProfilePicture
+                }
+                alt="pp"
+              />
+              <span>{userData.userNickName}</span>
               <button
                 onClick={
                   onClickSave
@@ -66,9 +79,11 @@ const LecturerInfoModification = () => {
             </div>
             <div></div>
             <div className="right">
+              프로필 소개
+              <br />
               <textarea
                 name=""
-                id=""
+                id="textarea"
                 cols="30"
                 rows="10"
                 ref={profileRef}

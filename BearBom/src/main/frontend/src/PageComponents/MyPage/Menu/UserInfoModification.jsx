@@ -5,14 +5,18 @@ import axios from "axios";
 import { useRef } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { onRequest } from "../../../ModuleComponents/UsefulFunctions/ApiService";
+import { useDispatch } from "react-redux";
+import { onIncrease } from "../../../ModuleComponents/reduxStore/reduxStore";
 
 const UserInfoModification = ({}) => {
   let tableInfo = takenClassItems;
   // userData는 이미 Mypage 렌더링 시 받아오기 때문에,
   // useOutletContext를 사용하여 서버로부터 데이터를 다시 받지 않고 처음에 받은 데이터를 props 전송 받음
   const { userData, setUpdateUserInfo, updateUserInfo } = useOutletContext();
+  const dispatch = useDispatch();
 
   const userPw = useRef();
+  const userPwCheck = useRef();
   const userNm = useRef();
   const userNickName = useRef();
   const userTel = useRef();
@@ -35,6 +39,7 @@ const UserInfoModification = ({}) => {
       userEmail: userEmail.current.value,
     });
     alert("회원 정보 수정이 완료되었습니다.");
+    dispatch(onIncrease());
     setUpdateUserInfo(updateUserInfo + 1);
     navigate("/mypage");
   };
@@ -77,8 +82,8 @@ const UserInfoModification = ({}) => {
                 <input type="text" id="userPw" ref={userPw} />
               </li>
               <li>
-                <label htmlFor="userPw">비밀번호 확인</label>
-                <input type="text" id="userPw" ref={userPw} />
+                <label htmlFor="userPwCheck">비밀번호 확인</label>
+                <input type="text" id="userPwCheck" ref={userPwCheck} />
               </li>
               <li>
                 <label htmlFor="userNm">이름</label>
