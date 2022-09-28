@@ -10,11 +10,11 @@ import excelDownload from "../../images/excelDownload.png";
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../../app-config";
 import { onRequest } from "../UsefulFunctions/ApiService";
+import noImageAvailable from "../../images/noImageAvailable.png";
 
 // TableMenuItems 객체로 생성한 tableItems state를 사용하여 각 컴포넌트에 알맞은 데이터를 출력할 수 있도록 설계
 const Table = ({ tableInfo, fetchedData }) => {
   const userRole = localStorage.getItem("USER_ROLE");
-  const [writingMode, setWritingMode] = useState(false);
   const [sortType, setSortType] = useState("Idx");
 
   const returnValueOfKey = (Key) => {
@@ -45,6 +45,8 @@ const Table = ({ tableInfo, fetchedData }) => {
   const filterSelectRef = useRef();
 
   const navigate = useNavigate();
+
+  // --------------------------- 페이징 처리 관련 함수 ---------------------------
 
   // 1. 필터 내용에 따라 data를 변경하는 함수
   const filteringData = (value, option) => {
@@ -92,7 +94,9 @@ const Table = ({ tableInfo, fetchedData }) => {
     setCurrentPageData(data.slice(10 * pageNum - 10, 10 * pageNum));
   };
 
-  // 테이블 바디 onClick 시, 상세 페이지로 이동하는 함수
+  // --------------------------- 페이징 처리 관련 함수 끝 ---------------------------
+
+  // 테이블 바디 클릭 시, 상세 페이지로 이동하는 함수
   const moveToBoard = (element, type) => {
     let id = element[returnValueOfKey("Idx")];
     let path = window.location.pathname;
@@ -135,15 +139,36 @@ const Table = ({ tableInfo, fetchedData }) => {
     }
   };
 
+  // 강좌 등록 - 관리자 승인 버튼 클릭 함수
   const onClickApprove = (index) => {
     // let selectedArray = fetchedData.filter((a) => {
     //   return a.courseIdx === index;
     // });
+    alert("강좌 등록이 승인되었습니다.");
     onRequest("/api/admin/updateCourseStatus", "post", { courseIdx: index });
   };
+
+  // 강좌 등록 - 관리자 삭제 버튼 클릭 함수
   const onClickDelete = (index) => {
-    onRequest("/api/admin/deleteCourseStatus", "post", { courseIdx: index });
+    if (window.confirm("해당 강좌를 삭제하시겠습니까?")) {
+      onRequest("/api/admin/deleteCourseStatus", "post", { courseIdx: index });
+    }
   };
+
+  // 유저 관리 - 관리자 유저 강퇴 버튼 클릭 함수
+  const onClickKickOut = (index) => {
+    if (window.confirm("해당 유저를 베어봄에서 탈퇴 시키시겠습니까?")) {
+      onRequest("/api/admin/deleteUserInfo", "post", { userId: index });
+    }
+  };
+
+  // 글쓰기 버튼 클릭 함수
+  const onClickWrite = () => {
+    navigate("write");
+  };
+
+  //--------------------------- 테이블 만드는 부분 ---------------------------
+
   // 테이블에 클래스 추가해주는 함수
   const insertClass = (index) => {
     return "column " + tableInfo[index].prop;
@@ -159,27 +184,11 @@ const Table = ({ tableInfo, fetchedData }) => {
   };
 
   // 테이블 바디 반환하는 함수 (가로)
-  const insertTDT = (tableInfo, element) => {
-    console.log(fetchedData);
-    let tableItem = [];
-    for (let i = 0; i < tableInfo.length; i++) {
-      tableItem.push(
-        <td
-          className={insertClass(i)}
-          onClick={() => {
-            moveToBoard(element);
-          }}
-        >
-          {element[tableInfo[i].cell]}
-        </td>
-      );
-    }
-  };
+  // 다양한 조건을 줌으로써 데이터 형태에 맞게 출력 가능
   const insertTD = (tableInfo, element) => {
-    console.log(fetchedData);
     let tableItem = [];
     for (let i = 0; i < tableInfo.length; i++) {
-      console.log(tableInfo[i].cell);
+      // date 형식
       if (tableInfo[i].cell.includes("Regdate")) {
         tableItem.push(
           <td
@@ -193,36 +202,80 @@ const Table = ({ tableInfo, fetchedData }) => {
             )}
           </td>
         );
-      } else if (tableInfo[i].cell === "approval") {
+        // 관리자 상태 확인 버튼
+      } else if (tableInfo[i].title === "상태") {
         tableItem.push(
           <td className={insertClass(i)}>
-            <button
-              id="approve"
-              onClick={() => {
-                onClickApprove(element.courseIdx);
-              }}
-            >
-              승인
-            </button>
+            {element[tableInfo[i].cell] === "Y" ? (
+              <div className="approved">승인완료</div>
+            ) : element[tableInfo[i].cell] === "N" ? (
+              <div className="deleted">삭제완료</div>
+            ) : (
+              <button
+                className="pending"
+                onClick={() => {
+                  onClickApprove(element.courseIdx);
+                }}
+              >
+                미승인
+              </button>
+            )}
           </td>
         );
-      } else if (tableInfo[i].cell === "delete") {
+        // 관리자 삭제 버튼
+      } else if (tableInfo[i].title === "삭제") {
+        tableItem.push(
+          <td className={insertClass(i)}>
+            {element[tableInfo[i - 1].cell] === "N" ? null : (
+              <button
+                id="delete"
+                onClick={() => {
+                  onClickDelete(element.courseIdx);
+                }}
+              >
+                삭제
+              </button>
+            )}
+          </td>
+        );
+
+        // 관리자 유저 추방 버튼
+      } else if (tableInfo[i].title === "삭제") {
         tableItem.push(
           <td className={insertClass(i)}>
             <button
               id="delete"
               onClick={() => {
-                onClickDelete(element.courseIdx);
+                onClickKickOut(element.userIdx);
               }}
             >
-              삭제
+              추방
             </button>
           </td>
         );
+        // 이미지 파일
       } else if (tableInfo[i].title === "이미지") {
+        console.log(element[tableInfo[i].cell]);
         tableItem.push(
-          <td className={insertClass(i)}>{element[tableInfo[i].cell]}</td>
+          <td className={insertClass(i)}>
+            <img
+              className="smallImage"
+              src={
+                // string에 아래의 확장자가 포함되면 이미지 파일로 읽어올 수 있도록 조건을 줌
+                element[tableInfo[i].cell].includes(".png") ||
+                element[tableInfo[i].cell].includes(".svg") ||
+                element[tableInfo[i].cell].includes(".jpeg") ||
+                element[tableInfo[i].cell].includes(".gif") ||
+                element[tableInfo[i].cell].includes(".webp") ||
+                element[tableInfo[i].cell].includes(".jpg")
+                  ? `${API_BASE_URL}/upload/${element[tableInfo[i].cell]}`
+                  : noImageAvailable
+              }
+              alt="img"
+            />
+          </td>
         );
+        // 그 외 일반 string 데이터
       } else {
         tableItem.push(
           <td
@@ -236,24 +289,22 @@ const Table = ({ tableInfo, fetchedData }) => {
         );
       }
     }
-
     return tableItem;
   };
 
-  const onClickWrite = () => {
-    navigate("write");
-  };
+  //--------------------------- 테이블 만드는 부분 끝 ---------------------------
 
   return (
     <>
       {fetchedData ? (
         <div className="table_home">
           <div className="top1">
-            {userRole === "ROLE_ADMIN" && (
+            {userRole === "ROLE_ADMIN" &&
+            window.location.pathname !== "/admin/courses" ? (
               <button style={{ marginRight: "1rem" }} onClick={onClickWrite}>
                 글쓰기
               </button>
-            )}
+            ) : null}
 
             <div className="search">
               <select

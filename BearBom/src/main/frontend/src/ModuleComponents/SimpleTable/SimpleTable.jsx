@@ -9,10 +9,13 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
 const SimpleTable = ({ tableInfo, fetchedData, filterType }) => {
+  // 가장 최근 5개 주문 내역만 보여주는 부분
   let recentData = fetchedData.slice(
     fetchedData.length - 5,
     fetchedData.length
   );
+
+  // 5개 내역을 순서대로 출력하는 부분
   let sortedData = recentData.sort((a, b) => {
     return b.orderIdx - a.orderIdx;
   });

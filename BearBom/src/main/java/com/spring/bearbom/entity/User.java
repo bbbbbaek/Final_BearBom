@@ -28,6 +28,7 @@ public class User {
 	@Column(nullable = false)
 	private String userPw;
 
+	@Column(nullable = false)
 	private int userPwFailCnt = 0;
 	
 	@Column(nullable = false)
@@ -54,14 +55,12 @@ public class User {
 	@Column(nullable = false ,columnDefinition = "char(1)")
 	private char userYn = 'Y';
 
-	
 	@Column
 	private String userPhotoOrgNm;
 	
 	@Column
 	private String userPhotoNewNm;
 	
-
 	@Column
 	private String userPhotoPath;
 	
@@ -69,9 +68,9 @@ public class User {
 	private int userPoint = 0;
 	
 	@Column(columnDefinition = "varchar(45) default 'ROLE_USER'")
-	private String role;
+	private String role = "ROLE_USER";
 	
-	@Column(nullable = true)
+	@Column
 	private String lecturerInfo;
 	
 	@Transient

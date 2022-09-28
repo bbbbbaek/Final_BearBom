@@ -10,6 +10,7 @@ import axios from "axios";
 import { useState } from "react";
 import { API_BASE_URL } from "../../app-config";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import { useParams } from "react-router-dom";
 
 const Payment = () => {
   const [userData, setUserData] = useState();
@@ -195,7 +196,7 @@ const Payment = () => {
                       <td>{a.userId}</td>
                       <td>{a.courseStDate}</td>
                       <td>{a.courseEndDate}</td>
-                      <td>{a.courseCost}</td>
+                      <td className="right">{a.courseCost.toLocaleString()}</td>
                     </tr>
                   );
                 })}

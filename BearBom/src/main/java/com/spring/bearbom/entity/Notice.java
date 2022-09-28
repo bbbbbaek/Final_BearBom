@@ -24,10 +24,10 @@ public class Notice {
     private String noticeContent;
 
     @Column(nullable = false)
-    private LocalDateTime noticeRegdate = LocalDateTime.now();
+    private LocalDateTime noticeRegdate = LocalDateTime.now().plusHours(9);
 
-    @Column(nullable = false)
-    private LocalDateTime noticeMdfdate = LocalDateTime.now();
+    @Column
+    private LocalDateTime noticeMdfdate;
 
     @Column(nullable = false,columnDefinition = "char(1)")
     private char noticeUseYn = 'Y';

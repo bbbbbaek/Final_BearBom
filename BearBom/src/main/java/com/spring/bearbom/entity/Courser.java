@@ -24,10 +24,10 @@ public class Courser {
     private String courserRate;
 
     @Column(nullable = false)
-    private LocalDateTime courserRegdate = LocalDateTime.now();
+    private LocalDateTime courserRegdate = LocalDateTime.now().plusHours(9);
 
-    @Column(nullable = false)
-    private LocalDateTime courserMdfdate = LocalDateTime.now();
+    @Column
+    private LocalDateTime courserMdfdate;
 
     @Column(nullable = false,columnDefinition = "char(1)")
     private char courserUseYn ='Y';

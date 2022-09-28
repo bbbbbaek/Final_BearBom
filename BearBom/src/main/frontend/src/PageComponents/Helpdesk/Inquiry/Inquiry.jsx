@@ -30,7 +30,7 @@ const Inquiry = () => {
     })
       .then(() => {
         alert("문의 등록이 완료되었습니다.");
-        navigate("/mypage/inquiry");
+        navigate("/mypage/inquiry/view");
       })
       .catch((e) => {
         console.log(e);
@@ -108,7 +108,6 @@ const Inquiry = () => {
             type="button"
             value="제출"
             onClick={() => {
-              alert("문의 등록이 완료되었습니다.");
               onSubmit();
             }}
           />

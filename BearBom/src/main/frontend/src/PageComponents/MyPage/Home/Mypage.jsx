@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./mypage.scss";
 import QuickView from "../Quickview/QuickView";
 import Sidebar from "../Sidebar/SideBar";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { API_BASE_URL } from "../../../app-config";
 import { Outlet } from "react-router-dom";
@@ -27,6 +27,7 @@ const Mypage = () => {
   //     setFetchedData(res[2].data);
   //   });
   // }, []);
+
   const [updateUserInfo, setUpdateUserInfo] = useState(0);
   const [userData, setUserData] = useState(); // 로그인한 유저 정보
   const [widgetData, setWidgetData] = useState(); // Widget에 보일 클래스 개수 정보

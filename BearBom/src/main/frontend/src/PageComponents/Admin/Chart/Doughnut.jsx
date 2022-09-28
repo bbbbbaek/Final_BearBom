@@ -1,9 +1,14 @@
-import { margin } from "@mui/system";
+import { fontWeight, margin } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import "../../../css/doughnut.css";
 
-const Doughnut = () => {
-  const [data, setData] = useState([8, 2]);
+const Doughnut = ({ rawSales }) => {
+  const salesTarget = parseInt(localStorage.getItem("sales_target"));
+  console.log(salesTarget);
+  // salesTarget - sales
+  console.log(rawSales);
+  console.log(salesTarget);
+  const [data, setData] = useState([rawSales, salesTarget - rawSales]);
   const [array, setArray] = useState([]);
   useEffect(() => {
     let sum = data.reduce((a, b) => {
@@ -30,7 +35,12 @@ const Doughnut = () => {
       <div>
         <div
           className="doughnut-wrapper"
-          style={{ width: "150px", height: "150px", margin: "10px" }}
+          style={{
+            width: "150px",
+            height: "150px",
+            margin: "10px",
+            position: "relative",
+          }}
         >
           <svg viewBox="0 0 200 200">
             <circle
@@ -59,6 +69,17 @@ const Doughnut = () => {
               strokeDashoffset={2 * Math.PI * 90 * 0.25}
             />
           </svg>
+          <div
+            style={{
+              position: "absolute",
+              top: "52px",
+              left: "45px",
+              fontWeight: "600",
+              fontSize: "2rem",
+            }}
+          >
+            {(rawSales / salesTarget) * 100}%
+          </div>
         </div>
       </div>
     </>
