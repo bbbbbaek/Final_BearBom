@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useLocation, useParams } from "react-router-dom";
 import "../../css/detail.css";
 import { API_BASE_URL } from "../../app-config";
 import axios from "axios";
@@ -24,6 +24,7 @@ const Detail = () => {
   const [averageRating, setaverageRating] = useState([]); //평균평점을 담은 State
   const location = useLocation(); //URL을
   const [CurCnt, setCurCnt] = useState(0);
+  const [teacherInfo, setTeacherInfo] = useState();
   // const userId = localStorage.getItem("USER_ID"); //유저 아이디를
   // const navigate = useNavigate(); //결제를 위한 navigate
 
@@ -128,77 +129,81 @@ const Detail = () => {
       setaverageRating(response.data.averageRating);
       setReviewList(response.data.reviewList);
       setReviewData(response.data.reviewList.slice(0, 4));
+      setTeacherInfo(response.data.userInfo);
     });
   }, []);
-
+  console.log(teacherInfo);
   return (
     <>
-      <div className="main-container">
-        <div className="info">
-          <div className="main-info">
-            <div className="main-img-box">
-              <ImgBox course={course} />
-            </div>
-            <h4 className="courseNm">{course.courseNm}</h4>
-            <div className="course-short-info">
-              <div>
-                <BarChartIcon color="action" />
-                {course.courseLevel}
+      {teacherInfo ? (
+        <div className="main-container">
+          <div className="info">
+            <div className="main-info">
+              <div className="main-img-box">
+                <ImgBox course={course} />
               </div>
-              <div>
-                <AccessTimeIcon sx={{ fontSize: 30 }} color="action" />
-                {course.courseRuntime}시간
-              </div>
-              <div>
-                <FmdGoodIcon color="action" />
-                {course.courseAddress}
-                {course.courseAddressEx}
-              </div>
-              <div>
-                <SupervisorAccountIcon sx={{ fontSize: 30 }} color="action" />
-                {course.courseMin} ~ {course.courseMax}인
-              </div>
-            </div>
-            <DetailTabs
-              id="Detail-Tabs"
-              averageRating={averageRating}
-              course={course}
-              CurCnt={CurCnt}
-            />
-            <hr />
-            <section id="review" className="section-box">
-              <div className="reviewList">
-                <OpenModal
-                  addReviewInfo={addReviewInfo}
-                  onWriteReview={onWriteReview}
-                />
-
-                <div id="review-box-list">
-                  {reviewData !== []
-                    ? reviewData.map((review) => <Review review={review} />)
-                    : null}
-                  <div className="btn-position">
-                    <button
-                      className="more-btn"
-                      onClick={() => {
-                        setCnt(cnt + 1);
-                      }}
-                    >
-                      더보기
-                    </button>
-                  </div>
+              <h4 className="courseNm">{course.courseNm}</h4>
+              <div className="course-short-info">
+                <div>
+                  <BarChartIcon color="action" />
+                  {course.courseLevel}
+                </div>
+                <div>
+                  <AccessTimeIcon sx={{ fontSize: 30 }} color="action" />
+                  {course.courseRuntime}시간
+                </div>
+                <div>
+                  <FmdGoodIcon color="action" />
+                  {course.courseAddress}
+                  {course.courseAddressEx}
+                </div>
+                <div>
+                  <SupervisorAccountIcon sx={{ fontSize: 30 }} color="action" />
+                  {course.courseMin} ~ {course.courseMax}인
                 </div>
               </div>
-            </section>
-          </div>
-          <div className="main-cal">
-            <div>
-              <Apply id="Apply" courseIdx={id} course={course} />
+              <DetailTabs
+                id="Detail-Tabs"
+                averageRating={averageRating}
+                course={course}
+                CurCnt={CurCnt}
+                teacherInfo={teacherInfo}
+              />
+              <hr />
+              <section id="review" className="section-box">
+                <div className="reviewList">
+                  <OpenModal
+                    addReviewInfo={addReviewInfo}
+                    onWriteReview={onWriteReview}
+                  />
+
+                  <div id="review-box-list">
+                    {reviewData !== []
+                      ? reviewData.map((review) => <Review review={review} />)
+                      : null}
+                    <div className="btn-position">
+                      <button
+                        className="more-btn"
+                        onClick={() => {
+                          setCnt(cnt + 1);
+                        }}
+                      >
+                        더보기
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </section>
             </div>
-            <div></div>
+            <div className="main-cal">
+              <div>
+                <Apply id="Apply" courseIdx={id} course={course} />
+              </div>
+              <div></div>
+            </div>
           </div>
         </div>
-      </div>
+      ) : null}
     </>
   );
 };
