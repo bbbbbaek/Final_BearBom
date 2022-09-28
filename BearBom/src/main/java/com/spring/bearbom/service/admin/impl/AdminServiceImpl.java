@@ -69,5 +69,10 @@ public class AdminServiceImpl implements AdminService{
 		adminInquiryMapper.updateInquiry(id);
 	}
 
+	@Override
+	public List<Map<String, Object>> getAdminOrderList() {
+		return adminMapper.getAdminOrderList();
+	}
+
 
 }
