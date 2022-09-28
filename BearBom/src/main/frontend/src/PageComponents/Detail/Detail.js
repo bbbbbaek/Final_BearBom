@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useLocation, useParams } from "react-router-dom";
 import "../../css/detail.css";
 import { API_BASE_URL } from "../../app-config";
 import axios from "axios";
