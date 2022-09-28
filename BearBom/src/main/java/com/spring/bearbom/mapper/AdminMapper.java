@@ -20,4 +20,5 @@ public interface AdminMapper {
     List<Map<String, Object>> todaySales();
 
 
+    List<Map<String, Object>> getAdminOrderList();
 }

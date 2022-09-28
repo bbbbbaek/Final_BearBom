@@ -37,11 +37,13 @@ export const profileItems = ["사진", "이름", "이메일", "연락처"];
 // 최근 거래 내역 (메인메뉴)
 export const recentTransactionItems = [
   new Data("", "l5", ""),
-  new Data("주문번호", "l10", "orderIdx"),
-  new Data("이미지", "l10", "courseImage"),
+  new Data("강의번호", "l10", "courseIdx"),
   new Data("강의명", "l40", "courseNm"),
   new Data("강사명", "l10", "userId"),
-  new Data("구매일", "l10", "orderDate"),
+  new Data("가격", "l10", "courseCost"),
+  new Data("난이도", "l10", "courseLevel"),
+  // new Data("등록일", "l10", "courseRegdate"),
+  // new Data("구매일", "l10", "orderDate"),
   // new Data("상태", "l10", "status"), // 없음
 ];
 
@@ -123,23 +125,25 @@ export const latestTransactionItems = [
 // 매출 관리
 export const salesMgmtItems = [
   new Data("", "l5", ""),
-  new Data("주문번호", "l10", "orderIdx"),
-  new Data("강의명", "l40", "courseTitle"),
-  new Data("판매자", "l10", "lecturerId"),
+  new Data("번호", "l10", "orderIdx"),
+  new Data("주문번호", "l10", "orderNm"),
+  new Data("강의번호", "l10", "courseIdx"),
   new Data("구매자", "l10", "userId"),
-  new Data("매출액", "l20", "courseCost"),
-  new Data("거래일자", "l10", "orderDate"),
+  new Data("매출액", "l20", "orderPri"),
+  new Data("거래일자", "l10", "orderRegdate"),
 ];
 
 // 주문 관리
 export const orderMgmtItems = [
   new Data("", "l5", ""),
-  new Data("주문번호", "l10", "orderIdx"),
-  new Data("", "l10", "courseImage"),
-  new Data("강의명", "l30", "courseTitle"),
-  new Data("판매자", "l10", "lecturerId"),
+  new Data("주문번호", "l10", "orderNm"),
+  new Data("강의번호", "l10", "courseIdx"),
+  new Data("판매자", "l10", "userId"),
+  new Data("가격", "l10", "orderPri"),
   new Data("구매자", "l10", "userId"),
-  new Data("구매일", "l10", "orderDate"),
+  new Data("주문여부", "l10", "orderYn"),
+  new Data("구매일", "l10", "paymentDate"),
+  new Data("구매방식", "l10", "paymentMethod"),
 ];
 
 // 고객 관리

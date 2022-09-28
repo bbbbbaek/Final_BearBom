@@ -11,12 +11,12 @@ const RecentTransaction = () => {
   useEffect(() => {
     axios({
       method: "get",
-      url: API_BASE_URL + "/api/order/allOrderList",
+      url: API_BASE_URL + "/api/order/getOrderList",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
       },
     }).then((res) => {
-      console.log(res);
+      console.log(res.data.getOrderedCourseList);
       setFetchedData(res.data.getOrderedCourseList);
     });
   }, []);
