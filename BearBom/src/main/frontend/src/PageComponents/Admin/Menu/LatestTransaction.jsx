@@ -15,7 +15,6 @@ const LatestTransaction = () => {
         Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
       },
     }).then((res) => {
-      console.log(res);
       setFetchedData(res.data.getOrderedCourseList);
     });
   }, []);
@@ -26,6 +25,7 @@ const LatestTransaction = () => {
         <h5>
           <strong>최근 결제 내역</strong>
         </h5>
+
         <br />
         {fetchedData ? (
           <SimpleTable tableInfo={tableInfo} fetchedData={fetchedData} />

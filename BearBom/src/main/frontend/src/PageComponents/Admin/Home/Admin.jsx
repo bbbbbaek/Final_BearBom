@@ -73,10 +73,10 @@ const Admin = () => {
             <div className="homeContainer">
               <Navbar />
               <div className="widgets">
-                <Widget type="sales" widgetData={widgetData} />
+                {/* <Widget type="sales" widgetData={widgetData} />
                 <Widget type="orders" widgetData={widgetData} />
                 <Widget type="users" widgetData={widgetData} />
-                <Widget type="courses" widgetData={widgetData} />
+                <Widget type="courses" widgetData={widgetData} /> */}
               </div>
               <div className="charts">
                 <Featured widgetData={widgetData} />

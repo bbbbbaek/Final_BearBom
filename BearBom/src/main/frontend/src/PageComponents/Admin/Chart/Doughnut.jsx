@@ -78,7 +78,8 @@ const Doughnut = ({ rawSales }) => {
               fontSize: "2rem",
             }}
           >
-            {(rawSales / salesTarget) * 100}%
+            {isNaN(rawSales / salesTarget) ? 0 : (rawSales / salesTarget) * 100}
+            %
           </div>
         </div>
       </div>

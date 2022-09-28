@@ -64,10 +64,14 @@ const Widget = ({ type, widgetData }) => {
         <div className="left">
           <span className="title">{data.title}</span>
           <span className="counter">
-            {data.title === "매출" && "₩ " + data.value}
-            {data.title === "주문" && data.value + " 건"}
-            {data.title === "회원" && data.value + " 명"}
-            {data.title === "강좌" && data.value + " 개"}
+            {data.title === "매출" &&
+              (data.value ? "₩ " + data.value : "₩ " + 0)}
+            {data.title === "주문" &&
+              (data.value ? data.value + " 건" : +0 + " 건")}
+            {data.title === "회원" &&
+              (data.value ? data.value + " 명" : +0 + " 명")}
+            {data.title === "강좌" &&
+              (data.value ? data.value + " 개" : +0 + " 개")}
           </span>
           <span className="link" onClick={onClickLink}>
             {data.link}
