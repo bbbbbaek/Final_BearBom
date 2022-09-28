@@ -14,18 +14,10 @@ body {
   margin: auto;
 }
 
-.img {
-  height: 15%;
-  margin-top: 20px;
-}
 .info {
   height: 84%;
   margin-left: 20px;
   clear: both;
-}
-
-.courseNm {
-  margin-left: 20px;
 }
 
 .main-info {
@@ -33,6 +25,26 @@ body {
   width: 65%;
   height: 100%;
 }
+
+.main-img-box {
+  margin: 24px 0px 50px 0px;
+}
+
+.img {
+  height: 15%;
+  margin-top: 20px;
+}
+
+.courseNm {
+  margin-left: 20px;
+}
+
+.course-short-info {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+}
+
 .main-cal {
   float: right;
   width: 30%;
@@ -41,9 +53,7 @@ body {
   padding-right: 10px;
   text-align: center;
 }
-.main-img-box {
-  margin: 24px 0px 50px 0px;
-}
+
 .main-img {
   float: left;
   width: 48%;
@@ -68,12 +78,6 @@ body {
   color: black;
   font-weight: bold;
   text-decoration-line: blink;
-}
-
-.course-short-info {
-  display: flex;
-  justify-content: space-between;
-  margin: 20px;
 }
 
 .teacher {
@@ -458,4 +462,12 @@ body {
   #main-box {
     height: 300px;
   }
+}
+
+.detail-text-area {
+  min-width: 800px;
+  min-height: 300px;
+  padding: 10px 15px;
+  border: 1px solid #bdb7ae;
+  border-radius: 5px;
 }

@@ -1,3 +1,5 @@
+import "../../css/detail.css";
+
 function Cur({ course }) {
   return (
     <>
@@ -5,7 +7,13 @@ function Cur({ course }) {
         <b>커리큘럼</b>
       </h5>
       <div className="cur-box1">
-        <div className="cur-box-step">{course.courseLevelContent}</div>
+        <textarea
+          className="detail-text-area"
+          readOnly
+          style={{ resize: "none" }}
+        >
+          {course.courseLevelContent}
+        </textarea>
       </div>
     </>
   );
