@@ -36,7 +36,9 @@ function Review({ review }) {
         </div>
 
         <div>
-          <span>{review.courserContent}</span>
+          <textarea className="review-text-area">
+            {review.courserContent}
+          </textarea>
         </div>
       </div>
     </>

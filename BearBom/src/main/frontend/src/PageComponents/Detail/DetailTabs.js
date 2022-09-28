@@ -43,12 +43,7 @@ export default function DetailTabs({
           />
         </TabPanel>
         <TabPanel value="2">
-          <h5>
-            <b>클래스소개</b>
-          </h5>
-          <div className="class-content">
-            <ClassContents course={course} />
-          </div>
+          <ClassContents course={course} />
         </TabPanel>
         <TabPanel value="3">
           <Cur course={course} />
