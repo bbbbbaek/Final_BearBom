@@ -49,7 +49,7 @@ public class EmailServiceImpl implements EmailService {
         msgg+= ePw+"</strong><div><br/> ";
         msgg+= "</div>";
         message.setText(msgg, "utf-8", "html");//내용
-        message.setFrom(new InternetAddress("bitcamp222@naver.com","BearBom"));//보내는 사람
+        message.setFrom(new InternetAddress("yspark8300@naver.com","BearBom"));//보내는 사람
 
         return message;
     }
