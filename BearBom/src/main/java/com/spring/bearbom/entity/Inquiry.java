@@ -23,7 +23,6 @@ public class Inquiry {
         @Id
         private int inquiryIdx;
 
-
         @Column(nullable = false, columnDefinition = "varchar(100)")
         private String inquirySort;
 
@@ -38,33 +37,12 @@ public class Inquiry {
 
         @Column(nullable = false,columnDefinition = "char(1)")
         private char inquiryYn ='Y';
-
         
         @Column(nullable = false)
-        private LocalDateTime inquiryRegdate = LocalDateTime.now();
-        
-        @Column(nullable = true)
-        private LocalDateTime replyRegdate;
-        
-        @Column(columnDefinition = "char(1)")
-        private char replyYn ='N';
-        
-        @Column(columnDefinition = "varchar(300)")
-        private String replyTitle;
-
-        @Column(columnDefinition = "varchar(2000)")
-        private String replyContent;
-
-
-
-
+        private LocalDateTime inquiryRegdate = LocalDateTime.now().plusHours(9);
 
         @ManyToOne
         @JoinColumn(name="USER_ID")
         private User user;
-
-
-
-
 
 }

@@ -15,7 +15,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicUpdate
 @IdClass(CourseFileId.class)
 public class CourseFile {
-	@Id //@GeneratedValue(strategy=GenerationType.AUTO) @ColumnDefault("int default 0")
+	@Id
 	private int courseFileIdx;
 	
 	@Column(nullable = false)

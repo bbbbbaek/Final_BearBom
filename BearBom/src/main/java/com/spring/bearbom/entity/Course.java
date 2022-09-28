@@ -29,14 +29,8 @@ public class Course {
 	@Column(nullable = false)
 	private String courseNm;
 	
-//	@Column(nullable = false)
-//	private String courseType;
-	
 	@Column(nullable = false)
 	private String courseOnOff;
-	
-//	@Column(nullable = false)
-//	private String courseOneSeason;
 
 	@Column(nullable = false)
 	private char courseUseYn = 'D';
@@ -96,10 +90,6 @@ public class Course {
 	@JoinColumn(name="USER_ID")
 	private User user;
 
-//	@ManyToOne
-//	@JoinColumn(name="CMMN_CODE_IDX")
-//	private CmmnCode cmmnCode;
-	
 	@Column(nullable= false)
 	private String courseLocation;
 	
@@ -118,12 +108,7 @@ public class Course {
 	@Column(nullable = false)
 	private String courseAddressDef;
 	
-	@Column(nullable = false)
+	@Column
 	private String courseAddressEx;
-	
-	@Transient
-	private int courseStCost;
-	
-	@Transient
-	private int courseEndCost;
+
 }

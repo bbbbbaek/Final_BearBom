@@ -24,10 +24,10 @@ public class Guide {
     private String guideContent;
 
     @Column(nullable = false)
-    private LocalDateTime guideRegdate = LocalDateTime.now();
+    private LocalDateTime guideRegdate = LocalDateTime.now().plusHours(9);
 
-    @Column(nullable = false)
-    private LocalDateTime guideMdfdate = LocalDateTime.now();
+    @Column
+    private LocalDateTime guideMdfdate;
 
     @Column(nullable = false,columnDefinition = "char(1)")
     private char guideUseYn ='Y';
