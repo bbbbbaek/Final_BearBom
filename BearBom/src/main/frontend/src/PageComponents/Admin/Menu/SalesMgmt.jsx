@@ -8,15 +8,17 @@ const SalesMgmt = () => {
   let tableInfo = salesMgmtItems;
   const [fetchedData, setFetchedData] = useState();
   useEffect(() => {
-    axios
-      .get(
-        "https://raw.githubusercontent.com/Kenny-Korea/json-repository/main/Order"
-      )
-      .then((res) => {
-        setFetchedData(res.data);
-      });
+    axios({
+      method: "get",
+      url: API_BASE_URL + "/api/admin/getAdminOrderList",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("ACCESS_TOKEN"),
+      },
+    }).then((res) => {
+      console.log(res.data.getAdminOrderList);
+      setFetchedData(res.data.getAdminOrderList);
+    });
   }, []);
-
   return (
     <>
       <div className="inquiryview">
