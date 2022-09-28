@@ -11,8 +11,9 @@ function Apply({ courseIdx, course }) {
   const [like, setLike] = useState(false);
   const [courseCostChange, setCourseCostChange] = useState("");
   const calRef = useRef(null);
-  //카카오페이 경로이동
+  //결제창으로 이동
   const navigate = useNavigate();
+
   const onClickBtn = async () => {
     console.log({
       courseIdx: id,
@@ -36,6 +37,7 @@ function Apply({ courseIdx, course }) {
     navigate(`/mypage/payment`);
   };
 
+  //찜하기 데이터 받아오기
   useEffect((e) => {
     const fetchData = async () => {
       const userId = localStorage.getItem("USER_ID");
@@ -68,6 +70,7 @@ function Apply({ courseIdx, course }) {
     fetchData();
   }, []);
 
+  //금액 3자리마다 , 찍어주기
   useEffect(() => {
     setCourseCostChange((prev) =>
       (course.courseCost + "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
@@ -109,7 +112,6 @@ function Apply({ courseIdx, course }) {
     // [POST] 사용자가 좋아요를 누름 -> DB 갱신
     // setLike(!like);
   };
-  ///////////////////////////////////
 
   return (
     <>
@@ -124,7 +126,6 @@ function Apply({ courseIdx, course }) {
         <div className="apply-cost">
           <span>예약 금액 1인:</span>
           <span className="apply-cost-won">
-            {/* <b>{courseCostChange}원</b> */}
             <b>
               {typeof courseCostChange !== "undefined"
                 ? courseCostChange
