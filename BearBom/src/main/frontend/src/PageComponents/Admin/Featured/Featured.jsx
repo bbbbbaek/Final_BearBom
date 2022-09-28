@@ -7,7 +7,12 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import useFetch from "../../../customHooks/useFetch";
 
 const Featured = ({ widgetData }) => {
-  const rawSales = widgetData.totalSales[0].totalsales;
+  let rawSales;
+  if (widgetData.totalSales[0]) {
+    rawSales = widgetData.totalSales[0].totalsales;
+  } else {
+    rawSales = 0;
+  }
   const sales = rawSales.toLocaleString("ko-KR");
   const targetRef = useRef();
   // const target = targetRef.current.value;
