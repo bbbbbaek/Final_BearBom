@@ -46,4 +46,21 @@ public class AdminController {
             return errorMap;
         }
     }
+    //admin orderlist
+    @GetMapping("/getAdminOrderList")
+    public Map<String, Object> getAdminOrderList(Map<String, Object> paramMap){
+        try{
+            List<Map<String, Object>> getAdminOrderList = adminService.getAdminOrderList();
+
+            Map<String, Object> resultMap = new HashMap<>();
+            resultMap.put("getAdminOrderList", getAdminOrderList);
+
+            return resultMap;
+
+        }catch (Exception e) {
+            Map<String, Object> errorMap = new HashMap<>();
+            errorMap.put("error", e.getMessage());
+            return errorMap;
+        }
+    }
 }

@@ -27,6 +27,8 @@ public interface AdminService {
 
 	void updateInquiry(Integer id);
 
+    List<Map<String, Object>> getAdminOrderList();
+
 
 //	List<Inquiry> inquiryInfoReference(Inquiry inquiry);
 
