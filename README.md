@@ -11,19 +11,19 @@
 
 <h1><img src="https://cdn-icons-png.flaticon.com/512/5090/5090029.png" width="30" height="30"> 주요기능</h1>
 <li>- 카테고리별 검색<br>
-&nbsp;&nbsp; : 블라<br><br></li><br>
+&nbsp;&nbsp; : 원하는 카테고리 분류를 선택하여 검색 가능<br><br></li><br>
 
 <li>- 지도구현<br>
-&nbsp;&nbsp; : 블라<br><br></li><br>
+&nbsp;&nbsp; : 오프라인 클래스의 경우 길찾기에 용이하게 지도로 위치를 구현<br><br></li><br>
 
-<li>- 결제기능 구현<br>
-&nbsp;&nbsp; : 블라<br><br></li><br>
+<li>- 결제기능<br>
+&nbsp;&nbsp; : 실제 활용되는 결재시스템을 도입하여 카카오페이, 신용카드 등 자유로운 결재 가능<br><br></li><br>
 
 <li>- 찜기능<br>
-&nbsp;&nbsp; : 블라<br><br></li><br>
+&nbsp;&nbsp; : 현재 시간 여유가 없다고 해도 찜기능을 통해 관심목록을 관리 가능<br><br></li><br>
 
 <li>- 로그인, 회원가입<br>
-&nbsp;&nbsp; : 블라<br><br></li><br>
+&nbsp;&nbsp; : Security와 JWT를 이용한 인증, 로그인과 소셜서비스와 연계된 회원가입을 통해 서비스 이용 가능<br><br></li><br>
 
 
 
