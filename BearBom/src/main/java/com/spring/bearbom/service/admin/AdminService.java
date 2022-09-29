@@ -4,14 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.spring.bearbom.dto.InquiryDTO;
-import com.spring.bearbom.entity.Inquiry;
 
 public interface AdminService {
 
 	List<InquiryDTO> inquiryInfoReference();
-
-	
-//	void updateInquiry(InquiryDTO inquiryDTO);
 
     List<Map<String, Object>> totalSales();
 
@@ -26,10 +22,7 @@ public interface AdminService {
 	List<Map<String, Object>> todaySales();
 
 	void updateInquiry(Integer id);
-
-    List<Map<String, Object>> getAdminOrderList();
-
-
-//	List<Inquiry> inquiryInfoReference(Inquiry inquiry);
+	
+	List<Map<String,Object>> getAdminOrderList();
 
 }

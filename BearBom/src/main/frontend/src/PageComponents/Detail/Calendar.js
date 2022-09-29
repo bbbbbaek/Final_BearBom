@@ -5,8 +5,8 @@ import ko from "date-fns/locale/ko";
 import "../../css/apply.css";
 
 const Calendar = (/* props */ { stDate, endDate }) => {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate1, setEndDate1] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date()); //시작 날짜
+  const [endDate1, setEndDate1] = useState(new Date()); //종료 날짜
 
   const onChange = (dates) => {
     const [start, end] = dates;
@@ -23,7 +23,7 @@ const Calendar = (/* props */ { stDate, endDate }) => {
 
   return (
     <>
-      <div /* className={`react-datepicker__month-container ${props.width}`} */>
+      <div>
         <DatePicker
           locale="ko"
           dateFormat="YYYY년 MM월 DD일"
@@ -32,9 +32,6 @@ const Calendar = (/* props */ { stDate, endDate }) => {
           startDate={startDate}
           endDate={endDate1}
           minDate={new Date()}
-          // excludeDates={[addDays(new Date(), 1), addDays(new Date(), 5)]}
-          // selectsRange
-          // selectsDisabledDaysInRange
           inline
           readOnly
         />
