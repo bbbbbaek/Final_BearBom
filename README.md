@@ -23,18 +23,18 @@
 
 <h1><img src="https://cdn-icons-png.flaticon.com/512/1299/1299967.png" width="30" height="30"> 팀원소개</h1><br>
 
-여기에 이미지
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbOVIRN%2FbtrNjqKMv97%2FrCkIKBkl9mZb0vUm1t3sjK%2Fimg.png">
 <br>
 
 <h1><img src="https://cdn-icons-png.flaticon.com/512/780/780529.png" width="30" height="30"> 사용기술 / 개발도구</h1><br>
 
 
-여기에 이미지
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FReX0W%2FbtrNhd0gvK0%2F1hkoFWTJ9a0g5jYYzI7Fbk%2Fimg.png">
 <br><br>
 
 <h1><img src="https://cdn-icons-png.flaticon.com/512/2906/2906274.png" width="30" height="30">DB설계</h1><br>
 
-여기에 이미지
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbqwzAR%2FbtrNhCY6cSX%2FkDaUUUWW8hq1bRnYkPAKe1%2Fimg.jpg">
 <br><br>
 
 
