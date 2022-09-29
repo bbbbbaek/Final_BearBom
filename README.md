@@ -1,7 +1,7 @@
 <h1><img src="https://user-images.githubusercontent.com/107159105/192440999-c585aba8-e23a-4092-9776-d99217f559b0.png" width="30" height="30">
  베어봄 (Bear-Bom)</h1>
-<p>설명 <br>
-  맞추고 <b>강조할부분</b></p><br>
+<p>평범하게 반복되는 하루들과, 할일 없는 주말을 알차게 보내기위해 <br>
+  각종 취미 생활과 기술을 배울 수 있는 <b>관심분야별 매칭 플랫폼</b></p><br>
 
 
 <h1><img src="https://cdn.icon-icons.com/icons2/2104/PNG/512/calendar_icon_129329.png"  width="30" height="30"> 프로젝트 기간</h1>
@@ -10,14 +10,23 @@
 
 
 <h1><img src="https://cdn-icons-png.flaticon.com/512/5090/5090029.png" width="30" height="30"> 주요기능</h1>
-<li>기능1<br>
+<li>- 카테고리별 검색<br>
 &nbsp;&nbsp; : 블라<br><br></li><br>
 
-<li>기능2<br>
+<li>- 지도구현<br>
 &nbsp;&nbsp; : 블라<br><br></li><br>
 
-<li>기능3<br>
+<li>- 결제기능 구현<br>
 &nbsp;&nbsp; : 블라<br><br></li><br>
+
+<li>- 찜기능<br>
+&nbsp;&nbsp; : 블라<br><br></li><br>
+
+<li>- 로그인, 회원가입<br>
+&nbsp;&nbsp; : 블라<br><br></li><br>
+
+
+
 
 
 
