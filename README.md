@@ -50,6 +50,5 @@
 
 
 <h1>:open_file_folder: 베어봄 발표영상 & PPT</h1><br>
-<a href="#" target="_blank">베어봄 시연 영상</a><br>
-<a href="#" target="_blank">베어봄 PPT</a>
+<a href="https://www.youtube.com/watch?v=qwCrcA6K4lg" target="_blank">베어봄 시연 영상</a><br>
 <br><br>
